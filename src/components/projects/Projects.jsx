@@ -20,6 +20,7 @@ const Projects = () => {
       description:
         'We build applications of any complexity with no limits on integrations or scalability, handling multiple inputs, outputs, databases, and external components efficiently and swiftly.',
       icon: <HiOutlineDesktopComputer />,
+      vercelLink:"see projects on Vercel",
       color: '#286F6C',
       animationData: webDevelopmentAnimation,
     },
@@ -87,7 +88,7 @@ const Projects = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           <DescriptionTitle>{serviceContent[selectedService].title}</DescriptionTitle>
-          <DescriptionText>{serviceContent[selectedService].description}</DescriptionText>
+          <DescriptionText>{serviceContent[selectedService].description} <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="link-certificat"><span style={{color:"#4b0082", fontWeight:"bold", cursor:'pointer',}}>{serviceContent[selectedService].vercelLink}</span></a></DescriptionText>
           <Lottie
             animationData={serviceContent[selectedService].animationData}
             loop
@@ -208,5 +209,9 @@ const DescriptionText = styled.p`
   font-size: 1rem;
   color: #6c757d;
   margin-bottom: 1.5rem;
+
+  a {
+    text-Decoration:none;
+  }
 `;
 
