@@ -1,16 +1,60 @@
 import styled from "styled-components";
-import { FaGraduationCap, FaVideo, FaBookOpen, FaLaptopCode } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaGraduationCap, FaBookOpen, FaLaptopCode, FaMobile } from "react-icons/fa";
 
 export default function FormationPage() {
+  const [countdown, setCountdown] = useState("");
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      const now = new Date();
+      let nextSession = new Date();
+
+      const day = now.getDay();
+      const hour = now.getHours();
+      const minutes = now.getMinutes();
+
+      // Prochaine session vendredi à 21h
+      const daysUntilFriday = (5 - day + 7) % 7 || 7; // évite 0 si déjà vendredi après 21h
+      nextSession.setDate(now.getDate() + daysUntilFriday);
+      nextSession.setHours(21, 0, 0, 0);
+
+      if (day === 5 && (hour < 21 || (hour === 21 && minutes === 0))) {
+        nextSession = new Date();
+        nextSession.setHours(21, 0, 0, 0);
+      }
+
+      if (now >= nextSession) {
+        nextSession.setDate(nextSession.getDate() + 7); // vendredi suivant
+      }
+
+      const diff = nextSession - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / (1000 * 60)) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
+
+      setCountdown(
+        `${days}d ${hours.toString().padStart(2, "0")}:${mins
+          .toString()
+          .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`
+      );
+    };
+
+    const timer = setInterval(updateCountdown, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <PageWrapper>
       <Header>
         <Logo>Evoubabp Academy</Logo>
         <Nav>
           <NavLink href="/">Home</NavLink>
-          <NavLink href="/projects">Projects</NavLink>
-          <NavLink href="/method">Method</NavLink>
-          <NavLink href="/academy" className="font-semibold">Academy</NavLink>
+          <NavLink href="#projects">Projects</NavLink>
+          <NavLink href="#method">Method</NavLink>
+          <NavLink href="#academy" className="font-semibold">Academy</NavLink>
         </Nav>
       </Header>
 
@@ -26,15 +70,15 @@ export default function FormationPage() {
           <FaGraduationCap className="text-purple-600 mb-3" size={32} />
           <CardTitle>Fullstack Web Dev</CardTitle>
           <CardText>
-            Learn HTML, CSS, JS, React, Node, and databases to build complete apps from scratch.
+            Learn HTML, CSS, JS, React, Next15 to build complete apps from scratch.
           </CardText>
         </Card>
 
         <Card>
-          <FaVideo className="text-purple-600 mb-3" size={32} />
-          <CardTitle>Video-based Learning</CardTitle>
+          <FaMobile className="text-purple-600 mb-3" size={32} />
+          <CardTitle>Fullstack Mobile Dev</CardTitle>
           <CardText>
-            Access structured video courses with real coding examples and projects.
+            Access structured courses with real coding examples and projects.
           </CardText>
         </Card>
 
@@ -48,10 +92,11 @@ export default function FormationPage() {
 
         <Card>
           <FaLaptopCode className="text-purple-600 mb-3" size={32} />
-          <CardTitle>Live Coding Workshops</CardTitle>
+          <CardTitle>Live Coding weekend</CardTitle>
           <CardText>
             Join hands-on sessions to practice building apps live with guidance.
           </CardText>
+          <ClockText>Next session in: {countdown}</ClockText>
         </Card>
       </Grid>
 
@@ -143,6 +188,13 @@ const CardTitle = styled.h3`
 const CardText = styled.p`
   font-size: 0.875rem;
   color: #4a5568;
+`;
+
+const ClockText = styled.p`
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #7e22ce;
+  font-size: 1rem;
 `;
 
 const Footer = styled.footer`
