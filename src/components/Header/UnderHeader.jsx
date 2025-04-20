@@ -35,7 +35,7 @@ export default function UnderHeader() {
             variants={fadeIn("left", "tween", 0.2, 1)}
             className="secondText"
           >
-            <span>I develop great Projects</span> 
+            <span >I develop great Projects</span> 
             <br />
             <span>to grow your business.</span>            
           </motion.span>
@@ -159,6 +159,21 @@ const UnderHeaderStyle = styled.div`
     color: orange;
     margin-left: 3rem;
     cursor:pointer;
+
+    &: hover {
+       background-color:#4b0082;
+       color:#fff;
+       font-size:30px;
+
+       border:1px solid purple;
+       border-radius:10px;
+
+       padding:0.3rem 0.5rem;
+       text-decoration:none;
+       transition: all 0.5s ease-in-out; /* Ajout de la transition */
+
+    }
+
     @media (max-width: 640px) {
       position: relative;
       display: none;
@@ -259,11 +274,7 @@ const UnderHeaderStyle = styled.div`
     width: 3.5rem;
 }
 
-.player {
-    width: 8rem;
-    height: 3rem;
-    margin: -40px;
-}
+
 
 
 `;
