@@ -1,103 +1,124 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { FaGraduationCap, FaBookOpen, FaLaptopCode, FaMobile } from "react-icons/fa";
+import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
-export default function FormationPage() {
+// Composant de carte extrait
+const FormationCard = ({ icon: Icon, title, text, countdown }) => (
+  <Card>
+    <Icon className="text-purple-600 mb-3" size={32} />
+    <CardTitle>{title}</CardTitle>
+    <CardText>{text}</CardText>
+    {countdown && <ClockText>Next session in: {countdown}</ClockText>}
+  </Card>
+);
+
+FormationCard.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  countdown: PropTypes.string
+};
+
+// Hook personnalisé pour le countdown
+const useCountdown = () => {
   const [countdown, setCountdown] = useState("");
 
-  useEffect(() => {
-    const updateCountdown = () => {
-      const now = new Date();
-      let nextSession = new Date();
+  const updateCountdown = useCallback(() => {
+    const now = new Date();
+    let nextSession = new Date();
 
-      const day = now.getDay();
-      const hour = now.getHours();
-      const minutes = now.getMinutes();
+    const day = now.getDay();
+    const hour = now.getHours();
+    const minutes = now.getMinutes();
 
-      // Prochaine session vendredi à 21h
-      const daysUntilFriday = (5 - day + 7) % 7 || 7; // évite 0 si déjà vendredi après 21h
-      nextSession.setDate(now.getDate() + daysUntilFriday);
+    const daysUntilFriday = (5 - day + 7) % 7 || 7;
+    nextSession.setDate(now.getDate() + daysUntilFriday);
+    nextSession.setHours(21, 0, 0, 0);
+
+    if (day === 5 && (hour < 21 || (hour === 21 && minutes === 0))) {
+      nextSession = new Date();
       nextSession.setHours(21, 0, 0, 0);
+    }
 
-      if (day === 5 && (hour < 21 || (hour === 21 && minutes === 0))) {
-        nextSession = new Date();
-        nextSession.setHours(21, 0, 0, 0);
-      }
+    if (now >= nextSession) {
+      nextSession.setDate(nextSession.getDate() + 7);
+    }
 
-      if (now >= nextSession) {
-        nextSession.setDate(nextSession.getDate() + 7); // vendredi suivant
-      }
+    const diff = nextSession - now;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const mins = Math.floor((diff / (1000 * 60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
 
-      const diff = nextSession - now;
+    setCountdown(
+      `${days}d ${hours.toString().padStart(2, "0")}:${mins
+        .toString()
+        .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`
+    );
+  }, []);
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const mins = Math.floor((diff / (1000 * 60)) % 60);
-      const secs = Math.floor((diff / 1000) % 60);
-
-      setCountdown(
-        `${days}d ${hours.toString().padStart(2, "0")}:${mins
-          .toString()
-          .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`
-      );
-    };
-
+  useEffect(() => {
+    updateCountdown();
     const timer = setInterval(updateCountdown, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [updateCountdown]);
+
+  return countdown;
+};
+
+export default function FormationPage() {
+  const countdown = useCountdown();
+  const { t } = useTranslation();
+
+  const formations = [
+    {
+      icon: FaGraduationCap,
+      title: t('formations.webDev.title'),
+      text: t('formations.webDev.description')
+    },
+    {
+      icon: FaMobile,
+      title: t('formations.mobileDev.title'),
+      text: t('formations.mobileDev.description')
+    },
+    {
+      icon: FaBookOpen,
+      title: t('formations.techBusiness.title'),
+      text: t('formations.techBusiness.description')
+    },
+    {
+      icon: FaLaptopCode,
+      title: t('formations.liveCoding.title'),
+      text: t('formations.liveCoding.description'),
+      countdown
+    }
+  ];
 
   return (
     <PageWrapper>
       <Header>
         <Logo>Evoubabp Academy</Logo>
         <Nav>
-          <NavLink href="/">Home</NavLink>
-          <NavLink href="#projects">Projects</NavLink>
-          <NavLink href="#method">Method</NavLink>
-          <NavLink href="#academy" className="font-semibold">Academy</NavLink>
+          <NavLink href="/">{t('common.home')}</NavLink>
+          <NavLink href="#projects">{t('common.projects')}</NavLink>
+          <NavLink href="#method">{t('common.method')}</NavLink>
+          <NavLink href="#academy" className="font-semibold">{t('common.formations')}</NavLink>
         </Nav>
       </Header>
 
       <IntroSection>
-        <IntroTitle>🎓 Explore Our Trainings</IntroTitle>
+        <IntroTitle>🎓 {t('formations.title')}</IntroTitle>
         <IntroText>
-          Learn web development, app building, and tech entrepreneurship through hands-on courses built for real-world success.
+          {t('formations.subtitle')}
         </IntroText>
       </IntroSection>
 
       <Grid>
-        <Card>
-          <FaGraduationCap className="text-purple-600 mb-3" size={32} />
-          <CardTitle>Fullstack Web Dev</CardTitle>
-          <CardText>
-            Learn HTML, CSS, JS, React, Next15 to build complete apps from scratch.
-          </CardText>
-        </Card>
-
-        <Card>
-          <FaMobile className="text-purple-600 mb-3" size={32} />
-          <CardTitle>Fullstack Mobile Dev</CardTitle>
-          <CardText>
-            Access structured courses with real coding examples and projects.
-          </CardText>
-        </Card>
-
-        <Card>
-          <FaBookOpen className="text-purple-600 mb-3" size={32} />
-          <CardTitle>Tech & Business</CardTitle>
-          <CardText>
-            Understand how to turn code into products and navigate the tech startup ecosystem.
-          </CardText>
-        </Card>
-
-        <Card>
-          <FaLaptopCode className="text-purple-600 mb-3" size={32} />
-          <CardTitle>Live Coding weekend</CardTitle>
-          <CardText>
-            Join hands-on sessions to practice building apps live with guidance.
-          </CardText>
-          <ClockText>Next session in: {countdown}</ClockText>
-        </Card>
+        {formations.map((formation, index) => (
+          <FormationCard key={index} {...formation} />
+        ))}
       </Grid>
 
       <Footer>

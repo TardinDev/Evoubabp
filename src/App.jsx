@@ -1,18 +1,23 @@
-
-import { Route, Routes } from 'react-router-dom'
+import { Routes } from 'react-router-dom'
 import './App.css'
-import HomePage from './Pages/HomePage'
-import FormationPage from './components/Formations/Formations'
+import LanguageModal from './components/i18n/LanguageModal'
+import { renderRoutes } from './routes'
 
-
-
+/**
+ * Composant principal de l'application
+ * Gère le routage et les composants globaux
+ */
 function App() {
-
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/formations" element={<FormationPage />} />
-    </Routes>
+    <>
+      {/* Modal de sélection de langue */}
+      <LanguageModal />
+      
+      {/* Routes de l'application */}
+      <Routes>
+        {renderRoutes()}
+      </Routes>
+    </>
   )
 }
 

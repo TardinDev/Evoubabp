@@ -4,16 +4,42 @@ import styled from 'styled-components';
 import constants from "../../styles/contants";
 import { motion } from 'framer-motion'; // for slow motion
 import { getMenuStyles, headerVariants } from "../../utils/motion";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import useHeaderShadow from "../../hooks/useHeaderShadow";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
+// Composant de menu extrait
+const Menu = ({ menuOpened }) => {
+  const { t } = useTranslation();
+  
+  return (
+    <ul className="menu" style={getMenuStyles(menuOpened)}>
+      <li><a href="#">{t('common.home')}</a></li>
+      <li><a href="#projects">{t('common.projects')}</a></li>
+      <li><a href="#howItWorks">{t('common.method')}</a></li>
+      <li><Link to="/formations">{t('common.formations')}</Link></li>
+      <li className="email">
+        <p>tardindavy@gmail.com</p>
+        <IoIosMail size={"60px"} />
+      </li>
+    </ul>
+  );
+};
 
+Menu.propTypes = {
+  menuOpened: PropTypes.bool.isRequired
+};
 
 const Header = () => {
-
   const [menuOpened, setMenuOpened] = useState(false);
   const headerShadow = useHeaderShadow();
+  const { t } = useTranslation();
+
+  const toggleMenu = useCallback(() => {
+    setMenuOpened(prev => !prev);
+  }, []);
 
   return (
     <HeaderStyles>
@@ -26,19 +52,11 @@ const Header = () => {
         style={{boxShadow: headerShadow}}>
 
         <div className='name' ><a href="Home" style={{color:"#4b0082"}}>Evoubabp</a></div>
-        <ul className="menu" style={getMenuStyles(menuOpened)}>
-          <li><a href="#">Home</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#howItWorks">Method</a></li>
-          <li><Link to="/formations">Formations</Link></li>
-          <li className="email">
-            <p>tardindavy@gmail.com</p>
-            <IoIosMail size={"60px"} />
-          </li>
-        </ul>
+
+        <Menu menuOpened={menuOpened} />
 
         {/* for menu in small screen */}
-        <div className="menu-icon" onClick={() => setMenuOpened(!menuOpened)}>
+        <div className="menu-icon" onClick={toggleMenu}>
           <BiMenuAltRight size={30} color="purple"/>
         </div>
       </motion.div>
