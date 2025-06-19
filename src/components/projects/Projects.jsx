@@ -51,7 +51,7 @@ const Projects = () => {
   };
 
   return (
-    <SectionContainer id="projects">
+    <SectionContainer >
       <motion.div
         initial="hidden"
         whileInView="show"
