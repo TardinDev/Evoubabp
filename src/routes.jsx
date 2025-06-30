@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
-import FormationPage from './components/Formations/Formations'
+import FormationPage from './Pages/FormationPage'
 
 export const routes = [
   {

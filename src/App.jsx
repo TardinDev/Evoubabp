@@ -1,6 +1,5 @@
 import { Routes } from 'react-router-dom'
 import './App.css'
-import LanguageModal from './components/i18n/LanguageModal'
 import { renderRoutes } from './routes'
 
 /**
@@ -10,9 +9,6 @@ import { renderRoutes } from './routes'
 function App() {
   return (
     <>
-      {/* Modal de sélection de langue */}
-      <LanguageModal />
-      
       {/* Routes de l'application */}
       <Routes>
         {renderRoutes()}

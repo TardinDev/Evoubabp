@@ -8,18 +8,14 @@ import { useState, useCallback } from "react";
 import useHeaderShadow from "../../hooks/useHeaderShadow";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-
 // Composant de menu extrait
 const Menu = ({ menuOpened }) => {
-  const { t } = useTranslation();
-  
   return (
     <ul className="menu" style={getMenuStyles(menuOpened)}>
-      <li><a href="#">{t('common.home')}</a></li>
-      <li><a href="#projects">{t('common.projects')}</a></li>
-      <li><a href="#howItWorks">{t('common.method')}</a></li>
-      <li><Link to="/formations">{t('common.formations')}</Link></li>
+      <li><a href="#">Accueil</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#howItWorks">Méthode</a></li>
+      <li><Link to="/formations">Formations</Link></li>
       <li className="email">
         <p>tardindavy@gmail.com</p>
         <IoIosMail size={"60px"} />
@@ -35,7 +31,6 @@ Menu.propTypes = {
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const headerShadow = useHeaderShadow();
-  const { t } = useTranslation();
 
   const toggleMenu = useCallback(() => {
     setMenuOpened(prev => !prev);

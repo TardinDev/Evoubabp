@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../../utils/motion';
-import { useTranslation } from 'react-i18next';
 
 export default function ApplicationsSection() {
-  const { t } = useTranslation();
-
   return (
     <SectionContainer id="applications">
       <motion.div
@@ -15,8 +12,8 @@ export default function ApplicationsSection() {
         viewport={{ once: true, amount: 0.2 }}
         className="content"
       >
-        <Title>{t('applications.title')}</Title>
-        <Subtitle>{t('applications.subtitle')}</Subtitle>
+        <Title>Applications</Title>
+        <Subtitle>Applications mobiles et web que j&rsquo;ai développées</Subtitle>
 
         {/* Section Mobile Apps */}
         <GridContainer>
@@ -27,8 +24,8 @@ export default function ApplicationsSection() {
                 alt="Zopgo Mobile App"
               />
             </ImageContainer>
-            <CardTitle>{t('applications.mobile.ecommerce.title')}</CardTitle>
-            <CardText>{t('applications.mobile.ecommerce.description')}</CardText>
+            <CardTitle>E-commerce Mobile</CardTitle>
+            <CardText>Une application e-commerce complète avec gestion d&rsquo;inventaire en temps réel et traitement sécurisé des paiements.</CardText>
           </Card>
 
           <Card>
@@ -38,8 +35,8 @@ export default function ApplicationsSection() {
                 alt="InstanJob Mobile App"
               />
             </ImageContainer>
-            <CardTitle>{t('applications.mobile.finance.title')}</CardTitle>
-            <CardText>{t('applications.mobile.finance.description')}</CardText>
+            <CardTitle>Finance Mobile</CardTitle>
+            <CardText>Application de gestion financière personnelle avec suivi des dépenses, outils de budgétisation et surveillance de portefeuille.</CardText>
           </Card>
         </GridContainer>
 
@@ -52,8 +49,8 @@ export default function ApplicationsSection() {
                 alt="Zopgo Web App"
               />
             </ImageContainer>
-            <CardTitle>{t('applications.web.management.title')}</CardTitle>
-            <CardText>{t('applications.web.management.description')}</CardText>
+            <CardTitle>Système de Gestion</CardTitle>
+            <CardText>Plateforme de gestion complète pour les entreprises avec suivi de projet, collaboration d&rsquo;équipe et allocation des ressources.</CardText>
           </Card>
 
           <Card>
@@ -63,8 +60,8 @@ export default function ApplicationsSection() {
                 alt="Web App 2"
               />
             </ImageContainer>
-            <CardTitle>{t('applications.web.data.title')}</CardTitle>
-            <CardText>{t('applications.web.data.description')}</CardText>
+            <CardTitle>Visualisation de Données</CardTitle>
+            <CardText>Tableau de bord interactif de visualisation de données pour analyser et présenter des ensembles de données complexes avec mises à jour en temps réel.</CardText>
           </Card>
         </GridContainer>
       </motion.div>
