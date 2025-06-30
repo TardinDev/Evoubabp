@@ -5,19 +5,19 @@ import { MdWorkspacesOutline } from "react-icons/md";
 
 export const projectExperience = [
   {
-    name: "Website Design",
+    name: "Conception de Sites Web",
     projects: 76,
     icon: HiOutlineDesktopComputer,
     bg: "#286F6C",
   },
   {
-    name: "Mobile App Design",
+    name: "Conception d'Apps Mobiles",
     projects: 63,
     icon: CiMobile1,
     bg: "#EEC048",
   },
   {
-    name: "Brand Identity",
+    name: "Identité de Marque",
     projects: 47,
     icon: MdWorkspacesOutline,
     bg: "#F26440",
@@ -25,8 +25,8 @@ export const projectExperience = [
 ];
 
 export const WhatDoIHelp = [
-  "I will help you with finging a solution and solve your problem, We use process design to create digital products. Besides that also help their business.",
-  "We use process design to create digital products. Besides that also help their business",
+  "Je vous aiderai à trouver une solution et à résoudre votre problème. Nous utilisons un processus de conception pour créer des produits numériques. En plus de cela, nous aidons également leur entreprise.",
+  "Nous utilisons un processus de conception pour créer des produits numériques. En plus de cela, nous aidons également leur entreprise.",
 ];
 
 export const workExp = [

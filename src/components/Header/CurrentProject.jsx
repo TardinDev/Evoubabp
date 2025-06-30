@@ -6,6 +6,8 @@ import { DiNodejs } from "react-icons/di";
 import { SiVite } from "react-icons/si";
 import { DiMongodb } from "react-icons/di";
 import { FaGithub } from "react-icons/fa6";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "../../utils/motion";
 
 import Lottie from "lottie-react";
 import progressBar from "/public/lottiesimages/progressBar.json";
@@ -13,51 +15,71 @@ import ChevronDown from "/public/lottiesimages/chevronDown.json";
 
 export default function CurrentProject() {
   const handleIcon = () => {
-    alert("This is the true project!");
+    alert("Naviguez vers le bas pour voir plus de projets !");
   };
 
   return (
-    <CurrentProjectStyle>
-      <div className="left-side">
-        <h1>Current Project</h1>
-        <p>
-          “Currently, I am working on a software project aimed at facilitating
-          connections between investors and local stakeholders. The goal is to
-          enable investments in various sectors, thereby promoting the
-          development of regions conducive to the well-being of the population.”
-        </p>
-        <div className="progressAndPercent">
-          <div className="progress-bar">
-            <Lottie animationData={progressBar} loop autoplay />
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false, amount: 0.25 }}
+    >
+      <CurrentProjectStyle>
+        <motion.div 
+          variants={fadeIn("right", "tween", 0.2, 1)}
+          className="left-side"
+        >
+          <h1>Projet Actuel</h1>
+          <p>
+            "            &ldquo;Actuellement, je travaille sur un projet logiciel visant à faciliter
+            les connexions entre investisseurs et acteurs locaux. L&apos;objectif est de
+            permettre des investissements dans divers secteurs, favorisant ainsi le
+            développement de régions propices au bien-être de la population.&rdquo;"
+          </p>
+          <div className="progressAndPercent">
+            <div className="progress-bar">
+              <Lottie animationData={progressBar} loop autoplay />
+            </div>
+            <p className="completion-text">80% Terminé</p>
           </div>
-          <p className="completion-text">80% Completed</p>
-        </div>
-      </div>
+        </motion.div>
 
-      <div className="technologies">
-        <h1>
-          Technologies
-          <br />
-          I Used
-        </h1>
-        <div className="icons">
-          <IoLogoJavascript size={60} color="yellow" />
-          <FaReact size={60} color="blue" />
-          <SiReactrouter size={60} color="pink" />
-          <DiNodejs size={60} color="green" />
-          <SiVite size={50} color="#E49BFF" />
-          <DiMongodb size={60} color="green" />
-          <FaGithub size={60} color="black" />
-        </div>
+        <motion.div 
+          variants={fadeIn("left", "tween", 0.3, 1)}
+          className="technologies"
+        >
+          <h1>
+            Technologies
+            <br />
+            Utilisées
+          </h1>
+          <motion.div 
+            variants={fadeIn("up", "tween", 0.4, 1)}
+            className="icons"
+          >
+            <IoLogoJavascript size={60} color="yellow" />
+            <FaReact size={60} color="blue" />
+            <SiReactrouter size={60} color="pink" />
+            <DiNodejs size={60} color="green" />
+            <SiVite size={50} color="#E49BFF" />
+            <DiMongodb size={60} color="green" />
+            <FaGithub size={60} color="black" />
+          </motion.div>
 
-        <div className="seeMore" onClick={handleIcon}>
-          <h5>See more projects</h5>
-          <div className="see-more-animation">
-            <Lottie animationData={ChevronDown} loop autoplay />
-          </div>
-        </div>
-      </div>
-    </CurrentProjectStyle>
+          <motion.div 
+            variants={fadeIn("up", "tween", 0.5, 1)}
+            className="seeMore" 
+            onClick={handleIcon}
+          >
+            <h5>Voir plus de projets</h5>
+            <div className="see-more-animation">
+              <Lottie animationData={ChevronDown} loop autoplay />
+            </div>
+          </motion.div>
+        </motion.div>
+      </CurrentProjectStyle>
+    </motion.div>
   );
 }
 

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "../../utils/motion";
 
 const technologies = [
   {
@@ -140,39 +142,58 @@ const technologies = [
 
 const TechUsed = () => {
   return (
-    <Section>
-      <Container>
-        <Header>
-          <Title>Technologies Utilisées</Title>
-          <Subtitle>
-            Un stack moderne et performant pour créer des applications exceptionnelles
-          </Subtitle>
-        </Header>
-        
-        <TechGrid>
-          {technologies.map((tech, index) => (
-            <TechCard key={index} bgGradient={tech.bgGradient} color={tech.color}>
-              <CardHeader>
-                <IconContainer>
-                  <TechIcon>{tech.icon}</TechIcon>
-                </IconContainer>
-                <Version>{tech.version}</Version>
-              </CardHeader>
-              
-              <CardContent>
-                <TechName>{tech.name}</TechName>
-                <TechDescription>{tech.description}</TechDescription>
-              </CardContent>
-              
-              <CardFooter>
-                <StatusIndicator color={tech.color} />
-                <StatusText>Utilisé activement</StatusText>
-              </CardFooter>
-            </TechCard>
-          ))}
-        </TechGrid>
-      </Container>
-    </Section>
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
+    >
+      <Section>
+        <Container>
+          <motion.div variants={fadeIn("up", "tween", 0.1, 1)}>
+            <Header>
+              <Title>Technologies Utilisées</Title>
+              <Subtitle>
+                Un stack moderne et performant pour créer des applications exceptionnelles
+              </Subtitle>
+            </Header>
+          </motion.div>
+          
+          <TechGrid>
+            {technologies.map((tech, index) => (
+              <motion.div
+                key={index}
+                variants={fadeIn(
+                  index % 2 === 0 ? "left" : "right", 
+                  "spring", 
+                  index * 0.1, 
+                  1
+                )}
+              >
+                <TechCard bgGradient={tech.bgGradient} color={tech.color}>
+                  <CardHeader>
+                    <IconContainer>
+                      <TechIcon>{tech.icon}</TechIcon>
+                    </IconContainer>
+                    <Version>{tech.version}</Version>
+                  </CardHeader>
+                  
+                  <CardContent>
+                    <TechName>{tech.name}</TechName>
+                    <TechDescription>{tech.description}</TechDescription>
+                  </CardContent>
+                  
+                  <CardFooter>
+                    <StatusIndicator color={tech.color} />
+                    <StatusText>Utilisé activement</StatusText>
+                  </CardFooter>
+                </TechCard>
+              </motion.div>
+            ))}
+          </TechGrid>
+        </Container>
+      </Section>
+    </motion.div>
   );
 };
 

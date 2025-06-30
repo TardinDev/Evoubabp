@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "../../utils/motion";
 
 const applications = {
 
@@ -35,41 +37,62 @@ const applications = {
 
 const AppShowcaseSection = () => {
   return (
-    <Section id="projects">
-      <SectionContainer>
-        <Title>Mobile Apps</Title>
-        <Description>Quelques Applications Mobiles que jai développé.</Description>
-        <CardsContainer>
-          {applications.mobile.map((app, index) => (
-            <CardMobile key={index}>
-              <AppImageMobile
-                src={app.image}
-                alt={app.title}
-              />
-              <CardTitle>{app.title}</CardTitle>
-              <CardDescription>{app.description}</CardDescription>
-            </CardMobile>
-          ))}
-        </CardsContainer>
-      </SectionContainer>
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
+    >
+      <Section id="projects">
+        <motion.div variants={fadeIn("up", "tween", 0.1, 1)}>
+          <SectionContainer>
+            <Title>Applications Mobiles</Title>
+            <Description>Quelques applications mobiles que j&apos;ai développées.</Description>
+            <CardsContainer>
+              {applications.mobile.map((app, index) => (
+                <motion.div
+                  key={index}
+                  variants={fadeIn("right", "spring", index * 0.2, 1)}
+                >
+                  <CardMobile>
+                    <AppImageMobile
+                      src={app.image}
+                      alt={app.title}
+                    />
+                    <CardTitle>{app.title}</CardTitle>
+                    <CardDescription>{app.description}</CardDescription>
+                  </CardMobile>
+                </motion.div>
+              ))}
+            </CardsContainer>
+          </SectionContainer>
+        </motion.div>
 
-      <SectionContainer>
-        <Title>Web Apps</Title>
-        <Description>des applications web que jai développé pour mes clients.</Description>
-        <CardsContainer>
-          {applications.web.map((app, index) => (
-            <CardWeb key={index} isWeb>
-              <AppImage
-                src={app.image}
-                alt={app.title}
-              />
-              <CardTitle>{app.title}</CardTitle>
-              <CardDescription>{app.description}</CardDescription>
-            </CardWeb>
-          ))}
-        </CardsContainer>
-      </SectionContainer>
-    </Section>
+        <motion.div variants={fadeIn("up", "tween", 0.3, 1)}>
+          <SectionContainer>
+            <Title>Applications Web</Title>
+            <Description>Des applications web que j&apos;ai développées pour mes clients.</Description>
+            <CardsContainer>
+              {applications.web.map((app, index) => (
+                <motion.div
+                  key={index}
+                  variants={fadeIn("left", "spring", index * 0.2, 1)}
+                >
+                  <CardWeb>
+                    <AppImage
+                      src={app.image}
+                      alt={app.title}
+                    />
+                    <CardTitle>{app.title}</CardTitle>
+                    <CardDescription>{app.description}</CardDescription>
+                  </CardWeb>
+                </motion.div>
+              ))}
+            </CardsContainer>
+          </SectionContainer>
+        </motion.div>
+      </Section>
+    </motion.div>
   );
 };
 

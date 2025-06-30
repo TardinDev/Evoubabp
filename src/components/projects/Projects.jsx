@@ -16,34 +16,34 @@ const Projects = () => {
 
   const serviceContent = {
     web: {
-      title: 'Web Development',
+      title: 'Développement Web',
       description:
-        'We build applications of any complexity with no limits on integrations or scalability, handling multiple inputs, outputs, databases, and external components efficiently and swiftly.',
+        'Nous créons des applications de toute complexité sans limites d&apos;intégrations ou d&apos;évolutivité, gérant efficacement et rapidement les entrées, sorties, bases de données et composants externes multiples.',
       icon: <HiOutlineDesktopComputer />,
-      vercelLink:"see projects on Vercel",
+      vercelLink:"voir les projets sur Vercel",
       color: '#286F6C',
       animationData: webDevelopmentAnimation,
     },
     saas: {
       title: 'SAAS',
       description:
-        'Our SAAS solutions are designed to scale with your business, ensuring secure and reliable access across devices and platforms.',
+        'Nos solutions SAAS sont conçues pour évoluer avec votre entreprise, garantissant un accès sécurisé et fiable sur tous les appareils et plateformes.',
       icon: <MdCloud />,
       color: '#EEC048',
       animationData: saasAnimation,
     },
     mobile: {
-      title: 'Mobile Development',
+      title: 'Développement Mobile',
       description:
-        'We create high-performance mobile applications using React Native, optimized for both Android and iOS platforms.',
+        'Nous créons des applications mobiles haute performance avec React Native, optimisées pour les plateformes Android et iOS.',
       icon: <MdPhoneIphone />,
       color: '#F26440',
       animationData: mobileAnimation,
     },
     learning: {
-      title: 'Learning React',
+      title: 'Apprentissage React',
       description:
-        'Our Learning React program offers hands-on projects and expert guidance, helping you master the fundamentals and advanced concepts of React development.',
+        'Notre programme d&apos;Apprentissage React offre des projets pratiques et des conseils d&apos;experts, vous aidant à maîtriser les concepts fondamentaux et avancés du développement React.',
       icon: <MdSchool />,
       color: '#4A90E2',
       animationData: learningAnimation,
@@ -58,8 +58,8 @@ const Projects = () => {
         variants={fadeIn('up', 'spring', 0.2, 1)}
         viewport={{ once: true, amount: 0.2 }}
       >
-        <Title>Provided Services</Title>
-        <Subtitle>Bringing your ideas to life within your timeline and budget.</Subtitle>
+        <Title>Services Proposés</Title>
+                  <Subtitle>Donner vie à vos idées dans vos délais et votre budget.</Subtitle>
       </motion.div>
 
       <ContentContainer>

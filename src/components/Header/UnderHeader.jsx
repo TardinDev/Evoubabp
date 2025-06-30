@@ -29,15 +29,15 @@ export default function UnderHeader() {
             variants={fadeIn("right", "tween", 0.2, 1)}
             className="firstText"
           >
-            Hey There,<br /> I am Tardin.
+            Bonjour,<br /> Je suis Tardin.
           </motion.span>
           <motion.span 
             variants={fadeIn("left", "tween", 0.2, 1)}
             className="secondText"
           >
-            <span >I develop great Projects</span> 
+            <span >Je développe de grands Projets</span> 
             <br />
-            <span>to grow your business.</span>            
+            <span>pour développer votre entreprise.</span>            
           </motion.span>
         </div>
 
@@ -56,7 +56,7 @@ export default function UnderHeader() {
             href={cv} 
             download={cv} // attribut pour forcer le téléchargement
          >
-            Download my CV
+            Télécharger mon CV
         </motion.a>
 
         {/* <motion.a 
@@ -75,8 +75,8 @@ export default function UnderHeader() {
             <div className="numberofyearsExperience">
               <div className="firstText">2</div>
               <div className="secondText">
-                <div>Years</div>
-                <div>Experiences</div>
+                <div>Années</div>
+                <div>d&apos;Expérience</div>
               </div>
             </div>
             <div className="iconsContact">
@@ -91,7 +91,7 @@ export default function UnderHeader() {
               variants={fadeIn("left", "tween", 0.2, 1)}
               className="certificat-container"
 >
-          <div>You can test projects on vercel <br/>or check the code developpment on Github !</div>
+          <div>Vous pouvez tester les projets sur Vercel <br/>ou consulter le code sur GitHub !</div>
 
           <div className="vercelAndGithub">
             <div className="certificat">

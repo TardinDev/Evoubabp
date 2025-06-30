@@ -3,6 +3,8 @@ import { useState, useEffect, useCallback } from "react";
 import { FaGraduationCap, FaBookOpen, FaLaptopCode, FaMobile } from "react-icons/fa";
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "../../utils/motion";
 
 // Composant de carte extrait
 const FormationCard = ({ icon: Icon, title, text, countdown }) => (
@@ -10,7 +12,7 @@ const FormationCard = ({ icon: Icon, title, text, countdown }) => (
     <Icon className="text-purple-600 mb-3" size={32} />
     <CardTitle>{title}</CardTitle>
     <CardText>{text}</CardText>
-    {countdown && <ClockText>Next session in: {countdown}</ClockText>}
+    {countdown && <ClockText>Prochaine session dans : {countdown}</ClockText>}
   </Card>
 );
 
@@ -97,34 +99,57 @@ export default function FormationPage() {
   ];
 
   return (
-    <PageWrapper>
-      <Header>
-        <Logo>Evoubabp Academy</Logo>
-        <Nav>
-          <NavLink href="/">{t('common.home')}</NavLink>
-          <NavLink href="#projects">{t('common.projects')}</NavLink>
-          <NavLink href="#method">{t('common.method')}</NavLink>
-          <NavLink href="#academy" className="font-semibold">{t('common.formations')}</NavLink>
-        </Nav>
-      </Header>
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
+    >
+      <PageWrapper>
+        <motion.div variants={fadeIn("down", "tween", 0.1, 1)}>
+          <Header>
+            <Logo>Evoubabp Academy</Logo>
+            <Nav>
+              <NavLink href="/">{t('common.home')}</NavLink>
+              <NavLink href="#projects">{t('common.projects')}</NavLink>
+              <NavLink href="#method">{t('common.method')}</NavLink>
+              <NavLink href="#academy" className="font-semibold">{t('common.formations')}</NavLink>
+            </Nav>
+          </Header>
+        </motion.div>
 
-      <IntroSection>
-        <IntroTitle>🎓 {t('formations.title')}</IntroTitle>
-        <IntroText>
-          {t('formations.subtitle')}
-        </IntroText>
-      </IntroSection>
+        <motion.div variants={fadeIn("up", "tween", 0.2, 1)}>
+          <IntroSection>
+            <IntroTitle>🎓 {t('formations.title')}</IntroTitle>
+            <IntroText>
+              {t('formations.subtitle')}
+            </IntroText>
+          </IntroSection>
+        </motion.div>
 
-      <Grid>
-        {formations.map((formation, index) => (
-          <FormationCard key={index} {...formation} />
-        ))}
-      </Grid>
+        <Grid>
+          {formations.map((formation, index) => (
+            <motion.div
+              key={index}
+              variants={fadeIn(
+                index % 2 === 0 ? "left" : "right",
+                "spring",
+                index * 0.2,
+                1
+              )}
+            >
+              <FormationCard {...formation} />
+            </motion.div>
+          ))}
+        </Grid>
 
-      <Footer>
-        © {new Date().getFullYear()} Evoubabp. All rights reserved.
-      </Footer>
-    </PageWrapper>
+        <motion.div variants={fadeIn("up", "tween", 0.5, 1)}>
+          <Footer>
+            © {new Date().getFullYear()} Evoubabp. Tous droits réservés.
+          </Footer>
+        </motion.div>
+      </PageWrapper>
+    </motion.div>
   );
 }
 
