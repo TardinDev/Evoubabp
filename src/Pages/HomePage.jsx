@@ -4,9 +4,12 @@ import UnderHeader from "../components/Header/UnderHeader";
 import HowItWorks from "../components/projects/HowItWorks12";
 import Projects from "../components/projects/Projects";
 import AppShowcaseSection from "../components/ShowCaseprojects/AppShowcaseSection";
+import TechUsed from "../components/TechUsed/TechUsed";
 import Footer from "../components/TheFooter/Footer";
 
+
 export default function HomePage() {
+
   return (
     <div>
       <Header/>
@@ -15,8 +18,7 @@ export default function HomePage() {
       <Projects id="projects"/>
       <HowItWorks id="howItWorks"/>
       <AppShowcaseSection />
-     
-
+      <TechUsed/>
       <Footer/>
     </div>
   )
