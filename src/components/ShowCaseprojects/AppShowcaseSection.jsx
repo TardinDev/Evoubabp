@@ -32,6 +32,11 @@ const applications = {
       description: "un site web pour particulier qui propose des services de consulting et administratif",
       image: "/imagesAppsMobile/mtzService.png",
     },
+    {
+      title: "Manioc Gabon",
+      description: "Site web dédié à la vente de manioc sous toutes ses formes : tubercules frais, bâtons de manioc, farine, tapioca, et feuilles de manioc. Le site met en avant la qualité locale, la fraîcheur des produits, et une livraison rapide à domicile.",
+      image: "/imagesAppsMobile/maniocgabon.png",
+    },
   ],
 };
 
