@@ -7,7 +7,7 @@ import { IoLogoVercel } from "react-icons/io5";
 import tardinimage from '/public/images/tardin.png'
 import cv from '/public/documents/tardinDev.pdf'
 import Lottie from "lottie-react";
-import gitHubAnimation from "/public/lottiesimages/gitHub.json"; // Assurez-vous que le chemin est correct
+import gitHubAnimation from "/public/lottiesimages/gitHub.json";
 
 
 
@@ -35,9 +35,11 @@ export default function UnderHeader() {
             variants={fadeIn("left", "tween", 0.2, 1)}
             className="secondText"
           >
-            <span >Je développe de grands Projets</span> 
+            <span >Je conçois des projets ambitieux</span> 
             <br />
-            <span>pour développer votre entreprise.</span>            
+            <span> pour accélérer la croissance</span>  
+            <br/>
+            <span> de votre entreprise.</span>            
           </motion.span>
         </div>
 
@@ -132,7 +134,7 @@ const UnderHeaderStyle = styled.div`
 
   .person {
     position: absolute;
-    bottom: -2rem;
+    bottom: 1rem;
     left: 33%;
     img {
       width: 45%;
@@ -175,6 +177,31 @@ const UnderHeaderStyle = styled.div`
     }
 
     @media (max-width: 640px) {
+      position: relative;
+      display: none;
+    }
+  }
+
+  .secondText {
+      position: relative;
+      border-radius: 8px;
+      display: inline-block;
+      cursor: pointer;
+
+      &: hover {
+        background: #4b0082;
+        color: #fff;
+
+        border:1px solid purple;
+        border-radius:10px;
+
+        padding:0.3rem 0.5rem;
+        text-decoration:none;
+        transition: all 0.5s ease-in-out; /* Ajout de la transition */
+
+      }
+
+      @media (max-width: 640px) {
       position: relative;
       display: none;
     }
