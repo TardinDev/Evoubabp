@@ -18,7 +18,7 @@ const Projects = () => {
     web: {
       title: 'Développement Web',
       description:
-        'Nous créons des applications de toute complexité sans limites d&apos;intégrations ou d&apos;évolutivité, gérant efficacement et rapidement les entrées, sorties, bases de données et composants externes multiples.',
+      "Nous créons des applications de toute complexité, sans limites d’intégration ni d’évolutivité, en gérant efficacement et rapidement les entrées, les sorties, les bases de données et de multiples composants externes.",
       icon: <HiOutlineDesktopComputer />,
       vercelLink:"voir les projets sur Vercel",
       color: '#286F6C',
@@ -43,7 +43,7 @@ const Projects = () => {
     learning: {
       title: 'Apprentissage React',
       description:
-        'Notre programme d&apos;Apprentissage React offre des projets pratiques et des conseils d&apos;experts, vous aidant à maîtriser les concepts fondamentaux et avancés du développement React.',
+      "Notre programme d’apprentissage React propose des projets pratiques et des conseils d’experts pour vous aider à maîtriser les concepts fondamentaux et avancés du développement avec React.",
       icon: <MdSchool />,
       color: '#4A90E2',
       animationData: learningAnimation,

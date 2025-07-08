@@ -32,10 +32,10 @@ export default function CurrentProject() {
         >
           <h1>Projet Actuel</h1>
           <p>
-            "            &ldquo;Actuellement, je travaille sur un projet logiciel visant à faciliter
+            Actuellement, je travaille sur un projet logiciel visant à faciliter
             les connexions entre investisseurs et acteurs locaux. L&apos;objectif est de
             permettre des investissements dans divers secteurs, favorisant ainsi le
-            développement de régions propices au bien-être de la population.&rdquo;"
+            développement de régions propices au bien-être de la population.
           </p>
           <div className="progressAndPercent">
             <div className="progress-bar">
