@@ -26,16 +26,19 @@ const applications = {
       title: "Dive-Cvetements",
       description: "site web pour achéter ou louer des vêtements en Laine et rafia pour l'été",
       image: "/imagesAppsMobile/diveC.png",
+      url: "https://div-cvetements.vercel.app/"
     },
     {
       title: "Mintsa Services",
       description: "un site web pour particulier qui propose des services de consulting et administratif",
       image: "/imagesAppsMobile/mtzService.png",
+      url: "https://mintsaservices.vercel.app/"
     },
     {
       title: "Manioc Gabon",
       description: "Site web dédié à la vente de manioc sous toutes ses formes : tubercules frais, bâtons de manioc, farine, tapioca, et feuilles de manioc. Le site met en avant la qualité locale, la fraîcheur des produits, et une livraison rapide à domicile.",
       image: "/imagesAppsMobile/maniocgabon.png",
+      url: "https://maniocgabon.vercel.app/"
     },
   ],
 };
@@ -83,7 +86,10 @@ const AppShowcaseSection = () => {
                   key={index}
                   variants={fadeIn("left", "spring", index * 0.2, 1)}
                 >
-                  <CardWeb>
+                  <CardWeb 
+                    onClick={app.url ? () => window.open(app.url, '_blank') : undefined}
+                    isClickable={!!app.url}
+                  >
                     <AppImage
                       src={app.image}
                       alt={app.title}
@@ -183,6 +189,7 @@ const CardWeb = styled.div`
   padding: 1.2rem;
   flex-shrink: 0;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: ${props => props.isClickable ? 'pointer' : 'default'};
 
   &:hover {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
