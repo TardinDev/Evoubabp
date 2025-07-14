@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-export default function FormationCard({ icon: Icon, title, text, countdown, index }) {
+export default function FormationCard({ icon: Icon, title, text, countdown, index, navigateUrl }) {
+  const navigate = useNavigate();
+  
   const cardColors = [
     { primary: '#667eea', secondary: '#764ba2', accent: '#ff6b6b' },
     { primary: '#f093fb', secondary: '#f5576c', accent: '#4facfe' },
@@ -11,6 +14,17 @@ export default function FormationCard({ icon: Icon, title, text, countdown, inde
   ];
 
   const colorScheme = cardColors[index % cardColors.length];
+
+  const handleClick = () => {
+    if (navigateUrl) {
+      navigate(navigateUrl);
+    }
+  };
+
+  const handleButtonClick = (e) => {
+    e.stopPropagation(); // Empêche la propagation vers la carte
+    handleClick();
+  };
 
   return (
     <CardWrapper
@@ -25,6 +39,8 @@ export default function FormationCard({ icon: Icon, title, text, countdown, inde
         damping: 20 
       }}
       colorScheme={colorScheme}
+      onClick={handleClick}
+      clickable={!!navigateUrl}
     >
       <CardBackground colorScheme={colorScheme} />
       
@@ -35,7 +51,10 @@ export default function FormationCard({ icon: Icon, title, text, countdown, inde
         </IconWrapper>
         
         <TextContent>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle>
+            {title}
+            {navigateUrl && <ClickableIndicator>👆 Cliquez pour découvrir</ClickableIndicator>}
+          </CardTitle>
           <CardDescription>{text}</CardDescription>
           
           {countdown && (
@@ -47,7 +66,7 @@ export default function FormationCard({ icon: Icon, title, text, countdown, inde
         </TextContent>
         
         <CardFooter>
-          <EnrollButton colorScheme={colorScheme}>
+          <EnrollButton colorScheme={colorScheme} onClick={handleButtonClick}>
             <span>S&rsquo;inscrire</span>
             <ArrowIcon>→</ArrowIcon>
           </EnrollButton>
@@ -71,7 +90,8 @@ FormationCard.propTypes = {
   title: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   countdown: PropTypes.string,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  navigateUrl: PropTypes.string
 };
 
 const CardWrapper = styled(motion.div)`
@@ -79,10 +99,15 @@ const CardWrapper = styled(motion.div)`
   background: white;
   border-radius: 20px;
   overflow: hidden;
-  cursor: pointer;
+  cursor: ${props => props.clickable ? 'pointer' : 'default'};
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: ${props => props.clickable ? '0 15px 50px rgba(0, 0, 0, 0.15)' : '0 10px 40px rgba(0, 0, 0, 0.1)'};
+  }
   
   &::before {
     content: '';
@@ -156,6 +181,17 @@ const CardTitle = styled.h3`
   margin-bottom: 1rem;
   color: #2d3748;
   line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const ClickableIndicator = styled.small`
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #667eea;
+  opacity: 0.8;
+  font-style: italic;
 `;
 
 const CardDescription = styled.p`

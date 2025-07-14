@@ -1,6 +1,8 @@
 import { Route } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 import FormationPage from './Pages/FormationPage'
+import MobileFormationPage from './Pages/MobileFormationPage'
+import PaymentPage from './Pages/PaymentPage'
 
 export const routes = [
   {
@@ -10,6 +12,14 @@ export const routes = [
   {
     path: '/formations',
     element: <FormationPage />,
+  },
+  {
+    path: '/formations/mobile',
+    element: <MobileFormationPage />,
+  },
+  {
+    path: '/payment',
+    element: <PaymentPage />,
   },
 ]
 
