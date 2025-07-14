@@ -5,34 +5,36 @@ import { FaCreditCard, FaPaypal, FaMobile, FaUniversity, FaLock, FaCheck, FaArro
 import { Link } from "react-router-dom";
 
 export default function PaymentPage() {
-  const [selectedPlan, setSelectedPlan] = useState("premium");
+  const [selectedPlan, setSelectedPlan] = useState("pro");
   const [selectedPayment, setSelectedPayment] = useState("card");
 
   const plans = [
     {
-      id: "premium",
-      name: "Formation Premium",
-      price: "29€",
-      description: "Accès aux 3 projets premium",
+      id: "pro",
+      name: "Formation Pro",
+      price: "129€",
+      description: "Maîtrisez les fondamentaux du développement mobile",
       features: [
+        "RunSport - App E-commerce complète",
         "SocialConnect - Réseau social complet",
-        "SkyBooker - App de réservation voyage", 
-        "SendMoney - App fintech de transfert",
         "Code source complet pour chaque projet",
         "Vidéos tutoriels détaillées",
         "Support technique prioritaire",
         "Certificats de complétion",
-        "Mises à jour gratuites à vie"
+        "Mises à jour gratuites à vie",
+        "Accès communauté Discord"
       ]
     },
     {
-      id: "ultimate",
-      name: "Formation Ultimate",
-      price: "49€",
-      originalPrice: "78€",
-      description: "Formation complète + bonus exclusifs",
+      id: "mastering",
+      name: "Formation Mastering",
+      price: "149€",
+      originalPrice: "199€",
+      description: "Devenez un expert React Native avec 4 projets complets",
       features: [
-        "Tout de la Formation Premium",
+        "Tout de la Formation Pro",
+        "SkyBooker - App de réservation voyage", 
+        "SendMoney - App fintech de transfert",
         "Guide de déploiement App Store/Play Store",
         "Templates UI/UX supplémentaires",
         "Masterclass architecture avancée",
@@ -81,10 +83,10 @@ export default function PaymentPage() {
 
         <Header>
           <FaLock />
-          <Title>Déverrouillez les projets premium</Title>
+          <Title>Choisissez votre formation React Native</Title>
           <Subtitle>
-            Accédez aux 3 projets avancés et développez des compétences professionnelles 
-            avec des applications complètes dans les secteurs social, voyage et fintech.
+            Accédez aux projets avancés et développez des compétences professionnelles 
+            avec des applications complètes dans les secteurs e-commerce, social, voyage et fintech.
           </Subtitle>
         </Header>
 
@@ -118,7 +120,7 @@ export default function PaymentPage() {
                     </Feature>
                   ))}
                 </FeaturesList>
-                {plan.id === "ultimate" && <PopularBadge>Plus populaire</PopularBadge>}
+                {plan.id === "mastering" && <PopularBadge>Plus populaire</PopularBadge>}
               </PlanCard>
             ))}
           </PlansSection>

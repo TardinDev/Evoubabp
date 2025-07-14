@@ -32,6 +32,47 @@ export const features = [
   "✅ Mise à jour gratuite"
 ];
 
+export const formations = {
+  pro: {
+    id: "pro",
+    title: "Formation Pro",
+    price: 129,
+    currency: "€",
+    description: "Maîtrisez les fondamentaux du développement mobile avec React Native",
+    projects: ["runSport", "socialConnect"],
+    features: [
+      "✅ 2 projets complets inclus",
+      "✅ Code source disponible",
+      "✅ Vidéos tutoriels HD",
+      "✅ Support communauté",
+      "✅ Certificat de réussite",
+      "✅ Mise à jour gratuite"
+    ],
+    badge: "POPULAIRE",
+    color: "#3B82F6"
+  },
+  mastering: {
+    id: "mastering",
+    title: "Formation Mastering",
+    price: 149,
+    currency: "€",
+    description: "Devenez un expert React Native avec 4 projets complets",
+    projects: ["runSport", "socialConnect", "skyBooker", "sendMoney"],
+    features: [
+      "✅ 4 projets complets inclus",
+      "✅ Code source disponible",
+      "✅ Vidéos tutoriels HD",
+      "✅ Support communauté",
+      "✅ Certificat de réussite",
+      "✅ Mise à jour gratuite",
+      "✅ Accès aux projets avancés",
+      "✅ Mentoring personnalisé"
+    ],
+    badge: "RECOMMANDÉ",
+    color: "#10B981"
+  }
+};
+
 export const techStacks = {
   frontend: {
     title: "🎨 Frontend & UI",
@@ -150,7 +191,8 @@ export const projects = {
       "Firebase",
       "Node.js"
     ],
-    isPremium: false
+    isPremium: false,
+    formation: "pro"
   },
   socialConnect: {
     id: "social",
@@ -180,7 +222,8 @@ export const projects = {
       "Profils utilisateurs personnalisés",
       "Search et découverte"
     ],
-    isPremium: true
+    isPremium: true,
+    formation: "pro"
   },
   skyBooker: {
     id: "travel",
@@ -210,7 +253,8 @@ export const projects = {
       "Historique des voyages",
       "Cartes d'embarquement digitales"
     ],
-    isPremium: true
+    isPremium: true,
+    formation: "mastering"
   },
   sendMoney: {
     id: "sendmoney",
@@ -251,6 +295,7 @@ export const projects = {
       "Audit trail complet"
     ],
     isPremium: true,
+    formation: "mastering",
     isSmallImage: true
   }
 };
@@ -262,4 +307,43 @@ export const tabs = [
   { id: "social", label: "Projet Social Media" },
   { id: "travel", label: "Projet Sky Reservation" },
   { id: "sendmoney", label: "Projet SendMoney" }
-]; 
+];
+
+// Fonction utilitaire pour déterminer l'accès aux projets selon la formation
+export const getProjectAccess = (projectId, userFormation = null) => {
+  const project = projects[projectId];
+  if (!project) return false;
+  
+  // Si l'utilisateur n'a pas de formation, seul RunSport est accessible
+  if (!userFormation) {
+    return project.id === "project";
+  }
+  
+  // Si l'utilisateur a la formation Pro
+  if (userFormation === "pro") {
+    return formations.pro.projects.includes(projectId);
+  }
+  
+  // Si l'utilisateur a la formation Mastering
+  if (userFormation === "mastering") {
+    return formations.mastering.projects.includes(projectId);
+  }
+  
+  return false;
+};
+
+// Fonction pour obtenir la formation recommandée pour un projet
+export const getRecommendedFormation = (projectId) => {
+  const project = projects[projectId];
+  if (!project) return null;
+  
+  if (project.formation === "pro") {
+    return formations.pro;
+  }
+  
+  if (project.formation === "mastering") {
+    return formations.mastering;
+  }
+  
+  return null;
+}; 
