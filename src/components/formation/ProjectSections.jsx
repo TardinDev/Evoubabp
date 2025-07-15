@@ -146,9 +146,44 @@ export const FreeProjectSection = ({ project, courseData }) => (
     
     {courseData && (
       <>
-        <SectionTitle style={{ marginTop: '3rem', marginBottom: '0' }}>
-          💻 Cours interactif - Développement étape par étape
-        </SectionTitle>
+        <div style={{ 
+          marginTop: '3rem', 
+          marginBottom: '2rem',
+          display: 'flex',
+          justifyContent: 'flex-start',
+          alignItems: 'center'
+        }}>
+          <a 
+            href="https://github.com/tardyDev/RunSport-Assets/archive/refs/heads/main.zip"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              background: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)',
+              color: 'white',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '0.375rem',
+              textDecoration: 'none',
+              fontWeight: '600',
+              fontSize: '0.9rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              transition: 'all 0.3s ease',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 10px 25px rgba(59, 130, 246, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }}
+          >
+            📦 Télécharger les assets
+          </a>
+        </div>
         <CourseInteractive courseData={courseData} />
       </>
     )}
