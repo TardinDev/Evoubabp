@@ -11,7 +11,7 @@ import {
 } from "../components/formation/MobileFormationComponents";
 import { HeroSection, OverviewSection, CurriculumSectionComponent, CTASection } from "../components/formation/FormationSections";
 import { ProjectSectionComponent } from "../components/formation/ProjectSections";
-import { concepts, features, techStacks, modules, projects, tabs } from "../utils/mobileFormationData";
+import { concepts, features, techStacks, modules, projects, tabs, runSportCourse } from "../utils/mobileFormationData";
 
 export default function MobileFormationPage() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -78,6 +78,7 @@ export default function MobileFormationPage() {
             <ProjectSectionComponent 
               project={projects.runSport}
               onPremiumClick={handlePremiumClick}
+              courseData={runSportCourse}
             />
           </TabContent>
         );

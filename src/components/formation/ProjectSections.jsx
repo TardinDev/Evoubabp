@@ -1,4 +1,6 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
+import { FaPlay, FaCode, FaVideo } from "react-icons/fa";
 import {
   ProjectSection,
   SectionTitle,
@@ -8,11 +10,125 @@ import {
   TechStackComponent,
   LockedContentWrapper,
   LockedProjectOverlay,
-  BlurredContent
+  BlurredContent,
+  CourseContainer,
+  CourseInnerWrapper,
+  CourseSidebar,
+  CourseMainContent,
+  SectionList,
+  SectionItem,
+  CodeBlock,
+  SidebarTitle,
+  VideoContainer,
+  VideoWrapper,
+  VideoPlaceholder,
+  MainContentTitle,
+  LessonSection,
+  ContentItem,
+  FinalCodeButton
 } from "./MobileFormationComponents";
 
+// Course Interactive Component
+const CourseInteractive = ({ courseData }) => {
+  const [activeSection, setActiveSection] = useState(courseData.sections[0]?.id || "");
+  const [showFinalCode, setShowFinalCode] = useState(false);
+  
+  const currentSection = courseData.sections.find(section => section.id === activeSection);
+  
+  return (
+    <CourseContainer>
+      <CourseInnerWrapper>
+        {/* Sidebar des sections */}
+        <CourseSidebar>
+          <SidebarTitle>📚 Contenu du cours</SidebarTitle>
+          <SectionList>
+            {courseData.sections.map((section) => (
+              <SectionItem
+                key={section.id}
+                active={activeSection === section.id}
+                onClick={() => setActiveSection(section.id)}
+              >
+                {section.title}
+              </SectionItem>
+            ))}
+          </SectionList>
+        </CourseSidebar>
+        
+        {/* Contenu principal avec vidéos */}
+        <CourseMainContent>
+          {currentSection && (
+            <>
+              <MainContentTitle>{currentSection.title}</MainContentTitle>
+              
+              <VideoContainer>
+                <FinalCodeButton 
+                  active={showFinalCode}
+                  onClick={() => setShowFinalCode(!showFinalCode)}
+                >
+                  {showFinalCode ? <FaVideo /> : <FaCode />}
+                  {showFinalCode ? 'Retour Vidéo' : 'Code Final'}
+                </FinalCodeButton>
+                
+                {!showFinalCode ? (
+                  <VideoWrapper>
+                    <VideoPlaceholder>
+                      <FaPlay />
+                      <p>Vidéo du cours - {currentSection.title}</p>
+                      {currentSection.duration && (
+                        <div className="duration">📹 {currentSection.duration}</div>
+                      )}
+                    </VideoPlaceholder>
+                  </VideoWrapper>
+                ) : (
+                  <div style={{ 
+                    background: '#0f172a',
+                    border: '1px solid #334155',
+                    borderRadius: '0.375rem',
+                    padding: '1rem',
+                    marginBottom: '1rem'
+                  }}>
+                    <h5 style={{ 
+                      color: '#06b6d4', 
+                      marginBottom: '1rem',
+                      fontSize: '1rem',
+                      fontWeight: '600'
+                    }}>
+                      🎯 Code final de cette section
+                    </h5>
+                    <CodeBlock>
+                      {currentSection.finalCode || currentSection.code}
+                    </CodeBlock>
+                  </div>
+                )}
+              </VideoContainer>
+              
+              <LessonSection>
+                <ContentItem>
+                  <h5>⏱️ Durée estimée</h5>
+                  <p>{currentSection.duration || "15-30 minutes selon votre niveau"}</p>
+                </ContentItem>
+              </LessonSection>
+            </>
+          )}
+        </CourseMainContent>
+      </CourseInnerWrapper>
+    </CourseContainer>
+  );
+};
+
+CourseInteractive.propTypes = {
+  courseData: PropTypes.shape({
+    sections: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      code: PropTypes.string.isRequired
+    })).isRequired
+  }).isRequired
+};
+
 // Free Project Component (RunSport)
-export const FreeProjectSection = ({ project }) => (
+export const FreeProjectSection = ({ project, courseData }) => (
   <ProjectSection>
     <SectionTitle>{project.title}</SectionTitle>
     <ProjectDescription>
@@ -27,6 +143,15 @@ export const FreeProjectSection = ({ project }) => (
       title="🛠️ Technologies utilisées" 
       items={project.technologies} 
     />
+    
+    {courseData && (
+      <>
+        <SectionTitle style={{ marginTop: '3rem', marginBottom: '0' }}>
+          💻 Cours interactif - Développement étape par étape
+        </SectionTitle>
+        <CourseInteractive courseData={courseData} />
+      </>
+    )}
   </ProjectSection>
 );
 
@@ -76,11 +201,11 @@ export const PremiumProjectSection = ({ project, onPremiumClick }) => (
 );
 
 // Generic Project Component
-export const ProjectSectionComponent = ({ project, onPremiumClick }) => {
+export const ProjectSectionComponent = ({ project, onPremiumClick, courseData }) => {
   if (project.isPremium) {
     return <PremiumProjectSection project={project} onPremiumClick={onPremiumClick} />;
   }
-  return <FreeProjectSection project={project} />;
+  return <FreeProjectSection project={project} courseData={courseData} />;
 };
 
 // PropTypes
@@ -98,7 +223,15 @@ const projectPropType = PropTypes.shape({
 });
 
 FreeProjectSection.propTypes = {
-  project: projectPropType.isRequired
+  project: projectPropType.isRequired,
+  courseData: PropTypes.shape({
+    sections: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      code: PropTypes.string.isRequired
+    })).isRequired
+  })
 };
 
 PremiumProjectSection.propTypes = {
@@ -108,5 +241,13 @@ PremiumProjectSection.propTypes = {
 
 ProjectSectionComponent.propTypes = {
   project: projectPropType.isRequired,
-  onPremiumClick: PropTypes.func.isRequired
+  onPremiumClick: PropTypes.func.isRequired,
+  courseData: PropTypes.shape({
+    sections: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      code: PropTypes.string.isRequired
+    })).isRequired
+  })
 }; 

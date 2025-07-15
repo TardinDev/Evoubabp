@@ -478,6 +478,259 @@ export const BlurredContent = styled.div`
   opacity: 0.85;
 `;
 
+// === COURSE CONTENT ===
+export const CourseContainer = styled.div`
+  margin-top: 1rem;
+  background: #0f172a;
+  padding: 2rem 0;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
+  position: relative;
+  min-height: 600px;
+  
+  @media (max-width: 768px) {
+    padding: 1rem 0;
+    min-height: 500px;
+  }
+`;
+
+export const CourseInnerWrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.5rem;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: 250px 1fr;
+    gap: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+`;
+
+export const CourseSidebar = styled.div`
+  background: #1e293b;
+  border-radius: 0.375rem;
+  padding: 1.5rem;
+  height: fit-content;
+  border: 1px solid #334155;
+  
+  @media (max-width: 768px) {
+    order: 3;
+  }
+`;
+
+export const CourseMainContent = styled.div`
+  background: #1e293b;
+  border-radius: 0.375rem;
+  padding: 2rem;
+  border: 1px solid #334155;
+  
+  @media (max-width: 1024px) {
+    order: 1;
+  }
+  
+  @media (max-width: 768px) {
+    order: 1;
+  }
+`;
+
+
+
+export const SectionList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export const SectionItem = styled.button`
+  background: ${props => props.active ? '#3b82f6' : '#0f172a'};
+  color: ${props => props.active ? 'white' : '#e2e8f0'};
+  border: 1px solid ${props => props.active ? '#3b82f6' : '#475569'};
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  
+  &:hover {
+    background: ${props => props.active ? '#2563eb' : '#334155'};
+    border-color: #3b82f6;
+    color: white;
+  }
+`;
+
+
+
+export const CodeBlock = styled.pre`
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1.5rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border: 1px solid #334155;
+  
+  .comment {
+    color: #64748b;
+  }
+  
+  .keyword {
+    color: #60a5fa;
+  }
+  
+  .string {
+    color: #34d399;
+  }
+`;
+
+
+
+export const SidebarTitle = styled.h4`
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 1rem;
+`;
+
+export const VideoContainer = styled.div`
+  margin-bottom: 2rem;
+  position: relative;
+`;
+
+export const VideoWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 0.375rem;
+  border: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+  }
+  
+  @media (max-width: 768px) {
+    height: 200px;
+  }
+`;
+
+export const VideoPlaceholder = styled.div`
+  color: #64748b;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  
+  svg {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #06b6d4;
+    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3));
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .duration {
+    display: inline-block;
+    background: rgba(6, 182, 212, 0.2);
+    color: #06b6d4;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+  }
+`;
+
+export const MainContentTitle = styled.h4`
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 1.5rem;
+`;
+
+export const LessonSection = styled.div`
+  margin-bottom: 2rem;
+`;
+
+export const ContentItem = styled.div`
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  
+  h5 {
+    color: #e2e8f0;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  p {
+    color: #94a3b8;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+`;
+
+export const FinalCodeButton = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: ${props => props.active ? '#06b6d4' : '#1e293b'};
+  color: ${props => props.active ? '#0f172a' : '#e2e8f0'};
+  border: 1px solid ${props => props.active ? '#06b6d4' : '#334155'};
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+  
+  &:hover {
+    background: ${props => props.active ? '#0891b2' : '#334155'};
+    transform: translateY(-1px);
+  }
+  
+  svg {
+    font-size: 0.875rem;
+  }
+`;
+
 // === CTA SECTIONS ===
 export const CTASectionFullWidth = styled.section`
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

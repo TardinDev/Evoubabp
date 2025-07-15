@@ -172,6 +172,388 @@ export const modules = [
   }
 ];
 
+export const runSportCourse = {
+  sections: [
+    {
+      id: "setup",
+      title: "Configuration du projet",
+      description: "Nous allons créer notre projet RunSport avec Expo CLI et configurer l'environnement de développement.",
+      videoUrl: "https://example.com/setup-video.mp4",
+      duration: "15 min",
+      keyPoints: [
+        "Installation d'Expo CLI",
+        "Création du projet TypeScript",
+        "Configuration des dépendances"
+      ],
+      code: `// Installation d'Expo CLI
+npm install -g @expo/cli
+
+// Création du projet RunSport
+npx create-expo-app RunSport --template typescript
+
+// Navigation vers le dossier
+cd RunSport
+
+// Installation des dépendances
+npm install @expo/vector-icons
+npm install react-native-paper`,
+      finalCode: `// Structure du projet final
+RunSport/
+├── app/
+│   ├── _layout.tsx
+│   ├── index.tsx
+│   ├── products.tsx
+│   └── cart.tsx
+├── components/
+│   ├── ProductCard.tsx
+│   ├── CategoryCard.tsx
+│   └── CartItem.tsx
+├── store/
+│   └── cartStore.ts
+├── config/
+│   └── firebase.ts
+└── package.json
+
+// Package.json final
+{
+  "name": "runsport",
+  "version": "1.0.0",
+  "dependencies": {
+    "expo": "~49.0.0",
+    "react": "18.2.0",
+    "react-native": "0.72.6",
+    "expo-router": "^2.0.0",
+    "@expo/vector-icons": "^13.0.0",
+    "react-native-paper": "^5.10.0",
+    "zustand": "^4.4.0",
+    "firebase": "^10.0.0"
+  }
+}`
+    },
+    {
+      id: "navigation",
+      title: "Navigation avec Expo Router",
+      description: "Nous allons configurer la navigation entre les écrans avec Expo Router v3.",
+      videoUrl: "https://example.com/navigation-video.mp4",
+      duration: "20 min",
+      keyPoints: [
+        "Installation d'Expo Router v3",
+        "Configuration du layout principal",
+        "Création des écrans de navigation",
+        "Personnalisation des headers"
+      ],
+      code: `// Installation d'Expo Router
+npx expo install expo-router
+
+// app/_layout.tsx
+import { Stack } from 'expo-router';
+
+export default function RootLayout() {
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#3b82f6',
+        },
+        headerTintColor: '#fff',
+      }}
+    >
+      <Stack.Screen name="index" options={{ title: 'Accueil' }} />
+      <Stack.Screen name="products" options={{ title: 'Produits' }} />
+    </Stack>
+  );
+}`,
+      finalCode: `// Configuration finale complète de la navigation
+
+// app/_layout.tsx
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+
+export default function RootLayout() {
+  return (
+    <>
+      <StatusBar style="light" backgroundColor="#3b82f6" />
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#3b82f6',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        <Stack.Screen 
+          name="index" 
+          options={{ 
+            title: '🏃‍♂️ RunSport',
+            headerShown: true 
+          }} 
+        />
+        <Stack.Screen 
+          name="products" 
+          options={{ 
+            title: '👟 Nos Produits',
+            headerBackTitle: 'Retour'
+          }} 
+        />
+        <Stack.Screen 
+          name="cart" 
+          options={{ 
+            title: '🛒 Mon Panier',
+            presentation: 'modal'
+          }} 
+        />
+      </Stack>
+    </>
+  );
+}
+
+// Types pour la navigation
+export type RootStackParamList = {
+  index: undefined;
+  products: { category?: string };
+  cart: undefined;
+};`
+    },
+    {
+      id: "homescreen",
+      title: "Écran d'accueil",
+      description: "Créons l'écran d'accueil avec un hero section et les catégories de chaussures.",
+      videoUrl: "https://example.com/homescreen-video.mp4",
+      duration: "25 min",
+      keyPoints: [
+        "Création du hero section attractif",
+        "Intégration des catégories de produits",
+        "Styling avec TailwindCSS",
+        "Navigation vers les écrans produits",
+        "Responsive design mobile"
+      ],
+      code: `// app/index.tsx
+import React from 'react';
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { router } from 'expo-router';
+
+export default function HomeScreen() {
+  const categories = [
+    { id: 1, name: 'Running', image: '/images/running.jpg' },
+    { id: 2, name: 'Basketball', image: '/images/basketball.jpg' },
+    { id: 3, name: 'Football', image: '/images/football.jpg' },
+  ];
+
+  return (
+    <ScrollView className="flex-1 bg-white">
+      {/* Hero Section */}
+      <View className="bg-blue-500 p-6 rounded-b-3xl">
+        <Text className="text-white text-2xl font-bold mb-2">
+          Bienvenue sur RunSport
+        </Text>
+        <Text className="text-white/80">
+          Trouvez les meilleures chaussures de sport
+        </Text>
+      </View>
+
+      {/* Categories */}
+      <View className="p-4">
+        <Text className="text-xl font-semibold mb-4">Catégories</Text>
+        <View className="flex-row flex-wrap gap-3">
+          {categories.map((category) => (
+            <TouchableOpacity
+              key={category.id}
+              className="bg-gray-100 p-4 rounded-xl flex-1 min-w-[45%]"
+              onPress={() => router.push('/products')}
+            >
+              <Text className="text-center font-medium">{category.name}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+    </ScrollView>
+  );
+}`
+    },
+    {
+      id: "products",
+      title: "Liste des produits",
+      description: "Créons l'écran qui affiche la liste des chaussures avec filtres et recherche.",
+      code: `// app/products.tsx
+import React, { useState } from 'react';
+import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
+
+const SHOES = [
+  {
+    id: 1,
+    name: 'Nike Air Max 270',
+    price: 150,
+    image: '/images/nike-air-max.jpg',
+    category: 'running'
+  },
+  {
+    id: 2,
+    name: 'Adidas Ultraboost 22',
+    price: 180,
+    image: '/images/adidas-ultra.jpg',
+    category: 'running'
+  },
+];
+
+export default function ProductsScreen() {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  const renderProduct = ({ item }) => (
+    <TouchableOpacity className="bg-white m-2 p-4 rounded-xl shadow-sm border border-gray-100">
+      <Image source={{ uri: item.image }} className="w-full h-40 rounded-lg mb-3" />
+      <Text className="font-semibold text-lg mb-1">{item.name}</Text>
+      <Text className="text-blue-600 font-bold text-xl">{item.price}€</Text>
+      
+      <TouchableOpacity className="bg-blue-500 p-3 rounded-lg mt-3">
+        <Text className="text-white text-center font-medium">
+          Ajouter au panier
+        </Text>
+      </TouchableOpacity>
+    </TouchableOpacity>
+  );
+
+  return (
+    <View className="flex-1 bg-gray-50">
+      <FlatList
+        data={SHOES}
+        renderItem={renderProduct}
+        numColumns={2}
+        contentContainerStyle={{ padding: 8 }}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
+  );
+}`
+    },
+    {
+      id: "cart",
+      title: "Panier et checkout",
+      description: "Implémentons la logique du panier avec Zustand et l'écran de checkout.",
+      code: `// store/cartStore.ts
+import { create } from 'zustand';
+
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
+
+interface CartStore {
+  items: CartItem[];
+  addItem: (item: Omit<CartItem, 'quantity'>) => void;
+  removeItem: (id: number) => void;
+  updateQuantity: (id: number, quantity: number) => void;
+  clearCart: () => void;
+  total: number;
+}
+
+export const useCartStore = create<CartStore>((set, get) => ({
+  items: [],
+  
+  addItem: (item) => {
+    set((state) => {
+      const existingItem = state.items.find(i => i.id === item.id);
+      if (existingItem) {
+        return {
+          items: state.items.map(i =>
+            i.id === item.id 
+              ? { ...i, quantity: i.quantity + 1 }
+              : i
+          )
+        };
+      }
+      return { items: [...state.items, { ...item, quantity: 1 }] };
+    });
+  },
+
+  removeItem: (id) => {
+    set((state) => ({
+      items: state.items.filter(item => item.id !== id)
+    }));
+  },
+
+  updateQuantity: (id, quantity) => {
+    set((state) => ({
+      items: state.items.map(item =>
+        item.id === id ? { ...item, quantity } : item
+      )
+    }));
+  },
+
+  clearCart: () => set({ items: [] }),
+
+  get total() {
+    return get().items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  }
+}));`
+    },
+    {
+      id: "firebase",
+      title: "Intégration Firebase",
+      description: "Connectons notre app à Firebase pour l'authentification et la base de données.",
+      code: `// config/firebase.ts
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+
+const firebaseConfig = {
+  apiKey: "your-api-key",
+  authDomain: "runsport-app.firebaseapp.com",
+  projectId: "runsport-app",
+  storageBucket: "runsport-app.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "your-app-id"
+};
+
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+
+// services/authService.ts
+import { auth } from '../config/firebase';
+import { 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword,
+  signOut 
+} from 'firebase/auth';
+
+export const authService = {
+  async signUp(email: string, password: string) {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      return { user: userCredential.user, error: null };
+    } catch (error) {
+      return { user: null, error: error.message };
+    }
+  },
+
+  async signIn(email: string, password: string) {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      return { user: userCredential.user, error: null };
+    } catch (error) {
+      return { user: null, error: error.message };
+    }
+  },
+
+  async signOut() {
+    try {
+      await signOut(auth);
+      return { error: null };
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
+};`
+    }
+  ]
+};
+
 export const projects = {
   runSport: {
     id: "project",
