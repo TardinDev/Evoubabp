@@ -92,7 +92,7 @@ export const HeroTitle = styled.h1`
 `;
 
 export const GradientText = styled.span`
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
@@ -121,12 +121,12 @@ export const Stat = styled.div`
   color: rgba(255, 255, 255, 0.9);
   
   svg {
-    color: #f093fb;
+    color: #06b6d4;
   }
 `;
 
 export const CTAButton = styled(motion.button)`
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
   border: none;
   border-radius: 50px;
   color: white;
@@ -141,7 +141,7 @@ export const CTAButton = styled(motion.button)`
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
   }
 `;
 
@@ -170,7 +170,7 @@ export const Tab = styled.button`
   background: ${props => props.active ? '#667eea' : 'transparent'};
   color: ${props => props.active ? 'white' : '#64748b'};
   border: 1px solid ${props => props.active ? '#667eea' : '#e2e8f0'};
-  border-radius: 50px;
+  border-radius: 0.375rem;
   padding: 0.75rem 1.5rem;
   font-weight: 500;
   cursor: pointer;
@@ -208,15 +208,15 @@ export const SectionTitle = styled.h2`
 // === CONCEPT CARDS ===
 export const ConceptsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
 `;
 
 export const ConceptCard = styled.div`
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 15px;
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
   transition: all 0.3s ease;
   
@@ -228,15 +228,15 @@ export const ConceptCard = styled.div`
 
 export const ConceptIcon = styled.div`
   background: linear-gradient(135deg, #667eea, #764ba2);
-  width: 60px;
-  height: 60px;
-  border-radius: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1.25rem;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 `;
 
 export const ConceptTitle = styled.h3`

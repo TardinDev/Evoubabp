@@ -8,7 +8,7 @@ export default function FormationCard({ icon: Icon, title, text, countdown, inde
   
   const cardColors = [
     { primary: '#667eea', secondary: '#764ba2', accent: '#ff6b6b' },
-    { primary: '#f093fb', secondary: '#f5576c', accent: '#4facfe' },
+    { primary: '#3b82f6', secondary: '#06b6d4', accent: '#4facfe' },
     { primary: '#4facfe', secondary: '#00f2fe', accent: '#43e97b' },
     { primary: '#43e97b', secondary: '#38f9d7', accent: '#667eea' }
   ];

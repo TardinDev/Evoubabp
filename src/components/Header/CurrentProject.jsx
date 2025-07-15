@@ -60,7 +60,7 @@ export default function CurrentProject() {
           >
             <IoLogoJavascript size={60} color="yellow" />
             <FaReact size={60} color="blue" />
-            <SiReactrouter size={60} color="pink" />
+            <SiReactrouter size={60} color="#06b6d4" />
             <DiNodejs size={60} color="green" />
             <SiVite size={50} color="#E49BFF" />
             <DiMongodb size={60} color="green" />
