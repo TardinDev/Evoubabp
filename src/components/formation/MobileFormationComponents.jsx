@@ -824,4 +824,223 @@ ModuleComponent.propTypes = {
 
 LockedProjectOverlay.propTypes = {
   onPremiumClick: PropTypes.func.isRequired
+};
+
+// === ADVANCED FEATURES SECTION ===
+export const AdvancedFeaturesSection = styled.section`
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  padding: 4rem 0;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+`;
+
+export const AdvancedFeaturesContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+`;
+
+export const AdvancedSectionTitle = styled.h2`
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+export const AdvancedSectionSubtitle = styled.p`
+  font-size: 1.25rem;
+  text-align: center;
+  color: #94a3b8;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  
+  @media (max-width: 768px) {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+  }
+`;
+
+export const AdvancedFeaturesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+`;
+
+export const AdvancedFeatureCard = styled(motion.div)`
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 1px solid #475569;
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.1) 0%, 
+      rgba(6, 182, 212, 0.05) 50%, 
+      rgba(139, 92, 246, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: #3b82f6;
+    box-shadow: 
+      0 20px 40px rgba(59, 130, 246, 0.2),
+      0 0 80px rgba(6, 182, 212, 0.1);
+    
+    &::before {
+      opacity: 1;
+    }
+  }
+`;
+
+export const AdvancedFeatureIcon = styled.div`
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+  }
+  
+  ${AdvancedFeatureCard}:hover & {
+    &::before {
+      opacity: 1;
+      transform: rotate(45deg) translate(100%, 100%);
+    }
+  }
+`;
+
+export const AdvancedFeatureTitle = styled.h3`
+  font-size: 1.375rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #f1f5f9;
+  position: relative;
+  z-index: 1;
+`;
+
+export const AdvancedFeatureDescription = styled.p`
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+`;
+
+export const AdvancedFeatureBadge = styled.div`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+`;
+
+// Component for the advanced features section
+export const AdvancedFeaturesComponent = ({ features }) => (
+  <AdvancedFeaturesSection>
+    <AdvancedFeaturesContainer>
+      <AdvancedSectionTitle>✨ Fonctionnalités avancées que vous maîtriserez</AdvancedSectionTitle>
+      <AdvancedSectionSubtitle>
+        Développez des compétences de niveau professionnel en implémentant ces fonctionnalités 
+        innovantes qui distinguent votre application sur le marché
+      </AdvancedSectionSubtitle>
+      <AdvancedFeaturesGrid>
+        {features.map((feature, index) => (
+          <AdvancedFeatureCard
+            key={index}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true }}
+          >
+            <AdvancedFeatureBadge>Pro</AdvancedFeatureBadge>
+            <AdvancedFeatureIcon>
+              {feature.icon}
+            </AdvancedFeatureIcon>
+            <AdvancedFeatureTitle>{feature.title}</AdvancedFeatureTitle>
+            <AdvancedFeatureDescription>{feature.description}</AdvancedFeatureDescription>
+          </AdvancedFeatureCard>
+        ))}
+      </AdvancedFeaturesGrid>
+    </AdvancedFeaturesContainer>
+  </AdvancedFeaturesSection>
+);
+
+// PropTypes
+AdvancedFeaturesComponent.propTypes = {
+  features: PropTypes.arrayOf(PropTypes.shape({
+    icon: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired
+  })).isRequired
 }; 

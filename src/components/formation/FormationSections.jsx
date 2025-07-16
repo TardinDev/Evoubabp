@@ -32,7 +32,8 @@ import {
   ModuleComponent,
   CTASectionFullWidth,
   FullWidthCTAWrapper,
-  CTAContainer
+  CTAContainer,
+  AdvancedFeaturesComponent
 } from "./MobileFormationComponents";
 
 // Hero Section Component
@@ -111,6 +112,51 @@ export const OverviewSection = ({ concepts, features, techStacks }) => (
         ))}
       </FeaturesGrid>
     </Section>
+
+    <AdvancedFeaturesComponent 
+      features={[
+        {
+          icon: "🤖",
+          title: "IA pour recommandation personnalisée",
+          description: "Intégrez l'intelligence artificielle pour proposer du contenu personnalisé à vos utilisateurs"
+        },
+        {
+          icon: "👆",
+          title: "Auth biométrique",
+          description: "Authentification sécurisée par empreinte digitale et reconnaissance faciale"
+        },
+        {
+          icon: "💳",
+          title: "Paiement Stripe + Apple Pay",
+          description: "Intégration complète des systèmes de paiement modernes et sécurisés"
+        },
+        {
+          icon: "🌙",
+          title: "Mode sombre automatique",
+          description: "Thème adaptatif basé sur les préférences système de l'utilisateur"
+        },
+        {
+          icon: "🔔",
+          title: "Notifications push segmentées",
+          description: "Système de notifications ciblées et personnalisées par segments d'utilisateurs"
+        },
+        {
+          icon: "💬",
+          title: "Chat support IA",
+          description: "Assistant virtuel intelligent pour le support client 24/7"
+        },
+        {
+          icon: "✨",
+          title: "Animations fluides et feed interactif",
+          description: "Interface utilisateur moderne avec animations et interactions fluides"
+        },
+        {
+          icon: "📍",
+          title: "Chat utilisateur + favoris + géoloc boutique",
+          description: "Système social complet avec géolocalisation et fonctionnalités communautaires"
+        }
+      ]}
+    />
 
     <Section>
       <SectionTitle>⚡ Technologies modernes pour développer une app</SectionTitle>
