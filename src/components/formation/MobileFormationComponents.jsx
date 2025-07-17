@@ -3,6 +3,68 @@ import { motion } from "framer-motion";
 import { FaCheck, FaLock } from "react-icons/fa";
 import PropTypes from "prop-types";
 
+
+// === UTILITY COMPONENTS ===
+export const TechStackComponent = ({ title, items }) => (
+  <TechStack>
+    <TechTitle>{title}</TechTitle>
+    <TechList>
+      {items.map((item, index) => (
+        <TechItem key={index}>{item}</TechItem>
+      ))}
+    </TechList>
+  </TechStack>
+);
+
+export const ModuleComponent = ({ module }) => (
+  <Module>
+    <ModuleHeader>
+      <ModuleNumber>{module.number}</ModuleNumber>
+      <ModuleTitle>{module.title}</ModuleTitle>
+      <ModuleDuration>{module.duration}</ModuleDuration>
+    </ModuleHeader>
+    <LessonList>
+      {module.lessons.map((lesson, index) => (
+        <Lesson key={index}>
+          <FaCheck />
+          {lesson}
+        </Lesson>
+      ))}
+    </LessonList>
+  </Module>
+);
+
+export const LockedProjectOverlay = ({ onPremiumClick }) => (
+  <LockedOverlay onClick={onPremiumClick}>
+    <LockIcon>
+      <FaLock />
+    </LockIcon>
+    <UnlockText>Contenu Premium</UnlockText>
+    <UnlockSubtext>Cliquez pour déverrouiller ce projet</UnlockSubtext>
+  </LockedOverlay>
+);
+
+// PropTypes
+TechStackComponent.propTypes = {
+  title: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.string).isRequired
+};
+
+ModuleComponent.propTypes = {
+  module: PropTypes.shape({
+    number: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    duration: PropTypes.string.isRequired,
+    lessons: PropTypes.arrayOf(PropTypes.string).isRequired
+  }).isRequired
+};
+
+LockedProjectOverlay.propTypes = {
+  onPremiumClick: PropTypes.func.isRequired
+};
+
+
+
 // === LAYOUT COMPONENTS ===
 export const PageWrapper = styled.div`
   background: white;
@@ -142,6 +204,42 @@ export const CTAButton = styled(motion.button)`
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+  }
+`;
+
+// Conteneur pour les boutons CTA
+export const HeroButtonsContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    width: 100%;
+    
+    button {
+      justify-content: center;
+      font-size: 1rem;
+      padding: 0.875rem 1.5rem;
+    }
+  }
+`;
+
+// Bouton de contact spécialisé
+export const ContactButton = styled(CTAButton)`
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
   }
 `;
 
@@ -767,64 +865,6 @@ export const CTAContainer = styled.div`
   margin-top: 2rem;
 `;
 
-// === UTILITY COMPONENTS ===
-export const TechStackComponent = ({ title, items }) => (
-  <TechStack>
-    <TechTitle>{title}</TechTitle>
-    <TechList>
-      {items.map((item, index) => (
-        <TechItem key={index}>{item}</TechItem>
-      ))}
-    </TechList>
-  </TechStack>
-);
-
-export const ModuleComponent = ({ module }) => (
-  <Module>
-    <ModuleHeader>
-      <ModuleNumber>{module.number}</ModuleNumber>
-      <ModuleTitle>{module.title}</ModuleTitle>
-      <ModuleDuration>{module.duration}</ModuleDuration>
-    </ModuleHeader>
-    <LessonList>
-      {module.lessons.map((lesson, index) => (
-        <Lesson key={index}>
-          <FaCheck />
-          {lesson}
-        </Lesson>
-      ))}
-    </LessonList>
-  </Module>
-);
-
-export const LockedProjectOverlay = ({ onPremiumClick }) => (
-  <LockedOverlay onClick={onPremiumClick}>
-    <LockIcon>
-      <FaLock />
-    </LockIcon>
-    <UnlockText>Contenu Premium</UnlockText>
-    <UnlockSubtext>Cliquez pour déverrouiller ce projet</UnlockSubtext>
-  </LockedOverlay>
-);
-
-// PropTypes
-TechStackComponent.propTypes = {
-  title: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(PropTypes.string).isRequired
-};
-
-ModuleComponent.propTypes = {
-  module: PropTypes.shape({
-    number: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    duration: PropTypes.string.isRequired,
-    lessons: PropTypes.arrayOf(PropTypes.string).isRequired
-  }).isRequired
-};
-
-LockedProjectOverlay.propTypes = {
-  onPremiumClick: PropTypes.func.isRequired
-};
 
 // === ADVANCED FEATURES SECTION ===
 export const AdvancedFeaturesSection = styled.section`

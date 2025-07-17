@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Fichier des emails de notification (ne pas commiter)
+email-notifications.json
+save-email-server.cjs

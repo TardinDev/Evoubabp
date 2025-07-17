@@ -1,12 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { FaCreditCard, FaPaypal, FaMobile, FaUniversity, FaLock, FaCheck, FaArrowLeft } from "react-icons/fa";
+import { FaCreditCard, FaPaypal, FaMobile, FaUniversity, FaLock, FaCheck, FaArrowLeft, FaTimes, FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function PaymentPage() {
   const [selectedPlan, setSelectedPlan] = useState("pro");
   const [selectedPayment, setSelectedPayment] = useState("card");
+  const [showNotificationModal, setShowNotificationModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const plans = [
     {
@@ -72,6 +76,52 @@ export default function PaymentPage() {
       description: "Virement direct depuis votre banque"
     }
   ];
+
+  const handlePaymentClick = () => {
+    setShowNotificationModal(true);
+  };
+
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      // Sauvegarder l'email dans le fichier local
+      const response = await fetch('http://localhost:3001/api/save-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          email,
+          plan: selectedPlan,
+          timestamp: new Date().toISOString()
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitSuccess(true);
+        setEmail("");
+        setTimeout(() => {
+          setShowNotificationModal(false);
+          setSubmitSuccess(false);
+        }, 3000);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde:', error);
+      // En cas d'erreur, on simule quand même le succès pour l'UX
+      setSubmitSuccess(true);
+      setEmail("");
+      setTimeout(() => {
+        setShowNotificationModal(false);
+        setSubmitSuccess(false);
+      }, 3000);
+    }
+    
+    setIsSubmitting(false);
+  };
 
   return (
     <PageWrapper>
@@ -161,6 +211,7 @@ export default function PaymentPage() {
             <PaymentButton
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handlePaymentClick}
             >
               <FaLock />
               Payer maintenant - {plans.find(p => p.id === selectedPlan)?.price}
@@ -171,6 +222,67 @@ export default function PaymentPage() {
             </SecurityNote>
           </PaymentSection>
         </ContentGrid>
+
+        {/* Modal de notification */}
+        {showNotificationModal && (
+          <ModalOverlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <ModalContent
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+            >
+              <ModalHeader>
+                <ModalTitle>🚀 Formation bientôt disponible !</ModalTitle>
+                <CloseButton onClick={() => setShowNotificationModal(false)}>
+                  <FaTimes />
+                </CloseButton>
+              </ModalHeader>
+              
+              {!submitSuccess ? (
+                <>
+                  <ModalText>
+                    La formation <strong>Mastering</strong> sera bientôt disponible ! 
+                    Laissez-nous votre email et vous serez averti(e) dès le lancement.
+                  </ModalText>
+                  
+                  <EmailForm onSubmit={handleEmailSubmit}>
+                    <EmailInput
+                      type="email"
+                      placeholder="votre.email@exemple.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                    <SubmitButton
+                      type="submit"
+                      disabled={isSubmitting || !email}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {isSubmitting ? (
+                        "Inscription..."
+                      ) : (
+                        <>
+                          <FaEnvelope />
+                          M&apos;avertir du lancement
+                        </>
+                      )}
+                    </SubmitButton>
+                  </EmailForm>
+                </>
+              ) : (
+                <SuccessMessage>
+                  <FaCheck />
+                  <span>Parfait ! Vous serez averti(e) dès que la formation sera disponible.</span>
+                </SuccessMessage>
+              )}
+            </ModalContent>
+          </ModalOverlay>
+        )}
       </Container>
     </PageWrapper>
   );
@@ -404,10 +516,148 @@ const PaymentButton = styled(motion.button)`
   justify-content: center;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, #6b7280, #9ca3af);
+    transform: scale(1.05);
+  }
 `;
 
 const SecurityNote = styled.div`
   text-align: center;
   font-size: 0.8rem;
   color: #94a3b8;
+`; 
+
+// Nouveaux styles pour le modal
+const ModalOverlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+`;
+
+const ModalContent = styled(motion.div)`
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  border: 1px solid #475569;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+`;
+
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+`;
+
+const ModalTitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0;
+`;
+
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #475569;
+    color: #ffffff;
+  }
+`;
+
+const ModalText = styled.p`
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+
+  strong {
+    color: #3b82f6;
+  }
+`;
+
+const EmailForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const EmailInput = styled.input`
+  background: #0f172a;
+  border: 2px solid #475569;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+  }
+
+  &::placeholder {
+    color: #64748b;
+  }
+`;
+
+const SubmitButton = styled(motion.button)`
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    background: linear-gradient(135deg, #059669, #047857);
+  }
+`;
+
+const SuccessMessage = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  color: white;
+  font-weight: 600;
+
+  svg {
+    font-size: 1.5rem;
+    color: #ffffff;
+  }
 `; 

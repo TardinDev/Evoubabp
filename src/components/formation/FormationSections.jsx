@@ -1,4 +1,4 @@
-import { FaClock, FaUsers, FaGraduationCap, FaDownload } from "react-icons/fa";
+import { FaClock, FaUsers, FaGraduationCap, FaDownload, FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
@@ -16,6 +16,8 @@ import {
   HeroStats,
   Stat,
   CTAButton,
+  HeroButtonsContainer,
+  ContactButton,
   Section,
   SectionTitle,
   ConceptsGrid,
@@ -37,54 +39,84 @@ import {
 } from "./MobileFormationComponents";
 
 // Hero Section Component
-export const HeroSection = ({ onStartFormation }) => (
-  <HeaderSection>
-    <Container>
-      <BackLink as={Link} to="/formations">← Retour aux formations</BackLink>
-      <HeroContent>
-        <HeroImage>
-          <AppMockup 
-            src="/imagesFormations/RunSport.png" 
-            alt="Application RunSport - Formation React Native"
-          />
-        </HeroImage>
-        <HeroText>
-          <Badge>🎯 Formation Gratuite</Badge>
-          <HeroTitle>
-            Développement Mobile avec <GradientText>React Native</GradientText>
-          </HeroTitle>
-          <HeroDescription>
-            Apprenez à créer 4 applications mobiles complètes : RunSport (E-commerce), SocialConnect 
-            (Réseau social), SkyBooker (Réservation voyage) et SendMoney (Fintech). Une formation gratuite 
-            qui vous enseigne React Native, les APIs backend, Git/GitHub et toutes les technologies du développement mobile moderne.
-          </HeroDescription>
-          <HeroStats>
-            <Stat>
-              <FaClock />
-              <span>10,5 heures</span>
-            </Stat>
-            <Stat>
-              <FaUsers />
-              <span>58 étudiants</span>
-            </Stat>
-            <Stat>
-              <FaGraduationCap />
-              <span>Débutant</span>
-            </Stat>
-          </HeroStats>
-          <CTAButton 
-            whileHover={{ scale: 1.05 }} 
-            whileTap={{ scale: 0.95 }} 
-            onClick={onStartFormation}
-          >
-            <FaDownload />
-            Commencer Maintenant - Gratuit
-          </CTAButton>
-        </HeroText>
-      </HeroContent>
-    </Container>
-  </HeaderSection>
-);
+export const HeroSection = ({ onStartFormation }) => {
+  const handleContactClick = () => {
+    const subject = encodeURIComponent("Question sur la formation React Native");
+    const body = encodeURIComponent(`Bonjour,
+
+J'ai une question concernant votre formation React Native Mobile.
+
+Ma question :
+[Écrivez votre question ici]
+
+Merci de votre réponse rapide !
+
+Cordialement`);
+    
+    window.location.href = `mailto:tardindavy@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  return (
+    <HeaderSection>
+      <Container>
+        <BackLink as={Link} to="/formations">← Retour aux formations</BackLink>
+        <HeroContent>
+          <HeroImage>
+            <AppMockup 
+              src="/imagesFormations/RunSport.png" 
+              alt="Application RunSport - Formation React Native"
+            />
+          </HeroImage>
+          <HeroText>
+            <Badge>🎯 Formation Gratuite</Badge>
+            <HeroTitle>
+              Développement Mobile avec <GradientText>React Native</GradientText>
+            </HeroTitle>
+            <HeroDescription>
+              Apprenez à créer 4 applications mobiles complètes : RunSport (E-commerce), SocialConnect 
+              (Réseau social), SkyBooker(Réservation voyage) et SendMoney (Fintech). Une formation 
+              qui vous enseigne React-Native, les APIs, le backend, Git/GitHub et toutes les technologies du développement mobile moderne.
+            </HeroDescription>
+            <HeroStats>
+              <Stat>
+                <FaClock />
+                <span>10,5 heures</span>
+              </Stat>
+              <Stat>
+                <FaUsers />
+                <span>58 étudiants</span>
+              </Stat>
+              <Stat>
+                <FaGraduationCap />
+                <span>Débutant</span>
+              </Stat>
+            </HeroStats>
+            
+            <HeroButtonsContainer>
+              <CTAButton 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }} 
+                onClick={onStartFormation}
+              >
+                <FaDownload />
+                Commencer Maintenant - Gratuit
+              </CTAButton>
+              
+              <ContactButton 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }} 
+                onClick={handleContactClick}
+              >
+                <FaEnvelope />
+                Une question ? Je réponds immédiatement !
+              </ContactButton>
+            </HeroButtonsContainer>
+          </HeroText>
+        </HeroContent>
+      </Container>
+    </HeaderSection>
+  );
+};
 
 // Overview Section Component
 export const OverviewSection = ({ concepts, features, techStacks }) => (
