@@ -21,10 +21,17 @@ const applications = {
       image: "/imagesAppsMobile/zopgomobile.png",
     },
     {
-      title: "RunSport",
+      title: "Run Sport",
       description: "une application qui permet de trouver des chaussures de sport adaptés à vos besoins",
       image: "/imagesAppsMobile/RunSport.png",
     },
+    {
+      title: "Binome Pay",
+      description: "Transférer de l’argent d’un pays à un autre sans passer par les moyens classiques comme les banques ou Western Union, en mettant en relation directe deux personnes avec des besoins croisés.",
+      image: "/imagesAppsMobile/binomePay.png",
+    },
+    
+    
   ],
   web: [
     {

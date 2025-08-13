@@ -70,7 +70,7 @@ Cordialement`);
           <HeroText>
             <Badge>🎯 Formation Gratuite</Badge>
             <HeroTitle>
-              Développement Mobile avec <GradientText>React Native</GradientText>
+              Développement Mobile avec <GradientText>React-Native</GradientText>
             </HeroTitle>
             <HeroDescription>
               Apprenez à créer 4 applications mobiles complètes : RunSport (E-commerce), SocialConnect 

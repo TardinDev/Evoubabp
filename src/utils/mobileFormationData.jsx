@@ -19,7 +19,7 @@ export const concepts = [
   {
     icon: FaDatabase,
     title: "Backend",
-    description: "Intégration d'APIs REST, Firebase, authentification et gestion des données"
+    description: "Intégration d'APIs REST, Clerk, Supabase, authentification et gestion des données"
   }
 ];
 
@@ -78,7 +78,7 @@ export const techStacks = {
     title: "🎨 Frontend & UI",
     items: [
       "React Native",
-      "Expo SDK 50+",
+      "Expo SDK 53",
       "TypeScript",
       "TailwindCSS",
       "Expo Router v3"
@@ -87,11 +87,11 @@ export const techStacks = {
   backend: {
     title: "⚙️ Backend & APIs",
     items: [
-      "Firebase v9",
-      "Node.js 20+",
+      "Supabase",
+      "Clerk Auth",
       "REST APIs",
       "JWT Auth",
-      "Supabase"
+      "PostgreSQL"
     ]
   },
   stateStorage: {
@@ -166,8 +166,8 @@ export const modules = [
     lessons: [
       "Git et GitHub pour développeurs mobiles",
       "Intégration d'APIs REST",
-      "Firebase et stockage cloud",
-      "Authentification et gestion utilisateurs"
+      "Supabase et base de données",
+      "Authentification avec Clerk"
     ]
   }
 ];
@@ -211,7 +211,8 @@ RunSport/
 ├── store/
 │   └── cartStore.ts
 ├── config/
-│   └── firebase.ts
+│   ├── supabase.ts
+│   └── clerk.ts
 └── package.json
 
 // Package.json final
@@ -219,14 +220,15 @@ RunSport/
   "name": "runsport",
   "version": "1.0.0",
   "dependencies": {
-    "expo": "~49.0.0",
-    "react": "18.2.0",
-    "react-native": "0.72.6",
-    "expo-router": "^2.0.0",
+    "expo": "~53.0.0",
+          "react": "18.3.1",
+          "react-native": "0.75.3",
+          "expo-router": "^3.5.0",
     "@expo/vector-icons": "^13.0.0",
     "react-native-paper": "^5.10.0",
     "zustand": "^4.4.0",
-    "firebase": "^10.0.0"
+    "@clerk/expo": "^0.19.0",
+    "@supabase/supabase-js": "^2.38.0"
   }
 }`
     },
@@ -493,61 +495,84 @@ export const useCartStore = create<CartStore>((set, get) => ({
 }));`
     },
     {
-      id: "firebase",
-      title: "Intégration Firebase",
-      description: "Connectons notre app à Firebase pour l'authentification et la base de données.",
-      code: `// config/firebase.ts
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+      id: "auth-db",
+      title: "Authentification & Base de données",
+      description: "Connectons notre app avec Clerk pour l'authentification et Supabase pour la base de données.",
+      code: `// config/supabase.ts
+import { createClient } from '@supabase/supabase-js';
 
-const firebaseConfig = {
-  apiKey: "your-api-key",
-  authDomain: "runsport-app.firebaseapp.com",
-  projectId: "runsport-app",
-  storageBucket: "runsport-app.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "your-app-id"
-};
+const supabaseUrl = 'https://your-project.supabase.co';
+const supabaseKey = 'your-anon-key';
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+export const supabase = createClient(supabaseUrl, supabaseKey);
+
+// config/clerk.ts
+import { ClerkProvider } from '@clerk/expo';
+
+const publishableKey = 'pk_test_your-key';
+
+export { ClerkProvider, publishableKey };
 
 // services/authService.ts
-import { auth } from '../config/firebase';
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword,
-  signOut 
-} from 'firebase/auth';
+import { useAuth, useUser } from '@clerk/expo';
+import { supabase } from '../config/supabase';
 
-export const authService = {
-  async signUp(email: string, password: string) {
+export const useAuthService = () => {
+  const { signIn, signOut, signUp } = useAuth();
+  const { user } = useUser();
+
+  const signUpWithEmail = async (email: string, password: string) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      return { user: userCredential.user, error: null };
+      const result = await signUp.create({
+        emailAddress: email,
+        password,
+      });
+      return { user: result, error: null };
     } catch (error) {
       return { user: null, error: error.message };
     }
-  },
+  };
 
-  async signIn(email: string, password: string) {
+  const signInWithEmail = async (email: string, password: string) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      return { user: userCredential.user, error: null };
+      const result = await signIn.create({
+        identifier: email,
+        password,
+      });
+      return { user: result, error: null };
     } catch (error) {
       return { user: null, error: error.message };
     }
-  },
+  };
 
-  async signOut() {
+  const logout = async () => {
     try {
-      await signOut(auth);
+      await signOut();
       return { error: null };
     } catch (error) {
       return { error: error.message };
     }
+  };
+
+  return { signUpWithEmail, signInWithEmail, logout, user };
+};
+
+// services/databaseService.ts
+import { supabase } from '../config/supabase';
+
+export const databaseService = {
+  async getProducts() {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*');
+    return { data, error };
+  },
+
+  async createOrder(orderData) {
+    const { data, error } = await supabase
+      .from('orders')
+      .insert([orderData]);
+    return { data, error };
   }
 };`
     }
@@ -563,15 +588,15 @@ export const projects = {
     alt: "Écrans de l'application RunSport",
     technologies: [
       "React Native",
-      "Expo SDK 49+",
+      "Expo SDK 53",
       "Expo Router",
       "TailwindCSS",
       "TypeScript",
       "AsyncStorage",
       "Git & GitHub",
       "REST APIs",
-      "Firebase",
-      "Node.js"
+      "Clerk",
+      "Supabase"
     ],
     isPremium: false,
     formation: "pro"
