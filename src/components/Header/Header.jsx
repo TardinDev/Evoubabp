@@ -1,5 +1,5 @@
 import { IoIosMail } from "react-icons/io";
-import { BiMenuAltRight } from "react-icons/bi";  // Import the menu icon
+import { BiMenuAltRight } from "react-icons/bi";
 import styled from 'styled-components';
 import constants from "../../styles/contants";
 import { motion } from 'framer-motion'; // for slow motion

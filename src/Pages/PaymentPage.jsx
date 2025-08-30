@@ -110,7 +110,6 @@ export default function PaymentPage() {
         }, 3000);
       }
     } catch (error) {
-      console.error('Erreur lors de la sauvegarde:', error);
       // En cas d'erreur, on simule quand même le succès pour l'UX
       setSubmitSuccess(true);
       setEmail("");

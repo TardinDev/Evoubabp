@@ -9,7 +9,6 @@ import { renderRoutes } from './routes'
 function App() {
   return (
     <>
-      {/* Routes de l'application */}
       <Routes>
         {renderRoutes()}
       </Routes>

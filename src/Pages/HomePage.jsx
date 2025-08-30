@@ -7,9 +7,8 @@ import AppShowcaseSection from "../components/ShowCaseprojects/AppShowcaseSectio
 import TechUsed from "../components/TechUsed/TechUsed";
 import Footer from "../components/TheFooter/Footer";
 
-
 export default function HomePage() {
-
+  console.log('HomePage rendering FULL...')
   return (
     <div>
       <Header/>
