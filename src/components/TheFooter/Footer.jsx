@@ -8,7 +8,7 @@ export default function Footer() {
           <BrandSection>
             <BrandLogo>
               <LogoIcon>🚀</LogoIcon>
-              <BrandName>Evoubabp</BrandName>
+              <BrandName>Evoubap</BrandName>
             </BrandLogo>
             <BrandDescription>
               Créateur d&apos;applications mobiles et web innovantes. 

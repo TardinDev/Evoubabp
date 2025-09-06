@@ -46,7 +46,7 @@ const Header = () => {
         className='container'
         style={{boxShadow: headerShadow}}>
 
-        <div className='name' ><a href="Home" style={{color:"#4b0082"}}>Evoubabp</a></div>
+        <div className='name' ><a href="Home" style={{color:"#4b0082"}}>Evoubap</a></div>
 
         <Menu menuOpened={menuOpened} />
 
