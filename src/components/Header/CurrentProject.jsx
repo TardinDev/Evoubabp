@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import { FaReact } from "react-icons/fa";
-import { IoLogoJavascript } from "react-icons/io5";
-import { SiReactrouter } from "react-icons/si";
-import { DiNodejs } from "react-icons/di";
-import { SiVite } from "react-icons/si";
-import { DiMongodb } from "react-icons/di";
-import { FaGithub } from "react-icons/fa6";
+import { 
+  SiTypescript,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiReactquery,
+  SiNodedotjs,
+  SiVite,
+  SiPostgresql,
+  SiDocker,
+  SiPrisma
+} from "react-icons/si";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 
@@ -49,22 +54,21 @@ export default function CurrentProject() {
           variants={fadeIn("left", "tween", 0.3, 1)}
           className="technologies"
         >
-          <h1>
-            Technologies
-            <br />
-            Utilisées
-          </h1>
+          <h1> Technologies  Utilisées </h1>
           <motion.div 
             variants={fadeIn("up", "tween", 0.4, 1)}
             className="icons"
           >
-            <IoLogoJavascript size={60} color="yellow" />
-            <FaReact size={60} color="blue" />
-            <SiReactrouter size={60} color="#06b6d4" />
-            <DiNodejs size={60} color="green" />
-            <SiVite size={50} color="#E49BFF" />
-            <DiMongodb size={60} color="green" />
-            <FaGithub size={60} color="black" />
+            <SiTypescript size={56} color="#3178C6" />
+            <FaReact size={56} color="#61DAFB" />
+            <SiNextdotjs size={56} color="#000000" />
+            <SiTailwindcss size={56} color="#06B6D4" />
+            <SiReactquery size={56} color="#FF4154" />
+            <SiNodedotjs size={56} color="#3C873A" />
+            <SiVite size={48} color="#646CFF" />
+            <SiPrisma size={56} color="#2D3748" />
+            <SiPostgresql size={56} color="#316192" />
+            <SiDocker size={56} color="#2496ED" />
           </motion.div>
 
           <motion.div 

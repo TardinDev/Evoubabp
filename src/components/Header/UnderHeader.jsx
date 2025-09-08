@@ -75,7 +75,7 @@ export default function UnderHeader() {
             className="experience"
           >
             <div className="numberofyearsExperience">
-              <div className="firstText">2</div>
+              <div className="firstText">4</div>
               <div className="secondText">
                 <div>Années</div>
                 <div>d&apos;Expérience</div>
