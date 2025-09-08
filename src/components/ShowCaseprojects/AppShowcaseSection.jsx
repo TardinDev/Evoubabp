@@ -211,7 +211,7 @@ const CardWeb = styled.div`
 
 const AppImageMobile = styled.img`
   width: 100%;
-  height: 22rem;
+  height: clamp(12rem, 30vw, 22rem);
   object-fit: contain;
   object-position: center;
   border-radius: 0.75rem;
@@ -221,7 +221,7 @@ const AppImageMobile = styled.img`
 
 const AppImage = styled.img`
   width: 100%;
-  height: 20rem;
+  height: clamp(14rem, 28vw, 20rem);
   object-fit: cover;
   border-radius: 0.75rem;
   margin-bottom: 1rem;

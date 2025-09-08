@@ -82,7 +82,7 @@ const HeaderStyles = styled.div`
 
 
   .name {
-    font-size: 4.5rem;
+    font-size: clamp(1.5rem, 4vw + 1rem, 3rem);
     font-weight: bold; 
     color: purple;
   }
@@ -117,6 +117,8 @@ const HeaderStyles = styled.div`
          top:3rem;
          width:50%;
          min-width:15rem;
+         max-height: 80vh;
+         overflow: auto;
          background:white;
          padding:2rem;
          display:flex;
@@ -130,14 +132,12 @@ const HeaderStyles = styled.div`
 
 
   .menu-icon {
-   
-   display: none;
-   cursor: pointer;
-
-   @media (max-width: 768px) {
-     display: block;
-   }
- }
+    display: none;
+    cursor: pointer;
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
 
 
 

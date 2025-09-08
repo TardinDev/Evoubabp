@@ -1,6 +1,7 @@
 import { Routes } from 'react-router-dom'
 import './App.css'
 import { renderRoutes } from './routes'
+import GlobalStyle from './styles/GlobalStyle'
 
 /**
  * Composant principal de l'application
@@ -9,6 +10,7 @@ import { renderRoutes } from './routes'
 function App() {
   return (
     <>
+      <GlobalStyle />
       <Routes>
         {renderRoutes()}
       </Routes>

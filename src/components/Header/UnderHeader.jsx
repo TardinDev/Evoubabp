@@ -128,7 +128,7 @@ const UnderHeaderStyle = styled.div`
   .container {
     position: relative;
     background-color: #F8F7F1;
-    padding: 30px 50px;
+    padding: clamp(16px, 2vw, 30px) clamp(20px, 4vw, 50px);
     z-index: 1;
   }
 
@@ -137,8 +137,8 @@ const UnderHeaderStyle = styled.div`
     bottom: 1rem;
     left: 33%;
     img {
-      width: 45%;
-      height: 45%;
+      width: clamp(140px, 30vw, 320px);
+      height: auto;
       object-fit: contain;
       border: 3px solid purple;
       border-radius: 50%;
@@ -147,7 +147,6 @@ const UnderHeaderStyle = styled.div`
     @media (max-width: 640px) {
       position: relative;
       left: 0;
-      background-size: 20rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -159,7 +158,7 @@ const UnderHeaderStyle = styled.div`
     top: 50%;
     left: 0;
     color: orange;
-    margin-left: 3rem;
+    margin-left: clamp(1rem, 4vw, 3rem);
     cursor:pointer;
 
     &: hover {
@@ -212,7 +211,7 @@ const UnderHeaderStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    font-size: 35px;
+    font-size: clamp(1.25rem, 2.2vw + 1rem, 2.25rem);
     @media (max-width: 640px) {
       justify-content: center;
       align-items: center;
@@ -221,7 +220,7 @@ const UnderHeaderStyle = styled.div`
   }
 
   .downElement {
-    margin-top: 12rem;
+    margin-top: clamp(4rem, 8vw, 12rem);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
