@@ -717,8 +717,8 @@ export const tabs = [
 ];
 
 // Fonction utilitaire pour déterminer l'accès aux projets selon la formation
-export const getProjectAccess = (projectId, userFormation = null) => {
-  const project = projects[projectId];
+export const getProjectAccess = (projectId: string, userFormation: string | null = null) => {
+  const project = (projects as any)[projectId];
   if (!project) return false;
   
   // Si l'utilisateur n'a pas de formation, seul RunSport est accessible
@@ -740,8 +740,8 @@ export const getProjectAccess = (projectId, userFormation = null) => {
 };
 
 // Fonction pour obtenir la formation recommandée pour un projet
-export const getRecommendedFormation = (projectId) => {
-  const project = projects[projectId];
+export const getRecommendedFormation = (projectId: string) => {
+  const project = (projects as any)[projectId];
   if (!project) return null;
   
   if (project.formation === "pro") {

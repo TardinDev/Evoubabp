@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { FormationCardProps } from '../../shared/types';
 
-export default function FormationCard({ icon: Icon, title, text, countdown, index, navigateUrl }) {
+export default function FormationCard({ icon: Icon, title, text, countdown, index, navigateUrl }: FormationCardProps) {
   const navigate = useNavigate();
   
   const cardColors = [
@@ -21,7 +22,7 @@ export default function FormationCard({ icon: Icon, title, text, countdown, inde
     }
   };
 
-  const handleButtonClick = (e) => {
+  const handleButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation(); // Empêche la propagation vers la carte
     handleClick();
   };

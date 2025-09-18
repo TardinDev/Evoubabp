@@ -57,14 +57,18 @@ const Shapes = () => (
   </>
 );
 
-const HowItWorks = () => (
+interface HowItWorksProps {
+  id?: string;
+}
+
+const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => (
   <motion.div
     variants={staggerContainer}
     initial="hidden"
     whileInView="show"
     viewport={{ once: true, amount: 0.25 }}
   >
-    <Section id="howItWorks">
+    <Section id={id || "howItWorks"}>
       <Shapes />
       <Container>
         <motion.div variants={fadeIn("up", "tween", 0.1, 1)}>

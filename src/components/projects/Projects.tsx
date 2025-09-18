@@ -11,7 +11,11 @@ import saasAnimation from '../../shared/assets/animations/saas.json';
 import mobileAnimation from '../../shared/assets/animations/mobile.json';
 import learningAnimation from '../../shared/assets/animations/learning.json';
 
-const Projects = () => {
+interface ProjectsProps {
+  id?: string;
+}
+
+const Projects: React.FC<ProjectsProps> = ({ id }) => {
   const [selectedService, setSelectedService] = useState('web');
 
   const serviceContent = {
@@ -51,7 +55,7 @@ const Projects = () => {
   };
 
   return (
-    <SectionContainer >
+    <SectionContainer id={id}>
       <motion.div
         initial="hidden"
         whileInView="show"
