@@ -35,11 +35,11 @@ export default function UnderHeader() {
             variants={fadeIn("left", "tween", 0.2, 1)}
             className="secondText"
           >
-            <span >Je conçois des projets ambitieux</span> 
+            <span>Je conçois des solutions intelligentes</span>
             <br />
-            <span> pour accélérer la croissance</span>  
+            <span>alimentées par l'IA pour transformer</span>
             <br/>
-            <span> de votre entreprise.</span>            
+            <span>l'avenir de votre entreprise.</span>            
           </motion.span>
         </div>
 
@@ -93,7 +93,10 @@ export default function UnderHeader() {
               variants={fadeIn("left", "tween", 0.2, 1)}
               className="certificat-container"
 >
-          <div>Vous pouvez tester les projets sur Vercel <br/>ou consulter le code sur GitHub !</div>
+          <div>
+            Découvrez mes projets intégrant l'IA, l'automatisation intelligente <br/>
+            et les dernières innovations technologiques sur Vercel et GitHub !
+          </div>
 
           <div className="vercelAndGithub">
             <div className="certificat">
@@ -135,21 +138,34 @@ const UnderHeaderStyle = styled.div`
   .person {
     position: absolute;
     bottom: 1rem;
-    left: 33%;
+    left: 25%;
+    transform: translateX(-50%);
+    z-index: 1;
+
     img {
-      width: clamp(140px, 30vw, 320px);
+      width: clamp(150px, 30vw, 320px);
       height: auto;
       object-fit: contain;
       border: 3px solid purple;
       border-radius: 50%;
       margin-bottom: 5px;
+      opacity: 0.9;
+      transition: all 0.3s ease;
     }
+
+    &:hover img {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
     @media (max-width: 640px) {
       position: relative;
       left: 0;
+      transform: none;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 2rem;
     }
   }
 
@@ -183,21 +199,24 @@ const UnderHeaderStyle = styled.div`
 
   .secondText {
       position: relative;
-      border-radius: 8px;
+      border-radius: 10px;
       display: inline-block;
       cursor: pointer;
+      padding: 0.5rem 1rem;
+      transition: all 0.5s ease-in-out;
+      color: black;
+      font-weight: 600;
+      z-index: 2;
 
       &: hover {
-        background: #4b0082;
+        background-color: #4b0082;
         color: #fff;
-
-        border:1px solid purple;
-        border-radius:10px;
-
-        padding:0.3rem 0.5rem;
-        text-decoration:none;
-        transition: all 0.5s ease-in-out; /* Ajout de la transition */
-
+        transform: scale(1.1);
+        border: 1px solid purple;
+        border-radius: 10px;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        z-index: 10;
       }
 
       @media (max-width: 640px) {
@@ -216,6 +235,28 @@ const UnderHeaderStyle = styled.div`
       justify-content: center;
       align-items: center;
       gap: 2rem;
+    }
+  }
+
+  .firstText {
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    padding: 0.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    color: black;
+    position: relative;
+    z-index: 2;
+
+    &:hover {
+      background-color: #4b0082;
+      color: #fff;
+      transform: scale(1.1);
+      border: 1px solid purple;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      z-index: 10;
     }
   }
 

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { HiOutlineDesktopComputer } from 'react-icons/hi';
 import { MdCloud, MdPhoneIphone, MdSchool } from 'react-icons/md';
+import { FaBrain } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../../utils/motion';
 import Lottie from 'lottie-react';
@@ -20,19 +21,19 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
 
   const serviceContent = {
     web: {
-      title: 'Développement Web',
+      title: 'Développement Web/SAAS',
       description:
-      "Nous créons des applications de toute complexité, sans limites d’intégration ni d’évolutivité, en gérant efficacement et rapidement les entrées, les sorties, les bases de données et de multiples composants externes.",
+      "Nous créons des applications web et SAAS de toute complexité, sans limites d'intégration ni d'évolutivité, en gérant efficacement et rapidement les entrées, les sorties, les bases de données et de multiples composants externes.",
       icon: <HiOutlineDesktopComputer />,
       vercelLink:"voir les projets sur Vercel",
       color: '#286F6C',
       animationData: webDevelopmentAnimation,
     },
     saas: {
-      title: 'SAAS',
+      title: 'Intelligence Artificielle',
       description:
-        'Nos solutions SAAS sont conçues pour évoluer avec votre entreprise, garantissant un accès sécurisé et fiable sur tous les appareils et plateformes.',
-      icon: <MdCloud />,
+        'Nos solutions IA sont conçues pour automatiser vos processus, analyser vos données et fournir des insights prédictifs pour transformer votre entreprise grâce à l\'intelligence artificielle.',
+      icon: <FaBrain />,
       color: '#EEC048',
       animationData: saasAnimation,
     },
@@ -144,12 +145,23 @@ const ContentContainer = styled.div`
     justify-content: space-between;
     align-items: flex-start;
   }
+
+  @media (max-width: 767px) {
+    gap: 3rem;
+    flex-direction: column;
+  }
 `;
 
 const TextContainer = styled.div`
   flex: 2;
   max-width: 600px;
   margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: 767px) {
+    max-width: 100%;
+    order: 1;
+  }
 `;
 
 const ServiceList = styled.ul`
@@ -159,6 +171,10 @@ const ServiceList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media (max-width: 767px) {
+    gap: 1.5rem;
+  }
 `;
 
 const ServiceItem = styled.li`
@@ -197,9 +213,19 @@ const ImageContainer = styled.div`
   padding: 2rem;
   text-align: center;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
 
   @media (min-width: 768px) {
     text-align: left;
+  }
+
+  @media (max-width: 767px) {
+    padding: 1.5rem;
+    order: 2;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
   }
 `;
 

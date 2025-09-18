@@ -102,7 +102,7 @@ const Section = styled.section`
   color: ${({ theme }) => (theme === "dark" ? "white" : "#27272a")};
   position: relative;
   z-index: 1;
-  margin-bottom: 3rem; /* Ajoute un espace en bas pour éviter le débordement */
+  margin-bottom: 0;
 `;
 
 const Container = styled.div`
@@ -127,42 +127,48 @@ const Title = styled.h2`
 `;
 
 const ContentGrid = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   margin-top: 2rem;
   cursor: pointer;
   max-width: 100%;
-  overflow-x: auto;
   padding: 1rem 0;
-  justify-content: flex-start;
-  
-  /* Style de la scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: #d1d5db #f3f4f6;
-  
-  &::-webkit-scrollbar {
-    height: 8px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: #f3f4f6;
-    border-radius: 4px;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: #d1d5db;
-    border-radius: 4px;
-  }
-  
-  &::-webkit-scrollbar-thumb:hover {
-    background: #9ca3af;
+
+  @media (max-width: 480px) {
+    gap: 0.8rem;
+    padding: 0.5rem 0;
   }
 
   @media (min-width: 768px) {
-    margin-top: 2rem;
+    display: flex;
+    flex-wrap: nowrap;
     gap: 3rem;
-    justify-content: center;
+    margin-top: 2rem;
+    overflow-x: auto;
+    justify-content: flex-start;
+
+    /* Style de la scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f3f4f6;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f3f4f6;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #9ca3af;
+    }
   }
 
   @media (min-width: 1200px) {
@@ -173,15 +179,14 @@ const ContentGrid = styled.div`
 `;
 
 const ContentGridItem = styled.div`
-  min-width: 280px;
-  max-width: 320px;
-  flex-shrink: 0;
   display: flex;
   justify-content: center;
+  width: 100%;
 
   @media (min-width: 768px) {
     min-width: 300px;
     max-width: 350px;
+    flex-shrink: 0;
   }
 
   @media (min-width: 1200px) {
@@ -202,10 +207,22 @@ const StyledContentItem = styled.div`
   font-size: 16px;
   border-radius: 1.5rem;
   text-align: center;
-  padding: 2.5rem;
+  padding: 1.5rem;
   width: 100%;
-  min-height: 300px;
+  min-height: 250px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    min-height: 220px;
+    font-size: 14px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 2.5rem;
+    min-height: 300px;
+    font-size: 16px;
+  }
 
   &:hover {
     transform: translateY(-8px) scale(1.05);
@@ -216,10 +233,20 @@ const StyledContentItem = styled.div`
   ${({ offset }) => offset && `@media (min-width: 1024px) { margin-top: 0; }`}
 
   .icon {
-    font-size: 4rem;
-    margin-bottom: 2rem;
+    font-size: 3rem;
+    margin-bottom: 1rem;
     color: #ffffff;
     transition: transform 0.3s ease, color 0.3s ease;
+
+    @media (max-width: 480px) {
+      font-size: 2.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+    }
 
     &:hover {
       transform: scale(1.2);
@@ -228,11 +255,21 @@ const StyledContentItem = styled.div`
   }
 
   h4 {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     color: #27272a;
     transition: color 0.3s ease;
+
+    @media (max-width: 480px) {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
 
     &:hover {
       color: #ffffff;
@@ -241,10 +278,22 @@ const StyledContentItem = styled.div`
 
   p {
     opacity: 0.9;
-    margin-top: 1rem;
-    line-height: 1.6;
-    font-size: 1rem;
+    margin-top: 0.8rem;
+    line-height: 1.4;
+    font-size: 0.9rem;
     transition: opacity 0.3s ease;
+
+    @media (max-width: 480px) {
+      font-size: 0.8rem;
+      line-height: 1.3;
+      margin-top: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
 
     &:hover {
       opacity: 1;

@@ -120,7 +120,7 @@ const AppShowcaseSection = () => {
 };
 
 const Section = styled.section`
-  padding: 2rem;
+  padding: 1rem 2rem 2rem 2rem;
   background-color: #d4e4fa;
 `;
 
@@ -151,25 +151,32 @@ const CardsContainer = styled.div`
   gap: 1.5rem;
   overflow-x: auto;
   padding-bottom: 1rem;
-  
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-x: visible;
+    align-items: center;
+  }
+
   /* Style de la scrollbar */
   scrollbar-width: thin;
   scrollbar-color: #d1d5db #f3f4f6;
-  
+
   &::-webkit-scrollbar {
     height: 8px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: #f3f4f6;
     border-radius: 4px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: #d1d5db;
     border-radius: 4px;
   }
-  
+
   &::-webkit-scrollbar-thumb:hover {
     background: #9ca3af;
   }
@@ -185,6 +192,17 @@ const CardMobile = styled.div`
   padding: 1.2rem;
   flex-shrink: 0;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  @media (max-width: 767px) {
+    width: 90%;
+    max-width: 350px;
+    min-width: unset;
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
+    padding: 1rem;
+  }
 
   &:hover {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -202,6 +220,17 @@ const CardWeb = styled.div`
   flex-shrink: 0;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   cursor: ${props => props.isClickable ? 'pointer' : 'default'};
+
+  @media (max-width: 767px) {
+    width: 90%;
+    max-width: 350px;
+    min-width: unset;
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
+    padding: 1rem;
+  }
 
   &:hover {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
