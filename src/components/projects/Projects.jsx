@@ -6,10 +6,10 @@ import { motion } from 'framer-motion';
 import { fadeIn } from '../../utils/motion';
 import Lottie from 'lottie-react';
 
-import webDevelopmentAnimation from '/public/lottiesimages/webDevelopment.json';
-import saasAnimation from '/public/lottiesimages/saas.json';
-import mobileAnimation from '/public/lottiesimages/mobile.json';
-import learningAnimation from '/public/lottiesimages/learning.json';
+import webDevelopmentAnimation from '../../shared/assets/animations/webDevelopment.json';
+import saasAnimation from '../../shared/assets/animations/saas.json';
+import mobileAnimation from '../../shared/assets/animations/mobile.json';
+import learningAnimation from '../../shared/assets/animations/learning.json';
 
 const Projects = () => {
   const [selectedService, setSelectedService] = useState('web');

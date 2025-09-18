@@ -15,8 +15,8 @@ import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 
 import Lottie from "lottie-react";
-import progressBar from "/public/lottiesimages/progressBar.json";
-import ChevronDown from "/public/lottiesimages/chevronDown.json";
+import progressBar from "../../shared/assets/animations/progressBar.json";
+import ChevronDown from "../../shared/assets/animations/chevronDown.json";
 
 export default function CurrentProject() {
   const handleIcon = () => {

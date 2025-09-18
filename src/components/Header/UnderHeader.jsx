@@ -7,7 +7,7 @@ import { IoLogoVercel } from "react-icons/io5";
 import tardinimage from '/public/images/tardin.png'
 import cv from '/public/documents/tardinDev.pdf'
 import Lottie from "lottie-react";
-import gitHubAnimation from "/public/lottiesimages/gitHub.json";
+import gitHubAnimation from "../../shared/assets/animations/gitHub.json";
 
 
 
