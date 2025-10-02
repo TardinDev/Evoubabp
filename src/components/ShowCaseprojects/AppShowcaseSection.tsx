@@ -6,9 +6,9 @@ const applications = {
 
   mobile: [
     {
-      title: "Thread Clone",
-      description: "Un clone de l'application Threads",
-      image: "/imagesAppsMobile/threadsclone.png",
+      title: "Sport Challenge",
+      description: "une application qui permet de trouver des challenges sportifs autour de chez soi",
+      image: "/imagesAppsMobile/sportchallenge.png",
     },
     {
       title: "instanjob",
@@ -210,7 +210,7 @@ const CardMobile = styled.div`
   }
 `;
 
-const CardWeb = styled.div`
+const CardWeb = styled.div<{ isClickable?: boolean }>`
   min-width: 320px;
   max-width: 340px;
   background-color: white;
