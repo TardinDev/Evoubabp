@@ -1,121 +1,80 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
-
-const applications = {
-
-  mobile: [
-    {
-      title: "Sport Challenge",
-      description: "une application qui permet de trouver des challenges sportifs autour de chez soi",
-      image: "/imagesAppsMobile/sportchallenge.png",
-    },
-    {
-      title: "instanjob",
-      description: "une Application qui permet de trouver rapidement des missions autour de chez soi",
-      image: "/imagesAppsMobile/instanjobmobile.png",
-    },
-    {
-      title: "ZopGo",
-      description: "Faciliter les transport et voyage avec une seule application",
-      image: "/imagesAppsMobile/zopgomobile.png",
-    },
-    {
-      title: "Run Sport",
-      description: "une application qui permet de trouver des chaussures de sport adaptés à vos besoins",
-      image: "/imagesAppsMobile/RunSport.png",
-    },
-    {
-      title: "Binome Pay",
-      description: "Transférer de l’argent d’un pays à un autre sans passer par les moyens classiques comme les banques ou Western Union, en mettant en relation directe deux personnes avec des besoins croisés.",
-      image: "/imagesAppsMobile/binomePay.png",
-    },
-    
-    
-  ],
-  web: [
-    {
-      title: "Dive-Cvetements",
-      description: "site web pour achéter ou louer des vêtements en Laine et rafia pour l'été",
-      image: "/imagesAppsMobile/diveC.png",
-      url: "https://div-cvetements.vercel.app/"
-    },
-    {
-      title: "Mintsa Services",
-      description: "un site web pour particulier qui propose des services de consulting et administratif",
-      image: "/imagesAppsMobile/mtzService.png",
-      url: "https://mintsaservices.vercel.app/"
-    },
-    {
-      title: "Manioc Gabon",
-      description: "Site web dédié à la vente de manioc sous toutes ses formes : tubercules frais, bâtons de manioc, farine, tapioca, et feuilles de manioc. Le site met en avant la qualité locale, la fraîcheur des produits, et une livraison rapide à domicile.",
-      image: "/imagesAppsMobile/maniocgabon.png",
-      url: "https://maniocgabon.vercel.app/"
-    },
-  ],
-};
+import { applicationsData } from "../../data/applicationsData";
+import { Application } from "../../types/applications";
+import AppCard from "./AppCard";
+import AppModal from "./AppModal";
 
 const AppShowcaseSection = () => {
-  return (
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
-    >
-      <Section id="projects">
-        <motion.div variants={fadeIn("up", "tween", 0.1, 1)}>
-          <SectionContainer>
-            <Title>Applications Mobiles</Title>
-            <Description>Quelques applications mobiles que j&apos;ai développées.</Description>
-            <CardsContainer>
-              {applications.mobile.map((app, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeIn("right", "spring", index * 0.2, 1)}
-                >
-                  <CardMobile>
-                    <AppImageMobile
-                      src={app.image}
-                      alt={app.title}
-                    />
-                    <CardTitle>{app.title}</CardTitle>
-                    <CardDescription>{app.description}</CardDescription>
-                  </CardMobile>
-                </motion.div>
-              ))}
-            </CardsContainer>
-          </SectionContainer>
-        </motion.div>
+  const [selectedApp, setSelectedApp] = useState<Application | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-        <motion.div variants={fadeIn("up", "tween", 0.3, 1)}>
-          <SectionContainer>
-            <Title>Applications Web</Title>
-            <Description>Des applications web que j&apos;ai développées pour mes clients.</Description>
-            <CardsContainer>
-              {applications.web.map((app, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeIn("left", "spring", index * 0.2, 1)}
-                >
-                  <CardWeb 
-                    onClick={app.url ? () => window.open(app.url, '_blank') : undefined}
-                    isClickable={!!app.url}
-                  >
-                    <AppImage
-                      src={app.image}
-                      alt={app.title}
-                    />
-                    <CardTitle>{app.title}</CardTitle>
-                    <CardDescription>{app.description}</CardDescription>
-                  </CardWeb>
-                </motion.div>
-              ))}
-            </CardsContainer>
-          </SectionContainer>
-        </motion.div>
-      </Section>
-    </motion.div>
+  const handleCardClick = (app: Application) => {
+    setSelectedApp(app);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedApp(null), 300);
+  };
+
+  return (
+    <>
+      <motion.div
+        variants={staggerContainer(0.1, 0)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+      >
+        <Section id="projects">
+          <motion.div variants={fadeIn("up", "tween", 0.1, 1)}>
+            <SectionContainer>
+              <Title>Applications Mobiles</Title>
+              <Description>Quelques applications mobiles que j&apos;ai développées.</Description>
+              <CardsContainer>
+                {applicationsData.mobile.map((app, index) => (
+                  <AppCard
+                    key={`mobile-${index}`}
+                    app={app}
+                    index={index}
+                    type="mobile"
+                    variants={fadeIn("right", "spring", index * 0.2, 1)}
+                    onCardClick={handleCardClick}
+                  />
+                ))}
+              </CardsContainer>
+            </SectionContainer>
+          </motion.div>
+
+          <motion.div variants={fadeIn("up", "tween", 0.3, 1)}>
+            <SectionContainer>
+              <Title>Applications Web</Title>
+              <Description>Des applications web que j&apos;ai développées pour mes clients.</Description>
+              <CardsContainer>
+                {applicationsData.web.map((app, index) => (
+                  <AppCard
+                    key={`web-${index}`}
+                    app={app}
+                    index={index}
+                    type="web"
+                    variants={fadeIn("left", "spring", index * 0.2, 1)}
+                  />
+                ))}
+              </CardsContainer>
+            </SectionContainer>
+          </motion.div>
+        </Section>
+      </motion.div>
+
+      <AppModal
+        app={selectedApp}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
+    </>
   );
 };
 
@@ -180,93 +139,6 @@ const CardsContainer = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background: #9ca3af;
   }
-`;
-
-
-const CardMobile = styled.div`
-  min-width: 280px;
-  max-width: 300px;
-  background-color: white;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 1.2rem;
-  flex-shrink: 0;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-
-  @media (max-width: 767px) {
-    width: 90%;
-    max-width: 350px;
-    min-width: unset;
-  }
-
-  @media (max-width: 480px) {
-    width: 95%;
-    padding: 1rem;
-  }
-
-  &:hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transform: translateY(-2px);
-  }
-`;
-
-const CardWeb = styled.div<{ isClickable?: boolean }>`
-  min-width: 320px;
-  max-width: 340px;
-  background-color: white;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 1.2rem;
-  flex-shrink: 0;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-  cursor: ${props => props.isClickable ? 'pointer' : 'default'};
-
-  @media (max-width: 767px) {
-    width: 90%;
-    max-width: 350px;
-    min-width: unset;
-  }
-
-  @media (max-width: 480px) {
-    width: 95%;
-    padding: 1rem;
-  }
-
-  &:hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transform: translateY(-2px);
-  }
-`;
-
-const AppImageMobile = styled.img`
-  width: 100%;
-  height: clamp(12rem, 30vw, 22rem);
-  object-fit: contain;
-  object-position: center;
-  border-radius: 0.75rem;
-  margin-bottom: 1rem;
-  background-color: #f8fafc;
-`;
-
-const AppImage = styled.img`
-  width: 100%;
-  height: clamp(14rem, 28vw, 20rem);
-  object-fit: cover;
-  border-radius: 0.75rem;
-  margin-bottom: 1rem;
-`;
-
-const CardTitle = styled.h3`
-  font-weight: 600;
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: #1f2937;
-`;
-
-const CardDescription = styled.p`
-  color: #6b7280;
-  font-size: 1rem;
-  line-height: 1.5rem;
 `;
 
 export default AppShowcaseSection;
