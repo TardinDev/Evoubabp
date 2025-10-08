@@ -97,8 +97,6 @@ const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
               ))}
             </TechnologiesContainer>
           )}
-
-          {app.year && <Year>{app.year}</Year>}
         </CardContent>
       </Card>
     </motion.div>
