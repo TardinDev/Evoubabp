@@ -1,0 +1,1521 @@
+import { useState } from "react";
+import styled from "styled-components";
+import { FaReact, FaNodeJs } from "react-icons/fa";
+import { SiTypescript, SiTailwindcss, SiSupabase } from "react-icons/si";
+import { Link } from "react-router-dom";
+
+export default function WebDevPage() {
+  const [activeTab, setActiveTab] = useState<'supabase' | 'nodejs'>('supabase');
+
+  return (
+    <PageWrapper>
+      <Header>
+        <HeaderContent>
+          <BackButton to="/formations">← Retour aux formations</BackButton>
+          <HeaderTitle>
+            <FaReact /> Développement Web Moderne
+          </HeaderTitle>
+          <HeaderSubtitle>
+            Maîtrisez React, TypeScript, Tailwind CSS et créez des applications full-stack professionnelles
+          </HeaderSubtitle>
+        </HeaderContent>
+      </Header>
+
+      <Section>
+        <Container>
+          <SectionTitle>🎯 Ce que vous allez apprendre</SectionTitle>
+          <IntroGrid>
+            <IntroCard>
+              <IntroIcon><FaReact color="#61DAFB" size={48} /></IntroIcon>
+              <IntroTitle>React 18+</IntroTitle>
+              <IntroText>Hooks, Context, State Management</IntroText>
+            </IntroCard>
+            <IntroCard>
+              <IntroIcon><SiTypescript color="#3178C6" size={48} /></IntroIcon>
+              <IntroTitle>TypeScript</IntroTitle>
+              <IntroText>Types, Interfaces, Génériques</IntroText>
+            </IntroCard>
+            <IntroCard>
+              <IntroIcon><SiTailwindcss color="#06B6D4" size={48} /></IntroIcon>
+              <IntroTitle>Tailwind CSS</IntroTitle>
+              <IntroText>Design System, Responsive</IntroText>
+            </IntroCard>
+            <IntroCard>
+              <IntroIcon><SiSupabase color="#3ECF8E" size={48} /></IntroIcon>
+              <IntroTitle>Supabase</IntroTitle>
+              <IntroText>Auth, Database, Storage</IntroText>
+            </IntroCard>
+            <IntroCard>
+              <IntroIcon><FaNodeJs color="#339933" size={48} /></IntroIcon>
+              <IntroTitle>Node.js</IntroTitle>
+              <IntroText>Express, API REST, MongoDB</IntroText>
+            </IntroCard>
+          </IntroGrid>
+        </Container>
+      </Section>
+
+      <Section $bgColor="#f7fafc">
+        <Container>
+          <SectionTitle>🛠️ Installation</SectionTitle>
+          <Description>Installez Node.js depuis https://nodejs.org/ puis créez votre projet</Description>
+          <CodeBlock>{`npm create vite@latest mon-app -- --template react-ts
+cd mon-app
+npm install
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p`}</CodeBlock>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <SectionTitle>🗄️ Backend</SectionTitle>
+          <TabsContainer>
+            <Tab $active={activeTab === 'supabase'} onClick={() => setActiveTab('supabase')}>Supabase</Tab>
+            <Tab $active={activeTab === 'nodejs'} onClick={() => setActiveTab('nodejs')}>Node.js</Tab>
+          </TabsContainer>
+
+          {activeTab === 'supabase' && (
+            <TabContent>
+              <CodeBlock>{`npm install @supabase/supabase-js
+
+// src/lib/supabase.ts
+import { createClient } from '@supabase/supabase-js'
+export const supabase = createClient(url, key)`}</CodeBlock>
+            </TabContent>
+          )}
+
+          {activeTab === 'nodejs' && (
+            <TabContent>
+              <CodeBlock>{`npm install express mongoose cors
+
+const express = require('express');
+const app = express();
+app.listen(3000);`}</CodeBlock>
+            </TabContent>
+          )}
+        </Container>
+      </Section>
+
+      <Section $bgColor="#f7fafc">
+        <Container>
+          <SectionTitle>⚛️ React Hooks Essentiels</SectionTitle>
+
+          <SubSection>
+            <SubTitle>useState - Gestion de l'état</SubTitle>
+            <Description>Le hook useState permet de gérer l'état dans les composants fonctionnels</Description>
+            <CodeBlock>{`import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Compteur: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Incrémenter
+      </button>
+      <button onClick={() => setCount(0)}>
+        Réinitialiser
+      </button>
+    </div>
+  );
+}`}</CodeBlock>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>useEffect - Effets de bord</SubTitle>
+            <Description>useEffect permet d'exécuter du code après le rendu du composant</Description>
+            <CodeBlock>{`import { useState, useEffect } from 'react';
+
+function UserProfile({ userId }: { userId: string }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const response = await fetch(\`/api/users/\${userId}\`);
+      const data = await response.json();
+      setUser(data);
+      setLoading(false);
+    }
+
+    fetchUser();
+  }, [userId]); // Se réexécute si userId change
+
+  if (loading) return <p>Chargement...</p>;
+  return <div>{user?.name}</div>;
+}`}</CodeBlock>
+          </SubSection>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <SectionTitle>📝 TypeScript avec React</SectionTitle>
+
+          <SubSection>
+            <SubTitle>Typage des Props</SubTitle>
+            <CodeBlock>{`interface UserCardProps {
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    avatar?: string; // Propriété optionnelle
+  };
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
+}
+
+function UserCard({ user, onEdit, onDelete }: UserCardProps) {
+  return (
+    <div className="p-4 border rounded">
+      {user.avatar && <img src={user.avatar} alt={user.name} />}
+      <h3>{user.name}</h3>
+      <p>{user.email}</p>
+      <button onClick={() => onEdit(user.id)}>Modifier</button>
+      <button onClick={() => onDelete(user.id)}>Supprimer</button>
+    </div>
+  );
+}`}</CodeBlock>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Génériques et Types Utilitaires</SubTitle>
+            <CodeBlock>{`// Type générique pour les données paginées
+interface PaginatedResponse<T> {
+  data: T[];
+  page: number;
+  totalPages: number;
+  totalItems: number;
+}
+
+// Utilisation avec différents types
+type UserResponse = PaginatedResponse<User>;
+type ProductResponse = PaginatedResponse<Product>;
+
+// Types utilitaires TypeScript
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  role: 'admin' | 'user';
+};
+
+type UserUpdate = Partial<User>; // Toutes les propriétés optionnelles
+type UserCreate = Omit<User, 'id'>; // Sans l'id
+type UserPublic = Pick<User, 'name' | 'id'>; // Seulement name et id`}</CodeBlock>
+          </SubSection>
+        </Container>
+      </Section>
+
+      <Section $bgColor="#f7fafc">
+        <Container>
+          <SectionTitle>🎨 Tailwind CSS - Patterns</SectionTitle>
+
+          <SubSection>
+            <SubTitle>Composant Button Réutilisable</SubTitle>
+            <CodeBlock>{`interface ButtonProps {
+  children: React.ReactNode;
+  variant?: 'primary' | 'secondary' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  onClick?: () => void;
+}
+
+function Button({
+  children,
+  variant = 'primary',
+  size = 'md',
+  onClick
+}: ButtonProps) {
+  const baseClasses = "font-semibold rounded transition-colors duration-200";
+
+  const variantClasses = {
+    primary: "bg-blue-500 hover:bg-blue-600 text-white",
+    secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800",
+    danger: "bg-red-500 hover:bg-red-600 text-white"
+  };
+
+  const sizeClasses = {
+    sm: "px-3 py-1 text-sm",
+    md: "px-4 py-2 text-base",
+    lg: "px-6 py-3 text-lg"
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      className={\`\${baseClasses} \${variantClasses[variant]} \${sizeClasses[size]}\`}
+    >
+      {children}
+    </button>
+  );
+}`}</CodeBlock>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Card Component avec Tailwind</SubTitle>
+            <CodeBlock>{`interface CardProps {
+  title: string;
+  description: string;
+  image?: string;
+  tags?: string[];
+  onAction?: () => void;
+}
+
+function Card({ title, description, image, tags, onAction }: CardProps) {
+  return (
+    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden">
+      {image && (
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-48 object-cover"
+        />
+      )}
+
+      <div className="p-4">
+        <h3 className="text-xl font-bold mb-2 text-gray-800">
+          {title}
+        </h3>
+
+        <p className="text-gray-600 mb-4">
+          {description}
+        </p>
+
+        {tags && tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {tags.map((tag, index) => (
+              <span
+                key={index}
+                className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {onAction && (
+          <button
+            onClick={onAction}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded"
+          >
+            En savoir plus
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}`}</CodeBlock>
+          </SubSection>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <SectionTitle>🎯 Projet Final : Application E-commerce Complète</SectionTitle>
+          <ProjectDescription>
+            Construisez une vraie application e-commerce en suivant un parcours progressif.
+            Chaque étape vous apprend une nouvelle technologie tout en construisant le même projet.
+          </ProjectDescription>
+
+          <ProjectTimeline>
+            <TimelineItem>
+              <TimelineNumber>1</TimelineNumber>
+              <TimelineContent>
+                <TimelineTitle><FaReact color="#61DAFB" /> Étape React</TimelineTitle>
+                <TimelineText>Créez l'interface : liste de produits, panier, filtres</TimelineText>
+              </TimelineContent>
+            </TimelineItem>
+
+            <TimelineItem>
+              <TimelineNumber>2</TimelineNumber>
+              <TimelineContent>
+                <TimelineTitle><SiTypescript color="#3178C6" /> Étape TypeScript</TimelineTitle>
+                <TimelineText>Ajoutez le typage : interfaces pour produits, utilisateurs, commandes</TimelineText>
+              </TimelineContent>
+            </TimelineItem>
+
+            <TimelineItem>
+              <TimelineNumber>3</TimelineNumber>
+              <TimelineContent>
+                <TimelineTitle><SiTailwindcss color="#06B6D4" /> Étape Tailwind</TimelineTitle>
+                <TimelineText>Stylisez l'application avec un design professionnel et responsive</TimelineText>
+              </TimelineContent>
+            </TimelineItem>
+
+            <TimelineItem>
+              <TimelineNumber>4</TimelineNumber>
+              <TimelineContent>
+                <TimelineTitle><SiSupabase color="#3ECF8E" /> Étape Supabase</TimelineTitle>
+                <TimelineText>Connectez la base de données et l'authentification</TimelineText>
+              </TimelineContent>
+            </TimelineItem>
+
+            <TimelineItem>
+              <TimelineNumber>5</TimelineNumber>
+              <TimelineContent>
+                <TimelineTitle><FaNodeJs color="#339933" /> Étape Node.js (Optionnel)</TimelineTitle>
+                <TimelineText>Créez une API personnalisée pour les paiements et analytics</TimelineText>
+              </TimelineContent>
+            </TimelineItem>
+          </ProjectTimeline>
+        </Container>
+      </Section>
+
+      {/* Étape 1 : React */}
+      <Section $bgColor="#f7fafc">
+        <Container>
+          <StepHeader>
+            <StepBadge>Étape 1</StepBadge>
+            <div>
+              <StepTitle><FaReact color="#61DAFB" /> Base React - Liste de Produits</StepTitle>
+              <StepGoal>Objectif : Afficher des produits et gérer le panier avec useState</StepGoal>
+            </div>
+          </StepHeader>
+
+          <CodeBlock>{`// App.tsx - Version simple React
+import { useState } from 'react';
+
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+  priority: 'low' | 'medium' | 'high';
+  createdAt: Date;
+}
+
+function TodoApp() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [input, setInput] = useState('');
+  const [priority, setPriority] = useState<'low' | 'medium' | 'high'>('medium');
+  const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
+
+  const addTodo = () => {
+    if (!input.trim()) return;
+
+    const newTodo: Todo = {
+      id: Date.now(),
+      text: input,
+      completed: false,
+      priority,
+      createdAt: new Date()
+    };
+
+    setTodos([...todos, newTodo]);
+    setInput('');
+  };
+
+  const toggleTodo = (id: number) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
+  };
+
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  const filteredTodos = todos.filter(todo => {
+    if (filter === 'active') return !todo.completed;
+    if (filter === 'completed') return todo.completed;
+    return true;
+  });
+
+  const priorityColors = {
+    low: 'bg-green-100 border-green-300',
+    medium: 'bg-yellow-100 border-yellow-300',
+    high: 'bg-red-100 border-red-300'
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto p-6">
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <h1 className="text-3xl font-bold mb-6 text-gray-800">
+          📝 Ma Liste de Tâches
+        </h1>
+
+        {/* Formulaire d'ajout */}
+        <div className="mb-6">
+          <div className="flex gap-2 mb-2">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && addTodo()}
+              placeholder="Nouvelle tâche..."
+              className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              onClick={addTodo}
+              className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            >
+              Ajouter
+            </button>
+          </div>
+
+          <select
+            value={priority}
+            onChange={(e) => setPriority(e.target.value as any)}
+            className="px-3 py-1 border rounded"
+          >
+            <option value="low">Basse priorité</option>
+            <option value="medium">Priorité moyenne</option>
+            <option value="high">Haute priorité</option>
+          </select>
+        </div>
+
+        {/* Filtres */}
+        <div className="flex gap-2 mb-4">
+          {(['all', 'active', 'completed'] as const).map(f => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={\`px-4 py-1 rounded \${
+                filter === f
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 text-gray-700'
+              }\`}
+            >
+              {f === 'all' ? 'Toutes' : f === 'active' ? 'Actives' : 'Terminées'}
+            </button>
+          ))}
+        </div>
+
+        {/* Liste des todos */}
+        <ul className="space-y-2">
+          {filteredTodos.map(todo => (
+            <li
+              key={todo.id}
+              className={\`p-4 rounded-lg border-2 \${priorityColors[todo.priority]} \${
+                todo.completed ? 'opacity-60' : ''
+              }\`}
+            >
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => toggleTodo(todo.id)}
+                  className="w-5 h-5 cursor-pointer"
+                />
+
+                <span className={\`flex-1 \${todo.completed ? 'line-through' : ''}\`}>
+                  {todo.text}
+                </span>
+
+                <span className="text-xs text-gray-500">
+                  {todo.priority}
+                </span>
+
+                <button
+                  onClick={() => deleteTodo(todo.id)}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  ✕
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        {/* Statistiques */}
+        <div className="mt-6 pt-4 border-t text-sm text-gray-600">
+          <p>
+            Total: {todos.length} |
+            Actives: {todos.filter(t => !t.completed).length} |
+            Terminées: {todos.filter(t => t.completed).length}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default TodoApp;`}</CodeBlock>
+        </Container>
+      </Section>
+
+      {/* Projet TypeScript */}
+      <Section>
+        <Container>
+          <ProjectHeader>
+            <ProjectIcon><SiTypescript color="#3178C6" size={40} /></ProjectIcon>
+            <div>
+              <ProjectTitle>Projet TypeScript : Gestionnaire d'Utilisateurs</ProjectTitle>
+              <ProjectSubtitle>Apprenez les interfaces, types et génériques</ProjectSubtitle>
+            </div>
+          </ProjectHeader>
+
+          <CodeBlock>{`// Types et interfaces
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'admin' | 'user' | 'guest';
+  createdAt: Date;
+}
+
+interface ApiResponse<T> {
+  data: T;
+  status: number;
+  message: string;
+}
+
+// Composant avec TypeScript strict
+import { useState, useEffect } from 'react';
+
+function UserManager() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fonction typée pour fetch
+  async function fetchUsers(): Promise<ApiResponse<User[]>> {
+    const response = await fetch('/api/users');
+    return response.json();
+  }
+
+  useEffect(() => {
+    fetchUsers()
+      .then((result) => {
+        setUsers(result.data);
+        setLoading(false);
+      })
+      .catch((err: Error) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  // Fonction avec type guards
+  const isAdmin = (user: User): boolean => {
+    return user.role === 'admin';
+  };
+
+  const addUser = (newUser: Omit<User, 'id' | 'createdAt'>) => {
+    const user: User = {
+      ...newUser,
+      id: crypto.randomUUID(),
+      createdAt: new Date()
+    };
+    setUsers([...users, user]);
+  };
+
+  if (loading) return <div>Chargement...</div>;
+  if (error) return <div>Erreur: {error}</div>;
+
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-4">Gestion des Utilisateurs</h2>
+
+      <div className="grid gap-4">
+        {users.map((user) => (
+          <div
+            key={user.id}
+            className={\`p-4 rounded border \${
+              isAdmin(user) ? 'border-red-500 bg-red-50' : 'border-gray-300'
+            }\`}
+          >
+            <h3 className="font-bold">{user.name}</h3>
+            <p className="text-sm text-gray-600">{user.email}</p>
+            <span className={\`text-xs px-2 py-1 rounded \${
+              user.role === 'admin' ? 'bg-red-200' : 'bg-blue-200'
+            }\`}>
+              {user.role}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default UserManager;`}</CodeBlock>
+        </Container>
+      </Section>
+
+      {/* Projet Tailwind */}
+      <Section $bgColor="#f7fafc">
+        <Container>
+          <ProjectHeader>
+            <ProjectIcon><SiTailwindcss color="#06B6D4" size={40} /></ProjectIcon>
+            <div>
+              <ProjectTitle>Projet Tailwind : Galerie d'Images</ProjectTitle>
+              <ProjectSubtitle>Créez une UI moderne et responsive</ProjectSubtitle>
+            </div>
+          </ProjectHeader>
+
+          <CodeBlock>{`interface Image {
+  id: number;
+  url: string;
+  title: string;
+  category: string;
+}
+
+function ImageGallery() {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  const images: Image[] = [
+    { id: 1, url: '/img1.jpg', title: 'Nature', category: 'nature' },
+    { id: 2, url: '/img2.jpg', title: 'Ville', category: 'city' },
+    { id: 3, url: '/img3.jpg', title: 'Animaux', category: 'animals' },
+  ];
+
+  const categories = ['all', 'nature', 'city', 'animals'];
+
+  const filteredImages = selectedCategory === 'all'
+    ? images
+    : images.filter(img => img.category === selectedCategory);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header avec glassmorphism */}
+        <div className="bg-white/30 backdrop-blur-lg rounded-2xl p-6 mb-8 shadow-xl">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">
+            Galerie d'Images
+          </h1>
+
+          {/* Filtres */}
+          <div className="flex flex-wrap gap-3">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={\`
+                  px-6 py-2 rounded-full font-semibold
+                  transition-all duration-300 transform hover:scale-105
+                  \${selectedCategory === cat
+                    ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg'
+                    : 'bg-white/50 text-gray-700 hover:bg-white/70'
+                  }
+                \`}
+              >
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Grid d'images */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredImages.map((image) => (
+            <div
+              key={image.id}
+              className="group relative overflow-hidden rounded-2xl shadow-lg
+                         transform transition-all duration-300 hover:scale-105
+                         hover:shadow-2xl cursor-pointer"
+            >
+              <img
+                src={image.url}
+                alt={image.title}
+                className="w-full h-64 object-cover transition-transform
+                           duration-300 group-hover:scale-110"
+              />
+
+              {/* Overlay au hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70
+                              to-transparent opacity-0 group-hover:opacity-100
+                              transition-opacity duration-300 flex items-end p-6">
+                <div>
+                  <h3 className="text-white text-xl font-bold mb-2">
+                    {image.title}
+                  </h3>
+                  <span className="bg-white/20 backdrop-blur-sm text-white
+                                   px-3 py-1 rounded-full text-sm">
+                    {image.category}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats */}
+        <div className="mt-8 bg-white/30 backdrop-blur-lg rounded-2xl p-6 shadow-xl">
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <p className="text-3xl font-bold text-purple-600">
+                {filteredImages.length}
+              </p>
+              <p className="text-gray-600">Images</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-blue-600">
+                {categories.length - 1}
+              </p>
+              <p className="text-gray-600">Catégories</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-green-600">HD</p>
+              <p className="text-gray-600">Qualité</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ImageGallery;`}</CodeBlock>
+        </Container>
+      </Section>
+
+      {/* Projet Supabase */}
+      <Section>
+        <Container>
+          <ProjectHeader>
+            <ProjectIcon><SiSupabase color="#3ECF8E" size={40} /></ProjectIcon>
+            <div>
+              <ProjectTitle>Projet Supabase : Application de Notes</ProjectTitle>
+              <ProjectSubtitle>Base de données, Auth et temps réel</ProjectSubtitle>
+            </div>
+          </ProjectHeader>
+
+          <CodeBlock>{`// Configuration Supabase
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  process.env.VITE_SUPABASE_URL!,
+  process.env.VITE_SUPABASE_ANON_KEY!
+);
+
+interface Note {
+  id: string;
+  title: string;
+  content: string;
+  user_id: string;
+  created_at: string;
+}
+
+function NotesApp() {
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [user, setUser] = useState<any>(null);
+
+  // Auth avec Supabase
+  useEffect(() => {
+    // Vérifier la session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Écouter les changements d'auth
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Charger les notes
+  useEffect(() => {
+    if (!user) return;
+
+    async function fetchNotes() {
+      const { data, error } = await supabase
+        .from('notes')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (data) setNotes(data);
+    }
+
+    fetchNotes();
+
+    // S'abonner aux changements en temps réel
+    const subscription = supabase
+      .channel('notes_changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'notes',
+          filter: \`user_id=eq.\${user.id}\`
+        },
+        (payload) => {
+          if (payload.eventType === 'INSERT') {
+            setNotes((prev) => [payload.new as Note, ...prev]);
+          } else if (payload.eventType === 'DELETE') {
+            setNotes((prev) =>
+              prev.filter((note) => note.id !== payload.old.id)
+            );
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [user]);
+
+  // Connexion avec Google
+  async function signInWithGoogle() {
+    await supabase.auth.signInWithOAuth({
+      provider: 'google'
+    });
+  }
+
+  // Déconnexion
+  async function signOut() {
+    await supabase.auth.signOut();
+  }
+
+  // Ajouter une note
+  async function addNote() {
+    if (!title.trim() || !user) return;
+
+    const { error } = await supabase.from('notes').insert({
+      title,
+      content,
+      user_id: user.id
+    });
+
+    if (!error) {
+      setTitle('');
+      setContent('');
+    }
+  }
+
+  // Supprimer une note
+  async function deleteNote(id: string) {
+    await supabase.from('notes').delete().eq('id', id);
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold mb-4">Mes Notes</h2>
+          <button
+            onClick={signInWithGoogle}
+            className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600"
+          >
+            Se connecter avec Google
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <div className="flex justify-between items-center mb-4">
+            <h1 className="text-3xl font-bold">Mes Notes</h1>
+            <button
+              onClick={signOut}
+              className="text-red-500 hover:text-red-700"
+            >
+              Déconnexion
+            </button>
+          </div>
+
+          {/* Formulaire */}
+          <div className="mb-6">
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Titre de la note..."
+              className="w-full px-4 py-2 border rounded-lg mb-2"
+            />
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Contenu..."
+              rows={4}
+              className="w-full px-4 py-2 border rounded-lg mb-2"
+            />
+            <button
+              onClick={addNote}
+              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600"
+            >
+              Ajouter
+            </button>
+          </div>
+
+          {/* Liste des notes */}
+          <div className="space-y-4">
+            {notes.map((note) => (
+              <div
+                key={note.id}
+                className="border rounded-lg p-4 hover:shadow-md transition"
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="font-bold text-lg">{note.title}</h3>
+                    <p className="text-gray-600 mt-2">{note.content}</p>
+                    <p className="text-sm text-gray-400 mt-2">
+                      {new Date(note.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => deleteNote(note.id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default NotesApp;`}</CodeBlock>
+        </Container>
+      </Section>
+
+      {/* Projet Node.js */}
+      <Section $bgColor="#f7fafc">
+        <Container>
+          <ProjectHeader>
+            <ProjectIcon><FaNodeJs color="#339933" size={40} /></ProjectIcon>
+            <div>
+              <ProjectTitle>Projet Node.js : API REST</ProjectTitle>
+              <ProjectSubtitle>Créez un backend avec Express et MongoDB</ProjectSubtitle>
+            </div>
+          </ProjectHeader>
+
+          <CodeBlock>{`// server/index.js
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
+
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Connexion MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('✅ MongoDB connecté'))
+  .catch(err => console.error('❌ Erreur MongoDB:', err));
+
+// Modèle Product
+const productSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
+  category: String,
+  stock: { type: Number, default: 0 },
+  createdAt: { type: Date, default: Date.now }
+});
+
+const Product = mongoose.model('Product', productSchema);
+
+// Routes CRUD
+
+// GET - Récupérer tous les produits
+app.get('/api/products', async (req, res) => {
+  try {
+    const { category, minPrice, maxPrice } = req.query;
+
+    let query = {};
+    if (category) query.category = category;
+    if (minPrice || maxPrice) {
+      query.price = {};
+      if (minPrice) query.price.$gte = Number(minPrice);
+      if (maxPrice) query.price.$lte = Number(maxPrice);
+    }
+
+    const products = await Product.find(query).sort({ createdAt: -1 });
+    res.json({
+      success: true,
+      data: products,
+      count: products.length
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// GET - Récupérer un produit par ID
+app.get('/api/products/:id', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: 'Produit non trouvé'
+      });
+    }
+
+    res.json({ success: true, data: product });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// POST - Créer un produit
+app.post('/api/products', async (req, res) => {
+  try {
+    const product = await Product.create(req.body);
+    res.status(201).json({
+      success: true,
+      data: product,
+      message: 'Produit créé avec succès'
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// PUT - Mettre à jour un produit
+app.put('/api/products/:id', async (req, res) => {
+  try {
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: 'Produit non trouvé'
+      });
+    }
+
+    res.json({
+      success: true,
+      data: product,
+      message: 'Produit mis à jour'
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// DELETE - Supprimer un produit
+app.delete('/api/products/:id', async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: 'Produit non trouvé'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Produit supprimé'
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// Route de test
+app.get('/', (req, res) => {
+  res.json({
+    message: 'API Products - Disponible',
+    endpoints: {
+      'GET /api/products': 'Liste des produits',
+      'GET /api/products/:id': 'Détail d\'un produit',
+      'POST /api/products': 'Créer un produit',
+      'PUT /api/products/:id': 'Modifier un produit',
+      'DELETE /api/products/:id': 'Supprimer un produit'
+    }
+  });
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(\`🚀 Serveur démarré sur le port \${PORT}\`);
+});
+
+// Frontend React pour consommer l'API
+// src/App.tsx
+import { useState, useEffect } from 'react';
+
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  category: string;
+  stock: number;
+}
+
+function App() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/products')
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data.data);
+        setLoading(false);
+      });
+  }, []);
+
+  const deleteProduct = async (id: string) => {
+    await fetch(\`http://localhost:3000/api/products/\${id}\`, {
+      method: 'DELETE'
+    });
+    setProducts(products.filter(p => p._id !== id));
+  };
+
+  if (loading) return <div>Chargement...</div>;
+
+  return (
+    <div className="p-8">
+      <h1 className="text-3xl font-bold mb-6">Produits</h1>
+      <div className="grid grid-cols-3 gap-4">
+        {products.map(product => (
+          <div key={product._id} className="border p-4 rounded">
+            <h3 className="font-bold">{product.name}</h3>
+            <p className="text-green-600">{product.price}€</p>
+            <p className="text-sm text-gray-500">{product.category}</p>
+            <button
+              onClick={() => deleteProduct(product._id)}
+              className="mt-2 text-red-500 text-sm"
+            >
+              Supprimer
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}`}</CodeBlock>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <SectionTitle>📚 Ressources et Prochaines Étapes</SectionTitle>
+
+          <ResourcesGrid>
+            <ResourceCard>
+              <ResourceTitle>📖 Documentation Officielle</ResourceTitle>
+              <ResourceList>
+                <li><ResourceLink href="https://react.dev" target="_blank">React Docs</ResourceLink></li>
+                <li><ResourceLink href="https://www.typescriptlang.org/docs/" target="_blank">TypeScript Docs</ResourceLink></li>
+                <li><ResourceLink href="https://tailwindcss.com/docs" target="_blank">Tailwind CSS Docs</ResourceLink></li>
+                <li><ResourceLink href="https://supabase.com/docs" target="_blank">Supabase Docs</ResourceLink></li>
+              </ResourceList>
+            </ResourceCard>
+
+            <ResourceCard>
+              <ResourceTitle>🎯 Projets Suggérés</ResourceTitle>
+              <ResourceList>
+                <li>• Application météo avec API</li>
+                <li>• Blog personnel avec Markdown</li>
+                <li>• E-commerce avec panier</li>
+                <li>• Dashboard analytics</li>
+                <li>• Application de chat en temps réel</li>
+              </ResourceList>
+            </ResourceCard>
+
+            <ResourceCard>
+              <ResourceTitle>🚀 Prochaines Étapes</ResourceTitle>
+              <ResourceList>
+                <li>• Apprendre Next.js pour le SSR</li>
+                <li>• Maîtriser les tests (Jest, React Testing Library)</li>
+                <li>• Explorer les state managers (Zustand, Redux)</li>
+                <li>• Déployer sur Vercel ou Netlify</li>
+                <li>• Optimiser les performances</li>
+              </ResourceList>
+            </ResourceCard>
+          </ResourcesGrid>
+
+          <CTASection>
+            <CTATitle>Prêt à commencer ?</CTATitle>
+            <CTAText>
+              Créez votre premier projet et mettez en pratique tout ce que vous avez appris !
+            </CTAText>
+            <CTAButton href="https://vitejs.dev/guide/" target="_blank">
+              Créer mon projet →
+            </CTAButton>
+          </CTASection>
+        </Container>
+      </Section>
+    </PageWrapper>
+  );
+}
+
+const PageWrapper = styled.div`
+  background: white;
+  min-height: 100vh;
+`;
+
+const Header = styled.header`
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 3rem 2rem;
+`;
+
+const HeaderContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const BackButton = styled(Link)`
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+  &:hover { opacity: 1; }
+`;
+
+const HeaderTitle = styled.h1`
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const HeaderSubtitle = styled.p`
+  font-size: 1.25rem;
+  opacity: 0.95;
+`;
+
+const Section = styled.section<{ $bgColor?: string }>`
+  padding: 4rem 2rem;
+  background-color: ${props => props.$bgColor || 'white'};
+`;
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #2d3748;
+`;
+
+const Description = styled.p`
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+`;
+
+const IntroGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+`;
+
+const IntroCard = styled.div`
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s;
+  &:hover { transform: translateY(-5px); }
+`;
+
+const IntroIcon = styled.div`
+  font-size: 3rem;
+  margin-bottom: 1rem;
+`;
+
+const IntroTitle = styled.h3`
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2d3748;
+`;
+
+const IntroText = styled.p`
+  color: #718096;
+  font-size: 0.95rem;
+`;
+
+const CodeBlock = styled.pre`
+  background: #1a202c;
+  color: #e2e8f0;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+`;
+
+const TabsContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+`;
+
+const Tab = styled.button<{ $active: boolean }>`
+  padding: 1rem 2rem;
+  background: ${props => props.$active ? 'linear-gradient(135deg, #667eea, #764ba2)' : '#f7fafc'};
+  color: ${props => props.$active ? 'white' : '#4a5568'};
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 8px;
+`;
+
+const TabContent = styled.div`
+  animation: fadeIn 0.3s;
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+`;
+
+const SubSection = styled.div`
+  margin-bottom: 2.5rem;
+`;
+
+const SubTitle = styled.h3`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #2d3748;
+`;
+
+const ProjectDescription = styled.p`
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+`;
+
+const ResourcesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+`;
+
+const ResourceCard = styled.div`
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
+`;
+
+const ResourceTitle = styled.h4`
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #2d3748;
+`;
+
+const ResourceList = styled.ul`
+  list-style: none;
+  padding: 0;
+  color: #4a5568;
+  line-height: 2;
+`;
+
+const ResourceLink = styled.a`
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #764ba2;
+    text-decoration: underline;
+  }
+`;
+
+const CTASection = styled.div`
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 3rem;
+  border-radius: 16px;
+  text-align: center;
+  color: white;
+`;
+
+const CTATitle = styled.h3`
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+`;
+
+const CTAText = styled.p`
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+`;
+
+const CTAButton = styled.a`
+  display: inline-block;
+  background: white;
+  color: #667eea;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const ProjectHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+`;
+
+const ProjectIcon = styled.div`
+  flex-shrink: 0;
+`;
+
+const ProjectTitle = styled.h3`
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+`;
+
+const ProjectSubtitle = styled.p`
+  font-size: 1rem;
+  color: #718096;
+`;

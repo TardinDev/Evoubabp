@@ -31,6 +31,15 @@ const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
     }
   };
 
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  const handleImageError = () => {
+    console.error(`Failed to load image: ${app.image}`);
+    setImageError(true);
+  };
+
   const isClickable = (type === "web" && app.url) || onCardClick;
 
   return (
@@ -48,21 +57,24 @@ const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
           {!imageLoaded && !imageError && (
             <ImagePlaceholder>
               <LoadingSpinner />
+              <LoadingText>Chargement...</LoadingText>
             </ImagePlaceholder>
           )}
           {imageError && (
             <ImagePlaceholder>
-              <ErrorText>Image non disponible</ErrorText>
+              <ErrorText>❌ Image non disponible</ErrorText>
+              <ErrorSubtext>{app.image}</ErrorSubtext>
             </ImagePlaceholder>
           )}
           <AppImage
             src={app.image}
             alt={`Capture d'écran de ${app.title} - ${app.description}`}
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageError(true)}
+            onLoad={handleImageLoad}
+            onError={handleImageError}
             style={{ display: imageLoaded && !imageError ? "block" : "none" }}
             type={type}
-            loading="lazy"
+            loading="eager"
+            decoding="async"
           />
         </ImageContainer>
 
@@ -129,9 +141,13 @@ const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   min-height: 200px;
+  background-color: #f8fafc;
 `;
 
 const ImagePlaceholder = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   min-height: 200px;
@@ -139,8 +155,10 @@ const ImagePlaceholder = styled.div`
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 
   @keyframes loading {
     0% {
@@ -166,17 +184,36 @@ const LoadingSpinner = styled.div`
   }
 `;
 
-const ErrorText = styled.p`
+const LoadingText = styled.p`
   color: #6b7280;
   font-size: 0.875rem;
+  margin-top: 0.5rem;
+`;
+
+const ErrorText = styled.p`
+  color: #ef4444;
+  font-size: 0.875rem;
+  font-weight: 600;
+`;
+
+const ErrorSubtext = styled.p`
+  color: #6b7280;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  word-break: break-all;
+  padding: 0 1rem;
+  text-align: center;
 `;
 
 const AppImage = styled.img<{ type: "mobile" | "web" }>`
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: ${props => props.type === "mobile" ? "clamp(12rem, 30vw, 22rem)" : "clamp(14rem, 28vw, 20rem)"};
   object-fit: ${props => props.type === "mobile" ? "contain" : "cover"};
   object-position: center;
   background-color: ${props => props.type === "mobile" ? "#f8fafc" : "transparent"};
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const CardContent = styled.div`

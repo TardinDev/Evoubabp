@@ -4,8 +4,8 @@ import { fadeIn, staggerContainer } from "../../utils/motion";
 import { FaFacebook, FaTiktok, FaYoutube } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { IoLogoVercel } from "react-icons/io5";
-import tardinimage from '/public/images/tardin.png'
-import cv from '/public/documents/tardinDev.pdf'
+import tardinimage from '/images/tardin.png'
+import cv from '/documents/tardinDev.pdf'
 import Lottie from "lottie-react";
 import gitHubAnimation from "../../shared/assets/animations/gitHub.json";
 

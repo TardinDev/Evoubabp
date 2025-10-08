@@ -1,0 +1,3386 @@
+import { useState } from "react";
+import styled from "styled-components";
+import { FaReact, FaNodeJs, FaCode, FaPalette, FaDatabase, FaRocket } from "react-icons/fa";
+import { SiTypescript, SiTailwindcss, SiSupabase } from "react-icons/si";
+
+export default function WebDevPage() {
+  const [activeTab, setActiveTab] = useState<'supabase' | 'nodejs'>('supabase');
+  const [activeExample, setActiveExample] = useState<string | null>(null);
+
+  return (
+    <PageWrapper>
+      {/* Header Section */}
+      <Header>
+        <HeaderContent>
+          <BackButton href="/formations">← Retour aux formations</BackButton>
+          <HeaderTitle>
+            <FaReact /> Développement Web Moderne
+          </HeaderTitle>
+          <HeaderSubtitle>
+            Maîtrisez React, TypeScript, Tailwind CSS et créez des applications full-stack professionnelles
+          </HeaderSubtitle>
+        </HeaderContent>
+      </Header>
+
+      {/* Introduction */}
+      <Section>
+        <Container>
+          <SectionTitle>🎯 Ce que vous allez apprendre</SectionTitle>
+          <IntroGrid>
+            <IntroCard>
+              <IntroIcon><FaReact color="#61DAFB" /></IntroIcon>
+              <IntroTitle>React 18+</IntroTitle>
+              <IntroText>Hooks, Context, State Management</IntroText>
+            </IntroCard>
+            <IntroCard>
+              <IntroIcon><SiTypescript color="#3178C6" /></IntroIcon>
+              <IntroTitle>TypeScript</IntroTitle>
+              <IntroText>Types, Interfaces, Génériques</IntroText>
+            </IntroCard>
+            <IntroCard>
+              <IntroIcon><SiTailwindcss color="#06B6D4" /></IntroIcon>
+              <IntroTitle>Tailwind CSS</IntroTitle>
+              <IntroText>Design System, Responsive</IntroText>
+            </IntroCard>
+            <IntroCard>
+              <IntroIcon><SiSupabase color="#3ECF8E" /></IntroIcon>
+              <IntroTitle>Supabase</IntroTitle>
+              <IntroText>Auth, Database, Storage</IntroText>
+            </IntroCard>
+            <IntroCard>
+              <IntroIcon><FaNodeJs color="#339933" /></IntroIcon>
+              <IntroTitle>Node.js</IntroTitle>
+              <IntroText>Express, API REST, MongoDB</IntroText>
+            </IntroCard>
+            <IntroCard>
+              <IntroIcon><FaRocket color="#FF6B6B" /></IntroIcon>
+              <IntroTitle>Déploiement</IntroTitle>
+              <IntroText>Vercel, Netlify, Docker</IntroText>
+            </IntroCard>
+          </IntroGrid>
+        </Container>
+      </Section>
+
+      {/* Installation Section */}
+      <Section $bgColor="#f7fafc">
+        <Container>
+          <SectionTitle>🛠️ Installation et Configuration</SectionTitle>
+
+          <SubSection>
+            <SubTitle>Prérequis</SubTitle>
+            <Description>
+              Avant de commencer, assurez-vous d'avoir installé les outils suivants sur votre ordinateur :
+            </Description>
+
+            <StepsContainer>
+              <InstallStep>
+                <InstallStepNumber>1</InstallStepNumber>
+                <InstallStepContent>
+                  <InstallStepTitle>Node.js (version 18+)</InstallStepTitle>
+                  <InstallStepDescription>
+                    Node.js est l'environnement d'exécution JavaScript côté serveur.
+                  </InstallStepDescription>
+                  <CodeExample>
+                    <CodeBlock>{`# Télécharger depuis le site officiel
+https://nodejs.org/
+
+# Ou avec Homebrew (Mac)
+brew install node
+
+# Ou avec nvm (recommandé)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+nvm install 18
+nvm use 18
+
+# Vérifier l'installation
+node --version  # v18.x.x ou plus
+npm --version   # 9.x.x ou plus`}</CodeBlock>
+                  </CodeExample>
+                </InstallStepContent>
+              </InstallStep>
+
+              <InstallStep>
+                <InstallStepNumber>2</InstallStepNumber>
+                <InstallStepContent>
+                  <InstallStepTitle>Éditeur de Code - VS Code</InstallStepTitle>
+                  <InstallStepDescription>
+                    Visual Studio Code est l'éditeur recommandé pour le développement web moderne.
+                  </InstallStepDescription>
+                  <CodeExample>
+                    <CodeBlock>{`# Télécharger depuis
+https://code.visualstudio.com/
+
+# Extensions recommandées :
+- ES7+ React/Redux/React-Native snippets
+- Tailwind CSS IntelliSense
+- TypeScript Vue Plugin (Volar)
+- Prettier - Code formatter
+- ESLint
+- Auto Rename Tag
+- Path Intellisense`}</CodeBlock>
+                  </CodeExample>
+                </InstallStepContent>
+              </InstallStep>
+
+              <InstallStep>
+                <InstallStepNumber>3</InstallStepNumber>
+                <InstallStepContent>
+                  <InstallStepTitle>Git (Optionnel mais recommandé)</InstallStepTitle>
+                  <InstallStepDescription>
+                    Pour le versioning de votre code.
+                  </InstallStepDescription>
+                  <CodeExample>
+                    <CodeBlock>{`# Mac
+brew install git
+
+# Windows
+https://git-scm.com/download/win
+
+# Linux
+sudo apt install git
+
+# Vérifier
+git --version`}</CodeBlock>
+                  </CodeExample>
+                </InstallStepContent>
+              </InstallStep>
+            </StepsContainer>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Créer votre Premier Projet React + TypeScript + Tailwind</SubTitle>
+
+            <CodeExample>
+              <CodeTitle>🚀 Méthode 1 : Vite (Recommandée - Plus rapide)</CodeTitle>
+              <CodeBlock>{`# Créer un nouveau projet
+npm create vite@latest mon-app -- --template react-ts
+
+# Naviguer dans le dossier
+cd mon-app
+
+# Installer les dépendances
+npm install
+
+# Installer Tailwind CSS
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+# Lancer le serveur de développement
+npm run dev
+
+# Votre app sera disponible sur http://localhost:5173`}</CodeBlock>
+            </CodeExample>
+
+            <CodeExample>
+              <CodeTitle>⚙️ Configuration de Tailwind CSS</CodeTitle>
+              <CodeBlock>{`// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+// src/index.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;`}</CodeBlock>
+            </CodeExample>
+
+            <CodeExample>
+              <CodeTitle>📁 Structure de Projet Recommandée</CodeTitle>
+              <CodeBlock>{`mon-app/
+├── public/              # Fichiers statiques
+├── src/
+│   ├── components/      # Composants réutilisables
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   └── Navbar.tsx
+│   ├── pages/          # Pages de l'application
+│   │   ├── HomePage.tsx
+│   │   └── AboutPage.tsx
+│   ├── hooks/          # Custom hooks
+│   │   └── useAuth.ts
+│   ├── types/          # Types TypeScript
+│   │   └── index.ts
+│   ├── utils/          # Fonctions utilitaires
+│   │   └── api.ts
+│   ├── App.tsx         # Composant principal
+│   ├── main.tsx        # Point d'entrée
+│   └── index.css       # Styles globaux
+├── package.json
+└── tsconfig.json`}</CodeBlock>
+            </CodeExample>
+
+            <CodeExample>
+              <CodeTitle>✅ Test de l'Installation</CodeTitle>
+              <CodeBlock>{`// src/App.tsx - Remplacez le contenu par :
+function App() {
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+      <div className="bg-white p-8 rounded-xl shadow-2xl max-w-md">
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">
+          🎉 Ça fonctionne !
+        </h1>
+        <p className="text-gray-600">
+          React + TypeScript + Tailwind CSS configurés avec succès
+        </p>
+        <button className="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition">
+          Commencer
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default App
+
+// Si vous voyez ce design, tout fonctionne parfaitement ! ✨`}</CodeBlock>
+            </CodeExample>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Installation des Outils Backend</SubTitle>
+
+            <TabContainer>
+              <TabButtons>
+                <TabButton
+                  $active={activeTab === 'supabase'}
+                  onClick={() => setActiveTab('supabase')}
+                >
+                  <SiSupabase /> Supabase
+                </TabButton>
+                <TabButton
+                  $active={activeTab === 'nodejs'}
+                  onClick={() => setActiveTab('nodejs')}
+                >
+                  <FaNodeJs /> Node.js + MongoDB
+                </TabButton>
+              </TabButtons>
+
+              {activeTab === 'supabase' && (
+                <TabContent>
+                  <CodeExample>
+                    <CodeTitle>Installation Supabase</CodeTitle>
+                    <CodeBlock>{`# Installer le client Supabase
+npm install @supabase/supabase-js
+
+# Créer un compte sur https://supabase.com
+# 1. Créer un nouveau projet
+# 2. Récupérer URL et ANON_KEY dans Settings > API
+
+# Créer un fichier .env à la racine
+VITE_SUPABASE_URL=votre_url_supabase
+VITE_SUPABASE_ANON_KEY=votre_anon_key
+
+# Créer src/lib/supabase.ts
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+
+export const supabase = createClient(supabaseUrl, supabaseKey)
+
+# C'est tout ! Supabase est prêt 🎉`}</CodeBlock>
+                  </CodeExample>
+                </TabContent>
+              )}
+
+              {activeTab === 'nodejs' && (
+                <TabContent>
+                  <CodeExample>
+                    <CodeTitle>Installation Backend Node.js</CodeTitle>
+                    <CodeBlock>{`# Créer un dossier backend séparé
+mkdir backend
+cd backend
+
+# Initialiser le projet
+npm init -y
+
+# Installer les dépendances
+npm install express mongoose dotenv cors
+npm install -D typescript @types/express @types/node ts-node nodemon
+
+# Initialiser TypeScript
+npx tsc --init
+
+# Installer MongoDB localement (Mac)
+brew tap mongodb/brew
+brew install mongodb-community
+brew services start mongodb-community
+
+# Ou utiliser MongoDB Atlas (cloud gratuit)
+https://www.mongodb.com/cloud/atlas
+
+# Créer backend/src/index.ts
+import express from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+const app = express()
+const PORT = process.env.PORT || 5000
+
+app.use(cors())
+app.use(express.json())
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK' })
+})
+
+app.listen(PORT, () => {
+  console.log(\`Server running on http://localhost:\${PORT}\`)
+})
+
+# Ajouter dans package.json
+{
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  }
+}
+
+# Lancer le serveur
+npm run dev`}</CodeBlock>
+                  </CodeExample>
+                </TabContent>
+              )}
+            </TabContainer>
+          </SubSection>
+        </Container>
+      </Section>
+
+      {/* React Section */}
+      <Section $bgColor="#f7fafc">
+        <Container>
+          <SectionTitle>⚛️ React - Les Fondamentaux</SectionTitle>
+
+          <SubSection>
+            <SubTitle>1. Les Composants React</SubTitle>
+            <Description>
+              Les composants sont les briques de base d'une application React.
+              Pensez à eux comme des <strong>fonctions JavaScript qui retournent du HTML</strong>.
+            </Description>
+
+            <CodeExample>
+              <CodeTitle>💡 Exemple : Composant Simple</CodeTitle>
+              <CodeBlock>{`// Composant fonctionnel basique
+function Welcome({ name }: { name: string }) {
+  return (
+    <div className="p-4 bg-blue-100 rounded">
+      <h1>Bonjour, {name}!</h1>
+      <p>Bienvenue dans React</p>
+    </div>
+  );
+}
+
+// Utilisation
+<Welcome name="David" />`}</CodeBlock>
+              <CodeExplanation>
+                • <strong>{`{ name }`}</strong> : Destructuration des props (paramètres)<br/>
+                • <strong>{`{ name: string }`}</strong> : Typage TypeScript<br/>
+                • <strong>{`{name}`}</strong> : Affichage dynamique de la variable
+              </CodeExplanation>
+            </CodeExample>
+
+            <CodeExample>
+              <CodeTitle>💡 Exemple : Composant avec State (useState)</CodeTitle>
+              <CodeBlock>{`import { useState } from 'react';
+
+function Counter() {
+  // Déclare une variable d'état "count" avec valeur initiale 0
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg">
+      <h2 className="text-2xl font-bold text-gray-800">
+        Compteur: {count}
+      </h2>
+
+      <div className="flex gap-4 mt-4">
+        <button
+          onClick={() => setCount(count + 1)}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Incrémenter
+        </button>
+
+        <button
+          onClick={() => setCount(count - 1)}
+          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          Décrémenter
+        </button>
+      </div>
+    </div>
+  );
+}`}</CodeBlock>
+              <CodeExplanation>
+                • <strong>useState(0)</strong> : Crée une variable réactive initialisée à 0<br/>
+                • <strong>count</strong> : Variable pour lire la valeur<br/>
+                • <strong>setCount</strong> : Fonction pour modifier la valeur<br/>
+                • Quand on appelle <strong>setCount</strong>, React re-render le composant
+              </CodeExplanation>
+            </CodeExample>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>2. Les Hooks Essentiels</SubTitle>
+
+            <HooksGrid>
+              <HookCard>
+                <HookName>useState</HookName>
+                <HookDescription>Gérer l'état local du composant</HookDescription>
+                <HookCodeBlock>{`const [user, setUser] = useState({
+  name: 'John',
+  age: 25
+});
+
+// Modifier l'état
+setUser({ ...user, age: 26 });`}</HookCodeBlock>
+              </HookCard>
+
+              <HookCard>
+                <HookName>useEffect</HookName>
+                <HookDescription>Exécuter du code après le rendu (API, timers...)</HookDescription>
+                <HookCodeBlock>{`useEffect(() => {
+  // Appelé après chaque rendu
+  fetchData();
+
+  // Cleanup (nettoyage)
+  return () => {
+    cleanup();
+  };
+}, [dependency]); // Re-exécute si dependency change`}</HookCodeBlock>
+              </HookCard>
+
+              <HookCard>
+                <HookName>useContext</HookName>
+                <HookDescription>Partager des données entre composants</HookDescription>
+                <HookCodeBlock>{`const ThemeContext = createContext('light');
+
+function App() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Header />
+    </ThemeContext.Provider>
+  );
+}
+
+function Header() {
+  const theme = useContext(ThemeContext); // 'dark'
+}`}</HookCodeBlock>
+              </HookCard>
+            </HooksGrid>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>3. Projet Pratique : Todo List</SubTitle>
+            <CodeExample>
+              <CodeTitle>🎯 Application complète avec useState et map</CodeTitle>
+              <CodeBlock>{`import { useState } from 'react';
+
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+function TodoApp() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [input, setInput] = useState('');
+
+  const addTodo = () => {
+    if (input.trim()) {
+      setTodos([
+        ...todos,
+        { id: Date.now(), text: input, completed: false }
+      ]);
+      setInput('');
+    }
+  };
+
+  const toggleTodo = (id: number) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
+  };
+
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">Ma Todo List</h1>
+
+      {/* Input pour ajouter */}
+      <div className="flex gap-2 mb-6">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && addTodo()}
+          placeholder="Nouvelle tâche..."
+          className="flex-1 px-4 py-2 border rounded"
+        />
+        <button
+          onClick={addTodo}
+          className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Ajouter
+        </button>
+      </div>
+
+      {/* Liste des todos */}
+      <ul className="space-y-2">
+        {todos.map(todo => (
+          <li
+            key={todo.id}
+            className="flex items-center gap-3 p-4 bg-white rounded shadow"
+          >
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleTodo(todo.id)}
+              className="w-5 h-5"
+            />
+            <span className={\`flex-1 \${todo.completed ? 'line-through text-gray-400' : ''}\`}>
+              {todo.text}
+            </span>
+            <button
+              onClick={() => deleteTodo(todo.id)}
+              className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+            >
+              Supprimer
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}`}</CodeBlock>
+              <KeyConcepts>
+                <strong>🔑 Concepts clés :</strong><br/>
+                • <strong>Interface TypeScript</strong> : Définit la structure d'un Todo<br/>
+                • <strong>map()</strong> : Transforme chaque todo en élément JSX<br/>
+                • <strong>filter()</strong> : Crée un nouveau tableau sans l'élément supprimé<br/>
+                • <strong>Spread operator (...)</strong> : Copie les propriétés d'un objet<br/>
+                • <strong>Template literals</strong> : Classes CSS conditionnelles
+              </KeyConcepts>
+            </CodeExample>
+          </SubSection>
+        </Container>
+      </Section>
+
+      {/* TypeScript Section */}
+      <Section>
+        <Container>
+          <SectionTitle>🔷 TypeScript - Typage Avancé</SectionTitle>
+
+          <SubSection>
+            <SubTitle>Pourquoi TypeScript ?</SubTitle>
+            <BenefitsGrid>
+              <BenefitCard>
+                <BenefitIcon>✅</BenefitIcon>
+                <BenefitTitle>Détection d'erreurs</BenefitTitle>
+                <BenefitText>Les erreurs sont détectées avant l'exécution</BenefitText>
+              </BenefitCard>
+              <BenefitCard>
+                <BenefitIcon>🚀</BenefitIcon>
+                <BenefitTitle>Auto-complétion</BenefitTitle>
+                <BenefitText>Votre IDE vous suggère les propriétés</BenefitText>
+              </BenefitCard>
+              <BenefitCard>
+                <BenefitIcon>📖</BenefitIcon>
+                <BenefitTitle>Documentation</BenefitTitle>
+                <BenefitText>Les types documentent votre code</BenefitText>
+              </BenefitCard>
+              <BenefitCard>
+                <BenefitIcon>🛡️</BenefitIcon>
+                <BenefitTitle>Refactoring sûr</BenefitTitle>
+                <BenefitText>Modifiez sans crainte de casser le code</BenefitText>
+              </BenefitCard>
+            </BenefitsGrid>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Les Types de Base</SubTitle>
+            <CodeExample>
+              <CodeBlock>{`// Types primitifs
+let name: string = "David";
+let age: number = 25;
+let isActive: boolean = true;
+let data: null = null;
+let value: undefined = undefined;
+
+// Tableaux
+let numbers: number[] = [1, 2, 3];
+let strings: Array<string> = ["a", "b", "c"];
+
+// Tuples (tableau fixe)
+let person: [string, number] = ["David", 25];
+
+// Union types (plusieurs types possibles)
+let id: string | number = "ABC123"; // ou 123
+
+// Type literal (valeurs spécifiques)
+let status: "active" | "inactive" | "pending" = "active";`}</CodeBlock>
+            </CodeExample>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Interfaces et Types</SubTitle>
+            <CodeExample>
+              <CodeBlock>{`// Interface (pour les objets)
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  age?: number; // Propriété optionnelle
+  readonly createdAt: Date; // En lecture seule
+}
+
+// Utilisation
+const user: User = {
+  id: 1,
+  name: "David",
+  email: "david@example.com",
+  createdAt: new Date()
+};
+
+// user.createdAt = new Date(); // ❌ Erreur : readonly
+
+// Type alias (plus flexible)
+type Status = "loading" | "success" | "error";
+type Response<T> = {
+  data: T;
+  status: Status;
+  message?: string;
+};
+
+// Utilisation avec génériques
+const apiResponse: Response<User[]> = {
+  data: [user],
+  status: "success"
+};`}</CodeBlock>
+            </CodeExample>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Typage des Composants React</SubTitle>
+            <CodeExample>
+              <CodeBlock>{`import { ReactNode } from 'react';
+
+// 1. Props typées
+interface ButtonProps {
+  children: ReactNode;
+  variant?: 'primary' | 'secondary';
+  onClick: () => void;
+  disabled?: boolean;
+}
+
+function Button({ children, variant = 'primary', onClick, disabled }: ButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={variant === 'primary' ? 'bg-blue-500' : 'bg-gray-500'}
+    >
+      {children}
+    </button>
+  );
+}
+
+// 2. Événements typés
+function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  console.log(e.target.value);
+}
+
+function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  // ...
+}
+
+// 3. State typé
+interface FormData {
+  username: string;
+  password: string;
+}
+
+const [formData, setFormData] = useState<FormData>({
+  username: '',
+  password: ''
+});
+
+// 4. Ref typé
+const inputRef = useRef<HTMLInputElement>(null);
+inputRef.current?.focus(); // Safe access`}</CodeBlock>
+            </CodeExample>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Exemple Complet : Formulaire Typé</SubTitle>
+            <CodeExample>
+              <CodeBlock>{`interface LoginFormProps {
+  onSubmit: (credentials: Credentials) => Promise<void>;
+  isLoading?: boolean;
+}
+
+interface Credentials {
+  email: string;
+  password: string;
+}
+
+interface FormErrors {
+  email?: string;
+  password?: string;
+}
+
+function LoginForm({ onSubmit, isLoading = false }: LoginFormProps) {
+  const [credentials, setCredentials] = useState<Credentials>({
+    email: '',
+    password: ''
+  });
+
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const validate = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    if (!credentials.email.includes('@')) {
+      newErrors.email = 'Email invalide';
+    }
+
+    if (credentials.password.length < 6) {
+      newErrors.password = 'Au moins 6 caractères';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validate()) {
+      await onSubmit(credentials);
+    }
+  };
+
+  const handleChange = (field: keyof Credentials) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setCredentials({ ...credentials, [field]: e.target.value });
+    };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <input
+          type="email"
+          value={credentials.email}
+          onChange={handleChange('email')}
+          placeholder="Email"
+          className="w-full px-4 py-2 border rounded"
+        />
+        {errors.email && (
+          <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+        )}
+      </div>
+
+      <div>
+        <input
+          type="password"
+          value={credentials.password}
+          onChange={handleChange('password')}
+          placeholder="Password"
+          className="w-full px-4 py-2 border rounded"
+        />
+        {errors.password && (
+          <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+        )}
+      </div>
+
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="w-full px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+      >
+        {isLoading ? 'Connexion...' : 'Se connecter'}
+      </button>
+    </form>
+  );
+}`}</CodeBlock>
+              <KeyConcepts>
+                <strong>🔑 Points clés :</strong><br/>
+                • <strong>keyof Credentials</strong> : Type qui ne peut être que 'email' ou 'password'<br/>
+                • <strong>Promise{'<void>'}  </strong> : Fonction async qui ne retourne rien<br/>
+                • <strong>Partial{'<T>'}</strong> : Rend toutes les propriétés optionnelles<br/>
+                • <strong>Type safety</strong> : Impossible de passer un mauvais champ
+              </KeyConcepts>
+            </CodeExample>
+          </SubSection>
+        </Container>
+      </Section>
+
+      {/* Tailwind Section */}
+      <Section $bgColor="#f7fafc">
+        <Container>
+          <SectionTitle>🎨 Tailwind CSS - Design System</SectionTitle>
+
+          <SubSection>
+            <SubTitle>Les Classes Utilitaires</SubTitle>
+            <Description>
+              Tailwind CSS est un framework <strong>utility-first</strong> : au lieu d'écrire du CSS,
+              vous composez des classes utilitaires directement dans votre HTML.
+            </Description>
+
+            <TailwindComparison>
+              <ComparisonColumn>
+                <ComparisonTitle>❌ CSS Classique</ComparisonTitle>
+                <CodeBlock>{`.card {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  max-width: 400px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a202c;
+}`}</CodeBlock>
+              </ComparisonColumn>
+
+              <ComparisonColumn>
+                <ComparisonTitle>✅ Tailwind CSS</ComparisonTitle>
+                <CodeBlock>{`<div className="p-6 bg-white rounded-lg shadow-lg max-w-sm">
+  <h2 className="text-2xl font-bold text-gray-800">
+    Titre
+  </h2>
+</div>
+
+// Avantages :
+// ✅ Pas de fichier CSS séparé
+// ✅ Pas de noms de classes à inventer
+// ✅ Responsive intégré
+// ✅ Purge automatique du CSS non utilisé`}</CodeBlock>
+              </ComparisonColumn>
+            </TailwindComparison>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Classes Essentielles</SubTitle>
+
+            <TailwindGrid>
+              <TailwindCategory>
+                <CategoryTitle>📏 Spacing</CategoryTitle>
+                <CategoryContent>
+                  <code>p-4</code> padding: 1rem<br/>
+                  <code>m-2</code> margin: 0.5rem<br/>
+                  <code>px-6</code> padding horizontal<br/>
+                  <code>mt-8</code> margin-top: 2rem<br/>
+                  <code>space-y-4</code> gap vertical entre enfants
+                </CategoryContent>
+              </TailwindCategory>
+
+              <TailwindCategory>
+                <CategoryTitle>🎨 Colors</CategoryTitle>
+                <CategoryContent>
+                  <code>bg-blue-500</code> fond bleu<br/>
+                  <code>text-red-600</code> texte rouge<br/>
+                  <code>border-gray-300</code> bordure grise<br/>
+                  Nuances : 50, 100...900
+                </CategoryContent>
+              </TailwindCategory>
+
+              <TailwindCategory>
+                <CategoryTitle>📱 Layout</CategoryTitle>
+                <CategoryContent>
+                  <code>flex</code> display: flex<br/>
+                  <code>grid</code> display: grid<br/>
+                  <code>grid-cols-3</code> 3 colonnes<br/>
+                  <code>gap-4</code> espacement grille<br/>
+                  <code>items-center</code> align vertical
+                </CategoryContent>
+              </TailwindCategory>
+
+              <TailwindCategory>
+                <CategoryTitle>📐 Sizing</CategoryTitle>
+                <CategoryContent>
+                  <code>w-full</code> width: 100%<br/>
+                  <code>h-64</code> height: 16rem<br/>
+                  <code>max-w-lg</code> max-width<br/>
+                  <code>min-h-screen</code> min-height: 100vh
+                </CategoryContent>
+              </TailwindCategory>
+
+              <TailwindCategory>
+                <CategoryTitle>✏️ Typography</CategoryTitle>
+                <CategoryContent>
+                  <code>text-xl</code> font-size: 1.25rem<br/>
+                  <code>font-bold</code> font-weight: 700<br/>
+                  <code>leading-relaxed</code> line-height<br/>
+                  <code>tracking-wide</code> letter-spacing
+                </CategoryContent>
+              </TailwindCategory>
+
+              <TailwindCategory>
+                <CategoryTitle>🎭 Effects</CategoryTitle>
+                <CategoryContent>
+                  <code>shadow-lg</code> box-shadow<br/>
+                  <code>rounded-lg</code> border-radius<br/>
+                  <code>opacity-50</code> opacity: 0.5<br/>
+                  <code>hover:bg-blue-600</code> au survol
+                </CategoryContent>
+              </TailwindCategory>
+            </TailwindGrid>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Responsive Design</SubTitle>
+            <CodeExample>
+              <CodeTitle>📱 Mobile-First Approach</CodeTitle>
+              <CodeBlock>{`// Par défaut : mobile
+// sm: 640px et plus
+// md: 768px et plus
+// lg: 1024px et plus
+// xl: 1280px et plus
+
+<div className="
+  w-full           /* Mobile : pleine largeur */
+  md:w-1/2         /* Tablette : 50% */
+  lg:w-1/3         /* Desktop : 33% */
+  p-4              /* Mobile : padding 1rem */
+  md:p-6           /* Tablette : padding 1.5rem */
+  text-sm          /* Mobile : texte petit */
+  md:text-base     /* Tablette : texte normal */
+  lg:text-lg       /* Desktop : texte grand */
+">
+  Contenu responsive
+</div>
+
+// Exemple : Navigation
+<nav className="
+  flex
+  flex-col         /* Mobile : vertical */
+  md:flex-row      /* Desktop : horizontal */
+  gap-2
+  md:gap-6
+">
+  <a href="#">Accueil</a>
+  <a href="#">Services</a>
+  <a href="#">Contact</a>
+</nav>`}</CodeBlock>
+            </CodeExample>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Composants Réutilisables</SubTitle>
+            <CodeExample>
+              <CodeTitle>🔧 Pattern : Variantes de Boutons</CodeTitle>
+              <CodeBlock>{`interface ButtonProps {
+  children: ReactNode;
+  variant?: 'primary' | 'secondary' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  onClick?: () => void;
+}
+
+function Button({
+  children,
+  variant = 'primary',
+  size = 'md',
+  onClick
+}: ButtonProps) {
+  // Classes de base communes
+  const baseClasses = "font-semibold rounded transition-colors duration-200";
+
+  // Classes par variante
+  const variantClasses = {
+    primary: "bg-blue-500 hover:bg-blue-600 text-white",
+    secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800",
+    danger: "bg-red-500 hover:bg-red-600 text-white"
+  };
+
+  // Classes par taille
+  const sizeClasses = {
+    sm: "px-3 py-1 text-sm",
+    md: "px-4 py-2 text-base",
+    lg: "px-6 py-3 text-lg"
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      className={\`\${baseClasses} \${variantClasses[variant]} \${sizeClasses[size]}\`}
+    >
+      {children}
+    </button>
+  );
+}
+
+// Utilisation
+<div className="flex gap-4">
+  <Button variant="primary" size="sm">Petit</Button>
+  <Button variant="secondary" size="md">Moyen</Button>
+  <Button variant="danger" size="lg">Grand</Button>
+</div>`}</CodeBlock>
+            </CodeExample>
+          </SubSection>
+
+          <SubSection>
+            <SubTitle>Exemple Complet : Card Component</SubTitle>
+            <CodeExample>
+              <CodeBlock>{`interface ProductCardProps {
+  image: string;
+  title: string;
+  price: number;
+  rating: number;
+  onAddToCart: () => void;
+}
+
+function ProductCard({ image, title, price, rating, onAddToCart }: ProductCardProps) {
+  return (
+    <div className="
+      bg-white
+      rounded-xl
+      shadow-lg
+      overflow-hidden
+      hover:shadow-2xl
+      transition-shadow
+      duration-300
+      max-w-sm
+    ">
+      {/* Image */}
+      <div className="relative h-64 overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+        />
+        <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+          -20%
+        </div>
+      </div>
+
+      {/* Contenu */}
+      <div className="p-6">
+        {/* Titre */}
+        <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-2">
+          {title}
+        </h3>
+
+        {/* Rating */}
+        <div className="flex items-center gap-2 mb-4">
+          <div className="flex">
+            {[...Array(5)].map((_, i) => (
+              <span key={i} className={i < rating ? "text-yellow-400" : "text-gray-300"}>
+                ★
+              </span>
+            ))}
+          </div>
+          <span className="text-gray-600 text-sm">({rating}/5)</span>
+        </div>
+
+        {/* Prix */}
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <span className="text-3xl font-bold text-blue-600">
+              {price}€
+            </span>
+            <span className="text-gray-400 line-through ml-2">
+              {(price * 1.2).toFixed(2)}€
+            </span>
+          </div>
+        </div>
+
+        {/* Bouton */}
+        <button
+          onClick={onAddToCart}
+          className="
+            w-full
+            bg-blue-500
+            hover:bg-blue-600
+            text-white
+            font-semibold
+            py-3
+            rounded-lg
+            transition-colors
+            duration-200
+            flex
+            items-center
+            justify-center
+            gap-2
+          "
+        >
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+          </svg>
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+  );
+}`}</CodeBlock>
+              <KeyConcepts>
+                <strong>🎨 Techniques utilisées :</strong><br/>
+                • <strong>hover:</strong> classes appliquées au survol<br/>
+                • <strong>transition-*</strong> : animations fluides<br/>
+                • <strong>line-clamp-2</strong> : limite le texte à 2 lignes<br/>
+                • <strong>object-cover</strong> : image remplissant le conteneur<br/>
+                • <strong>absolute</strong> : positionnement badge promo
+              </KeyConcepts>
+            </CodeExample>
+          </SubSection>
+        </Container>
+      </Section>
+
+      {/* Backend Section */}
+      <Section>
+        <Container>
+          <SectionTitle>🗄️ Backend - Supabase vs Node.js</SectionTitle>
+
+          <TabContainer>
+            <TabButtons>
+              <TabButton
+                $active={activeTab === 'supabase'}
+                onClick={() => setActiveTab('supabase')}
+              >
+                <SiSupabase /> Supabase (Backend-as-a-Service)
+              </TabButton>
+              <TabButton
+                $active={activeTab === 'nodejs'}
+                onClick={() => setActiveTab('nodejs')}
+              >
+                <FaNodeJs /> Node.js + Express
+              </TabButton>
+            </TabButtons>
+
+            {activeTab === 'supabase' && (
+              <TabContent>
+                <SubSection>
+                  <SubTitle>Qu'est-ce que Supabase ?</SubTitle>
+                  <Description>
+                    Supabase est une alternative open-source à Firebase. C'est un <strong>Backend-as-a-Service</strong> qui
+                    vous fournit une base de données PostgreSQL, de l'authentification, du stockage de fichiers et des APIs
+                    automatiques <strong>sans écrire de code backend</strong>.
+                  </Description>
+
+                  <BenefitsGrid>
+                    <BenefitCard>
+                      <BenefitIcon>⚡</BenefitIcon>
+                      <BenefitTitle>Rapide</BenefitTitle>
+                      <BenefitText>Backend prêt en 2 minutes</BenefitText>
+                    </BenefitCard>
+                    <BenefitCard>
+                      <BenefitIcon>🔐</BenefitIcon>
+                      <BenefitTitle>Auth intégrée</BenefitTitle>
+                      <BenefitText>Email, OAuth, Magic Links</BenefitText>
+                    </BenefitCard>
+                    <BenefitCard>
+                      <BenefitIcon>📊</BenefitIcon>
+                      <BenefitTitle>PostgreSQL</BenefitTitle>
+                      <BenefitText>Base de données relationnelle puissante</BenefitText>
+                    </BenefitCard>
+                    <BenefitCard>
+                      <BenefitIcon>🔄</BenefitIcon>
+                      <BenefitTitle>Real-time</BenefitTitle>
+                      <BenefitText>Subscriptions en temps réel</BenefitText>
+                    </BenefitCard>
+                  </BenefitsGrid>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>1. Installation et Configuration</SubTitle>
+                  <CodeExample>
+                    <CodeBlock>{`# Installation
+npm install @supabase/supabase-js
+
+# Créer un client Supabase
+// lib/supabase.ts
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+export const supabase = createClient(supabaseUrl, supabaseKey)
+
+// Types TypeScript (auto-générés)
+export type Database = {
+  public: {
+    Tables: {
+      users: {
+        Row: {
+          id: string
+          email: string
+          name: string
+          created_at: string
+        }
+        Insert: {
+          email: string
+          name: string
+        }
+      }
+    }
+  }
+}`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>2. Authentification</SubTitle>
+                  <CodeExample>
+                    <CodeTitle>🔐 Sign Up / Login</CodeTitle>
+                    <CodeBlock>{`import { supabase } from './lib/supabase'
+
+// Inscription
+async function signUp(email: string, password: string) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        full_name: 'John Doe'
+      }
+    }
+  })
+
+  if (error) throw error
+  return data
+}
+
+// Connexion
+async function signIn(email: string, password: string) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  })
+
+  if (error) throw error
+  return data
+}
+
+// Connexion OAuth (Google, GitHub...)
+async function signInWithGoogle() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google'
+  })
+}
+
+// Obtenir l'utilisateur connecté
+async function getUser() {
+  const { data: { user } } = await supabase.auth.getUser()
+  return user
+}
+
+// Déconnexion
+async function signOut() {
+  await supabase.auth.signOut()
+}
+
+// Écouter les changements d'auth
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN') console.log('Connecté!', session)
+  if (event === 'SIGNED_OUT') console.log('Déconnecté!')
+})`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>3. CRUD Operations (Base de données)</SubTitle>
+                  <CodeExample>
+                    <CodeTitle>📝 Create, Read, Update, Delete</CodeTitle>
+                    <CodeBlock>{`// CREATE - Insérer des données
+async function createPost(title: string, content: string) {
+  const { data, error } = await supabase
+    .from('posts')
+    .insert([
+      { title, content, user_id: userId }
+    ])
+    .select()
+
+  return data
+}
+
+// READ - Lire des données
+async function getPosts() {
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .order('created_at', { ascending: false })
+
+  return data
+}
+
+// READ avec JOIN
+async function getPostsWithAuthor() {
+  const { data } = await supabase
+    .from('posts')
+    .select(\`
+      *,
+      author:users(name, email)
+    \`)
+
+  return data
+}
+
+// READ avec filtres
+async function searchPosts(query: string) {
+  const { data } = await supabase
+    .from('posts')
+    .select('*')
+    .ilike('title', \`%\${query}%\`) // Recherche insensible à la casse
+    .gte('views', 100) // Greater than or equal
+    .limit(10)
+
+  return data
+}
+
+// UPDATE - Modifier des données
+async function updatePost(id: string, updates: Partial<Post>) {
+  const { data } = await supabase
+    .from('posts')
+    .update(updates)
+    .eq('id', id)
+    .select()
+
+  return data
+}
+
+// DELETE - Supprimer des données
+async function deletePost(id: string) {
+  await supabase
+    .from('posts')
+    .delete()
+    .eq('id', id)
+}`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>4. Real-time Subscriptions</SubTitle>
+                  <CodeExample>
+                    <CodeTitle>🔄 Écouter les changements en temps réel</CodeTitle>
+                    <CodeBlock>{`import { useEffect, useState } from 'react'
+
+function PostsList() {
+  const [posts, setPosts] = useState<Post[]>([])
+
+  useEffect(() => {
+    // Charger les posts initiaux
+    loadPosts()
+
+    // S'abonner aux changements
+    const subscription = supabase
+      .channel('posts')
+      .on(
+        'postgres_changes',
+        {
+          event: '*', // INSERT, UPDATE, DELETE
+          schema: 'public',
+          table: 'posts'
+        },
+        (payload) => {
+          console.log('Changement détecté!', payload)
+
+          if (payload.eventType === 'INSERT') {
+            setPosts(prev => [payload.new as Post, ...prev])
+          }
+
+          if (payload.eventType === 'UPDATE') {
+            setPosts(prev => prev.map(post =>
+              post.id === payload.new.id ? payload.new as Post : post
+            ))
+          }
+
+          if (payload.eventType === 'DELETE') {
+            setPosts(prev => prev.filter(post => post.id !== payload.old.id))
+          }
+        }
+      )
+      .subscribe()
+
+    // Cleanup
+    return () => {
+      subscription.unsubscribe()
+    }
+  }, [])
+
+  async function loadPosts() {
+    const { data } = await supabase.from('posts').select('*')
+    setPosts(data || [])
+  }
+
+  return (
+    <div>
+      {posts.map(post => (
+        <div key={post.id}>{post.title}</div>
+      ))}
+    </div>
+  )
+}`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>5. Storage (Fichiers)</SubTitle>
+                  <CodeExample>
+                    <CodeBlock>{`// Upload d'image
+async function uploadAvatar(file: File, userId: string) {
+  const fileName = \`\${userId}-\${Date.now()}\`
+
+  const { data, error } = await supabase.storage
+    .from('avatars')
+    .upload(fileName, file)
+
+  if (error) throw error
+
+  // Obtenir l'URL publique
+  const { data: { publicUrl } } = supabase.storage
+    .from('avatars')
+    .getPublicUrl(fileName)
+
+  return publicUrl
+}
+
+// Component avec upload
+function AvatarUpload() {
+  const [uploading, setUploading] = useState(false)
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploading(true)
+    try {
+      const url = await uploadAvatar(file, userId)
+      // Mettre à jour le profil avec la nouvelle URL
+      await supabase
+        .from('users')
+        .update({ avatar_url: url })
+        .eq('id', userId)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  return (
+    <input
+      type="file"
+      onChange={handleUpload}
+      disabled={uploading}
+    />
+  )
+}`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>6. Row Level Security (RLS)</SubTitle>
+                  <Description>
+                    Supabase utilise PostgreSQL RLS pour sécuriser vos données. Les utilisateurs ne peuvent accéder
+                    qu'aux données autorisées.
+                  </Description>
+                  <CodeExample>
+                    <CodeTitle>🔒 Politiques de sécurité (SQL)</CodeTitle>
+                    <CodeBlock>{`-- Activer RLS sur la table
+ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
+
+-- Politique : Tout le monde peut lire les posts
+CREATE POLICY "Les posts sont publics"
+ON posts FOR SELECT
+USING (true);
+
+-- Politique : Seul l'auteur peut modifier son post
+CREATE POLICY "Modifier ses propres posts"
+ON posts FOR UPDATE
+USING (auth.uid() = user_id);
+
+-- Politique : Seul l'auteur peut supprimer son post
+CREATE POLICY "Supprimer ses propres posts"
+ON posts FOR DELETE
+USING (auth.uid() = user_id);
+
+-- Politique : Utilisateurs authentifiés peuvent créer
+CREATE POLICY "Créer un post si authentifié"
+ON posts FOR INSERT
+WITH CHECK (auth.uid() = user_id);`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+              </TabContent>
+            )}
+
+            {activeTab === 'nodejs' && (
+              <TabContent>
+                <SubSection>
+                  <SubTitle>Architecture Node.js + Express</SubTitle>
+                  <Description>
+                    Avec Node.js et Express, vous créez votre propre serveur backend. Vous avez
+                    <strong> un contrôle total</strong> sur la logique métier, mais vous devez tout configurer vous-même.
+                  </Description>
+
+                  <BenefitsGrid>
+                    <BenefitCard>
+                      <BenefitIcon>🎛️</BenefitIcon>
+                      <BenefitTitle>Contrôle total</BenefitTitle>
+                      <BenefitText>Personnalisez tout selon vos besoins</BenefitText>
+                    </BenefitCard>
+                    <BenefitCard>
+                      <BenefitIcon>🔧</BenefitIcon>
+                      <BenefitTitle>Flexible</BenefitTitle>
+                      <BenefitText>Intégrez n'importe quelle bibliothèque</BenefitText>
+                    </BenefitCard>
+                    <BenefitCard>
+                      <BenefitIcon>💰</BenefitIcon>
+                      <BenefitTitle>Économique</BenefitTitle>
+                      <BenefitText>Hébergez où vous voulez</BenefitText>
+                    </BenefitCard>
+                    <BenefitCard>
+                      <BenefitIcon>📚</BenefitIcon>
+                      <BenefitTitle>Apprentissage</BenefitTitle>
+                      <BenefitText>Comprenez le backend en profondeur</BenefitText>
+                    </BenefitCard>
+                  </BenefitsGrid>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>1. Configuration Initiale</SubTitle>
+                  <CodeExample>
+                    <CodeBlock>{`# Initialiser le projet
+npm init -y
+npm install express mongoose dotenv cors
+npm install -D typescript @types/express @types/node ts-node nodemon
+
+# tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true
+  }
+}
+
+# package.json scripts
+{
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  }
+}`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>2. Structure du Projet</SubTitle>
+                  <CodeExample>
+                    <CodeBlock>{`src/
+├── index.ts              # Point d'entrée
+├── config/
+│   └── database.ts       # Configuration DB
+├── models/
+│   ├── User.ts          # Modèle User
+│   └── Post.ts          # Modèle Post
+├── routes/
+│   ├── auth.routes.ts   # Routes auth
+│   └── post.routes.ts   # Routes posts
+├── controllers/
+│   ├── auth.controller.ts
+│   └── post.controller.ts
+├── middleware/
+│   ├── auth.middleware.ts
+│   └── error.middleware.ts
+└── types/
+    └── index.ts         # Types TypeScript`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>3. Serveur Express de Base</SubTitle>
+                  <CodeExample>
+                    <CodeTitle>src/index.ts</CodeTitle>
+                    <CodeBlock>{`import express from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import { connectDatabase } from './config/database'
+import authRoutes from './routes/auth.routes'
+import postRoutes from './routes/post.routes'
+import { errorHandler } from './middleware/error.middleware'
+
+dotenv.config()
+
+const app = express()
+const PORT = process.env.PORT || 5000
+
+// Middlewares
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+// Routes
+app.use('/api/auth', authRoutes)
+app.use('/api/posts', postRoutes)
+
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date() })
+})
+
+// Error handling
+app.use(errorHandler)
+
+// Démarrage du serveur
+async function start() {
+  try {
+    await connectDatabase()
+    app.listen(PORT, () => {
+      console.log(\`🚀 Server running on http://localhost:\${PORT}\`)
+    })
+  } catch (error) {
+    console.error('Failed to start server:', error)
+    process.exit(1)
+  }
+}
+
+start()`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>4. Connexion MongoDB</SubTitle>
+                  <CodeExample>
+                    <CodeTitle>src/config/database.ts</CodeTitle>
+                    <CodeBlock>{`import mongoose from 'mongoose'
+
+export async function connectDatabase() {
+  try {
+    const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/myapp'
+
+    await mongoose.connect(mongoUri)
+
+    console.log('✅ MongoDB connected')
+  } catch (error) {
+    console.error('❌ MongoDB connection error:', error)
+    throw error
+  }
+}
+
+// Gestion des erreurs de connexion
+mongoose.connection.on('error', (error) => {
+  console.error('MongoDB error:', error)
+})
+
+mongoose.connection.on('disconnected', () => {
+  console.log('MongoDB disconnected')
+})`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>5. Modèles MongoDB (Mongoose)</SubTitle>
+                  <CodeExample>
+                    <CodeTitle>src/models/User.ts</CodeTitle>
+                    <CodeBlock>{`import mongoose, { Document, Schema } from 'mongoose'
+import bcrypt from 'bcryptjs'
+
+export interface IUser extends Document {
+  email: string
+  password: string
+  name: string
+  avatar?: string
+  createdAt: Date
+  comparePassword(candidatePassword: string): Promise<boolean>
+}
+
+const userSchema = new Schema<IUser>({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
+    trim: true
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6
+  },
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  avatar: String,
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+})
+
+// Hash password avant sauvegarde
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next()
+
+  this.password = await bcrypt.hash(this.password, 10)
+  next()
+})
+
+// Méthode pour comparer les mots de passe
+userSchema.methods.comparePassword = async function(candidatePassword: string) {
+  return bcrypt.compare(candidatePassword, this.password)
+}
+
+export const User = mongoose.model<IUser>('User', userSchema)`}</CodeBlock>
+                  </CodeExample>
+
+                  <CodeExample>
+                    <CodeTitle>src/models/Post.ts</CodeTitle>
+                    <CodeBlock>{`import mongoose, { Document, Schema } from 'mongoose'
+
+export interface IPost extends Document {
+  title: string
+  content: string
+  author: mongoose.Types.ObjectId
+  tags: string[]
+  published: boolean
+  views: number
+  createdAt: Date
+  updatedAt: Date
+}
+
+const postSchema = new Schema<IPost>({
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 200
+  },
+  content: {
+    type: String,
+    required: true
+  },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  tags: [String],
+  published: {
+    type: Boolean,
+    default: false
+  },
+  views: {
+    type: Number,
+    default: 0
+  }
+}, {
+  timestamps: true // Ajoute createdAt et updatedAt automatiquement
+})
+
+// Index pour recherche rapide
+postSchema.index({ title: 'text', content: 'text' })
+postSchema.index({ author: 1, createdAt: -1 })
+
+export const Post = mongoose.model<IPost>('Post', postSchema)`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>6. Authentification JWT</SubTitle>
+                  <CodeExample>
+                    <CodeTitle>src/controllers/auth.controller.ts</CodeTitle>
+                    <CodeBlock>{`import { Request, Response } from 'express'
+import jwt from 'jsonwebtoken'
+import { User } from '../models/User'
+
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'
+
+// Inscription
+export async function register(req: Request, res: Response) {
+  try {
+    const { email, password, name } = req.body
+
+    // Vérifier si l'utilisateur existe
+    const exists = await User.findOne({ email })
+    if (exists) {
+      return res.status(400).json({ error: 'Email déjà utilisé' })
+    }
+
+    // Créer l'utilisateur
+    const user = await User.create({ email, password, name })
+
+    // Générer le token JWT
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '7d' })
+
+    res.status(201).json({
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.name
+      },
+      token
+    })
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur serveur' })
+  }
+}
+
+// Connexion
+export async function login(req: Request, res: Response) {
+  try {
+    const { email, password } = req.body
+
+    // Trouver l'utilisateur
+    const user = await User.findOne({ email })
+    if (!user) {
+      return res.status(401).json({ error: 'Identifiants invalides' })
+    }
+
+    // Vérifier le mot de passe
+    const isMatch = await user.comparePassword(password)
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Identifiants invalides' })
+    }
+
+    // Générer le token
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '7d' })
+
+    res.json({
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.name
+      },
+      token
+    })
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur serveur' })
+  }
+}
+
+// Obtenir le profil
+export async function getProfile(req: Request, res: Response) {
+  try {
+    const user = await User.findById(req.userId).select('-password')
+    res.json({ user })
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur serveur' })
+  }
+}`}</CodeBlock>
+                  </CodeExample>
+
+                  <CodeExample>
+                    <CodeTitle>src/middleware/auth.middleware.ts</CodeTitle>
+                    <CodeBlock>{`import { Request, Response, NextFunction } from 'express'
+import jwt from 'jsonwebtoken'
+
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'
+
+// Étendre le type Request pour ajouter userId
+declare global {
+  namespace Express {
+    interface Request {
+      userId?: string
+    }
+  }
+}
+
+export function authMiddleware(req: Request, res: Response, next: NextFunction) {
+  try {
+    // Récupérer le token du header
+    const token = req.headers.authorization?.split(' ')[1] // "Bearer TOKEN"
+
+    if (!token) {
+      return res.status(401).json({ error: 'Token manquant' })
+    }
+
+    // Vérifier le token
+    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string }
+
+    // Ajouter userId à la requête
+    req.userId = decoded.userId
+
+    next()
+  } catch (error) {
+    res.status(401).json({ error: 'Token invalide' })
+  }
+}`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>7. API REST - CRUD Posts</SubTitle>
+                  <CodeExample>
+                    <CodeTitle>src/controllers/post.controller.ts</CodeTitle>
+                    <CodeBlock>{`import { Request, Response } from 'express'
+import { Post } from '../models/Post'
+
+// CREATE
+export async function createPost(req: Request, res: Response) {
+  try {
+    const { title, content, tags } = req.body
+
+    const post = await Post.create({
+      title,
+      content,
+      tags,
+      author: req.userId // Depuis le middleware auth
+    })
+
+    res.status(201).json({ post })
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur création post' })
+  }
+}
+
+// READ ALL
+export async function getPosts(req: Request, res: Response) {
+  try {
+    const { page = 1, limit = 10, search } = req.query
+
+    const query: any = { published: true }
+
+    // Recherche textuelle
+    if (search) {
+      query.$text = { $search: search as string }
+    }
+
+    const posts = await Post.find(query)
+      .populate('author', 'name avatar') // Joindre les données auteur
+      .sort({ createdAt: -1 })
+      .limit(Number(limit))
+      .skip((Number(page) - 1) * Number(limit))
+
+    const total = await Post.countDocuments(query)
+
+    res.json({
+      posts,
+      pagination: {
+        page: Number(page),
+        limit: Number(limit),
+        total,
+        pages: Math.ceil(total / Number(limit))
+      }
+    })
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur récupération posts' })
+  }
+}
+
+// READ ONE
+export async function getPost(req: Request, res: Response) {
+  try {
+    const post = await Post.findById(req.params.id)
+      .populate('author', 'name avatar email')
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post non trouvé' })
+    }
+
+    // Incrémenter les vues
+    post.views += 1
+    await post.save()
+
+    res.json({ post })
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur récupération post' })
+  }
+}
+
+// UPDATE
+export async function updatePost(req: Request, res: Response) {
+  try {
+    const { title, content, tags, published } = req.body
+
+    const post = await Post.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        author: req.userId // Seul l'auteur peut modifier
+      },
+      { title, content, tags, published },
+      { new: true, runValidators: true }
+    )
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post non trouvé ou non autorisé' })
+    }
+
+    res.json({ post })
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur mise à jour post' })
+  }
+}
+
+// DELETE
+export async function deletePost(req: Request, res: Response) {
+  try {
+    const post = await Post.findOneAndDelete({
+      _id: req.params.id,
+      author: req.userId
+    })
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post non trouvé ou non autorisé' })
+    }
+
+    res.json({ message: 'Post supprimé' })
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur suppression post' })
+  }
+}`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>8. Routes Express</SubTitle>
+                  <CodeExample>
+                    <CodeTitle>src/routes/post.routes.ts</CodeTitle>
+                    <CodeBlock>{`import { Router } from 'express'
+import { authMiddleware } from '../middleware/auth.middleware'
+import {
+  createPost,
+  getPosts,
+  getPost,
+  updatePost,
+  deletePost
+} from '../controllers/post.controller'
+
+const router = Router()
+
+// Routes publiques
+router.get('/', getPosts)
+router.get('/:id', getPost)
+
+// Routes protégées (nécessitent authentification)
+router.post('/', authMiddleware, createPost)
+router.put('/:id', authMiddleware, updatePost)
+router.delete('/:id', authMiddleware, deletePost)
+
+export default router`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+
+                <SubSection>
+                  <SubTitle>9. Consommer l'API depuis React</SubTitle>
+                  <CodeExample>
+                    <CodeTitle>Frontend - API Client</CodeTitle>
+                    <CodeBlock>{`// lib/api.ts
+const API_URL = 'http://localhost:5000/api'
+
+// Helper pour les requêtes
+async function apiRequest<T>(
+  endpoint: string,
+  options: RequestInit = {}
+): Promise<T> {
+  const token = localStorage.getItem('token')
+
+  const response = await fetch(\`\${API_URL}\${endpoint}\`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token && { Authorization: \`Bearer \${token}\` }),
+      ...options.headers
+    }
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.error || 'Erreur API')
+  }
+
+  return response.json()
+}
+
+// Auth API
+export const authAPI = {
+  register: (data: { email: string; password: string; name: string }) =>
+    apiRequest('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    }),
+
+  login: (data: { email: string; password: string }) =>
+    apiRequest('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    }),
+
+  getProfile: () => apiRequest('/auth/profile')
+}
+
+// Posts API
+export const postsAPI = {
+  getAll: (params?: { page?: number; search?: string }) =>
+    apiRequest(\`/posts?\${new URLSearchParams(params as any)}\`),
+
+  getOne: (id: string) =>
+    apiRequest(\`/posts/\${id}\`),
+
+  create: (data: { title: string; content: string }) =>
+    apiRequest('/posts', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    }),
+
+  update: (id: string, data: Partial<Post>) =>
+    apiRequest(\`/posts/\${id}\`, {
+      method: 'PUT',
+      body: JSON.stringify(data)
+    }),
+
+  delete: (id: string) =>
+    apiRequest(\`/posts/\${id}\`, { method: 'DELETE' })
+}
+
+// Component React
+function PostsList() {
+  const [posts, setPosts] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const data = await postsAPI.getAll({ page: 1 })
+        setPosts(data.posts)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    load()
+  }, [])
+
+  if (loading) return <div>Chargement...</div>
+
+  return (
+    <div>
+      {posts.map(post => (
+        <div key={post.id}>{post.title}</div>
+      ))}
+    </div>
+  )
+}`}</CodeBlock>
+                  </CodeExample>
+                </SubSection>
+              </TabContent>
+            )}
+          </TabContainer>
+        </Container>
+      </Section>
+
+      {/* Comparison Section */}
+      <Section $bgColor="#f7fafc">
+        <Container>
+          <SectionTitle>⚖️ Supabase vs Node.js : Lequel Choisir ?</SectionTitle>
+
+          <ComparisonTable>
+            <ComparisonRow>
+              <ComparisonHeader>Critère</ComparisonHeader>
+              <ComparisonHeader>Supabase</ComparisonHeader>
+              <ComparisonHeader>Node.js + Express</ComparisonHeader>
+            </ComparisonRow>
+            <ComparisonRow>
+              <ComparisonCell><strong>Rapidité de dev</strong></ComparisonCell>
+              <ComparisonCell $highlight="green">✅ Très rapide (backend prêt en 2 min)</ComparisonCell>
+              <ComparisonCell>⚠️ Plus lent (configuration complète)</ComparisonCell>
+            </ComparisonRow>
+            <ComparisonRow>
+              <ComparisonCell><strong>Contrôle</strong></ComparisonCell>
+              <ComparisonCell>⚠️ Limité aux fonctionnalités Supabase</ComparisonCell>
+              <ComparisonCell $highlight="green">✅ Contrôle total</ComparisonCell>
+            </ComparisonRow>
+            <ComparisonRow>
+              <ComparisonCell><strong>Courbe d'apprentissage</strong></ComparisonCell>
+              <ComparisonCell $highlight="green">✅ Facile</ComparisonCell>
+              <ComparisonCell>⚠️ Plus complexe</ComparisonCell>
+            </ComparisonRow>
+            <ComparisonRow>
+              <ComparisonCell><strong>Authentification</strong></ComparisonCell>
+              <ComparisonCell $highlight="green">✅ Intégrée (OAuth, Magic Links...)</ComparisonCell>
+              <ComparisonCell>⚠️ À implémenter (JWT, passport...)</ComparisonCell>
+            </ComparisonRow>
+            <ComparisonRow>
+              <ComparisonCell><strong>Real-time</strong></ComparisonCell>
+              <ComparisonCell $highlight="green">✅ Natif</ComparisonCell>
+              <ComparisonCell>⚠️ Nécessite WebSockets (Socket.io)</ComparisonCell>
+            </ComparisonRow>
+            <ComparisonRow>
+              <ComparisonCell><strong>Coût</strong></ComparisonCell>
+              <ComparisonCell>💰 Gratuit puis payant selon usage</ComparisonCell>
+              <ComparisonCell $highlight="green">✅ Hébergement flexible</ComparisonCell>
+            </ComparisonRow>
+            <ComparisonRow>
+              <ComparisonCell><strong>Scalabilité</strong></ComparisonCell>
+              <ComparisonCell $highlight="green">✅ Automatique</ComparisonCell>
+              <ComparisonCell>⚠️ À gérer manuellement</ComparisonCell>
+            </ComparisonRow>
+          </ComparisonTable>
+
+          <RecommendationBox>
+            <RecommendationTitle>💡 Nos Recommandations</RecommendationTitle>
+            <RecommendationGrid>
+              <RecommendationCard>
+                <h4>Choisissez Supabase si :</h4>
+                <ul>
+                  <li>Vous voulez un <strong>MVP rapide</strong></li>
+                  <li>Vous êtes <strong>débutant</strong> en backend</li>
+                  <li>Vous avez besoin d'<strong>auth complexe</strong></li>
+                  <li>Vous voulez du <strong>real-time</strong></li>
+                  <li>Projet type : SaaS, Chat, Dashboard</li>
+                </ul>
+              </RecommendationCard>
+              <RecommendationCard>
+                <h4>Choisissez Node.js si :</h4>
+                <ul>
+                  <li>Besoin de <strong>logique métier complexe</strong></li>
+                  <li>Intégrations avec <strong>APIs tierces</strong></li>
+                  <li>Vous voulez <strong>apprendre le backend</strong></li>
+                  <li>Contrôle total sur l'<strong>infrastructure</strong></li>
+                  <li>Projet type : E-commerce, CRM, API complexe</li>
+                </ul>
+              </RecommendationCard>
+            </RecommendationGrid>
+          </RecommendationBox>
+        </Container>
+      </Section>
+
+      {/* Practical Projects Section */}
+      <Section>
+        <Container>
+          <SectionTitle>💻 Projets Pratiques à Développer</SectionTitle>
+          <Description style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            Mettez en pratique vos compétences avec ces <strong>5 projets concrets</strong> de difficulté croissante
+          </Description>
+
+          <ProjectsGrid>
+            {/* Projet 1 */}
+            <PracticalProject>
+              <ProjectHeader $color="#4CAF50">
+                <ProjectLevel>Niveau Débutant</ProjectLevel>
+                <ProjectTitle>1. Todo List App</ProjectTitle>
+              </ProjectHeader>
+              <ProjectBody>
+                <ProjectDescription>
+                  Une application de gestion de tâches avec toutes les fonctionnalités de base.
+                </ProjectDescription>
+
+                <FeaturesSection>
+                  <FeaturesTitle>✨ Fonctionnalités :</FeaturesTitle>
+                  <FeaturesList>
+                    <li>Ajouter, modifier, supprimer des tâches</li>
+                    <li>Marquer comme complétées</li>
+                    <li>Filtrer (Toutes, Actives, Complétées)</li>
+                    <li>Persistance avec LocalStorage</li>
+                    <li>Compteur de tâches restantes</li>
+                  </FeaturesList>
+                </FeaturesSection>
+
+                <TechStack>
+                  <TechTitle>🛠️ Technologies :</TechTitle>
+                  React + TypeScript + Tailwind CSS
+                </TechStack>
+
+                <LearningPoints>
+                  <LearningTitle>📚 Ce que vous apprendrez :</LearningTitle>
+                  • useState pour gérer l'état<br/>
+                  • useEffect pour le LocalStorage<br/>
+                  • Rendu conditionnel<br/>
+                  • Gestion d'événements<br/>
+                  • Array methods (map, filter)
+                </LearningPoints>
+
+                <EstimatedTime>⏱️ Durée estimée : 4-6 heures</EstimatedTime>
+              </ProjectBody>
+            </PracticalProject>
+
+            {/* Projet 2 */}
+            <PracticalProject>
+              <ProjectHeader $color="#2196F3">
+                <ProjectLevel>Niveau Débutant/Intermédiaire</ProjectLevel>
+                <ProjectTitle>2. Weather App</ProjectTitle>
+              </ProjectHeader>
+              <ProjectBody>
+                <ProjectDescription>
+                  Application météo utilisant une API externe pour afficher les prévisions.
+                </ProjectDescription>
+
+                <FeaturesSection>
+                  <FeaturesTitle>✨ Fonctionnalités :</FeaturesTitle>
+                  <FeaturesList>
+                    <li>Recherche de ville</li>
+                    <li>Affichage météo actuelle (temp, humidité, vent)</li>
+                    <li>Prévisions sur 5 jours</li>
+                    <li>Icônes météo dynamiques</li>
+                    <li>Géolocalisation automatique</li>
+                    <li>Favoris de villes</li>
+                  </FeaturesList>
+                </FeaturesSection>
+
+                <TechStack>
+                  <TechTitle>🛠️ Technologies :</TechTitle>
+                  React + TypeScript + Tailwind + OpenWeatherMap API
+                </TechStack>
+
+                <LearningPoints>
+                  <LearningTitle>📚 Ce que vous apprendrez :</LearningTitle>
+                  • Appels API avec fetch<br/>
+                  • Gestion d'erreurs async<br/>
+                  • Loading states<br/>
+                  • Geolocation API<br/>
+                  • useEffect pour API calls<br/>
+                  • Environment variables
+                </LearningPoints>
+
+                <CodeSnippet>
+                  <code>{`// Exemple d'appel API
+const fetchWeather = async (city: string) => {
+  const API_KEY = import.meta.env.VITE_WEATHER_API_KEY
+  const url = \`https://api.openweathermap.org/data/2.5/weather?q=\${city}&appid=\${API_KEY}\`
+  const response = await fetch(url)
+  const data = await response.json()
+  return data
+}`}</code>
+                </CodeSnippet>
+
+                <EstimatedTime>⏱️ Durée estimée : 8-10 heures</EstimatedTime>
+              </ProjectBody>
+            </PracticalProject>
+
+            {/* Projet 3 */}
+            <PracticalProject>
+              <ProjectHeader $color="#FF9800">
+                <ProjectLevel>Niveau Intermédiaire</ProjectLevel>
+                <ProjectTitle>3. E-Commerce Product Page</ProjectTitle>
+              </ProjectHeader>
+              <ProjectBody>
+                <ProjectDescription>
+                  Page produit complète avec panier et gestion de stock.
+                </ProjectDescription>
+
+                <FeaturesSection>
+                  <FeaturesTitle>✨ Fonctionnalités :</FeaturesTitle>
+                  <FeaturesList>
+                    <li>Galerie d'images avec zoom</li>
+                    <li>Sélection de variantes (taille, couleur)</li>
+                    <li>Ajout au panier avec quantité</li>
+                    <li>Calcul total avec taxes</li>
+                    <li>Gestion du stock en temps réel</li>
+                    <li>Reviews et notation</li>
+                    <li>Produits similaires</li>
+                  </FeaturesList>
+                </FeaturesSection>
+
+                <TechStack>
+                  <TechTitle>🛠️ Technologies :</TechTitle>
+                  React + TypeScript + Tailwind + Context API + Supabase
+                </TechStack>
+
+                <LearningPoints>
+                  <LearningTitle>📚 Ce que vous apprendrez :</LearningTitle>
+                  • Context API pour le panier global<br/>
+                  • Custom hooks (useCart)<br/>
+                  • Supabase pour la base de données<br/>
+                  • Real-time subscriptions<br/>
+                  • Optimistic UI updates<br/>
+                  • Formulaires complexes
+                </LearningPoints>
+
+                <CodeSnippet>
+                  <code>{`// Hook personnalisé pour le panier
+function useCart() {
+  const [cart, setCart] = useState<CartItem[]>([])
+
+  const addToCart = (product: Product, quantity: number) => {
+    setCart(prev => {
+      const existing = prev.find(item => item.id === product.id)
+      if (existing) {
+        return prev.map(item =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        )
+      }
+      return [...prev, { ...product, quantity }]
+    })
+  }
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+
+  return { cart, addToCart, total }
+}`}</code>
+                </CodeSnippet>
+
+                <EstimatedTime>⏱️ Durée estimée : 12-15 heures</EstimatedTime>
+              </ProjectBody>
+            </PracticalProject>
+
+            {/* Projet 4 */}
+            <PracticalProject>
+              <ProjectHeader $color="#9C27B0">
+                <ProjectLevel>Niveau Intermédiaire/Avancé</ProjectLevel>
+                <ProjectTitle>4. Social Media Dashboard</ProjectTitle>
+              </ProjectHeader>
+              <ProjectBody>
+                <ProjectDescription>
+                  Tableau de bord complet avec authentification et données en temps réel.
+                </ProjectDescription>
+
+                <FeaturesSection>
+                  <FeaturesTitle>✨ Fonctionnalités :</FeaturesTitle>
+                  <FeaturesList>
+                    <li>Authentification (email + OAuth)</li>
+                    <li>Profil utilisateur éditable</li>
+                    <li>Créer, modifier, supprimer des posts</li>
+                    <li>Like et commentaires</li>
+                    <li>Feed en temps réel</li>
+                    <li>Upload d'images</li>
+                    <li>Notifications push</li>
+                    <li>Recherche d'utilisateurs</li>
+                    <li>Dark mode</li>
+                  </FeaturesList>
+                </FeaturesSection>
+
+                <TechStack>
+                  <TechTitle>🛠️ Technologies :</TechTitle>
+                  React + TypeScript + Tailwind + Supabase + React Router
+                </TechStack>
+
+                <LearningPoints>
+                  <LearningTitle>📚 Ce que vous apprendrez :</LearningTitle>
+                  • Supabase Auth (email, Google, GitHub)<br/>
+                  • Protected routes<br/>
+                  • Real-time subscriptions<br/>
+                  • File upload avec Supabase Storage<br/>
+                  • Row Level Security<br/>
+                  • Pagination infinie<br/>
+                  • Optimistic updates<br/>
+                  • Dark mode avec Tailwind
+                </LearningPoints>
+
+                <CodeSnippet>
+                  <code>{`// Real-time posts subscription
+useEffect(() => {
+  const channel = supabase
+    .channel('posts')
+    .on('postgres_changes', {
+      event: '*',
+      schema: 'public',
+      table: 'posts'
+    }, (payload) => {
+      if (payload.eventType === 'INSERT') {
+        setPosts(prev => [payload.new as Post, ...prev])
+      }
+    })
+    .subscribe()
+
+  return () => { channel.unsubscribe() }
+}, [])`}</code>
+                </CodeSnippet>
+
+                <EstimatedTime>⏱️ Durée estimée : 20-25 heures</EstimatedTime>
+              </ProjectBody>
+            </PracticalProject>
+
+            {/* Projet 5 */}
+            <PracticalProject>
+              <ProjectHeader $color="#F44336">
+                <ProjectLevel>Niveau Avancé</ProjectLevel>
+                <ProjectTitle>5. Full-Stack Task Management SaaS</ProjectTitle>
+              </ProjectHeader>
+              <ProjectBody>
+                <ProjectDescription>
+                  Application SaaS complète avec équipes, projets et collaboration en temps réel.
+                </ProjectDescription>
+
+                <FeaturesSection>
+                  <FeaturesTitle>✨ Fonctionnalités :</FeaturesTitle>
+                  <FeaturesList>
+                    <li>Multi-tenancy (équipes/organisations)</li>
+                    <li>Rôles et permissions (Admin, Member, Guest)</li>
+                    <li>Projets et sous-tâches illimitées</li>
+                    <li>Kanban board (drag & drop)</li>
+                    <li>Assignation de tâches</li>
+                    <li>Timeline et Gantt chart</li>
+                    <li>Commentaires et mentions (@user)</li>
+                    <li>Fichiers joints</li>
+                    <li>Notifications email</li>
+                    <li>Recherche full-text</li>
+                    <li>Analytics et rapports</li>
+                    <li>Export PDF/Excel</li>
+                    <li>Webhooks pour intégrations</li>
+                  </FeaturesList>
+                </FeaturesSection>
+
+                <TechStack>
+                  <TechTitle>🛠️ Technologies :</TechTitle>
+                  <strong>Frontend:</strong> React + TypeScript + Tailwind + Zustand + React Router + React DnD<br/>
+                  <strong>Backend:</strong> Node.js + Express + MongoDB + JWT + Socket.io<br/>
+                  <strong>Déploiement:</strong> Vercel (Frontend) + Railway (Backend) + MongoDB Atlas
+                </TechStack>
+
+                <LearningPoints>
+                  <LearningTitle>📚 Ce que vous apprendrez :</LearningTitle>
+                  • Architecture full-stack complète<br/>
+                  • State management avec Zustand<br/>
+                  • Drag & drop avec React DnD<br/>
+                  • WebSockets (Socket.io)<br/>
+                  • Pagination côté serveur<br/>
+                  • Recherche full-text MongoDB<br/>
+                  • RBAC (Role-Based Access Control)<br/>
+                  • Email templates (Nodemailer)<br/>
+                  • File upload multi-providers<br/>
+                  • Rate limiting et sécurité<br/>
+                  • Tests (Jest, React Testing Library)<br/>
+                  • CI/CD avec GitHub Actions
+                </LearningPoints>
+
+                <ArchitectureDiagram>
+                  <code>{`📱 Frontend (React)
+    ↓ HTTP/WebSocket
+⚙️  Backend API (Node.js/Express)
+    ↓ Mongoose
+🗄️  MongoDB Atlas
+    ↓ Triggers
+📧 Email Service (Nodemailer)
+
+Flux de données :
+1. User action → API request
+2. Backend validation + auth
+3. Database operation
+4. Real-time broadcast (Socket.io)
+5. UI update (optimistic + confirmation)`}</code>
+                </ArchitectureDiagram>
+
+                <CodeSnippet>
+                  <code>{`// Exemple : WebSocket pour collaboration temps réel
+// Backend
+io.on('connection', (socket) => {
+  socket.on('join-project', (projectId) => {
+    socket.join(projectId)
+  })
+
+  socket.on('task-updated', (data) => {
+    io.to(data.projectId).emit('task-changed', data.task)
+  })
+})
+
+// Frontend
+socket.on('task-changed', (task) => {
+  updateTaskInStore(task)
+  showNotification(\`\${task.updatedBy} a modifié une tâche\`)
+})`}</code>
+                </CodeSnippet>
+
+                <EstimatedTime>⏱️ Durée estimée : 40-60 heures</EstimatedTime>
+
+                <DeploymentGuide>
+                  <h4>🚀 Guide de Déploiement :</h4>
+                  <ol>
+                    <li><strong>Frontend (Vercel)</strong>: Push sur GitHub → Import dans Vercel → Auto-deploy</li>
+                    <li><strong>Backend (Railway)</strong>: Connect GitHub → Configure env vars → Deploy</li>
+                    <li><strong>Database (MongoDB Atlas)</strong>: Créer cluster → Whitelist IPs → Connection string</li>
+                    <li><strong>Domain</strong>: Configurer DNS → SSL automatique</li>
+                  </ol>
+                </DeploymentGuide>
+              </ProjectBody>
+            </PracticalProject>
+          </ProjectsGrid>
+
+          <ProgressionBox>
+            <ProgressionTitle>🎯 Progression Recommandée</ProgressionTitle>
+            <ProgressionText>
+              <strong>Semaine 1-2 :</strong> Projet 1 (Todo List) + révisions des bases<br/>
+              <strong>Semaine 3-4 :</strong> Projet 2 (Weather App) + apprentissage API<br/>
+              <strong>Semaine 5-7 :</strong> Projet 3 (E-Commerce) + Supabase<br/>
+              <strong>Semaine 8-11 :</strong> Projet 4 (Social Dashboard) + features avancées<br/>
+              <strong>Semaine 12-16 :</strong> Projet 5 (SaaS) + déploiement production<br/><br/>
+
+              <strong>💡 Conseil :</strong> Ne passez au projet suivant que lorsque vous êtes à l'aise avec le précédent.
+              Ajoutez vos propres fonctionnalités pour personnaliser chaque projet !
+            </ProgressionText>
+          </ProgressionBox>
+        </Container>
+      </Section>
+
+      {/* CTA Section */}
+      <CTASection>
+        <CTAContent>
+          <CTATitle>🎓 Prêt à Devenir Développeur Full-Stack ?</CTATitle>
+          <CTAText>
+            Rejoignez notre formation et créez des applications web modernes en quelques semaines !
+          </CTAText>
+          <CTAButton href="/formations">Voir toutes les formations</CTAButton>
+        </CTAContent>
+      </CTASection>
+    </PageWrapper>
+  );
+}
+
+// Styled Components (suite...)
+const PageWrapper = styled.div`
+  min-height: 100vh;
+  background: white;
+`;
+
+const Header = styled.header`
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+`;
+
+const HeaderContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const BackButton = styled.a`
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid white;
+  border-radius: 8px;
+  transition: all 0.3s;
+
+  &:hover {
+    background: white;
+    color: #667eea;
+  }
+`;
+
+const HeaderTitle = styled.h1`
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+const HeaderSubtitle = styled.p`
+  font-size: 1.25rem;
+  opacity: 0.9;
+`;
+
+const Section = styled.section<{ $bgColor?: string }>`
+  padding: 4rem 2rem;
+  background: ${props => props.$bgColor || 'white'};
+`;
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #2d3748;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+`;
+
+const IntroGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+`;
+
+const IntroCard = styled.div`
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+`;
+
+const IntroIcon = styled.div`
+  font-size: 3rem;
+  margin-bottom: 1rem;
+`;
+
+const IntroTitle = styled.h3`
+  font-size: 1.2rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+`;
+
+const IntroText = styled.p`
+  color: #718096;
+  font-size: 0.9rem;
+`;
+
+const SubSection = styled.div`
+  margin-bottom: 4rem;
+`;
+
+const SubTitle = styled.h3`
+  font-size: 2rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+`;
+
+const Description = styled.p`
+  font-size: 1.1rem;
+  color: #4a5568;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+`;
+
+const CodeExample = styled.div`
+  background: #1a202c;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+`;
+
+const CodeTitle = styled.div`
+  color: #48bb78;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+`;
+
+const CodeBlock = styled.pre`
+  color: #e2e8f0;
+  font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+`;
+
+const CodeExplanation = styled.div`
+  color: #cbd5e0;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #4a5568;
+  line-height: 1.8;
+`;
+
+const KeyConcepts = styled.div`
+  background: #2d3748;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  line-height: 1.8;
+  font-size: 0.9rem;
+`;
+
+const HooksGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+`;
+
+const HookCard = styled.div`
+  background: white;
+  border-left: 4px solid #667eea;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+`;
+
+const HookName = styled.h4`
+  color: #667eea;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+`;
+
+const HookDescription = styled.p`
+  color: #4a5568;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+`;
+
+const HookCodeBlock = styled.pre`
+  background: #f7fafc;
+  padding: 1rem;
+  border-radius: 6px;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  color: #2d3748;
+`;
+
+const BenefitsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+`;
+
+const BenefitCard = styled.div`
+  text-align: center;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+`;
+
+const BenefitIcon = styled.div`
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+`;
+
+const BenefitTitle = styled.h4`
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+`;
+
+const BenefitText = styled.p`
+  color: #718096;
+  font-size: 0.9rem;
+`;
+
+const TailwindComparison = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const ComparisonColumn = styled.div``;
+
+const ComparisonTitle = styled.h4`
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #2d3748;
+`;
+
+const TailwindGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+`;
+
+const TailwindCategory = styled.div`
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+`;
+
+const CategoryTitle = styled.h4`
+  color: #667eea;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+`;
+
+const CategoryContent = styled.div`
+  color: #4a5568;
+  line-height: 2;
+  font-size: 0.9rem;
+
+  code {
+    background: #edf2f7;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: #667eea;
+    font-size: 0.85rem;
+  }
+`;
+
+const TabContainer = styled.div``;
+
+const TabButtons = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e2e8f0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const TabButton = styled.button<{ $active: boolean }>`
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: ${props => props.$active ? '#667eea' : 'transparent'};
+  color: ${props => props.$active ? 'white' : '#4a5568'};
+  border: none;
+  border-bottom: 3px solid ${props => props.$active ? '#667eea' : 'transparent'};
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background: ${props => props.$active ? '#5568d3' : '#f7fafc'};
+  }
+`;
+
+const TabContent = styled.div`
+  animation: fadeIn 0.3s;
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+`;
+
+const ComparisonTable = styled.div`
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin-bottom: 3rem;
+`;
+
+const ComparisonRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+
+  &:first-child {
+    background: #667eea;
+    color: white;
+    font-weight: 600;
+  }
+
+  &:hover:not(:first-child) {
+    background: #f7fafc;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const ComparisonHeader = styled.div`
+  font-weight: 600;
+`;
+
+const ComparisonCell = styled.div<{ $highlight?: string }>`
+  padding: 0.5rem;
+  background: ${props =>
+    props.$highlight === 'green' ? '#f0fff4' :
+    props.$highlight === 'red' ? '#fff5f5' :
+    'transparent'};
+  border-radius: 6px;
+`;
+
+const RecommendationBox = styled.div`
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 3rem;
+  border-radius: 12px;
+  color: white;
+`;
+
+const RecommendationTitle = styled.h3`
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
+const RecommendationGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const RecommendationCard = styled.div`
+  background: rgba(255,255,255,0.1);
+  padding: 2rem;
+  border-radius: 10px;
+
+  h4 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+
+      &:before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: #48bb78;
+        font-weight: bold;
+      }
+    }
+  }
+`;
+
+const FinalProjectSteps = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+const ProjectStep = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: translateX(10px);
+  }
+`;
+
+const StepBadge = styled.div`
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex-shrink: 0;
+`;
+
+const StepContent = styled.div`
+  flex: 1;
+`;
+
+const StepTitle = styled.h4`
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+`;
+
+const StepDescription = styled.p`
+  color: #4a5568;
+  line-height: 1.8;
+`;
+
+const CTASection = styled.section`
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
+`;
+
+const CTAContent = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+`;
+
+const CTATitle = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+`;
+
+const CTAText = styled.p`
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+`;
+
+const CTAButton = styled.a`
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #667eea;
+  background: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+// Installation Section Styles
+const InstallStep = styled.div`
+  margin-bottom: 3rem;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+`;
+
+const InstallStepNumber = styled.div`
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex-shrink: 0;
+`;
+
+const InstallStepContent = styled.div`
+  flex: 1;
+`;
+
+const InstallStepTitle = styled.h4`
+  font-size: 1.3rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+`;
+
+const InstallStepDescription = styled.p`
+  color: #4a5568;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+`;
+
+// Practical Projects Styles
+const ProjectsGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+`;
+
+const PracticalProject = styled.div`
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+  }
+`;
+
+const ProjectHeader = styled.div<{ $color: string }>`
+  background: ${props => props.$color};
+  color: white;
+  padding: 2rem;
+`;
+
+const ProjectLevel = styled.div`
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+`;
+
+const ProjectTitle = styled.h3`
+  font-size: 2rem;
+  margin: 0;
+`;
+
+const ProjectBody = styled.div`
+  padding: 2rem;
+`;
+
+const ProjectDescription = styled.p`
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+`;
+
+const FeaturesSection = styled.div`
+  margin-bottom: 2rem;
+`;
+
+const FeaturesTitle = styled.h4`
+  color: #2d3748;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+`;
+
+const FeaturesList = styled.ul`
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #4a5568;
+
+    &:before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #48bb78;
+      font-weight: bold;
+    }
+  }
+`;
+
+const TechStack = styled.div`
+  background: #f7fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  color: #2d3748;
+  line-height: 1.8;
+`;
+
+const TechTitle = styled.div`
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #667eea;
+`;
+
+const LearningPoints = styled.div`
+  background: #edf2f7;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  color: #2d3748;
+  line-height: 1.8;
+`;
+
+const LearningTitle = styled.div`
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #2d3748;
+`;
+
+const CodeSnippet = styled.div`
+  background: #1a202c;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  overflow-x: auto;
+
+  code {
+    color: #e2e8f0;
+    font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+`;
+
+const ArchitectureDiagram = styled.div`
+  background: #f7fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  border-left: 4px solid #667eea;
+
+  code {
+    color: #2d3748;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    white-space: pre;
+  }
+`;
+
+const EstimatedTime = styled.div`
+  display: inline-block;
+  background: #667eea;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  margin-top: 1rem;
+`;
+
+const DeploymentGuide = styled.div`
+  background: #f0fff4;
+  border: 2px solid #48bb78;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+
+  h4 {
+    color: #22543d;
+    margin-bottom: 1rem;
+  }
+
+  ol {
+    margin: 0;
+    padding-left: 1.5rem;
+    color: #2d3748;
+
+    li {
+      margin: 0.5rem 0;
+      line-height: 1.6;
+    }
+  }
+`;
+
+const ProgressionBox = styled.div`
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 3rem;
+  border-radius: 16px;
+  color: white;
+  margin-top: 3rem;
+`;
+
+const ProgressionTitle = styled.h3`
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+`;
+
+const ProgressionText = styled.div`
+  font-size: 1.1rem;
+  line-height: 2;
+
+  strong {
+    display: inline-block;
+    min-width: 120px;
+  }
+`;

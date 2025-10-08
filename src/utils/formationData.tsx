@@ -1,17 +1,24 @@
-import { FaGraduationCap, FaBookOpen, FaLaptopCode, FaMobile } from "react-icons/fa";
+import { FaGraduationCap, FaBookOpen, FaLaptopCode, FaMobile, FaBrain } from "react-icons/fa";
 
 // Données des formations
 export const formations = [
   {
     icon: FaGraduationCap,
     title: "Développement Web Moderne",
-    text: "Maîtrisez React, Next.js, TypeScript et les technologies web les plus demandées. Créez des applications web performantes et évolutives."
+    text: "Maîtrisez React, Next.js, TypeScript et les technologies web les plus demandées. Créez des applications web performantes et évolutives.",
+    navigateUrl: "/formations/web-dev"
   },
   {
     icon: FaMobile,
     title: "Développement Mobile Cross-Platform",
     text: "Développez des applications mobiles avec React Native et Expo. Une formation complète pour créer des apps iOS et Android.",
     navigateUrl: "/formations/mobile"
+  },
+  {
+    icon: FaBrain,
+    title: "Machine Learning & IA",
+    text: "Découvrez le Machine Learning de manière simple et intuitive. Apprenez les algorithmes, concepts clés et créez vos premiers modèles d'IA.",
+    navigateUrl: "/formations/machine-learning"
   },
   {
     icon: FaBookOpen,
