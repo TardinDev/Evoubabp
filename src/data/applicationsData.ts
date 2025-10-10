@@ -71,5 +71,14 @@ export const applicationsData: ApplicationsData = {
       category: "E-commerce",
       year: "2024"
     },
+    {
+      title: "Germe Invest",
+      description: "Cabinet d’investissement offrant des services de conseil financier, de gestion de portefeuille et d’accompagnement des projets d’entrepreneuriat en Afrique.",
+      image: "/imagesAppsMobile/germeinvest.png",
+      url: "https://germe-invest.com/",
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+      category: "Finance & Investissement",
+      year: "2025"
+    },
   ],
 };
