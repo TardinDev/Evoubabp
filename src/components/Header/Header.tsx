@@ -97,16 +97,6 @@ const HeaderStyles = styled.div`
     justify-content: space-around;
     align-items: center;
 
-    /* @media (max-width: 768px) {
-      flex-direction: column;
-      position: absolute;
-      top: 70px;
-      right: ${props => props.menuOpened ? '0' : '-100%'};
-      width: 100%;
-      background-color: #F8F7F1;
-      transition: right 0.3s ease;
-    } */
-
     @media (max-width:640px), (max-width:640px) {
          position :absolute;
          list-style:none;

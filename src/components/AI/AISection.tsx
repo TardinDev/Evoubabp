@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
-import { FaBrain, FaRobot, FaChartLine, FaLightbulb } from 'react-icons/fa';
-import { SiOpenai, SiTensorflow } from 'react-icons/si';
+import { FaBrain, FaRobot, FaChartLine, FaLightbulb, FaMicrochip, FaNetworkWired } from 'react-icons/fa';
 import AnimatedBackground from './AnimatedBackground';
 
 interface AISectionProps {
@@ -49,8 +48,9 @@ const AISection: React.FC<AISectionProps> = ({ id }) => {
         <motion.div variants={fadeIn('up', 'tween', 0.2, 1)}>
           <SectionHeader>
             <IconContainer>
-              <SiOpenai size={40} />
-              <SiTensorflow size={40} />
+              <FaBrain size={40} />
+              <FaMicrochip size={40} />
+              <FaNetworkWired size={40} />
             </IconContainer>
             <Title>L'IA au Cœur de Nos Solutions</Title>
             <Subtitle>

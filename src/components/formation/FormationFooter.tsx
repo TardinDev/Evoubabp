@@ -167,7 +167,7 @@ const SocialLinks = styled.div`
   }
 `;
 
-const SocialLink = styled.a`
+const SocialLink = styled.a<{ $platform?: 'youtube' | 'facebook' | 'linkedin' | 'github' }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -180,28 +180,28 @@ const SocialLink = styled.a`
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  
+
   &:hover {
     transform: translateY(-3px) scale(1.1);
-    
+
     ${props => props.$platform === 'youtube' && `
       background: #FF0000;
       box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
       color: white;
     `}
-    
+
     ${props => props.$platform === 'facebook' && `
       background: #1877F2;
       box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
       color: white;
     `}
-    
+
     ${props => props.$platform === 'linkedin' && `
       background: #0A66C2;
       box-shadow: 0 8px 25px rgba(10, 102, 194, 0.4);
       color: white;
     `}
-    
+
     ${props => props.$platform === 'github' && `
       background: #333333;
       box-shadow: 0 8px 25px rgba(51, 51, 51, 0.4);

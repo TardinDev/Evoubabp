@@ -101,19 +101,19 @@ export default function UnderHeader() {
           <div className="vercelAndGithub">
             <div className="certificat">
               <IoLogoVercel size={55} color="#000" className="icon-certificat" />
-              <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="link-certificat"> <span href="vercel.com">Vercel</span></a>
+              <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="link-certificat"> <span>Vercel</span></a>
             </div>
 
             <div className="certificat">
             <div style={{ height: "2rem", width: "3rem", }}>
-              <Lottie 
+              <Lottie
                  animationData={gitHubAnimation}
                  loop
                  autoplay
                />
             </div>
-          <a href="https://github.com/TardinDev" target="_blank" rel="noopener noreferrer" className="link-certificat"> <span href="github.com">GitHub</span> </a> 
-            </div> 
+          <a href="https://github.com/TardinDev" target="_blank" rel="noopener noreferrer" className="link-certificat"> <span>GitHub</span> </a>
+            </div>
           </div>
    
          </motion.div>

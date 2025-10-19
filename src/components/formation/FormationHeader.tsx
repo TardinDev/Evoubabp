@@ -171,7 +171,7 @@ const NavLink = styled.button`
   }
 `;
 
-const MobileMenuButton = styled.button`
+const MobileMenuButton = styled.button<{ $isOpen?: boolean }>`
   display: none;
   flex-direction: column;
   gap: 4px;
@@ -179,33 +179,33 @@ const MobileMenuButton = styled.button`
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  
+
   @media (max-width: 768px) {
     display: flex;
   }
-  
+
   span {
     width: 25px;
     height: 3px;
     background: white;
     transition: all 0.3s ease;
     border-radius: 2px;
-    
+
     &:nth-child(1) {
       transform: ${props => props.$isOpen ? 'rotate(45deg) translate(6px, 6px)' : 'none'};
     }
-    
+
     &:nth-child(2) {
       opacity: ${props => props.$isOpen ? '0' : '1'};
     }
-    
+
     &:nth-child(3) {
       transform: ${props => props.$isOpen ? 'rotate(-45deg) translate(6px, -6px)' : 'none'};
     }
   }
 `;
 
-const MobileNav = styled.nav`
+const MobileNav = styled.nav<{ $isOpen?: boolean }>`
   position: absolute;
   top: 100%;
   left: 0;
@@ -219,7 +219,7 @@ const MobileNav = styled.nav`
   z-index: 9;
   padding: 1rem 0;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  
+
   @media (min-width: 769px) {
     display: none;
   }

@@ -31,7 +31,7 @@ export const useCountdown = () => {
       nextSession.setDate(nextSession.getDate() + 7);
     }
 
-    const diff = nextSession - now;
+    const diff = nextSession.getTime() - now.getTime();
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const mins = Math.floor((diff / (1000 * 60)) % 60);

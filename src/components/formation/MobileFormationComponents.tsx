@@ -264,7 +264,7 @@ export const TabList = styled.div`
   }
 `;
 
-export const Tab = styled.button`
+export const Tab = styled.button<{ active?: boolean }>`
   background: ${props => props.active ? '#667eea' : 'transparent'};
   color: ${props => props.active ? 'white' : '#64748b'};
   border: 1px solid ${props => props.active ? '#667eea' : '#e2e8f0'};
@@ -274,11 +274,11 @@ export const Tab = styled.button`
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
-  
+
   &:hover {
     background: ${props => props.active ? '#667eea' : '#f8fafc'};
   }
-  
+
   @media (max-width: 768px) {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
@@ -648,7 +648,7 @@ export const SectionList = styled.div`
   gap: 0.5rem;
 `;
 
-export const SectionItem = styled.button`
+export const SectionItem = styled.button<{ active?: boolean }>`
   background: ${props => props.active ? '#3b82f6' : '#0f172a'};
   color: ${props => props.active ? 'white' : '#e2e8f0'};
   border: 1px solid ${props => props.active ? '#3b82f6' : '#475569'};
@@ -658,7 +658,7 @@ export const SectionItem = styled.button`
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: 500;
-  
+
   &:hover {
     background: ${props => props.active ? '#2563eb' : '#334155'};
     border-color: #3b82f6;
@@ -801,7 +801,7 @@ export const ContentItem = styled.div`
   }
 `;
 
-export const FinalCodeButton = styled.button`
+export const FinalCodeButton = styled.button<{ active?: boolean }>`
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -818,12 +818,12 @@ export const FinalCodeButton = styled.button`
   align-items: center;
   gap: 0.5rem;
   z-index: 10;
-  
+
   &:hover {
     background: ${props => props.active ? '#0891b2' : '#334155'};
     transform: translateY(-1px);
   }
-  
+
   svg {
     font-size: 0.875rem;
   }

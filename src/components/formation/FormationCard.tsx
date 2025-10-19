@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { FormationCardProps } from '../../shared/types';
 
+interface ColorScheme {
+  primary: string;
+  secondary: string;
+  accent: string;
+}
+
 export default function FormationCard({ icon: Icon, title, text, countdown, index, navigateUrl }: FormationCardProps) {
   const navigate = useNavigate();
   
@@ -95,7 +101,7 @@ FormationCard.propTypes = {
   navigateUrl: PropTypes.string
 };
 
-const CardWrapper = styled(motion.div)`
+const CardWrapper = styled(motion.div)<{ colorScheme: ColorScheme; clickable?: boolean }>`
   position: relative;
   background: white;
   border-radius: 20px;
@@ -105,11 +111,11 @@ const CardWrapper = styled(motion.div)`
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
-  
+
   &:hover {
     box-shadow: ${props => props.clickable ? '0 15px 50px rgba(0, 0, 0, 0.15)' : '0 10px 40px rgba(0, 0, 0, 0.1)'};
   }
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -122,14 +128,14 @@ const CardWrapper = styled(motion.div)`
   }
 `;
 
-const CardBackground = styled.div`
+const CardBackground = styled.div<{ colorScheme: ColorScheme }>`
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, 
-    ${props => props.colorScheme.primary}15, 
+  background: linear-gradient(135deg,
+    ${props => props.colorScheme.primary}15,
     ${props => props.colorScheme.secondary}10
   );
   z-index: 1;
@@ -145,7 +151,7 @@ const CardContent = styled.div`
   min-height: 350px;
 `;
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div<{ colorScheme: ColorScheme }>`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -159,7 +165,7 @@ const IconWrapper = styled.div`
   box-shadow: 0 8px 25px ${props => props.colorScheme.primary}40;
 `;
 
-const IconGlow = styled.div`
+const IconGlow = styled.div<{ colorScheme: ColorScheme }>`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -231,7 +237,7 @@ const CardFooter = styled.div`
   margin-top: auto;
 `;
 
-const EnrollButton = styled.button`
+const EnrollButton = styled.button<{ colorScheme: ColorScheme }>`
   background: linear-gradient(135deg, ${props => props.colorScheme.primary}, ${props => props.colorScheme.secondary});
   border: none;
   padding: 0.75rem 1.5rem;
@@ -244,7 +250,7 @@ const EnrollButton = styled.button`
   align-items: center;
   gap: 0.5rem;
   box-shadow: 0 4px 15px ${props => props.colorScheme.primary}40;
-  
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px ${props => props.colorScheme.primary}60;
@@ -259,7 +265,7 @@ const ArrowIcon = styled.span`
   }
 `;
 
-const PriceTag = styled.div`
+const PriceTag = styled.div<{ colorScheme: ColorScheme }>`
   background: ${props => props.colorScheme.accent}20;
   color: ${props => props.colorScheme.accent};
   padding: 0.5rem 1rem;
@@ -279,19 +285,19 @@ const FloatingElements = styled.div`
   z-index: 1;
 `;
 
-const FloatingDot = styled.div`
+const FloatingDot = styled.div<{ colorScheme: ColorScheme }>`
   position: absolute;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: ${props => props.colorScheme.accent}60;
   animation: float 3s ease-in-out infinite;
-  
+
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
   }
-  
+
   &:nth-child(2) {
     animation-delay: 1.5s;
   }

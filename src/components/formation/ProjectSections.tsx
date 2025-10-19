@@ -173,12 +173,14 @@ export const FreeProjectSection = ({ project, courseData }) => (
               cursor: 'pointer'
             }}
             onMouseEnter={(e) => {
-              e.target.style.transform = 'translateY(-2px)';
-              e.target.style.boxShadow = '0 10px 25px rgba(59, 130, 246, 0.3)';
+              const target = e.target as HTMLElement;
+              target.style.transform = 'translateY(-2px)';
+              target.style.boxShadow = '0 10px 25px rgba(59, 130, 246, 0.3)';
             }}
             onMouseLeave={(e) => {
-              e.target.style.transform = 'translateY(0)';
-              e.target.style.boxShadow = 'none';
+              const target = e.target as HTMLElement;
+              target.style.transform = 'translateY(0)';
+              target.style.boxShadow = 'none';
             }}
           >
             📦 Télécharger les assets

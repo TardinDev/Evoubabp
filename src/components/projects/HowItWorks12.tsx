@@ -32,6 +32,7 @@ const contents = [
     icon: HiOutlineDesktopComputer,
     bg: "#4A90E2",
   },
+
 ];
 
 const ContentItem = ({ item, index }) => (
@@ -98,8 +99,8 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => (
 
 const Section = styled.section`
   padding: 2rem 0.5rem;
-  background-color: ${({ theme }) => (theme === "dark" ? "#0b1727" : "white")};
-  color: ${({ theme }) => (theme === "dark" ? "white" : "#27272a")};
+  background-color: white;
+  color: #27272a;
   position: relative;
   z-index: 1;
   margin-bottom: 0;
@@ -196,7 +197,7 @@ const ContentGridItem = styled.div`
   }
 `;
 
-const StyledContentItem = styled.div`
+const StyledContentItem = styled.div<{ bg: string; offset: boolean }>`
   background-color: ${({ bg }) => bg};
   display: flex;
   flex-direction: column;

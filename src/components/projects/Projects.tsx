@@ -177,7 +177,7 @@ const ServiceList = styled.ul`
   }
 `;
 
-const ServiceItem = styled.li`
+const ServiceItem = styled.li<{ active?: boolean }>`
   display: flex;
   align-items: center;
   background: ${({ active }) =>
@@ -194,7 +194,7 @@ const ServiceItem = styled.li`
   }
 `;
 
-const ServiceIcon = styled.span`
+const ServiceIcon = styled.span<{ color?: string }>`
   font-size: 2rem;
   margin-right: 1rem;
   color: ${({ color }) => color};

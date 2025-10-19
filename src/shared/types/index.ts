@@ -4,9 +4,9 @@ export interface FormationCardProps {
   icon: React.ComponentType<any>;
   title: string;
   text: string;
-  countdown: string;
+  countdown?: string;
   index: number;
-  navigateUrl: string;
+  navigateUrl?: string;
 }
 
 export interface ProjectData {
