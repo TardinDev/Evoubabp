@@ -73,12 +73,21 @@ export const applicationsData: ApplicationsData = {
     },
     {
       title: "Germe Invest",
-      description: "Cabinet d’investissement offrant des services de conseil financier, de gestion de portefeuille et d’accompagnement des projets d’entrepreneuriat en Afrique.",
+      description: "Cabinet d'investissement offrant des services de conseil financier, de gestion de portefeuille et d'accompagnement des projets d'entrepreneuriat en Afrique.",
       image: "/imagesAppsMobile/germeinvest.png",
       url: "https://germe-invest.com/",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
       category: "Finance & Investissement",
       year: "2025"
+    },
+    {
+      title: "KongossaDocs",
+      description: "Plateforme de gestion et de partage de documents en ligne, permettant une collaboration efficace et sécurisée entre équipes.",
+      image: "/imagesAppsMobile/kongossaDoc.png",
+      url: "",
+      technologies: ["React", "TypeScript", "Firebase", "Material-UI"],
+      category: "Productivité",
+      year: "2024"
     },
   ],
 };
