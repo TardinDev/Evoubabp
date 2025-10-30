@@ -54,6 +54,15 @@ export const applicationsData: ApplicationsData = {
       year: "2024"
     },
     {
+      title: "DreamQuest",
+      description: "Application innovante qui transforme vos rêves en réalité visuelle. Décrivez votre rêve à l'IA et elle le convertit en image, jeu interactif ou monde 3D immersif.",
+      image: "/imagesAppsMobile/dreamQuest.png",
+      url: "",
+      technologies: ["React", "TypeScript", "OpenAI", "Three.js"],
+      category: "IA & Créativité",
+      year: "2024"
+    },
+    {
       title: "Mintsa Services",
       description: "un site web pour particulier qui propose des services de consulting et administratif",
       image: "/imagesAppsMobile/mtzService.png",
