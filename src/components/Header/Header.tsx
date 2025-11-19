@@ -8,6 +8,7 @@ import { useState, useCallback } from "react";
 import useHeaderShadow from "../../hooks/useHeaderShadow";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { useActiveSectionContext } from "../../contexts/ActiveSectionContext";
 // Composant de menu extrait
 const Menu = ({ menuOpened }) => {
   return (
@@ -31,13 +32,14 @@ Menu.propTypes = {
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const headerShadow = useHeaderShadow();
+  const { activeColor } = useActiveSectionContext();
 
   const toggleMenu = useCallback(() => {
     setMenuOpened(prev => !prev);
   }, []);
 
   return (
-    <HeaderStyles>
+    <HeaderStyles backgroundColor={activeColor}>
       <motion.div
         initial="hidden"
         whileInView="show"
@@ -59,19 +61,19 @@ const Header = () => {
   );
 }
 
-const HeaderStyles = styled.div`
-  background-color: #F8F7F1;
+const HeaderStyles = styled.div<{ backgroundColor: string }>`
+  background-color: ${props => props.backgroundColor};
   padding: 1rem 2rem;
   z-index: 99;
   opacity: 1;
   transform: none;
   position: sticky;
   top: 0;
-  transition: all 300ms ease;
-  
+  transition: background-color 500ms ease, all 300ms ease;
+
 
   .container {
-    background-color: #F8F7F1; 
+    background-color: transparent;
     padding:0rem;
     display: flex;
     justify-content: space-between;

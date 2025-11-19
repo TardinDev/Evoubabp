@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800">
+  <rect width="400" height="800" fill="#FFFFFF"/>
+  
+  <!-- Avatar -->
+  <circle cx="200" cy="120" r="50" fill="#667eea"/>
+  <text x="200" y="135" text-anchor="middle" fill="#FFFFFF" font-family="Arial" font-size="40">👤</text>
+  
+  <!-- Username -->
+  <text x="200" y="200" text-anchor="middle" fill="#000000" font-family="Arial" font-size="20" font-weight="bold">@username</text>
+  
+  <!-- Stats -->
+  <text x="80" y="250" text-anchor="middle" fill="#000000" font-family="Arial" font-size="16" font-weight="bold">123</text>
+  <text x="80" y="270" text-anchor="middle" fill="#666666" font-family="Arial" font-size="12">Abonnements</text>
+  
+  <text x="200" y="250" text-anchor="middle" fill="#000000" font-family="Arial" font-size="16" font-weight="bold">12.5K</text>
+  <text x="200" y="270" text-anchor="middle" fill="#666666" font-family="Arial" font-size="12">Abonnés</text>
+  
+  <text x="320" y="250" text-anchor="middle" fill="#000000" font-family="Arial" font-size="16" font-weight="bold">1.2M</text>
+  <text x="320" y="270" text-anchor="middle" fill="#666666" font-family="Arial" font-size="12">J'aime</text>
+  
+  <!-- Follow button -->
+  <rect x="130" y="290" width="140" height="35" rx="5" fill="#FF0050"/>
+  <text x="200" y="313" text-anchor="middle" fill="#FFFFFF" font-family="Arial" font-size="14" font-weight="bold">S'abonner</text>
+  
+  <!-- Video grid -->
+  <rect x="20" y="360" width="115" height="180" rx="5" fill="#E0E0E0"/>
+  <rect x="142" y="360" width="115" height="180" rx="5" fill="#E0E0E0"/>
+  <rect x="265" y="360" width="115" height="180" rx="5" fill="#E0E0E0"/>
+  
+  <rect x="20" y="545" width="115" height="180" rx="5" fill="#E0E0E0"/>
+  <rect x="142" y="545" width="115" height="180" rx="5" fill="#E0E0E0"/>
+  <rect x="265" y="545" width="115" height="180" rx="5" fill="#E0E0E0"/>
+  
+  <text x="200" y="340" text-anchor="middle" fill="#666666" font-family="Arial" font-size="12">Grille de vidéos</text>
+</svg>

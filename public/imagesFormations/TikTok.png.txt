@@ -1,0 +1,7 @@
+Cette image principale TikTok.png peut être remplacée par une vraie image.
+En attendant, le projet TikTok utilisera la galerie de 4 screenshots SVG créés.
+
+Pour créer TikTok.png :
+- Format paysage recommandé : 1920x1080px
+- Montrer 3-4 écrans côte à côte de l'application
+- Format PNG, < 2MB

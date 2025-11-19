@@ -1083,4 +1083,117 @@ AdvancedFeaturesComponent.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired
   })).isRequired
-}; 
+};
+
+// === SCREENSHOT GALLERY COMPONENT ===
+export const ScreenshotGalleryComponent = ({ screenshots }) => (
+  <ScreenshotGallery>
+    <GalleryTitle>📱 Aperçu de l'application</GalleryTitle>
+    <ScreenshotGrid>
+      {screenshots.map((screenshot, index) => (
+        <ScreenshotCard
+          key={index}
+          as={motion.div}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          viewport={{ once: true }}
+        >
+          <ScreenshotImageWrapper>
+            <ScreenshotImage
+              src={screenshot.url}
+              alt={screenshot.title}
+              onError={(e) => {
+                e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="400" viewBox="0 0 200 400"%3E%3Crect width="200" height="400" fill="%23f0f0f0"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="16"%3E' + screenshot.title + '%3C/text%3E%3C/svg%3E';
+              }}
+            />
+          </ScreenshotImageWrapper>
+          <ScreenshotInfo>
+            <ScreenshotTitle>{screenshot.title}</ScreenshotTitle>
+            <ScreenshotDescription>{screenshot.description}</ScreenshotDescription>
+          </ScreenshotInfo>
+        </ScreenshotCard>
+      ))}
+    </ScreenshotGrid>
+  </ScreenshotGallery>
+);
+
+ScreenshotGalleryComponent.propTypes = {
+  screenshots: PropTypes.arrayOf(PropTypes.shape({
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired
+  })).isRequired
+};
+
+// Styled components for Screenshot Gallery
+const ScreenshotGallery = styled.div`
+  margin: 4rem 0;
+`;
+
+const GalleryTitle = styled.h3`
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
+const ScreenshotGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+`;
+
+const ScreenshotCard = styled.div`
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+  }
+`;
+
+const ScreenshotImageWrapper = styled.div`
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  overflow: hidden;
+  position: relative;
+`;
+
+const ScreenshotImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+`;
+
+const ScreenshotInfo = styled.div`
+  padding: 1.5rem;
+`;
+
+const ScreenshotTitle = styled.h4`
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+`;
+
+const ScreenshotDescription = styled.p`
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.5;
+`; 

@@ -11,7 +11,7 @@ import {
 } from "../components/formation/MobileFormationComponents";
 import { HeroSection, OverviewSection, CurriculumSectionComponent, CTASection } from "../components/formation/FormationSections";
 import { ProjectSectionComponent } from "../components/formation/ProjectSections";
-import { concepts, features, techStacks, modules, projects, tabs, runSportCourse } from "../utils/mobileFormationData";
+import { concepts, features, techStacks, modules, projects, tabs, runSportCourse, tiktokCourse } from "../utils/mobileFormationData";
 
 export default function MobileFormationPage() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -68,6 +68,21 @@ export default function MobileFormationPage() {
           </TabContent>
         );
 
+      case "tiktok":
+        return (
+          <TabContent
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <ProjectSectionComponent
+              project={projects.tiktok}
+              onPremiumClick={handlePremiumClick}
+              courseData={tiktokCourse}
+            />
+          </TabContent>
+        );
+
       case "project":
         return (
           <TabContent
@@ -75,7 +90,7 @@ export default function MobileFormationPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <ProjectSectionComponent 
+            <ProjectSectionComponent
               project={projects.runSport}
               onPremiumClick={handlePremiumClick}
               courseData={runSportCourse}

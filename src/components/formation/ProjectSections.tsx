@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { FaPlay, FaCode, FaVideo } from "react-icons/fa";
+import { FaPlay, FaCode, FaVideo, FaYoutube, FaTiktok } from "react-icons/fa";
 import {
   ProjectSection,
   SectionTitle,
@@ -25,7 +25,8 @@ import {
   MainContentTitle,
   LessonSection,
   ContentItem,
-  FinalCodeButton
+  FinalCodeButton,
+  ScreenshotGalleryComponent
 } from "./MobileFormationComponents";
 
 // Course Interactive Component
@@ -130,30 +131,53 @@ CourseInteractive.propTypes = {
 // Free Project Component (RunSport)
 export const FreeProjectSection = ({ project, courseData }) => (
   <ProjectSection>
-    <SectionTitle>{project.title}</SectionTitle>
+    <SectionTitle>
+      {project.icon === "tiktok" && (
+        <span style={{
+          marginRight: '0.5rem',
+          display: 'inline-flex',
+          alignItems: 'center'
+        }}>
+          <FaTiktok style={{
+            fontSize: '2rem',
+            background: 'linear-gradient(180deg, #00f2ea 0%, #ff0050 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }} />
+        </span>
+      )}
+      {project.title}
+    </SectionTitle>
     <ProjectDescription>
       <p>{project.description}</p>
     </ProjectDescription>
-    
+
     <ProjectImage>
       <img src={project.image} alt={project.alt} />
     </ProjectImage>
 
-    <TechStackComponent 
-      title="🛠️ Technologies utilisées" 
-      items={project.technologies} 
+    {project.screenshots && project.screenshots.length > 0 && (
+      <ScreenshotGalleryComponent screenshots={project.screenshots} />
+    )}
+
+    <TechStackComponent
+      title="🛠️ Technologies utilisées"
+      items={project.technologies}
     />
     
     {courseData && (
       <>
-        <div style={{ 
-          marginTop: '3rem', 
+        <div style={{
+          marginTop: '3rem',
           marginBottom: '2rem',
           display: 'flex',
+          gap: '1rem',
+          flexWrap: 'wrap',
           justifyContent: 'flex-start',
           alignItems: 'center'
         }}>
-          <a 
+          <a
             href="https://github.com/tardyDev/RunSport-Assets/archive/refs/heads/main.zip"
             target="_blank"
             rel="noopener noreferrer"
@@ -185,6 +209,41 @@ export const FreeProjectSection = ({ project, courseData }) => (
           >
             📦 Télécharger les assets
           </a>
+
+          {project.youtubeChannel && (
+            <a
+              href={project.youtubeChannel}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: 'linear-gradient(135deg, #FF0000 0%, #CC0000 100%)',
+                color: 'white',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '0.375rem',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '0.9rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                transition: 'all 0.3s ease',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLElement;
+                target.style.transform = 'translateY(-2px)';
+                target.style.boxShadow = '0 10px 25px rgba(255, 0, 0, 0.3)';
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLElement;
+                target.style.transform = 'translateY(0)';
+                target.style.boxShadow = 'none';
+              }}
+            >
+              <FaYoutube size={20} /> Suivre le live YouTube
+            </a>
+          )}
         </div>
         <CourseInteractive courseData={courseData} />
       </>
@@ -256,7 +315,14 @@ const projectPropType = PropTypes.shape({
   features: PropTypes.arrayOf(PropTypes.string),
   securityFeatures: PropTypes.arrayOf(PropTypes.string),
   isPremium: PropTypes.bool.isRequired,
-  isSmallImage: PropTypes.bool
+  isSmallImage: PropTypes.bool,
+  youtubeChannel: PropTypes.string,
+  icon: PropTypes.string,
+  screenshots: PropTypes.arrayOf(PropTypes.shape({
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired
+  }))
 });
 
 FreeProjectSection.propTypes = {

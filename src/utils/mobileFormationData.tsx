@@ -172,6 +172,1209 @@ export const modules = [
   }
 ];
 
+export const tiktokCourse = {
+  sections: [
+    {
+      id: "setup",
+      title: "Configuration du projet TikTok",
+      description: "Nous allons créer notre projet TikTok Clone avec Expo CLI et configurer toutes les dépendances nécessaires pour gérer les vidéos.",
+      videoUrl: "https://example.com/tiktok-setup-video.mp4",
+      duration: "20 min",
+      keyPoints: [
+        "Installation d'Expo CLI",
+        "Création du projet TypeScript",
+        "Installation des dépendances vidéo (Expo AV)",
+        "Configuration de Firebase Storage",
+        "Setup de React Native Reanimated"
+      ],
+      code: `// Installation d'Expo CLI
+npm install -g @expo/cli
+
+// Création du projet TikTok
+npx create-expo-app TikTokClone --template typescript
+
+// Navigation vers le dossier
+cd TikTokClone
+
+// Installation des dépendances essentielles
+npx expo install expo-av
+npx expo install expo-camera
+npx expo install expo-media-library
+npx expo install react-native-reanimated
+npx expo install react-native-gesture-handler
+
+// Installation de Firebase pour le stockage vidéo
+npm install firebase
+npm install @react-native-firebase/app
+npm install @react-native-firebase/storage`,
+      finalCode: `// Structure du projet final
+TikTokClone/
+├── app/
+│   ├── _layout.tsx
+│   ├── index.tsx (Feed principal)
+│   ├── upload.tsx (Upload vidéo)
+│   ├── profile/[id].tsx (Profil utilisateur)
+│   └── video/[id].tsx (Détails vidéo)
+├── components/
+│   ├── VideoPlayer.tsx
+│   ├── VideoCard.tsx
+│   ├── ActionButtons.tsx
+│   ├── CommentSheet.tsx
+│   └── ProfileHeader.tsx
+├── store/
+│   ├── videoStore.ts
+│   └── userStore.ts
+├── config/
+│   └── firebase.ts
+├── hooks/
+│   ├── useVideoPlayer.ts
+│   └── useGestures.ts
+└── package.json
+
+// Package.json final
+{
+  "name": "tiktok-clone",
+  "version": "1.0.0",
+  "dependencies": {
+    "expo": "~53.0.0",
+    "react": "18.3.1",
+    "react-native": "0.75.3",
+    "expo-router": "^3.5.0",
+    "expo-av": "~15.0.0",
+    "expo-camera": "~16.0.0",
+    "expo-media-library": "~17.0.0",
+    "react-native-reanimated": "~3.16.1",
+    "react-native-gesture-handler": "~2.20.2",
+    "firebase": "^10.7.0",
+    "zustand": "^4.4.0",
+    "@expo/vector-icons": "^14.0.0"
+  }
+}`
+    },
+    {
+      id: "video-player",
+      title: "Création du lecteur vidéo vertical",
+      description: "Développons le composant central de TikTok : le lecteur vidéo vertical avec auto-play et swipe.",
+      videoUrl: "https://example.com/tiktok-player-video.mp4",
+      duration: "30 min",
+      keyPoints: [
+        "Configuration d'Expo AV Video",
+        "Système de swipe vertical avec Gesture Handler",
+        "Auto-play et mise en pause",
+        "Gestion de la mémoire vidéo",
+        "Transitions fluides entre vidéos"
+      ],
+      code: `// components/VideoPlayer.tsx
+import React, { useRef, useEffect, useState } from 'react';
+import { View, Dimensions, StyleSheet } from 'react-native';
+import { Video, ResizeMode } from 'expo-av';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  runOnJS
+} from 'react-native-reanimated';
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+
+interface VideoPlayerProps {
+  videoUri: string;
+  isActive: boolean;
+  onSwipeUp: () => void;
+  onSwipeDown: () => void;
+}
+
+export default function VideoPlayer({
+  videoUri,
+  isActive,
+  onSwipeUp,
+  onSwipeDown
+}: VideoPlayerProps) {
+  const videoRef = useRef<Video>(null);
+  const [status, setStatus] = useState({});
+  const translateY = useSharedValue(0);
+
+  useEffect(() => {
+    if (isActive) {
+      videoRef.current?.playAsync();
+    } else {
+      videoRef.current?.pauseAsync();
+    }
+  }, [isActive]);
+
+  const gesture = Gesture.Pan()
+    .onUpdate((event) => {
+      translateY.value = event.translationY;
+    })
+    .onEnd((event) => {
+      if (event.translationY < -50) {
+        runOnJS(onSwipeUp)();
+      } else if (event.translationY > 50) {
+        runOnJS(onSwipeDown)();
+      }
+      translateY.value = withSpring(0);
+    });
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: translateY.value }]
+  }));
+
+  return (
+    <GestureDetector gesture={gesture}>
+      <Animated.View style={[styles.container, animatedStyle]}>
+        <Video
+          ref={videoRef}
+          source={{ uri: videoUri }}
+          style={styles.video}
+          resizeMode={ResizeMode.COVER}
+          isLooping
+          shouldPlay={isActive}
+          onPlaybackStatusUpdate={setStatus}
+        />
+      </Animated.View>
+    </GestureDetector>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    height: SCREEN_HEIGHT,
+    width: '100%',
+    backgroundColor: 'black'
+  },
+  video: {
+    flex: 1
+  }
+});`,
+      finalCode: `// Hook personnalisé pour gérer le lecteur vidéo
+// hooks/useVideoPlayer.ts
+import { useRef, useEffect } from 'react';
+import { Video } from 'expo-av';
+
+export const useVideoPlayer = (isActive: boolean) => {
+  const videoRef = useRef<Video>(null);
+
+  useEffect(() => {
+    if (isActive) {
+      videoRef.current?.playAsync();
+    } else {
+      videoRef.current?.pauseAsync();
+    }
+  }, [isActive]);
+
+  const togglePlayPause = async () => {
+    const status = await videoRef.current?.getStatusAsync();
+    if (status?.isPlaying) {
+      await videoRef.current?.pauseAsync();
+    } else {
+      await videoRef.current?.playAsync();
+    }
+  };
+
+  return { videoRef, togglePlayPause };
+};`
+    },
+    {
+      id: "feed",
+      title: "Création du Feed vertical",
+      description: "Construisons le feed principal avec défilement vertical infini et préchargement des vidéos.",
+      videoUrl: "https://example.com/tiktok-feed-video.mp4",
+      duration: "25 min",
+      keyPoints: [
+        "FlatList vertical avec pagination",
+        "Système de préchargement",
+        "Détection de la vidéo visible",
+        "Optimisation des performances",
+        "Infinite scroll"
+      ],
+      code: `// app/index.tsx
+import React, { useState, useRef } from 'react';
+import { FlatList, View, Dimensions, ViewToken } from 'react-native';
+import VideoPlayer from '../components/VideoPlayer';
+import ActionButtons from '../components/ActionButtons';
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+
+const MOCK_VIDEOS = [
+  {
+    id: '1',
+    videoUrl: 'https://example.com/video1.mp4',
+    username: '@user1',
+    description: 'Ma première vidéo TikTok ! 🎵',
+    likes: 1234,
+    comments: 56,
+    shares: 12
+  },
+  // ... plus de vidéos
+];
+
+export default function FeedScreen() {
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+  const flatListRef = useRef<FlatList>(null);
+
+  const onViewableItemsChanged = useRef(({ viewableItems }: {
+    viewableItems: ViewToken[]
+  }) => {
+    if (viewableItems.length > 0) {
+      setActiveVideoIndex(viewableItems[0].index || 0);
+    }
+  }).current;
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 80
+  }).current;
+
+  const handleSwipeUp = () => {
+    if (activeVideoIndex < MOCK_VIDEOS.length - 1) {
+      flatListRef.current?.scrollToIndex({
+        index: activeVideoIndex + 1,
+        animated: true
+      });
+    }
+  };
+
+  const handleSwipeDown = () => {
+    if (activeVideoIndex > 0) {
+      flatListRef.current?.scrollToIndex({
+        index: activeVideoIndex - 1,
+        animated: true
+      });
+    }
+  };
+
+  const renderItem = ({ item, index }: { item: any; index: number }) => (
+    <View style={{ height: SCREEN_HEIGHT }}>
+      <VideoPlayer
+        videoUri={item.videoUrl}
+        isActive={index === activeVideoIndex}
+        onSwipeUp={handleSwipeUp}
+        onSwipeDown={handleSwipeDown}
+      />
+      <ActionButtons
+        likes={item.likes}
+        comments={item.comments}
+        shares={item.shares}
+        username={item.username}
+        description={item.description}
+      />
+    </View>
+  );
+
+  return (
+    <View style={{ flex: 1, backgroundColor: 'black' }}>
+      <FlatList
+        ref={flatListRef}
+        data={MOCK_VIDEOS}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        pagingEnabled
+        showsVerticalScrollIndicator={false}
+        snapToInterval={SCREEN_HEIGHT}
+        snapToAlignment="start"
+        decelerationRate="fast"
+        onViewableItemsChanged={onViewableItemsChanged}
+        viewabilityConfig={viewabilityConfig}
+        removeClippedSubviews
+        maxToRenderPerBatch={2}
+        windowSize={3}
+      />
+    </View>
+  );
+}`
+    },
+    {
+      id: "action-buttons",
+      title: "Boutons d'action (Like, Comment, Share)",
+      description: "Créons les boutons d'action latéraux avec animations, similaires à TikTok.",
+      videoUrl: "https://example.com/tiktok-actions-video.mp4",
+      duration: "20 min",
+      keyPoints: [
+        "Création des boutons animés",
+        "Système de likes avec animation",
+        "Modal de commentaires",
+        "Partage de vidéos",
+        "Profil utilisateur miniature"
+      ],
+      code: `// components/ActionButtons.tsx
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withSequence
+} from 'react-native-reanimated';
+
+interface ActionButtonsProps {
+  likes: number;
+  comments: number;
+  shares: number;
+  username: string;
+  description: string;
+}
+
+export default function ActionButtons({
+  likes,
+  comments,
+  shares,
+  username,
+  description
+}: ActionButtonsProps) {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(likes);
+  const scale = useSharedValue(1);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }]
+  }));
+
+  const handleLike = () => {
+    scale.value = withSequence(
+      withSpring(1.3, { damping: 2 }),
+      withSpring(1)
+    );
+
+    setIsLiked(!isLiked);
+    setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
+  };
+
+  return (
+    <View style={styles.container}>
+      {/* Description */}
+      <View style={styles.bottomSection}>
+        <Text style={styles.username}>{username}</Text>
+        <Text style={styles.description}>{description}</Text>
+      </View>
+
+      {/* Boutons d'action */}
+      <View style={styles.actionsContainer}>
+        {/* Profil */}
+        <TouchableOpacity style={styles.actionButton}>
+          <View style={styles.avatar}>
+            <Ionicons name="person" size={24} color="white" />
+          </View>
+        </TouchableOpacity>
+
+        {/* Like */}
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={handleLike}
+        >
+          <Animated.View style={animatedStyle}>
+            <Ionicons
+              name={isLiked ? "heart" : "heart-outline"}
+              size={35}
+              color={isLiked ? "#FF0050" : "white"}
+            />
+          </Animated.View>
+          <Text style={styles.actionText}>
+            {likeCount >= 1000 ? \`\${(likeCount / 1000).toFixed(1)}K\` : likeCount}
+          </Text>
+        </TouchableOpacity>
+
+        {/* Comments */}
+        <TouchableOpacity style={styles.actionButton}>
+          <Ionicons name="chatbubble-outline" size={32} color="white" />
+          <Text style={styles.actionText}>{comments}</Text>
+        </TouchableOpacity>
+
+        {/* Share */}
+        <TouchableOpacity style={styles.actionButton}>
+          <Ionicons name="arrow-redo-outline" size={32} color="white" />
+          <Text style={styles.actionText}>{shares}</Text>
+        </TouchableOpacity>
+
+        {/* Music */}
+        <TouchableOpacity style={styles.actionButton}>
+          <Ionicons name="musical-notes" size={32} color="white" />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 16,
+    paddingBottom: 20
+  },
+  bottomSection: {
+    marginBottom: 100
+  },
+  username: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 4
+  },
+  description: {
+    color: 'white',
+    fontSize: 14
+  },
+  actionsContainer: {
+    position: 'absolute',
+    right: 16,
+    bottom: 100
+  },
+  actionButton: {
+    alignItems: 'center',
+    marginBottom: 24
+  },
+  actionText: {
+    color: 'white',
+    fontSize: 12,
+    marginTop: 4,
+    fontWeight: '600'
+  },
+  avatar: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#333',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'white'
+  }
+});`
+    },
+    {
+      id: "camera-upload",
+      title: "Caméra et Upload de vidéos",
+      description: "Implémentons la fonctionnalité d'enregistrement vidéo et d'upload avec Expo Camera et Firebase Storage.",
+      videoUrl: "https://example.com/tiktok-camera-video.mp4",
+      duration: "35 min",
+      keyPoints: [
+        "Configuration d'Expo Camera",
+        "Enregistrement vidéo",
+        "Prévisualisation avant upload",
+        "Upload vers Firebase Storage",
+        "Progress bar et gestion d'erreurs"
+      ],
+      code: `// app/upload.tsx
+import React, { useState, useRef } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+import { Ionicons } from '@expo/vector-icons';
+import * as MediaLibrary from 'expo-media-library';
+
+export default function UploadScreen() {
+  const [facing, setFacing] = useState<CameraType>('back');
+  const [isRecording, setIsRecording] = useState(false);
+  const [permission, requestPermission] = useCameraPermissions();
+  const cameraRef = useRef<CameraView>(null);
+
+  if (!permission) {
+    return <View />;
+  }
+
+  if (!permission.granted) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.message}>
+          Nous avons besoin de votre autorisation pour utiliser la caméra
+        </Text>
+        <TouchableOpacity onPress={requestPermission} style={styles.button}>
+          <Text style={styles.buttonText}>Autoriser la caméra</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  const toggleCameraFacing = () => {
+    setFacing(current => (current === 'back' ? 'front' : 'back'));
+  };
+
+  const startRecording = async () => {
+    if (!cameraRef.current || isRecording) return;
+
+    setIsRecording(true);
+    try {
+      const video = await cameraRef.current.recordAsync({
+        maxDuration: 60, // 60 secondes max
+        quality: '1080p'
+      });
+
+      if (video) {
+        await MediaLibrary.saveToLibraryAsync(video.uri);
+        console.log('Vidéo enregistrée:', video.uri);
+        // Ici, vous pouvez naviguer vers l'écran de prévisualisation
+      }
+    } catch (error) {
+      console.error('Erreur enregistrement:', error);
+    } finally {
+      setIsRecording(false);
+    }
+  };
+
+  const stopRecording = () => {
+    if (cameraRef.current && isRecording) {
+      cameraRef.current.stopRecording();
+      setIsRecording(false);
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <CameraView
+        style={styles.camera}
+        facing={facing}
+        ref={cameraRef}
+        mode="video"
+      >
+        <View style={styles.topControls}>
+          <TouchableOpacity
+            style={styles.flipButton}
+            onPress={toggleCameraFacing}
+          >
+            <Ionicons name="camera-reverse" size={32} color="white" />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.bottomControls}>
+          <TouchableOpacity
+            style={[
+              styles.recordButton,
+              isRecording && styles.recordingButton
+            ]}
+            onPressIn={startRecording}
+            onPressOut={stopRecording}
+          >
+            <View style={styles.recordInner} />
+          </TouchableOpacity>
+        </View>
+      </CameraView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'black'
+  },
+  camera: {
+    flex: 1
+  },
+  topControls: {
+    position: 'absolute',
+    top: 50,
+    right: 20
+  },
+  flipButton: {
+    padding: 10
+  },
+  bottomControls: {
+    position: 'absolute',
+    bottom: 40,
+    left: 0,
+    right: 0,
+    alignItems: 'center'
+  },
+  recordButton: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 5,
+    borderColor: 'white'
+  },
+  recordingButton: {
+    borderColor: '#FF0050'
+  },
+  recordInner: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#FF0050'
+  },
+  message: {
+    textAlign: 'center',
+    color: 'white',
+    marginBottom: 20
+  },
+  button: {
+    backgroundColor: '#FF0050',
+    padding: 15,
+    borderRadius: 10,
+    marginHorizontal: 20
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold'
+  }
+});`,
+      finalCode: `// services/uploadService.ts
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage } from '../config/firebase';
+
+export const uploadVideoToFirebase = async (
+  videoUri: string,
+  onProgress?: (progress: number) => void
+): Promise<string> => {
+  try {
+    // Convertir le fichier en blob
+    const response = await fetch(videoUri);
+    const blob = await response.blob();
+
+    // Créer une référence unique
+    const filename = \`videos/\${Date.now()}_\${Math.random()}.mp4\`;
+    const storageRef = ref(storage, filename);
+
+    // Upload avec suivi de progression
+    const uploadTask = uploadBytesResumable(storageRef, blob);
+
+    return new Promise((resolve, reject) => {
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          onProgress?.(progress);
+        },
+        (error) => {
+          reject(error);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve(downloadURL);
+        }
+      );
+    });
+  } catch (error) {
+    throw new Error(\`Erreur lors de l'upload: \${error}\`);
+  }
+};`
+    },
+    {
+      id: "comments",
+      title: "Système de commentaires",
+      description: "Créons le système de commentaires avec bottom sheet et réponses imbriquées.",
+      videoUrl: "https://example.com/tiktok-comments-video.mp4",
+      duration: "25 min",
+      keyPoints: [
+        "Bottom Sheet pour les commentaires",
+        "Liste de commentaires avec avatars",
+        "Système de réponses",
+        "Input de commentaire",
+        "Likes sur les commentaires"
+      ],
+      code: `// components/CommentSheet.tsx
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Modal
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+interface Comment {
+  id: string;
+  username: string;
+  text: string;
+  likes: number;
+  timestamp: string;
+}
+
+interface CommentSheetProps {
+  visible: boolean;
+  onClose: () => void;
+  comments: Comment[];
+}
+
+export default function CommentSheet({
+  visible,
+  onClose,
+  comments
+}: CommentSheetProps) {
+  const [newComment, setNewComment] = useState('');
+  const [commentList, setCommentList] = useState(comments);
+
+  const handleAddComment = () => {
+    if (newComment.trim()) {
+      const comment: Comment = {
+        id: Date.now().toString(),
+        username: '@moi',
+        text: newComment,
+        likes: 0,
+        timestamp: 'À l\'instant'
+      };
+      setCommentList([comment, ...commentList]);
+      setNewComment('');
+    }
+  };
+
+  const renderComment = ({ item }: { item: Comment }) => (
+    <View style={styles.commentItem}>
+      <View style={styles.avatar}>
+        <Ionicons name="person" size={20} color="white" />
+      </View>
+
+      <View style={styles.commentContent}>
+        <View style={styles.commentHeader}>
+          <Text style={styles.username}>{item.username}</Text>
+          <Text style={styles.timestamp}>{item.timestamp}</Text>
+        </View>
+        <Text style={styles.commentText}>{item.text}</Text>
+
+        <View style={styles.commentActions}>
+          <TouchableOpacity style={styles.replyButton}>
+            <Text style={styles.replyText}>Répondre</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <TouchableOpacity style={styles.likeButton}>
+        <Ionicons name="heart-outline" size={16} color="#666" />
+        <Text style={styles.likeCount}>{item.likes}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  return (
+    <Modal
+      visible={visible}
+      transparent
+      animationType="slide"
+      onRequestClose={onClose}
+    >
+      <View style={styles.overlay}>
+        <View style={styles.sheetContainer}>
+          <View style={styles.header}>
+            <Text style={styles.title}>
+              {commentList.length} commentaires
+            </Text>
+            <TouchableOpacity onPress={onClose}>
+              <Ionicons name="close" size={24} color="#333" />
+            </TouchableOpacity>
+          </View>
+
+          <FlatList
+            data={commentList}
+            renderItem={renderComment}
+            keyExtractor={(item) => item.id}
+            style={styles.commentsList}
+            showsVerticalScrollIndicator={false}
+          />
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Ajouter un commentaire..."
+              placeholderTextColor="#999"
+              value={newComment}
+              onChangeText={setNewComment}
+              multiline
+            />
+            <TouchableOpacity
+              style={styles.sendButton}
+              onPress={handleAddComment}
+            >
+              <Ionicons name="send" size={24} color="#FF0050" />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
+const styles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'flex-end'
+  },
+  sheetContainer: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: '80%'
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee'
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  commentsList: {
+    flex: 1,
+    padding: 16
+  },
+  commentItem: {
+    flexDirection: 'row',
+    marginBottom: 20
+  },
+  avatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#333',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12
+  },
+  commentContent: {
+    flex: 1
+  },
+  commentHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4
+  },
+  username: {
+    fontWeight: 'bold',
+    marginRight: 8
+  },
+  timestamp: {
+    color: '#999',
+    fontSize: 12
+  },
+  commentText: {
+    lineHeight: 20
+  },
+  commentActions: {
+    marginTop: 8
+  },
+  replyButton: {
+    marginRight: 16
+  },
+  replyText: {
+    color: '#666',
+    fontSize: 12,
+    fontWeight: '600'
+  },
+  likeButton: {
+    alignItems: 'center'
+  },
+  likeCount: {
+    fontSize: 12,
+    color: '#666',
+    marginTop: 2
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    padding: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    alignItems: 'center'
+  },
+  input: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    marginRight: 12,
+    maxHeight: 100
+  },
+  sendButton: {
+    padding: 8
+  }
+});`
+    },
+    {
+      id: "profile",
+      title: "Page profil utilisateur",
+      description: "Créons la page de profil avec grille de vidéos, followers et statistiques.",
+      videoUrl: "https://example.com/tiktok-profile-video.mp4",
+      duration: "20 min",
+      keyPoints: [
+        "En-tête de profil",
+        "Statistiques (followers, likes)",
+        "Grille de vidéos",
+        "Onglets (Vidéos, Likes)",
+        "Bouton Follow/Following"
+      ],
+      code: `// app/profile/[id].tsx
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Dimensions
+} from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+
+const { width } = Dimensions.get('window');
+const VIDEO_SIZE = (width - 6) / 3;
+
+const MOCK_PROFILE = {
+  id: '1',
+  username: '@username',
+  name: 'John Doe',
+  bio: 'Créateur de contenu 🎥\nPassionné de tech 💻',
+  followers: 125000,
+  following: 432,
+  likes: 1500000,
+  videos: [
+    { id: '1', thumbnail: 'https://via.placeholder.com/200', views: 12000 },
+    { id: '2', thumbnail: 'https://via.placeholder.com/200', views: 45000 },
+    // ... plus de vidéos
+  ]
+};
+
+export default function ProfileScreen() {
+  const { id } = useLocalSearchParams();
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [activeTab, setActiveTab] = useState('videos');
+
+  const formatNumber = (num: number) => {
+    if (num >= 1000000) return \`\${(num / 1000000).toFixed(1)}M\`;
+    if (num >= 1000) return \`\${(num / 1000).toFixed(1)}K\`;
+    return num.toString();
+  };
+
+  const renderVideoItem = ({ item }: any) => (
+    <TouchableOpacity style={styles.videoItem}>
+      <Image
+        source={{ uri: item.thumbnail }}
+        style={styles.videoThumbnail}
+      />
+      <View style={styles.videoViews}>
+        <Ionicons name="play" size={12} color="white" />
+        <Text style={styles.viewsText}>
+          {formatNumber(item.views)}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <View style={styles.avatarContainer}>
+          <View style={styles.avatar}>
+            <Ionicons name="person" size={50} color="white" />
+          </View>
+        </View>
+
+        <Text style={styles.name}>{MOCK_PROFILE.name}</Text>
+        <Text style={styles.username}>{MOCK_PROFILE.username}</Text>
+
+        {/* Stats */}
+        <View style={styles.statsContainer}>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>
+              {formatNumber(MOCK_PROFILE.following)}
+            </Text>
+            <Text style={styles.statLabel}>Abonnements</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>
+              {formatNumber(MOCK_PROFILE.followers)}
+            </Text>
+            <Text style={styles.statLabel}>Abonnés</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>
+              {formatNumber(MOCK_PROFILE.likes)}
+            </Text>
+            <Text style={styles.statLabel}>J'aime</Text>
+          </View>
+        </View>
+
+        {/* Follow Button */}
+        <TouchableOpacity
+          style={[
+            styles.followButton,
+            isFollowing && styles.followingButton
+          ]}
+          onPress={() => setIsFollowing(!isFollowing)}
+        >
+          <Text style={styles.followButtonText}>
+            {isFollowing ? 'Abonné' : 'S\'abonner'}
+          </Text>
+        </TouchableOpacity>
+
+        {/* Bio */}
+        <Text style={styles.bio}>{MOCK_PROFILE.bio}</Text>
+
+        {/* Tabs */}
+        <View style={styles.tabs}>
+          <TouchableOpacity
+            style={[
+              styles.tab,
+              activeTab === 'videos' && styles.activeTab
+            ]}
+            onPress={() => setActiveTab('videos')}
+          >
+            <Ionicons name="grid" size={20} color="#333" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.tab,
+              activeTab === 'likes' && styles.activeTab
+            ]}
+            onPress={() => setActiveTab('likes')}
+          >
+            <Ionicons name="heart" size={20} color="#333" />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* Videos Grid */}
+      <FlatList
+        data={MOCK_PROFILE.videos}
+        renderItem={renderVideoItem}
+        keyExtractor={(item) => item.id}
+        numColumns={3}
+        columnWrapperStyle={styles.videoRow}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  header: {
+    padding: 20,
+    alignItems: 'center'
+  },
+  avatarContainer: {
+    marginBottom: 12
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#333',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  name: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 4
+  },
+  username: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 20
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20
+  },
+  statItem: {
+    alignItems: 'center',
+    paddingHorizontal: 20
+  },
+  statNumber: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  statLabel: {
+    fontSize: 12,
+    color: '#666'
+  },
+  statDivider: {
+    width: 1,
+    height: 20,
+    backgroundColor: '#ddd'
+  },
+  followButton: {
+    backgroundColor: '#FF0050',
+    paddingHorizontal: 60,
+    paddingVertical: 12,
+    borderRadius: 4,
+    marginBottom: 12
+  },
+  followingButton: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#ddd'
+  },
+  followButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16
+  },
+  bio: {
+    textAlign: 'center',
+    color: '#333',
+    marginBottom: 20,
+    lineHeight: 20
+  },
+  tabs: {
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    width: '100%',
+    marginTop: 10
+  },
+  tab: {
+    flex: 1,
+    paddingVertical: 12,
+    alignItems: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: 'transparent'
+  },
+  activeTab: {
+    borderBottomColor: '#333'
+  },
+  videoRow: {
+    gap: 2
+  },
+  videoItem: {
+    width: VIDEO_SIZE,
+    height: VIDEO_SIZE * 1.5,
+    marginBottom: 2,
+    backgroundColor: '#f0f0f0'
+  },
+  videoThumbnail: {
+    width: '100%',
+    height: '100%'
+  },
+  videoViews: {
+    position: 'absolute',
+    bottom: 8,
+    left: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4
+  },
+  viewsText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold'
+  }
+});`
+    }
+  ]
+};
+
 export const runSportCourse = {
   sections: [
     {
@@ -580,6 +1783,62 @@ export const databaseService = {
 };
 
 export const projects = {
+  tiktok: {
+    id: "tiktok",
+    title: "Projet TikTok Clone",
+    icon: "tiktok",
+    description: "Apprenez à développer un clone de TikTok avec toutes les fonctionnalités principales : vidéos courtes, likes, commentaires, partages, profils utilisateurs et feed personnalisé. Ce projet GRATUIT vous permettra de maîtriser les bases du développement d'applications vidéo.",
+    image: "/Formationsimages/tiktok.jpeg",
+    alt: "Écrans de l'application TikTok Clone",
+    screenshots: [
+      {
+        url: "/imagesFormations/tiktok/feed.svg",
+        title: "Feed de vidéos",
+        description: "Défilement vertical infini avec vidéos en autoplay"
+      },
+      {
+        url: "/imagesFormations/tiktok/camera.svg",
+        title: "Caméra d'enregistrement",
+        description: "Interface de capture vidéo avec effets et filtres"
+      },
+      {
+        url: "/imagesFormations/tiktok/profile.svg",
+        title: "Profil utilisateur",
+        description: "Page profil avec grille de vidéos et statistiques"
+      },
+      {
+        url: "/imagesFormations/tiktok/comments.svg",
+        title: "Système de commentaires",
+        description: "Bottom sheet avec commentaires et réponses"
+      }
+    ],
+    technologies: [
+      "React Native",
+      "Expo SDK 53",
+      "Expo Router",
+      "Expo AV",
+      "TypeScript",
+      "TailwindCSS",
+      "Firebase Storage",
+      "Expo Camera",
+      "React Native Reanimated",
+      "Gesture Handler"
+    ],
+    features: [
+      "Feed de vidéos verticales",
+      "Système de likes et commentaires",
+      "Profils utilisateurs",
+      "Upload de vidéos",
+      "Enregistrement vidéo in-app",
+      "Partage de contenu",
+      "Following/Followers",
+      "Page For You personnalisée"
+    ],
+    isPremium: false,
+    isFree: true,
+    formation: "free",
+    youtubeChannel: "https://www.youtube.com/@tardindavy"
+  },
   runSport: {
     id: "project",
     title: "🏃‍♂️ Projet RunSport",
@@ -710,6 +1969,7 @@ export const projects = {
 export const tabs = [
   { id: "overview", label: "Vue d'ensemble" },
   { id: "curriculum", label: "Programme" },
+  { id: "tiktok", label: "Projet TikTok (GRATUIT)" },
   { id: "project", label: "Projet RunSport" },
   { id: "social", label: "Projet Social Media" },
   { id: "travel", label: "Projet Sky Reservation" },
@@ -720,22 +1980,27 @@ export const tabs = [
 export const getProjectAccess = (projectId: string, userFormation: string | null = null) => {
   const project = (projects as any)[projectId];
   if (!project) return false;
-  
+
+  // Le projet TikTok est GRATUIT et accessible à tous
+  if (projectId === "tiktok" || project.isFree) {
+    return true;
+  }
+
   // Si l'utilisateur n'a pas de formation, seul RunSport est accessible
   if (!userFormation) {
     return project.id === "project";
   }
-  
+
   // Si l'utilisateur a la formation Pro
   if (userFormation === "pro") {
     return formations.pro.projects.includes(projectId);
   }
-  
+
   // Si l'utilisateur a la formation Mastering
   if (userFormation === "mastering") {
     return formations.mastering.projects.includes(projectId);
   }
-  
+
   return false;
 };
 

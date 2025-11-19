@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { useChatBot } from "../../contexts/ChatBotContext";
+import { FaComments } from "react-icons/fa";
 
 export default function Footer() {
+  const { openChatBot } = useChatBot();
+
   return (
     <FooterStyle>
       <FooterContainer>
@@ -11,7 +15,7 @@ export default function Footer() {
               <BrandName>Evoubap</BrandName>
             </BrandLogo>
             <BrandDescription>
-              Créateur d&apos;applications mobiles et web innovantes. 
+              Créateur d&apos;applications mobiles et web innovantes.
               Transformons vos idées en solutions digitales exceptionnelles.
             </BrandDescription>
             <SocialLinks>
@@ -74,6 +78,10 @@ export default function Footer() {
                   <ContactIcon>🌍</ContactIcon>
                   <span>France, Europe</span>
                 </ContactItem>
+                <ChatButton onClick={openChatBot}>
+                  <FaComments size={18} />
+                  <span>Discuter avec moi</span>
+                </ChatButton>
               </ContactInfo>
             </FooterColumn>
           </LinksSection>
@@ -90,10 +98,6 @@ export default function Footer() {
             <LegalLink href="#">Conditions d&apos;utilisation</LegalLink>
             <LegalLink href="#">Mentions légales</LegalLink>
           </LegalLinks>
-          <BackToTop onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-            <BackToTopIcon>↑</BackToTopIcon>
-            <span>Haut de page</span>
-          </BackToTop>
         </BottomSection>
       </FooterContainer>
     </FooterStyle>
@@ -341,4 +345,30 @@ const BackToTop = styled.button`
 const BackToTopIcon = styled.span`
   font-weight: bold;
   font-size: 1rem;
+`;
+
+const ChatButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 `;
