@@ -1,59 +1,59 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
-import { FaNodeJs, FaServer, FaDatabase, FaCode, FaShieldAlt, FaCog } from 'react-icons/fa';
-import { SiSpringboot, SiSupabase } from 'react-icons/si';
+import { FaReact, FaCode, FaPalette, FaRocket, FaMobileAlt, FaCheckCircle } from 'react-icons/fa';
+import { SiTypescript, SiTailwindcss } from 'react-icons/si';
 
-interface BackendSectionProps {
+interface FrontendSectionProps {
   id?: string;
 }
 
-const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
-  const backendTechnologies = [
+const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
+  const frontendTechnologies = [
     {
-      icon: <FaNodeJs />,
-      title: 'Node.js',
-      description: 'Développement backend JavaScript/TypeScript performant et scalable',
-      gradient: 'linear-gradient(135deg, #68a063 0%, #3c873a 100%)',
+      icon: <FaReact />,
+      title: 'React',
+      description: 'Bibliothèque JavaScript puissante pour construire des interfaces utilisateur modernes et réactives',
+      gradient: 'linear-gradient(135deg, #61dafb 0%, #0088cc 100%)',
       features: [
-        'API RESTful et GraphQL',
-        'Microservices avec Express/Fastify',
-        'WebSockets et temps réel',
-        'Authentification JWT',
-        'Intégration base de données (MongoDB, PostgreSQL)',
-        'Gestion des files d\'attente (Bull, RabbitMQ)'
+        'Composants réutilisables et modulaires',
+        'Virtual DOM pour performances optimales',
+        'Hooks pour gestion d\'état simplifiée',
+        'React Router pour navigation fluide',
+        'Context API et Redux pour état global',
+        'Server-Side Rendering (SSR) avec Next.js'
       ],
-      useCases: 'Applications temps réel, APIs performantes, Microservices'
+      useCases: 'Applications web complexes, SPA, Applications e-commerce'
     },
     {
-      icon: <SiSpringboot />,
-      title: 'Spring Boot',
-      description: 'Framework Java enterprise robuste pour applications critiques',
-      gradient: 'linear-gradient(135deg, #6db33f 0%, #5a9e32 100%)',
+      icon: <SiTypescript />,
+      title: 'TypeScript',
+      description: 'Superset de JavaScript offrant le typage statique pour un code plus robuste et maintenable',
+      gradient: 'linear-gradient(135deg, #3178c6 0%, #235a97 100%)',
       features: [
-        'Architecture microservices',
-        'Spring Security pour l\'authentification',
-        'JPA/Hibernate pour ORM',
-        'Spring Cloud pour systèmes distribués',
-        'Tests unitaires et d\'intégration',
-        'Monitoring avec Actuator'
+        'Détection d\'erreurs à la compilation',
+        'Autocomplétion intelligente (IntelliSense)',
+        'Interfaces et types personnalisés',
+        'Refactoring sécurisé et facilité',
+        'Meilleure documentation du code',
+        'Support des dernières fonctionnalités ES6+'
       ],
-      useCases: 'Applications enterprise, Systèmes bancaires, E-commerce complexe'
+      useCases: 'Projets de grande envergure, Équipes multiples, Applications critiques'
     },
     {
-      icon: <SiSupabase />,
-      title: 'Supabase',
-      description: 'Backend-as-a-Service open source avec base de données PostgreSQL',
-      gradient: 'linear-gradient(135deg, #3ecf8e 0%, #2b9e6f 100%)',
+      icon: <SiTailwindcss />,
+      title: 'Tailwind CSS',
+      description: 'Framework CSS utility-first permettant un développement rapide et un design cohérent',
+      gradient: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
       features: [
-        'Base de données PostgreSQL instantanée',
-        'Authentification intégrée (OAuth, Magic Links)',
-        'API auto-générées (REST, GraphQL)',
-        'Stockage de fichiers',
-        'Functions serverless Edge',
-        'Temps réel avec subscriptions'
+        'Classes utilitaires pour styling rapide',
+        'Design responsive intégré',
+        'Personnalisation complète via config',
+        'Dark mode natif',
+        'Optimisation automatique (PurgeCSS)',
+        'Composants réutilisables avec @apply'
       ],
-      useCases: 'Prototypes rapides, SaaS, Applications mobile-first'
+      useCases: 'Prototypage rapide, Design systems, Applications modernes'
     }
   ];
 
@@ -68,20 +68,20 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
         <motion.div variants={fadeIn('up', 'tween', 0.2, 1)}>
           <SectionHeader>
             <IconContainer>
-              <FaServer size={40} />
-              <FaDatabase size={40} />
-              <FaCog size={40} />
+              <FaReact size={40} />
+              <SiTypescript size={40} />
+              <SiTailwindcss size={40} />
             </IconContainer>
-            <Title>Technologies Backend Maîtrisées</Title>
+            <Title>Technologies Frontend Modernes</Title>
             <Subtitle>
-              Des solutions backend robustes et évolutives adaptées à vos besoins,
-              du prototypage rapide aux systèmes enterprise critiques.
+              Création d'interfaces utilisateur exceptionnelles et performantes
+              avec les technologies les plus avancées de l'écosystème web.
             </Subtitle>
           </SectionHeader>
         </motion.div>
 
         <TechGrid>
-          {backendTechnologies.map((tech, index) => (
+          {frontendTechnologies.map((tech, index) => (
             <motion.div
               key={index}
               variants={fadeIn('up', 'spring', 0.3 + index * 0.15, 0.8)}
@@ -95,7 +95,7 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
 
                 <FeaturesSection>
                   <FeaturesTitle>
-                    <FaCode size={16} /> Ce qui est fait :
+                    <FaCode size={16} /> Fonctionnalités clés :
                   </FeaturesTitle>
                   <FeaturesList>
                     {tech.features.map((feature, idx) => (
@@ -109,7 +109,7 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
 
                 <UseCasesSection>
                   <UseCasesTitle>
-                    <FaShieldAlt size={14} /> Cas d'usage :
+                    <FaCheckCircle size={14} /> Cas d'usage :
                   </UseCasesTitle>
                   <UseCasesText>{tech.useCases}</UseCasesText>
                 </UseCasesSection>
@@ -123,8 +123,9 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
         <motion.div variants={fadeIn('up', 'tween', 0.8, 1)}>
           <BottomContent>
             <HighlightText>
-              Chaque projet est unique. Nous choisissons la technologie backend la plus adaptée
-              à vos contraintes de performance, scalabilité et budget.
+              <FaRocket style={{ display: 'inline', marginRight: '0.5rem' }} />
+              La combinaison React + TypeScript + Tailwind CSS permet de créer des applications
+              web ultra-performantes, maintenables et visuellement exceptionnelles.
             </HighlightText>
           </BottomContent>
         </motion.div>
@@ -133,11 +134,11 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
   );
 };
 
-export default BackendSection;
+export default FrontendSection;
 
 const SectionContainer = styled.section`
   padding: 6rem 2rem;
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 50%, #16213e 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -159,8 +160,9 @@ const SectionContainer = styled.section`
     right: 0;
     bottom: 0;
     background:
-      radial-gradient(circle at 30% 30%, rgba(104, 160, 99, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 70% 70%, rgba(109, 179, 63, 0.1) 0%, transparent 50%);
+      radial-gradient(circle at 20% 20%, rgba(97, 218, 251, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(49, 120, 198, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 60%);
     pointer-events: none;
   }
 `;
@@ -179,19 +181,29 @@ const SectionHeader = styled.div`
 const IconContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
 
   svg {
-    color: #6db33f;
-    filter: drop-shadow(0 0 10px rgba(109, 179, 63, 0.3));
+    &:nth-child(1) {
+      color: #61dafb;
+      filter: drop-shadow(0 0 10px rgba(97, 218, 251, 0.4));
+    }
+    &:nth-child(2) {
+      color: #3178c6;
+      filter: drop-shadow(0 0 10px rgba(49, 120, 198, 0.4));
+    }
+    &:nth-child(3) {
+      color: #06b6d4;
+      filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.4));
+    }
   }
 `;
 
 const Title = styled.h2`
   font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #68a063 0%, #6db33f 50%, #3ecf8e 100%);
+  background: linear-gradient(135deg, #61dafb 0%, #3178c6 50%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -208,7 +220,7 @@ const Title = styled.h2`
 
 const Subtitle = styled.p`
   font-size: 1.2rem;
-  color: #b8b8d1;
+  color: #cbd5e1;
   line-height: 1.6;
   max-width: 700px;
   margin: 0 auto;
@@ -263,7 +275,7 @@ const TechCard = styled.div<{ gradient: string }>`
 
   &:hover {
     transform: translateY(-10px);
-    border-color: rgba(109, 179, 63, 0.3);
+    border-color: rgba(97, 218, 251, 0.3);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   }
 
@@ -284,7 +296,7 @@ const CardGlow = styled.div`
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(109, 179, 63, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(97, 218, 251, 0.1) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -303,8 +315,8 @@ const CardHeader = styled.div`
 
 const CardIcon = styled.div`
   font-size: 2.5rem;
-  color: #6db33f;
-  filter: drop-shadow(0 0 10px rgba(109, 179, 63, 0.3));
+  color: #61dafb;
+  filter: drop-shadow(0 0 10px rgba(97, 218, 251, 0.3));
 
   @media (max-width: 480px) {
     font-size: 2rem;
@@ -322,7 +334,7 @@ const CardTitle = styled.h3`
 `;
 
 const CardDescription = styled.p`
-  color: #b8b8d1;
+  color: #cbd5e1;
   line-height: 1.6;
   font-size: 1rem;
   margin-bottom: 1.5rem;
@@ -340,14 +352,14 @@ const FeaturesSection = styled.div`
 const FeaturesTitle = styled.h4`
   font-size: 1.1rem;
   font-weight: 600;
-  color: #e0e0ff;
+  color: #e0f2fe;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 
   svg {
-    color: #6db33f;
+    color: #61dafb;
   }
 `;
 
@@ -358,7 +370,7 @@ const FeaturesList = styled.ul`
 `;
 
 const FeatureItem = styled.li`
-  color: #c0c0d8;
+  color: #cbd5e1;
   font-size: 0.9rem;
   line-height: 1.8;
   display: flex;
@@ -372,7 +384,7 @@ const FeatureItem = styled.li`
 `;
 
 const CheckIcon = styled.span`
-  color: #3ecf8e;
+  color: #06b6d4;
   font-weight: bold;
   font-size: 1rem;
   flex-shrink: 0;
@@ -380,16 +392,16 @@ const CheckIcon = styled.span`
 `;
 
 const UseCasesSection = styled.div`
-  background: rgba(109, 179, 63, 0.1);
+  background: rgba(97, 218, 251, 0.1);
   border-radius: 10px;
   padding: 1rem;
-  border-left: 3px solid #6db33f;
+  border-left: 3px solid #61dafb;
 `;
 
 const UseCasesTitle = styled.h4`
   font-size: 0.95rem;
   font-weight: 600;
-  color: #3ecf8e;
+  color: #06b6d4;
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
@@ -397,7 +409,7 @@ const UseCasesTitle = styled.h4`
 `;
 
 const UseCasesText = styled.p`
-  color: #d0d0e8;
+  color: #e0f2fe;
   font-size: 0.9rem;
   line-height: 1.5;
   font-style: italic;
@@ -416,13 +428,17 @@ const BottomContent = styled.div`
 const HighlightText = styled.p`
   font-size: 1.3rem;
   font-style: italic;
-  color: #e0e0ff;
+  color: #e0f2fe;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
-  border-left: 4px solid #6db33f;
+  border-left: 4px solid #61dafb;
   max-width: 800px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 
   @media (max-width: 768px) {
     font-size: 1.1rem;

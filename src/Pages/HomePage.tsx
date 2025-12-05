@@ -7,6 +7,7 @@ import AppShowcaseSection from "../components/ShowCaseprojects/AppShowcaseSectio
 // import DevToolsSection from "../components/DevTools/DevToolsSection";
 import DevToolsSectionTest from "../components/DevTools/DevToolsSectionTest";
 import AISection from "../components/AI/AISection";
+import FrontendSection from "../components/Frontend/FrontendSection";
 import BackendSection from "../components/Backend/BackendSection";
 import TechUsed from "../components/TechUsed/TechUsed";
 import ToolsSection from "../components/Tools/ToolsSection";
@@ -29,6 +30,7 @@ export default function HomePage() {
     { id: 'app-showcase', color: '#FFF3E0' }, // Orange clair
     { id: 'dev-tools', color: '#E3F2FD' }, // Bleu clair
     { id: 'tools-section', color: '#FCE4EC' }, // Rose clair
+    { id: 'frontend-tech', color: '#E1F5FE' }, // Bleu cyan clair (React/TypeScript/Tailwind)
     { id: 'backend-tech', color: '#E8F5E9' }, // Vert clair (Node.js/Spring)
     { id: 'ai-innovation', color: '#EDE7F6' }, // Violet clair (IA)
     { id: 'tech-used', color: '#FFF8E1' }, // Jaune clair
@@ -41,16 +43,16 @@ export default function HomePage() {
     <ChatBotProvider>
       <ActiveSectionProvider value={{ activeSection, activeColor }}>
         <div>
-          <Header/>
+          <Header />
           <div id="header-section">
-            <UnderHeader/>
+            <UnderHeader />
           </div>
           <div id="current-project">
-            <CurrentProject/>
+            <CurrentProject />
           </div>
-          <Projects id="projects"/>
+          <Projects id="projects" />
           <ChatBot />
-          <HowItWorks id="howItWorks"/>
+          <HowItWorks id="howItWorks" />
           <div id="app-showcase">
             <AppShowcaseSection />
           </div>
@@ -60,15 +62,16 @@ export default function HomePage() {
           <div id="tools-section">
             <ToolsSection />
           </div>
-          <BackendSection id="backend-tech"/>
-          <AISection id="ai-innovation"/>
+          <FrontendSection id="frontend-tech" />
+          <BackendSection id="backend-tech" />
+          <AISection id="ai-innovation" />
           <div id="tech-used">
-            <TechUsed/>
+            <TechUsed />
           </div>
           <div id="footer">
-            <Footer/>
+            <Footer />
           </div>
-         
+
         </div>
       </ActiveSectionProvider>
     </ChatBotProvider>

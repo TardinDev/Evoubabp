@@ -103,6 +103,8 @@ const SectionContainer = styled.section`
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
 
   @media (max-width: 768px) {
     padding: 4rem 1rem;

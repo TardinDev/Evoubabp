@@ -23,9 +23,9 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
     web: {
       title: 'Développement Web/SAAS',
       description:
-      "Nous créons des applications web et SAAS de toute complexité, sans limites d'intégration ni d'évolutivité, en gérant efficacement et rapidement les entrées, les sorties, les bases de données et de multiples composants externes.",
+        "Nous créons des applications web et SAAS de toute complexité, sans limites d'intégration ni d'évolutivité, en gérant efficacement et rapidement les entrées, les sorties, les bases de données et de multiples composants externes.",
       icon: <HiOutlineDesktopComputer />,
-      vercelLink:"voir les projets sur Vercel",
+      vercelLink: "voir les projets sur Vercel",
       color: '#286F6C',
       animationData: webDevelopmentAnimation,
     },
@@ -48,7 +48,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
     learning: {
       title: 'Apprentissage React',
       description:
-      "Notre programme d’apprentissage React propose des projets pratiques et des conseils d’experts pour vous aider à maîtriser les concepts fondamentaux et avancés du développement avec React.",
+        "Notre programme d’apprentissage React propose des projets pratiques et des conseils d’experts pour vous aider à maîtriser les concepts fondamentaux et avancés du développement avec React.",
       icon: <MdSchool />,
       color: '#4A90E2',
       animationData: learningAnimation,
@@ -64,7 +64,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
         viewport={{ once: true, amount: 0.2 }}
       >
         <Title>Services Proposés</Title>
-                  <Subtitle>Donner vie à vos idées dans vos délais et votre budget.</Subtitle>
+        <Subtitle>Donner vie à vos idées dans vos délais et votre budget.</Subtitle>
       </motion.div>
 
       <ContentContainer>
@@ -93,7 +93,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
           viewport={{ once: true, amount: 0.2 }}
         >
           <DescriptionTitle>{serviceContent[selectedService].title}</DescriptionTitle>
-          <DescriptionText>{serviceContent[selectedService].description} <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="link-certificat"><span style={{color:"#4b0082", fontWeight:"bold", cursor:'pointer',}}>{serviceContent[selectedService].vercelLink}</span></a></DescriptionText>
+          <DescriptionText>{serviceContent[selectedService].description} <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="link-certificat"><span style={{ color: "#4b0082", fontWeight: "bold", cursor: 'pointer', }}>{serviceContent[selectedService].vercelLink}</span></a></DescriptionText>
           <Lottie
             animationData={serviceContent[selectedService].animationData}
             loop
@@ -117,6 +117,9 @@ const SectionContainer = styled.section`
   background: linear-gradient(135deg, #f5f7fa, #e4ecf5);
   border-radius: 16px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 `;
 
 const Title = styled.h2`

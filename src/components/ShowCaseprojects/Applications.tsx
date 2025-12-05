@@ -75,6 +75,9 @@ const SectionContainer = styled.section`
   border-radius: 16px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
   margin: 2rem 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 
   .content {
     max-width: 1200px;

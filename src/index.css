@@ -4,9 +4,22 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
   font-family: "Eudoxus Sans", sans-serif;
-  
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  position: relative;
+}
+
+/* Empêcher tout débordement horizontal sur mobile */
+#root {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
