@@ -84,6 +84,16 @@ const SectionContainer = styled.section`
     margin: 0 auto;
     text-align: center;
   }
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+    margin: 1rem 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 0.75rem;
+    border-radius: 8px;
+  }
 `;
 
 const Title = styled.h2`
@@ -91,12 +101,32 @@ const Title = styled.h2`
   font-weight: bold;
   color: #3a3b3c;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const Subtitle = styled.p`
   font-size: 1.2rem;
   color: #6c757d;
   margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+  }
 `;
 
 const GridContainer = styled.div`
@@ -104,6 +134,17 @@ const GridContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const Card = styled.div`
@@ -116,6 +157,16 @@ const Card = styled.div`
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    border-radius: 0.5rem;
   }
 `;
 
@@ -138,6 +189,21 @@ const ImageContainer = styled.div`
       transform: scale(1.05);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
+
+    @media (max-width: 768px) {
+      width: 50%;
+      max-width: 150px;
+    }
+
+    @media (max-width: 480px) {
+      width: 45%;
+      max-width: 120px;
+      border-radius: 0.35rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 0.75rem;
   }
 `;
 
@@ -146,10 +212,29 @@ const CardTitle = styled.h3`
   font-weight: 600;
   color: #2d3748;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
 `;
 
 const CardText = styled.p`
   color: #4a5568;
   font-size: 1rem;
   line-height: 1.5;
+
+  @media (max-width: 768px) {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
 `; 
