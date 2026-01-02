@@ -45,10 +45,10 @@ export default function FormationFooter() {
               <SocialLink href="#" aria-label="Facebook" $platform="facebook">
                 <SocialIcon as={FaFacebook} />
               </SocialLink>
-              <SocialLink href="#" aria-label="LinkedIn" $platform="linkedin">
+              <SocialLink href="https://www.linkedin.com/in/davy-tardin-11a7a1159/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" $platform="linkedin">
                 <SocialIcon as={FaLinkedin} />
               </SocialLink>
-              <SocialLink href="#" aria-label="GitHub" $platform="github">
+              <SocialLink href="https://github.com/TardinDev" target="_blank" rel="noopener noreferrer" aria-label="GitHub" $platform="github">
                 <SocialIcon as={FaGithub} />
               </SocialLink>
             </SocialLinks>
