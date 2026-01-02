@@ -72,7 +72,9 @@ export default function Footer() {
                 </ContactItem>
                 <ContactItem>
                   <ContactIcon>📱</ContactIcon>
-                  <span>+33 (0)7 XX XX XX XX</span>
+                  <ContactLink href="https://wa.me/33766450771" target="_blank" rel="noopener noreferrer">
+                    +33 7 66 45 07 71 (WhatsApp)
+                  </ContactLink>
                 </ContactItem>
                 <ContactItem>
                   <ContactIcon>🌍</ContactIcon>

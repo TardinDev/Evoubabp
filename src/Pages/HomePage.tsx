@@ -18,8 +18,6 @@ import { ChatBotProvider } from "../contexts/ChatBotContext";
 import useActiveSection from "../hooks/useActiveSection";
 
 export default function HomePage() {
-  console.log('HomePage rendering FULL...')
-
   // Définir les sections avec leurs couleurs
   const sections = [
     { id: 'header-section', color: '#F8F7F1' }, // Couleur par défaut

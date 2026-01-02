@@ -17,7 +17,9 @@ export default function FormationFooter() {
               </ContactItem>
               <ContactItem>
                 <Icon>📱</Icon>
-                <span>+33 XX XX XX XX</span>
+                <ContactLink href="https://wa.me/33766450771" target="_blank" rel="noopener noreferrer">
+                  +33 7 66 45 07 71 (WhatsApp)
+                </ContactLink>
               </ContactItem>
               <ContactItem>
                 <Icon>📍</Icon>
@@ -29,10 +31,10 @@ export default function FormationFooter() {
           <LinksSection>
             <SectionTitle>🔗 Liens Utiles</SectionTitle>
             <LinksList>
-              <FooterLink href="#formations">Nos Formations</FooterLink>
-              <FooterLink href="#about">À Propos</FooterLink>
-              <FooterLink href="#contact">Contact</FooterLink>
-              <FooterLink href="#blog">Blog</FooterLink>
+              <FooterLink href="/">Accueil</FooterLink>
+              <FooterLink href="/#projects">Nos Projets</FooterLink>
+              <FooterLink href="/#footer-section">Contact</FooterLink>
+              <FooterLink href="https://www.linkedin.com/in/davy-tardin-11a7a1159/" target="_blank" rel="noopener noreferrer">LinkedIn</FooterLink>
             </LinksList>
           </LinksSection>
           
@@ -133,6 +135,16 @@ const ContactItem = styled.div`
 const Icon = styled.span`
   font-size: 1.25rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+`;
+
+const ContactLink = styled.a`
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #ffd700;
+  }
 `;
 
 const LinksSection = styled.div``;

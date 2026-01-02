@@ -72,7 +72,7 @@
 
 ```bash
 # Cloner le repository
-git clone https://github.com/votre-username/Evoubabp.git
+git clone https://github.com/TardinDev/Evoubabp.git
 
 # Naviguer dans le dossier
 cd Evoubabp
