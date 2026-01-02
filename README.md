@@ -215,7 +215,7 @@ Ce projet est sous licence privée - voir le fichier LICENSE pour plus de détai
 **Tardin Davy** - Développeur Full-Stack
 
 - Portfolio : [evoubap.com](https://evoubap.com)
-- GitHub : [@tardindavy](https://github.com/tardindavy)
+- GitHub : [@TardinDev](https://github.com/TardinDev)
 - LinkedIn : [Davy Tardin](https://www.linkedin.com/in/davy-tardin-11a7a1159/)
 
 ## 🙏 Remerciements
