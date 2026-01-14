@@ -45,8 +45,8 @@ export default function Footer() {
           <LinksSection>
             <FooterColumn>
               <FooterTitle>Services</FooterTitle>
-              <FooterLink href="#projects">Applications Mobile</FooterLink>
-              <FooterLink href="#projects">Applications Web</FooterLink>
+              <FooterLink href="#app-showcase">Applications Mobile</FooterLink>
+              <FooterLink href="#app-showcase">Applications Web</FooterLink>
               <FooterLink href="#howItWorks">Développement SaaS</FooterLink>
               <FooterLink href="#">Formations</FooterLink>
               <FooterLink href="#">Consulting</FooterLink>
