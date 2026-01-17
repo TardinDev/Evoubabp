@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaRobot, FaBug, FaShieldAlt, FaChartLine, FaCheckCircle, FaArrowRight, FaStar, FaCode } from "react-icons/fa";
+import { FaRobot, FaBug, FaShieldAlt, FaChartLine, FaCheckCircle, FaArrowRight, FaStar, FaCode, FaRocket } from "react-icons/fa";
 
 // Composant icône Claude (étoile orange)
 const ClaudeIcon = ({ size = 24 }: { size?: number }) => (
@@ -157,7 +157,7 @@ const ToolsSection = () => {
 
         <BottomCTA>
           <CTAContent>
-            <CTAIcon>🚀</CTAIcon>
+            <CTAIcon><FaRocket size={48} /></CTAIcon>
             <CTAText>
               Prêt à bénéficier d'un code de qualité professionnelle ?
             </CTAText>
@@ -560,7 +560,7 @@ const CTAContent = styled.div`
 `;
 
 const CTAIcon = styled.div`
-  font-size: 4rem;
+  color: #667eea;
   animation: bounce 2s ease-in-out infinite;
 
   @keyframes bounce {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaComments, FaTimes, FaPaperPlane, FaRobot, FaCode, FaMobile, FaServer, FaGraduationCap } from 'react-icons/fa';
+import { FaComments, FaTimes, FaPaperPlane, FaHeadset, FaCode, FaMobile, FaServer, FaGraduationCap } from 'react-icons/fa';
 import { useChatBot } from '../../contexts/ChatBotContext';
 
 interface Message {
@@ -24,7 +24,7 @@ const knowledgeBase = {
   skills: {
     frontend: ['React', 'React Native', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Styled Components', 'Framer Motion'],
     backend: ['Node.js', 'Express', 'Spring Boot', 'Java', 'PostgreSQL', 'MongoDB', 'Supabase', 'Firebase'],
-    tools: ['Git', 'Docker', 'VS Code', 'Figma', 'Postman', 'Claude AI'],
+    tools: ['Git', 'Docker', 'VS Code', 'Figma', 'Postman'],
     mobile: ['React Native', 'Expo', 'Android Studio']
   },
   projects: {
@@ -45,104 +45,104 @@ const responsePatterns = [
   {
     patterns: ['bonjour', 'salut', 'hello', 'hi', 'hey', 'coucou', 'bonsoir'],
     responses: [
-      "Bonjour ! 👋 Ravi de vous rencontrer ! Je suis l'assistant virtuel de Davy. Comment puis-je vous aider aujourd'hui ?",
-      "Salut ! 😊 Bienvenue sur le portfolio de Davy. Que souhaitez-vous savoir sur ses compétences ou projets ?",
-      "Hello ! Je suis là pour répondre à toutes vos questions sur Davy et ses réalisations. Que puis-je faire pour vous ?"
+      "Bonjour ! Bienvenue sur le portfolio de Davy. Comment puis-je vous aider ?",
+      "Bienvenue ! Que souhaitez-vous savoir sur les compétences ou projets de Davy ?",
+      "Bonjour ! Je suis là pour répondre à vos questions. Que puis-je faire pour vous ?"
     ]
   },
   {
     patterns: ['compétence', 'skill', 'technologie', 'tech', 'stack', 'langage', 'framework', 'savoir faire', 'maitrise'],
     responses: [
-      `Davy maîtrise un large éventail de technologies ! 🚀\n\n**Frontend:** ${knowledgeBase.skills.frontend.join(', ')}\n\n**Backend:** ${knowledgeBase.skills.backend.join(', ')}\n\n**Mobile:** ${knowledgeBase.skills.mobile.join(', ')}\n\nQuel domaine vous intéresse particulièrement ?`,
+      `Davy maîtrise un large éventail de technologies :\n\n**Frontend:** ${knowledgeBase.skills.frontend.join(', ')}\n\n**Backend:** ${knowledgeBase.skills.backend.join(', ')}\n\n**Mobile:** ${knowledgeBase.skills.mobile.join(', ')}\n\nQuel domaine vous intéresse particulièrement ?`,
     ]
   },
   {
     patterns: ['react', 'frontend', 'front-end', 'interface', 'ui', 'ux'],
     responses: [
-      "Côté Frontend, Davy excelle avec React et son écosystème ! ⚛️\n\nIl utilise TypeScript pour un code robuste, Styled Components et Tailwind pour le styling, et Framer Motion pour des animations fluides.\n\nVoulez-vous voir des exemples de projets React ?",
-      "React est l'une des spécialités de Davy ! Il développe des interfaces modernes, performantes et accessibles. Il maîtrise également Next.js pour le SSR et React Native pour le mobile."
+      "Côté Frontend, Davy excelle avec React et son écosystème.\n\nIl utilise TypeScript pour un code robuste, Styled Components et Tailwind pour le styling, et Framer Motion pour des animations fluides.\n\nVoulez-vous voir des exemples de projets React ?",
+      "React est l'une des spécialités de Davy. Il développe des interfaces modernes, performantes et accessibles. Il maîtrise également Next.js pour le SSR et React Native pour le mobile."
     ]
   },
   {
     patterns: ['node', 'nodejs', 'express', 'backend', 'back-end', 'api', 'serveur', 'server'],
     responses: [
-      "Côté Backend Node.js, Davy développe des APIs robustes ! 🟢\n\nIl utilise Express ou Fastify, connecte à PostgreSQL/MongoDB, implémente l'authentification JWT, et gère les WebSockets pour le temps réel.\n\nSon projet phare : University Management Dashboard en PERN Stack !",
+      "Côté Backend Node.js, Davy développe des APIs robustes.\n\nIl utilise Express ou Fastify, connecte à PostgreSQL/MongoDB, implémente l'authentification JWT, et gère les WebSockets pour le temps réel.\n\nSon projet phare : University Management Dashboard en PERN Stack.",
     ]
   },
   {
     patterns: ['spring', 'java', 'spring boot', 'springboot'],
     responses: [
-      "Spring Boot est une autre expertise de Davy ! ☕\n\nIl développe des applications enterprise robustes avec Spring Security, JPA/Hibernate, et architecture microservices.\n\nSon projet en cours : une application de déclaration de naissance pour l'administration publique.",
+      "Spring Boot est une autre expertise de Davy.\n\nIl développe des applications enterprise robustes avec Spring Security, JPA/Hibernate, et architecture microservices.\n\nSon projet en cours : une application de déclaration de naissance pour l'administration publique.",
     ]
   },
   {
     patterns: ['mobile', 'android', 'ios', 'react native', 'application mobile', 'app'],
     responses: [
-      "Davy développe aussi des applications mobiles ! 📱\n\nAvec React Native et Expo, il crée des apps cross-platform performantes. Il a notamment réalisé un clone TikTok avec gestion vidéo, caméra et profils utilisateurs.\n\nIntéressé par un projet mobile ?",
+      "Davy développe aussi des applications mobiles.\n\nAvec React Native et Expo, il crée des apps cross-platform performantes. Il a notamment réalisé un clone TikTok avec gestion vidéo, caméra et profils utilisateurs.\n\nIntéressé par un projet mobile ?",
     ]
   },
   {
     patterns: ['projet', 'réalisation', 'portfolio', 'travaux', 'exemple', 'demo'],
     responses: [
-      `Voici les projets phares de Davy ! 💼\n\n**Web:**\n${knowledgeBase.projects.web.map(p => `• ${p}`).join('\n')}\n\n**Mobile:**\n${knowledgeBase.projects.mobile.map(p => `• ${p}`).join('\n')}\n\nVoulez-vous plus de détails sur l'un d'entre eux ?`,
+      `Voici les projets phares de Davy :\n\n**Web:**\n${knowledgeBase.projects.web.map(p => `• ${p}`).join('\n')}\n\n**Mobile:**\n${knowledgeBase.projects.mobile.map(p => `• ${p}`).join('\n')}\n\nVoulez-vous plus de détails sur l'un d'entre eux ?`,
     ]
   },
   {
     patterns: ['université', 'university', 'dashboard', 'gestion', 'pern', 'classroom', 'google classroom'],
     responses: [
-      "Le University Management Dashboard est un projet impressionnant ! 🎓\n\nC'est un système complet style Google Classroom avec :\n• Authentification multi-rôles (Admin, Prof, Étudiant)\n• Codes de rejoindre sécurisés\n• Upload média via Cloudinary\n• Stack PERN (PostgreSQL, Express, React, Node)\n\nC'est un excellent exemple de ses compétences FullStack !",
+      "Le University Management Dashboard est un projet complet.\n\nC'est un système style Google Classroom avec :\n• Authentification multi-rôles (Admin, Prof, Étudiant)\n• Codes de rejoindre sécurisés\n• Upload média via Cloudinary\n• Stack PERN (PostgreSQL, Express, React, Node)\n\nUn excellent exemple de compétences FullStack.",
     ]
   },
   {
     patterns: ['naissance', 'déclaration', 'civil', 'état civil', 'birth'],
     responses: [
-      "L'application de Déclaration de Naissance est un projet d'envergure ! 👶\n\nDéveloppée avec React + Spring Boot, elle permet :\n• Enregistrement numérique des naissances\n• Génération d'actes officiels\n• Gestion sécurisée des données sensibles\n• Interface intuitive pour les agents d'état civil\n\nUn projet qui démontre sa capacité à gérer des applications critiques.",
+      "L'application de Déclaration de Naissance est un projet d'envergure.\n\nDéveloppée avec React + Spring Boot, elle permet :\n• Enregistrement numérique des naissances\n• Génération d'actes officiels\n• Gestion sécurisée des données sensibles\n• Interface intuitive pour les agents d'état civil\n\nUn projet qui démontre la capacité à gérer des applications critiques.",
     ]
   },
   {
     patterns: ['contact', 'email', 'mail', 'joindre', 'contacter', 'coordonnées'],
     responses: [
-      `Vous pouvez contacter Davy de plusieurs façons ! 📧\n\n**Email:** ${knowledgeBase.contact.email}\n\nOu utilisez les boutons ci-dessous pour :\n• Proposer un projet\n• Discuter d'une embauche\n• Demander un entretien\n\nJe suis aussi là pour transmettre votre message !`,
+      `Vous pouvez contacter Davy de plusieurs façons :\n\n**Email:** ${knowledgeBase.contact.email}\n\nOu utilisez les boutons ci-dessous pour :\n• Proposer un projet\n• Discuter d'une embauche\n• Demander un entretien`,
     ]
   },
   {
     patterns: ['disponible', 'disponibilité', 'freelance', 'cdi', 'mission', 'embauche', 'recruter', 'hire'],
     responses: [
-      `Davy est actuellement ${knowledgeBase.availability} ! 🎯\n\nIl est ouvert à :\n• Missions freelance\n• Postes CDI\n• Projets de collaboration\n\nVoulez-vous lui proposer une opportunité ?`,
+      `Davy est actuellement ${knowledgeBase.availability}.\n\nIl est ouvert à :\n• Missions freelance\n• Postes CDI\n• Projets de collaboration\n\nVoulez-vous lui proposer une opportunité ?`,
     ]
   },
   {
     patterns: ['prix', 'tarif', 'cout', 'coût', 'budget', 'devis', 'combien'],
     responses: [
-      "Pour discuter des tarifs, le mieux est de contacter Davy directement ! 💰\n\nChaque projet est unique et nécessite une estimation personnalisée basée sur :\n• La complexité technique\n• Les délais\n• Les fonctionnalités requises\n\nCliquez sur 'Proposer un projet' pour obtenir un devis !",
+      "Pour discuter des tarifs, contactez Davy directement.\n\nChaque projet est unique et nécessite une estimation personnalisée basée sur :\n• La complexité technique\n• Les délais\n• Les fonctionnalités requises\n\nCliquez sur 'Proposer un projet' pour obtenir un devis.",
     ]
   },
   {
     patterns: ['merci', 'thanks', 'thank you', 'super', 'génial', 'parfait', 'excellent'],
     responses: [
-      "Avec plaisir ! 😊 N'hésitez pas si vous avez d'autres questions !",
-      "Je suis là pour ça ! Besoin d'autre chose ?",
-      "Ravi d'avoir pu vous aider ! Y a-t-il autre chose que je puisse faire pour vous ?"
+      "Avec plaisir. N'hésitez pas si vous avez d'autres questions.",
+      "Je reste à votre disposition. Besoin d'autre chose ?",
+      "Ravi d'avoir pu vous aider. Y a-t-il autre chose que je puisse faire pour vous ?"
     ]
   },
   {
     patterns: ['au revoir', 'bye', 'goodbye', 'à bientôt', 'ciao', 'quitter'],
     responses: [
-      "Au revoir ! 👋 N'hésitez pas à revenir si vous avez d'autres questions !",
-      "À bientôt ! J'espère que vous avez trouvé ce que vous cherchiez. Bonne continuation !",
-      "Merci de votre visite ! Revenez quand vous voulez ! 🚀"
+      "Au revoir. N'hésitez pas à revenir si vous avez d'autres questions.",
+      "À bientôt. J'espère que vous avez trouvé ce que vous cherchiez.",
+      "Merci de votre visite. À bientôt."
     ]
   },
   {
     patterns: ['qui es-tu', 'qui êtes-vous', 'c\'est qui', 'présente-toi', 'about', 'à propos'],
     responses: [
-      "Je suis l'assistant virtuel de Davy, développeur FullStack passionné ! 🤖\n\nMa mission est de vous aider à :\n• Découvrir ses compétences et projets\n• Répondre à vos questions\n• Faciliter la prise de contact\n\nPosez-moi n'importe quelle question !",
+      "Je suis le service de support du portfolio de Davy, développeur FullStack.\n\nJe peux vous aider à :\n• Découvrir ses compétences et projets\n• Répondre à vos questions\n• Faciliter la prise de contact\n\nPosez-moi vos questions.",
     ]
   },
   {
     patterns: ['experience', 'expérience', 'parcours', 'carrière', 'background'],
     responses: [
-      "Davy a un parcours riche en développement ! 📚\n\nIl a travaillé sur des projets variés allant des applications enterprise aux apps mobiles grand public.\n\nSes domaines d'expertise :\n• Applications web React/Next.js\n• APIs REST avec Node.js & Spring Boot\n• Applications mobiles React Native\n• Intégration de services cloud\n\nSon approche : code propre, performance et UX soignée.",
+      "Davy a un parcours riche en développement.\n\nIl a travaillé sur des projets variés allant des applications enterprise aux apps mobiles grand public.\n\nSes domaines d'expertise :\n• Applications web React/Next.js\n• APIs REST avec Node.js & Spring Boot\n• Applications mobiles React Native\n• Intégration de services cloud\n\nSon approche : code propre, performance et UX soignée.",
     ]
   }
 ];
@@ -166,7 +166,7 @@ const findBestResponse = (userInput: string): string => {
     "Intéressant ! Pouvez-vous m'en dire plus ? Je suis là pour vous aider à en savoir plus sur Davy et ses compétences.",
     "Je ne suis pas sûr de comprendre, mais je peux vous parler des compétences, projets ou disponibilités de Davy. Que souhaitez-vous savoir ?",
     "Hmm, laissez-moi réfléchir... Peut-être que vous aimeriez en savoir plus sur ses projets React, Node.js ou Spring Boot ?",
-    "Je suis un assistant spécialisé sur le portfolio de Davy. Posez-moi des questions sur ses technologies, projets ou sa disponibilité !"
+    "Je peux vous renseigner sur les compétences, projets et disponibilités de Davy. N'hésitez pas à poser vos questions."
   ];
 
   return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
@@ -223,7 +223,7 @@ const ChatBot = () => {
         openChatBot();
         setTimeout(() => {
           addBotMessage(
-            "👋 Bonjour ! Je suis l'assistant IA du portfolio de Davy. Je peux répondre à vos questions sur ses compétences, projets et disponibilités. Comment puis-je vous aider ?"
+            "Bonjour ! Bienvenue sur le portfolio de Davy. Je peux répondre à vos questions sur ses compétences, projets et disponibilités. Comment puis-je vous aider ?"
           );
         }, 300);
       }
@@ -267,7 +267,7 @@ const ChatBot = () => {
     if (messages.length === 0) {
       setTimeout(() => {
         addBotMessage(
-          "👋 Bienvenue ! Je suis l'assistant IA de Davy, développeur FullStack.\n\nJe peux vous renseigner sur :\n• Ses compétences (React, Node.js, Spring Boot...)\n• Ses projets réalisés\n• Sa disponibilité\n\nPosez-moi n'importe quelle question ou utilisez les boutons ci-dessous !"
+          "Bienvenue sur le portfolio de Davy, développeur FullStack.\n\nJe peux vous renseigner sur :\n• Ses compétences (React, Node.js, Spring Boot...)\n• Ses projets réalisés\n• Sa disponibilité\n\nPosez vos questions ou utilisez les boutons ci-dessous."
         );
       }, 500);
     }
@@ -289,9 +289,9 @@ const ChatBot = () => {
 
     simulateTyping(() => {
       const botResponses = {
-        project: "Excellent choix ! 🚀 J'adorerais en savoir plus sur votre projet. Remplissez ce formulaire rapide et Davy vous répondra sous 24-48h avec une proposition adaptée.",
-        hire: "Formidable ! 🎯 Davy est ouvert aux opportunités. Partagez les détails du poste via ce formulaire et il vous contactera rapidement pour discuter.",
-        interview: "Parfait ! 📅 Organisons cet échange. Précisez vos disponibilités et le sujet que vous souhaitez aborder dans le formulaire ci-dessous."
+        project: "Excellent choix. Remplissez ce formulaire rapide et Davy vous répondra sous 24-48h avec une proposition adaptée à votre projet.",
+        hire: "Davy est ouvert aux opportunités. Partagez les détails du poste via ce formulaire et il vous contactera rapidement pour discuter.",
+        interview: "Organisons cet échange. Précisez vos disponibilités et le sujet que vous souhaitez aborder dans le formulaire ci-dessous."
       };
       addBotMessage(botResponses[action]);
       setFormData({ ...formData, contactReason: action });
@@ -320,11 +320,11 @@ const ChatBot = () => {
     e.preventDefault();
 
     addUserMessage(
-      `📋 Formulaire envoyé:\nNom: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`
+      `Formulaire envoyé:\nNom: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`
     );
 
     simulateTyping(async () => {
-      addBotMessage('📤 Envoi en cours...');
+      addBotMessage('Envoi en cours...');
 
       try {
         const response = await fetch('/api/send-chat-message', {
@@ -344,7 +344,7 @@ const ChatBot = () => {
         if (response.ok && data.success) {
           setTimeout(() => {
             addBotMessage(
-              `✅ Parfait ${formData.name} ! Votre message a bien été transmis à Davy.\n\nIl vous répondra à ${formData.email} dans les 24-48h.\n\nEn attendant, n'hésitez pas à explorer le portfolio ou à me poser d'autres questions !`
+              `Merci ${formData.name}. Votre message a bien été transmis à Davy.\n\nIl vous répondra à ${formData.email} dans les 24-48h.\n\nN'hésitez pas à explorer le portfolio en attendant.`
             );
             setShowForm(false);
             setFormData({ name: '', email: '', message: '', contactReason: '' });
@@ -352,7 +352,7 @@ const ChatBot = () => {
         } else {
           setTimeout(() => {
             addBotMessage(
-              `⚠️ Oups, une erreur technique s'est produite. Mais pas de souci !\n\nVous pouvez contacter Davy directement :\n📧 ${knowledgeBase.contact.email}\n\nIl sera ravi de vous répondre !`
+              `Une erreur technique s'est produite.\n\nVous pouvez contacter Davy directement :\n${knowledgeBase.contact.email}`
             );
           }, 500);
         }
@@ -360,7 +360,7 @@ const ChatBot = () => {
         console.error('Erreur lors de l\'envoi:', error);
         setTimeout(() => {
           addBotMessage(
-            `⚠️ La connexion a échoué. Contactez Davy directement à ${knowledgeBase.contact.email} 📧`
+            `La connexion a échoué. Contactez Davy directement à ${knowledgeBase.contact.email}`
           );
         }, 500);
       }
@@ -387,13 +387,13 @@ const ChatBot = () => {
           >
             <ChatHeader>
               <HeaderContent>
-                <RobotIcon>
-                  <FaRobot size={24} />
+                <SupportIcon>
+                  <FaHeadset size={24} />
                   <OnlineIndicator />
-                </RobotIcon>
+                </SupportIcon>
                 <HeaderText>
-                  <h3>Assistant IA Evoubap</h3>
-                  <Status>🟢 En ligne - Prêt à aider</Status>
+                  <h3>Support Evoubap</h3>
+                  <Status>En ligne</Status>
                 </HeaderText>
               </HeaderContent>
               <CloseButton onClick={handleClose}>
@@ -481,7 +481,7 @@ const ChatBot = () => {
                     whileTap={{ scale: 0.98 }}
                     color="#4CAF50"
                   >
-                    💼 Proposer un projet
+                    Proposer un projet
                   </ActionButton>
                   <ActionButton
                     onClick={() => handleQuickAction('hire')}
@@ -489,7 +489,7 @@ const ChatBot = () => {
                     whileTap={{ scale: 0.98 }}
                     color="#2196F3"
                   >
-                    🤝 Embaucher
+                    Embaucher
                   </ActionButton>
                   <ActionButton
                     onClick={() => handleQuickAction('interview')}
@@ -497,7 +497,7 @@ const ChatBot = () => {
                     whileTap={{ scale: 0.98 }}
                     color="#9C27B0"
                   >
-                    📅 Demander un entretien
+                    Demander un entretien
                   </ActionButton>
                 </QuickActions>
               )}
@@ -508,7 +508,7 @@ const ChatBot = () => {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                 >
-                  <FormTitle>📝 Formulaire de contact</FormTitle>
+                  <FormTitle>Formulaire de contact</FormTitle>
                   <form onSubmit={handleSubmitForm}>
                     <FormGroup>
                       <label>Nom complet *</label>
@@ -651,7 +651,7 @@ const HeaderContent = styled.div`
   gap: 1rem;
 `;
 
-const RobotIcon = styled.div`
+const SupportIcon = styled.div`
   position: relative;
   width: 45px;
   height: 45px;

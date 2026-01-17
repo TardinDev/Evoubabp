@@ -2,13 +2,15 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import { useState } from "react";
+import { FaReact, FaMobile, FaGlobe, FaBolt, FaCompass, FaBook, FaPalette, FaRoad, FaExchangeAlt, FaTheaterMasks, FaMagic, FaHandPointer, FaGamepad, FaStar, FaLayerGroup, FaSearch } from "react-icons/fa";
+import { SiExpo, SiNextdotjs, SiVite, SiTailwindcss, SiStyledcomponents, SiReactquery, SiFramer, SiThreedotjs, SiGreensock } from "react-icons/si";
 
 const technologies = [
   {
     name: "React Native",
     version: "v0.74",
     description: "Framework pour créer des applications mobiles natives",
-    icon: "⚛️",
+    icon: FaReact,
     color: "#61DAFB",
     bgGradient: "linear-gradient(135deg, #61DAFB20, #61DAFB10)",
     category: "mobile"
@@ -17,7 +19,7 @@ const technologies = [
     name: "Expo",
     version: "v51",
     description: "Plateforme pour développer des applications React Native",
-    icon: "🚀",
+    icon: SiExpo,
     color: "#000020",
     bgGradient: "linear-gradient(135deg, #00002020, #00002010)",
     category: "mobile"
@@ -26,7 +28,7 @@ const technologies = [
     name: "Expo Router",
     version: "v3",
     description: "Système de navigation basé sur les fichiers",
-    icon: "🧭",
+    icon: FaCompass,
     color: "#000020",
     bgGradient: "linear-gradient(135deg, #00002020, #00002010)",
     category: "mobile"
@@ -35,7 +37,7 @@ const technologies = [
     name: "React",
     version: "v18",
     description: "Bibliothèque JavaScript pour créer des interfaces utilisateur",
-    icon: "⚛️",
+    icon: FaReact,
     color: "#61DAFB",
     bgGradient: "linear-gradient(135deg, #61DAFB20, #61DAFB10)",
     category: "web"
@@ -44,7 +46,7 @@ const technologies = [
     name: "Next.js",
     version: "v14",
     description: "Framework React full-stack avec SSR et SSG",
-    icon: "▲",
+    icon: SiNextdotjs,
     color: "#000000",
     bgGradient: "linear-gradient(135deg, #00000020, #00000010)",
     category: "web"
@@ -53,7 +55,7 @@ const technologies = [
     name: "Vite",
     version: "v5",
     description: "Outil de build ultra-rapide pour les projets web",
-    icon: "⚡",
+    icon: SiVite,
     color: "#646CFF",
     bgGradient: "linear-gradient(135deg, #646CFF20, #646CFF10)",
     category: "web"
@@ -62,7 +64,7 @@ const technologies = [
     name: "TypeScript",
     version: "v5",
     description: "JavaScript avec typage statique",
-    icon: "📘",
+    icon: FaBook,
     color: "#3178C6",
     bgGradient: "linear-gradient(135deg, #3178C620, #3178C610)",
     category: "both"
@@ -71,7 +73,7 @@ const technologies = [
     name: "Tailwind CSS",
     version: "v3",
     description: "Framework CSS utility-first pour le design",
-    icon: "🎨",
+    icon: SiTailwindcss,
     color: "#06B6D4",
     bgGradient: "linear-gradient(135deg, #06B6D420, #06B6D410)",
     category: "web"
@@ -80,7 +82,7 @@ const technologies = [
     name: "Styled Components",
     version: "v6",
     description: "CSS-in-JS pour styliser les composants React",
-    icon: "💅",
+    icon: SiStyledcomponents,
     color: "#DB7093",
     bgGradient: "linear-gradient(135deg, #DB709320, #DB709310)",
     category: "web"
@@ -89,7 +91,7 @@ const technologies = [
     name: "React Router",
     version: "v6",
     description: "Routage déclaratif pour les applications React",
-    icon: "🛣️",
+    icon: FaRoad,
     color: "#CA4245",
     bgGradient: "linear-gradient(135deg, #CA424520, #CA424510)",
     category: "web"
@@ -98,7 +100,7 @@ const technologies = [
     name: "Zustand",
     version: "v4",
     description: "Gestionnaire d'état léger pour React",
-    icon: "🐻",
+    icon: FaLayerGroup,
     color: "#FF6B6B",
     bgGradient: "linear-gradient(135deg, #FF6B6B20, #FF6B6B10)",
     category: "both"
@@ -107,7 +109,7 @@ const technologies = [
     name: "Tanstack Query",
     version: "v5",
     description: "Gestion des données et cache pour React",
-    icon: "🔄",
+    icon: SiReactquery,
     color: "#FF4154",
     bgGradient: "linear-gradient(135deg, #FF415420, #FF415410)",
     category: "both"
@@ -116,7 +118,7 @@ const technologies = [
     name: "Framer Motion",
     version: "v11",
     description: "Bibliothèque d'animations pour React",
-    icon: "🎭",
+    icon: SiFramer,
     color: "#0055FF",
     bgGradient: "linear-gradient(135deg, #0055FF20, #0055FF10)",
     category: "web"
@@ -125,7 +127,7 @@ const technologies = [
     name: "Reanimated",
     version: "v3",
     description: "Bibliothèque d'animations performantes",
-    icon: "✨",
+    icon: FaMagic,
     color: "#4A90E2",
     bgGradient: "linear-gradient(135deg, #4A90E220, #4A90E210)",
     category: "mobile"
@@ -134,7 +136,7 @@ const technologies = [
     name: "Gesture Handler",
     version: "v2",
     description: "Gestion avancée des gestes tactiles",
-    icon: "👆",
+    icon: FaHandPointer,
     color: "#7B68EE",
     bgGradient: "linear-gradient(135deg, #7B68EE20, #7B68EE10)",
     category: "mobile"
@@ -143,7 +145,7 @@ const technologies = [
     name: "Three.js",
     version: "v0.160",
     description: "Bibliothèque JavaScript pour créer des expériences 3D",
-    icon: "🎮",
+    icon: SiThreedotjs,
     color: "#000000",
     bgGradient: "linear-gradient(135deg, #00000020, #00000010)",
     category: "web"
@@ -152,7 +154,7 @@ const technologies = [
     name: "GSAP",
     version: "v3",
     description: "Bibliothèque d'animations haute performance",
-    icon: "🌟",
+    icon: SiGreensock,
     color: "#88CE02",
     bgGradient: "linear-gradient(135deg, #88CE0220, #88CE0210)",
     category: "web"
@@ -164,10 +166,10 @@ const TechUsed = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const categories = [
-    { id: "all", label: "Tout", icon: "🎯" },
-    { id: "mobile", label: "Mobile", icon: "📱" },
-    { id: "web", label: "Web", icon: "🌐" },
-    { id: "both", label: "Fullstack", icon: "⚡" }
+    { id: "all", label: "Tout", icon: FaLayerGroup },
+    { id: "mobile", label: "Mobile", icon: FaMobile },
+    { id: "web", label: "Web", icon: FaGlobe },
+    { id: "both", label: "Fullstack", icon: FaBolt }
   ];
 
   const filteredTechnologies = selectedCategory === "all"
@@ -204,7 +206,7 @@ const TechUsed = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span>{category.icon}</span>
+                  <category.icon size={18} />
                   {category.label}
                   <CountBadge active={selectedCategory === category.id}>
                     {category.id === "all"
@@ -244,7 +246,7 @@ const TechUsed = () => {
 
                     <CardHeader>
                       <IconContainer color={tech.color}>
-                        <TechIcon>{tech.icon}</TechIcon>
+                        <tech.icon size={24} color={tech.color} />
                       </IconContainer>
                       <Version>{tech.version}</Version>
                     </CardHeader>
@@ -261,9 +263,9 @@ const TechUsed = () => {
 
                     {/* Badge catégorie */}
                     <CategoryBadge category={tech.category}>
-                      {tech.category === "mobile" && "📱"}
-                      {tech.category === "web" && "🌐"}
-                      {tech.category === "both" && "⚡"}
+                      {tech.category === "mobile" && <FaMobile size={16} />}
+                      {tech.category === "web" && <FaGlobe size={16} />}
+                      {tech.category === "both" && <FaBolt size={16} />}
                     </CategoryBadge>
                   </TechCard>
                 </motion.div>
@@ -278,7 +280,7 @@ const TechUsed = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              <EmptyIcon>🔍</EmptyIcon>
+              <EmptyIcon><FaSearch size={48} /></EmptyIcon>
               <EmptyText>Aucune technologie trouvée dans cette catégorie</EmptyText>
             </EmptyState>
           )}
@@ -369,8 +371,8 @@ const FilterButton = styled.button<{ active: boolean }>`
     ? '0 10px 25px rgba(102, 126, 234, 0.3)'
     : '0 4px 12px rgba(0, 0, 0, 0.05)'};
 
-  span {
-    font-size: 1.25rem;
+  svg {
+    flex-shrink: 0;
   }
 
   &:hover {
@@ -494,9 +496,6 @@ const IconContainer = styled.div<{ color: string }>`
   }
 `;
 
-const TechIcon = styled.span`
-  font-size: 1.5rem;
-`;
 
 const Version = styled.span`
   background: linear-gradient(135deg, #667eea, #764ba2);
@@ -572,9 +571,9 @@ const EmptyState = styled.div`
 `;
 
 const EmptyIcon = styled.div`
-  font-size: 4rem;
   margin-bottom: 1rem;
   opacity: 0.5;
+  color: #64748b;
 `;
 
 const EmptyText = styled.p`

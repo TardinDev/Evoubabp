@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useChatBot } from "../../contexts/ChatBotContext";
-import { FaComments } from "react-icons/fa";
+import { FaComments, FaCode, FaEnvelope, FaPhone, FaGlobe } from "react-icons/fa";
 
 export default function Footer() {
   const { openChatBot } = useChatBot();
@@ -11,7 +11,7 @@ export default function Footer() {
         <TopSection>
           <BrandSection>
             <BrandLogo>
-              <LogoIcon>🚀</LogoIcon>
+              <LogoIcon><FaCode size={20} /></LogoIcon>
               <BrandName>Evoubap</BrandName>
             </BrandLogo>
             <BrandDescription>
@@ -65,19 +65,19 @@ export default function Footer() {
               <FooterTitle>Contact</FooterTitle>
               <ContactInfo>
                 <ContactItem>
-                  <ContactIcon>📧</ContactIcon>
+                  <ContactIcon><FaEnvelope size={14} /></ContactIcon>
                   <ContactLink href="mailto:tardindavy@gmail.com">
                     tardindavy@gmail.com
                   </ContactLink>
                 </ContactItem>
                 <ContactItem>
-                  <ContactIcon>📱</ContactIcon>
+                  <ContactIcon><FaPhone size={14} /></ContactIcon>
                   <ContactLink href="https://wa.me/33766450771" target="_blank" rel="noopener noreferrer">
                     +33 7 66 45 07 71 (WhatsApp)
                   </ContactLink>
                 </ContactItem>
                 <ContactItem>
-                  <ContactIcon>🌍</ContactIcon>
+                  <ContactIcon><FaGlobe size={14} /></ContactIcon>
                   <span>France, Europe</span>
                 </ContactItem>
                 <ChatButton onClick={openChatBot}>
@@ -164,7 +164,7 @@ const LogoIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  color: white;
 `;
 
 const BrandName = styled.h2`
@@ -265,7 +265,10 @@ const ContactItem = styled.div`
 `;
 
 const ContactIcon = styled.span`
-  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
 `;
 
 const ContactLink = styled.a`
