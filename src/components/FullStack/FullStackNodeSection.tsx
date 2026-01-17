@@ -61,6 +61,8 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
 
         <ContentWrapper>
           <motion.div variants={fadeIn('up', 'tween', 0.1, 0.8)}>
+            <HeroTitle>J'applique du FullStack à ton projet !</HeroTitle>
+
             <HeaderArea>
               <TagLine>FULLSTACK JAVASCRIPT</TagLine>
               <MainTitle>
@@ -252,6 +254,22 @@ const ContentWrapper = styled.div`
   z-index: 2;
 `;
 
+const HeroTitle = styled.h1`
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1.3;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+`;
+
 const HeaderArea = styled.div`
   margin-bottom: 4rem;
 
@@ -382,7 +400,7 @@ const TerminalBody = styled.div`
 
 const TerminalLine = styled.div<{ type: string; delay: number }>`
   color: ${props => {
-    switch(props.type) {
+    switch (props.type) {
       case 'comment': return 'rgba(255, 255, 255, 0.3)';
       case 'command': return '#61dafb';
       case 'success': return '#68a063';
