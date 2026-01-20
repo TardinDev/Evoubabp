@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import { useState } from "react";
-import { FaReact, FaMobile, FaGlobe, FaBolt, FaCompass, FaBook, FaPalette, FaRoad, FaExchangeAlt, FaTheaterMasks, FaMagic, FaHandPointer, FaGamepad, FaStar, FaLayerGroup, FaSearch } from "react-icons/fa";
-import { SiExpo, SiNextdotjs, SiVite, SiTailwindcss, SiStyledcomponents, SiReactquery, SiFramer, SiThreedotjs, SiGreensock } from "react-icons/si";
+import { FaReact, FaMobile, FaGlobe, FaBolt, FaCompass, FaBook, FaRoad, FaMagic, FaHandPointer, FaLayerGroup, FaSearch, FaNodeJs, FaJava, FaGitAlt, FaKey, FaUserShield } from "react-icons/fa";
+import { SiExpo, SiNextdotjs, SiVite, SiTailwindcss, SiStyledcomponents, SiReactquery, SiFramer, SiThreedotjs, SiGreensock, SiSpringboot, SiPostgresql, SiSupabase, SiFirebase, SiExpress, SiMongodb, SiPrisma } from "react-icons/si";
 
 const technologies = [
   {
@@ -158,6 +158,123 @@ const technologies = [
     color: "#88CE02",
     bgGradient: "linear-gradient(135deg, #88CE0220, #88CE0210)",
     category: "web"
+  },
+  {
+    name: "Node.js",
+    version: "v22",
+    description: "Runtime JavaScript côté serveur",
+    icon: FaNodeJs,
+    color: "#339933",
+    bgGradient: "linear-gradient(135deg, #33993320, #33993310)",
+    category: "both"
+  },
+  {
+    name: "Express",
+    version: "v5",
+    description: "Framework minimaliste pour Node.js",
+    icon: SiExpress,
+    color: "#000000",
+    bgGradient: "linear-gradient(135deg, #00000020, #00000010)",
+    category: "both"
+  },
+  {
+    name: "Spring Boot",
+    version: "v4",
+    description: "Framework Java pour applications enterprise",
+    icon: SiSpringboot,
+    color: "#6DB33F",
+    bgGradient: "linear-gradient(135deg, #6DB33F20, #6DB33F10)",
+    category: "both"
+  },
+  {
+    name: "Java",
+    version: "v21",
+    description: "Langage de programmation orienté objet",
+    icon: FaJava,
+    color: "#ED8B00",
+    bgGradient: "linear-gradient(135deg, #ED8B0020, #ED8B0010)",
+    category: "both"
+  },
+  {
+    name: "PostgreSQL",
+    version: "v17",
+    description: "Base de données relationnelle puissante",
+    icon: SiPostgresql,
+    color: "#4169E1",
+    bgGradient: "linear-gradient(135deg, #4169E120, #4169E110)",
+    category: "both"
+  },
+  {
+    name: "MongoDB",
+    version: "v7",
+    description: "Base de données NoSQL orientée documents",
+    icon: SiMongodb,
+    color: "#47A248",
+    bgGradient: "linear-gradient(135deg, #47A24820, #47A24810)",
+    category: "both"
+  },
+  {
+    name: "Supabase",
+    version: "v2",
+    description: "Backend-as-a-Service open source",
+    icon: SiSupabase,
+    color: "#3ECF8E",
+    bgGradient: "linear-gradient(135deg, #3ECF8E20, #3ECF8E10)",
+    category: "both"
+  },
+  {
+    name: "Firebase",
+    version: "v10",
+    description: "Plateforme de développement Google",
+    icon: SiFirebase,
+    color: "#FFCA28",
+    bgGradient: "linear-gradient(135deg, #FFCA2820, #FFCA2810)",
+    category: "mobile"
+  },
+  {
+    name: "Prisma",
+    version: "v6",
+    description: "ORM moderne pour TypeScript et Node.js",
+    icon: SiPrisma,
+    color: "#2D3748",
+    bgGradient: "linear-gradient(135deg, #2D374820, #2D374810)",
+    category: "both"
+  },
+  {
+    name: "Clerk",
+    version: "v5",
+    description: "Solution d'authentification complète",
+    icon: FaUserShield,
+    color: "#6C47FF",
+    bgGradient: "linear-gradient(135deg, #6C47FF20, #6C47FF10)",
+    category: "both"
+  },
+  {
+    name: "JWT",
+    version: "",
+    description: "Standard pour l'authentification sécurisée",
+    icon: FaKey,
+    color: "#000000",
+    bgGradient: "linear-gradient(135deg, #00000020, #00000010)",
+    category: "both"
+  },
+  {
+    name: "Git",
+    version: "v2",
+    description: "Système de contrôle de version distribué",
+    icon: FaGitAlt,
+    color: "#F05032",
+    bgGradient: "linear-gradient(135deg, #F0503220, #F0503210)",
+    category: "both"
+  },
+  {
+    name: "NativeWind",
+    version: "v4",
+    description: "Tailwind CSS pour React Native",
+    icon: SiTailwindcss,
+    color: "#06B6D4",
+    bgGradient: "linear-gradient(135deg, #06B6D420, #06B6D410)",
+    category: "mobile"
   }
 ];
 
