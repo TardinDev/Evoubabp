@@ -18,7 +18,7 @@ export default function MentionsLegalesPage() {
           </BackLink>
 
           <PageTitle>Mentions Légales</PageTitle>
-          <LastUpdate>Dernière mise à jour : Janvier 2025</LastUpdate>
+          <LastUpdate>Dernière mise à jour : Janvier 2026</LastUpdate>
 
           <Section>
             <SectionIcon><FaBuilding /></SectionIcon>

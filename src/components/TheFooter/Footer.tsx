@@ -94,7 +94,7 @@ export default function Footer() {
 
         <BottomSection>
           <CopyRight>
-            © 2025 Evoubabp Industries. Tous droits réservés.
+            © 2026 Evoubabp Industries. Tous droits réservés.
           </CopyRight>
           <LegalLinks>
             <LegalLinkStyled to="/politique-confidentialite">Politique de confidentialité</LegalLinkStyled>

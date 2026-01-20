@@ -18,7 +18,7 @@ export default function CGUPage() {
           </BackLink>
 
           <PageTitle>Conditions Générales d'Utilisation</PageTitle>
-          <LastUpdate>Dernière mise à jour : Janvier 2025</LastUpdate>
+          <LastUpdate>Dernière mise à jour : Janvier 2026</LastUpdate>
 
           <IntroSection>
             <p>

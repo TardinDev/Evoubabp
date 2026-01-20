@@ -18,7 +18,7 @@ export default function PolitiqueConfidentialitePage() {
           </BackLink>
 
           <PageTitle>Politique de Confidentialité</PageTitle>
-          <LastUpdate>Dernière mise à jour : Janvier 2025</LastUpdate>
+          <LastUpdate>Dernière mise à jour : Janvier 2026</LastUpdate>
 
           <IntroSection>
             <p>
