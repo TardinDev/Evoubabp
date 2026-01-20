@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { useChatBot } from "../../contexts/ChatBotContext";
 import { FaComments, FaCode, FaEnvelope, FaPhone, FaGlobe } from "react-icons/fa";
 
@@ -96,9 +97,9 @@ export default function Footer() {
             © 2025 Evoubabp Industries. Tous droits réservés.
           </CopyRight>
           <LegalLinks>
-            <LegalLink href="#">Politique de confidentialité</LegalLink>
-            <LegalLink href="#">Conditions d&apos;utilisation</LegalLink>
-            <LegalLink href="#">Mentions légales</LegalLink>
+            <LegalLinkStyled to="/politique-confidentialite">Politique de confidentialité</LegalLinkStyled>
+            <LegalLinkStyled to="/cgu">Conditions d&apos;utilisation</LegalLinkStyled>
+            <LegalLinkStyled to="/mentions-legales">Mentions légales</LegalLinkStyled>
           </LegalLinks>
         </BottomSection>
       </FooterContainer>
@@ -320,7 +321,18 @@ const LegalLink = styled.a`
   text-decoration: none;
   font-size: 0.875rem;
   transition: color 0.3s ease;
-  
+
+  &:hover {
+    color: #3b82f6;
+  }
+`;
+
+const LegalLinkStyled = styled(Link)`
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+
   &:hover {
     color: #3b82f6;
   }

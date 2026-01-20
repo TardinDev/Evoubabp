@@ -5,6 +5,9 @@ import MobileFormationPage from './Pages/MobileFormationPage'
 import MachineLearningPage from './Pages/MachineLearningPage'
 import WebDevPage from './Pages/WebDevPage'
 import PaymentPage from './Pages/PaymentPage'
+import MentionsLegalesPage from './Pages/MentionsLegalesPage'
+import PolitiqueConfidentialitePage from './Pages/PolitiqueConfidentialitePage'
+import CGUPage from './Pages/CGUPage'
 
 export const routes = [
   {
@@ -30,6 +33,18 @@ export const routes = [
   {
     path: '/payment',
     element: <PaymentPage />,
+  },
+  {
+    path: '/mentions-legales',
+    element: <MentionsLegalesPage />,
+  },
+  {
+    path: '/politique-confidentialite',
+    element: <PolitiqueConfidentialitePage />,
+  },
+  {
+    path: '/cgu',
+    element: <CGUPage />,
   },
 ]
 
