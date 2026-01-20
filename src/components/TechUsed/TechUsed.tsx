@@ -8,7 +8,7 @@ import { SiExpo, SiNextdotjs, SiVite, SiTailwindcss, SiStyledcomponents, SiReact
 const technologies = [
   {
     name: "React Native",
-    version: "v0.74",
+    version: "v0.83",
     description: "Framework pour créer des applications mobiles natives",
     icon: FaReact,
     color: "#61DAFB",
@@ -17,7 +17,7 @@ const technologies = [
   },
   {
     name: "Expo",
-    version: "v51",
+    version: "v54",
     description: "Plateforme pour développer des applications React Native",
     icon: SiExpo,
     color: "#000020",
@@ -35,7 +35,7 @@ const technologies = [
   },
   {
     name: "React",
-    version: "v18",
+    version: "v19",
     description: "Bibliothèque JavaScript pour créer des interfaces utilisateur",
     icon: FaReact,
     color: "#61DAFB",
@@ -44,7 +44,7 @@ const technologies = [
   },
   {
     name: "Next.js",
-    version: "v14",
+    version: "v16",
     description: "Framework React full-stack avec SSR et SSG",
     icon: SiNextdotjs,
     color: "#000000",
@@ -53,7 +53,7 @@ const technologies = [
   },
   {
     name: "Vite",
-    version: "v5",
+    version: "v7",
     description: "Outil de build ultra-rapide pour les projets web",
     icon: SiVite,
     color: "#646CFF",
@@ -71,7 +71,7 @@ const technologies = [
   },
   {
     name: "Tailwind CSS",
-    version: "v3",
+    version: "v4",
     description: "Framework CSS utility-first pour le design",
     icon: SiTailwindcss,
     color: "#06B6D4",

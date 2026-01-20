@@ -35,8 +35,8 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
       },
     ],
     stack: {
-      frontend: ['React', 'TypeScript', 'Material-UI', 'React Query'],
-      backend: ['Java 17', 'Spring Boot', 'Spring Security', 'PostgreSQL']
+      frontend: ['React 19', 'TypeScript', 'Material-UI', 'React Query'],
+      backend: ['Java 21', 'Spring Boot 4', 'Spring Security', 'PostgreSQL']
     }
   };
 

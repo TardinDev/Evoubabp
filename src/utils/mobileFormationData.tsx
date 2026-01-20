@@ -78,7 +78,7 @@ export const techStacks = {
     title: "🎨 Frontend & UI",
     items: [
       "React Native",
-      "Expo SDK 53",
+      "Expo SDK 54",
       "TypeScript",
       "TailwindCSS",
       "Expo Router v3"
@@ -1814,7 +1814,7 @@ export const projects = {
     ],
     technologies: [
       "React Native",
-      "Expo SDK 53",
+      "Expo SDK 54",
       "Expo Router",
       "Expo AV",
       "TypeScript",
@@ -1847,7 +1847,7 @@ export const projects = {
     alt: "Écrans de l'application RunSport",
     technologies: [
       "React Native",
-      "Expo SDK 53",
+      "Expo SDK 54",
       "Expo Router",
       "TailwindCSS",
       "TypeScript",
