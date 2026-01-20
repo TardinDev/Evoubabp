@@ -13,7 +13,7 @@ import { useActiveSectionContext } from "../../contexts/ActiveSectionContext";
 const Menu = ({ menuOpened }) => {
   return (
     <ul className="menu" style={getMenuStyles(menuOpened)}>
-      <li><a href="#">Accueil</a></li>
+      <li><Link to="/">Accueil</Link></li>
       <li><a href="#app-showcase">Projets</a></li>
       <li><a href="#howItWorks">Méthode</a></li>
       <li><Link to="/formations">Formations</Link></li>

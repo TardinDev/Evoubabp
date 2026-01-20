@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/motion";
-import { FaYoutube, FaFacebook, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 export default function FormationFooter() {
   return (
@@ -41,12 +41,6 @@ export default function FormationFooter() {
           <SocialSection>
             <SectionTitle>🌐 Suivez-nous</SectionTitle>
             <SocialLinks>
-              <SocialLink href="#" aria-label="YouTube" $platform="youtube">
-                <SocialIcon as={FaYoutube} />
-              </SocialLink>
-              <SocialLink href="#" aria-label="Facebook" $platform="facebook">
-                <SocialIcon as={FaFacebook} />
-              </SocialLink>
               <SocialLink href="https://www.linkedin.com/in/davy-tardin-11a7a1159/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" $platform="linkedin">
                 <SocialIcon as={FaLinkedin} />
               </SocialLink>
@@ -62,8 +56,8 @@ export default function FormationFooter() {
             © {new Date().getFullYear()} Evoubabp Academy. Tous droits réservés.
           </Copyright>
           <LegalLinks>
-            <LegalLink href="#privacy">Politique de confidentialité</LegalLink>
-            <LegalLink href="#terms">Conditions d&rsquo;utilisation</LegalLink>
+            <LegalLink href="/politique-confidentialite">Politique de confidentialité</LegalLink>
+            <LegalLink href="/cgu">Conditions d&rsquo;utilisation</LegalLink>
           </LegalLinks>
         </FooterBottom>
       </FooterWrapper>
