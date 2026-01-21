@@ -6,10 +6,11 @@ import {
   HiOutlineCode,
   HiOutlineServer,
   HiOutlineCheckCircle,
-  HiArrowRight
+  HiArrowRight,
+  HiOutlineShieldCheck
 } from "react-icons/hi";
-import { FaReact, FaNodeJs, FaDatabase, FaRocket } from "react-icons/fa";
-import { SiTypescript, SiSpringboot } from "react-icons/si";
+import { FaReact, FaNodeJs, FaRocket, FaGitAlt, FaDocker } from "react-icons/fa";
+import { SiTypescript, SiSpringboot, SiGithubactions, SiVitest, SiEslint, SiPrettier, SiSentry } from "react-icons/si";
 
 interface HowItWorksProps {
   id?: string;
@@ -51,12 +52,54 @@ const processSteps = [
   },
   {
     number: "04",
-    title: "Déploiement",
-    subtitle: "Mise en production",
-    description: "Tests rigoureux, optimisation des performances et déploiement sur infrastructure cloud sécurisée.",
-    icon: HiOutlineCheckCircle,
+    title: "Qualité & CI/CD",
+    subtitle: "Automatisation complète",
+    description: "Pipeline d'intégration continue, tests automatisés et déploiement sécurisé avec monitoring en temps réel.",
+    icon: HiOutlineShieldCheck,
     color: "#f59e0b",
-    deliverables: ["Tests QA", "CI/CD", "Monitoring"],
+    techs: [
+      { icon: SiGithubactions, name: "GitHub Actions" },
+      { icon: SiVitest, name: "Vitest" },
+    ],
+  },
+];
+
+const devPractices = [
+  {
+    icon: SiGithubactions,
+    title: "CI/CD",
+    description: "Build et déploiement automatiques sur chaque commit",
+    color: "#2088FF",
+  },
+  {
+    icon: SiVitest,
+    title: "Tests Automatisés",
+    description: "Tests unitaires et d'intégration avec couverture de code",
+    color: "#6E9F18",
+  },
+  {
+    icon: SiEslint,
+    title: "Linting",
+    description: "Analyse statique du code pour garantir la qualité",
+    color: "#4B32C3",
+  },
+  {
+    icon: SiPrettier,
+    title: "Formatage",
+    description: "Code formaté automatiquement pour une cohérence parfaite",
+    color: "#F7B93E",
+  },
+  {
+    icon: FaGitAlt,
+    title: "Pre-commit Hooks",
+    description: "Vérifications automatiques avant chaque commit",
+    color: "#F05032",
+  },
+  {
+    icon: SiSentry,
+    title: "Monitoring",
+    description: "Suivi des erreurs et performances en production",
+    color: "#362D59",
   },
 ];
 
@@ -138,6 +181,37 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
               </motion.div>
             ))}
           </TimelineContainer>
+
+          <motion.div variants={fadeIn("up", "tween", 0.7, 0.8)}>
+            <DevPracticesSection>
+              <DevPracticesHeader>
+                <DevPracticesTagLine>DÉVELOPPEMENT RIGOUREUX</DevPracticesTagLine>
+                <DevPracticesTitle>Outils & Bonnes Pratiques</DevPracticesTitle>
+                <DevPracticesSubtitle>
+                  Un workflow professionnel pour garantir la qualité, la fiabilité et la maintenabilité du code
+                </DevPracticesSubtitle>
+              </DevPracticesHeader>
+
+              <PracticesGrid>
+                {devPractices.map((practice, index) => (
+                  <motion.div
+                    key={index}
+                    variants={fadeIn("up", "spring", 0.1 + index * 0.1, 0.6)}
+                  >
+                    <PracticeCard>
+                      <PracticeIconWrapper color={practice.color}>
+                        <practice.icon size={24} />
+                      </PracticeIconWrapper>
+                      <PracticeContent>
+                        <PracticeTitle>{practice.title}</PracticeTitle>
+                        <PracticeDescription>{practice.description}</PracticeDescription>
+                      </PracticeContent>
+                    </PracticeCard>
+                  </motion.div>
+                ))}
+              </PracticesGrid>
+            </DevPracticesSection>
+          </motion.div>
 
           <motion.div variants={fadeIn("up", "tween", 0.8, 0.8)}>
             <BottomCTA>
@@ -514,4 +588,125 @@ const CTAButton = styled.a`
   &:hover svg {
     transform: translateX(4px);
   }
+`;
+
+const DevPracticesSection = styled.div`
+  margin-bottom: 4rem;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+    margin-bottom: 3rem;
+  }
+`;
+
+const DevPracticesHeader = styled.div`
+  text-align: center;
+  margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2rem;
+  }
+`;
+
+const DevPracticesTagLine = styled.span`
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.1);
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+`;
+
+const DevPracticesTitle = styled.h3`
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.75rem;
+`;
+
+const DevPracticesSubtitle = styled.p`
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+`;
+
+const PracticesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+`;
+
+const PracticeCard = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+  }
+`;
+
+const PracticeIconWrapper = styled.div<{ color: string }>`
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${props => `${props.color}15`};
+  border: 1px solid ${props => `${props.color}25`};
+  border-radius: 10px;
+  color: ${props => props.color};
+  transition: all 0.3s ease;
+
+  ${PracticeCard}:hover & {
+    transform: scale(1.1);
+    background: ${props => `${props.color}25`};
+  }
+`;
+
+const PracticeContent = styled.div`
+  flex: 1;
+`;
+
+const PracticeTitle = styled.h4`
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.35rem;
+`;
+
+const PracticeDescription = styled.p`
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
 `;
