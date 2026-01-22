@@ -15,6 +15,9 @@ import TechUsed from "../components/TechUsed/TechUsed";
 import ToolsSection from "../components/Tools/ToolsSection";
 import Footer from "../components/TheFooter/Footer";
 import ChatBot from "../components/ChatBot/ChatBot";
+import TestimonialsSection from "../components/Testimonials/TestimonialsSection";
+import CaseStudiesSection from "../components/CaseStudies/CaseStudiesSection";
+import ContactSection from "../components/Contact/ContactSection";
 import { ActiveSectionProvider } from "../contexts/ActiveSectionContext";
 import { ChatBotProvider } from "../contexts/ChatBotContext";
 import useActiveSection from "../hooks/useActiveSection";
@@ -28,6 +31,8 @@ export default function HomePage() {
     { id: 'projects', color: '#F0E6FF' }, // Violet clair
     { id: 'howItWorks', color: '#E8F5E9' }, // Vert très clair
     { id: 'app-showcase', color: '#FFF3E0' }, // Orange clair
+    { id: 'testimonials', color: '#F8FAFC' }, // Gris très clair
+    { id: 'case-studies', color: '#E8EAF6' }, // Indigo clair
     { id: 'fullstack-node', color: '#E8F5E9' }, // Vert clair (Node.js)
     { id: 'fullstack-spring', color: '#F3E5F5' }, // Violet clair (Spring)
     { id: 'dev-tools', color: '#E3F2FD' }, // Bleu clair
@@ -36,6 +41,7 @@ export default function HomePage() {
     { id: 'backend-tech', color: '#E8F5E9' }, // Vert clair (Node.js/Spring)
     { id: 'ai-innovation', color: '#EDE7F6' }, // Violet clair (IA)
     { id: 'tech-used', color: '#FFF8E1' }, // Jaune clair
+    { id: 'contact', color: '#F3E5F5' }, // Violet clair (Contact)
     { id: 'footer', color: '#ECEFF1' }, // Gris clair
   ];
 
@@ -58,6 +64,12 @@ export default function HomePage() {
           <div id="app-showcase">
             <AppShowcaseSection />
           </div>
+          <div id="testimonials">
+            <TestimonialsSection />
+          </div>
+          {/* <div id="case-studies">
+            <CaseStudiesSection />
+          </div> */}
           <div id="fullstack-node">
             <FullStackNodeSection />
           </div>
@@ -75,6 +87,9 @@ export default function HomePage() {
           <AISection id="ai-innovation" />
           <div id="tech-used">
             <TechUsed />
+          </div>
+          <div id="contact">
+            <ContactSection />
           </div>
           <div id="footer">
             <Footer />

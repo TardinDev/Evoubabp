@@ -265,11 +265,11 @@ const HeaderArea = styled.div`
 
 const SectionHeadline = styled.h2`
   font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-size: clamp(2.25rem, 3vw, 2.75rem);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #61dafb, #68a063);
+  background: linear-gradient(135deg, #F1F1F1, #B0B0B0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
