@@ -63,6 +63,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
           <motion.div variants={fadeIn('up', 'tween', 0.1, 0.8)}>
 
             <HeaderArea>
+              <SectionHeadline>J'apporte une expertise FullStack à vos projets !</SectionHeadline>
               <TagLine>FULLSTACK JAVASCRIPT</TagLine>
               <MainTitle>
                 <TitleAccent>React</TitleAccent>
@@ -259,6 +260,22 @@ const HeaderArea = styled.div`
   @media (max-width: 768px) {
     margin-bottom: 3rem;
     text-align: center;
+  }
+`;
+
+const SectionHeadline = styled.h2`
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #61dafb, #68a063);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
   }
 `;
 
