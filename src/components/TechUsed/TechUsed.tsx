@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import { useState } from "react";
 import { FaReact, FaMobile, FaGlobe, FaBolt, FaCompass, FaBook, FaRoad, FaMagic, FaHandPointer, FaLayerGroup, FaSearch, FaNodeJs, FaJava, FaGitAlt, FaKey, FaUserShield } from "react-icons/fa";
-import { SiExpo, SiNextdotjs, SiVite, SiTailwindcss, SiStyledcomponents, SiReactquery, SiFramer, SiThreedotjs, SiGreensock, SiSpringboot, SiPostgresql, SiSupabase, SiFirebase, SiExpress, SiMongodb, SiPrisma } from "react-icons/si";
+import { SiExpo, SiNextdotjs, SiVite, SiTailwindcss, SiStyledcomponents, SiReactquery, SiFramer, SiThreedotjs, SiGreensock, SiSpringboot, SiPostgresql, SiSupabase, SiFirebase, SiExpress, SiMongodb, SiPrisma, SiPostman } from "react-icons/si";
 
 const technologies = [
   {
@@ -265,6 +265,15 @@ const technologies = [
     icon: FaGitAlt,
     color: "#F05032",
     bgGradient: "linear-gradient(135deg, #F0503220, #F0503210)",
+    category: "both"
+  },
+  {
+    name: "Postman",
+    version: "v11",
+    description: "Plateforme de test et développement d'APIs",
+    icon: SiPostman,
+    color: "#FF6C37",
+    bgGradient: "linear-gradient(135deg, #FF6C3720, #FF6C3710)",
     category: "both"
   },
   {
