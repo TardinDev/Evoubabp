@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import { FaFacebook, FaTiktok, FaYoutube } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -8,10 +8,22 @@ import tardinimage from '/images/tardin.png'
 import cv from '/documents/tardinDev.pdf'
 import Lottie from "lottie-react";
 import gitHubAnimation from "../../shared/assets/animations/gitHub.json";
+import { useState, useEffect } from "react";
 
-
+const carouselWords = [
+  "Tardin",
+  <>Développeur<br/>Logiciel</>
+];
 
 export default function UnderHeader() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % carouselWords.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
 
@@ -25,11 +37,26 @@ export default function UnderHeader() {
         className="container"
       >
         <div className="upElement">
-          <motion.span 
+          <motion.span
             variants={fadeIn("right", "tween", 0.2, 1)}
             className="firstText"
           >
-            Bonjour,<br /> Je suis Tardin.
+            Bonjour,<br /> Je suis{" "}
+            <span className="carousel-container">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={currentIndex}
+                  className="carousel-word"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                >
+                  {carouselWords[currentIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
+            .
           </motion.span>
           <motion.span 
             variants={fadeIn("left", "tween", 0.2, 1)}
@@ -247,6 +274,7 @@ const UnderHeaderStyle = styled.div`
     color: black;
     position: relative;
     z-index: 2;
+    margin-left: -1.5rem;
 
     &:hover {
       background-color: #4b0082;
@@ -258,6 +286,28 @@ const UnderHeaderStyle = styled.div`
       text-decoration: none;
       z-index: 10;
     }
+  }
+
+  .carousel-container {
+    display: inline-block;
+    position: relative;
+    width: 280px;
+    height: 2.4em;
+    vertical-align: top;
+  }
+
+  .carousel-word {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: black;
+    font-weight: 700;
+    line-height: 1.2;
+    transition: color 0.3s ease;
+  }
+
+  .firstText:hover .carousel-word {
+    color: white;
   }
 
   .downElement {
