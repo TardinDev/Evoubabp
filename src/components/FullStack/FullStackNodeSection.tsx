@@ -142,7 +142,12 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                       <PrimaryButton href={project.liveUrl} target="_blank">
                         <FaExternalLinkAlt /> Voir Live
                       </PrimaryButton>
-                      <SecondaryButton href={project.githubUrl} target="_blank">
+                      <SecondaryButton
+                        href="https://github.com/TardinDev/University-Management-DashBoard"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-certificat"
+                      >
                         <FaGithub /> Code
                       </SecondaryButton>
                     </ActionButtons>

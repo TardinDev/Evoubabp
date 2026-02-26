@@ -7,10 +7,11 @@ import {
   HiOutlineServer,
   HiOutlineCheckCircle,
   HiArrowRight,
-  HiOutlineShieldCheck
+  HiOutlineShieldCheck,
+  HiOutlineLockClosed // Added for Security/Auth if needed, or re-use ShieldCheck
 } from "react-icons/hi";
-import { FaReact, FaNodeJs, FaRocket, FaGitAlt, FaDocker } from "react-icons/fa";
-import { SiTypescript, SiSpringboot, SiGithubactions, SiVitest, SiEslint, SiPrettier, SiSentry } from "react-icons/si";
+import { FaReact, FaNodeJs, FaRocket, FaGitAlt, FaDocker, FaKey, FaLock } from "react-icons/fa";
+import { SiTypescript, SiSpringboot, SiGithubactions, SiVitest, SiEslint, SiPrettier, SiSentry, SiJsonwebtokens, SiSpringsecurity } from "react-icons/si";
 
 interface HowItWorksProps {
   id?: string;
@@ -47,7 +48,10 @@ const processSteps = [
     color: "#6db33f",
     techs: [
       { icon: FaNodeJs, name: "Node.js" },
-      { icon: SiSpringboot, name: "Spring" },
+      { icon: SiSpringboot, name: "Spring Boot" },
+      { icon: FaLock, name: "Clerk" },
+      { icon: SiJsonwebtokens, name: "JWT" },
+      { icon: SiSpringsecurity, name: "Spring Security" },
     ],
   },
   {
@@ -59,6 +63,7 @@ const processSteps = [
     color: "#f59e0b",
     techs: [
       { icon: SiGithubactions, name: "GitHub Actions" },
+      { icon: FaDocker, name: "Docker" },
       { icon: SiVitest, name: "Vitest" },
     ],
   },

@@ -9,6 +9,7 @@ import FullStackSpringSection from "../components/FullStack/FullStackSpringSecti
 // import DevToolsSection from "../components/DevTools/DevToolsSection";
 import DevToolsSectionTest from "../components/DevTools/DevToolsSectionTest";
 import AISection from "../components/AI/AISection";
+import DockerSection from "../components/Docker/DockerSection";
 import FrontendSection from "../components/Frontend/FrontendSection";
 import BackendSection from "../components/Backend/BackendSection";
 import TechUsed from "../components/TechUsed/TechUsed";
@@ -40,6 +41,7 @@ export default function HomePage() {
     { id: 'frontend-tech', color: '#E1F5FE' }, // Bleu cyan clair (React/TypeScript/Tailwind)
     { id: 'backend-tech', color: '#E8F5E9' }, // Vert clair (Node.js/Spring)
     { id: 'ai-innovation', color: '#EDE7F6' }, // Violet clair (IA)
+    { id: 'docker-devops', color: '#E3F2FD' }, // Bleu clair (Docker)
     { id: 'tech-used', color: '#FFF8E1' }, // Jaune clair
     { id: 'contact', color: '#F3E5F5' }, // Violet clair (Contact)
     { id: 'footer', color: '#ECEFF1' }, // Gris clair
@@ -67,9 +69,6 @@ export default function HomePage() {
           <div id="testimonials">
             <TestimonialsSection />
           </div>
-          {/* <div id="case-studies">
-            <CaseStudiesSection />
-          </div> */}
           <div id="fullstack-node">
             <FullStackNodeSection />
           </div>
@@ -85,6 +84,7 @@ export default function HomePage() {
           <FrontendSection id="frontend-tech" />
           <BackendSection id="backend-tech" />
           <AISection id="ai-innovation" />
+          <DockerSection id="docker-devops" />
           <div id="tech-used">
             <TechUsed />
           </div>

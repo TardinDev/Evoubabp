@@ -45,6 +45,33 @@ export const applicationsData: ApplicationsData = {
   ],
   web: [
     {
+      title: "Delaala",
+      description: "Plateforme web complète offrant des solutions digitales innovantes et des services personnalisés.",
+      image: "/imagesAppsMobile/delaala.png",
+      url: "https://delaala.com/",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Zustand", "Zod", "Express", "Supabase", "PostgreSQL"],
+      category: "Services",
+      year: "2025"
+    },
+    {
+      title: "ProJuridique",
+      description: "Plateforme professionnelle dédiée aux services juridiques, facilitant l'accès au droit et la mise en relation avec des experts juridiques.",
+      image: "/imagesAppsMobile/juridiquePro.png",
+      url: "https://projuridique.com/",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "GSAP", "Zustand", "Zod", "Express", "Prisma", "PostgreSQL"],
+      category: "Juridique",
+      year: "2025"
+    },
+    {
+      title: "Shopping Perroquet",
+      description: "Site e-commerce proposant une large sélection de produits avec une expérience d'achat fluide et moderne.",
+      image: "/imagesAppsMobile/e-commerceShoppingPerroquet.png",
+      url: "",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Zustand", "Zod", "Express", "Supabase", "Prisma", "PostgreSQL"],
+      category: "E-commerce",
+      year: "2025"
+    },
+    {
       title: "Dive-Cvetements",
       description: "site web pour achéter ou louer des vêtements en Laine et rafia pour l'été",
       image: "/imagesAppsMobile/diveC.png",
