@@ -8,6 +8,7 @@ import PaymentPage from './Pages/PaymentPage'
 import MentionsLegalesPage from './Pages/MentionsLegalesPage'
 import PolitiqueConfidentialitePage from './Pages/PolitiqueConfidentialitePage'
 import CGUPage from './Pages/CGUPage'
+import NotFoundPage from './Pages/NotFoundPage'
 
 export const routes = [
   {
@@ -46,10 +47,14 @@ export const routes = [
     path: '/cgu',
     element: <CGUPage />,
   },
+  {
+    path: '*',
+    element: <NotFoundPage />,
+  },
 ]
 
 export const renderRoutes = () => {
   return routes.map((route) => (
     <Route key={route.path} path={route.path} element={route.element} />
   ))
-} 
+}

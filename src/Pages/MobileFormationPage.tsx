@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SEOHead from "../components/SEO/SEOHead";
 import {
   PageWrapper,
   Container,
@@ -147,6 +148,11 @@ export default function MobileFormationPage() {
 
   return (
     <PageWrapper>
+      <SEOHead
+        title="Formation React Native | Développement Mobile | Evoubap"
+        description="Apprenez à créer des applications mobiles avec React Native. Formation complète avec projets concrets : RunSport, TikTok Clone et plus encore."
+        canonical="https://evoubap.com/formations/mobile"
+      />
       {/* Hero Section */}
       <HeroSection onStartFormation={handleStartFormation} />
 

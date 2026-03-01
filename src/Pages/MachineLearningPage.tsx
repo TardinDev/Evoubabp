@@ -1,12 +1,18 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { FaBrain, FaChartLine, FaRobot, FaLightbulb } from "react-icons/fa";
+import SEOHead from "../components/SEO/SEOHead";
 
 export default function MachineLearningPage() {
   const [activeExample, setActiveExample] = useState<string | null>(null);
 
   return (
     <PageWrapper>
+      <SEOHead
+        title="Formation Machine Learning | Intelligence Artificielle | Evoubap"
+        description="Découvrez les fondamentaux du Machine Learning : apprentissage supervisé, non supervisé, réseaux de neurones. Formation accessible et intuitive."
+        canonical="https://evoubap.com/formations/machine-learning"
+      />
       {/* Header Section */}
       <Header>
         <HeaderContent>

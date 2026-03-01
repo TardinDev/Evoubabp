@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft, FaFileContract, FaHandshake, FaGavel, FaEnvelope } from 'react-icons/fa';
+import SEOHead from "../components/SEO/SEOHead";
 
 export default function CGUPage() {
   return (
     <PageContainer>
+      <SEOHead
+        title="Conditions Générales d'Utilisation | Evoubap"
+        description="Conditions générales d'utilisation du site evoubap.com. Règles d'accès et d'utilisation du site et des services proposés."
+        canonical="https://evoubap.com/cgu"
+      />
       <BackgroundGradient />
       <ContentWrapper>
         <motion.div

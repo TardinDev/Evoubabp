@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft, FaShieldAlt, FaCookieBite, FaUserShield, FaEnvelope } from 'react-icons/fa';
+import SEOHead from "../components/SEO/SEOHead";
 
 export default function PolitiqueConfidentialitePage() {
   return (
     <PageContainer>
+      <SEOHead
+        title="Politique de Confidentialité | Evoubap"
+        description="Politique de confidentialité du site evoubap.com. Découvrez comment nous protégeons vos données personnelles conformément au RGPD."
+        canonical="https://evoubap.com/politique-confidentialite"
+      />
       <BackgroundGradient />
       <ContentWrapper>
         <motion.div

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { FaCreditCard, FaPaypal, FaMobile, FaUniversity, FaLock, FaCheck, FaArrowLeft, FaTimes, FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEO/SEOHead";
 
 export default function PaymentPage() {
   const [selectedPlan, setSelectedPlan] = useState("pro");
@@ -124,6 +125,11 @@ export default function PaymentPage() {
 
   return (
     <PageWrapper>
+      <SEOHead
+        title="Paiement Formation | Evoubap"
+        description="Choisissez votre formule de formation en développement mobile React Native. Accès aux projets, code source, vidéos et support technique."
+        canonical="https://evoubap.com/payment"
+      />
       <Container>
         <BackLink to="/formations/mobile">
           <FaArrowLeft />

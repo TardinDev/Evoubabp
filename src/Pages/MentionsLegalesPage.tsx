@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft, FaBuilding, FaServer, FaEnvelope, FaPhone } from 'react-icons/fa';
+import SEOHead from "../components/SEO/SEOHead";
 
 export default function MentionsLegalesPage() {
   return (
     <PageContainer>
+      <SEOHead
+        title="Mentions Légales | Evoubap"
+        description="Mentions légales du site evoubap.com. Informations sur l'éditeur, l'hébergement et les conditions d'utilisation du site."
+        canonical="https://evoubap.com/mentions-legales"
+      />
       <BackgroundGradient />
       <ContentWrapper>
         <motion.div

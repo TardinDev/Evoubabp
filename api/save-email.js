@@ -1,9 +1,22 @@
 // API endpoint pour sauvegarder les emails de notification
 
+const ALLOWED_ORIGINS = ['https://evoubap.com', 'https://www.evoubap.com']
+const MAX_EMAIL_LENGTH = 254
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+
+function getCorsOrigin(req) {
+  const origin = req.headers?.origin
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    return origin
+  }
+  return ALLOWED_ORIGINS[0]
+}
+
 export default function handler(req, res) {
   // Configuration CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  const corsOrigin = getCorsOrigin(req)
+  res.setHeader('Access-Control-Allow-Origin', corsOrigin);
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
@@ -19,7 +32,7 @@ export default function handler(req, res) {
   try {
     const { email, plan, timestamp } = req.body;
 
-    if (!email || !email.includes('@')) {
+    if (!email || typeof email !== 'string' || email.length > MAX_EMAIL_LENGTH || !EMAIL_REGEX.test(email)) {
       return res.status(400).json({ error: 'Email invalide' });
     }
 

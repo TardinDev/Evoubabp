@@ -14,7 +14,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
     year: '2024',
     description: 'Système de gestion universitaire complet style Google Classroom avec authentification multi-rôles (Admin, Professeur, Étudiant), codes de rejoindre sécurisés et upload média via Cloudinary.',
     image: '/images/university-dashboard.png',
-    liveUrl: '#',
+    liveUrl: 'https://university-management-dashboard-kappa.vercel.app/login',
     githubUrl: '#',
     stats: [
       { value: '3', label: 'Rôles' },
@@ -139,7 +139,11 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                     <ProjectDesc>{project.description}</ProjectDesc>
 
                     <ActionButtons>
-                      <PrimaryButton href={project.liveUrl} target="_blank">
+                      <PrimaryButton
+                        href="https://university-management-dashboard-kappa.vercel.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <FaExternalLinkAlt /> Voir Live
                       </PrimaryButton>
                       <SecondaryButton

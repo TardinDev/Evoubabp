@@ -1,5 +1,10 @@
 import nodemailer from 'nodemailer'
 
+const ALLOWED_ORIGINS = ['https://evoubap.com', 'https://www.evoubap.com']
+const MAX_BODY_SIZE = 50000 // 50 KB
+const MAX_EMAIL_LENGTH = 254
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+
 function sanitize(value) {
   if (value === undefined || value === null) {
     return 'N/A'
@@ -9,6 +14,14 @@ function sanitize(value) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
+}
+
+function getCorsOrigin(req) {
+  const origin = req.headers?.origin
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    return origin
+  }
+  return ALLOWED_ORIGINS[0]
 }
 
 function buildTransportConfig() {
@@ -42,8 +55,15 @@ async function readBody(req) {
 
   return await new Promise((resolve, reject) => {
     let data = ''
+    let size = 0
 
     req.on('data', (chunk) => {
+      size += chunk.length
+      if (size > MAX_BODY_SIZE) {
+        req.destroy()
+        reject(new Error('Body too large'))
+        return
+      }
       data += chunk
     })
 
@@ -67,7 +87,8 @@ async function readBody(req) {
 }
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
+  const corsOrigin = getCorsOrigin(req)
+  res.setHeader('Access-Control-Allow-Origin', corsOrigin)
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
 
@@ -83,9 +104,13 @@ export default async function handler(req, res) {
 
   try {
     const body = await readBody(req)
-    const notifyEmail = 'tardindavy@gmail.com' // Email de destination
+    const notifyEmail = process.env.NOTIFY_EMAIL
     const smtpUser = process.env.SMTP_USER
     const smtpPass = process.env.SMTP_PASS
+
+    if (!notifyEmail) {
+      throw new Error('NOTIFY_EMAIL environment variable is not defined')
+    }
 
     if (!smtpUser || !smtpPass) {
       throw new Error('SMTP_USER or SMTP_PASS environment variable is missing')
@@ -99,9 +124,8 @@ export default async function handler(req, res) {
       return
     }
 
-    // Validation email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
+    // Validation email renforcée
+    if (typeof email !== 'string' || email.length > MAX_EMAIL_LENGTH || !EMAIL_REGEX.test(email)) {
       res.status(400).json({ error: 'Email invalide' })
       return
     }
@@ -116,7 +140,7 @@ export default async function handler(req, res) {
     }
 
     const reasonText = reasonMap[contactReason] || 'Contact général'
-    const subject = `🤖 ChatBot - ${reasonText} de ${name}`
+    const subject = `ChatBot - ${reasonText} de ${sanitize(name)}`
     const visitedAt = timestamp ?? new Date().toISOString()
 
     const htmlContent = `
@@ -192,7 +216,7 @@ export default async function handler(req, res) {
       </head>
       <body>
         <div class="header">
-          <h1>🤖 Nouveau message via ChatBot</h1>
+          <h1>Nouveau message via ChatBot</h1>
         </div>
         <div class="content">
           <div class="info-box">
@@ -245,7 +269,7 @@ Répondez directement à : ${email}
     await transporter.sendMail({
       to: notifyEmail,
       from: process.env.SMTP_FROM || smtpUser,
-      replyTo: email, // Pour pouvoir répondre directement
+      replyTo: email,
       subject,
       text: textContent,
       html: htmlContent,
@@ -254,6 +278,6 @@ Répondez directement à : ${email}
     res.status(200).json({ success: true, message: 'Message envoyé avec succès' })
   } catch (error) {
     console.error('Failed to send chat message', error)
-    res.status(500).json({ error: 'Échec de l\'envoi du message', details: error.message })
+    res.status(500).json({ error: 'Échec de l\'envoi du message' })
   }
 }

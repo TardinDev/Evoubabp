@@ -1,3 +1,4 @@
+import SEOHead from "../components/SEO/SEOHead";
 import CurrentProject from "../components/Header/CurrentProject";
 import Header from "../components/Header/Header";
 import UnderHeader from "../components/Header/UnderHeader";
@@ -53,6 +54,11 @@ export default function HomePage() {
     <ChatBotProvider>
       <ActiveSectionProvider value={{ activeSection, activeColor }}>
         <div>
+          <SEOHead
+            title="Davy Tardin - Développeur Full-Stack | Applications Mobile & Web"
+            description="Portfolio de Davy Tardin, développeur full-stack spécialisé en React Native, React et Node.js. Création d'applications mobiles et web innovantes. Freelance en France."
+            canonical="https://evoubap.com/"
+          />
           <Header />
           <div id="header-section">
             <UnderHeader />

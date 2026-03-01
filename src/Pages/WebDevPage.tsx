@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaReact, FaNodeJs, FaCheck } from "react-icons/fa";
 import { SiTypescript, SiTailwindcss, SiSupabase } from "react-icons/si";
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEO/SEOHead";
 
 export default function WebDevPage() {
   const [selectedProject, setSelectedProject] = useState<'ecommerce' | 'ai' | null>(null);
@@ -28,6 +29,11 @@ export default function WebDevPage() {
 
   return (
     <PageWrapper>
+      <SEOHead
+        title="Formation Développement Web | React, TypeScript, Node.js | Evoubap"
+        description="Formation complète en développement web : créez un e-commerce et un assistant IA avec React, TypeScript, Tailwind CSS, Supabase et Node.js."
+        canonical="https://evoubap.com/formations/web-dev"
+      />
       <Header>
         <HeaderContent>
           <BackButton to="/formations">← Retour</BackButton>

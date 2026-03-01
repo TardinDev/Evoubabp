@@ -1,5 +1,8 @@
 import nodemailer from 'nodemailer'
 
+const ALLOWED_ORIGINS = ['https://evoubap.com', 'https://www.evoubap.com']
+const MAX_BODY_SIZE = 10000 // 10 KB
+
 function sanitize(value) {
   if (value === undefined || value === null) {
     return 'N/A'
@@ -9,6 +12,14 @@ function sanitize(value) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
+}
+
+function getCorsOrigin(req) {
+  const origin = req.headers?.origin
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    return origin
+  }
+  return ALLOWED_ORIGINS[0]
 }
 
 function buildTransportConfig() {
@@ -42,8 +53,15 @@ async function readBody(req) {
 
   return await new Promise((resolve, reject) => {
     let data = ''
+    let size = 0
 
     req.on('data', (chunk) => {
+      size += chunk.length
+      if (size > MAX_BODY_SIZE) {
+        req.destroy()
+        reject(new Error('Body too large'))
+        return
+      }
       data += chunk
     })
 
@@ -67,7 +85,8 @@ async function readBody(req) {
 }
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
+  const corsOrigin = getCorsOrigin(req)
+  res.setHeader('Access-Control-Allow-Origin', corsOrigin)
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
 

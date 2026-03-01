@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import styled from "styled-components";
+import SEOHead from "../components/SEO/SEOHead";
 
 // Import groupé de tous les composants formation
 import {
@@ -27,6 +28,11 @@ export default function FormationPage() {
 
   return (
     <PageWrapper>
+      <SEOHead
+        title="Formations Développement Web & Mobile | Evoubap"
+        description="Découvrez nos formations en développement web, mobile React Native et Machine Learning. Apprenez à créer des applications professionnelles avec des projets concrets."
+        canonical="https://evoubap.com/formations"
+      />
       {/* 1. Header avec menu de navigation */}
       <FormationHeader />
 
