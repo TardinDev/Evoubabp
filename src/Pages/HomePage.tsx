@@ -33,6 +33,7 @@ export default function HomePage() {
     { id: 'projects', color: '#F0E6FF' }, // Violet clair
     { id: 'howItWorks', color: '#E8F5E9' }, // Vert très clair
     { id: 'app-showcase', color: '#FFF3E0' }, // Orange clair
+    { id: 'tech-used', color: '#0f0c29' }, // Dark (Technologies)
     { id: 'testimonials', color: '#F8FAFC' }, // Gris très clair
     { id: 'case-studies', color: '#E8EAF6' }, // Indigo clair
     { id: 'fullstack-node', color: '#E8F5E9' }, // Vert clair (Node.js)
@@ -43,7 +44,6 @@ export default function HomePage() {
     { id: 'backend-tech', color: '#E8F5E9' }, // Vert clair (Node.js/Spring)
     { id: 'ai-innovation', color: '#EDE7F6' }, // Violet clair (IA)
     { id: 'docker-devops', color: '#E3F2FD' }, // Bleu clair (Docker)
-    { id: 'tech-used', color: '#FFF8E1' }, // Jaune clair
     { id: 'contact', color: '#F3E5F5' }, // Violet clair (Contact)
     { id: 'footer', color: '#ECEFF1' }, // Gris clair
   ];
@@ -72,6 +72,9 @@ export default function HomePage() {
           <div id="app-showcase">
             <AppShowcaseSection />
           </div>
+          <div id="tech-used">
+            <TechUsed />
+          </div>
           <div id="testimonials">
             <TestimonialsSection />
           </div>
@@ -91,9 +94,6 @@ export default function HomePage() {
           <BackendSection id="backend-tech" />
           <AISection id="ai-innovation" />
           <DockerSection id="docker-devops" />
-          <div id="tech-used">
-            <TechUsed />
-          </div>
           <div id="contact">
             <ContactSection />
           </div>

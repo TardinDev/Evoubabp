@@ -1,710 +1,636 @@
 import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
-import { fadeIn, staggerContainer } from "../../utils/motion";
-import { useState } from "react";
-import { FaReact, FaMobile, FaGlobe, FaBolt, FaCompass, FaBook, FaRoad, FaMagic, FaHandPointer, FaLayerGroup, FaSearch, FaNodeJs, FaJava, FaGitAlt, FaKey, FaUserShield } from "react-icons/fa";
-import { SiExpo, SiNextdotjs, SiVite, SiTailwindcss, SiStyledcomponents, SiReactquery, SiFramer, SiThreedotjs, SiGreensock, SiSpringboot, SiPostgresql, SiSupabase, SiFirebase, SiExpress, SiMongodb, SiPrisma, SiPostman } from "react-icons/si";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  FaReact, FaCompass, FaBook, FaRoad, FaMagic, FaHandPointer,
+  FaLayerGroup, FaNodeJs, FaJava, FaGitAlt, FaKey, FaUserShield,
+  FaCode, FaServer, FaMobile, FaDatabase, FaTools
+} from "react-icons/fa";
+import {
+  SiExpo, SiNextdotjs, SiVite, SiTailwindcss, SiStyledcomponents,
+  SiReactquery, SiFramer, SiThreedotjs, SiGreensock, SiSpringboot,
+  SiPostgresql, SiSupabase, SiFirebase, SiExpress, SiMongodb,
+  SiPrisma, SiPostman
+} from "react-icons/si";
+import type { IconType } from "react-icons";
 
-const technologies = [
+gsap.registerPlugin(ScrollTrigger);
+
+interface Tech {
+  name: string;
+  version: string;
+  icon: IconType;
+  color: string;
+}
+
+interface Category {
+  label: string;
+  icon: IconType;
+  accentColor: string;
+  techs: Tech[];
+}
+
+const categories: Category[] = [
   {
-    name: "React Native",
-    version: "v0.83",
-    description: "Framework pour créer des applications mobiles natives",
-    icon: FaReact,
-    color: "#61DAFB",
-    bgGradient: "linear-gradient(135deg, #61DAFB20, #61DAFB10)",
-    category: "mobile"
+    label: "Frontend",
+    icon: FaCode,
+    accentColor: "#667eea",
+    techs: [
+      { name: "React", version: "v19", icon: FaReact, color: "#61DAFB" },
+      { name: "Next.js", version: "v16", icon: SiNextdotjs, color: "#000000" },
+      { name: "Vite", version: "v7", icon: SiVite, color: "#646CFF" },
+      { name: "TypeScript", version: "v5", icon: FaBook, color: "#3178C6" },
+      { name: "Tailwind CSS", version: "v4", icon: SiTailwindcss, color: "#06B6D4" },
+      { name: "Styled Components", version: "v6", icon: SiStyledcomponents, color: "#DB7093" },
+      { name: "React Router", version: "v6", icon: FaRoad, color: "#CA4245" },
+      { name: "Framer Motion", version: "v11", icon: SiFramer, color: "#0055FF" },
+      { name: "Three.js", version: "v0.160", icon: SiThreedotjs, color: "#000000" },
+      { name: "GSAP", version: "v3", icon: SiGreensock, color: "#88CE02" },
+    ],
   },
   {
-    name: "Expo",
-    version: "v54",
-    description: "Plateforme pour développer des applications React Native",
-    icon: SiExpo,
-    color: "#000020",
-    bgGradient: "linear-gradient(135deg, #00002020, #00002010)",
-    category: "mobile"
+    label: "Backend",
+    icon: FaServer,
+    accentColor: "#339933",
+    techs: [
+      { name: "Node.js", version: "v22", icon: FaNodeJs, color: "#339933" },
+      { name: "Express", version: "v5", icon: SiExpress, color: "#000000" },
+      { name: "Spring Boot", version: "v4", icon: SiSpringboot, color: "#6DB33F" },
+      { name: "Java", version: "v21", icon: FaJava, color: "#ED8B00" },
+    ],
   },
   {
-    name: "Expo Router",
-    version: "v3",
-    description: "Système de navigation basé sur les fichiers",
-    icon: FaCompass,
-    color: "#000020",
-    bgGradient: "linear-gradient(135deg, #00002020, #00002010)",
-    category: "mobile"
+    label: "Mobile",
+    icon: FaMobile,
+    accentColor: "#764ba2",
+    techs: [
+      { name: "React Native", version: "v0.83", icon: FaReact, color: "#61DAFB" },
+      { name: "Expo", version: "v54", icon: SiExpo, color: "#000020" },
+      { name: "Expo Router", version: "v3", icon: FaCompass, color: "#000020" },
+      { name: "Reanimated", version: "v3", icon: FaMagic, color: "#4A90E2" },
+      { name: "Gesture Handler", version: "v2", icon: FaHandPointer, color: "#7B68EE" },
+      { name: "NativeWind", version: "v4", icon: SiTailwindcss, color: "#06B6D4" },
+    ],
   },
   {
-    name: "React",
-    version: "v19",
-    description: "Bibliothèque JavaScript pour créer des interfaces utilisateur",
-    icon: FaReact,
-    color: "#61DAFB",
-    bgGradient: "linear-gradient(135deg, #61DAFB20, #61DAFB10)",
-    category: "web"
+    label: "Base de données",
+    icon: FaDatabase,
+    accentColor: "#4169E1",
+    techs: [
+      { name: "PostgreSQL", version: "v17", icon: SiPostgresql, color: "#4169E1" },
+      { name: "MongoDB", version: "v7", icon: SiMongodb, color: "#47A248" },
+      { name: "Supabase", version: "v2", icon: SiSupabase, color: "#3ECF8E" },
+      { name: "Firebase", version: "v10", icon: SiFirebase, color: "#FFCA28" },
+      { name: "Prisma", version: "v6", icon: SiPrisma, color: "#2D3748" },
+    ],
   },
   {
-    name: "Next.js",
-    version: "v16",
-    description: "Framework React full-stack avec SSR et SSG",
-    icon: SiNextdotjs,
-    color: "#000000",
-    bgGradient: "linear-gradient(135deg, #00000020, #00000010)",
-    category: "web"
+    label: "Outils & Auth",
+    icon: FaTools,
+    accentColor: "#FF6B6B",
+    techs: [
+      { name: "Zustand", version: "v4", icon: FaLayerGroup, color: "#FF6B6B" },
+      { name: "Tanstack Query", version: "v5", icon: SiReactquery, color: "#FF4154" },
+      { name: "Clerk", version: "v5", icon: FaUserShield, color: "#6C47FF" },
+      { name: "JWT", version: "", icon: FaKey, color: "#000000" },
+      { name: "Git", version: "v2", icon: FaGitAlt, color: "#F05032" },
+      { name: "Postman", version: "v11", icon: SiPostman, color: "#FF6C37" },
+    ],
   },
-  {
-    name: "Vite",
-    version: "v7",
-    description: "Outil de build ultra-rapide pour les projets web",
-    icon: SiVite,
-    color: "#646CFF",
-    bgGradient: "linear-gradient(135deg, #646CFF20, #646CFF10)",
-    category: "web"
-  },
-  {
-    name: "TypeScript",
-    version: "v5",
-    description: "JavaScript avec typage statique",
-    icon: FaBook,
-    color: "#3178C6",
-    bgGradient: "linear-gradient(135deg, #3178C620, #3178C610)",
-    category: "both"
-  },
-  {
-    name: "Tailwind CSS",
-    version: "v4",
-    description: "Framework CSS utility-first pour le design",
-    icon: SiTailwindcss,
-    color: "#06B6D4",
-    bgGradient: "linear-gradient(135deg, #06B6D420, #06B6D410)",
-    category: "web"
-  },
-  {
-    name: "Styled Components",
-    version: "v6",
-    description: "CSS-in-JS pour styliser les composants React",
-    icon: SiStyledcomponents,
-    color: "#DB7093",
-    bgGradient: "linear-gradient(135deg, #DB709320, #DB709310)",
-    category: "web"
-  },
-  {
-    name: "React Router",
-    version: "v6",
-    description: "Routage déclaratif pour les applications React",
-    icon: FaRoad,
-    color: "#CA4245",
-    bgGradient: "linear-gradient(135deg, #CA424520, #CA424510)",
-    category: "web"
-  },
-  {
-    name: "Zustand",
-    version: "v4",
-    description: "Gestionnaire d'état léger pour React",
-    icon: FaLayerGroup,
-    color: "#FF6B6B",
-    bgGradient: "linear-gradient(135deg, #FF6B6B20, #FF6B6B10)",
-    category: "both"
-  },
-  {
-    name: "Tanstack Query",
-    version: "v5",
-    description: "Gestion des données et cache pour React",
-    icon: SiReactquery,
-    color: "#FF4154",
-    bgGradient: "linear-gradient(135deg, #FF415420, #FF415410)",
-    category: "both"
-  },
-  {
-    name: "Framer Motion",
-    version: "v11",
-    description: "Bibliothèque d'animations pour React",
-    icon: SiFramer,
-    color: "#0055FF",
-    bgGradient: "linear-gradient(135deg, #0055FF20, #0055FF10)",
-    category: "web"
-  },
-  {
-    name: "Reanimated",
-    version: "v3",
-    description: "Bibliothèque d'animations performantes",
-    icon: FaMagic,
-    color: "#4A90E2",
-    bgGradient: "linear-gradient(135deg, #4A90E220, #4A90E210)",
-    category: "mobile"
-  },
-  {
-    name: "Gesture Handler",
-    version: "v2",
-    description: "Gestion avancée des gestes tactiles",
-    icon: FaHandPointer,
-    color: "#7B68EE",
-    bgGradient: "linear-gradient(135deg, #7B68EE20, #7B68EE10)",
-    category: "mobile"
-  },
-  {
-    name: "Three.js",
-    version: "v0.160",
-    description: "Bibliothèque JavaScript pour créer des expériences 3D",
-    icon: SiThreedotjs,
-    color: "#000000",
-    bgGradient: "linear-gradient(135deg, #00000020, #00000010)",
-    category: "web"
-  },
-  {
-    name: "GSAP",
-    version: "v3",
-    description: "Bibliothèque d'animations haute performance",
-    icon: SiGreensock,
-    color: "#88CE02",
-    bgGradient: "linear-gradient(135deg, #88CE0220, #88CE0210)",
-    category: "web"
-  },
-  {
-    name: "Node.js",
-    version: "v22",
-    description: "Runtime JavaScript côté serveur",
-    icon: FaNodeJs,
-    color: "#339933",
-    bgGradient: "linear-gradient(135deg, #33993320, #33993310)",
-    category: "both"
-  },
-  {
-    name: "Express",
-    version: "v5",
-    description: "Framework minimaliste pour Node.js",
-    icon: SiExpress,
-    color: "#000000",
-    bgGradient: "linear-gradient(135deg, #00000020, #00000010)",
-    category: "both"
-  },
-  {
-    name: "Spring Boot",
-    version: "v4",
-    description: "Framework Java pour applications enterprise",
-    icon: SiSpringboot,
-    color: "#6DB33F",
-    bgGradient: "linear-gradient(135deg, #6DB33F20, #6DB33F10)",
-    category: "both"
-  },
-  {
-    name: "Java",
-    version: "v21",
-    description: "Langage de programmation orienté objet",
-    icon: FaJava,
-    color: "#ED8B00",
-    bgGradient: "linear-gradient(135deg, #ED8B0020, #ED8B0010)",
-    category: "both"
-  },
-  {
-    name: "PostgreSQL",
-    version: "v17",
-    description: "Base de données relationnelle puissante",
-    icon: SiPostgresql,
-    color: "#4169E1",
-    bgGradient: "linear-gradient(135deg, #4169E120, #4169E110)",
-    category: "both"
-  },
-  {
-    name: "MongoDB",
-    version: "v7",
-    description: "Base de données NoSQL orientée documents",
-    icon: SiMongodb,
-    color: "#47A248",
-    bgGradient: "linear-gradient(135deg, #47A24820, #47A24810)",
-    category: "both"
-  },
-  {
-    name: "Supabase",
-    version: "v2",
-    description: "Backend-as-a-Service open source",
-    icon: SiSupabase,
-    color: "#3ECF8E",
-    bgGradient: "linear-gradient(135deg, #3ECF8E20, #3ECF8E10)",
-    category: "both"
-  },
-  {
-    name: "Firebase",
-    version: "v10",
-    description: "Plateforme de développement Google",
-    icon: SiFirebase,
-    color: "#FFCA28",
-    bgGradient: "linear-gradient(135deg, #FFCA2820, #FFCA2810)",
-    category: "mobile"
-  },
-  {
-    name: "Prisma",
-    version: "v6",
-    description: "ORM moderne pour TypeScript et Node.js",
-    icon: SiPrisma,
-    color: "#2D3748",
-    bgGradient: "linear-gradient(135deg, #2D374820, #2D374810)",
-    category: "both"
-  },
-  {
-    name: "Clerk",
-    version: "v5",
-    description: "Solution d'authentification complète",
-    icon: FaUserShield,
-    color: "#6C47FF",
-    bgGradient: "linear-gradient(135deg, #6C47FF20, #6C47FF10)",
-    category: "both"
-  },
-  {
-    name: "JWT",
-    version: "",
-    description: "Standard pour l'authentification sécurisée",
-    icon: FaKey,
-    color: "#000000",
-    bgGradient: "linear-gradient(135deg, #00000020, #00000010)",
-    category: "both"
-  },
-  {
-    name: "Git",
-    version: "v2",
-    description: "Système de contrôle de version distribué",
-    icon: FaGitAlt,
-    color: "#F05032",
-    bgGradient: "linear-gradient(135deg, #F0503220, #F0503210)",
-    category: "both"
-  },
-  {
-    name: "Postman",
-    version: "v11",
-    description: "Plateforme de test et développement d'APIs",
-    icon: SiPostman,
-    color: "#FF6C37",
-    bgGradient: "linear-gradient(135deg, #FF6C3720, #FF6C3710)",
-    category: "both"
-  },
-  {
-    name: "NativeWind",
-    version: "v4",
-    description: "Tailwind CSS pour React Native",
-    icon: SiTailwindcss,
-    color: "#06B6D4",
-    bgGradient: "linear-gradient(135deg, #06B6D420, #06B6D410)",
-    category: "mobile"
-  }
 ];
 
 const TechUsed = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const orbRef = useRef<HTMLDivElement>(null);
+  const orb2Ref = useRef<HTMLDivElement>(null);
+  const dotsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const categories = [
-    { id: "all", label: "Tout", icon: FaLayerGroup },
-    { id: "mobile", label: "Mobile", icon: FaMobile },
-    { id: "web", label: "Web", icon: FaGlobe },
-    { id: "both", label: "Fullstack", icon: FaBolt }
-  ];
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const groups = gsap.utils.toArray<HTMLElement>(".category-group");
+      const accentColors = categories.map((c) => c.accentColor);
 
-  const filteredTechnologies = selectedCategory === "all"
-    ? technologies
-    : technologies.filter(tech => tech.category === selectedCategory);
+      // Initial states
+      gsap.set(groups, {
+        xPercent: -120,
+        opacity: 0,
+        rotationY: -15,
+        transformPerspective: 1200,
+      });
+      gsap.set(orbRef.current, { backgroundColor: accentColors[0] });
+      gsap.set(orb2Ref.current, { backgroundColor: accentColors[0] });
+
+      // Title entrance
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Floating shapes subtle parallax
+      const shapes = gsap.utils.toArray<HTMLElement>(".float-shape");
+      shapes.forEach((shape, i) => {
+        gsap.to(shape, {
+          y: i % 2 === 0 ? -120 : 100,
+          rotation: i % 2 === 0 ? 180 : -180,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5 + i * 0.5,
+          },
+        });
+      });
+
+      // Pinned timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: () => `+=${groups.length * window.innerHeight}`,
+          pin: true,
+          scrub: 0.8,
+          anticipatePin: 1,
+        },
+      });
+
+      groups.forEach((group, i) => {
+        const items = group.querySelectorAll<HTMLElement>(".tech-item");
+        const stepNum = group.querySelector(".step-num");
+
+        // Set varied initial positions per item
+        gsap.set(items, {
+          opacity: 0,
+          scale: (idx: number) => 0.55 + (idx % 3) * 0.05,
+          y: (idx: number) => (idx % 2 === 0 ? 70 : -50),
+          rotation: (idx: number) => (idx % 3 - 1) * 8,
+        });
+
+        // ── ENTER ──
+
+        // Orbs shift color & position
+        tl.to(
+          orbRef.current,
+          {
+            backgroundColor: accentColors[i],
+            x: i % 2 === 0 ? -120 : 160,
+            y: i % 2 === 0 ? -80 : 100,
+            scale: 0.85 + (i % 3) * 0.15,
+            duration: 1,
+            ease: "sine.inOut",
+          }
+        );
+        tl.to(
+          orb2Ref.current,
+          {
+            backgroundColor: accentColors[i],
+            x: i % 2 === 0 ? 220 : -140,
+            y: i % 2 === 0 ? 120 : -100,
+            scale: 0.55 + (i % 2) * 0.35,
+            duration: 1,
+            ease: "sine.inOut",
+          },
+          "<"
+        );
+
+        // Progress dots
+        if (i > 0) {
+          tl.to(
+            dotsRef.current[i - 1],
+            { scale: 1, width: 10, background: "#cbd5e1", duration: 0.3 },
+            "<"
+          );
+        }
+        tl.to(
+          dotsRef.current[i],
+          { scale: 1.4, width: 30, background: accentColors[i], duration: 0.3 },
+          "<"
+        );
+
+        // Step number fades in
+        if (stepNum) {
+          tl.fromTo(
+            stepNum,
+            { opacity: 0, scale: 0.7 },
+            { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
+            "<0.1"
+          );
+        }
+
+        // Group slides in with 3D
+        tl.to(
+          group,
+          {
+            xPercent: 0,
+            opacity: 1,
+            rotationY: 0,
+            duration: 1.2,
+            ease: "power3.out",
+          },
+          "<0.1"
+        );
+
+        // Items cascade in with spring
+        tl.to(
+          items,
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            rotation: 0,
+            stagger: { each: 0.06, from: "start" },
+            duration: 0.5,
+            ease: "back.out(1.7)",
+          },
+          "<0.5"
+        );
+
+        // Hold
+        tl.to(group, { duration: 0.6 });
+
+        // ── EXIT ── (except last)
+        if (i < groups.length - 1) {
+          // Items scatter with parallax
+          tl.to(items, {
+            xPercent: (idx: number) => 50 + (idx % 3) * 30,
+            y: (idx: number) => (idx % 2 === 0 ? -60 : 60),
+            rotation: (idx: number) => (idx % 2 === 0 ? 15 : -15),
+            opacity: 0,
+            stagger: 0.03,
+            duration: 0.7,
+            ease: "power3.in",
+          });
+
+          // Step number fades
+          if (stepNum) {
+            tl.to(
+              stepNum,
+              { opacity: 0, scale: 1.3, duration: 0.4, ease: "power2.in" },
+              "<0.1"
+            );
+          }
+
+          // Group exits with 3D rotation
+          tl.to(
+            group,
+            {
+              xPercent: 120,
+              rotationY: 15,
+              opacity: 0,
+              duration: 0.5,
+              ease: "power2.in",
+            },
+            "<0.15"
+          );
+        }
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <motion.div
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
-    >
-      <Section>
-        <Container>
-          <motion.div variants={fadeIn("up", "tween", 0.1, 1)}>
-            <Header>
-              <Title>Technologies Utilisées</Title>
-              <Subtitle>
-                Un stack moderne et performant pour créer des applications exceptionnelles
-              </Subtitle>
-            </Header>
-          </motion.div>
+    <Section ref={sectionRef}>
+      {/* Ambient glow orbs */}
+      <BackgroundOrb ref={orbRef} style={{ top: "25%", left: "5%" }} />
+      <BackgroundOrb ref={orb2Ref} style={{ top: "55%", right: "5%" }} />
 
-          {/* Filtres de catégories */}
-          <motion.div variants={fadeIn("up", "tween", 0.2, 1)}>
-            <FilterContainer>
-              {categories.map((category) => (
-                <FilterButton
-                  key={category.id}
-                  active={selectedCategory === category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  as={motion.button}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <category.icon size={18} />
-                  {category.label}
-                  <CountBadge active={selectedCategory === category.id}>
-                    {category.id === "all"
-                      ? technologies.length
-                      : technologies.filter(t => t.category === category.id).length}
-                  </CountBadge>
-                </FilterButton>
-              ))}
-            </FilterContainer>
-          </motion.div>
+      {/* Floating decorative shapes */}
+      <FloatingShape className="float-shape" style={{ top: "12%", left: "6%" }} />
+      <FloatingShape
+        className="float-shape"
+        $variant="circle"
+        style={{ top: "65%", right: "9%" }}
+      />
+      <FloatingShape className="float-shape" style={{ bottom: "18%", left: "48%" }} />
 
-          {/* Grille de technologies avec AnimatePresence */}
-          <TechGrid>
-            <AnimatePresence mode="wait">
-              {filteredTechnologies.map((tech, index) => (
-                <motion.div
-                  key={tech.name}
-                  layout
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.8, y: -20 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: index * 0.05,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                >
-                  <TechCard
-                    bgGradient={tech.bgGradient}
+      <PinnedContent>
+        <TitleContainer ref={titleRef}>
+          <Title>Technologies Utilisées</Title>
+          <Subtitle>
+            Un stack moderne et performant pour créer des applications
+            exceptionnelles
+          </Subtitle>
+        </TitleContainer>
+
+        <ContentArea>
+          {categories.map((category, catIndex) => (
+            <CategoryGroup key={category.label} className="category-group">
+              <StepNumber className="step-num" accentColor={category.accentColor}>
+                {String(catIndex + 1).padStart(2, "0")}
+                <StepTotal> / {String(categories.length).padStart(2, "0")}</StepTotal>
+              </StepNumber>
+
+              <CategoryLabel accentColor={category.accentColor}>
+                <CategoryIconWrapper accentColor={category.accentColor}>
+                  <category.icon size={20} />
+                </CategoryIconWrapper>
+                <CategoryLabelText>{category.label}</CategoryLabelText>
+                <CategoryCount accentColor={category.accentColor}>
+                  {category.techs.length}
+                </CategoryCount>
+                <CategoryLine accentColor={category.accentColor} />
+              </CategoryLabel>
+
+              <TechRow>
+                {category.techs.map((tech) => (
+                  <TechItem
+                    key={tech.name}
+                    className="tech-item"
                     color={tech.color}
-                    isHovered={hoveredCard === index}
                   >
-                    <CardGlow isVisible={hoveredCard === index} color={tech.color} />
-
-                    <CardHeader>
-                      <IconContainer color={tech.color}>
-                        <tech.icon size={24} color={tech.color} />
-                      </IconContainer>
-                      <Version>{tech.version}</Version>
-                    </CardHeader>
-
-                    <CardContent>
+                    <IconWrapper color={tech.color}>
+                      <tech.icon size={22} color={tech.color} />
+                    </IconWrapper>
+                    <TechInfo>
                       <TechName>{tech.name}</TechName>
-                      <TechDescription>{tech.description}</TechDescription>
-                    </CardContent>
+                      {tech.version && (
+                        <TechVersion>{tech.version}</TechVersion>
+                      )}
+                    </TechInfo>
+                  </TechItem>
+                ))}
+              </TechRow>
+            </CategoryGroup>
+          ))}
+        </ContentArea>
 
-                    <CardFooter>
-                      <StatusIndicator color={tech.color} />
-                      <StatusText>Utilisé activement</StatusText>
-                    </CardFooter>
-
-                    {/* Badge catégorie */}
-                    <CategoryBadge category={tech.category}>
-                      {tech.category === "mobile" && <FaMobile size={16} />}
-                      {tech.category === "web" && <FaGlobe size={16} />}
-                      {tech.category === "both" && <FaBolt size={16} />}
-                    </CategoryBadge>
-                  </TechCard>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </TechGrid>
-
-          {/* Message si aucune technologie */}
-          {filteredTechnologies.length === 0 && (
-            <EmptyState
-              as={motion.div}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            >
-              <EmptyIcon><FaSearch size={48} /></EmptyIcon>
-              <EmptyText>Aucune technologie trouvée dans cette catégorie</EmptyText>
-            </EmptyState>
-          )}
-        </Container>
-      </Section>
-    </motion.div>
+        <ProgressBar>
+          {categories.map((_, i) => (
+            <ProgressDot
+              key={i}
+              ref={(el) => {
+                dotsRef.current[i] = el;
+              }}
+            />
+          ))}
+        </ProgressBar>
+      </PinnedContent>
+    </Section>
   );
 };
 
+/* ── Styled Components ── */
+
 const Section = styled.section`
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(160deg, #0f0c29 0%, #1a1a3e 40%, #24243e 100%);
   position: relative;
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
-    pointer-events: none;
+  min-height: 100vh;
+`;
+
+const BackgroundOrb = styled.div`
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  filter: blur(130px);
+  opacity: 0.2;
+  pointer-events: none;
+  will-change: transform, background-color;
+  z-index: 0;
+
+  @media (max-width: 768px) {
+    width: 300px;
+    height: 300px;
+    filter: blur(80px);
   }
 `;
 
-const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+const FloatingShape = styled.div<{ $variant?: string }>`
+  position: absolute;
+  width: ${(p) => (p.$variant === "circle" ? "14px" : "18px")};
+  height: ${(p) => (p.$variant === "circle" ? "14px" : "18px")};
+  border: 2px solid rgba(102, 126, 234, 0.15);
+  border-radius: ${(p) => (p.$variant === "circle" ? "50%" : "4px")};
+  pointer-events: none;
+  will-change: transform;
+  z-index: 0;
+`;
+
+const PinnedContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2.5rem 2rem;
   position: relative;
   z-index: 1;
 `;
 
-const Header = styled.div`
+const TitleContainer = styled.div`
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 `;
 
 const Title = styled.h2`
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1a202c;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #667eea 0%, #a78bfa 50%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.125rem;
-  color: #64748b;
-  max-width: 600px;
+  font-size: 1.1rem;
+  color: #94a3b8;
+  max-width: 550px;
   margin: 0 auto;
   line-height: 1.6;
-`;
-
-const FilterContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
 
   @media (max-width: 768px) {
-    gap: 0.75rem;
+    font-size: 0.95rem;
   }
 `;
 
-const FilterButton = styled.button<{ active: boolean }>`
-  background: ${props => props.active
-    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-    : 'rgba(255, 255, 255, 0.9)'};
-  color: ${props => props.active ? 'white' : '#64748b'};
-  border: 2px solid ${props => props.active ? '#667eea' : '#e2e8f0'};
-  border-radius: 50px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+const ContentArea = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  min-height: 320px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  box-shadow: ${props => props.active
-    ? '0 10px 25px rgba(102, 126, 234, 0.3)'
-    : '0 4px 12px rgba(0, 0, 0, 0.05)'};
+  justify-content: center;
+  perspective: 1200px;
+`;
 
-  svg {
-    flex-shrink: 0;
-  }
+const CategoryGroup = styled.div`
+  position: absolute;
+  width: 100%;
+  will-change: transform, opacity;
+`;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
-    border-color: #667eea;
-  }
+const StepNumber = styled.div<{ accentColor: string }>`
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  color: transparent;
+  -webkit-text-stroke: 1.5px ${(p) => `${p.accentColor}40`};
+  will-change: transform, opacity;
 
   @media (max-width: 768px) {
-    padding: 0.6rem 1.25rem;
+    font-size: 2.5rem;
+  }
+`;
+
+const StepTotal = styled.span`
+  font-size: 1.2rem;
+  font-weight: 400;
+  -webkit-text-stroke-width: 1px;
+
+  @media (max-width: 768px) {
     font-size: 0.9rem;
   }
 `;
 
-const CountBadge = styled.span<{ active: boolean }>`
-  background: ${props => props.active ? 'rgba(255, 255, 255, 0.25)' : '#667eea'};
-  color: ${props => props.active ? 'white' : 'white'};
-  padding: 0.15rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  min-width: 24px;
-  text-align: center;
-`;
-
-const TechGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  min-height: 400px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-`;
-
-const TechCard = styled.div<{ bgGradient: string; color: string; isHovered: boolean }>`
-  background: ${props => props.bgGradient};
-  backdrop-filter: blur(10px);
-  border: 2px solid ${props => props.isHovered ? props.color : 'rgba(255, 255, 255, 0.2)'};
-  border-radius: 1.25rem;
-  padding: 1.75rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 1.25rem;
-    z-index: 0;
-  }
-
-  &:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-  }
-
-  > * {
-    position: relative;
-    z-index: 1;
-  }
-`;
-
-const CardGlow = styled.div<{ isVisible: boolean; color: string }>`
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle,
-    ${props => props.color}30 0%,
-    ${props => props.color}15 30%,
-    transparent 70%
-  );
-  opacity: ${props => props.isVisible ? 1 : 0};
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  animation: ${props => props.isVisible ? 'rotate 6s linear infinite' : 'none'};
-  z-index: 0;
-
-  @keyframes rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-`;
-
-const CardHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-`;
-
-const IconContainer = styled.div<{ color: string }>`
-  width: 60px;
-  height: 60px;
-  border-radius: 15px;
-  background: ${props => `${props.color}20`};
+const CategoryLabel = styled.div<{ accentColor: string }>`
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-
-  ${TechCard}:hover & {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 8px 25px ${props => `${props.color}40`};
-  }
-`;
-
-
-const Version = styled.span`
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-`;
-
-const CardContent = styled.div`
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
 `;
 
-const TechName = styled.h3`
+const CategoryIconWrapper = styled.div<{ accentColor: string }>`
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: ${(p) => `${p.accentColor}20`};
+  color: ${(p) => p.accentColor};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+`;
+
+const CategoryLabelText = styled.span`
   font-size: 1.25rem;
-  font-weight: 600;
-  color: #1a202c;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: #e2e8f0;
 `;
 
-const TechDescription = styled.p`
-  color: #64748b;
-  font-size: 0.875rem;
-  line-height: 1.5;
+const CategoryCount = styled.span<{ accentColor: string }>`
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: white;
+  background: ${(p) => p.accentColor};
+  padding: 0.2rem 0.6rem;
+  border-radius: 10px;
+  flex-shrink: 0;
 `;
 
-const CardFooter = styled.div`
+const CategoryLine = styled.div<{ accentColor: string }>`
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    ${(p) => `${p.accentColor}40`} 0%,
+    transparent 100%
+  );
+`;
+
+const TechRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+`;
+
+const TechItem = styled.div<{ color: string }>`
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid ${(p) => `${p.color}30`};
+  border-radius: 60px;
+  padding: 0.65rem 1.3rem 0.65rem 0.65rem;
+  white-space: nowrap;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  cursor: default;
+  will-change: transform, opacity;
+
+  &:hover {
+    transform: translateY(-5px) scale(1.06);
+    box-shadow: 0 14px 40px ${(p) => `${p.color}30`};
+    border-color: ${(p) => `${p.color}70`};
+    background: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+const IconWrapper = styled.div<{ color: string }>`
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: ${(p) => `${p.color}18`};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.35s ease;
+
+  ${TechItem}:hover & {
+    transform: rotate(12deg) scale(1.15);
+    background: ${(p) => `${p.color}30`};
+    box-shadow: 0 0 20px ${(p) => `${p.color}40`};
+  }
+`;
+
+const TechInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
 `;
 
-const StatusIndicator = styled.div<{ color: string }>`
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: ${props => props.color};
-  animation: pulse 2s infinite;
-
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.5;
-    }
-  }
+const TechName = styled.span`
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e2e8f0;
 `;
 
-const StatusText = styled.span`
-  font-size: 0.75rem;
-  color: #64748b;
-  font-weight: 500;
+const TechVersion = styled.span`
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  letter-spacing: 0.3px;
 `;
 
-const CategoryBadge = styled.div<{ category: string }>`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.25rem;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 0.4rem;
+const ProgressBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 2.5rem;
+`;
+
+const ProgressDot = styled.div`
+  width: 10px;
+  height: 10px;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 2;
+  background: #334155;
+  will-change: transform, width, background-color;
 `;
 
-const EmptyState = styled.div`
-  text-align: center;
-  padding: 4rem 2rem;
-`;
-
-const EmptyIcon = styled.div`
-  margin-bottom: 1rem;
-  opacity: 0.5;
-  color: #64748b;
-`;
-
-const EmptyText = styled.p`
-  font-size: 1.125rem;
-  color: #64748b;
-`;
-
-export default TechUsed; 
+export default TechUsed;
