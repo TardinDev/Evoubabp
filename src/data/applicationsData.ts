@@ -66,7 +66,7 @@ export const applicationsData: ApplicationsData = {
       title: "Shopping Perroquet",
       description: "Site e-commerce proposant une large sélection de produits avec une expérience d'achat fluide et moderne.",
       image: "/imagesAppsMobile/e-commerceShoppingPerroquet.png",
-      url: "",
+      url: "https://maquette-ecommerce.vercel.app/",
       technologies: ["React", "TypeScript", "Tailwind CSS", "Zustand", "Zod", "Express", "Supabase", "Prisma", "PostgreSQL"],
       category: "E-commerce",
       year: "2025"

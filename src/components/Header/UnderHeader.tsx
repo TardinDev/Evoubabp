@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 
 const carouselWords = [
   "Tardin",
-  <>Développeur<br/>Logiciel</>
+  <>Développeur<br />Logiciel</>
 ];
 
 export default function UnderHeader() {
@@ -29,7 +29,7 @@ export default function UnderHeader() {
 
     <UnderHeaderStyle>
       {/* Section container */}
-      <motion.div 
+      <motion.div
         variants={staggerContainer}
         initial="hidden"
         whileInView="show"
@@ -58,20 +58,20 @@ export default function UnderHeader() {
             </span>
             .
           </motion.span>
-          <motion.span 
+          <motion.span
             variants={fadeIn("left", "tween", 0.2, 1)}
             className="secondText"
           >
             <span>Je conçois des solutions intelligentes</span>
             <br />
             <span>alimentées par l'IA pour transformer</span>
-            <br/>
-            <span>l'avenir de votre entreprise.</span>            
+            <br />
+            <span>l'avenir de votre entreprise.</span>
           </motion.span>
         </div>
 
         {/* Person image */}
-        <motion.div 
+        <motion.div
           variants={fadeIn("up", "tween", 0.2, 1)}
           className="person"
         >
@@ -79,13 +79,13 @@ export default function UnderHeader() {
         </motion.div>
 
         {/* CV download */}
-        <motion.a 
-            variants={fadeIn("right", "tween", 0.2, 1)}
-            className="CV" 
-            href={cv} 
-            download={cv} // attribut pour forcer le téléchargement
-         >
-            Télécharger mon CV
+        <motion.a
+          variants={fadeIn("right", "tween", 0.2, 1)}
+          className="CV"
+          href={cv}
+          download={cv} // attribut pour forcer le téléchargement
+        >
+          Télécharger mon CV
         </motion.a>
 
         {/* <motion.a 
@@ -97,7 +97,7 @@ export default function UnderHeader() {
 
         {/* Down element */}
         <div className="downElement">
-          <motion.div 
+          <motion.div
             variants={fadeIn("right", "tween", 0.2, 1)}
             className="experience"
           >
@@ -109,43 +109,43 @@ export default function UnderHeader() {
               </div>
             </div>
             <div className="iconsContact">
-              <FaFacebook size={50} color="blue"/>
-              <FaTiktok size={50} color="#000"/>
-              <IoLogoWhatsapp size={50} color="green"/>
-              <FaYoutube size={50} color="red"/>
+              <FaFacebook size={50} color="blue" />
+              <FaTiktok size={50} color="#000" />
+              <IoLogoWhatsapp size={50} color="green" />
+              <FaYoutube size={50} color="red" />
             </div>
           </motion.div>
 
-          <motion.div 
-              variants={fadeIn("left", "tween", 0.2, 1)}
-              className="certificat-container"
->
-          <div>
-            Découvrez mes projets intégrant l'IA, l'automatisation intelligente <br/>
-            et les dernières innovations technologiques sur Vercel et GitHub !
-          </div>
-
-          <div className="vercelAndGithub">
-            <div className="certificat">
-              <IoLogoVercel size={55} color="#000" className="icon-certificat" />
-              <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="link-certificat"> <span>Vercel</span></a>
+          <motion.div
+            variants={fadeIn("left", "tween", 0.2, 1)}
+            className="certificat-container"
+          >
+            <div>
+              Découvrez mes projets intégrant l'IA, l'automatisation intelligente <br />
+              et les dernières innovations technologiques sur Vercel et GitHub !
             </div>
 
-            <div className="certificat">
-            <div style={{ height: "2rem", width: "3rem", }}>
-              <Lottie
-                 animationData={gitHubAnimation}
-                 loop
-                 autoplay
-               />
-            </div>
-          <a href="https://github.com/TardinDev" target="_blank" rel="noopener noreferrer" className="link-certificat"> <span>GitHub</span> </a>
-            </div>
-          </div>
-   
-         </motion.div>
+            <div className="vercelAndGithub">
+              <div className="certificat">
+                <IoLogoVercel size={55} color="#000" className="icon-certificat" />
+                <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="link-certificat"> <span>Vercel</span></a>
+              </div>
 
-    
+              <div className="certificat">
+                <div style={{ height: "2rem", width: "3rem", }}>
+                  <Lottie
+                    animationData={gitHubAnimation}
+                    loop
+                    autoplay
+                  />
+                </div>
+                <a href="https://github.com/TardinDev" target="_blank" rel="noopener noreferrer" className="link-certificat"> <span>GitHub</span> </a>
+              </div>
+            </div>
+
+          </motion.div>
+
+
         </div>
       </motion.div>
     </UnderHeaderStyle>

@@ -1,5 +1,6 @@
 import { Routes, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import './App.css'
 import { renderRoutes } from './routes'
 import GlobalStyle from './styles/GlobalStyle'
@@ -71,6 +72,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <Analytics />
       <Routes>
         {renderRoutes()}
       </Routes>
