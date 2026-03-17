@@ -4,10 +4,12 @@ interface SEOHeadProps {
   title: string
   description: string
   canonical: string
+  keywords?: string
   ogTitle?: string
   ogDescription?: string
   ogImage?: string
   ogType?: string
+  jsonLd?: Record<string, unknown>
 }
 
 function setMetaTag(property: string, content: string, isProperty = false) {
@@ -39,15 +41,20 @@ export default function SEOHead({
   title,
   description,
   canonical,
+  keywords,
   ogTitle,
   ogDescription,
   ogImage = 'https://evoubap.com/evoubapfavicon.jpeg',
   ogType = 'website',
+  jsonLd,
 }: SEOHeadProps) {
   useEffect(() => {
     document.title = title
 
     setMetaTag('description', description)
+    if (keywords) {
+      setMetaTag('keywords', keywords)
+    }
 
     setCanonical(canonical)
 
@@ -61,7 +68,19 @@ export default function SEOHead({
     setMetaTag('twitter:description', ogDescription || description, true)
     setMetaTag('twitter:url', canonical, true)
     setMetaTag('twitter:image', ogImage, true)
-  }, [title, description, canonical, ogTitle, ogDescription, ogImage, ogType])
+
+    if (jsonLd) {
+      const id = 'seo-jsonld'
+      let script = document.getElementById(id) as HTMLScriptElement | null
+      if (!script) {
+        script = document.createElement('script')
+        script.id = id
+        script.type = 'application/ld+json'
+        document.head.appendChild(script)
+      }
+      script.textContent = JSON.stringify(jsonLd)
+    }
+  }, [title, description, canonical, keywords, ogTitle, ogDescription, ogImage, ogType, jsonLd])
 
   return null
 }

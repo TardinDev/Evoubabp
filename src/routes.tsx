@@ -8,6 +8,8 @@ import PaymentPage from './Pages/PaymentPage'
 import MentionsLegalesPage from './Pages/MentionsLegalesPage'
 import PolitiqueConfidentialitePage from './Pages/PolitiqueConfidentialitePage'
 import CGUPage from './Pages/CGUPage'
+import BlogPage from './Pages/BlogPage'
+import BlogArticlePage from './Pages/BlogArticlePage'
 import NotFoundPage from './Pages/NotFoundPage'
 
 export const routes = [
@@ -46,6 +48,14 @@ export const routes = [
   {
     path: '/cgu',
     element: <CGUPage />,
+  },
+  {
+    path: '/blog',
+    element: <BlogPage />,
+  },
+  {
+    path: '/blog/:slug',
+    element: <BlogArticlePage />,
   },
   {
     path: '*',

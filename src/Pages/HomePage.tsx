@@ -55,9 +55,10 @@ export default function HomePage() {
       <ActiveSectionProvider value={{ activeSection, activeColor }}>
         <div>
           <SEOHead
-            title="Davy Tardin - Développeur Full-Stack | Applications Mobile & Web"
-            description="Portfolio de Davy Tardin, développeur full-stack spécialisé en React Native, React et Node.js. Création d'applications mobiles et web innovantes. Freelance en France."
+            title="Davy Tardin — Développeur React & React Native Freelance à Paris"
+            description="Développeur React freelance à Paris, spécialisé React Native, Node.js et TypeScript. Création d'applications web et mobiles performantes. Disponible pour missions freelance et CDI."
             canonical="https://evoubap.com/"
+            keywords="développeur React Paris, React Native freelance, TypeScript, Node.js, freelance, Paris, disponible, mission freelance"
           />
           <Header />
           <div id="header-section">

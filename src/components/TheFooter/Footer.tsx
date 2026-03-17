@@ -40,6 +40,7 @@ export default function Footer() {
               <FooterLink href="#app-showcase">Applications Web</FooterLink>
               <FooterLink href="#howItWorks">Développement SaaS</FooterLink>
               <FooterLinkStyled to="/formations">Formations</FooterLinkStyled>
+              <FooterLinkStyled to="/blog">Blog</FooterLinkStyled>
               <FooterLink href="#howItWorks">Consulting</FooterLink>
             </FooterColumn>
 
