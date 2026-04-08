@@ -14,7 +14,7 @@ import { useActiveSectionContext } from "../../contexts/ActiveSectionContext";
 const Menu = ({ menuOpened }) => {
   return (
     <ul
-      className="uppercase text-base list-none gap-6 cursor-pointer flex justify-around items-center sm:static sm:flex-row sm:w-auto sm:max-h-none sm:overflow-visible sm:bg-transparent sm:p-0 sm:rounded-none sm:items-center sm:justify-around max-sm:absolute max-sm:list-none max-sm:gap-8 max-sm:font-medium max-sm:flex-col max-sm:right-0 max-sm:top-12 max-sm:w-1/2 max-sm:min-w-[15rem] max-sm:max-h-[80vh] max-sm:overflow-auto max-sm:bg-white max-sm:p-8 max-sm:flex max-sm:rounded-2xl max-sm:transition-all max-sm:duration-300 max-sm:items-start max-sm:justify-end max-sm:shadow-md"
+      className="uppercase text-base list-none gap-6 cursor-pointer flex justify-around items-center sm:static sm:flex-row sm:w-auto sm:max-h-none sm:overflow-visible sm:bg-transparent sm:p-0 sm:rounded-none sm:items-center sm:justify-around max-sm:absolute max-sm:list-none max-sm:gap-8 max-sm:font-medium max-sm:flex-col max-sm:right-0 max-sm:top-12 max-sm:w-1/2 max-sm:w-[85vw] max-sm:max-w-[15rem] max-sm:max-h-[80vh] max-sm:overflow-auto max-sm:bg-white max-sm:p-8 max-sm:flex max-sm:rounded-2xl max-sm:transition-all max-sm:duration-300 max-sm:items-start max-sm:justify-end max-sm:shadow-md"
       style={getMenuStyles(menuOpened)}
     >
       <li className="list-none hover:text-accent-blue">

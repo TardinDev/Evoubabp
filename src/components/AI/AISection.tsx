@@ -85,14 +85,14 @@ const AISection: React.FC<AISectionProps> = ({ id }) => {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] max-md:grid-cols-1 gap-8 max-md:gap-6 max-[480px]:gap-4 mb-16 max-md:mb-12 max-[480px]:mb-8 relative z-[2]">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] max-md:grid-cols-1 gap-8 max-md:gap-6 max-[480px]:gap-4 mb-16 max-md:mb-12 max-[480px]:mb-8 relative z-[2]">
           {aiFeatures.map((feature, index) => (
             <motion.div
               key={index}
               variants={fadeIn('up', 'spring', 0.3 + index * 0.1, 0.8)}
             >
               <div
-                className="group bg-white/5 backdrop-blur-[10px] rounded-[20px] p-8 border border-white/10 relative overflow-hidden transition-all duration-300 hover:-translate-y-2.5 hover:border-[rgba(102,126,234,0.3)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+                className="group bg-white/5 backdrop-blur-[10px] rounded-[20px] p-4 sm:p-8 border border-white/10 relative overflow-hidden transition-all duration-300 hover:-translate-y-2.5 hover:border-[rgba(102,126,234,0.3)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
               >
                 {/* Top gradient line (::before) */}
                 <div

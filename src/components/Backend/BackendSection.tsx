@@ -103,7 +103,7 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
           </div>
         </motion.div>
 
-        <div className="grid gap-10 mb-16 md:mb-12 max-[480px]:mb-8 relative z-[2] md:grid-cols-1 md:gap-8 max-[480px]:gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
+        <div className="grid gap-10 mb-16 md:mb-12 max-[480px]:mb-8 relative z-[2] md:grid-cols-1 md:gap-8 max-[480px]:gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))' }}>
           {backendTechnologies.map((tech, index) => (
             <motion.div
               key={index}

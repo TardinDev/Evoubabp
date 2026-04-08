@@ -62,10 +62,8 @@ const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
           tabIndex={isClickable ? 0 : -1}
           role={isClickable ? "button" : undefined}
           aria-label={isClickable ? `Voir ${app.title}` : undefined}
-          className="bg-white rounded-2xl shadow-md shrink-0 overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2 max-md:max-w-[350px] max-[480px]:w-[95%] max-md:w-[90%]"
+          className="bg-white rounded-2xl shadow-md shrink-0 overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2 w-full max-w-[340px] max-sm:max-w-full"
           style={{
-            minWidth: type === "mobile" ? "280px" : "320px",
-            maxWidth: type === "mobile" ? "300px" : "340px",
             cursor: isClickable ? "pointer" : "default",
           }}
         >

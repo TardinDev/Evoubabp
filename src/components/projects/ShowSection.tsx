@@ -20,7 +20,7 @@ const ShowSection = ({ images, direction }: { images: string[]; direction: 'left
             key={index}
             src={`/images/${img}`}
             alt={`App ${index + 1}`}
-            className="w-[100px] h-[100px] rounded-[10px] transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-[10deg]"
+            className="w-16 h-16 sm:w-[100px] sm:h-[100px] rounded-[10px] transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-[10deg]"
           />
         ))}
       </animated.div>

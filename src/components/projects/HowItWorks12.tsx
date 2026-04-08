@@ -326,7 +326,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
           {/* Dev Practices Section */}
           <motion.div variants={fadeIn("up", "tween", 0.7, 0.8)}>
             <div
-              className="mb-16 p-12 md:p-6 md:mb-12 rounded-3xl backdrop-blur-[10px]"
+              className="mb-16 p-4 sm:p-6 md:p-12 md:mb-12 rounded-3xl backdrop-blur-[10px]"
               style={{
                 background: 'rgba(255, 255, 255, 0.03)',
                 border: '1px solid rgba(255, 255, 255, 0.08)',

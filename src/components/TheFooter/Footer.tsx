@@ -86,7 +86,7 @@ export default function Footer() {
           </div>
 
           {/* Links section */}
-          <div className="grid grid-cols-3 gap-8 max-sm:grid-cols-1 max-sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Services column */}
             <div className="flex flex-col gap-4">
               <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">Services</h3>

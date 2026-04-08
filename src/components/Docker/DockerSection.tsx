@@ -85,14 +85,14 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
                     </div>
                 </motion.div>
 
-                <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] max-md:grid-cols-1 gap-8 max-md:gap-6 max-[480px]:gap-4 mb-16 max-md:mb-12 max-[480px]:mb-8 relative z-[2]">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] max-md:grid-cols-1 gap-8 max-md:gap-6 max-[480px]:gap-4 mb-16 max-md:mb-12 max-[480px]:mb-8 relative z-[2]">
                     {dockerFeatures.map((feature, index) => (
                         <motion.div
                             key={index}
                             variants={fadeIn('up', 'spring', 0.3 + index * 0.1, 0.8)}
                         >
                             <div
-                                className="group backdrop-blur-[10px] rounded-[20px] p-8 border border-[rgba(148,163,184,0.1)] relative overflow-hidden transition-all duration-300 h-full hover:-translate-y-2.5 hover:border-[rgba(56,189,248,0.3)] hover:shadow-[0_20px_40px_rgba(15,23,42,0.4)] hover:bg-[rgba(30,41,59,0.6)]"
+                                className="group backdrop-blur-[10px] rounded-[20px] p-4 sm:p-8 border border-[rgba(148,163,184,0.1)] relative overflow-hidden transition-all duration-300 h-full hover:-translate-y-2.5 hover:border-[rgba(56,189,248,0.3)] hover:shadow-[0_20px_40px_rgba(15,23,42,0.4)] hover:bg-[rgba(30,41,59,0.6)]"
                                 style={{ background: 'rgba(30, 41, 59, 0.4)' }}
                             >
                                 {/* Top gradient line (::before) */}

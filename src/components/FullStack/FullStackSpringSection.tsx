@@ -143,7 +143,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
               </div>
             </motion.div>
 
-            <div className="grid gap-16 mb-16 items-center max-[968px]:grid-cols-1 max-[968px]:gap-12" style={{ gridTemplateColumns: '1fr 1.1fr' }}>
+            <div className="grid gap-16 mb-16 items-center grid-cols-1 min-[968px]:grid-cols-[1fr_1.1fr] max-[968px]:gap-12">
               <motion.div variants={fadeIn('right', 'tween', 0.1, 0.8)}>
                 <div>
                   {/* Official Badge */}
@@ -358,7 +358,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
               </div>
             </motion.div>
 
-            <div className="grid gap-8 max-[968px]:grid-cols-1" style={{ gridTemplateColumns: '1.2fr 1fr' }}>
+            <div className="grid gap-8 grid-cols-1 min-[968px]:grid-cols-[1.2fr_1fr]">
               <motion.div variants={fadeIn('right', 'spring', 0.4, 0.8)}>
                 <div
                   className="rounded-2xl p-8 text-white"

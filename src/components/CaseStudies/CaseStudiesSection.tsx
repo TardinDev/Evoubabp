@@ -174,8 +174,7 @@ const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ id }) => {
                 >
                   {/* StudyHeader */}
                   <div
-                    className="grid cursor-pointer md:grid-cols-1"
-                    style={{ gridTemplateColumns: '300px 1fr' }}
+                    className="grid cursor-pointer grid-cols-1 md:grid-cols-[300px_1fr]"
                     onClick={() => toggleStudy(study.id)}
                   >
                     {/* StudyImageWrapper */}

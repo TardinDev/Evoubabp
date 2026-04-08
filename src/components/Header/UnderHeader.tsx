@@ -48,7 +48,7 @@ export default function UnderHeader() {
             className="cursor-pointer transition-all duration-500 ease-in-out p-2 rounded-[10px] font-semibold text-black relative z-[2] -ml-6 hover:bg-[#4b0082] hover:text-white hover:scale-110 hover:border hover:border-purple-800 hover:rounded-[10px] hover:px-4 hover:py-2 hover:no-underline hover:z-10 group"
           >
             Bonjour,<br /> Je suis{" "}
-            <span className="inline-block relative w-[280px] h-[2.4em] align-top">
+            <span className="inline-block relative w-[min(280px,70vw)] h-[2.4em] align-top">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={currentIndex}
@@ -121,10 +121,10 @@ export default function UnderHeader() {
             </div>
             {/* iconsContact */}
             <div className="flex gap-4 mt-2 cursor-pointer [&>svg]:transition-transform [&>svg]:duration-300 [&>svg]:ease-in-out hover:[&>svg]:scale-[1.2]">
-              <FaFacebook size={50} color="blue" className="transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
-              <FaTiktok size={50} color="#000" className="transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
-              <IoLogoWhatsapp size={50} color="green" className="transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
-              <FaYoutube size={50} color="red" className="transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <FaFacebook color="blue" className="w-10 h-10 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <FaTiktok color="#000" className="w-10 h-10 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <IoLogoWhatsapp color="green" className="w-10 h-10 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <FaYoutube color="red" className="w-10 h-10 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
             </div>
           </motion.div>
 

@@ -69,7 +69,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
   return (
     <section
       id={id}
-      className="flex flex-col items-center px-8 py-20 gap-8 rounded-2xl w-full max-w-[100vw] overflow-x-hidden"
+      className="flex flex-col items-center px-4 sm:px-8 py-20 gap-8 rounded-2xl w-full max-w-[100vw] overflow-x-hidden"
       style={{
         background: 'linear-gradient(135deg, #f5f7fa, #e4ecf5)',
         boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)',
@@ -81,7 +81,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
         variants={fadeIn('up', 'spring', 0.2, 1)}
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-[2.5rem] font-bold text-[#3a3b3c] text-center mt-4">
+        <h2 className="text-2xl sm:text-[2.5rem] font-bold text-[#3a3b3c] text-center mt-4">
           Services Proposés
         </h2>
         <p className="text-[1.2rem] text-[#6c757d] text-center">

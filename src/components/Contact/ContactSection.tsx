@@ -140,7 +140,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
 
         {/* GlowEffect */}
         <div
-          className="absolute top-[30%] right-[10%] w-[500px] h-[500px] pointer-events-none"
+          className="absolute top-[30%] right-[10%] w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 60%)',
           }}
@@ -351,7 +351,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
 
             <motion.div variants={fadeIn("left", "spring", 0.3, 0.8)}>
               <div
-                className="rounded-3xl p-10 backdrop-blur-[10px] md:p-6"
+                className="rounded-3xl p-4 sm:p-6 md:p-10 backdrop-blur-[10px]"
                 style={{
                   background: 'rgba(255, 255, 255, 0.05)',
                   border: '1px solid rgba(255, 255, 255, 0.1)',

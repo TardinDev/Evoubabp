@@ -261,11 +261,11 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
 
           {/* StatsRow */}
           <div
-            className="flex justify-center items-center gap-12 sm:gap-6 py-8"
+            className="flex justify-center items-center gap-4 sm:gap-8 md:gap-12 py-8"
             style={{ borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}
           >
             <div className="text-center">
-              <div className="text-[2rem] sm:text-2xl font-bold text-[#ffd700] mb-1">
+              <div className="text-xl sm:text-2xl md:text-[2rem] font-bold text-[#ffd700] mb-1">
                 50+
               </div>
               <div className="text-[0.85rem] text-white/40 font-medium">
@@ -274,7 +274,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
             </div>
             <div className="w-px h-10" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
             <div className="text-center">
-              <div className="text-[2rem] sm:text-2xl font-bold text-[#ffd700] mb-1">
+              <div className="text-xl sm:text-2xl md:text-[2rem] font-bold text-[#ffd700] mb-1">
                 100%
               </div>
               <div className="text-[0.85rem] text-white/40 font-medium">
@@ -283,7 +283,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
             </div>
             <div className="w-px h-10" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
             <div className="text-center">
-              <div className="text-[2rem] sm:text-2xl font-bold text-[#ffd700] mb-1">
+              <div className="text-xl sm:text-2xl md:text-[2rem] font-bold text-[#ffd700] mb-1">
                 5.0
               </div>
               <div className="text-[0.85rem] text-white/40 font-medium">

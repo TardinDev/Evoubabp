@@ -100,7 +100,7 @@ const DevToolsSectionTest = () => {
           {/* Content Wrapper */}
           <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-16 max-lg:gap-12 items-center mb-20">
             {/* Circular Process */}
-            <div className="relative w-[450px] h-[450px] max-md:w-[350px] max-md:h-[350px] mx-auto">
+            <div className="relative w-[min(450px,90vw)] h-[min(450px,90vw)] max-md:w-[min(350px,90vw)] max-md:h-[min(350px,90vw)] mx-auto">
               {/* Center Hub */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-[180px] max-md:w-[140px] max-md:h-[140px] rounded-full border-[3px] border-slate-200 shadow-[0_20px_60px_rgba(0,0,0,0.1)] flex items-center justify-center z-10" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)' }}>
                 <AnimatePresence mode="wait">

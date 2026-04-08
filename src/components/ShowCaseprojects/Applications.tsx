@@ -26,7 +26,7 @@ export default function ApplicationsSection() {
         </p>
 
         {/* Section Mobile Apps */}
-        <div className="grid gap-8 md:grid-cols-1 md:gap-6 max-[480px]:gap-4 mb-12 md:mb-8 max-[480px]:mb-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+        <div className="grid gap-8 md:grid-cols-1 md:gap-6 max-[480px]:gap-4 mb-12 md:mb-8 max-[480px]:mb-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))' }}>
           <div className="bg-white rounded-2xl p-6 md:p-5 max-[480px]:p-4 max-[480px]:rounded-lg transition-all duration-300 hover:-translate-y-[5px] hover:shadow-lg" style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
             <div className="mb-4 max-[480px]:mb-3 flex justify-center items-center">
               <img
@@ -59,7 +59,7 @@ export default function ApplicationsSection() {
         </div>
 
         {/* Section Web Apps */}
-        <div className="grid gap-8 md:grid-cols-1 md:gap-6 max-[480px]:gap-4 mb-12 md:mb-8 max-[480px]:mb-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+        <div className="grid gap-8 md:grid-cols-1 md:gap-6 max-[480px]:gap-4 mb-12 md:mb-8 max-[480px]:mb-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))' }}>
           <div className="bg-white rounded-2xl p-6 md:p-5 max-[480px]:p-4 max-[480px]:rounded-lg transition-all duration-300 hover:-translate-y-[5px] hover:shadow-lg" style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
             <div className="mb-4 max-[480px]:mb-3 flex justify-center items-center">
               <img

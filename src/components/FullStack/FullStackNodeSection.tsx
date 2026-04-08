@@ -155,7 +155,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
               </div>
             </motion.div>
 
-            <div className="grid gap-12 mb-16 max-[968px]:grid-cols-1 max-[968px]:gap-8" style={{ gridTemplateColumns: '1fr 1.2fr' }}>
+            <div className="grid gap-12 mb-16 grid-cols-1 min-[968px]:grid-cols-[1fr_1.2fr] max-[968px]:gap-8">
               {/* Left Column */}
               <div className="flex flex-col gap-8">
                 <motion.div variants={fadeIn('right', 'spring', 0.2, 0.8)}>
