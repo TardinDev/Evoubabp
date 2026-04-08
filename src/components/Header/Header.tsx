@@ -39,7 +39,7 @@ const Menu = ({ menuOpened }) => {
       </li>
       <li className="normal-case flex gap-[0.1rem] flex-wrap items-center font-bold hover:text-secondary list-none">
         <p>tardindavy@gmail.com</p>
-        <IoIosMail size={"60px"} className="text-secondary p-[5px] bg-white rounded-[20px] shadow-[0px_4px_4px_rgba(0,0,0,0.35)]" />
+        <IoIosMail size={"52px"} className="text-secondary p-[5px] bg-white rounded-[20px] shadow-[0px_4px_4px_rgba(0,0,0,0.35)]" />
       </li>
     </ul>
   );
@@ -60,7 +60,7 @@ const Header = () => {
 
   return (
     <div
-      className="py-4 px-8 z-[99] opacity-100 sticky top-0 transition-all duration-300 ease-in-out"
+      className="py-3 px-6 z-[99] opacity-100 sticky top-0 transition-all duration-300 ease-in-out"
       style={{ backgroundColor: activeColor, transition: 'background-color 500ms ease, all 300ms ease' }}
     >
       <motion.div
@@ -71,7 +71,7 @@ const Header = () => {
         className="bg-transparent p-0 flex justify-between font-medium flex-wrap relative"
         style={{ boxShadow: headerShadow }}
       >
-        <div className="font-bold text-purple-800" style={{ fontSize: 'clamp(1.5rem, 4vw + 1rem, 3rem)' }}>
+        <div className="font-bold text-purple-800" style={{ fontSize: 'clamp(1.3rem, 3.5vw + 0.9rem, 2.6rem)' }}>
           <a href="Home" className="text-[#4b0082] no-underline">Evoubap</a>
         </div>
 
@@ -79,7 +79,7 @@ const Header = () => {
 
         {/* for menu in small screen */}
         <div className="hidden md:hidden max-md:block cursor-pointer" onClick={toggleMenu}>
-          <BiMenuAltRight size={30} color="purple" />
+          <BiMenuAltRight size={26} color="purple" />
         </div>
       </motion.div>
     </div>

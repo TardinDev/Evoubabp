@@ -38,14 +38,14 @@ const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
   const isClickable = (type === "web" && app.url) || onCardClick;
 
   return (
-      <motion.div variants={variants} className="shrink-0 w-[220px] md:w-[380px]">
+      <motion.div variants={variants} className={`shrink-0 ${type === "mobile" ? "w-[220px] md:w-[350px]" : "w-[195px] md:w-[330px]"}`}>
         <div
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           tabIndex={isClickable ? 0 : -1}
           role={isClickable ? "button" : undefined}
           aria-label={isClickable ? `Voir ${app.title}` : undefined}
-          className="bg-white rounded-xl md:rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2 h-full"
+          className={`${type === "mobile" ? "bg-transparent" : "bg-white shadow-md hover:shadow-lg"} rounded-xl md:rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2 h-full`}
           style={{
             cursor: isClickable ? "pointer" : "default",
           }}
@@ -54,9 +54,8 @@ const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
             className="relative w-full"
             style={{
               height: type === "mobile"
-                ? "clamp(8rem, 20vw, 22rem)"
-                : "clamp(9rem, 22vw, 20rem)",
-              backgroundColor: '#f8fafc',
+                ? "clamp(12rem, 30vw, 24rem)"
+                : "clamp(8rem, 19vw, 17rem)",
             }}
           >
             {imageError ? (
@@ -78,24 +77,23 @@ const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
                 style={{
                   objectFit: type === "mobile" ? "contain" : "cover",
                   objectPosition: "center",
-                  backgroundColor: type === "mobile" ? "#f8fafc" : "transparent",
                 }}
               />
             )}
           </div>
 
-          <div className="p-3 md:p-5">
+          <div className="p-2.5 md:p-4">
             <div className="flex justify-between items-start mb-1 md:mb-2">
-              <h3 className="font-semibold text-sm md:text-xl text-gray-800 flex-1 line-clamp-1">{app.title}</h3>
+              <h3 className="font-semibold text-sm md:text-lg text-gray-800 flex-1 line-clamp-1">{app.title}</h3>
               {type === "web" && app.url && (
                 <div className="text-blue-500 ml-1 md:ml-2 shrink-0" aria-label="Lien externe">
-                  <ExternalLink size={14} className="md:hidden" />
-                  <ExternalLink size={18} className="hidden md:block" />
+                  <ExternalLink size={12} className="md:hidden" />
+                  <ExternalLink size={16} className="hidden md:block" />
                 </div>
               )}
             </div>
 
-            <p className="text-gray-500 text-xs md:text-base leading-5 md:leading-6 mb-2 md:mb-4 line-clamp-2 md:line-clamp-none">{app.description}</p>
+            <p className="text-gray-500 text-xs md:text-sm leading-5 md:leading-6 mb-2 md:mb-4 line-clamp-2 md:line-clamp-none">{app.description}</p>
 
             {app.technologies && app.technologies.length > 0 && (
               <div className="flex flex-wrap gap-1 md:gap-2 mb-1 md:mb-3">

@@ -69,7 +69,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
   return (
     <section
       id={id}
-      className="flex flex-col items-center px-4 sm:px-8 py-20 gap-8 rounded-2xl w-full max-w-[100vw] overflow-x-hidden"
+      className="flex flex-col items-center px-4 sm:px-8 py-16 gap-8 rounded-2xl w-full max-w-[100vw] overflow-x-hidden"
       style={{
         background: 'linear-gradient(135deg, #f5f7fa, #e4ecf5)',
         boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)',
@@ -81,10 +81,10 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
         variants={fadeIn('up', 'spring', 0.2, 1)}
         viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-2xl sm:text-[2.5rem] font-bold text-[#3a3b3c] text-center mt-4">
+        <h2 className="text-xl sm:text-[2.2rem] font-bold text-[#3a3b3c] text-center mt-4">
           Services Proposés
         </h2>
-        <p className="text-[1.2rem] text-[#6c757d] text-center">
+        <p className="text-[1.05rem] text-[#6c757d] text-center">
           Donner vie à vos idées dans vos délais et votre budget.
         </p>
       </motion.div>
@@ -115,12 +115,12 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                 }}
               >
                 <span
-                  className="text-[2rem] mr-4"
+                  className="text-[1.75rem] mr-4"
                   style={{ color: serviceContent[service].color }}
                 >
                   {serviceContent[service].icon}
                 </span>
-                <span className="text-[1.2rem] font-medium text-[#3a3b3c]">
+                <span className="text-[1.05rem] font-medium text-[#3a3b3c]">
                   {serviceContent[service].title}
                 </span>
               </li>
@@ -136,7 +136,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
           className="flex-[1.5] bg-[#f8f9fa] rounded-2xl p-8 text-center md:text-left w-full order-2 md:order-none sm:p-6"
           style={{ boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)' }}
         >
-          <h3 className="text-[1.5rem] text-[#3a3b3c] mb-4">
+          <h3 className="text-[1.3rem] text-[#3a3b3c] mb-4">
             {serviceContent[selectedService].title}
           </h3>
           <p className="text-base text-[#6c757d] mb-6 [&_a]:no-underline">
@@ -162,7 +162,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
             animationData={serviceContent[selectedService].animationData}
             loop
             autoplay
-            style={{ width: '100%', maxHeight: '300px', marginTop: '1rem' }}
+            style={{ width: '100%', maxHeight: '260px', marginTop: '1rem' }}
           />
         </motion.div>
       </div>

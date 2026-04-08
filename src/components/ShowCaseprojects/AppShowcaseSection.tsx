@@ -30,12 +30,12 @@ const AppShowcaseSection = () => {
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
       >
-        <section id="projects" className="px-4 sm:px-8 pt-4 pb-8" style={{ backgroundColor: '#d4e4fa' }}>
+        <section id="projects" className="px-4 sm:px-6 pt-3 pb-6" style={{ backgroundColor: '#d4e4fa' }}>
           <motion.div variants={fadeIn("up", "tween", 0.1, 1)}>
-            <div className="mb-10 last:mb-0">
-              <h2 className="text-3xl font-bold mb-4 text-gray-800">Applications Mobiles</h2>
-              <p className="text-gray-500 mb-6 text-base">Quelques applications mobiles que j&apos;ai développées.</p>
-              <div className="showcase-cards-container flex flex-nowrap gap-3 md:gap-6 overflow-x-auto pb-3" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db #f3f4f6' }}>
+            <div className="mb-8 last:mb-0">
+              <h2 className="text-2xl font-bold mb-3 text-gray-800">Applications Mobiles</h2>
+              <p className="text-gray-500 mb-5 text-sm">Quelques applications mobiles que j&apos;ai développées.</p>
+              <div className="showcase-cards-container flex flex-nowrap gap-1 md:gap-3 overflow-x-auto pb-3" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db #f3f4f6' }}>
                 {applicationsData.mobile.map((app, index) => (
                   <AppCard
                     key={`mobile-${index}`}
@@ -51,9 +51,9 @@ const AppShowcaseSection = () => {
           </motion.div>
 
           <motion.div variants={fadeIn("up", "tween", 0.3, 1)}>
-            <div className="mb-10 last:mb-0">
-              <h2 className="text-3xl font-bold mb-4 text-gray-800">Applications Web</h2>
-              <p className="text-gray-500 mb-6 text-base">Des applications web que j&apos;ai développées pour mes clients.</p>
+            <div className="mb-8 last:mb-0">
+              <h2 className="text-2xl font-bold mb-3 text-gray-800">Applications Web</h2>
+              <p className="text-gray-500 mb-5 text-sm">Des applications web que j&apos;ai développées pour mes clients.</p>
               <div className="showcase-cards-container flex flex-nowrap gap-3 md:gap-6 overflow-x-auto pb-3" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db #f3f4f6' }}>
                 {applicationsData.web.map((app, index) => (
                   <AppCard

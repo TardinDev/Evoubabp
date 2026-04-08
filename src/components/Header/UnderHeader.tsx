@@ -41,7 +41,7 @@ export default function UnderHeader() {
         {/* upElement */}
         <div
           className="flex justify-between items-center flex-wrap max-sm:justify-center max-sm:items-center max-sm:gap-8"
-          style={{ fontSize: 'clamp(1.25rem, 2.2vw + 1rem, 2.25rem)' }}
+          style={{ fontSize: 'clamp(1.1rem, 1.9vw + 0.9rem, 2rem)' }}
         >
           <motion.span
             variants={fadeIn("right", "tween", 0.2, 1)}
@@ -85,7 +85,7 @@ export default function UnderHeader() {
             src={tardinimage}
             alt="Tardin"
             className="h-auto object-contain border-[3px] border-purple-800 rounded-full mb-[5px] opacity-90 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:scale-105"
-            style={{ width: 'clamp(150px, 30vw, 320px)' }}
+            style={{ width: 'clamp(130px, 26vw, 280px)' }}
           />
         </motion.div>
 
@@ -103,7 +103,7 @@ export default function UnderHeader() {
         {/* Down element */}
         <div
           className="flex flex-wrap justify-between text-xl max-sm:mt-16 max-sm:gap-8"
-          style={{ marginTop: 'clamp(4rem, 8vw, 12rem)' }}
+          style={{ marginTop: 'clamp(3.5rem, 7vw, 10rem)' }}
         >
           <motion.div
             variants={fadeIn("right", "tween", 0.2, 1)}
@@ -121,10 +121,10 @@ export default function UnderHeader() {
             </div>
             {/* iconsContact */}
             <div className="flex gap-4 mt-2 cursor-pointer [&>svg]:transition-transform [&>svg]:duration-300 [&>svg]:ease-in-out hover:[&>svg]:scale-[1.2]">
-              <FaFacebook color="blue" className="w-10 h-10 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
-              <FaTiktok color="#000" className="w-10 h-10 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
-              <IoLogoWhatsapp color="green" className="w-10 h-10 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
-              <FaYoutube color="red" className="w-10 h-10 sm:w-[50px] sm:h-[50px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <FaFacebook color="blue" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <FaTiktok color="#000" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <IoLogoWhatsapp color="green" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <FaYoutube color="red" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
             </div>
           </motion.div>
 
@@ -139,7 +139,7 @@ export default function UnderHeader() {
 
             <div className="flex flex-col gap-4">
               <div className="flex gap-[10px] items-center cursor-pointer">
-                <IoLogoVercel size={55} color="#000" className="mb-4 w-14" />
+                <IoLogoVercel size={48} color="#000" className="mb-4 w-14" />
                 <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="no-underline text-inherit">
                   <span className="text-purple-800 font-bold">Vercel</span>
                 </a>

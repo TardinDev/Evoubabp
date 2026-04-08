@@ -70,11 +70,11 @@ const AppModal = ({ app, isOpen, onClose }: AppModalProps) => {
               className="absolute top-4 right-4 bg-white border-none rounded-full w-10 h-10 flex items-center justify-center cursor-pointer z-10 transition-all duration-200 hover:bg-gray-100 hover:scale-110 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2"
               style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
             >
-              <X size={24} />
+              <X size={20} />
             </button>
 
             <div className="flex flex-col">
-              <div className="relative w-full h-[300px] md:h-[400px]">
+              <div className="relative w-full h-[260px] md:h-[350px]">
                 <Image
                   src={app.image}
                   alt={`Capture d'écran complète de ${app.title}`}
@@ -85,11 +85,11 @@ const AppModal = ({ app, isOpen, onClose }: AppModalProps) => {
               </div>
 
               <div className="p-8 max-[480px]:p-6">
-                <h2 id="modal-title" className="text-3xl max-[480px]:text-2xl font-bold text-gray-800 mb-2">{app.title}</h2>
+                <h2 id="modal-title" className="text-2xl max-[480px]:text-xl font-bold text-gray-800 mb-2">{app.title}</h2>
 
                 {app.year && <div className="text-gray-400 text-base font-medium mb-4">{app.year}</div>}
 
-                <p className="text-gray-600 text-lg leading-7 mb-8">{app.description}</p>
+                <p className="text-gray-600 text-base leading-7 mb-8">{app.description}</p>
 
                 {app.technologies && app.technologies.length > 0 && (
                   <div className="mb-6">
