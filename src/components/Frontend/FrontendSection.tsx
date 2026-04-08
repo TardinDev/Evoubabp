@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+'use client'
+
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaReact, FaCode, FaPalette, FaRocket, FaMobileAlt, FaCheckCircle } from 'react-icons/fa';
@@ -64,389 +65,122 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <SectionContainer id={id}>
+      <section
+        id={id}
+        className="relative overflow-hidden w-full max-w-[100vw] py-24 px-8 md:py-16 md:px-4 max-[480px]:py-12 max-[480px]:px-2"
+        style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)' }}
+      >
+        {/* Background radial gradients */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle at 20% 20%, rgba(97, 218, 251, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(49, 120, 198, 0.1) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 60%)',
+          }}
+        />
+
         <motion.div variants={fadeIn('up', 'tween', 0.2, 1)}>
-          <SectionHeader>
-            <IconContainer>
-              <FaReact size={40} />
-              <SiTypescript size={40} />
-              <SiTailwindcss size={40} />
-            </IconContainer>
-            <Title>Technologies Frontend Modernes</Title>
-            <Subtitle>
+          <div className="text-center mb-16 md:mb-12 relative z-[2]">
+            <div className="flex justify-center gap-6 mb-6">
+              <FaReact size={40} style={{ color: '#61dafb', filter: 'drop-shadow(0 0 10px rgba(97, 218, 251, 0.4))' }} />
+              <SiTypescript size={40} style={{ color: '#3178c6', filter: 'drop-shadow(0 0 10px rgba(49, 120, 198, 0.4))' }} />
+              <SiTailwindcss size={40} style={{ color: '#06b6d4', filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.4))' }} />
+            </div>
+            <h2
+              className="text-5xl md:text-[2.2rem] max-[480px]:text-[1.8rem] font-extrabold mb-4 bg-clip-text"
+              style={{
+                background: 'linear-gradient(135deg, #61dafb 0%, #3178c6 50%, #06b6d4 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Technologies Frontend Modernes
+            </h2>
+            <p className="text-[1.2rem] md:text-[1.1rem] max-[480px]:text-base text-slate-300 leading-relaxed max-w-[700px] mx-auto md:px-4 max-[480px]:px-2">
               Création d'interfaces utilisateur exceptionnelles et performantes
               avec les technologies les plus avancées de l'écosystème web.
-            </Subtitle>
-          </SectionHeader>
+            </p>
+          </div>
         </motion.div>
 
-        <TechGrid>
+        <div className="grid gap-10 mb-16 md:mb-12 max-[480px]:mb-8 relative z-[2] md:grid-cols-1 md:gap-8 max-[480px]:gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
           {frontendTechnologies.map((tech, index) => (
             <motion.div
               key={index}
               variants={fadeIn('up', 'spring', 0.3 + index * 0.15, 0.8)}
             >
-              <TechCard gradient={tech.gradient}>
-                <CardHeader>
-                  <CardIcon>{tech.icon}</CardIcon>
-                  <CardTitle>{tech.title}</CardTitle>
-                </CardHeader>
-                <CardDescription>{tech.description}</CardDescription>
+              <div
+                className="group backdrop-blur-[10px] rounded-[20px] p-10 max-[480px]:p-6 relative overflow-hidden transition-all duration-300 h-full flex flex-col hover:-translate-y-[10px] hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(97, 218, 251, 0.3)'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.1)'; }}
+              >
+                {/* Top gradient bar */}
+                <div className="absolute top-0 left-0 right-0 h-1" style={{ background: tech.gradient }} />
 
-                <FeaturesSection>
-                  <FeaturesTitle>
-                    <FaCode size={16} /> Fonctionnalités clés :
-                  </FeaturesTitle>
-                  <FeaturesList>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="text-[2.5rem] max-[480px]:text-[2rem]" style={{ color: '#61dafb', filter: 'drop-shadow(0 0 10px rgba(97, 218, 251, 0.3))' }}>
+                    {tech.icon}
+                  </div>
+                  <h3 className="text-[1.6rem] max-[480px]:text-[1.4rem] font-bold text-white">{tech.title}</h3>
+                </div>
+                <p className="text-slate-300 leading-relaxed text-base max-[480px]:text-[0.95rem] mb-6">{tech.description}</p>
+
+                <div className="mb-6 flex-grow">
+                  <h4 className="text-[1.1rem] font-semibold text-sky-100 mb-4 flex items-center gap-2">
+                    <FaCode size={16} style={{ color: '#61dafb' }} /> Fonctionnalités clés :
+                  </h4>
+                  <ul className="list-none p-0 m-0">
                     {tech.features.map((feature, idx) => (
-                      <FeatureItem key={idx}>
-                        <CheckIcon>✓</CheckIcon>
+                      <li key={idx} className="text-slate-300 text-[0.9rem] max-[480px]:text-[0.85rem] leading-[1.8] flex items-start gap-2 mb-2">
+                        <span className="text-cyan-500 font-bold text-base shrink-0 mt-[0.1rem]">&#x2713;</span>
                         {feature}
-                      </FeatureItem>
+                      </li>
                     ))}
-                  </FeaturesList>
-                </FeaturesSection>
+                  </ul>
+                </div>
 
-                <UseCasesSection>
-                  <UseCasesTitle>
+                <div className="rounded-[10px] p-4 border-l-[3px]" style={{ background: 'rgba(97, 218, 251, 0.1)', borderLeftColor: '#61dafb' }}>
+                  <h4 className="text-[0.95rem] font-semibold text-cyan-500 mb-2 flex items-center gap-2">
                     <FaCheckCircle size={14} /> Cas d'usage :
-                  </UseCasesTitle>
-                  <UseCasesText>{tech.useCases}</UseCasesText>
-                </UseCasesSection>
+                  </h4>
+                  <p className="text-sky-100 text-[0.9rem] max-[480px]:text-[0.85rem] leading-6 italic">{tech.useCases}</p>
+                </div>
 
-                <CardGlow />
-              </TechCard>
+                {/* Glow effect on hover */}
+                <div
+                  className="absolute pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    top: '-50%',
+                    left: '-50%',
+                    width: '200%',
+                    height: '200%',
+                    background: 'radial-gradient(circle, rgba(97, 218, 251, 0.1) 0%, transparent 70%)',
+                  }}
+                />
+              </div>
             </motion.div>
           ))}
-        </TechGrid>
+        </div>
 
         <motion.div variants={fadeIn('up', 'tween', 0.8, 1)}>
-          <BottomContent>
-            <HighlightText>
+          <div className="text-center relative z-[2]">
+            <p
+              className="text-[1.3rem] md:text-[1.1rem] max-[480px]:text-base italic text-sky-100 p-8 md:p-6 max-[480px]:p-4 rounded-[15px] border-l-4 max-w-[800px] mx-auto flex items-center justify-center flex-wrap"
+              style={{ background: 'rgba(255, 255, 255, 0.05)', borderLeftColor: '#61dafb' }}
+            >
               <FaRocket style={{ display: 'inline', marginRight: '0.5rem' }} />
               La combinaison React + TypeScript + Tailwind CSS permet de créer des applications
               web ultra-performantes, maintenables et visuellement exceptionnelles.
-            </HighlightText>
-          </BottomContent>
+            </p>
+          </div>
         </motion.div>
-      </SectionContainer>
+      </section>
     </motion.div>
   );
 };
 
 export default FrontendSection;
-
-const SectionContainer = styled.section`
-  padding: 6rem 2rem;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  max-width: 100vw;
-
-  @media (max-width: 768px) {
-    padding: 4rem 1rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 3rem 0.5rem;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(97, 218, 251, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(49, 120, 198, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 60%);
-    pointer-events: none;
-  }
-`;
-
-const SectionHeader = styled.div`
-  text-align: center;
-  margin-bottom: 4rem;
-  position: relative;
-  z-index: 2;
-
-  @media (max-width: 768px) {
-    margin-bottom: 3rem;
-  }
-`;
-
-const IconContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-
-  svg {
-    &:nth-child(1) {
-      color: #61dafb;
-      filter: drop-shadow(0 0 10px rgba(97, 218, 251, 0.4));
-    }
-    &:nth-child(2) {
-      color: #3178c6;
-      filter: drop-shadow(0 0 10px rgba(49, 120, 198, 0.4));
-    }
-    &:nth-child(3) {
-      color: #06b6d4;
-      filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.4));
-    }
-  }
-`;
-
-const Title = styled.h2`
-  font-size: 3rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #61dafb 0%, #3178c6 50%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 1rem;
-
-  @media (max-width: 768px) {
-    font-size: 2.2rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.8rem;
-  }
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.2rem;
-  color: #cbd5e1;
-  line-height: 1.6;
-  max-width: 700px;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-    padding: 0 1rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1rem;
-    padding: 0 0.5rem;
-  }
-`;
-
-const TechGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2.5rem;
-  margin-bottom: 4rem;
-  position: relative;
-  z-index: 2;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-
-  @media (max-width: 480px) {
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-`;
-
-const TechCard = styled.div<{ gradient: string }>`
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 480px) {
-    padding: 1.5rem;
-  }
-
-  &:hover {
-    transform: translateY(-10px);
-    border-color: rgba(97, 218, 251, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: ${props => props.gradient};
-  }
-`;
-
-const CardGlow = styled.div`
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(97, 218, 251, 0.1) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-
-  ${TechCard}:hover & {
-    opacity: 1;
-  }
-`;
-
-const CardHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-`;
-
-const CardIcon = styled.div`
-  font-size: 2.5rem;
-  color: #61dafb;
-  filter: drop-shadow(0 0 10px rgba(97, 218, 251, 0.3));
-
-  @media (max-width: 480px) {
-    font-size: 2rem;
-  }
-`;
-
-const CardTitle = styled.h3`
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: white;
-
-  @media (max-width: 480px) {
-    font-size: 1.4rem;
-  }
-`;
-
-const CardDescription = styled.p`
-  color: #cbd5e1;
-  line-height: 1.6;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-
-  @media (max-width: 480px) {
-    font-size: 0.95rem;
-  }
-`;
-
-const FeaturesSection = styled.div`
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
-`;
-
-const FeaturesTitle = styled.h4`
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #e0f2fe;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-
-  svg {
-    color: #61dafb;
-  }
-`;
-
-const FeaturesList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
-
-const FeatureItem = styled.li`
-  color: #cbd5e1;
-  font-size: 0.9rem;
-  line-height: 1.8;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 480px) {
-    font-size: 0.85rem;
-  }
-`;
-
-const CheckIcon = styled.span`
-  color: #06b6d4;
-  font-weight: bold;
-  font-size: 1rem;
-  flex-shrink: 0;
-  margin-top: 0.1rem;
-`;
-
-const UseCasesSection = styled.div`
-  background: rgba(97, 218, 251, 0.1);
-  border-radius: 10px;
-  padding: 1rem;
-  border-left: 3px solid #61dafb;
-`;
-
-const UseCasesTitle = styled.h4`
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #06b6d4;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-const UseCasesText = styled.p`
-  color: #e0f2fe;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  font-style: italic;
-
-  @media (max-width: 480px) {
-    font-size: 0.85rem;
-  }
-`;
-
-const BottomContent = styled.div`
-  text-align: center;
-  position: relative;
-  z-index: 2;
-`;
-
-const HighlightText = styled.p`
-  font-size: 1.3rem;
-  font-style: italic;
-  color: #e0f2fe;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  border-left: 4px solid #61dafb;
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-    padding: 1.5rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1rem;
-    padding: 1rem;
-  }
-`;

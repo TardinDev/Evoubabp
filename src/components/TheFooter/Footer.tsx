@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+'use client'
+
+import Link from "next/link";
 import { useChatBot } from "../../contexts/ChatBotContext";
 import { FaComments, FaCode, FaEnvelope, FaPhone, FaGlobe } from "react-icons/fa";
 
@@ -7,389 +8,160 @@ export default function Footer() {
   const { openChatBot } = useChatBot();
 
   return (
-    <FooterStyle>
-      <FooterContainer>
-        <TopSection>
-          <BrandSection>
-            <BrandLogo>
-              <LogoIcon><FaCode size={20} /></LogoIcon>
-              <BrandName>Evoubap</BrandName>
-            </BrandLogo>
-            <BrandDescription>
+    <footer
+      className="relative overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)' }}
+    >
+      {/* Pseudo-element overlay via a div */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%)'
+        }}
+      />
+
+      {/* Footer container */}
+      <div className="max-w-[1200px] mx-auto pt-12 px-8 pb-8 relative z-[1]">
+        {/* Top section */}
+        <div className="grid grid-cols-[1fr_2fr] gap-12 mb-8 max-md:grid-cols-1 max-md:gap-8">
+          {/* Brand section */}
+          <div className="flex flex-col gap-6">
+            {/* Brand logo */}
+            <div className="flex items-center gap-3">
+              {/* Logo icon */}
+              <div
+                className="w-10 h-10 rounded-[10px] flex items-center justify-center text-white"
+                style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}
+              >
+                <FaCode size={20} />
+              </div>
+              {/* Brand name */}
+              <h2
+                className="text-2xl font-bold bg-clip-text"
+                style={{
+                  background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
+              >
+                Evoubap
+              </h2>
+            </div>
+            {/* Brand description */}
+            <p className="text-[#94a3b8] leading-relaxed max-w-[300px]">
               Créateur d&apos;applications mobiles et web innovantes.
               Transformons vos idées en solutions digitales exceptionnelles.
-            </BrandDescription>
-            <SocialLinks>
-              <SocialLink href="https://www.linkedin.com/in/davy-tardin-11a7a1159/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            </p>
+            {/* Social links */}
+            <div className="flex gap-4">
+              <a
+                href="https://www.linkedin.com/in/davy-tardin-11a7a1159/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-300 backdrop-blur-[10px] border border-white/10 bg-white/10 hover:-translate-y-0.5 [&_svg]:fill-[#94a3b8] [&_svg]:transition-[fill] [&_svg]:duration-300 hover:[&_svg]:fill-white"
+                style={{ ['--tw-bg-opacity' as string]: undefined }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = 'linear-gradient(135deg, #3b82f6, #8b5cf6)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; }}
+              >
                 <svg width="20" height="20" viewBox="0 0 24 24">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
-              </SocialLink>
-              <SocialLink href="https://github.com/TardinDev" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              </a>
+              <a
+                href="https://github.com/TardinDev"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-300 backdrop-blur-[10px] border border-white/10 bg-white/10 hover:-translate-y-0.5 [&_svg]:fill-[#94a3b8] [&_svg]:transition-[fill] [&_svg]:duration-300 hover:[&_svg]:fill-white"
+                onMouseEnter={(e) => { e.currentTarget.style.background = 'linear-gradient(135deg, #3b82f6, #8b5cf6)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; }}
+              >
                 <svg width="20" height="20" viewBox="0 0 24 24">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
-              </SocialLink>
-            </SocialLinks>
-          </BrandSection>
+              </a>
+            </div>
+          </div>
 
-          <LinksSection>
-            <FooterColumn>
-              <FooterTitle>Services</FooterTitle>
-              <FooterLink href="#app-showcase">Applications Mobile</FooterLink>
-              <FooterLink href="#app-showcase">Applications Web</FooterLink>
-              <FooterLink href="#howItWorks">Développement SaaS</FooterLink>
-              <FooterLinkStyled to="/formations">Formations</FooterLinkStyled>
-              <FooterLinkStyled to="/blog">Blog</FooterLinkStyled>
-              <FooterLink href="#howItWorks">Consulting</FooterLink>
-            </FooterColumn>
+          {/* Links section */}
+          <div className="grid grid-cols-3 gap-8 max-sm:grid-cols-1 max-sm:gap-6">
+            {/* Services column */}
+            <div className="flex flex-col gap-4">
+              <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">Services</h3>
+              <a href="#app-showcase" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Applications Mobile</a>
+              <a href="#app-showcase" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Applications Web</a>
+              <a href="#howItWorks" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Développement SaaS</a>
+              <Link href="/formations" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Formations</Link>
+              <Link href="/blog" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Blog</Link>
+              <a href="#howItWorks" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Consulting</a>
+            </div>
 
-            <FooterColumn>
-              <FooterTitle>Technologies</FooterTitle>
-              <FooterLink href="#tech-used">React Native</FooterLink>
-              <FooterLink href="#tech-used">React / Next.js</FooterLink>
-              <FooterLink href="#tech-used">TypeScript</FooterLink>
-              <FooterLink href="#tech-used">Node.js</FooterLink>
-              <FooterLink href="#tech-used">Expo</FooterLink>
-            </FooterColumn>
+            {/* Technologies column */}
+            <div className="flex flex-col gap-4">
+              <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">Technologies</h3>
+              <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React Native</a>
+              <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React / Next.js</a>
+              <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">TypeScript</a>
+              <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Node.js</a>
+              <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Expo</a>
+            </div>
 
-            <FooterColumn>
-              <FooterTitle>Contact</FooterTitle>
-              <ContactInfo>
-                <ContactItem>
-                  <ContactIcon><FaEnvelope size={14} /></ContactIcon>
-                  <ContactLink href="mailto:tardindavy@gmail.com">
+            {/* Contact column */}
+            <div className="flex flex-col gap-4">
+              <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">Contact</h3>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2 text-[#94a3b8]">
+                  <span className="flex items-center justify-center text-[#94a3b8]"><FaEnvelope size={14} /></span>
+                  <a href="mailto:tardindavy@gmail.com" className="text-[#94a3b8] no-underline transition-colors duration-300 hover:text-blue-500">
                     tardindavy@gmail.com
-                  </ContactLink>
-                </ContactItem>
-                <ContactItem>
-                  <ContactIcon><FaPhone size={14} /></ContactIcon>
-                  <ContactLink href="https://wa.me/33766450771" target="_blank" rel="noopener noreferrer">
+                  </a>
+                </div>
+                <div className="flex items-center gap-2 text-[#94a3b8]">
+                  <span className="flex items-center justify-center text-[#94a3b8]"><FaPhone size={14} /></span>
+                  <a href="https://wa.me/33766450771" target="_blank" rel="noopener noreferrer" className="text-[#94a3b8] no-underline transition-colors duration-300 hover:text-blue-500">
                     +33 7 66 45 07 71 (WhatsApp)
-                  </ContactLink>
-                </ContactItem>
-                <ContactItem>
-                  <ContactIcon><FaGlobe size={14} /></ContactIcon>
+                  </a>
+                </div>
+                <div className="flex items-center gap-2 text-[#94a3b8]">
+                  <span className="flex items-center justify-center text-[#94a3b8]"><FaGlobe size={14} /></span>
                   <span>France, Europe</span>
-                </ContactItem>
-                <ChatButton onClick={openChatBot}>
+                </div>
+                <button
+                  onClick={openChatBot}
+                  className="flex items-center gap-2.5 border-none text-white py-3 px-5 rounded-[25px] cursor-pointer transition-all duration-300 text-[0.9rem] font-semibold mt-4 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(102,126,234,0.4)] active:translate-y-0"
+                  style={{
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    boxShadow: '0 4px 15px rgba(102, 126, 234, 0.3)'
+                  }}
+                >
                   <FaComments size={18} />
                   <span>Discuter avec moi</span>
-                </ChatButton>
-              </ContactInfo>
-            </FooterColumn>
-          </LinksSection>
-        </TopSection>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <Divider />
+        {/* Divider */}
+        <div
+          className="h-px my-8"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent)' }}
+        />
 
-        <BottomSection>
-          <CopyRight>
-            © 2026 Evoubabp Industries. Tous droits réservés.
-          </CopyRight>
-          <LegalLinks>
-            <LegalLinkStyled to="/politique-confidentialite">Politique de confidentialité</LegalLinkStyled>
-            <LegalLinkStyled to="/cgu">Conditions d&apos;utilisation</LegalLinkStyled>
-            <LegalLinkStyled to="/mentions-legales">Mentions légales</LegalLinkStyled>
-          </LegalLinks>
-        </BottomSection>
-      </FooterContainer>
-    </FooterStyle>
+        {/* Bottom section */}
+        <div className="flex justify-between items-center flex-wrap gap-4 max-md:flex-col max-md:text-center">
+          <p className="text-[#64748b] text-sm">
+            &copy; 2026 Evoubabp Industries. Tous droits réservés.
+          </p>
+          <div className="flex gap-6 max-sm:flex-wrap max-sm:justify-center">
+            <Link href="/politique-confidentialite" className="text-[#64748b] no-underline text-sm transition-colors duration-300 hover:text-blue-500">Politique de confidentialité</Link>
+            <Link href="/cgu" className="text-[#64748b] no-underline text-sm transition-colors duration-300 hover:text-blue-500">Conditions d&apos;utilisation</Link>
+            <Link href="/mentions-legales" className="text-[#64748b] no-underline text-sm transition-colors duration-300 hover:text-blue-500">Mentions légales</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 }
-
-const FooterStyle = styled.footer`
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-  }
-`;
-
-const FooterContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 2rem 2rem;
-  position: relative;
-  z-index: 1;
-`;
-
-const TopSection = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 3rem;
-  margin-bottom: 2rem;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-`;
-
-const BrandSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-`;
-
-const BrandLogo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-`;
-
-const LogoIcon = styled.div`
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-`;
-
-const BrandName = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
-
-const BrandDescription = styled.p`
-  color: #94a3b8;
-  line-height: 1.6;
-  max-width: 300px;
-`;
-
-const SocialLinks = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
-const SocialLink = styled.a`
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  
-  svg {
-    fill: #94a3b8;
-    transition: fill 0.3s ease;
-  }
-  
-  &:hover {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    transform: translateY(-2px);
-    
-    svg {
-      fill: white;
-    }
-  }
-`;
-
-const LinksSection = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-`;
-
-const FooterColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const FooterTitle = styled.h3`
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #e2e8f0;
-  margin-bottom: 0.5rem;
-`;
-
-const FooterLink = styled.a`
-  color: #94a3b8;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  padding: 0.25rem 0;
-  border-radius: 4px;
-
-  &:hover {
-    color: #3b82f6;
-    padding-left: 0.5rem;
-  }
-`;
-
-const FooterLinkStyled = styled(Link)`
-  color: #94a3b8;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  padding: 0.25rem 0;
-  border-radius: 4px;
-
-  &:hover {
-    color: #3b82f6;
-    padding-left: 0.5rem;
-  }
-`;
-
-const ContactInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-`;
-
-const ContactItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #94a3b8;
-`;
-
-const ContactIcon = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #94a3b8;
-`;
-
-const ContactLink = styled.a`
-  color: #94a3b8;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  
-  &:hover {
-    color: #3b82f6;
-  }
-`;
-
-const Divider = styled.div`
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent);
-  margin: 2rem 0;
-`;
-
-const BottomSection = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-  }
-`;
-
-const CopyRight = styled.p`
-  color: #64748b;
-  font-size: 0.875rem;
-`;
-
-const LegalLinks = styled.div`
-  display: flex;
-  gap: 1.5rem;
-  
-  @media (max-width: 640px) {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-`;
-
-const LegalLink = styled.a`
-  color: #64748b;
-  text-decoration: none;
-  font-size: 0.875rem;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #3b82f6;
-  }
-`;
-
-const LegalLinkStyled = styled(Link)`
-  color: #64748b;
-  text-decoration: none;
-  font-size: 0.875rem;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #3b82f6;
-  }
-`;
-
-const BackToTop = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  color: #3b82f6;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.875rem;
-  backdrop-filter: blur(10px);
-  
-  &:hover {
-    background: #3b82f6;
-    color: white;
-    transform: translateY(-2px);
-  }
-`;
-
-const BackToTopIcon = styled.span`
-  font-weight: bold;
-  font-size: 1rem;
-`;
-
-const ChatButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  color: white;
-  padding: 0.8rem 1.2rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-top: 1rem;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`;

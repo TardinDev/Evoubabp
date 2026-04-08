@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+'use client'
+
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaReact, FaNodeJs, FaTerminal, FaExternalLinkAlt, FaGithub, FaPlay, FaUniversity, FaUserGraduate, FaCloudUploadAlt, FaCloud } from 'react-icons/fa';
@@ -48,672 +49,388 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
     { type: 'success', text: '> Multi-role auth ready' },
   ];
 
-  return (
-    <motion.div
-      variants={staggerContainer(0.1, 0.2)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.1 }}
-    >
-      <SectionContainer id={id}>
-        <NoiseOverlay />
-        <GridPattern />
-
-        <ContentWrapper>
-          <motion.div variants={fadeIn('up', 'tween', 0.1, 0.8)}>
-
-            <HeaderArea>
-              <SectionHeadline>J'apporte une expertise FullStack à vos projets !</SectionHeadline>
-              <TagLine>FULLSTACK JAVASCRIPT</TagLine>
-              <MainTitle>
-                <TitleAccent>React</TitleAccent>
-                <TitleDivider>/</TitleDivider>
-                <TitleAccent className="node">Node.js</TitleAccent>
-              </MainTitle>
-              <HeaderDescription>
-                Écosystème JavaScript unifié pour des applications
-                performantes et temps réel
-              </HeaderDescription>
-            </HeaderArea>
-          </motion.div>
-
-          <MainGrid>
-            <LeftColumn>
-              <motion.div variants={fadeIn('right', 'spring', 0.2, 0.8)}>
-                <TerminalWindow>
-                  <TerminalHeader>
-                    <TerminalDots>
-                      <Dot color="#ff5f56" />
-                      <Dot color="#ffbd2e" />
-                      <Dot color="#27ca3f" />
-                    </TerminalDots>
-                    <TerminalTitle>
-                      <FaTerminal size={12} />
-                      fullstack-app
-                    </TerminalTitle>
-                  </TerminalHeader>
-                  <TerminalBody>
-                    {terminalLines.map((line, idx) => (
-                      <TerminalLine key={idx} type={line.type} delay={idx * 0.3}>
-                        {line.text}
-                      </TerminalLine>
-                    ))}
-                    <Cursor />
-                  </TerminalBody>
-                </TerminalWindow>
-              </motion.div>
-
-              <motion.div variants={fadeIn('right', 'spring', 0.4, 0.8)}>
-                <StatsRow>
-                  {project.stats.map((stat, idx) => (
-                    <StatItem key={idx}>
-                      <StatValue>{stat.value}</StatValue>
-                      <StatLabel>{stat.label}</StatLabel>
-                    </StatItem>
-                  ))}
-                </StatsRow>
-              </motion.div>
-            </LeftColumn>
-
-            <RightColumn>
-              <motion.div variants={fadeIn('left', 'spring', 0.3, 0.8)}>
-                <ProjectCard>
-                  <ProjectImageArea>
-                    <ProjectImage
-                      src={project.image}
-                      alt={project.title}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.opacity = '0';
-                      }}
-                    />
-                    <ImagePlaceholder>
-                      <FaPlay size={40} />
-                      <span>Démo Live</span>
-                    </ImagePlaceholder>
-                    <YearBadge>{project.year}</YearBadge>
-                  </ProjectImageArea>
-
-                  <ProjectContent>
-                    <ProjectName>{project.title}</ProjectName>
-                    <ProjectDesc>{project.description}</ProjectDesc>
-
-                    <ActionButtons>
-                      <PrimaryButton
-                        href="https://university-management-dashboard-kappa.vercel.app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FaExternalLinkAlt /> Voir Live
-                      </PrimaryButton>
-                      <SecondaryButton
-                        href="https://github.com/TardinDev/University-Management-DashBoard"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="link-certificat"
-                      >
-                        <FaGithub /> Code
-                      </SecondaryButton>
-                    </ActionButtons>
-                  </ProjectContent>
-                </ProjectCard>
-              </motion.div>
-            </RightColumn>
-          </MainGrid>
-
-          <motion.div variants={fadeIn('up', 'tween', 0.5, 0.8)}>
-            <TechStackSection>
-              <StackColumn>
-                <StackHeader>
-                  <StackIcon frontend><FaReact /></StackIcon>
-                  <StackTitle>Frontend</StackTitle>
-                </StackHeader>
-                <TechGrid>
-                  {project.stack.frontend.map((tech, idx) => (
-                    <TechItem key={idx}>
-                      <TechIcon>{tech.icon}</TechIcon>
-                      <TechName>{tech.name}</TechName>
-                    </TechItem>
-                  ))}
-                </TechGrid>
-              </StackColumn>
-
-              <StackDivider>
-                <DividerLine />
-                <DividerIcon>
-                  <ConnectionPulse />
-                  API
-                </DividerIcon>
-                <DividerLine />
-              </StackDivider>
-
-              <StackColumn>
-                <StackHeader>
-                  <StackIcon backend><FaNodeJs /></StackIcon>
-                  <StackTitle>Backend</StackTitle>
-                </StackHeader>
-                <TechGrid>
-                  {project.stack.backend.map((tech, idx) => (
-                    <TechItem key={idx}>
-                      <TechIcon>{tech.icon}</TechIcon>
-                      <TechName>{tech.name}</TechName>
-                    </TechItem>
-                  ))}
-                </TechGrid>
-              </StackColumn>
-            </TechStackSection>
-          </motion.div>
-        </ContentWrapper>
-      </SectionContainer>
-    </motion.div>
-  );
-};
-
-export default FullStackNodeSection;
-
-const blink = keyframes`
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-`;
-
-const pulse = keyframes`
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.5); opacity: 1; }
-`;
-
-const typeIn = keyframes`
-  from { width: 0; }
-  to { width: 100%; }
-`;
-
-const SectionContainer = styled.section`
-  position: relative;
-  padding: 6rem 2rem;
-  background: #0a0a0f;
-  overflow: hidden;
-  min-height: 100vh;
-
-  @media (max-width: 768px) {
-    padding: 4rem 1rem;
-  }
-`;
-
-const NoiseOverlay = styled.div`
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  pointer-events: none;
-`;
-
-const GridPattern = styled.div`
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(97, 218, 251, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(97, 218, 251, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-`;
-
-const ContentWrapper = styled.div`
-  position: relative;
-  max-width: 1400px;
-  margin: 0 auto;
-  z-index: 2;
-`;
-
-const HeaderArea = styled.div`
-  margin-bottom: 4rem;
-
-  @media (max-width: 768px) {
-    margin-bottom: 3rem;
-    text-align: center;
-  }
-`;
-
-const SectionHeadline = styled.h2`
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-size: clamp(2.25rem, 3vw, 2.75rem);
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #F1F1F1, #B0B0B0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-  }
-`;
-
-const TagLine = styled.span`
-  display: inline-block;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  color: #61dafb;
-  background: rgba(97, 218, 251, 0.1);
-  padding: 0.5rem 1rem;
-  border: 1px solid rgba(97, 218, 251, 0.2);
-  margin-bottom: 1.5rem;
-`;
-
-const MainTitle = styled.h2`
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-`;
-
-const TitleAccent = styled.span`
-  color: #61dafb;
-
-  &.node {
-    color: #68a063;
-  }
-`;
-
-const TitleDivider = styled.span`
-  color: rgba(255, 255, 255, 0.2);
-  font-weight: 300;
-`;
-
-const HeaderDescription = styled.p`
-  font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.6);
-  max-width: 500px;
-  line-height: 1.7;
-
-  @media (max-width: 768px) {
-    margin: 0 auto;
-  }
-`;
-
-const MainGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 3rem;
-  margin-bottom: 4rem;
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-`;
-
-const LeftColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
-const RightColumn = styled.div``;
-
-const TerminalWindow = styled.div`
-  background: #1a1a24;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    0 20px 50px rgba(0, 0, 0, 0.5);
-`;
-
-const TerminalHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.875rem 1rem;
-  background: #252530;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-`;
-
-const TerminalDots = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const Dot = styled.div<{ color: string }>`
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: ${props => props.color};
-`;
-
-const TerminalTitle = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
-`;
-
-const TerminalBody = styled.div`
-  padding: 1.5rem;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.9rem;
-  line-height: 1.8;
-`;
-
-const TerminalLine = styled.div<{ type: string; delay: number }>`
-  color: ${props => {
-    switch (props.type) {
+  const getTerminalLineColor = (type: string) => {
+    switch (type) {
       case 'comment': return 'rgba(255, 255, 255, 0.3)';
       case 'command': return '#61dafb';
       case 'success': return '#68a063';
       default: return 'rgba(255, 255, 255, 0.7)';
     }
-  }};
-  overflow: hidden;
-  white-space: nowrap;
-  animation: ${typeIn} 0.5s ease forwards;
-  animation-delay: ${props => props.delay}s;
-  width: 0;
-`;
-
-const Cursor = styled.span`
-  display: inline-block;
-  width: 10px;
-  height: 18px;
-  background: #61dafb;
-  margin-left: 4px;
-  animation: ${blink} 1s infinite;
-  vertical-align: text-bottom;
-`;
-
-const StatsRow = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-`;
-
-const StatItem = styled.div`
-  text-align: center;
-  padding: 1.5rem 1rem;
-  background: linear-gradient(135deg, rgba(97, 218, 251, 0.08), rgba(104, 160, 99, 0.05));
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-`;
-
-const StatValue = styled.div`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 0.25rem;
-`;
-
-const StatLabel = styled.div`
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-`;
-
-const ProjectCard = styled.div`
-  background: #12121a;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-
-  &:hover {
-    transform: translateY(-8px);
-  }
-`;
-
-const ProjectImageArea = styled.div`
-  position: relative;
-  aspect-ratio: 16/9;
-  background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
-  overflow: hidden;
-`;
-
-const ProjectImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: relative;
-  z-index: 2;
-`;
-
-const ImagePlaceholder = styled.div`
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  color: rgba(255, 255, 255, 0.3);
-
-  svg {
-    opacity: 0.5;
-  }
-
-  span {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-  }
-`;
-
-const YearBadge = styled.span`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
-  color: white;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  z-index: 3;
-`;
-
-const ProjectContent = styled.div`
-  padding: 2rem;
-`;
-
-const ProjectName = styled.h3`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 0.75rem;
-`;
-
-const ProjectDesc = styled.p`
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-`;
-
-const ActionButtons = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
-const PrimaryButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.5rem;
-  background: #61dafb;
-  color: #0a0a0f;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: #7de3ff;
-    transform: translateY(-2px);
-  }
-`;
-
-const SecondaryButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.5rem;
-  background: transparent;
-  color: white;
-  font-weight: 500;
-  font-size: 0.9rem;
-  text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-`;
-
-const TechStackSection = styled.div`
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  gap: 2rem;
-  padding: 3rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    padding: 2rem;
-  }
-`;
-
-const StackColumn = styled.div`
-  flex: 1;
-  max-width: 300px;
-`;
-
-const StackHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-`;
-
-const StackIcon = styled.div<{ frontend?: boolean; backend?: boolean }>`
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  font-size: 1.5rem;
-  background: ${props => props.frontend
-    ? 'linear-gradient(135deg, rgba(97, 218, 251, 0.2), rgba(97, 218, 251, 0.05))'
-    : 'linear-gradient(135deg, rgba(104, 160, 99, 0.2), rgba(104, 160, 99, 0.05))'
   };
-  color: ${props => props.frontend ? '#61dafb' : '#68a063'};
-`;
 
-const StackTitle = styled.h4`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: white;
-`;
+  return (
+    <>
+      <style>{`
+        @keyframes fsnode-blink {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
+        }
+        @keyframes fsnode-pulse {
+          0%, 100% { transform: scale(1); opacity: 0.5; }
+          50% { transform: scale(1.5); opacity: 1; }
+        }
+        @keyframes fsnode-typeIn {
+          from { width: 0; }
+          to { width: 100%; }
+        }
+      `}</style>
 
-const TechGrid = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-`;
+      <motion.div
+        variants={staggerContainer(0.1, 0.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.1 }}
+      >
+        <section
+          id={id}
+          className="relative py-24 px-8 md:py-16 md:px-4 overflow-hidden min-h-screen"
+          style={{ background: '#0a0a0f' }}
+        >
+          {/* Noise Overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              opacity: 0.03,
+              backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
+            }}
+          />
 
-const TechItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  transition: all 0.2s ease;
+          {/* Grid Pattern */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage: 'linear-gradient(rgba(97, 218, 251, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(97, 218, 251, 0.03) 1px, transparent 1px)',
+              backgroundSize: '60px 60px',
+            }}
+          />
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.06);
-    transform: translateX(4px);
-  }
-`;
+          <div className="relative max-w-[1400px] mx-auto z-[2]">
+            <motion.div variants={fadeIn('up', 'tween', 0.1, 0.8)}>
+              <div className="mb-16 md:mb-12 md:text-center">
+                <h2
+                  className="mb-4 font-semibold md:text-[1.1rem]"
+                  style={{
+                    fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                    fontSize: 'clamp(2.25rem, 3vw, 2.75rem)',
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    background: 'linear-gradient(135deg, #F1F1F1, #B0B0B0)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  J'apporte une expertise FullStack à vos projets !
+                </h2>
+                <span
+                  className="inline-block text-xs mb-6 px-4 py-2"
+                  style={{
+                    fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                    letterSpacing: '0.3em',
+                    color: '#61dafb',
+                    background: 'rgba(97, 218, 251, 0.1)',
+                    border: '1px solid rgba(97, 218, 251, 0.2)',
+                  }}
+                >
+                  FULLSTACK JAVASCRIPT
+                </span>
+                <h2
+                  className="mb-6 font-bold flex items-center gap-2 flex-wrap md:justify-center"
+                  style={{
+                    fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                    fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+                    lineHeight: 1.1,
+                  }}
+                >
+                  <span style={{ color: '#61dafb' }}>React</span>
+                  <span style={{ color: 'rgba(255, 255, 255, 0.2)', fontWeight: 300 }}>/</span>
+                  <span style={{ color: '#68a063' }}>Node.js</span>
+                </h2>
+                <p
+                  className="text-[1.15rem] max-w-[500px] md:mx-auto"
+                  style={{ color: 'rgba(255, 255, 255, 0.6)', lineHeight: 1.7 }}
+                >
+                  Écosystème JavaScript unifié pour des applications
+                  performantes et temps réel
+                </p>
+              </div>
+            </motion.div>
 
-const TechIcon = styled.div`
-  font-size: 1.25rem;
-  color: rgba(255, 255, 255, 0.7);
-`;
+            <div className="grid gap-12 mb-16 max-[968px]:grid-cols-1 max-[968px]:gap-8" style={{ gridTemplateColumns: '1fr 1.2fr' }}>
+              {/* Left Column */}
+              <div className="flex flex-col gap-8">
+                <motion.div variants={fadeIn('right', 'spring', 0.2, 0.8)}>
+                  <div
+                    className="rounded-xl overflow-hidden"
+                    style={{
+                      background: '#1a1a24',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 20px 50px rgba(0, 0, 0, 0.5)',
+                    }}
+                  >
+                    <div
+                      className="flex items-center gap-4 px-4 py-3.5"
+                      style={{ background: '#252530', borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}
+                    >
+                      <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full" style={{ background: '#ff5f56' }} />
+                        <div className="w-3 h-3 rounded-full" style={{ background: '#ffbd2e' }} />
+                        <div className="w-3 h-3 rounded-full" style={{ background: '#27ca3f' }} />
+                      </div>
+                      <div
+                        className="flex items-center gap-2 text-[0.8rem]"
+                        style={{ fontFamily: "'JetBrains Mono', monospace", color: 'rgba(255, 255, 255, 0.5)' }}
+                      >
+                        <FaTerminal size={12} />
+                        fullstack-app
+                      </div>
+                    </div>
+                    <div className="p-6" style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace", fontSize: '0.9rem', lineHeight: 1.8 }}>
+                      {terminalLines.map((line, idx) => (
+                        <div
+                          key={idx}
+                          className="overflow-hidden whitespace-nowrap"
+                          style={{
+                            color: getTerminalLineColor(line.type),
+                            animation: `fsnode-typeIn 0.5s ease forwards`,
+                            animationDelay: `${idx * 0.3}s`,
+                            width: 0,
+                          }}
+                        >
+                          {line.text}
+                        </div>
+                      ))}
+                      <span
+                        className="inline-block w-[10px] h-[18px] ml-1 align-text-bottom"
+                        style={{ background: '#61dafb', animation: 'fsnode-blink 1s infinite' }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
 
-const TechName = styled.span`
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.8);
-`;
+                <motion.div variants={fadeIn('right', 'spring', 0.4, 0.8)}>
+                  <div className="grid grid-cols-3 gap-4">
+                    {project.stats.map((stat, idx) => (
+                      <div
+                        key={idx}
+                        className="text-center py-6 px-4 rounded-xl"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(97, 218, 251, 0.08), rgba(104, 160, 99, 0.05))',
+                          border: '1px solid rgba(255, 255, 255, 0.06)',
+                        }}
+                      >
+                        <div
+                          className="text-2xl font-bold text-white mb-1"
+                          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                        >
+                          {stat.value}
+                        </div>
+                        <div
+                          className="text-xs uppercase"
+                          style={{ color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.1em' }}
+                        >
+                          {stat.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
 
-const StackDivider = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0 1rem;
+              {/* Right Column */}
+              <div>
+                <motion.div variants={fadeIn('left', 'spring', 0.3, 0.8)}>
+                  <div
+                    className="rounded-[20px] overflow-hidden transition-transform duration-[400ms] hover:-translate-y-2"
+                    style={{
+                      background: '#12121a',
+                      border: '1px solid rgba(255, 255, 255, 0.06)',
+                      transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    }}
+                  >
+                    <div
+                      className="relative overflow-hidden"
+                      style={{ aspectRatio: '16/9', background: 'linear-gradient(135deg, #1a1a2e, #0f0f1a)' }}
+                    >
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover relative z-[2]"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.opacity = '0';
+                        }}
+                      />
+                      <div
+                        className="absolute inset-0 flex flex-col items-center justify-center gap-4"
+                        style={{ color: 'rgba(255, 255, 255, 0.3)' }}
+                      >
+                        <FaPlay size={40} style={{ opacity: 0.5 }} />
+                        <span className="text-[0.9rem] uppercase" style={{ letterSpacing: '0.15em' }}>Démo Live</span>
+                      </div>
+                      <span
+                        className="absolute top-4 right-4 backdrop-blur-[10px] text-white text-xs px-3 py-1.5 rounded z-[3]"
+                        style={{
+                          background: 'rgba(0, 0, 0, 0.7)',
+                          fontFamily: "'JetBrains Mono', monospace",
+                        }}
+                      >
+                        {project.year}
+                      </span>
+                    </div>
 
-  @media (max-width: 768px) {
-    flex-direction: row;
-    padding: 1rem 0;
-  }
-`;
+                    <div className="p-8">
+                      <h3
+                        className="text-[1.75rem] font-semibold text-white mb-3"
+                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                      >
+                        {project.title}
+                      </h3>
+                      <p className="mb-6" style={{ color: 'rgba(255, 255, 255, 0.6)', lineHeight: 1.7 }}>
+                        {project.description}
+                      </p>
 
-const DividerLine = styled.div`
-  width: 2px;
-  height: 40px;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
+                      <div className="flex gap-4">
+                        <a
+                          href="https://university-management-dashboard-kappa.vercel.app"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 py-3.5 px-6 font-semibold text-[0.9rem] no-underline rounded-lg transition-all duration-300 hover:-translate-y-0.5"
+                          style={{ background: '#61dafb', color: '#0a0a0f' }}
+                          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = '#7de3ff'; }}
+                          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = '#61dafb'; }}
+                        >
+                          <FaExternalLinkAlt /> Voir Live
+                        </a>
+                        <a
+                          href="https://github.com/TardinDev/University-Management-DashBoard"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="link-certificat inline-flex items-center gap-2 py-3.5 px-6 font-medium text-[0.9rem] text-white no-underline rounded-lg transition-all duration-300 bg-transparent hover:bg-white/5"
+                          style={{ border: '1px solid rgba(255, 255, 255, 0.2)' }}
+                          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.3)'; }}
+                          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.2)'; }}
+                        >
+                          <FaGithub /> Code
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
 
-  @media (max-width: 768px) {
-    width: 40px;
-    height: 2px;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-  }
-`;
+            <motion.div variants={fadeIn('up', 'tween', 0.5, 0.8)}>
+              <div
+                className="flex items-stretch justify-center gap-8 p-12 md:flex-col md:p-8 rounded-[20px]"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.02)',
+                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                }}
+              >
+                {/* Frontend Stack */}
+                <div className="flex-1 max-w-[300px]">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div
+                      className="w-12 h-12 flex items-center justify-center rounded-xl text-2xl"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(97, 218, 251, 0.2), rgba(97, 218, 251, 0.05))',
+                        color: '#61dafb',
+                      }}
+                    >
+                      <FaReact />
+                    </div>
+                    <h4 className="text-xl font-semibold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Frontend</h4>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    {project.stack.frontend.map((tech, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-3 py-3 px-4 rounded-[10px] transition-all duration-200 hover:translate-x-1"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.03)',
+                          border: '1px solid rgba(255, 255, 255, 0.05)',
+                        }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.06)'; }}
+                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.03)'; }}
+                      >
+                        <div className="text-xl" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{tech.icon}</div>
+                        <span className="text-[0.95rem]" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{tech.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-const DividerIcon = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  background: #0a0a0f;
-  border: 2px solid rgba(97, 218, 251, 0.3);
-  border-radius: 50%;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  color: #61dafb;
-  letter-spacing: 0.05em;
-`;
+                {/* Divider */}
+                <div className="flex flex-col md:flex-row items-center justify-center gap-2 px-4 md:py-4 md:px-0">
+                  <div
+                    className="w-0.5 h-10 md:w-10 md:h-0.5"
+                    style={{ background: 'linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent)' }}
+                  />
+                  <div
+                    className="relative flex items-center justify-center w-[50px] h-[50px] rounded-full text-[0.7rem]"
+                    style={{
+                      background: '#0a0a0f',
+                      border: '2px solid rgba(97, 218, 251, 0.3)',
+                      fontFamily: "'JetBrains Mono', monospace",
+                      color: '#61dafb',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
+                    <div
+                      className="absolute rounded-full"
+                      style={{
+                        inset: '-4px',
+                        border: '2px solid rgba(97, 218, 251, 0.3)',
+                        animation: 'fsnode-pulse 2s ease-in-out infinite',
+                      }}
+                    />
+                    API
+                  </div>
+                  <div
+                    className="w-0.5 h-10 md:w-10 md:h-0.5"
+                    style={{ background: 'linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent)' }}
+                  />
+                </div>
 
-const ConnectionPulse = styled.div`
-  position: absolute;
-  inset: -4px;
-  border: 2px solid rgba(97, 218, 251, 0.3);
-  border-radius: 50%;
-  animation: ${pulse} 2s ease-in-out infinite;
-`;
+                {/* Backend Stack */}
+                <div className="flex-1 max-w-[300px]">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div
+                      className="w-12 h-12 flex items-center justify-center rounded-xl text-2xl"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(104, 160, 99, 0.2), rgba(104, 160, 99, 0.05))',
+                        color: '#68a063',
+                      }}
+                    >
+                      <FaNodeJs />
+                    </div>
+                    <h4 className="text-xl font-semibold text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Backend</h4>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    {project.stack.backend.map((tech, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-3 py-3 px-4 rounded-[10px] transition-all duration-200 hover:translate-x-1"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.03)',
+                          border: '1px solid rgba(255, 255, 255, 0.05)',
+                        }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.06)'; }}
+                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.03)'; }}
+                      >
+                        <div className="text-xl" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{tech.icon}</div>
+                        <span className="text-[0.95rem]" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{tech.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </motion.div>
+    </>
+  );
+};
+
+export default FullStackNodeSection;

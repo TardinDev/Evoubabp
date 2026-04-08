@@ -1,4 +1,5 @@
-import styled from "styled-components";
+'use client'
+
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -302,335 +303,175 @@ const TechUsed = () => {
   }, []);
 
   return (
-    <Section ref={sectionRef}>
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden min-h-screen"
+      style={{ background: 'linear-gradient(160deg, #0f0c29 0%, #1a1a3e 40%, #24243e 100%)' }}
+    >
       {/* Ambient glow orbs */}
-      <BackgroundOrb ref={orbRef} style={{ top: "25%", left: "5%" }} />
-      <BackgroundOrb ref={orb2Ref} style={{ top: "55%", right: "5%" }} />
+      <div
+        ref={orbRef}
+        className="absolute w-[550px] h-[550px] max-md:w-[300px] max-md:h-[300px] rounded-full blur-[130px] max-md:blur-[80px] opacity-20 pointer-events-none z-0"
+        style={{ top: "25%", left: "5%", willChange: 'transform, background-color' }}
+      />
+      <div
+        ref={orb2Ref}
+        className="absolute w-[550px] h-[550px] max-md:w-[300px] max-md:h-[300px] rounded-full blur-[130px] max-md:blur-[80px] opacity-20 pointer-events-none z-0"
+        style={{ top: "55%", right: "5%", willChange: 'transform, background-color' }}
+      />
 
       {/* Floating decorative shapes */}
-      <FloatingShape className="float-shape" style={{ top: "12%", left: "6%" }} />
-      <FloatingShape
-        className="float-shape"
-        $variant="circle"
-        style={{ top: "65%", right: "9%" }}
+      <div
+        className="float-shape absolute w-[18px] h-[18px] border-2 border-[rgba(102,126,234,0.15)] rounded pointer-events-none z-0"
+        style={{ top: "12%", left: "6%", willChange: 'transform' }}
       />
-      <FloatingShape className="float-shape" style={{ bottom: "18%", left: "48%" }} />
+      <div
+        className="float-shape absolute w-[14px] h-[14px] border-2 border-[rgba(102,126,234,0.15)] rounded-full pointer-events-none z-0"
+        style={{ top: "65%", right: "9%", willChange: 'transform' }}
+      />
+      <div
+        className="float-shape absolute w-[18px] h-[18px] border-2 border-[rgba(102,126,234,0.15)] rounded pointer-events-none z-0"
+        style={{ bottom: "18%", left: "48%", willChange: 'transform' }}
+      />
 
-      <PinnedContent>
-        <TitleContainer ref={titleRef}>
-          <Title>Technologies Utilisées</Title>
-          <Subtitle>
+      {/* Pinned Content */}
+      <div className="flex flex-col justify-center items-center min-h-screen py-10 px-8 relative z-[1]">
+        {/* Title Container */}
+        <div ref={titleRef} className="text-center mb-10">
+          <h2
+            className="text-[2.5rem] max-md:text-[1.8rem] font-bold mb-3 bg-clip-text"
+            style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #a78bfa 50%, #764ba2 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            Technologies Utilisées
+          </h2>
+          <p className="text-[1.1rem] max-md:text-[0.95rem] text-slate-400 max-w-[550px] mx-auto leading-relaxed">
             Un stack moderne et performant pour créer des applications
             exceptionnelles
-          </Subtitle>
-        </TitleContainer>
+          </p>
+        </div>
 
-        <ContentArea>
+        {/* Content Area */}
+        <div className="relative w-full max-w-[900px] min-h-[320px] flex items-center justify-center" style={{ perspective: '1200px' }}>
           {categories.map((category, catIndex) => (
-            <CategoryGroup key={category.label} className="category-group">
-              <StepNumber className="step-num" accentColor={category.accentColor}>
+            <div
+              key={category.label}
+              className="category-group absolute w-full"
+              style={{ willChange: 'transform, opacity' }}
+            >
+              {/* Step Number */}
+              <div
+                className="step-num text-[3.5rem] max-md:text-[2.5rem] font-black leading-none mb-2 text-transparent"
+                style={{
+                  WebkitTextStroke: `1.5px ${category.accentColor}40`,
+                  willChange: 'transform, opacity',
+                }}
+              >
                 {String(catIndex + 1).padStart(2, "0")}
-                <StepTotal> / {String(categories.length).padStart(2, "0")}</StepTotal>
-              </StepNumber>
+                <span
+                  className="text-[1.2rem] max-md:text-[0.9rem] font-normal"
+                  style={{ WebkitTextStrokeWidth: '1px' }}
+                >
+                  {" "}/ {String(categories.length).padStart(2, "0")}
+                </span>
+              </div>
 
-              <CategoryLabel accentColor={category.accentColor}>
-                <CategoryIconWrapper accentColor={category.accentColor}>
+              {/* Category Label */}
+              <div className="flex items-center gap-3 mb-6">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                  style={{
+                    background: `${category.accentColor}20`,
+                    color: category.accentColor,
+                  }}
+                >
                   <category.icon size={20} />
-                </CategoryIconWrapper>
-                <CategoryLabelText>{category.label}</CategoryLabelText>
-                <CategoryCount accentColor={category.accentColor}>
+                </div>
+                <span className="text-[1.25rem] font-bold text-slate-200">
+                  {category.label}
+                </span>
+                <span
+                  className="text-[0.7rem] font-bold text-white py-[0.2rem] px-[0.6rem] rounded-[10px] shrink-0"
+                  style={{ background: category.accentColor }}
+                >
                   {category.techs.length}
-                </CategoryCount>
-                <CategoryLine accentColor={category.accentColor} />
-              </CategoryLabel>
+                </span>
+                <div
+                  className="flex-1 h-px"
+                  style={{
+                    background: `linear-gradient(90deg, ${category.accentColor}40 0%, transparent 100%)`,
+                  }}
+                />
+              </div>
 
-              <TechRow>
+              {/* Tech Row */}
+              <div className="flex flex-wrap gap-[0.85rem]">
                 {category.techs.map((tech) => (
-                  <TechItem
+                  <div
                     key={tech.name}
-                    className="tech-item"
-                    color={tech.color}
+                    className="tech-item flex items-center gap-[0.85rem] backdrop-blur-[12px] rounded-[60px] py-[0.65rem] pr-[1.3rem] pl-[0.65rem] whitespace-nowrap cursor-default shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-all duration-[350ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-[5px] hover:scale-[1.06] hover:bg-white/10 group"
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.06)',
+                      border: `1.5px solid ${tech.color}30`,
+                      willChange: 'transform, opacity',
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.boxShadow = `0 14px 40px ${tech.color}30`;
+                      (e.currentTarget as HTMLElement).style.borderColor = `${tech.color}70`;
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+                      (e.currentTarget as HTMLElement).style.borderColor = `${tech.color}30`;
+                    }}
                   >
-                    <IconWrapper color={tech.color}>
+                    <div
+                      className="w-[42px] h-[42px] rounded-full flex items-center justify-center shrink-0 transition-all duration-[350ms] group-hover:rotate-[12deg] group-hover:scale-[1.15]"
+                      style={{
+                        background: `${tech.color}18`,
+                      }}
+                    >
                       <tech.icon size={22} color={tech.color} />
-                    </IconWrapper>
-                    <TechInfo>
-                      <TechName>{tech.name}</TechName>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[0.95rem] font-semibold text-slate-200">
+                        {tech.name}
+                      </span>
                       {tech.version && (
-                        <TechVersion>{tech.version}</TechVersion>
+                        <span
+                          className="text-[0.7rem] font-semibold text-white py-[0.15rem] px-2 rounded-xl tracking-[0.3px]"
+                          style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+                        >
+                          {tech.version}
+                        </span>
                       )}
-                    </TechInfo>
-                  </TechItem>
+                    </div>
+                  </div>
                 ))}
-              </TechRow>
-            </CategoryGroup>
+              </div>
+            </div>
           ))}
-        </ContentArea>
+        </div>
 
-        <ProgressBar>
+        {/* Progress Bar */}
+        <div className="flex items-center justify-center gap-2 mt-10">
           {categories.map((_, i) => (
-            <ProgressDot
+            <div
               key={i}
               ref={(el) => {
                 dotsRef.current[i] = el;
               }}
+              className="w-[10px] h-[10px] rounded-[10px] bg-slate-700"
+              style={{ willChange: 'transform, width, background-color' }}
             />
           ))}
-        </ProgressBar>
-      </PinnedContent>
-    </Section>
+        </div>
+      </div>
+    </section>
   );
 };
-
-/* ── Styled Components ── */
-
-const Section = styled.section`
-  background: linear-gradient(160deg, #0f0c29 0%, #1a1a3e 40%, #24243e 100%);
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-`;
-
-const BackgroundOrb = styled.div`
-  position: absolute;
-  width: 550px;
-  height: 550px;
-  border-radius: 50%;
-  filter: blur(130px);
-  opacity: 0.2;
-  pointer-events: none;
-  will-change: transform, background-color;
-  z-index: 0;
-
-  @media (max-width: 768px) {
-    width: 300px;
-    height: 300px;
-    filter: blur(80px);
-  }
-`;
-
-const FloatingShape = styled.div<{ $variant?: string }>`
-  position: absolute;
-  width: ${(p) => (p.$variant === "circle" ? "14px" : "18px")};
-  height: ${(p) => (p.$variant === "circle" ? "14px" : "18px")};
-  border: 2px solid rgba(102, 126, 234, 0.15);
-  border-radius: ${(p) => (p.$variant === "circle" ? "50%" : "4px")};
-  pointer-events: none;
-  will-change: transform;
-  z-index: 0;
-`;
-
-const PinnedContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 2.5rem 2rem;
-  position: relative;
-  z-index: 1;
-`;
-
-const TitleContainer = styled.div`
-  text-align: center;
-  margin-bottom: 2.5rem;
-`;
-
-const Title = styled.h2`
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  background: linear-gradient(135deg, #667eea 0%, #a78bfa 50%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-
-  @media (max-width: 768px) {
-    font-size: 1.8rem;
-  }
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.1rem;
-  color: #94a3b8;
-  max-width: 550px;
-  margin: 0 auto;
-  line-height: 1.6;
-
-  @media (max-width: 768px) {
-    font-size: 0.95rem;
-  }
-`;
-
-const ContentArea = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  min-height: 320px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1200px;
-`;
-
-const CategoryGroup = styled.div`
-  position: absolute;
-  width: 100%;
-  will-change: transform, opacity;
-`;
-
-const StepNumber = styled.div<{ accentColor: string }>`
-  font-size: 3.5rem;
-  font-weight: 900;
-  line-height: 1;
-  margin-bottom: 0.5rem;
-  color: transparent;
-  -webkit-text-stroke: 1.5px ${(p) => `${p.accentColor}40`};
-  will-change: transform, opacity;
-
-  @media (max-width: 768px) {
-    font-size: 2.5rem;
-  }
-`;
-
-const StepTotal = styled.span`
-  font-size: 1.2rem;
-  font-weight: 400;
-  -webkit-text-stroke-width: 1px;
-
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-  }
-`;
-
-const CategoryLabel = styled.div<{ accentColor: string }>`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-`;
-
-const CategoryIconWrapper = styled.div<{ accentColor: string }>`
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: ${(p) => `${p.accentColor}20`};
-  color: ${(p) => p.accentColor};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-`;
-
-const CategoryLabelText = styled.span`
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #e2e8f0;
-`;
-
-const CategoryCount = styled.span<{ accentColor: string }>`
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: white;
-  background: ${(p) => p.accentColor};
-  padding: 0.2rem 0.6rem;
-  border-radius: 10px;
-  flex-shrink: 0;
-`;
-
-const CategoryLine = styled.div<{ accentColor: string }>`
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    ${(p) => `${p.accentColor}40`} 0%,
-    transparent 100%
-  );
-`;
-
-const TechRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-`;
-
-const TechItem = styled.div<{ color: string }>`
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(12px);
-  border: 1.5px solid ${(p) => `${p.color}30`};
-  border-radius: 60px;
-  padding: 0.65rem 1.3rem 0.65rem 0.65rem;
-  white-space: nowrap;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  cursor: default;
-  will-change: transform, opacity;
-
-  &:hover {
-    transform: translateY(-5px) scale(1.06);
-    box-shadow: 0 14px 40px ${(p) => `${p.color}30`};
-    border-color: ${(p) => `${p.color}70`};
-    background: rgba(255, 255, 255, 0.1);
-  }
-`;
-
-const IconWrapper = styled.div<{ color: string }>`
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: ${(p) => `${p.color}18`};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.35s ease;
-
-  ${TechItem}:hover & {
-    transform: rotate(12deg) scale(1.15);
-    background: ${(p) => `${p.color}30`};
-    box-shadow: 0 0 20px ${(p) => `${p.color}40`};
-  }
-`;
-
-const TechInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-const TechName = styled.span`
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #e2e8f0;
-`;
-
-const TechVersion = styled.span`
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: white;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  padding: 0.15rem 0.5rem;
-  border-radius: 12px;
-  letter-spacing: 0.3px;
-`;
-
-const ProgressBar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 2.5rem;
-`;
-
-const ProgressDot = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 10px;
-  background: #334155;
-  will-change: transform, width, background-color;
-`;
 
 export default TechUsed;

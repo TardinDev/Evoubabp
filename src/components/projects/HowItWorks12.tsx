@@ -1,4 +1,5 @@
-import styled, { keyframes } from "styled-components";
+'use client'
+
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import {
@@ -8,7 +9,7 @@ import {
   HiOutlineCheckCircle,
   HiArrowRight,
   HiOutlineShieldCheck,
-  HiOutlineLockClosed // Added for Security/Auth if needed, or re-use ShieldCheck
+  HiOutlineLockClosed
 } from "react-icons/hi";
 import { FaReact, FaNodeJs, FaRocket, FaGitAlt, FaDocker, FaKey, FaLock } from "react-icons/fa";
 import { SiTypescript, SiSpringboot, SiGithubactions, SiVitest, SiEslint, SiPrettier, SiSentry, SiJsonwebtokens, SiSpringsecurity } from "react-icons/si";
@@ -116,602 +117,343 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
       whileInView="show"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <Section id={id || "howItWorks"}>
-        <GridOverlay />
-        <GlowEffect />
+      <style>{`
+        @keyframes hiw-pulse {
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.05); }
+        }
+        .hiw-step-card:hover .hiw-step-icon-wrapper {
+          transform: scale(1.1);
+        }
+        .hiw-practice-card:hover .hiw-practice-icon-wrapper {
+          transform: scale(1.1);
+        }
+        .hiw-cta-button:hover svg {
+          transform: translateX(4px);
+        }
+      `}</style>
 
-        <Container>
+      <section
+        id={id || "howItWorks"}
+        className="relative px-4 pb-16 pt-0 md:px-8 overflow-hidden"
+        style={{
+          background: 'linear-gradient(180deg, #4b0082 0%, #380062 50%, #2d004f 100%)',
+        }}
+      >
+        {/* GridOverlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+
+        {/* GlowEffect */}
+        <div
+          className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%)',
+          }}
+        />
+
+        <div className="relative max-w-[1400px] mx-auto z-[2]">
           <motion.div variants={fadeIn("up", "tween", 0.1, 0.8)}>
-            <HeaderSection>
-              <TagLine>MÉTHODOLOGIE</TagLine>
-              <MainTitle>
+            <div className="text-center mb-20 pt-16 md:mb-12 md:pt-12">
+              <span
+                className="inline-block font-mono text-xs tracking-[0.3em] text-[#e0b0ff] px-4 py-2 rounded mb-6"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                }}
+              >
+                MÉTHODOLOGIE
+              </span>
+              <h2
+                className="font-bold text-white leading-tight mb-6"
+                style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                }}
+              >
                 Processus de
-                <TitleGradient> Développement</TitleGradient>
-              </MainTitle>
-              <Subtitle>
+                <span
+                  className="bg-clip-text"
+                  style={{
+                    background: 'linear-gradient(135deg, #e0b0ff 0%, #ff9ecd 50%, #ffd700 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  {' '}Développement
+                </span>
+              </h2>
+              <p className="text-[1.15rem] text-white/70 max-w-[600px] mx-auto leading-relaxed">
                 Une approche structurée et itérative pour transformer
                 vos idées en produits digitaux performants
-              </Subtitle>
-            </HeaderSection>
+              </p>
+            </div>
           </motion.div>
 
-          <TimelineContainer>
-            <TimelineLine />
+          {/* Timeline Container */}
+          <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 relative mb-16">
+            {/* Timeline Line - only visible on xl */}
+            <div
+              className="absolute top-[80px] left-[10%] right-[10%] h-[2px] opacity-30 hidden xl:block"
+              style={{
+                background: 'linear-gradient(90deg, #8b5cf6, #61dafb, #6db33f, #f59e0b)',
+              }}
+            />
 
             {processSteps.map((step, index) => (
               <motion.div
                 key={index}
                 variants={fadeIn("up", "spring", 0.2 + index * 0.15, 0.8)}
               >
-                <StepCard index={index}>
-                  <StepNumber color={step.color}>{step.number}</StepNumber>
+                <div
+                  className="hiw-step-card relative rounded-[20px] p-8 sm:p-6 overflow-hidden backdrop-blur-[10px] transition-all duration-400 hover:translate-y-[-8px] hover:shadow-[0_12px_40px_rgba(0,0,0,0.3)]"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                  }}
+                >
+                  {/* StepNumber */}
+                  <span
+                    className="absolute top-6 right-6 text-[2.5rem] font-bold opacity-15 leading-none"
+                    style={{
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      color: step.color,
+                    }}
+                  >
+                    {step.number}
+                  </span>
 
-                  <StepIconWrapper color={step.color}>
+                  {/* StepIconWrapper */}
+                  <div
+                    className="hiw-step-icon-wrapper w-14 h-14 flex items-center justify-center rounded-[14px] mb-6 transition-all duration-300"
+                    style={{
+                      background: `${step.color}15`,
+                      border: `1px solid ${step.color}30`,
+                      color: step.color,
+                    }}
+                  >
                     <step.icon size={28} />
-                  </StepIconWrapper>
+                  </div>
 
-                  <StepContent>
-                    <StepTitle>{step.title}</StepTitle>
-                    <StepSubtitle>{step.subtitle}</StepSubtitle>
-                    <StepDescription>{step.description}</StepDescription>
+                  {/* StepContent */}
+                  <div className="relative z-[2]">
+                    <h3
+                      className="text-[1.4rem] font-semibold text-white mb-1"
+                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    >
+                      {step.title}
+                    </h3>
+                    <span className="block text-[0.85rem] text-white/50 mb-4">
+                      {step.subtitle}
+                    </span>
+                    <p className="text-[0.95rem] text-white/70 leading-relaxed mb-5">
+                      {step.description}
+                    </p>
 
                     {step.techs && (
-                      <TechRow>
+                      <div className="flex gap-2 flex-wrap">
                         {step.techs.map((tech, idx) => (
-                          <TechBadge key={idx} color={step.color}>
+                          <span
+                            key={idx}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[0.8rem] font-medium"
+                            style={{
+                              background: `${step.color}10`,
+                              border: `1px solid ${step.color}20`,
+                              color: step.color,
+                            }}
+                          >
                             <tech.icon size={14} />
                             {tech.name}
-                          </TechBadge>
+                          </span>
                         ))}
-                      </TechRow>
+                      </div>
                     )}
 
                     {step.deliverables && (
-                      <DeliverablesRow>
+                      <div className="flex gap-2 flex-wrap">
                         {step.deliverables.map((item, idx) => (
-                          <DeliverableTag key={idx}>{item}</DeliverableTag>
+                          <span
+                            key={idx}
+                            className="py-1.5 px-3 rounded-[20px] text-xs text-white/80 font-medium"
+                            style={{
+                              background: 'rgba(255, 255, 255, 0.1)',
+                              border: '1px solid rgba(255, 255, 255, 0.15)',
+                            }}
+                          >
+                            {item}
+                          </span>
                         ))}
-                      </DeliverablesRow>
+                      </div>
                     )}
-                  </StepContent>
+                  </div>
 
+                  {/* StepConnector - only on xl */}
                   {index < processSteps.length - 1 && (
-                    <StepConnector color={step.color}>
+                    <div
+                      className="absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 hidden xl:flex items-center justify-center opacity-50 z-10"
+                      style={{ color: step.color }}
+                    >
                       <HiArrowRight size={20} />
-                    </StepConnector>
+                    </div>
                   )}
 
-                  <StepGlow color={step.color} />
-                </StepCard>
+                  {/* StepGlow */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-[3px] opacity-80"
+                    style={{ background: step.color }}
+                  />
+                </div>
               </motion.div>
             ))}
-          </TimelineContainer>
+          </div>
 
+          {/* Dev Practices Section */}
           <motion.div variants={fadeIn("up", "tween", 0.7, 0.8)}>
-            <DevPracticesSection>
-              <DevPracticesHeader>
-                <DevPracticesTagLine>DÉVELOPPEMENT RIGOUREUX</DevPracticesTagLine>
-                <DevPracticesTitle>Outils & Bonnes Pratiques</DevPracticesTitle>
-                <DevPracticesSubtitle>
+            <div
+              className="mb-16 p-12 md:p-6 md:mb-12 rounded-3xl backdrop-blur-[10px]"
+              style={{
+                background: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+              }}
+            >
+              <div className="text-center mb-12 md:mb-8">
+                <span
+                  className="inline-block font-mono text-[0.7rem] tracking-[0.25em] text-[#ffd700] px-3 py-1.5 rounded mb-4"
+                  style={{
+                    background: 'rgba(255, 215, 0, 0.1)',
+                    border: '1px solid rgba(255, 215, 0, 0.2)',
+                  }}
+                >
+                  DÉVELOPPEMENT RIGOUREUX
+                </span>
+                <h3
+                  className="font-semibold text-white mb-3"
+                  style={{
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                  }}
+                >
+                  Outils & Bonnes Pratiques
+                </h3>
+                <p className="text-base text-white/60 max-w-[600px] mx-auto leading-relaxed">
                   Un workflow professionnel pour garantir la qualité, la fiabilité et la maintenabilité du code
-                </DevPracticesSubtitle>
-              </DevPracticesHeader>
+                </p>
+              </div>
 
-              <PracticesGrid>
+              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4">
                 {devPractices.map((practice, index) => (
                   <motion.div
                     key={index}
                     variants={fadeIn("up", "spring", 0.1 + index * 0.1, 0.6)}
                   >
-                    <PracticeCard>
-                      <PracticeIconWrapper color={practice.color}>
+                    <div
+                      className="hiw-practice-card flex items-start gap-4 p-5 rounded-[14px] transition-all duration-300 hover:translate-y-[-4px]"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                      }}
+                    >
+                      <div
+                        className="hiw-practice-icon-wrapper w-11 h-11 min-w-[44px] flex items-center justify-center rounded-[10px] transition-all duration-300"
+                        style={{
+                          background: `${practice.color}15`,
+                          border: `1px solid ${practice.color}25`,
+                          color: practice.color,
+                        }}
+                      >
                         <practice.icon size={24} />
-                      </PracticeIconWrapper>
-                      <PracticeContent>
-                        <PracticeTitle>{practice.title}</PracticeTitle>
-                        <PracticeDescription>{practice.description}</PracticeDescription>
-                      </PracticeContent>
-                    </PracticeCard>
+                      </div>
+                      <div className="flex-1">
+                        <h4
+                          className="text-base font-semibold text-white mb-1"
+                          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                        >
+                          {practice.title}
+                        </h4>
+                        <p className="text-[0.85rem] text-white/60 leading-normal">
+                          {practice.description}
+                        </p>
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
-              </PracticesGrid>
-            </DevPracticesSection>
+              </div>
+            </div>
           </motion.div>
 
+          {/* Bottom CTA */}
           <motion.div variants={fadeIn("up", "tween", 0.8, 0.8)}>
-            <BottomCTA>
-              <CTAContent>
-                <CTAIcon><FaRocket /></CTAIcon>
-                <CTAText>
-                  <CTATitle>Prêt à démarrer votre projet ?</CTATitle>
-                  <CTADescription>
+            <div
+              className="flex items-center justify-between gap-8 p-8 rounded-[20px] backdrop-blur-[10px] md:flex-col md:text-center"
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+              }}
+            >
+              <div className="flex items-center gap-6 md:flex-col">
+                <div
+                  className="w-[60px] h-[60px] flex items-center justify-center rounded-2xl text-[#ffd700] text-2xl"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(224, 176, 255, 0.2))',
+                    animation: 'hiw-pulse 2s ease-in-out infinite',
+                  }}
+                >
+                  <FaRocket />
+                </div>
+                <div>
+                  <h4
+                    className="text-[1.25rem] font-semibold text-white mb-1"
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                  >
+                    Prêt à démarrer votre projet ?
+                  </h4>
+                  <p className="text-[0.95rem] text-white/60">
                     Discutons de vos besoins et trouvons la meilleure solution ensemble
-                  </CTADescription>
-                </CTAText>
-              </CTAContent>
-              <CTAButton href="#contact">
+                  </p>
+                </div>
+              </div>
+              <a
+                href="#contact"
+                className="hiw-cta-button inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base no-underline whitespace-nowrap transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_10px_30px_rgba(255,215,0,0.4)]"
+                style={{
+                  background: 'linear-gradient(135deg, #ffd700, #ffb700)',
+                  color: '#2d004f',
+                  fontFamily: "'Space Grotesk', sans-serif",
+                }}
+              >
                 Commencer
                 <HiArrowRight />
-              </CTAButton>
-            </BottomCTA>
+              </a>
+            </div>
           </motion.div>
-        </Container>
-      </Section>
+        </div>
+      </section>
     </motion.div>
   );
 };
 
 export default HowItWorks;
-
-const pulse = keyframes`
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
-`;
-
-const Section = styled.section`
-  position: relative;
-  padding: 0 2rem 6rem 2rem;
-  background: linear-gradient(180deg, #4b0082 0%, #380062 50%, #2d004f 100%);
-  overflow: hidden;
-
-  @media (max-width: 768px) {
-    padding: 0 1rem 4rem 1rem;
-  }
-`;
-
-const GridOverlay = styled.div`
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-`;
-
-const GlowEffect = styled.div`
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
-  pointer-events: none;
-`;
-
-const Container = styled.div`
-  position: relative;
-  max-width: 1400px;
-  margin: 0 auto;
-  z-index: 2;
-`;
-
-const HeaderSection = styled.div`
-  text-align: center;
-  margin-bottom: 5rem;
-  padding-top: 4rem;
-
-  @media (max-width: 768px) {
-    margin-bottom: 3rem;
-    padding-top: 3rem;
-  }
-`;
-
-const TagLine = styled.span`
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  color: #e0b0ff;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.5rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-  margin-bottom: 1.5rem;
-`;
-
-const MainTitle = styled.h2`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
-  color: white;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-`;
-
-const TitleGradient = styled.span`
-  background: linear-gradient(135deg, #e0b0ff 0%, #ff9ecd 50%, #ffd700 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.7;
-`;
-
-const TimelineContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  position: relative;
-  margin-bottom: 4rem;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-`;
-
-const TimelineLine = styled.div`
-  position: absolute;
-  top: 80px;
-  left: 10%;
-  right: 10%;
-  height: 2px;
-  background: linear-gradient(90deg, #8b5cf6, #61dafb, #6db33f, #f59e0b);
-  opacity: 0.3;
-
-  @media (max-width: 1024px) {
-    display: none;
-  }
-`;
-
-const StepCard = styled.div<{ index: number }>`
-  position: relative;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 2rem;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-  }
-
-  @media (max-width: 640px) {
-    padding: 1.5rem;
-  }
-`;
-
-const StepGlow = styled.div<{ color: string }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: ${props => props.color};
-  opacity: 0.8;
-`;
-
-const StepNumber = styled.span<{ color: string }>`
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: ${props => props.color};
-  opacity: 0.15;
-  line-height: 1;
-`;
-
-const StepIconWrapper = styled.div<{ color: string }>`
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${props => `${props.color}15`};
-  border: 1px solid ${props => `${props.color}30`};
-  border-radius: 14px;
-  color: ${props => props.color};
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
-
-  ${StepCard}:hover & {
-    transform: scale(1.1);
-    background: ${props => `${props.color}25`};
-  }
-`;
-
-const StepContent = styled.div`
-  position: relative;
-  z-index: 2;
-`;
-
-const StepTitle = styled.h3`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 0.25rem;
-`;
-
-const StepSubtitle = styled.span`
-  display: block;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 1rem;
-`;
-
-const StepDescription = styled.p`
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.7;
-  margin-bottom: 1.25rem;
-`;
-
-const TechRow = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-`;
-
-const TechBadge = styled.span<{ color: string }>`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.4rem 0.75rem;
-  background: ${props => `${props.color}10`};
-  border: 1px solid ${props => `${props.color}20`};
-  border-radius: 6px;
-  font-size: 0.8rem;
-  color: ${props => props.color};
-  font-weight: 500;
-`;
-
-const DeliverablesRow = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-`;
-
-const DeliverableTag = styled.span`
-  padding: 0.35rem 0.7rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 500;
-`;
-
-const StepConnector = styled.div<{ color: string }>`
-  position: absolute;
-  right: -1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${props => props.color};
-  opacity: 0.5;
-  z-index: 10;
-
-  @media (max-width: 1024px) {
-    display: none;
-  }
-`;
-
-const BottomCTA = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-  }
-`;
-
-const CTAContent = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const CTAIcon = styled.div`
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(224, 176, 255, 0.2));
-  border-radius: 16px;
-  color: #ffd700;
-  font-size: 1.5rem;
-  animation: ${pulse} 2s ease-in-out infinite;
-`;
-
-const CTAText = styled.div``;
-
-const CTATitle = styled.h4`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 0.25rem;
-`;
-
-const CTADescription = styled.p`
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.6);
-`;
-
-const CTAButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, #ffd700, #ffb700);
-  color: #2d004f;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  text-decoration: none;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
-  }
-
-  svg {
-    transition: transform 0.3s ease;
-  }
-
-  &:hover svg {
-    transform: translateX(4px);
-  }
-`;
-
-const DevPracticesSection = styled.div`
-  margin-bottom: 4rem;
-  padding: 3rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  backdrop-filter: blur(10px);
-
-  @media (max-width: 768px) {
-    padding: 2rem 1.5rem;
-    margin-bottom: 3rem;
-  }
-`;
-
-const DevPracticesHeader = styled.div`
-  text-align: center;
-  margin-bottom: 3rem;
-
-  @media (max-width: 768px) {
-    margin-bottom: 2rem;
-  }
-`;
-
-const DevPracticesTagLine = styled.span`
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  color: #ffd700;
-  background: rgba(255, 215, 0, 0.1);
-  padding: 0.4rem 0.8rem;
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  border-radius: 4px;
-  margin-bottom: 1rem;
-`;
-
-const DevPracticesTitle = styled.h3`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 600;
-  color: white;
-  margin-bottom: 0.75rem;
-`;
-
-const DevPracticesSubtitle = styled.p`
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-`;
-
-const PracticesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-`;
-
-const PracticeCard = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-4px);
-  }
-`;
-
-const PracticeIconWrapper = styled.div<{ color: string }>`
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${props => `${props.color}15`};
-  border: 1px solid ${props => `${props.color}25`};
-  border-radius: 10px;
-  color: ${props => props.color};
-  transition: all 0.3s ease;
-
-  ${PracticeCard}:hover & {
-    transform: scale(1.1);
-    background: ${props => `${props.color}25`};
-  }
-`;
-
-const PracticeContent = styled.div`
-  flex: 1;
-`;
-
-const PracticeTitle = styled.h4`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 0.35rem;
-`;
-
-const PracticeDescription = styled.p`
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.5;
-`;

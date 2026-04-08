@@ -1,12 +1,14 @@
-import styled from "styled-components";
+'use client'
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import { FaFacebook, FaTiktok, FaYoutube } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { IoLogoVercel } from "react-icons/io5";
-import tardinimage from '/images/tardin.png'
-import cv from '/documents/tardinDev.pdf'
-import Lottie from "lottie-react";
+const tardinimage = '/images/tardin.png'
+const cv = '/documents/tardinDev.pdf'
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import gitHubAnimation from "../../shared/assets/animations/gitHub.json";
 import { useState, useEffect } from "react";
 
@@ -26,27 +28,31 @@ export default function UnderHeader() {
   }, []);
 
   return (
-
-    <UnderHeaderStyle>
+    <div className="bg-bg-primary">
       {/* Section container */}
       <motion.div
-        variants={staggerContainer}
+        variants={staggerContainer(0.1, 0.2)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
-        className="container"
+        className="relative bg-bg-primary z-[1]"
+        style={{ padding: 'clamp(16px, 2vw, 30px) clamp(20px, 4vw, 50px)' }}
       >
-        <div className="upElement">
+        {/* upElement */}
+        <div
+          className="flex justify-between items-center flex-wrap max-sm:justify-center max-sm:items-center max-sm:gap-8"
+          style={{ fontSize: 'clamp(1.25rem, 2.2vw + 1rem, 2.25rem)' }}
+        >
           <motion.span
             variants={fadeIn("right", "tween", 0.2, 1)}
-            className="firstText"
+            className="cursor-pointer transition-all duration-500 ease-in-out p-2 rounded-[10px] font-semibold text-black relative z-[2] -ml-6 hover:bg-[#4b0082] hover:text-white hover:scale-110 hover:border hover:border-purple-800 hover:rounded-[10px] hover:px-4 hover:py-2 hover:no-underline hover:z-10 group"
           >
             Bonjour,<br /> Je suis{" "}
-            <span className="carousel-container">
+            <span className="inline-block relative w-[280px] h-[2.4em] align-top">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={currentIndex}
-                  className="carousel-word"
+                  className="absolute left-0 top-0 text-black font-bold leading-[1.2] transition-colors duration-300 group-hover:text-white"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -20, opacity: 0 }}
@@ -60,338 +66,103 @@ export default function UnderHeader() {
           </motion.span>
           <motion.span
             variants={fadeIn("left", "tween", 0.2, 1)}
-            className="secondText"
+            className="relative rounded-[10px] inline-block cursor-pointer px-4 py-2 transition-all duration-500 ease-in-out text-black font-semibold z-[2] hover:bg-[#4b0082] hover:text-white hover:scale-110 hover:border hover:border-purple-800 hover:rounded-[10px] hover:px-4 hover:py-2 hover:no-underline hover:z-10 max-sm:relative max-sm:hidden"
           >
             <span>Je conçois des solutions intelligentes</span>
             <br />
-            <span>alimentées par l'IA pour transformer</span>
+            <span>alimentées par l&apos;IA pour transformer</span>
             <br />
-            <span>l'avenir de votre entreprise.</span>
+            <span>l&apos;avenir de votre entreprise.</span>
           </motion.span>
         </div>
 
         {/* Person image */}
         <motion.div
           variants={fadeIn("up", "tween", 0.2, 1)}
-          className="person"
+          className="absolute bottom-4 left-1/4 -translate-x-1/2 z-[1] max-sm:relative max-sm:left-0 max-sm:translate-x-0 max-sm:flex max-sm:justify-center max-sm:items-center max-sm:mt-8 group"
         >
-          <img src={tardinimage} alt="Tardin" className="cover-image" />
+          <img
+            src={tardinimage}
+            alt="Tardin"
+            className="h-auto object-contain border-[3px] border-purple-800 rounded-full mb-[5px] opacity-90 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:scale-105"
+            style={{ width: 'clamp(150px, 30vw, 320px)' }}
+          />
         </motion.div>
 
         {/* CV download */}
         <motion.a
           variants={fadeIn("right", "tween", 0.2, 1)}
-          className="CV"
+          className="absolute top-1/2 left-0 text-orange-500 cursor-pointer hover:bg-[#4b0082] hover:text-white hover:text-[30px] hover:border hover:border-purple-800 hover:rounded-[10px] hover:px-2 hover:py-[0.3rem] hover:no-underline transition-all duration-500 ease-in-out max-sm:relative max-sm:hidden"
+          style={{ marginLeft: 'clamp(1rem, 4vw, 3rem)' }}
           href={cv}
-          download={cv} // attribut pour forcer le téléchargement
+          download={cv}
         >
           Télécharger mon CV
         </motion.a>
 
-        {/* <motion.a 
-          variants={fadeIn("right", "tween", 0.2, 1)}
-          className="CV" href="mailto:tardindavy@gmail.com"
-        >
-          Download my CV
-        </motion.a> */}
-
         {/* Down element */}
-        <div className="downElement">
+        <div
+          className="flex flex-wrap justify-between text-xl max-sm:mt-16 max-sm:gap-8"
+          style={{ marginTop: 'clamp(4rem, 8vw, 12rem)' }}
+        >
           <motion.div
             variants={fadeIn("right", "tween", 0.2, 1)}
-            className="experience"
+            className="gap-4"
           >
-            <div className="numberofyearsExperience">
-              <div className="firstText">4</div>
-              <div className="secondText">
+            {/* numberofyearsExperience */}
+            <div className="flex items-center gap-[10px]">
+              <div className="cursor-pointer transition-all duration-500 ease-in-out p-2 rounded-[10px] font-semibold text-black relative z-[2] -ml-6 hover:bg-[#4b0082] hover:text-white hover:scale-110 hover:border hover:border-purple-800 hover:rounded-[10px] hover:px-4 hover:py-2 hover:no-underline hover:z-10">
+                4
+              </div>
+              <div className="relative rounded-[10px] inline-block cursor-pointer px-4 py-2 transition-all duration-500 ease-in-out text-black font-semibold z-[2] hover:bg-[#4b0082] hover:text-white hover:scale-110 hover:border hover:border-purple-800 hover:rounded-[10px] hover:px-4 hover:py-2 hover:no-underline hover:z-10 max-sm:relative max-sm:hidden">
                 <div>Années</div>
                 <div>d&apos;Expérience</div>
               </div>
             </div>
-            <div className="iconsContact">
-              <FaFacebook size={50} color="blue" />
-              <FaTiktok size={50} color="#000" />
-              <IoLogoWhatsapp size={50} color="green" />
-              <FaYoutube size={50} color="red" />
+            {/* iconsContact */}
+            <div className="flex gap-4 mt-2 cursor-pointer [&>svg]:transition-transform [&>svg]:duration-300 [&>svg]:ease-in-out hover:[&>svg]:scale-[1.2]">
+              <FaFacebook size={50} color="blue" className="transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <FaTiktok size={50} color="#000" className="transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <IoLogoWhatsapp size={50} color="green" className="transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <FaYoutube size={50} color="red" className="transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
             </div>
           </motion.div>
 
           <motion.div
             variants={fadeIn("left", "tween", 0.2, 1)}
-            className="certificat-container"
+            className="flex gap-5 items-center"
           >
             <div>
-              Découvrez mes projets intégrant l'IA, l'automatisation intelligente <br />
+              Découvrez mes projets intégrant l&apos;IA, l&apos;automatisation intelligente <br />
               et les dernières innovations technologiques sur Vercel et GitHub !
             </div>
 
-            <div className="vercelAndGithub">
-              <div className="certificat">
-                <IoLogoVercel size={55} color="#000" className="icon-certificat" />
-                <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="link-certificat"> <span>Vercel</span></a>
+            <div className="flex flex-col gap-4">
+              <div className="flex gap-[10px] items-center cursor-pointer">
+                <IoLogoVercel size={55} color="#000" className="mb-4 w-14" />
+                <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="no-underline text-inherit">
+                  <span className="text-purple-800 font-bold">Vercel</span>
+                </a>
               </div>
 
-              <div className="certificat">
-                <div style={{ height: "2rem", width: "3rem", }}>
+              <div className="flex gap-[10px] items-center cursor-pointer">
+                <div style={{ height: "2rem", width: "3rem" }}>
                   <Lottie
                     animationData={gitHubAnimation}
                     loop
                     autoplay
                   />
                 </div>
-                <a href="https://github.com/TardinDev" target="_blank" rel="noopener noreferrer" className="link-certificat"> <span>GitHub</span> </a>
+                <a href="https://github.com/TardinDev" target="_blank" rel="noopener noreferrer" className="no-underline text-inherit">
+                  <span className="text-purple-800 font-bold">GitHub</span>
+                </a>
               </div>
             </div>
 
           </motion.div>
 
-
         </div>
       </motion.div>
-    </UnderHeaderStyle>
+    </div>
   );
 }
-
-const UnderHeaderStyle = styled.div`
-  background-color: #F8F7F1;
-
-  .container {
-    position: relative;
-    background-color: #F8F7F1;
-    padding: clamp(16px, 2vw, 30px) clamp(20px, 4vw, 50px);
-    z-index: 1;
-  }
-
-  .person {
-    position: absolute;
-    bottom: 1rem;
-    left: 25%;
-    transform: translateX(-50%);
-    z-index: 1;
-
-    img {
-      width: clamp(150px, 30vw, 320px);
-      height: auto;
-      object-fit: contain;
-      border: 3px solid purple;
-      border-radius: 50%;
-      margin-bottom: 5px;
-      opacity: 0.9;
-      transition: all 0.3s ease;
-    }
-
-    &:hover img {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 640px) {
-      position: relative;
-      left: 0;
-      transform: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 2rem;
-    }
-  }
-
-  .CV {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    color: orange;
-    margin-left: clamp(1rem, 4vw, 3rem);
-    cursor:pointer;
-
-    &: hover {
-       background-color:#4b0082;
-       color:#fff;
-       font-size:30px;
-
-       border:1px solid purple;
-       border-radius:10px;
-
-       padding:0.3rem 0.5rem;
-       text-decoration:none;
-       transition: all 0.5s ease-in-out; /* Ajout de la transition */
-
-    }
-
-    @media (max-width: 640px) {
-      position: relative;
-      display: none;
-    }
-  }
-
-  .secondText {
-      position: relative;
-      border-radius: 10px;
-      display: inline-block;
-      cursor: pointer;
-      padding: 0.5rem 1rem;
-      transition: all 0.5s ease-in-out;
-      color: black;
-      font-weight: 600;
-      z-index: 2;
-
-      &: hover {
-        background-color: #4b0082;
-        color: #fff;
-        transform: scale(1.1);
-        border: 1px solid purple;
-        border-radius: 10px;
-        padding: 0.5rem 1rem;
-        text-decoration: none;
-        z-index: 10;
-      }
-
-      @media (max-width: 640px) {
-      position: relative;
-      display: none;
-    }
-  }
-
-  .upElement {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    font-size: clamp(1.25rem, 2.2vw + 1rem, 2.25rem);
-    @media (max-width: 640px) {
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-    }
-  }
-
-  .firstText {
-    cursor: pointer;
-    transition: all 0.5s ease-in-out;
-    padding: 0.5rem;
-    border-radius: 10px;
-    font-weight: 600;
-    color: black;
-    position: relative;
-    z-index: 2;
-    margin-left: -1.5rem;
-
-    &:hover {
-      background-color: #4b0082;
-      color: #fff;
-      transform: scale(1.1);
-      border: 1px solid purple;
-      border-radius: 10px;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-      z-index: 10;
-    }
-  }
-
-  .carousel-container {
-    display: inline-block;
-    position: relative;
-    width: 280px;
-    height: 2.4em;
-    vertical-align: top;
-  }
-
-  .carousel-word {
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: black;
-    font-weight: 700;
-    line-height: 1.2;
-    transition: color 0.3s ease;
-  }
-
-  .firstText:hover .carousel-word {
-    color: white;
-  }
-
-  .downElement {
-    margin-top: clamp(4rem, 8vw, 12rem);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    font-size: 20px;
-    @media (max-width: 640px) {
-      margin-top: 4rem;
-      gap: 2rem;
-    }
-  }
-
-  .experience {
-    gap: 1rem;
-    .numberofyearsExperience {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .iconsContact {
-      display: flex;
-      gap: 1rem;
-      margin-top: 0.5rem;
-      cursor: pointer;
-      svg {
-        transition: transform 0.3s ease-in-out;
-        &:hover {
-          transform: scale(1.2);
-        }
-      }
-    }
-  }
-
-  ${'' /* .certificat {
-    display: flex;
-    gap:10px;
-    align-items: center;
-    .iconCertificat {
-      margin-bottom: 1rem;
-      width: 3.5rem;
-    }
-  } */}
-
-  
-  .vercelAndGithub {
-
-      display:flex;
-      flex-direction:column;
-      gap:1rem;
-  }
-
-  .certificat-container {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.certificat {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    cursor:pointer;
-
-    span {
-
-      color:purple;
-      font-weight:bold;
-    }
-
-.link-certificat {
-    text-decoration: none; /* Enlève le soulignement */
-    color: inherit; /* Utilise la couleur du texte parent */
-}
-
-}
-
-.icon-certificat {
-    margin-bottom: 1rem;
-    width: 3.5rem;
-}
-
-
-
-
-`;

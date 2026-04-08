@@ -1,6 +1,7 @@
-import styled from "styled-components";
+'use client'
+
 import { FaReact } from "react-icons/fa";
-import { 
+import {
   SiTypescript,
   SiNextdotjs,
   SiTailwindcss,
@@ -14,7 +15,8 @@ import {
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import progressBar from "../../shared/assets/animations/progressBar.json";
 import ChevronDown from "../../shared/assets/animations/chevronDown.json";
 
@@ -25,202 +27,64 @@ export default function CurrentProject() {
 
   return (
     <motion.div
-      variants={staggerContainer}
+      variants={staggerContainer(0.1, 0.2)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.25 }}
     >
-      <CurrentProjectStyle>
-        <motion.div 
+      <div className="bg-[#4b0082] px-[5vw] py-4 flex flex-wrap justify-between gap-8 md:flex-row md:items-start max-md:flex-col max-md:items-center max-md:p-8 [&_h1]:text-white [&_h1]:text-2xl max-[480px]:[&_h1]:text-xl [&_h1]:mb-2 [&_p]:text-base max-[480px]:[&_p]:text-sm [&_p]:leading-relaxed [&_p]:text-white [&_p]:mt-2">
+        <motion.div
           variants={fadeIn("right", "tween", 0.2, 1)}
-          className="left-side"
+          className="flex-1 flex flex-col justify-center max-w-[600px]"
         >
-          <h1>Projet Actuel</h1>
-          <p>
+          <h1 className="text-white text-2xl mb-2">Projet Actuel</h1>
+          <p className="text-base leading-relaxed text-white mt-2">
             Actuellement, je travaille sur un projet logiciel visant à faciliter
             les connexions entre investisseurs et acteurs locaux. L&apos;objectif est de
             permettre des investissements dans divers secteurs, favorisant ainsi le
             développement de régions propices au bien-être de la population.
           </p>
-          <div className="progressAndPercent">
-            <div className="progress-bar">
+          <div className="flex items-center max-md:mt-4">
+            <div className="w-full max-w-[300px] h-[110px] max-md:max-w-[200px]">
               <Lottie animationData={progressBar} loop autoplay />
             </div>
-            <p className="completion-text">80% Terminé</p>
+            <p className="text-2xl text-white">80% Terminé</p>
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={fadeIn("left", "tween", 0.3, 1)}
-          className="technologies"
+          className="flex-1 flex flex-col items-center text-center"
         >
-          <h1> Technologies  Utilisées </h1>
-          <motion.div 
+          <h1 className="text-white text-2xl mb-4">Technologies Utilisées</h1>
+          <motion.div
             variants={fadeIn("up", "tween", 0.4, 1)}
-            className="icons"
+            className="flex flex-wrap justify-center gap-4 max-md:gap-2 [&_svg]:transition-transform [&_svg]:duration-300 [&_svg]:ease-in-out [&_svg]:cursor-pointer [&_svg:hover]:scale-[1.2]"
           >
-            <SiTypescript size={56} color="#3178C6" />
-            <FaReact size={56} color="#61DAFB" />
-            <SiNextdotjs size={56} color="#000000" />
-            <SiTailwindcss size={56} color="#06B6D4" />
-            <SiReactquery size={56} color="#FF4154" />
-            <SiNodedotjs size={56} color="#3C873A" />
-            <SiVite size={48} color="#646CFF" />
-            <SiPrisma size={56} color="#2D3748" />
-            <SiPostgresql size={56} color="#316192" />
-            <SiDocker size={56} color="#2496ED" />
+            <SiTypescript size={56} color="#3178C6" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
+            <FaReact size={56} color="#61DAFB" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
+            <SiNextdotjs size={56} color="#000000" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
+            <SiTailwindcss size={56} color="#06B6D4" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
+            <SiReactquery size={56} color="#FF4154" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
+            <SiNodedotjs size={56} color="#3C873A" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
+            <SiVite size={48} color="#646CFF" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
+            <SiPrisma size={56} color="#2D3748" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
+            <SiPostgresql size={56} color="#316192" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
+            <SiDocker size={56} color="#2496ED" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
           </motion.div>
 
-          <motion.div 
+          <motion.div
             variants={fadeIn("up", "tween", 0.5, 1)}
-            className="seeMore" 
+            className="flex items-center gap-2 mt-2 cursor-pointer"
             onClick={handleIcon}
           >
-            <h5>Voir plus de projets</h5>
-            <div className="see-more-animation">
+            <h5 className="text-white text-lg transition-colors duration-300 ease-in-out hover:text-gray-300 max-[480px]:text-base">Voir plus de projets</h5>
+            <div className="w-20 h-8">
               <Lottie animationData={ChevronDown} loop autoplay />
             </div>
           </motion.div>
         </motion.div>
-      </CurrentProjectStyle>
+      </div>
     </motion.div>
   );
 }
-
-const CurrentProjectStyle = styled.div`
-  background-color: #4b0082;
-  padding: 1rem 5vw;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2rem;
-
-  h1 {
-    color: #fff;
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  p {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #fff;
-    margin-top: 0.5rem;
-  }
-
-  .left-side {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 600px;
-  }
-
-  .progressAndPercent {
-    display: flex;
-    align-items: center;
-    
-
-    .progress-bar {
-      width: 100%;
-      max-width: 300px;
-      height:110px;
-    }
-
-    .completion-text {
-      font-size: 1.5rem;
-      color: #fff;
-    }
-  }
-
-  .technologies {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-
-    h1 {
-      margin-bottom: 1rem;
-    }
-
-    .icons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-
-      svg {
-        transition: transform 0.3s ease-in-out;
-        cursor: pointer;
-      }
-
-      svg:hover {
-        transform: scale(1.2);
-      }
-    }
-
-    .seeMore {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-      cursor: pointer;
-
-      h5 {
-        color: #fff;
-        font-size: 1.2rem;
-        transition: color 0.3s ease-in-out;
-      }
-
-      h5:hover {
-        color: #ccc;
-      }
-
-      .see-more-animation {
-        width: 5rem;
-        height: 2rem;
-      }
-    }
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-
-    .progressAndPercent {
-      margin-top: 1rem;
-
-      .progress-bar {
-        max-width: 200px;
-      }
-    }
-
-    .icons {
-      gap: 0.5rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 1.5rem;
-    }
-
-    p {
-      font-size: 0.9rem;
-    }
-
-    .icons {
-      svg {
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    .seeMore h5 {
-      font-size: 1rem;
-    }
-  }
-`;

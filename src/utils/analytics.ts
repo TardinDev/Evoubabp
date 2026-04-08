@@ -13,6 +13,7 @@ export const initGA = (measurementId: string) => {
  * Enregistre une page vue
  */
 export const logPageView = () => {
+  if (typeof window === 'undefined') return;
   ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search });
 };
 

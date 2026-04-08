@@ -1,4 +1,5 @@
-import styled, { keyframes } from "styled-components";
+'use client'
+
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import { useState } from "react";
@@ -36,6 +37,19 @@ const initialFormData: FormData = {
   message: ""
 };
 
+const inputClassName =
+  "w-full px-5 py-4 rounded-xl text-white text-base transition-all duration-300 outline-none placeholder:text-white/40 focus:shadow-[0_0_0_3px_rgba(255,215,0,0.1)]";
+
+const inputStyle = {
+  background: 'rgba(255, 255, 255, 0.08)',
+  border: '1px solid rgba(255, 255, 255, 0.15)',
+};
+
+const inputFocusStyle = {
+  borderColor: '#ffd700',
+  background: 'rgba(255, 255, 255, 0.1)',
+};
+
 const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,10 +68,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
     setSubmitStatus("idle");
 
     try {
-      // Simuler l'envoi (remplacer par votre API)
       await new Promise(resolve => setTimeout(resolve, 1500));
 
-      // Envoyer par email via mailto (solution simple)
       const mailtoLink = `mailto:tardindavy@gmail.com?subject=${encodeURIComponent(
         `[Portfolio] ${formData.subject} - ${formData.projectType}`
       )}&body=${encodeURIComponent(
@@ -75,6 +87,22 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
     }
   };
 
+  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    e.currentTarget.style.borderColor = '#ffd700';
+    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+  };
+
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+  };
+
+  const socialPlatformColors: Record<string, { bg: string; border: string }> = {
+    linkedin: { bg: '#0a66c2', border: '#0a66c2' },
+    github: { bg: '#333', border: '#333' },
+    whatsapp: { bg: '#25d366', border: '#25d366' },
+  };
+
   return (
     <motion.div
       variants={staggerContainer(0.1, 0.2)}
@@ -82,146 +110,322 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
       whileInView="show"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <Section id={id || "contact"}>
-        <BackgroundPattern />
-        <GlowEffect />
+      <style>{`
+        @keyframes contact-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        @keyframes contact-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
 
-        <Container>
+      <section
+        id={id || "contact"}
+        className="relative py-24 px-8 overflow-hidden md:py-16 md:px-4"
+        style={{
+          background: 'linear-gradient(180deg, #4b0082 0%, #380062 50%, #2d004f 100%)',
+        }}
+      >
+        {/* BackgroundPattern */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+          }}
+        />
+
+        {/* GlowEffect */}
+        <div
+          className="absolute top-[30%] right-[10%] w-[500px] h-[500px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 60%)',
+          }}
+        />
+
+        <div className="relative max-w-[1200px] mx-auto z-[2]">
           <motion.div variants={fadeIn("up", "tween", 0.1, 0.8)}>
-            <Header>
-              <TagLine>CONTACT</TagLine>
-              <Title>
-                Discutons de votre <TitleGradient>projet</TitleGradient>
-              </Title>
-              <Subtitle>
+            <div className="text-center mb-16 md:mb-12">
+              <span
+                className="inline-block font-mono text-xs tracking-[0.3em] text-[#ffd700] px-4 py-2 rounded mb-6"
+                style={{
+                  background: 'rgba(255, 215, 0, 0.1)',
+                  border: '1px solid rgba(255, 215, 0, 0.2)',
+                }}
+              >
+                CONTACT
+              </span>
+              <h2
+                className="font-bold text-white mb-4"
+                style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: 'clamp(2rem, 4vw, 3rem)',
+                }}
+              >
+                Discutons de votre{' '}
+                <span
+                  className="bg-clip-text"
+                  style={{
+                    background: 'linear-gradient(135deg, #ffd700 0%, #ff9500 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  projet
+                </span>
+              </h2>
+              <p className="text-[1.125rem] text-white/70 max-w-[500px] mx-auto leading-relaxed">
                 Une idée ? Un projet ? Contactez-moi et transformons votre vision en réalité
-              </Subtitle>
-            </Header>
+              </p>
+            </div>
           </motion.div>
 
-          <ContentGrid>
+          <div className="grid grid-cols-[1fr_1.5fr] gap-12 lg:grid-cols-1 lg:gap-8">
             <motion.div variants={fadeIn("right", "spring", 0.2, 0.8)}>
-              <ContactInfo>
-                <InfoCard>
-                  <InfoIconWrapper>
+              <div className="flex flex-col gap-6">
+                {/* Email Card */}
+                <div
+                  className="flex items-start gap-4 p-6 rounded-2xl transition-all duration-300 hover:translate-x-2"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                  }}
+                >
+                  <div
+                    className="w-12 h-12 flex items-center justify-center rounded-xl text-[#ffd700] text-xl"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 149, 0, 0.1))',
+                    }}
+                  >
                     <FaEnvelope />
-                  </InfoIconWrapper>
-                  <InfoContent>
-                    <InfoLabel>Email</InfoLabel>
-                    <InfoLink href="mailto:tardindavy@gmail.com">
+                  </div>
+                  <div className="flex-1">
+                    <span className="block text-[0.8rem] text-white/50 uppercase tracking-wider mb-1">
+                      Email
+                    </span>
+                    <a
+                      href="mailto:tardindavy@gmail.com"
+                      className="text-[1.1rem] text-white no-underline transition-colors duration-300 hover:text-[#ffd700]"
+                    >
                       tardindavy@gmail.com
-                    </InfoLink>
-                  </InfoContent>
-                </InfoCard>
+                    </a>
+                  </div>
+                </div>
 
-                <InfoCard>
-                  <InfoIconWrapper>
+                {/* WhatsApp Card */}
+                <div
+                  className="flex items-start gap-4 p-6 rounded-2xl transition-all duration-300 hover:translate-x-2"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                  }}
+                >
+                  <div
+                    className="w-12 h-12 flex items-center justify-center rounded-xl text-[#ffd700] text-xl"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 149, 0, 0.1))',
+                    }}
+                  >
                     <FaWhatsapp />
-                  </InfoIconWrapper>
-                  <InfoContent>
-                    <InfoLabel>WhatsApp</InfoLabel>
-                    <InfoLink
+                  </div>
+                  <div className="flex-1">
+                    <span className="block text-[0.8rem] text-white/50 uppercase tracking-wider mb-1">
+                      WhatsApp
+                    </span>
+                    <a
                       href="https://wa.me/33766450771"
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="text-[1.1rem] text-white no-underline transition-colors duration-300 hover:text-[#ffd700]"
                     >
                       +33 7 66 45 07 71
-                    </InfoLink>
-                  </InfoContent>
-                </InfoCard>
+                    </a>
+                  </div>
+                </div>
 
-                <InfoCard>
-                  <InfoIconWrapper>
+                {/* Location Card */}
+                <div
+                  className="flex items-start gap-4 p-6 rounded-2xl transition-all duration-300 hover:translate-x-2"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                  }}
+                >
+                  <div
+                    className="w-12 h-12 flex items-center justify-center rounded-xl text-[#ffd700] text-xl"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 149, 0, 0.1))',
+                    }}
+                  >
                     <FaMapMarkerAlt />
-                  </InfoIconWrapper>
-                  <InfoContent>
-                    <InfoLabel>Localisation</InfoLabel>
-                    <InfoText>France, Europe</InfoText>
-                    <InfoSubtext>Disponible en remote worldwide</InfoSubtext>
-                  </InfoContent>
-                </InfoCard>
+                  </div>
+                  <div className="flex-1">
+                    <span className="block text-[0.8rem] text-white/50 uppercase tracking-wider mb-1">
+                      Localisation
+                    </span>
+                    <span className="block text-[1.1rem] text-white">
+                      France, Europe
+                    </span>
+                    <span className="block text-[0.85rem] text-white/50 mt-1">
+                      Disponible en remote worldwide
+                    </span>
+                  </div>
+                </div>
 
-                <SocialLinks>
-                  <SocialLink
-                    href="https://www.linkedin.com/in/davy-tardin-11a7a1159/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    platform="linkedin"
-                  >
-                    <FaLinkedin />
-                  </SocialLink>
-                  <SocialLink
-                    href="https://github.com/TardinDev"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    platform="github"
-                  >
-                    <FaGithub />
-                  </SocialLink>
-                  <SocialLink
-                    href="https://wa.me/33766450771"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    platform="whatsapp"
-                  >
-                    <FaWhatsapp />
-                  </SocialLink>
-                </SocialLinks>
+                {/* Social Links */}
+                <div className="flex gap-4 mt-4">
+                  {[
+                    { href: "https://www.linkedin.com/in/davy-tardin-11a7a1159/", platform: "linkedin", icon: <FaLinkedin /> },
+                    { href: "https://github.com/TardinDev", platform: "github", icon: <FaGithub /> },
+                    { href: "https://wa.me/33766450771", platform: "whatsapp", icon: <FaWhatsapp /> },
+                  ].map((social) => (
+                    <a
+                      key={social.platform}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 flex items-center justify-center rounded-xl text-white text-xl transition-all duration-300 hover:translate-y-[-4px]"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                      }}
+                      onMouseEnter={(e) => {
+                        const colors = socialPlatformColors[social.platform];
+                        e.currentTarget.style.background = colors.bg;
+                        e.currentTarget.style.borderColor = colors.border;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                      }}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
 
-                <AvailabilityBadge>
-                  <AvailabilityDot />
+                {/* Availability Badge */}
+                <div
+                  className="flex items-center gap-3 px-6 py-4 rounded-xl text-green-500 font-medium mt-4"
+                  style={{
+                    background: 'rgba(34, 197, 94, 0.1)',
+                    border: '1px solid rgba(34, 197, 94, 0.3)',
+                  }}
+                >
+                  <span
+                    className="w-2.5 h-2.5 bg-green-500 rounded-full"
+                    style={{ animation: 'contact-pulse 2s infinite' }}
+                  />
                   Disponible pour de nouveaux projets
-                </AvailabilityBadge>
-              </ContactInfo>
+                </div>
+              </div>
             </motion.div>
 
             <motion.div variants={fadeIn("left", "spring", 0.3, 0.8)}>
-              <FormCard>
-                <Form onSubmit={handleSubmit}>
-                  <FormRow>
-                    <FormGroup>
-                      <FormLabel>Nom complet *</FormLabel>
-                      <FormInput
+              <div
+                className="rounded-3xl p-10 backdrop-blur-[10px] md:p-6"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                }}
+              >
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                  <div className="grid grid-cols-2 gap-6 sm:grid-cols-1 sm:gap-4">
+                    <div>
+                      <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
+                        Nom complet *
+                      </label>
+                      <input
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
+                        onFocus={handleInputFocus}
+                        onBlur={handleInputBlur}
                         placeholder="Votre nom"
                         required
+                        className={inputClassName}
+                        style={inputStyle}
                       />
-                    </FormGroup>
-                    <FormGroup>
-                      <FormLabel>Email *</FormLabel>
-                      <FormInput
+                    </div>
+                    <div>
+                      <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
+                        Email *
+                      </label>
+                      <input
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        onFocus={handleInputFocus}
+                        onBlur={handleInputBlur}
                         placeholder="votre@email.com"
                         required
+                        className={inputClassName}
+                        style={inputStyle}
                       />
-                    </FormGroup>
-                  </FormRow>
+                    </div>
+                  </div>
 
-                  <FormGroup>
-                    <FormLabel>Sujet *</FormLabel>
-                    <FormInput
+                  <div>
+                    <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
+                      Sujet *
+                    </label>
+                    <input
                       type="text"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
                       placeholder="Ex: Développement d'une application mobile"
                       required
+                      className={inputClassName}
+                      style={inputStyle}
                     />
-                  </FormGroup>
+                  </div>
 
-                  <FormRow>
-                    <FormGroup>
-                      <FormLabel>Type de projet</FormLabel>
-                      <FormSelect
+                  <div className="grid grid-cols-2 gap-6 sm:grid-cols-1 sm:gap-4">
+                    <div>
+                      <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
+                        Type de projet
+                      </label>
+                      <select
                         name="projectType"
                         value={formData.projectType}
                         onChange={handleChange}
+                        onFocus={handleInputFocus as any}
+                        onBlur={handleInputBlur as any}
+                        className={`${inputClassName} cursor-pointer [&_option]:bg-[#2d004f] [&_option]:text-white`}
+                        style={inputStyle}
                       >
                         <option value="">Sélectionner...</option>
                         <option value="mobile">Application Mobile</option>
@@ -230,14 +434,20 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                         <option value="consulting">Consulting</option>
                         <option value="formation">Formation</option>
                         <option value="other">Autre</option>
-                      </FormSelect>
-                    </FormGroup>
-                    <FormGroup>
-                      <FormLabel>Budget estimé</FormLabel>
-                      <FormSelect
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
+                        Budget estimé
+                      </label>
+                      <select
                         name="budget"
                         value={formData.budget}
                         onChange={handleChange}
+                        onFocus={handleInputFocus as any}
+                        onBlur={handleInputBlur as any}
+                        className={`${inputClassName} cursor-pointer [&_option]:bg-[#2d004f] [&_option]:text-white`}
+                        style={inputStyle}
                       >
                         <option value="">Sélectionner...</option>
                         <option value="<5k">&lt; 5 000 EUR</option>
@@ -245,26 +455,46 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                         <option value="10k-25k">10 000 - 25 000 EUR</option>
                         <option value="25k-50k">25 000 - 50 000 EUR</option>
                         <option value=">50k">&gt; 50 000 EUR</option>
-                      </FormSelect>
-                    </FormGroup>
-                  </FormRow>
+                      </select>
+                    </div>
+                  </div>
 
-                  <FormGroup>
-                    <FormLabel>Message *</FormLabel>
-                    <FormTextarea
+                  <div>
+                    <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
+                      Message *
+                    </label>
+                    <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
+                      onFocus={handleInputFocus as any}
+                      onBlur={handleInputBlur as any}
                       placeholder="Décrivez votre projet, vos objectifs et vos besoins..."
                       rows={5}
                       required
+                      className={`${inputClassName} resize-y min-h-[120px]`}
+                      style={inputStyle}
                     />
-                  </FormGroup>
+                  </div>
 
-                  <SubmitButton type="submit" disabled={isSubmitting}>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center justify-center gap-3 px-8 py-5 border-none rounded-xl text-[#2d004f] text-[1.1rem] font-semibold cursor-pointer transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_10px_30px_rgba(255,215,0,0.4)] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
+                    style={{
+                      background: 'linear-gradient(135deg, #ffd700, #ff9500)',
+                    }}
+                  >
                     {isSubmitting ? (
                       <>
-                        <Spinner />
+                        <span
+                          className="w-5 h-5 rounded-full"
+                          style={{
+                            border: '2px solid rgba(45, 0, 79, 0.3)',
+                            borderTopColor: '#2d004f',
+                            animation: 'contact-spin 0.8s linear infinite',
+                          }}
+                        />
                         Envoi en cours...
                       </>
                     ) : (
@@ -273,402 +503,41 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                         Envoyer le message
                       </>
                     )}
-                  </SubmitButton>
+                  </button>
 
                   {submitStatus === "success" && (
-                    <StatusMessage status="success">
+                    <div
+                      className="flex items-center gap-3 px-6 py-4 rounded-xl text-[0.95rem] text-green-500"
+                      style={{
+                        background: 'rgba(34, 197, 94, 0.1)',
+                        border: '1px solid rgba(34, 197, 94, 0.3)',
+                      }}
+                    >
                       <FaCheckCircle />
                       Message envoyé avec succès ! Je vous répondrai rapidement.
-                    </StatusMessage>
+                    </div>
                   )}
 
                   {submitStatus === "error" && (
-                    <StatusMessage status="error">
+                    <div
+                      className="flex items-center gap-3 px-6 py-4 rounded-xl text-[0.95rem] text-red-500"
+                      style={{
+                        background: 'rgba(239, 68, 68, 0.1)',
+                        border: '1px solid rgba(239, 68, 68, 0.3)',
+                      }}
+                    >
                       <FaExclamationCircle />
                       Une erreur est survenue. Veuillez réessayer.
-                    </StatusMessage>
+                    </div>
                   )}
-                </Form>
-              </FormCard>
+                </form>
+              </div>
             </motion.div>
-          </ContentGrid>
-        </Container>
-      </Section>
+          </div>
+        </div>
+      </section>
     </motion.div>
   );
 };
 
 export default ContactSection;
-
-const pulse = keyframes`
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-`;
-
-const spin = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`;
-
-const Section = styled.section`
-  position: relative;
-  padding: 6rem 2rem;
-  background: linear-gradient(180deg, #4b0082 0%, #380062 50%, #2d004f 100%);
-  overflow: hidden;
-
-  @media (max-width: 768px) {
-    padding: 4rem 1rem;
-  }
-`;
-
-const BackgroundPattern = styled.div`
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-`;
-
-const GlowEffect = styled.div`
-  position: absolute;
-  top: 30%;
-  right: 10%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 60%);
-  pointer-events: none;
-`;
-
-const Container = styled.div`
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-  z-index: 2;
-`;
-
-const Header = styled.div`
-  text-align: center;
-  margin-bottom: 4rem;
-
-  @media (max-width: 768px) {
-    margin-bottom: 3rem;
-  }
-`;
-
-const TagLine = styled.span`
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  color: #ffd700;
-  background: rgba(255, 215, 0, 0.1);
-  padding: 0.5rem 1rem;
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  border-radius: 4px;
-  margin-bottom: 1.5rem;
-`;
-
-const Title = styled.h2`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  color: white;
-  margin-bottom: 1rem;
-`;
-
-const TitleGradient = styled.span`
-  background: linear-gradient(135deg, #ffd700 0%, #ff9500 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 500px;
-  margin: 0 auto;
-  line-height: 1.6;
-`;
-
-const ContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 3rem;
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-`;
-
-const ContactInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-`;
-
-const InfoCard = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 215, 0, 0.3);
-    transform: translateX(8px);
-  }
-`;
-
-const InfoIconWrapper = styled.div`
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 149, 0, 0.1));
-  border-radius: 12px;
-  color: #ffd700;
-  font-size: 1.25rem;
-`;
-
-const InfoContent = styled.div`
-  flex: 1;
-`;
-
-const InfoLabel = styled.span`
-  display: block;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.25rem;
-`;
-
-const InfoLink = styled.a`
-  font-size: 1.1rem;
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #ffd700;
-  }
-`;
-
-const InfoText = styled.span`
-  display: block;
-  font-size: 1.1rem;
-  color: white;
-`;
-
-const InfoSubtext = styled.span`
-  display: block;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 0.25rem;
-`;
-
-const SocialLinks = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-`;
-
-const SocialLink = styled.a<{ platform: string }>`
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  color: white;
-  font-size: 1.25rem;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-
-    ${props => props.platform === 'linkedin' && `
-      background: #0a66c2;
-      border-color: #0a66c2;
-    `}
-
-    ${props => props.platform === 'github' && `
-      background: #333;
-      border-color: #333;
-    `}
-
-    ${props => props.platform === 'whatsapp' && `
-      background: #25d366;
-      border-color: #25d366;
-    `}
-  }
-`;
-
-const AvailabilityBadge = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  border-radius: 12px;
-  color: #22c55e;
-  font-weight: 500;
-  margin-top: 1rem;
-`;
-
-const AvailabilityDot = styled.span`
-  width: 10px;
-  height: 10px;
-  background: #22c55e;
-  border-radius: 50%;
-  animation: ${pulse} 2s infinite;
-`;
-
-const FormCard = styled.div`
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 2.5rem;
-  backdrop-filter: blur(10px);
-
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-  }
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-`;
-
-const FormRow = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-`;
-
-const FormGroup = styled.div``;
-
-const FormLabel = styled.label`
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 0.5rem;
-`;
-
-const inputStyles = `
-  width: 100%;
-  padding: 1rem 1.25rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  color: white;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  &:focus {
-    outline: none;
-    border-color: #ffd700;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
-  }
-`;
-
-const FormInput = styled.input`
-  ${inputStyles}
-`;
-
-const FormSelect = styled.select`
-  ${inputStyles}
-  cursor: pointer;
-
-  option {
-    background: #2d004f;
-    color: white;
-  }
-`;
-
-const FormTextarea = styled.textarea`
-  ${inputStyles}
-  resize: vertical;
-  min-height: 120px;
-`;
-
-const SubmitButton = styled.button`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 1.25rem 2rem;
-  background: linear-gradient(135deg, #ffd700, #ff9500);
-  border: none;
-  border-radius: 12px;
-  color: #2d004f;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
-  }
-
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-`;
-
-const Spinner = styled.span`
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(45, 0, 79, 0.3);
-  border-top-color: #2d004f;
-  border-radius: 50%;
-  animation: ${spin} 0.8s linear infinite;
-`;
-
-const StatusMessage = styled.div<{ status: "success" | "error" }>`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  font-size: 0.95rem;
-
-  ${props => props.status === 'success' && `
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    color: #22c55e;
-  `}
-
-  ${props => props.status === 'error' && `
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    color: #ef4444;
-  `}
-`;

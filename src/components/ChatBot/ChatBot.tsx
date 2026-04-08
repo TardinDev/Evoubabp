@@ -1,5 +1,6 @@
+'use client'
+
 import { useState, useEffect, useRef } from 'react';
-import styled, { keyframes } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaComments, FaTimes, FaPaperPlane, FaHeadset, FaCode, FaMobile, FaServer, FaGraduationCap } from 'react-icons/fa';
 import { useChatBot } from '../../contexts/ChatBotContext';
@@ -376,37 +377,71 @@ const ChatBot = () => {
 
   return (
     <>
+      {/* Keyframe animations */}
+      <style>{`
+        @keyframes chatbot-bounce {
+          0%, 60%, 100% { transform: translateY(0); }
+          30% { transform: translateY(-4px); }
+        }
+        @keyframes chatbot-pulse {
+          0% { transform: scale(1); opacity: 1; }
+          100% { transform: scale(1.5); opacity: 0; }
+        }
+      `}</style>
+
       <AnimatePresence>
         {isOpen && (
-          <ChatContainer
-            as={motion.div}
+          <motion.div
+            className="fixed bottom-[100px] right-[30px] w-[400px] h-[600px] bg-[#1a1a2e] rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.4)] flex flex-col z-[1000] overflow-hidden border border-white/10 md:w-[400px] md:h-[600px] max-md:w-[calc(100vw-40px)] max-md:h-[calc(100vh-140px)] max-md:right-5 max-md:bottom-20"
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           >
-            <ChatHeader>
-              <HeaderContent>
-                <SupportIcon>
+            {/* Chat Header */}
+            <div
+              className="text-white py-5 px-6 flex justify-between items-center"
+              style={{ background: 'linear-gradient(135deg, #4b0082 0%, #8b5cf6 100%)' }}
+            >
+              <div className="flex items-center gap-4">
+                <div className="relative w-[45px] h-[45px] bg-white/20 rounded-xl flex items-center justify-center">
                   <FaHeadset size={24} />
-                  <OnlineIndicator />
-                </SupportIcon>
-                <HeaderText>
-                  <h3>Support Evoubap</h3>
-                  <Status>En ligne</Status>
-                </HeaderText>
-              </HeaderContent>
-              <CloseButton onClick={handleClose}>
+                  <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#4b0082]" />
+                </div>
+                <div>
+                  <h3 className="m-0 text-lg font-semibold">Support Evoubap</h3>
+                  <span className="text-xs opacity-90">En ligne</span>
+                </div>
+              </div>
+              <button
+                className="bg-white/20 border-none rounded-[10px] w-9 h-9 flex items-center justify-center cursor-pointer text-white transition-all duration-300 hover:bg-white/30 hover:rotate-90"
+                onClick={handleClose}
+              >
                 <FaTimes size={20} />
-              </CloseButton>
-            </ChatHeader>
+              </button>
+            </div>
 
-            <MessagesContainer>
+            {/* Messages Container */}
+            <div
+              className="flex-1 overflow-y-auto p-6 flex flex-col gap-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-violet-500/30 [&::-webkit-scrollbar-thumb]:rounded-sm"
+              style={{ background: 'linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%)' }}
+            >
               {messages.map((message) => (
-                <MessageWrapper key={message.id} sender={message.sender}>
-                  <MessageBubble
-                    sender={message.sender}
-                    as={motion.div}
+                <div
+                  key={message.id}
+                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <motion.div
+                    className={`max-w-[85%] px-5 py-4 leading-relaxed text-sm whitespace-pre-wrap ${
+                      message.sender === 'user'
+                        ? 'rounded-[20px_20px_4px_20px] text-white border-none'
+                        : 'rounded-[20px_20px_20px_4px] text-[#e0e0e0] border border-white/10'
+                    }`}
+                    style={
+                      message.sender === 'user'
+                        ? { background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)' }
+                        : { background: 'rgba(255, 255, 255, 0.08)' }
+                    }
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.2 }}
@@ -416,43 +451,55 @@ const ChatBot = () => {
                         {line.startsWith('**') && line.endsWith('**') ? (
                           <strong>{line.replace(/\*\*/g, '')}</strong>
                         ) : line.startsWith('•') ? (
-                          <BulletPoint>{line}</BulletPoint>
+                          <div className="pl-2 my-0.5">{line}</div>
                         ) : (
                           line
                         )}
                         {i < message.text.split('\n').length - 1 && <br />}
                       </span>
                     ))}
-                  </MessageBubble>
-                </MessageWrapper>
+                  </motion.div>
+                </div>
               ))}
 
               {isTyping && (
-                <MessageWrapper sender="bot">
-                  <TypingIndicator
-                    as={motion.div}
+                <div className="flex justify-start">
+                  <motion.div
+                    className="flex items-center gap-1 px-5 py-4 bg-white/[0.08] rounded-[20px_20px_20px_4px] border border-white/10 w-fit"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                   >
-                    <TypingDot delay={0} />
-                    <TypingDot delay={0.2} />
-                    <TypingDot delay={0.4} />
-                  </TypingIndicator>
-                </MessageWrapper>
+                    <div
+                      className="w-2 h-2 bg-violet-500 rounded-full"
+                      style={{ animation: 'chatbot-bounce 1.4s ease-in-out infinite', animationDelay: '0s' }}
+                    />
+                    <div
+                      className="w-2 h-2 bg-violet-500 rounded-full"
+                      style={{ animation: 'chatbot-bounce 1.4s ease-in-out infinite', animationDelay: '0.2s' }}
+                    />
+                    <div
+                      className="w-2 h-2 bg-violet-500 rounded-full"
+                      style={{ animation: 'chatbot-bounce 1.4s ease-in-out infinite', animationDelay: '0.4s' }}
+                    />
+                  </motion.div>
+                </div>
               )}
 
               {!showForm && messages.length === 1 && (
-                <SuggestedQuestions
-                  as={motion.div}
+                <motion.div
+                  className="mt-2"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  <SuggestedLabel>Questions suggérées :</SuggestedLabel>
-                  <SuggestedGrid>
+                  <div className="text-xs text-white/50 mb-3 uppercase tracking-wider">
+                    Questions suggérées :
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
                     {suggestedQuestions.map((q, idx) => (
-                      <SuggestedButton
+                      <motion.button
                         key={idx}
+                        className="bg-violet-500/15 border border-violet-500/30 text-violet-300 py-2.5 px-3 rounded-[10px] text-xs cursor-pointer flex items-center gap-2 transition-all duration-200 hover:bg-violet-500/25 hover:border-violet-500/50 [&>svg]:text-sm"
                         onClick={() => {
                           setInputValue(q.text);
                           setTimeout(() => handleSendMessage(), 100);
@@ -462,588 +509,208 @@ const ChatBot = () => {
                       >
                         {q.icon}
                         <span>{q.text}</span>
-                      </SuggestedButton>
+                      </motion.button>
                     ))}
-                  </SuggestedGrid>
-                </SuggestedQuestions>
+                  </div>
+                </motion.div>
               )}
 
               {!showForm && messages.length > 0 && (
-                <QuickActions
-                  as={motion.div}
+                <motion.div
+                  className="flex flex-col gap-2 mt-4 pt-4 border-t border-white/10"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
-                  <ActionsLabel>Actions rapides :</ActionsLabel>
-                  <ActionButton
+                  <div className="text-xs text-white/50 mb-2 uppercase tracking-wider">
+                    Actions rapides :
+                  </div>
+                  <motion.button
+                    className="border rounded-xl font-semibold cursor-pointer transition-all duration-300 text-sm text-left py-3.5 px-4"
+                    style={{
+                      background: 'rgba(76, 175, 80, 0.08)',
+                      borderColor: 'rgba(76, 175, 80, 0.25)',
+                      color: '#4CAF50',
+                    }}
                     onClick={() => handleQuickAction('project')}
                     whileHover={{ scale: 1.02, x: 5 }}
                     whileTap={{ scale: 0.98 }}
-                    color="#4CAF50"
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(76, 175, 80, 0.15)';
+                      (e.currentTarget as HTMLElement).style.borderColor = '#4CAF50';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(76, 175, 80, 0.08)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(76, 175, 80, 0.25)';
+                    }}
                   >
                     Proposer un projet
-                  </ActionButton>
-                  <ActionButton
+                  </motion.button>
+                  <motion.button
+                    className="border rounded-xl font-semibold cursor-pointer transition-all duration-300 text-sm text-left py-3.5 px-4"
+                    style={{
+                      background: 'rgba(33, 150, 243, 0.08)',
+                      borderColor: 'rgba(33, 150, 243, 0.25)',
+                      color: '#2196F3',
+                    }}
                     onClick={() => handleQuickAction('hire')}
                     whileHover={{ scale: 1.02, x: 5 }}
                     whileTap={{ scale: 0.98 }}
-                    color="#2196F3"
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(33, 150, 243, 0.15)';
+                      (e.currentTarget as HTMLElement).style.borderColor = '#2196F3';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(33, 150, 243, 0.08)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(33, 150, 243, 0.25)';
+                    }}
                   >
                     Embaucher
-                  </ActionButton>
-                  <ActionButton
+                  </motion.button>
+                  <motion.button
+                    className="border rounded-xl font-semibold cursor-pointer transition-all duration-300 text-sm text-left py-3.5 px-4"
+                    style={{
+                      background: 'rgba(156, 39, 176, 0.08)',
+                      borderColor: 'rgba(156, 39, 176, 0.25)',
+                      color: '#9C27B0',
+                    }}
                     onClick={() => handleQuickAction('interview')}
                     whileHover={{ scale: 1.02, x: 5 }}
                     whileTap={{ scale: 0.98 }}
-                    color="#9C27B0"
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(156, 39, 176, 0.15)';
+                      (e.currentTarget as HTMLElement).style.borderColor = '#9C27B0';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(156, 39, 176, 0.08)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(156, 39, 176, 0.25)';
+                    }}
                   >
                     Demander un entretien
-                  </ActionButton>
-                </QuickActions>
+                  </motion.button>
+                </motion.div>
               )}
 
               {showForm && (
-                <FormContainer
-                  as={motion.div}
+                <motion.div
+                  className="bg-white/5 p-6 rounded-2xl border border-white/10"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                 >
-                  <FormTitle>Formulaire de contact</FormTitle>
-                  <form onSubmit={handleSubmitForm}>
-                    <FormGroup>
-                      <label>Nom complet *</label>
+                  <h4 className="text-white m-0 mb-4 text-base">Formulaire de contact</h4>
+                  <form className="flex flex-col gap-4" onSubmit={handleSubmitForm}>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-sm font-medium text-white/70">Nom complet *</label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Votre nom"
+                        className="py-3 px-4 border border-white/15 rounded-[10px] text-sm font-[inherit] transition-all duration-300 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:border-violet-500 focus:bg-violet-500/10"
                       />
-                    </FormGroup>
-                    <FormGroup>
-                      <label>Email *</label>
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-sm font-medium text-white/70">Email *</label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="votre@email.com"
+                        className="py-3 px-4 border border-white/15 rounded-[10px] text-sm font-[inherit] transition-all duration-300 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:border-violet-500 focus:bg-violet-500/10"
                       />
-                    </FormGroup>
-                    <FormGroup>
-                      <label>Message *</label>
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-sm font-medium text-white/70">Message *</label>
                       <textarea
                         required
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         placeholder="Décrivez votre projet ou votre demande..."
                         rows={4}
+                        className="py-3 px-4 border border-white/15 rounded-[10px] text-sm font-[inherit] transition-all duration-300 bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:border-violet-500 focus:bg-violet-500/10 resize-y"
                       />
-                    </FormGroup>
-                    <FormButtons>
-                      <CancelButton type="button" onClick={() => setShowForm(false)}>
+                    </div>
+                    <div className="flex gap-3 mt-2">
+                      <button
+                        type="button"
+                        onClick={() => setShowForm(false)}
+                        className="flex-1 bg-white/10 text-white/70 border border-white/20 py-3 rounded-[10px] font-medium cursor-pointer transition-all duration-200 hover:bg-white/15"
+                      >
                         Annuler
-                      </CancelButton>
-                      <SubmitButton type="submit">
+                      </button>
+                      <button
+                        type="submit"
+                        className="flex-[2] text-white border-none py-3.5 rounded-[10px] font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(139,92,246,0.4)]"
+                        style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)' }}
+                      >
                         Envoyer <FaPaperPlane size={14} />
-                      </SubmitButton>
-                    </FormButtons>
+                      </button>
+                    </div>
                   </form>
-                </FormContainer>
+                </motion.div>
               )}
 
               <div ref={messagesEndRef} />
-            </MessagesContainer>
+            </div>
 
+            {/* Input Container */}
             {!showForm && (
-              <InputContainer>
-                <Input
+              <div className="flex py-4 px-5 bg-black/30 border-t border-white/10 gap-3">
+                <input
                   type="text"
                   placeholder="Posez votre question..."
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                  className="flex-1 py-3.5 px-5 border border-white/15 rounded-[25px] text-sm font-[inherit] bg-white/5 text-white placeholder:text-white/40 focus:outline-none focus:border-violet-500 focus:bg-violet-500/10"
                 />
-                <SendButton onClick={handleSendMessage} disabled={!inputValue.trim()}>
+                <button
+                  onClick={handleSendMessage}
+                  disabled={!inputValue.trim()}
+                  className="text-white border-none w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:enabled:scale-110 hover:enabled:shadow-[0_8px_25px_rgba(139,92,246,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)' }}
+                >
                   <FaPaperPlane size={18} />
-                </SendButton>
-              </InputContainer>
+                </button>
+              </div>
             )}
-          </ChatContainer>
+          </motion.div>
         )}
       </AnimatePresence>
 
       {hasReachedApps && (
-        <FloatingButton
+        <motion.button
+          className="fixed bottom-[30px] right-[30px] w-[65px] h-[65px] rounded-full text-white border-none flex items-center justify-center cursor-pointer shadow-[0_8px_30px_rgba(75,0,130,0.5)] z-[999] max-md:w-[60px] max-md:h-[60px] max-md:bottom-5 max-md:right-5"
+          style={{
+            background: 'linear-gradient(135deg, #4b0082 0%, #8b5cf6 100%)',
+            display: isOpen ? 'none' : 'flex',
+          }}
           onClick={handleOpen}
-          as={motion.button}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          style={{ display: isOpen ? 'none' : 'flex' }}
         >
           <FaComments size={28} />
           {!hasInteracted && (
-            <NotificationBadge
-              as={motion.div}
+            <motion.div
+              className="absolute -top-1.5 -right-1.5 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-[3px] border-[#1a1a2e]"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 3 }}
             >
               1
-            </NotificationBadge>
+            </motion.div>
           )}
-          <PulseRing />
-        </FloatingButton>
+          <div
+            className="absolute inset-0 rounded-full border-[3px] border-violet-500"
+            style={{ animation: 'chatbot-pulse 2s ease-out infinite' }}
+          />
+        </motion.button>
       )}
     </>
   );
 };
 
 export default ChatBot;
-
-const bounce = keyframes`
-  0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-4px); }
-`;
-
-const pulse = keyframes`
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
-`;
-
-const ChatContainer = styled.div`
-  position: fixed;
-  bottom: 100px;
-  right: 30px;
-  width: 400px;
-  height: 600px;
-  background: #1a1a2e;
-  border-radius: 24px;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  z-index: 1000;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-
-  @media (max-width: 768px) {
-    width: calc(100vw - 40px);
-    height: calc(100vh - 140px);
-    right: 20px;
-    bottom: 80px;
-  }
-`;
-
-const ChatHeader = styled.div`
-  background: linear-gradient(135deg, #4b0082 0%, #8b5cf6 100%);
-  color: white;
-  padding: 1.2rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const HeaderContent = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
-const SupportIcon = styled.div`
-  position: relative;
-  width: 45px;
-  height: 45px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const OnlineIndicator = styled.div`
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 14px;
-  height: 14px;
-  background: #4CAF50;
-  border-radius: 50%;
-  border: 2px solid #4b0082;
-`;
-
-const HeaderText = styled.div`
-  h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-`;
-
-const Status = styled.span`
-  font-size: 0.75rem;
-  opacity: 0.9;
-`;
-
-const CloseButton = styled.button`
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 10px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: white;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: rotate(90deg);
-  }
-`;
-
-const MessagesContainer = styled.div`
-  flex: 1;
-  overflow-y: auto;
-  padding: 1.5rem;
-  background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgba(139, 92, 246, 0.3);
-    border-radius: 3px;
-  }
-`;
-
-const MessageWrapper = styled.div<{ sender: 'bot' | 'user' }>`
-  display: flex;
-  justify-content: ${props => props.sender === 'user' ? 'flex-end' : 'flex-start'};
-`;
-
-const MessageBubble = styled.div<{ sender: 'bot' | 'user' }>`
-  max-width: 85%;
-  padding: 1rem 1.2rem;
-  border-radius: ${props => props.sender === 'user'
-    ? '20px 20px 4px 20px'
-    : '20px 20px 20px 4px'};
-  background: ${props => props.sender === 'user'
-    ? 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)'
-    : 'rgba(255, 255, 255, 0.08)'};
-  color: ${props => props.sender === 'user' ? 'white' : '#e0e0e0'};
-  line-height: 1.6;
-  font-size: 0.9rem;
-  white-space: pre-wrap;
-  border: ${props => props.sender === 'bot' ? '1px solid rgba(255, 255, 255, 0.1)' : 'none'};
-`;
-
-const BulletPoint = styled.div`
-  padding-left: 0.5rem;
-  margin: 0.2rem 0;
-`;
-
-const TypingIndicator = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 1rem 1.2rem;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 20px 20px 20px 4px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  width: fit-content;
-`;
-
-const TypingDot = styled.div<{ delay: number }>`
-  width: 8px;
-  height: 8px;
-  background: #8b5cf6;
-  border-radius: 50%;
-  animation: ${bounce} 1.4s ease-in-out infinite;
-  animation-delay: ${props => props.delay}s;
-`;
-
-const SuggestedQuestions = styled.div`
-  margin-top: 0.5rem;
-`;
-
-const SuggestedLabel = styled.div`
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
-
-const SuggestedGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-`;
-
-const SuggestedButton = styled(motion.button)`
-  background: rgba(139, 92, 246, 0.15);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  color: #c4b5fd;
-  padding: 0.6rem 0.8rem;
-  border-radius: 10px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: rgba(139, 92, 246, 0.25);
-    border-color: rgba(139, 92, 246, 0.5);
-  }
-
-  svg {
-    font-size: 0.9rem;
-  }
-`;
-
-const QuickActions = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-`;
-
-const ActionsLabel = styled.div`
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
-
-const ActionButton = styled(motion.button)<{ color: string }>`
-  background: ${props => `${props.color}15`};
-  border: 1px solid ${props => `${props.color}40`};
-  color: ${props => props.color};
-  padding: 0.9rem 1rem;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  text-align: left;
-
-  &:hover {
-    background: ${props => `${props.color}25`};
-    border-color: ${props => props.color};
-  }
-`;
-
-const FormContainer = styled.div`
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-`;
-
-const FormTitle = styled.h4`
-  color: white;
-  margin: 0 0 1rem 0;
-  font-size: 1rem;
-`;
-
-const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-
-  label {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  input, textarea {
-    padding: 0.8rem 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    font-size: 0.9rem;
-    font-family: inherit;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.05);
-    color: white;
-
-    &::placeholder {
-      color: rgba(255, 255, 255, 0.3);
-    }
-
-    &:focus {
-      outline: none;
-      border-color: #8b5cf6;
-      background: rgba(139, 92, 246, 0.1);
-    }
-  }
-
-  textarea {
-    resize: vertical;
-  }
-`;
-
-const FormButtons = styled.div`
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-`;
-
-const CancelButton = styled.button`
-  flex: 1;
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.8rem;
-  border-radius: 10px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
-`;
-
-const SubmitButton = styled.button`
-  flex: 2;
-  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-  color: white;
-  border: none;
-  padding: 0.9rem;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-  }
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  padding: 1rem 1.2rem;
-  background: rgba(0, 0, 0, 0.3);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  gap: 0.8rem;
-`;
-
-const Input = styled.input`
-  flex: 1;
-  padding: 0.9rem 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 25px;
-  font-size: 0.9rem;
-  font-family: inherit;
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  &:focus {
-    outline: none;
-    border-color: #8b5cf6;
-    background: rgba(139, 92, 246, 0.1);
-  }
-`;
-
-const SendButton = styled.button`
-  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-  color: white;
-  border: none;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover:not(:disabled) {
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`;
-
-const FloatingButton = styled.button`
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #4b0082 0%, #8b5cf6 100%);
-  color: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 8px 30px rgba(75, 0, 130, 0.5);
-  z-index: 999;
-
-  @media (max-width: 768px) {
-    width: 60px;
-    height: 60px;
-    bottom: 20px;
-    right: 20px;
-  }
-`;
-
-const NotificationBadge = styled.div`
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: #ef4444;
-  color: white;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: bold;
-  border: 3px solid #1a1a2e;
-`;
-
-const PulseRing = styled.div`
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 3px solid #8b5cf6;
-  animation: ${pulse} 2s ease-out infinite;
-`;

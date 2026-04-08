@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+'use client'
+
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaReact, FaJava, FaShieldAlt, FaExternalLinkAlt, FaGithub, FaFileAlt, FaUserCheck, FaDatabase, FaLock } from 'react-icons/fa';
@@ -40,835 +41,526 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
     }
   };
 
+  const getTechBadgeStyles = (type: 'frontend' | 'backend' | 'db') => {
+    switch (type) {
+      case 'frontend':
+        return {
+          background: 'rgba(97, 218, 251, 0.1)',
+          color: '#61dafb',
+          border: '1px solid rgba(97, 218, 251, 0.2)',
+        };
+      case 'backend':
+        return {
+          background: 'rgba(109, 179, 63, 0.1)',
+          color: '#6db33f',
+          border: '1px solid rgba(109, 179, 63, 0.2)',
+        };
+      case 'db':
+        return {
+          background: 'rgba(51, 103, 145, 0.15)',
+          color: '#64b5f6',
+          border: '1px solid rgba(51, 103, 145, 0.3)',
+        };
+    }
+  };
+
   return (
-    <motion.div
-      variants={staggerContainer(0.1, 0.2)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.1 }}
-    >
-      <SectionContainer id={id}>
-        <BackgroundPattern />
-        <GoldAccent />
+    <>
+      <style>{`
+        @keyframes fsspring-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        @keyframes fsspring-shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+      `}</style>
 
-        <ContentWrapper>
-          <motion.div variants={fadeIn('up', 'tween', 0.05, 0.8)}>
-            <SectionTitleArea>
-              <SectionTagLine>FULLSTACK JAVA</SectionTagLine>
-              <SectionMainTitle>
-                <TitleAccent>React</TitleAccent>
-                <TitleDivider>+</TitleDivider>
-                <TitleAccent className="spring">Spring Boot</TitleAccent>
-              </SectionMainTitle>
-              <SectionSubtitle>
-                Architecture enterprise robuste pour applications critiques
-              </SectionSubtitle>
-            </SectionTitleArea>
-          </motion.div>
+      <motion.div
+        variants={staggerContainer(0.1, 0.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.1 }}
+      >
+        <section
+          id={id}
+          className="relative py-24 px-8 md:py-16 md:px-4 overflow-hidden min-h-screen"
+          style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #0f1419 50%, #0a0a0f 100%)' }}
+        >
+          {/* Background Pattern */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              opacity: 0.5,
+              backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236db33f' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+            }}
+          />
 
-          <TopSection>
-            <motion.div variants={fadeIn('right', 'tween', 0.1, 0.8)}>
-              <HeaderContent>
-                <OfficialBadge>
-                  <BadgeIcon><FaShieldAlt /></BadgeIcon>
-                  <BadgeText>APPLICATION OFFICIELLE</BadgeText>
-                </OfficialBadge>
+          {/* Gold Accent (shimmer bar) */}
+          <div
+            className="absolute top-0 left-0 right-0 h-1"
+            style={{
+              background: 'linear-gradient(90deg, #0a0a0f, #6db33f, #0a0a0f)',
+              backgroundSize: '200% 100%',
+              animation: 'fsspring-shimmer 3s linear infinite',
+            }}
+          />
 
-                <MainTitle>
-                  Déclaration de
-                  <TitleHighlight>Naissance</TitleHighlight>
-                </MainTitle>
-
-                <Subtitle>
-                  Solution digitale pour la modernisation des services
-                  d'état civil — Simplifier les démarches administratives
-                  tout en garantissant la sécurité des données sensibles.
-                </Subtitle>
-
-                <TechBadges>
-                  <TechBadge type="frontend">
-                    <FaReact /> React
-                  </TechBadge>
-                  <TechBadge type="backend">
-                    <SiSpringboot /> Spring Boot
-                  </TechBadge>
-                  <TechBadge type="db">
-                    <SiPostgresql /> PostgreSQL
-                  </TechBadge>
-                </TechBadges>
-              </HeaderContent>
+          <div className="relative max-w-[1400px] mx-auto z-[2]">
+            <motion.div variants={fadeIn('up', 'tween', 0.05, 0.8)}>
+              <div className="text-center mb-16 md:mb-12">
+                <span
+                  className="inline-block text-xs mb-6 px-4 py-2"
+                  style={{
+                    fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                    letterSpacing: '0.3em',
+                    color: '#6db33f',
+                    background: 'rgba(109, 179, 63, 0.1)',
+                    border: '1px solid rgba(109, 179, 63, 0.2)',
+                  }}
+                >
+                  FULLSTACK JAVA
+                </span>
+                <h2
+                  className="font-bold flex items-center justify-center gap-3 flex-wrap mb-4"
+                  style={{
+                    fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                    fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+                    lineHeight: 1.1,
+                  }}
+                >
+                  <span style={{ color: '#61dafb' }}>React</span>
+                  <span style={{ color: 'rgba(255, 255, 255, 0.3)', fontWeight: 300 }}>+</span>
+                  <span style={{ color: '#6db33f' }}>Spring Boot</span>
+                </h2>
+                <p
+                  className="text-[1.15rem] max-w-[500px] mx-auto md:px-4"
+                  style={{ color: 'rgba(255, 255, 255, 0.6)', lineHeight: 1.7 }}
+                >
+                  Architecture enterprise robuste pour applications critiques
+                </p>
+              </div>
             </motion.div>
 
-            <motion.div variants={fadeIn('left', 'spring', 0.2, 0.8)}>
-              <ProjectPreview>
-                <PreviewFrame>
-                  <FrameHeader>
-                    <FrameDots>
-                      <FrameDot />
-                      <FrameDot />
-                      <FrameDot />
-                    </FrameDots>
-                    <FrameUrl>etat-civil.gouv.ga/declaration</FrameUrl>
-                  </FrameHeader>
-                  <PreviewContent>
-                    <PreviewImage
-                      src={project.image}
-                      alt={project.title}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.opacity = '0';
+            <div className="grid gap-16 mb-16 items-center max-[968px]:grid-cols-1 max-[968px]:gap-12" style={{ gridTemplateColumns: '1fr 1.1fr' }}>
+              <motion.div variants={fadeIn('right', 'tween', 0.1, 0.8)}>
+                <div>
+                  {/* Official Badge */}
+                  <div
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded mb-6"
+                    style={{
+                      background: 'rgba(109, 179, 63, 0.15)',
+                      color: '#6db33f',
+                      border: '1px solid rgba(109, 179, 63, 0.3)',
+                    }}
+                  >
+                    <span className="text-[0.9rem]"><FaShieldAlt /></span>
+                    <span
+                      className="text-[0.7rem] font-bold"
+                      style={{ fontFamily: "'DM Sans', 'Inter', sans-serif", letterSpacing: '0.15em' }}
+                    >
+                      APPLICATION OFFICIELLE
+                    </span>
+                  </div>
+
+                  <h3
+                    className="font-semibold text-white mb-6"
+                    style={{
+                      fontFamily: "'Playfair Display', 'Georgia', serif",
+                      fontSize: 'clamp(2rem, 4vw, 3rem)',
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    Déclaration de
+                    <span className="block relative" style={{ color: '#6db33f' }}>
+                      Naissance
+                      <span
+                        className="absolute bottom-[0.1em] left-0 w-full"
+                        style={{
+                          height: '0.15em',
+                          background: 'linear-gradient(90deg, #6db33f, transparent)',
+                          opacity: 0.6,
+                        }}
+                      />
+                    </span>
+                  </h3>
+
+                  <p
+                    className="text-[1.05rem] mb-8 max-w-[500px]"
+                    style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      color: 'rgba(255, 255, 255, 0.6)',
+                      lineHeight: 1.8,
+                    }}
+                  >
+                    Solution digitale pour la modernisation des services
+                    d'état civil — Simplifier les démarches administratives
+                    tout en garantissant la sécurité des données sensibles.
+                  </p>
+
+                  <div className="flex flex-wrap gap-3">
+                    {(['frontend', 'backend', 'db'] as const).map((type, idx) => {
+                      const labels = [
+                        { icon: <FaReact />, text: 'React' },
+                        { icon: <SiSpringboot />, text: 'Spring Boot' },
+                        { icon: <SiPostgresql />, text: 'PostgreSQL' },
+                      ];
+                      return (
+                        <span
+                          key={idx}
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md text-[0.85rem] font-medium"
+                          style={{
+                            ...getTechBadgeStyles(type),
+                            fontFamily: "'DM Sans', sans-serif",
+                          }}
+                        >
+                          {labels[idx].icon} {labels[idx].text}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeIn('left', 'spring', 0.2, 0.8)}>
+                <div className="relative">
+                  <div
+                    className="rounded-xl overflow-hidden"
+                    style={{
+                      background: '#1a1a24',
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.2), 0 20px 50px rgba(0, 0, 0, 0.4)',
+                    }}
+                  >
+                    <div
+                      className="flex items-center gap-4 py-3 px-4"
+                      style={{ background: '#252530', borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}
+                    >
+                      <div className="flex gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(255, 255, 255, 0.2)' }} />
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(255, 255, 255, 0.2)' }} />
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(255, 255, 255, 0.2)' }} />
+                      </div>
+                      <div
+                        className="flex-1 text-center text-xs px-4 py-1 rounded"
+                        style={{
+                          fontFamily: "'DM Sans', sans-serif",
+                          color: 'rgba(255, 255, 255, 0.5)',
+                          background: 'rgba(0, 0, 0, 0.3)',
+                          border: '1px solid rgba(255, 255, 255, 0.05)',
+                        }}
+                      >
+                        etat-civil.gouv.ga/declaration
+                      </div>
+                    </div>
+                    <div
+                      className="relative"
+                      style={{ aspectRatio: '16/10', background: 'linear-gradient(135deg, #1a1a2e, #0f0f1a)' }}
+                    >
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover relative z-[2]"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.opacity = '0';
+                        }}
+                      />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                        <div style={{ color: '#6db33f', opacity: 0.3 }}>
+                          <FaFileAlt size={48} />
+                        </div>
+                        <span
+                          className="text-[0.9rem]"
+                          style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.4)' }}
+                        >
+                          Interface de déclaration
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating Card - top-right */}
+                  <div
+                    className="absolute flex items-center gap-2 py-3 px-4 backdrop-blur-[10px] rounded-lg hidden md:flex"
+                    style={{
+                      top: '-1rem',
+                      right: '-1rem',
+                      background: 'rgba(109, 179, 63, 0.15)',
+                      border: '1px solid rgba(109, 179, 63, 0.3)',
+                      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+                      animation: 'fsspring-float 4s ease-in-out infinite',
+                      animationDelay: '0s',
+                    }}
+                  >
+                    <div className="text-base" style={{ color: '#6db33f' }}><FaShieldAlt /></div>
+                    <span className="text-[0.8rem] font-semibold text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>Sécurisé</span>
+                  </div>
+
+                  {/* Floating Card - bottom-left */}
+                  <div
+                    className="absolute flex items-center gap-2 py-3 px-4 backdrop-blur-[10px] rounded-lg hidden md:flex"
+                    style={{
+                      bottom: '1rem',
+                      left: '-1rem',
+                      background: 'rgba(109, 179, 63, 0.15)',
+                      border: '1px solid rgba(109, 179, 63, 0.3)',
+                      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+                      animation: 'fsspring-float 4s ease-in-out infinite',
+                      animationDelay: '2s',
+                    }}
+                  >
+                    <div className="text-base" style={{ color: '#6db33f' }}><FaDatabase /></div>
+                    <span className="text-[0.8rem] font-semibold text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>RGPD</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.div variants={fadeIn('up', 'tween', 0.3, 0.8)}>
+              <div className="grid grid-cols-3 md:grid-cols-1 gap-6 mb-16">
+                {project.features.map((feature, idx) => (
+                  <div
+                    key={idx}
+                    className="p-8 rounded-xl text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.3)]"
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      border: '1px solid rgba(255, 255, 255, 0.06)',
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.05)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(109, 179, 63, 0.2)';
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.03)';
+                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.06)';
+                    }}
+                  >
+                    <div
+                      className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl text-xl"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(109, 179, 63, 0.2), rgba(109, 179, 63, 0.05))',
+                        border: '1px solid rgba(109, 179, 63, 0.2)',
+                        color: '#6db33f',
                       }}
-                    />
-                    <PreviewPlaceholder>
-                      <PlaceholderIcon>
-                        <FaFileAlt size={48} />
-                      </PlaceholderIcon>
-                      <PlaceholderText>Interface de déclaration</PlaceholderText>
-                    </PreviewPlaceholder>
-                  </PreviewContent>
-                </PreviewFrame>
-                <FloatingCard position="top-right">
-                  <FloatingCardIcon><FaShieldAlt /></FloatingCardIcon>
-                  <FloatingCardText>Sécurisé</FloatingCardText>
-                </FloatingCard>
-                <FloatingCard position="bottom-left">
-                  <FloatingCardIcon><FaDatabase /></FloatingCardIcon>
-                  <FloatingCardText>RGPD</FloatingCardText>
-                </FloatingCard>
-              </ProjectPreview>
-            </motion.div>
-          </TopSection>
-
-          <motion.div variants={fadeIn('up', 'tween', 0.3, 0.8)}>
-            <FeaturesRow>
-              {project.features.map((feature, idx) => (
-                <FeatureCard key={idx} delay={idx * 0.1}>
-                  <FeatureIconWrapper>
-                    {feature.icon}
-                  </FeatureIconWrapper>
-                  <FeatureTitle>{feature.title}</FeatureTitle>
-                  <FeatureDesc>{feature.desc}</FeatureDesc>
-                </FeatureCard>
-              ))}
-            </FeaturesRow>
-          </motion.div>
-
-          <BottomSection>
-            <motion.div variants={fadeIn('right', 'spring', 0.4, 0.8)}>
-              <ArchitecturePanel>
-                <PanelHeader>
-                  <PanelTitle>Architecture technique</PanelTitle>
-                  <PanelYear>{project.year}</PanelYear>
-                </PanelHeader>
-
-                <ArchDiagram>
-                  <ArchLayer>
-                    <LayerLabel>Frontend</LayerLabel>
-                    <LayerContent frontend>
-                      <LayerIcon><FaReact size={24} /></LayerIcon>
-                      <LayerTechs>
-                        {project.stack.frontend.map((tech, idx) => (
-                          <LayerTech key={idx}>{tech}</LayerTech>
-                        ))}
-                      </LayerTechs>
-                    </LayerContent>
-                  </ArchLayer>
-
-                  <ArchConnector>
-                    <ConnectorLine />
-                    <ConnectorLabel>HTTPS / JWT</ConnectorLabel>
-                    <ConnectorLine />
-                  </ArchConnector>
-
-                  <ArchLayer>
-                    <LayerLabel>Backend</LayerLabel>
-                    <LayerContent backend>
-                      <LayerIcon><SiSpringboot size={24} /></LayerIcon>
-                      <LayerTechs>
-                        {project.stack.backend.map((tech, idx) => (
-                          <LayerTech key={idx}>{tech}</LayerTech>
-                        ))}
-                      </LayerTechs>
-                    </LayerContent>
-                  </ArchLayer>
-                </ArchDiagram>
-              </ArchitecturePanel>
+                    >
+                      {feature.icon}
+                    </div>
+                    <h4 className="text-[1.1rem] font-semibold text-white mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                      {feature.title}
+                    </h4>
+                    <p className="text-[0.9rem] leading-6" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)' }}>
+                      {feature.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
 
-            <motion.div variants={fadeIn('left', 'spring', 0.5, 0.8)}>
-              <CTAPanel>
-                <CTAContent>
-                  <CTATitle>Projet réalisé</CTATitle>
-                  <CTADescription>
-                    Solution développée pour faciliter les démarches
-                    administratives des citoyens et optimiser le travail
-                    des agents d'état civil.
-                  </CTADescription>
+            <div className="grid gap-8 max-[968px]:grid-cols-1" style={{ gridTemplateColumns: '1.2fr 1fr' }}>
+              <motion.div variants={fadeIn('right', 'spring', 0.4, 0.8)}>
+                <div
+                  className="rounded-2xl p-8 text-white"
+                  style={{
+                    background: 'rgba(109, 179, 63, 0.08)',
+                    border: '1px solid rgba(109, 179, 63, 0.15)',
+                  }}
+                >
+                  <div
+                    className="flex justify-between items-center mb-8 pb-4"
+                    style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}
+                  >
+                    <h4 className="text-[1.1rem] font-semibold" style={{ fontFamily: "'DM Sans', sans-serif" }}>Architecture technique</h4>
+                    <span
+                      className="text-[0.8rem] px-3 py-1 rounded"
+                      style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        color: '#6db33f',
+                        background: 'rgba(109, 179, 63, 0.15)',
+                      }}
+                    >
+                      {project.year}
+                    </span>
+                  </div>
 
-                  <CTAStats>
-                    <CTAStat>
-                      <CTAStatValue>100%</CTAStatValue>
-                      <CTAStatLabel>Dématérialisé</CTAStatLabel>
-                    </CTAStat>
-                    <CTAStatDivider />
-                    <CTAStat>
-                      <CTAStatValue>24/7</CTAStatValue>
-                      <CTAStatLabel>Disponible</CTAStatLabel>
-                    </CTAStat>
-                    <CTAStatDivider />
-                    <CTAStat>
-                      <CTAStatValue>RGPD</CTAStatValue>
-                      <CTAStatLabel>Conforme</CTAStatLabel>
-                    </CTAStat>
-                  </CTAStats>
+                  <div className="flex flex-col gap-4">
+                    {/* Frontend Layer */}
+                    <div>
+                      <div
+                        className="text-[0.7rem] uppercase mb-2"
+                        style={{
+                          fontFamily: "'DM Sans', sans-serif",
+                          letterSpacing: '0.1em',
+                          color: 'rgba(255, 255, 255, 0.5)',
+                        }}
+                      >
+                        Frontend
+                      </div>
+                      <div
+                        className="flex items-center gap-4 p-4 rounded-lg"
+                        style={{
+                          background: 'rgba(97, 218, 251, 0.1)',
+                          border: '1px solid rgba(97, 218, 251, 0.2)',
+                        }}
+                      >
+                        <div style={{ color: 'rgba(255, 255, 255, 0.8)' }}><FaReact size={24} /></div>
+                        <div className="flex flex-wrap gap-2">
+                          {project.stack.frontend.map((tech, idx) => (
+                            <span
+                              key={idx}
+                              className="text-[0.8rem] px-2.5 py-1 rounded"
+                              style={{
+                                fontFamily: "'DM Sans', sans-serif",
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                background: 'rgba(255, 255, 255, 0.1)',
+                              }}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
 
-                  <CTAButtons>
-                    <PrimaryButton href={project.liveUrl} target="_blank">
-                      <FaExternalLinkAlt /> Voir le projet
-                    </PrimaryButton>
-                    <SecondaryButton href={project.githubUrl} target="_blank">
-                      <FaGithub /> Code source
-                    </SecondaryButton>
-                  </CTAButtons>
-                </CTAContent>
-              </CTAPanel>
-            </motion.div>
-          </BottomSection>
-        </ContentWrapper>
-      </SectionContainer>
-    </motion.div>
+                    {/* Connector */}
+                    <div className="flex items-center gap-3 px-4">
+                      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(109, 179, 63, 0.5), transparent)' }} />
+                      <span
+                        className="text-[0.65rem] whitespace-nowrap"
+                        style={{ fontFamily: "'JetBrains Mono', monospace", color: '#6db33f' }}
+                      >
+                        HTTPS / JWT
+                      </span>
+                      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(109, 179, 63, 0.5), transparent)' }} />
+                    </div>
+
+                    {/* Backend Layer */}
+                    <div>
+                      <div
+                        className="text-[0.7rem] uppercase mb-2"
+                        style={{
+                          fontFamily: "'DM Sans', sans-serif",
+                          letterSpacing: '0.1em',
+                          color: 'rgba(255, 255, 255, 0.5)',
+                        }}
+                      >
+                        Backend
+                      </div>
+                      <div
+                        className="flex items-center gap-4 p-4 rounded-lg"
+                        style={{
+                          background: 'rgba(109, 179, 63, 0.1)',
+                          border: '1px solid rgba(109, 179, 63, 0.2)',
+                        }}
+                      >
+                        <div style={{ color: 'rgba(255, 255, 255, 0.8)' }}><SiSpringboot size={24} /></div>
+                        <div className="flex flex-wrap gap-2">
+                          {project.stack.backend.map((tech, idx) => (
+                            <span
+                              key={idx}
+                              className="text-[0.8rem] px-2.5 py-1 rounded"
+                              style={{
+                                fontFamily: "'DM Sans', sans-serif",
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                background: 'rgba(255, 255, 255, 0.1)',
+                              }}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeIn('left', 'spring', 0.5, 0.8)}>
+                <div
+                  className="rounded-2xl p-8 flex flex-col justify-center"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid rgba(255, 255, 255, 0.06)',
+                  }}
+                >
+                  <div>
+                    <h4 className="text-2xl font-semibold text-white mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                      Projet réalisé
+                    </h4>
+                    <p
+                      className="text-[0.95rem] mb-6"
+                      style={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        color: 'rgba(255, 255, 255, 0.6)',
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      Solution développée pour faciliter les démarches
+                      administratives des citoyens et optimiser le travail
+                      des agents d'état civil.
+                    </p>
+
+                    <div
+                      className="flex items-center justify-between p-5 rounded-[10px] mb-6"
+                      style={{
+                        background: 'rgba(109, 179, 63, 0.08)',
+                        border: '1px solid rgba(109, 179, 63, 0.15)',
+                      }}
+                    >
+                      <div className="text-center flex-1">
+                        <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#6db33f' }}>100%</div>
+                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>Dématérialisé</div>
+                      </div>
+                      <div className="w-px h-[30px]" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
+                      <div className="text-center flex-1">
+                        <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#6db33f' }}>24/7</div>
+                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>Disponible</div>
+                      </div>
+                      <div className="w-px h-[30px]" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
+                      <div className="text-center flex-1">
+                        <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#6db33f' }}>RGPD</div>
+                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>Conforme</div>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4 max-[480px]:flex-col">
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        className="inline-flex items-center justify-center gap-2 flex-1 py-3.5 px-6 text-white font-semibold text-[0.9rem] no-underline rounded-lg transition-all duration-300 hover:-translate-y-0.5"
+                        style={{
+                          background: 'linear-gradient(135deg, #6db33f, #5a9e32)',
+                          fontFamily: "'DM Sans', sans-serif",
+                        }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 20px rgba(109, 179, 63, 0.3)'; }}
+                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
+                      >
+                        <FaExternalLinkAlt /> Voir le projet
+                      </a>
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        className="inline-flex items-center justify-center gap-2 flex-1 py-3.5 px-6 text-white font-semibold text-[0.9rem] no-underline bg-transparent rounded-lg transition-all duration-300 hover:bg-white/5"
+                        style={{
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          fontFamily: "'DM Sans', sans-serif",
+                        }}
+                        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.3)'; }}
+                        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.2)'; }}
+                      >
+                        <FaGithub /> Code source
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </motion.div>
+    </>
   );
 };
 
 export default FullStackSpringSection;
-
-const float = keyframes`
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-`;
-
-const shimmer = keyframes`
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-`;
-
-const SectionContainer = styled.section`
-  position: relative;
-  padding: 6rem 2rem;
-  background: linear-gradient(180deg, #0a0a0f 0%, #0f1419 50%, #0a0a0f 100%);
-  overflow: hidden;
-  min-height: 100vh;
-
-  @media (max-width: 768px) {
-    padding: 4rem 1rem;
-  }
-`;
-
-const BackgroundPattern = styled.div`
-  position: absolute;
-  inset: 0;
-  opacity: 0.5;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236db33f' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  pointer-events: none;
-`;
-
-const GoldAccent = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #0a0a0f, #6db33f, #0a0a0f);
-  background-size: 200% 100%;
-  animation: ${shimmer} 3s linear infinite;
-`;
-
-const ContentWrapper = styled.div`
-  position: relative;
-  max-width: 1400px;
-  margin: 0 auto;
-  z-index: 2;
-`;
-
-const SectionTitleArea = styled.div`
-  text-align: center;
-  margin-bottom: 4rem;
-
-  @media (max-width: 768px) {
-    margin-bottom: 3rem;
-  }
-`;
-
-const SectionTagLine = styled.span`
-  display: inline-block;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  color: #6db33f;
-  background: rgba(109, 179, 63, 0.1);
-  padding: 0.5rem 1rem;
-  border: 1px solid rgba(109, 179, 63, 0.2);
-  margin-bottom: 1.5rem;
-`;
-
-const SectionMainTitle = styled.h2`
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-`;
-
-const TitleAccent = styled.span`
-  color: #61dafb;
-
-  &.spring {
-    color: #6db33f;
-  }
-`;
-
-const TitleDivider = styled.span`
-  color: rgba(255, 255, 255, 0.3);
-  font-weight: 300;
-`;
-
-const SectionSubtitle = styled.p`
-  font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.6);
-  max-width: 500px;
-  margin: 0 auto;
-  line-height: 1.7;
-
-  @media (max-width: 768px) {
-    padding: 0 1rem;
-  }
-`;
-
-const TopSection = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 4rem;
-  margin-bottom: 4rem;
-  align-items: center;
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-`;
-
-const HeaderContent = styled.div``;
-
-const OfficialBadge = styled.div`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(109, 179, 63, 0.15);
-  color: #6db33f;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: 1px solid rgba(109, 179, 63, 0.3);
-  margin-bottom: 1.5rem;
-`;
-
-const BadgeIcon = styled.span`
-  font-size: 0.9rem;
-`;
-
-const BadgeText = styled.span`
-  font-family: 'DM Sans', 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-`;
-
-const MainTitle = styled.h3`
-  font-family: 'Playfair Display', 'Georgia', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 600;
-  color: white;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-`;
-
-const TitleHighlight = styled.span`
-  display: block;
-  color: #6db33f;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0.1em;
-    left: 0;
-    width: 100%;
-    height: 0.15em;
-    background: linear-gradient(90deg, #6db33f, transparent);
-    opacity: 0.6;
-  }
-`;
-
-const Subtitle = styled.p`
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.8;
-  margin-bottom: 2rem;
-  max-width: 500px;
-`;
-
-const TechBadges = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-`;
-
-const TechBadge = styled.span<{ type: 'frontend' | 'backend' | 'db' }>`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-
-  ${props => {
-    switch(props.type) {
-      case 'frontend':
-        return `
-          background: rgba(97, 218, 251, 0.1);
-          color: #61dafb;
-          border: 1px solid rgba(97, 218, 251, 0.2);
-        `;
-      case 'backend':
-        return `
-          background: rgba(109, 179, 63, 0.1);
-          color: #6db33f;
-          border: 1px solid rgba(109, 179, 63, 0.2);
-        `;
-      case 'db':
-        return `
-          background: rgba(51, 103, 145, 0.15);
-          color: #64b5f6;
-          border: 1px solid rgba(51, 103, 145, 0.3);
-        `;
-    }
-  }}
-`;
-
-const ProjectPreview = styled.div`
-  position: relative;
-`;
-
-const PreviewFrame = styled.div`
-  background: #1a1a24;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.2),
-    0 20px 50px rgba(0, 0, 0, 0.4);
-`;
-
-const FrameHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
-  background: #252530;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-`;
-
-const FrameDots = styled.div`
-  display: flex;
-  gap: 6px;
-`;
-
-const FrameDot = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-`;
-
-const FrameUrl = styled.div`
-  flex: 1;
-  text-align: center;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
-  background: rgba(0, 0, 0, 0.3);
-  padding: 0.35rem 1rem;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-`;
-
-const PreviewContent = styled.div`
-  position: relative;
-  aspect-ratio: 16/10;
-  background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
-`;
-
-const PreviewImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: relative;
-  z-index: 2;
-`;
-
-const PreviewPlaceholder = styled.div`
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-`;
-
-const PlaceholderIcon = styled.div`
-  color: #6db33f;
-  opacity: 0.3;
-`;
-
-const PlaceholderText = styled.span`
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.4);
-`;
-
-const FloatingCard = styled.div<{ position: 'top-right' | 'bottom-left' }>`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  background: rgba(109, 179, 63, 0.15);
-  border: 1px solid rgba(109, 179, 63, 0.3);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  animation: ${float} 4s ease-in-out infinite;
-
-  ${props => props.position === 'top-right' ? `
-    top: -1rem;
-    right: -1rem;
-    animation-delay: 0s;
-  ` : `
-    bottom: 1rem;
-    left: -1rem;
-    animation-delay: 2s;
-  `}
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const FloatingCardIcon = styled.div`
-  color: #6db33f;
-  font-size: 1rem;
-`;
-
-const FloatingCardText = styled.span`
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: white;
-`;
-
-const FeaturesRow = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 4rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const FeatureCard = styled.div<{ delay: number }>`
-  background: rgba(255, 255, 255, 0.03);
-  padding: 2rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  text-align: center;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-    border-color: rgba(109, 179, 63, 0.2);
-  }
-`;
-
-const FeatureIconWrapper = styled.div`
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(109, 179, 63, 0.2), rgba(109, 179, 63, 0.05));
-  border: 1px solid rgba(109, 179, 63, 0.2);
-  border-radius: 12px;
-  color: #6db33f;
-  font-size: 1.25rem;
-`;
-
-const FeatureTitle = styled.h4`
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 0.5rem;
-`;
-
-const FeatureDesc = styled.p`
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1.5;
-`;
-
-const BottomSection = styled.div`
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 2rem;
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const ArchitecturePanel = styled.div`
-  background: rgba(109, 179, 63, 0.08);
-  border: 1px solid rgba(109, 179, 63, 0.15);
-  border-radius: 16px;
-  padding: 2rem;
-  color: white;
-`;
-
-const PanelHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-`;
-
-const PanelTitle = styled.h4`
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-`;
-
-const PanelYear = styled.span`
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  color: #6db33f;
-  background: rgba(109, 179, 63, 0.15);
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
-`;
-
-const ArchDiagram = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const ArchLayer = styled.div``;
-
-const LayerLabel = styled.div`
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0.5rem;
-`;
-
-const LayerContent = styled.div<{ frontend?: boolean; backend?: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: ${props => props.frontend
-    ? 'rgba(97, 218, 251, 0.1)'
-    : 'rgba(109, 179, 63, 0.1)'
-  };
-  border: 1px solid ${props => props.frontend
-    ? 'rgba(97, 218, 251, 0.2)'
-    : 'rgba(109, 179, 63, 0.2)'
-  };
-  border-radius: 8px;
-`;
-
-const LayerIcon = styled.div`
-  color: rgba(255, 255, 255, 0.8);
-`;
-
-const LayerTechs = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-`;
-
-const LayerTech = styled.span`
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.25rem 0.6rem;
-  border-radius: 4px;
-`;
-
-const ArchConnector = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0 1rem;
-`;
-
-const ConnectorLine = styled.div`
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(109, 179, 63, 0.5), transparent);
-`;
-
-const ConnectorLabel = styled.span`
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: #6db33f;
-  white-space: nowrap;
-`;
-
-const CTAPanel = styled.div`
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
-  padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const CTAContent = styled.div``;
-
-const CTATitle = styled.h4`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: white;
-  margin-bottom: 1rem;
-`;
-
-const CTADescription = styled.p`
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-`;
-
-const CTAStats = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem;
-  background: rgba(109, 179, 63, 0.08);
-  border: 1px solid rgba(109, 179, 63, 0.15);
-  border-radius: 10px;
-  margin-bottom: 1.5rem;
-`;
-
-const CTAStat = styled.div`
-  text-align: center;
-  flex: 1;
-`;
-
-const CTAStatValue = styled.div`
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #6db33f;
-`;
-
-const CTAStatLabel = styled.div`
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
-
-const CTAStatDivider = styled.div`
-  width: 1px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.1);
-`;
-
-const CTAButtons = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  @media (max-width: 480px) {
-    flex-direction: column;
-  }
-`;
-
-const PrimaryButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  flex: 1;
-  padding: 0.875rem 1.5rem;
-  background: linear-gradient(135deg, #6db33f, #5a9e32);
-  color: white;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(109, 179, 63, 0.3);
-  }
-`;
-
-const SecondaryButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  flex: 1;
-  padding: 0.875rem 1.5rem;
-  background: transparent;
-  color: white;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-`;

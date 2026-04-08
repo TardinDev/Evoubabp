@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+'use client'
+
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaDocker, FaBoxOpen, FaServer, FaShip, FaLayerGroup, FaCogs } from 'react-icons/fa';
@@ -14,25 +15,25 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
             icon: <FaDocker />,
             title: 'Containerisation',
             description: 'Isolation complète des applications pour une sécurité et une stabilité maximales.',
-            gradient: 'linear-gradient(135deg, #0db7ed 0%, #38bdf8 100%)' // Docker Blue
+            gradient: 'linear-gradient(135deg, #0db7ed 0%, #38bdf8 100%)'
         },
         {
             icon: <FaShip />,
             title: 'Portabilité Ultime',
             description: 'Développez une fois, déployez partout. Cohérence parfaite entre dev, test et prod.',
-            gradient: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)' // Darker Blue
+            gradient: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)'
         },
         {
             icon: <FaLayerGroup />,
             title: 'Microservices',
             description: 'Architecture modulaire facilitant la maintenance et l\'évolution de vos systèmes.',
-            gradient: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)' // Indigo
+            gradient: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)'
         },
         {
             icon: <FaCogs />,
             title: 'DevOps & CI/CD',
             description: 'Pipelines automatisés pour des déploiements rapides, fiables et fréquents.',
-            gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)' // Violet
+            gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)'
         }
     ];
 
@@ -43,264 +44,96 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
         >
-            <SectionContainer id={id}>
+            <section
+                id={id}
+                className="relative overflow-hidden w-full max-w-[100vw] py-24 px-8 max-md:py-16 max-md:px-4 max-[480px]:py-12 max-[480px]:px-2"
+                style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #172554 100%)' }}
+            >
+                {/* ::before pseudo-element replacement */}
+                <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                        background:
+                            'radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.1) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 40%)'
+                    }}
+                />
+
                 <AnimatedDockerBackground />
+
                 <motion.div variants={fadeIn('up', 'tween', 0.2, 1)}>
-                    <SectionHeader>
-                        <IconContainer>
+                    <div className="text-center mb-16 relative z-[2]">
+                        <div className="flex justify-center items-center gap-6 mb-6 [&_svg]:text-[#38bdf8] [&_svg]:drop-shadow-[0_0_10px_rgba(56,189,248,0.3)]">
                             <FaDocker size={50} />
                             <FaServer size={40} />
                             <FaBoxOpen size={40} />
-                        </IconContainer>
-                        <Title>Solutions Docker & DevOps</Title>
-                        <Subtitle>
+                        </div>
+                        <h2
+                            className="text-5xl max-md:text-[2.2rem] max-[480px]:text-[1.8rem] font-extrabold mb-4 bg-clip-text"
+                            style={{
+                                background: 'linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text'
+                            }}
+                        >
+                            Solutions Docker & DevOps
+                        </h2>
+                        <p className="text-[1.2rem] max-md:text-[1.1rem] max-md:px-4 max-[480px]:text-base max-[480px]:px-2 text-slate-300 leading-relaxed max-w-[600px] mx-auto">
                             Accélérez votre transformation numérique avec des architectures conteneurisées
                             modernes, robustes et évolutives.
-                        </Subtitle>
-                    </SectionHeader>
+                        </p>
+                    </div>
                 </motion.div>
 
-                <FeaturesGrid>
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] max-md:grid-cols-1 gap-8 max-md:gap-6 max-[480px]:gap-4 mb-16 max-md:mb-12 max-[480px]:mb-8 relative z-[2]">
                     {dockerFeatures.map((feature, index) => (
                         <motion.div
                             key={index}
                             variants={fadeIn('up', 'spring', 0.3 + index * 0.1, 0.8)}
                         >
-                            <FeatureCard gradient={feature.gradient}>
-                                <CardIcon>{feature.icon}</CardIcon>
-                                <CardTitle>{feature.title}</CardTitle>
-                                <CardDescription>{feature.description}</CardDescription>
-                                <CardGlow />
-                            </FeatureCard>
+                            <div
+                                className="group backdrop-blur-[10px] rounded-[20px] p-8 border border-[rgba(148,163,184,0.1)] relative overflow-hidden transition-all duration-300 h-full hover:-translate-y-2.5 hover:border-[rgba(56,189,248,0.3)] hover:shadow-[0_20px_40px_rgba(15,23,42,0.4)] hover:bg-[rgba(30,41,59,0.6)]"
+                                style={{ background: 'rgba(30, 41, 59, 0.4)' }}
+                            >
+                                {/* Top gradient line (::before) */}
+                                <div
+                                    className="absolute top-0 left-0 right-0 h-[3px]"
+                                    style={{ background: feature.gradient }}
+                                />
+                                <div className="text-[2.5rem] text-[#38bdf8] mb-6 drop-shadow-[0_0_10px_rgba(56,189,248,0.3)]">
+                                    {feature.icon}
+                                </div>
+                                <h3 className="text-[1.4rem] font-bold text-slate-100 mb-4">{feature.title}</h3>
+                                <p className="text-slate-400 leading-relaxed text-[0.95rem]">{feature.description}</p>
+                                {/* CardGlow */}
+                                <div
+                                    className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                                    style={{ background: 'radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%)' }}
+                                />
+                            </div>
                         </motion.div>
                     ))}
-                </FeaturesGrid>
+                </div>
 
                 <motion.div variants={fadeIn('up', 'tween', 0.6, 1)}>
-                    <BottomContent>
-                        <HighlightText>
-                            "La conteneurisation n'est pas qu'une technologie, c'est la pierre angulaire
-                            d'une infrastructure agile et résiliente."
-                        </HighlightText>
-                        <CTAButton
-                            as={motion.button}
+                    <div className="text-center relative z-[2]">
+                        <p className="text-[1.3rem] italic text-slate-200 mb-8 p-8 rounded-[15px] border-l-4 border-l-[#38bdf8] max-w-[700px] mx-auto" style={{ background: 'rgba(30, 41, 59, 0.4)' }}>
+                            &quot;La conteneurisation n&apos;est pas qu&apos;une technologie, c&apos;est la pierre angulaire
+                            d&apos;une infrastructure agile et résiliente.&quot;
+                        </p>
+                        <motion.button
                             whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(14, 165, 233, 0.4)' }}
                             whileTap={{ scale: 0.95 }}
+                            className="text-white border-none py-4 px-10 rounded-full text-[1.1rem] font-semibold cursor-pointer transition-all duration-300 shadow-[0_5px_15px_rgba(2,132,199,0.3)]"
+                            style={{ background: 'linear-gradient(135deg, #0284c7 0%, #2563eb 100%)' }}
                         >
                             Moderniser votre infrastructure
-                        </CTAButton>
-                    </BottomContent>
+                        </motion.button>
+                    </div>
                 </motion.div>
-            </SectionContainer>
+            </section>
         </motion.div>
     );
 };
 
 export default DockerSection;
-
-const SectionContainer = styled.section`
-  padding: 6rem 2rem;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #172554 100%); // Slate to Dark Blue
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  max-width: 100vw;
-
-  @media (max-width: 768px) {
-    padding: 4rem 1rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 3rem 0.5rem;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-      radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.1) 0%, transparent 40%),
-      radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 40%);
-    pointer-events: none;
-  }
-`;
-
-const SectionHeader = styled.div`
-  text-align: center;
-  margin-bottom: 4rem;
-  position: relative;
-  z-index: 2;
-`;
-
-const IconContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-
-  svg {
-    color: #38bdf8;
-    filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));
-  }
-`;
-
-const Title = styled.h2`
-  font-size: 3rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 1rem;
-
-  @media (max-width: 768px) {
-    font-size: 2.2rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.8rem;
-  }
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.2rem;
-  color: #cbd5e1; // Slate 300
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-    padding: 0 1rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1rem;
-    padding: 0 0.5rem;
-  }
-`;
-
-const FeaturesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
-  position: relative;
-  z-index: 2;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-
-  @media (max-width: 480px) {
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-`;
-
-const FeatureCard = styled.div<{ gradient: string }>`
-  background: rgba(30, 41, 59, 0.4); // Slate 800 with opacity
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 2rem;
-  border: 1px solid rgba(148, 163, 184, 0.1);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  height: 100%;
-
-  &:hover {
-    transform: translateY(-10px);
-    border-color: rgba(56, 189, 248, 0.3);
-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.4);
-    background: rgba(30, 41, 59, 0.6);
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: ${props => props.gradient};
-  }
-`;
-
-const CardGlow = styled.div`
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-
-  ${FeatureCard}:hover & {
-    opacity: 1;
-  }
-`;
-
-const CardIcon = styled.div`
-  font-size: 2.5rem;
-  color: #38bdf8;
-  margin-bottom: 1.5rem;
-  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));
-`;
-
-const CardTitle = styled.h3`
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #f1f5f9; // Slate 100
-  margin-bottom: 1rem;
-`;
-
-const CardDescription = styled.p`
-  color: #94a3b8; // Slate 400
-  line-height: 1.6;
-  font-size: 0.95rem;
-`;
-
-const BottomContent = styled.div`
-  text-align: center;
-  position: relative;
-  z-index: 2;
-`;
-
-const HighlightText = styled.p`
-  font-size: 1.3rem;
-  font-style: italic;
-  color: #e2e8f0; // Slate 200
-  margin-bottom: 2rem;
-  padding: 2rem;
-  background: rgba(30, 41, 59, 0.4);
-  border-radius: 15px;
-  border-left: 4px solid #38bdf8;
-  max-width: 700px;
-  margin: 0 auto 2rem auto;
-`;
-
-const CTAButton = styled.button`
-  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
-  color: white;
-  border: none;
-  padding: 1rem 2.5rem;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(2, 132, 199, 0.3);
-
-  &:hover {
-    background: linear-gradient(135deg, #2563eb 0%, #0284c7 100%);
-  }
-`;

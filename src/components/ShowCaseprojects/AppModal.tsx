@@ -1,5 +1,6 @@
+'use client'
+
 import { useEffect } from "react";
-import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ExternalLink } from "lucide-react";
 import { Application } from "../../types/applications";
@@ -44,15 +45,15 @@ const AppModal = ({ app, isOpen, onClose }: AppModalProps) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <Overlay
-          as={motion.div}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
+          className="fixed inset-0 flex items-center justify-center z-[1000] p-4"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
         >
-          <ModalContainer
-            as={motion.div}
+          <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
@@ -60,232 +61,80 @@ const AppModal = ({ app, isOpen, onClose }: AppModalProps) => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
+            className="bg-white rounded-2xl w-full max-w-[900px] max-h-[90vh] md:max-h-[90vh] max-md:max-h-[95vh] overflow-y-auto relative shadow-2xl"
           >
-            <CloseButton
+            <button
               onClick={onClose}
               aria-label="Fermer le modal"
+              className="absolute top-4 right-4 bg-white border-none rounded-full w-10 h-10 flex items-center justify-center cursor-pointer z-10 transition-all duration-200 hover:bg-gray-100 hover:scale-110 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2"
+              style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
             >
               <X size={24} />
-            </CloseButton>
+            </button>
 
-            <ModalContent>
-              <ModalImage
+            <div className="flex flex-col">
+              <img
                 src={app.image}
                 alt={`Capture d'écran complète de ${app.title}`}
+                className="w-full max-h-[400px] object-cover rounded-t-2xl"
               />
 
-              <ModalInfo>
-                <ModalTitle id="modal-title">{app.title}</ModalTitle>
+              <div className="p-8 max-[480px]:p-6">
+                <h2 id="modal-title" className="text-3xl max-[480px]:text-2xl font-bold text-gray-800 mb-2">{app.title}</h2>
 
-                {app.year && <Year>{app.year}</Year>}
+                {app.year && <div className="text-gray-400 text-base font-medium mb-4">{app.year}</div>}
 
-                <ModalDescription>{app.description}</ModalDescription>
+                <p className="text-gray-600 text-lg leading-7 mb-8">{app.description}</p>
 
                 {app.technologies && app.technologies.length > 0 && (
-                  <Section>
-                    <SectionTitle>Technologies utilisées</SectionTitle>
-                    <TechnologiesGrid>
+                  <div className="mb-6">
+                    <h3 className="text-base font-semibold text-gray-700 mb-3 uppercase tracking-wide">Technologies utilisées</h3>
+                    <div className="flex flex-wrap gap-3">
                       {app.technologies.map((tech, idx) => (
-                        <TechBadge key={idx}>{tech}</TechBadge>
+                        <span
+                          key={idx}
+                          className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:-translate-y-0.5"
+                          style={{ backgroundColor: '#dbeafe', color: '#1e40af' }}
+                          onMouseEnter={(e) => { (e.target as HTMLElement).style.backgroundColor = '#bfdbfe'; }}
+                          onMouseLeave={(e) => { (e.target as HTMLElement).style.backgroundColor = '#dbeafe'; }}
+                        >
+                          {tech}
+                        </span>
                       ))}
-                    </TechnologiesGrid>
-                  </Section>
+                    </div>
+                  </div>
                 )}
 
                 {app.category && (
-                  <Section>
-                    <SectionTitle>Catégorie</SectionTitle>
-                    <CategoryBadge>{app.category}</CategoryBadge>
-                  </Section>
+                  <div className="mb-6">
+                    <h3 className="text-base font-semibold text-gray-700 mb-3 uppercase tracking-wide">Catégorie</h3>
+                    <span
+                      className="inline-block px-4 py-2 rounded-lg text-sm font-medium"
+                      style={{ backgroundColor: '#f3e8ff', color: '#6b21a8' }}
+                    >
+                      {app.category}
+                    </span>
+                  </div>
                 )}
 
                 {app.url && (
-                  <VisitButton
+                  <a
                     href={app.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold no-underline transition-all duration-200 mt-4 hover:bg-blue-600 hover:-translate-y-0.5 focus:outline-2 focus:outline-blue-500 focus:outline-offset-2"
                   >
                     Visiter le site
                     <ExternalLink size={18} />
-                  </VisitButton>
+                  </a>
                 )}
-              </ModalInfo>
-            </ModalContent>
-          </ModalContainer>
-        </Overlay>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
 };
-
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 1rem;
-`;
-
-const ModalContainer = styled.div`
-  background-color: white;
-  border-radius: 1rem;
-  max-width: 900px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
-  @media (max-width: 768px) {
-    max-height: 95vh;
-  }
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background-color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: background-color 0.2s ease, transform 0.2s ease;
-
-  &:hover {
-    background-color: #f3f4f6;
-    transform: scale(1.1);
-  }
-
-  &:focus {
-    outline: 2px solid #3b82f6;
-    outline-offset: 2px;
-  }
-`;
-
-const ModalContent = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ModalImage = styled.img`
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 1rem 1rem 0 0;
-`;
-
-const ModalInfo = styled.div`
-  padding: 2rem;
-
-  @media (max-width: 480px) {
-    padding: 1.5rem;
-  }
-`;
-
-const ModalTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: bold;
-  color: #1f2937;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 480px) {
-    font-size: 1.5rem;
-  }
-`;
-
-const Year = styled.div`
-  color: #9ca3af;
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-`;
-
-const ModalDescription = styled.p`
-  color: #4b5563;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  margin-bottom: 2rem;
-`;
-
-const Section = styled.div`
-  margin-bottom: 1.5rem;
-`;
-
-const SectionTitle = styled.h3`
-  font-size: 1rem;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
-
-const TechnologiesGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-`;
-
-const TechBadge = styled.span`
-  background-color: #dbeafe;
-  color: #1e40af;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: #bfdbfe;
-    transform: translateY(-2px);
-  }
-`;
-
-const CategoryBadge = styled.span`
-  display: inline-block;
-  background-color: #f3e8ff;
-  color: #6b21a8;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-`;
-
-const VisitButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #3b82f6;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  margin-top: 1rem;
-
-  &:hover {
-    background-color: #2563eb;
-    transform: translateY(-2px);
-  }
-
-  &:focus {
-    outline: 2px solid #3b82f6;
-    outline-offset: 2px;
-  }
-`;
 
 export default AppModal;

@@ -1,4 +1,5 @@
-import styled from "styled-components";
+'use client'
+
 import { motion } from "framer-motion";
 import { FaCheck, FaLock } from "react-icons/fa";
 import PropTypes from "prop-types";
@@ -6,42 +7,54 @@ import PropTypes from "prop-types";
 
 // === UTILITY COMPONENTS ===
 export const TechStackComponent = ({ title, items }) => (
-  <TechStack>
-    <TechTitle>{title}</TechTitle>
-    <TechList>
+  <div className="mt-8">
+    <h3 className="text-xl font-semibold mb-4 text-[#2d3748]">{title}</h3>
+    <div className="flex flex-wrap gap-3">
       {items.map((item, index) => (
-        <TechItem key={index}>{item}</TechItem>
+        <span key={index} className="bg-[#667eea] text-white py-2 px-4 rounded-[20px] text-sm font-medium">
+          {item}
+        </span>
       ))}
-    </TechList>
-  </TechStack>
+    </div>
+  </div>
 );
 
 export const ModuleComponent = ({ module }) => (
-  <Module>
-    <ModuleHeader>
-      <ModuleNumber>{module.number}</ModuleNumber>
-      <ModuleTitle>{module.title}</ModuleTitle>
-      <ModuleDuration>{module.duration}</ModuleDuration>
-    </ModuleHeader>
-    <LessonList>
+  <div className="bg-white rounded-[10px] p-6 border border-[#e2e8f0]">
+    <div className="flex items-center gap-4 mb-4 max-md:flex-col max-md:items-start max-md:gap-2">
+      <div
+        className="w-10 h-10 rounded-[10px] flex items-center justify-center font-bold text-white shrink-0"
+        style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+      >
+        {module.number}
+      </div>
+      <h3 className="text-lg font-semibold text-[#1e293b] flex-1">{module.title}</h3>
+      <div className="bg-[#f1f5f9] text-[#475569] py-1 px-3 rounded-[15px] text-sm font-medium">
+        {module.duration}
+      </div>
+    </div>
+    <ul className="list-none p-0 flex flex-col gap-2">
       {module.lessons.map((lesson, index) => (
-        <Lesson key={index}>
-          <FaCheck />
+        <li key={index} className="flex items-center gap-3 text-[#475569]">
+          <FaCheck className="text-[#10b981] shrink-0" />
           {lesson}
-        </Lesson>
+        </li>
       ))}
-    </LessonList>
-  </Module>
+    </ul>
+  </div>
 );
 
 export const LockedProjectOverlay = ({ onPremiumClick }) => (
-  <LockedOverlay onClick={onPremiumClick}>
-    <LockIcon>
+  <div
+    onClick={onPremiumClick}
+    className="absolute inset-0 bg-[rgba(15,23,42,0.75)] backdrop-blur-[3px] flex flex-col items-center justify-center z-10 cursor-pointer rounded-2xl transition-all duration-300 ease-in-out hover:bg-[rgba(15,23,42,0.85)]"
+  >
+    <div className="text-5xl text-[#3b82f6] mb-4 animate-pulse-opacity">
       <FaLock />
-    </LockIcon>
-    <UnlockText>Contenu Premium</UnlockText>
-    <UnlockSubtext>Cliquez pour déverrouiller ce projet</UnlockSubtext>
-  </LockedOverlay>
+    </div>
+    <h3 className="text-2xl font-bold text-white mb-2 text-center">Contenu Premium</h3>
+    <p className="text-base text-[#94a3b8] text-center m-0">Cliquez pour deverrouiller ce projet</p>
+  </div>
 );
 
 // PropTypes
@@ -64,995 +77,479 @@ LockedProjectOverlay.propTypes = {
 };
 
 
+// === LAYOUT COMPONENTS (now functional wrappers) ===
+export const PageWrapper = ({ children, ...props }) => (
+  <div className="bg-white min-h-screen" {...props}>{children}</div>
+);
 
-// === LAYOUT COMPONENTS ===
-export const PageWrapper = styled.div`
-  background: white;
-  min-height: 100vh;
-`;
+export const Container = ({ children, ...props }) => (
+  <div className="max-w-[1200px] mx-auto px-8" {...props}>{children}</div>
+);
 
-export const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-`;
+export const HeaderSection = ({ children, ...props }) => (
+  <section
+    className="text-white py-8 pb-16"
+    style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+    {...props}
+  >
+    {children}
+  </section>
+);
 
-export const HeaderSection = styled.section`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 2rem 0 4rem;
-`;
-
-export const ContentSection = styled.section`
-  padding: 4rem 0;
-  
-  &:has(.full-width-cta) {
-    padding-bottom: 0;
-  }
-`;
+export const ContentSection = ({ children, ...props }) => (
+  <section className="py-16 [&:has(.full-width-cta)]:pb-0" {...props}>{children}</section>
+);
 
 // === HERO COMPONENTS ===
-export const BackLink = styled(motion.a)`
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  margin-bottom: 2rem;
-  display: inline-block;
-  transition: color 0.3s ease;
-  
-  &:hover {
-    color: white;
-  }
-`;
+export const BackLink = ({ children, as: Component = 'a' as React.ElementType, ...props }: { children: React.ReactNode; as?: React.ElementType; [key: string]: any }) => {
+  return (
+    <Component
+      className="text-white/80 no-underline mb-8 inline-block transition-colors duration-300 ease-in-out hover:text-white"
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+};
 
-export const HeroContent = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
-  }
-`;
+export const HeroContent = ({ children, ...props }) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center max-md:text-center" {...props}>
+    {children}
+  </div>
+);
 
-export const HeroImage = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+export const HeroImage = ({ children, ...props }) => (
+  <div className="flex justify-center" {...props}>{children}</div>
+);
 
-export const AppMockup = styled.img`
-  max-width: 100%;
-  height: auto;
-  max-height: 500px;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-`;
+export const AppMockup = ({ ...props }) => (
+  <img
+    className="max-w-full h-auto max-h-[500px] rounded-[20px] shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+    {...props}
+  />
+);
 
-export const HeroText = styled.div``;
+export const HeroText = ({ children, ...props }) => (
+  <div {...props}>{children}</div>
+);
 
-export const Badge = styled.div`
-  background: rgba(255, 255, 255, 0.2);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  display: inline-block;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-`;
+export const Badge = ({ children, ...props }) => (
+  <div className="bg-white/20 py-2 px-4 rounded-[20px] inline-block mb-4 text-sm font-semibold" {...props}>
+    {children}
+  </div>
+);
 
-export const HeroTitle = styled.h1`
-  font-size: 3rem;
-  font-weight: 900;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-  
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-`;
+export const HeroTitle = ({ children, ...props }) => (
+  <h1 className="text-5xl md:text-3xl font-black mb-6 leading-[1.2]" {...props}>{children}</h1>
+);
 
-export const GradientText = styled.span`
-  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-`;
+export const GradientText = ({ children, ...props }) => (
+  <span
+    className="bg-clip-text text-transparent"
+    style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)' }}
+    {...props}
+  >
+    {children}
+  </span>
+);
 
-export const HeroDescription = styled.p`
-  font-size: 1.125rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.9);
-`;
+export const HeroDescription = ({ children, ...props }) => (
+  <p className="text-lg leading-relaxed mb-8 text-white/90" {...props}>{children}</p>
+);
 
-export const HeroStats = styled.div`
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-`;
+export const HeroStats = ({ children, ...props }) => (
+  <div className="flex gap-8 mb-8 max-md:justify-center" {...props}>{children}</div>
+);
 
-export const Stat = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: rgba(255, 255, 255, 0.9);
-  
-  svg {
-    color: #06b6d4;
-  }
-`;
+export const Stat = ({ children, ...props }) => (
+  <div className="flex items-center gap-2 text-white/90 [&>svg]:text-[#06b6d4]" {...props}>{children}</div>
+);
 
-export const CTAButton = styled(motion.button)`
-  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-  border: none;
-  border-radius: 50px;
-  color: white;
-  font-size: 1.125rem;
-  font-weight: 600;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
-  }
-`;
+export const CTAButton = ({ children, ...props }) => (
+  <motion.button
+    className="border-none rounded-full text-white text-lg font-semibold py-4 px-8 flex items-center gap-2 cursor-pointer transition-all duration-300 ease-in-out hover:-translate-y-[2px] hover:shadow-[0_10px_25px_rgba(59,130,246,0.4)]"
+    style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)' }}
+    {...props}
+  >
+    {children}
+  </motion.button>
+);
 
-// Conteneur pour les boutons CTA
-export const HeroButtonsContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  align-items: center;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: stretch;
-    width: 100%;
-    
-    button {
-      justify-content: center;
-      font-size: 1rem;
-      padding: 0.875rem 1.5rem;
-    }
-  }
-`;
+export const HeroButtonsContainer = ({ children, ...props }) => (
+  <div className="flex gap-4 flex-wrap items-center max-md:flex-col max-md:items-stretch max-md:w-full max-md:[&>button]:justify-center max-md:[&>button]:text-base max-md:[&>button]:py-3.5 max-md:[&>button]:px-6" {...props}>
+    {children}
+  </div>
+);
 
-// Bouton de contact spécialisé
-export const ContactButton = styled(CTAButton)`
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 0.95rem;
-  }
-`;
+export const ContactButton = ({ children, ...props }) => (
+  <motion.button
+    className="border-2 border-white/20 rounded-full text-white text-lg max-md:text-[0.95rem] font-semibold py-4 px-8 flex items-center gap-2 cursor-pointer transition-all duration-300 ease-in-out hover:-translate-y-[2px] hover:shadow-[0_10px_25px_rgba(16,185,129,0.4)]"
+    style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}
+    {...props}
+  >
+    {children}
+  </motion.button>
+);
 
 // === TAB NAVIGATION ===
-export const TabNavigation = styled.section`
-  background: white;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-`;
+export const TabNavigation = ({ children, ...props }) => (
+  <section className="bg-white border-b border-[#e2e8f0] py-4 sticky top-0 z-50" {...props}>
+    {children}
+  </section>
+);
 
-export const TabList = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding: 0.5rem 0;
-  
-  @media (max-width: 768px) {
-    gap: 0.25rem;
-  }
-`;
+export const TabList = ({ children, ...props }) => (
+  <div className="flex gap-2 max-md:gap-1 overflow-x-auto py-2" {...props}>{children}</div>
+);
 
-export const Tab = styled.button<{ active?: boolean }>`
-  background: ${props => props.active ? '#667eea' : 'transparent'};
-  color: ${props => props.active ? 'white' : '#64748b'};
-  border: 1px solid ${props => props.active ? '#667eea' : '#e2e8f0'};
-  border-radius: 0.375rem;
-  padding: 0.75rem 1.5rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
+export const Tab = ({ children, active, ...props }: { children: React.ReactNode; active?: boolean; [key: string]: any }) => (
+  <button
+    className={`rounded-md py-3 px-6 max-md:py-2 max-md:px-4 max-md:text-sm font-medium cursor-pointer transition-all duration-300 ease-in-out whitespace-nowrap border ${
+      active
+        ? 'bg-[#667eea] text-white border-[#667eea]'
+        : 'bg-transparent text-[#64748b] border-[#e2e8f0] hover:bg-[#f8fafc]'
+    }`}
+    {...props}
+  >
+    {children}
+  </button>
+);
 
-  &:hover {
-    background: ${props => props.active ? '#667eea' : '#f8fafc'};
-  }
-
-  @media (max-width: 768px) {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
-`;
-
-export const TabContent = styled(motion.div)``;
+export const TabContent = ({ children, ...props }) => (
+  <motion.div {...props}>{children}</motion.div>
+);
 
 // === CONTENT SECTIONS ===
-export const Section = styled.div`
-  margin-bottom: 4rem;
-`;
+export const Section = ({ children, ...props }) => (
+  <div className="mb-16" {...props}>{children}</div>
+);
 
-export const SectionTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: #1e293b;
-  
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
-`;
+export const SectionTitle = ({ children, ...props }) => (
+  <h2 className="text-3xl md:text-2xl font-bold mb-8 text-[#1e293b]" {...props}>{children}</h2>
+);
 
 // === CONCEPT CARDS ===
-export const ConceptsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-`;
+export const ConceptsGrid = ({ children, ...props }) => (
+  <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-6" {...props}>{children}</div>
+);
 
-export const ConceptCard = styled.div`
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 15px;
-  padding: 1.5rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  }
-`;
+export const ConceptCard = ({ children, ...props }) => (
+  <div className="bg-white border border-[#e2e8f0] rounded-[15px] p-6 text-center transition-all duration-300 ease-in-out hover:-translate-y-[5px] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)]" {...props}>
+    {children}
+  </div>
+);
 
-export const ConceptIcon = styled.div`
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.25rem;
-  color: white;
-  font-size: 1.25rem;
-`;
+export const ConceptIcon = ({ children, ...props }) => (
+  <div
+    className="w-[50px] h-[50px] rounded-xl flex items-center justify-center mx-auto mb-5 text-white text-xl"
+    style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+    {...props}
+  >
+    {children}
+  </div>
+);
 
-export const ConceptTitle = styled.h3`
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #1e293b;
-`;
+export const ConceptTitle = ({ children, ...props }) => (
+  <h3 className="text-xl font-semibold mb-4 text-[#1e293b]" {...props}>{children}</h3>
+);
 
-export const ConceptDescription = styled.p`
-  color: #64748b;
-  line-height: 1.6;
-`;
+export const ConceptDescription = ({ children, ...props }) => (
+  <p className="text-[#64748b] leading-relaxed" {...props}>{children}</p>
+);
 
 // === FEATURES ===
-export const FeaturesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-`;
+export const FeaturesGrid = ({ children, ...props }) => (
+  <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4" {...props}>{children}</div>
+);
 
-export const Feature = styled.div`
-  padding: 1rem;
-  background: #f8fafc;
-  border-radius: 10px;
-  font-weight: 500;
-  color: #475569;
-`;
+export const Feature = ({ children, ...props }) => (
+  <div className="p-4 bg-[#f8fafc] rounded-[10px] font-medium text-[#475569]" {...props}>{children}</div>
+);
 
-// === TECH STACK ===
-export const TechStack = styled.div`
-  margin-top: 2rem;
-`;
-
-export const TechTitle = styled.h3`
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #2d3748;
-`;
-
-export const TechList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-`;
-
-export const TechItem = styled.span`
-  background: #667eea;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 500;
-`;
+// === TECH STACK (styled components replaced inline in TechStackComponent) ===
+// TechStack, TechTitle, TechList, TechItem are used only by TechStackComponent above.
 
 // === CURRICULUM ===
-export const CurriculumSection = styled.div`
-  background: #f8fafc;
-  border-radius: 15px;
-  padding: 2rem;
-`;
+export const CurriculumSection = ({ children, ...props }) => (
+  <div className="bg-[#f8fafc] rounded-[15px] p-8" {...props}>{children}</div>
+);
 
-export const ModuleList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-`;
-
-export const Module = styled.div`
-  background: white;
-  border-radius: 10px;
-  padding: 1.5rem;
-  border: 1px solid #e2e8f0;
-`;
-
-export const ModuleHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-`;
-
-export const ModuleNumber = styled.div`
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  flex-shrink: 0;
-`;
-
-export const ModuleTitle = styled.h3`
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #1e293b;
-  flex: 1;
-`;
-
-export const ModuleDuration = styled.div`
-  background: #f1f5f9;
-  color: #475569;
-  padding: 0.25rem 0.75rem;
-  border-radius: 15px;
-  font-size: 0.875rem;
-  font-weight: 500;
-`;
-
-export const LessonList = styled.ul`
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-export const Lesson = styled.li`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: #475569;
-  
-  svg {
-    color: #10b981;
-    flex-shrink: 0;
-  }
-`;
+export const ModuleList = ({ children, ...props }) => (
+  <div className="flex flex-col gap-6" {...props}>{children}</div>
+);
 
 // === PROJECT SECTIONS ===
-export const ProjectSection = styled.div`
-  position: relative;
-`;
+export const ProjectSection = ({ children, ...props }) => (
+  <div className="relative" {...props}>{children}</div>
+);
 
-export const ProjectDescription = styled.div`
-  font-size: 1.125rem;
-  line-height: 1.7;
-  color: #475569;
-  margin-bottom: 2rem;
-`;
+export const ProjectDescription = ({ children, ...props }) => (
+  <div className="text-lg leading-[1.7] text-[#475569] mb-8" {...props}>{children}</div>
+);
 
-export const ProjectImage = styled.div`
-  text-align: center;
-  margin: 2rem 0;
-  
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  }
-`;
+export const ProjectImage = ({ children, ...props }) => (
+  <div className="text-center my-8 [&>img]:max-w-full [&>img]:h-auto [&>img]:rounded-[15px] [&>img]:shadow-[0_10px_30px_rgba(0,0,0,0.1)]" {...props}>
+    {children}
+  </div>
+);
 
-export const ProjectImageSmall = styled.div`
-  text-align: center;
-  margin: 2rem 0;
-  
-  img {
-    max-width: 50%;
-    max-height: 400px;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    object-fit: contain;
-    
-    @media (max-width: 768px) {
-      max-width: 70%;
-      max-height: 350px;
-    }
-  }
-`;
+export const ProjectImageSmall = ({ children, ...props }) => (
+  <div className="text-center my-8 [&>img]:max-w-[50%] [&>img]:max-h-[400px] [&>img]:h-auto [&>img]:rounded-[15px] [&>img]:shadow-[0_10px_30px_rgba(0,0,0,0.1)] [&>img]:object-contain max-md:[&>img]:max-w-[70%] max-md:[&>img]:max-h-[350px]" {...props}>
+    {children}
+  </div>
+);
 
 // === LOCKED CONTENT ===
-export const LockedContentWrapper = styled.div`
-  position: relative;
-`;
+export const LockedContentWrapper = ({ children, ...props }) => (
+  <div className="relative" {...props}>{children}</div>
+);
 
-export const LockedOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(3px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  cursor: pointer;
-  border-radius: 1rem;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: rgba(15, 23, 42, 0.85);
-  }
-`;
-
-export const LockIcon = styled.div`
-  font-size: 3rem;
-  color: #3b82f6;
-  margin-bottom: 1rem;
-  animation: pulse 2s infinite;
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-`;
-
-export const UnlockText = styled.h3`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-  text-align: center;
-`;
-
-export const UnlockSubtext = styled.p`
-  font-size: 1rem;
-  color: #94a3b8;
-  text-align: center;
-  margin: 0;
-`;
-
-export const BlurredContent = styled.div`
-  filter: blur(1.5px);
-  pointer-events: none;
-  opacity: 0.85;
-`;
+export const BlurredContent = ({ children, ...props }) => (
+  <div className="blur-[1.5px] pointer-events-none opacity-[0.85]" {...props}>{children}</div>
+);
 
 // === COURSE CONTENT ===
-export const CourseContainer = styled.div`
-  margin-top: 1rem;
-  background: #0f172a;
-  padding: 2rem 0;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  width: 100vw;
-  position: relative;
-  min-height: 600px;
-  
-  @media (max-width: 768px) {
-    padding: 1rem 0;
-    min-height: 500px;
-  }
-`;
+export const CourseContainer = ({ children, ...props }) => (
+  <div
+    className="mt-4 bg-[#0f172a] py-8 max-md:py-4 relative min-h-[600px] max-md:min-h-[500px]"
+    style={{
+      marginLeft: 'calc(-50vw + 50%)',
+      marginRight: 'calc(-50vw + 50%)',
+      width: '100vw'
+    }}
+    {...props}
+  >
+    {children}
+  </div>
+);
 
-export const CourseInnerWrapper = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 1.5rem;
-  
-  @media (max-width: 1024px) {
-    grid-template-columns: 250px 1fr;
-    gap: 1rem;
-  }
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 0 1rem;
-  }
-`;
+export const CourseInnerWrapper = ({ children, ...props }) => (
+  <div className="max-w-[1200px] mx-auto px-8 max-md:px-4 grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[280px_1fr] gap-6 max-md:gap-4" {...props}>
+    {children}
+  </div>
+);
 
-export const CourseSidebar = styled.div`
-  background: #1e293b;
-  border-radius: 0.375rem;
-  padding: 1.5rem;
-  height: fit-content;
-  border: 1px solid #334155;
-  
-  @media (max-width: 768px) {
-    order: 3;
-  }
-`;
+export const CourseSidebar = ({ children, ...props }) => (
+  <div className="bg-[#1e293b] rounded-md p-6 h-fit border border-[#334155] max-md:order-3" {...props}>
+    {children}
+  </div>
+);
 
-export const CourseMainContent = styled.div`
-  background: #1e293b;
-  border-radius: 0.375rem;
-  padding: 2rem;
-  border: 1px solid #334155;
-  
-  @media (max-width: 1024px) {
-    order: 1;
-  }
-  
-  @media (max-width: 768px) {
-    order: 1;
-  }
-`;
+export const CourseMainContent = ({ children, ...props }) => (
+  <div className="bg-[#1e293b] rounded-md p-8 border border-[#334155] max-lg:order-1 max-md:order-1" {...props}>
+    {children}
+  </div>
+);
 
+export const SectionList = ({ children, ...props }) => (
+  <div className="flex flex-col gap-2" {...props}>{children}</div>
+);
 
+export const SectionItem = ({ children, active, ...props }: { children: React.ReactNode; active?: boolean; [key: string]: any }) => (
+  <button
+    className={`rounded-md py-3 px-4 text-left cursor-pointer transition-all duration-200 ease-in-out font-medium border ${
+      active
+        ? 'bg-[#3b82f6] text-white border-[#3b82f6] hover:bg-[#2563eb]'
+        : 'bg-[#0f172a] text-[#e2e8f0] border-[#475569] hover:bg-[#334155] hover:border-[#3b82f6] hover:text-white'
+    }`}
+    {...props}
+  >
+    {children}
+  </button>
+);
 
-export const SectionList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
+export const CodeBlock = ({ children, ...props }) => (
+  <pre
+    className="bg-[#0f172a] text-[#e2e8f0] p-6 rounded-md overflow-x-auto font-mono text-sm leading-relaxed border border-[#334155] [&>.comment]:text-[#64748b] [&>.keyword]:text-[#60a5fa] [&>.string]:text-[#34d399]"
+    {...props}
+  >
+    {children}
+  </pre>
+);
 
-export const SectionItem = styled.button<{ active?: boolean }>`
-  background: ${props => props.active ? '#3b82f6' : '#0f172a'};
-  color: ${props => props.active ? 'white' : '#e2e8f0'};
-  border: 1px solid ${props => props.active ? '#3b82f6' : '#475569'};
-  border-radius: 0.375rem;
-  padding: 0.75rem 1rem;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-weight: 500;
+export const SidebarTitle = ({ children, ...props }) => (
+  <h4 className="text-lg font-semibold text-[#f1f5f9] mb-4" {...props}>{children}</h4>
+);
 
-  &:hover {
-    background: ${props => props.active ? '#2563eb' : '#334155'};
-    border-color: #3b82f6;
-    color: white;
-  }
-`;
+export const VideoContainer = ({ children, ...props }) => (
+  <div className="mb-8 relative" {...props}>{children}</div>
+);
 
+export const VideoWrapper = ({ children, ...props }) => (
+  <div
+    className="relative w-full h-[250px] max-md:h-[200px] rounded-md border border-[#334155] flex items-center justify-center mb-4 overflow-hidden"
+    style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}
+    {...props}
+  >
+    {/* Decorative radial gradients */}
+    <div
+      className="absolute inset-0"
+      style={{
+        backgroundImage: 'radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)'
+      }}
+    />
+    {children}
+  </div>
+);
 
+export const VideoPlaceholder = ({ children, ...props }) => (
+  <div className="text-[#64748b] text-center relative z-[1] p-8 [&>svg]:text-5xl [&>svg]:mb-4 [&>svg]:text-[#06b6d4] [&>svg]:drop-shadow-[0_0_10px_rgba(6,182,212,0.3)] [&>p]:m-0 [&>p]:text-sm [&>p]:font-medium [&>.duration]:inline-block [&>.duration]:bg-[rgba(6,182,212,0.2)] [&>.duration]:text-[#06b6d4] [&>.duration]:py-1 [&>.duration]:px-3 [&>.duration]:rounded-2xl [&>.duration]:text-xs [&>.duration]:mt-2 [&>.duration]:border [&>.duration]:border-[rgba(6,182,212,0.3)]" {...props}>
+    {children}
+  </div>
+);
 
-export const CodeBlock = styled.pre`
-  background: #0f172a;
-  color: #e2e8f0;
-  padding: 1.5rem;
-  border-radius: 0.375rem;
-  overflow-x: auto;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  border: 1px solid #334155;
-  
-  .comment {
-    color: #64748b;
-  }
-  
-  .keyword {
-    color: #60a5fa;
-  }
-  
-  .string {
-    color: #34d399;
-  }
-`;
+export const MainContentTitle = ({ children, ...props }) => (
+  <h4 className="text-xl font-semibold text-[#f1f5f9] mb-6" {...props}>{children}</h4>
+);
 
+export const LessonSection = ({ children, ...props }) => (
+  <div className="mb-8" {...props}>{children}</div>
+);
 
+export const ContentItem = ({ children, ...props }) => (
+  <div className="bg-[#0f172a] border border-[#334155] rounded-md p-4 mb-4 [&>h5]:text-[#e2e8f0] [&>h5]:font-semibold [&>h5]:mb-2 [&>h5]:text-base [&>p]:text-[#94a3b8] [&>p]:m-0 [&>p]:text-sm [&>p]:leading-relaxed" {...props}>
+    {children}
+  </div>
+);
 
-export const SidebarTitle = styled.h4`
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #f1f5f9;
-  margin-bottom: 1rem;
-`;
-
-export const VideoContainer = styled.div`
-  margin-bottom: 2rem;
-  position: relative;
-`;
-
-export const VideoWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 250px;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  border-radius: 0.375rem;
-  border: 1px solid #334155;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-      radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
-  }
-  
-  @media (max-width: 768px) {
-    height: 200px;
-  }
-`;
-
-export const VideoPlaceholder = styled.div`
-  color: #64748b;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-  padding: 2rem;
-  
-  svg {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: #06b6d4;
-    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3));
-  }
-  
-  p {
-    margin: 0;
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-  
-  .duration {
-    display: inline-block;
-    background: rgba(6, 182, 212, 0.2);
-    color: #06b6d4;
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.8rem;
-    margin-top: 0.5rem;
-    border: 1px solid rgba(6, 182, 212, 0.3);
-  }
-`;
-
-export const MainContentTitle = styled.h4`
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #f1f5f9;
-  margin-bottom: 1.5rem;
-`;
-
-export const LessonSection = styled.div`
-  margin-bottom: 2rem;
-`;
-
-export const ContentItem = styled.div`
-  background: #0f172a;
-  border: 1px solid #334155;
-  border-radius: 0.375rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  
-  h5 {
-    color: #e2e8f0;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-  }
-  
-  p {
-    color: #94a3b8;
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-`;
-
-export const FinalCodeButton = styled.button<{ active?: boolean }>`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: ${props => props.active ? '#06b6d4' : '#1e293b'};
-  color: ${props => props.active ? '#0f172a' : '#e2e8f0'};
-  border: 1px solid ${props => props.active ? '#06b6d4' : '#334155'};
-  border-radius: 0.375rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  z-index: 10;
-
-  &:hover {
-    background: ${props => props.active ? '#0891b2' : '#334155'};
-    transform: translateY(-1px);
-  }
-
-  svg {
-    font-size: 0.875rem;
-  }
-`;
+export const FinalCodeButton = ({ children, active, ...props }: { children: React.ReactNode; active?: boolean; [key: string]: any }) => (
+  <button
+    className={`absolute top-4 right-4 rounded-md py-2 px-4 text-sm font-semibold cursor-pointer transition-all duration-200 ease-in-out flex items-center gap-2 z-10 border [&>svg]:text-sm hover:-translate-y-px ${
+      active
+        ? 'bg-[#06b6d4] text-[#0f172a] border-[#06b6d4] hover:bg-[#0891b2]'
+        : 'bg-[#1e293b] text-[#e2e8f0] border-[#334155] hover:bg-[#334155]'
+    }`}
+    {...props}
+  >
+    {children}
+  </button>
+);
 
 // === CTA SECTIONS ===
-export const CTASectionFullWidth = styled.section`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 4rem 0 4rem 0;
-  text-align: center;
-  color: white;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  width: 100vw;
-  position: relative;
+export const CTASectionFullWidth = ({ children, ...props }) => (
+  <section
+    className="py-16 text-center text-white relative [&>h2]:text-white [&>h2]:mb-4 [&_p]:text-white/90 [&_p]:opacity-100"
+    style={{
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      marginLeft: 'calc(-50vw + 50%)',
+      marginRight: 'calc(-50vw + 50%)',
+      width: '100vw'
+    }}
+    {...props}
+  >
+    {children}
+  </section>
+);
 
-  h2 {
-    color: white;
-    margin-bottom: 1rem;
-  }
+export const FullWidthCTAWrapper = ({ children, className, ...props }) => (
+  <div className={`mt-12 [&.full-width-cta]:mb-0 ${className || ''}`} {...props}>{children}</div>
+);
 
-  p {
-    color: rgba(255, 255, 255, 0.9);
-    opacity: 1;
-  }
-`;
-
-export const FullWidthCTAWrapper = styled.div`
-  margin: 3rem 0 0 0;
-  
-  &.full-width-cta {
-    margin-bottom: 0;
-  }
-`;
-
-export const CTAContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-`;
+export const CTAContainer = ({ children, ...props }) => (
+  <div className="flex justify-center mt-8" {...props}>{children}</div>
+);
 
 
 // === ADVANCED FEATURES SECTION ===
-export const AdvancedFeaturesSection = styled.section`
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-  padding: 4rem 0;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  width: 100vw;
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
-    pointer-events: none;
-  }
-`;
+export const AdvancedFeaturesSection = ({ children, ...props }) => (
+  <section
+    className="py-16 relative overflow-hidden"
+    style={{
+      background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)',
+      marginLeft: 'calc(-50vw + 50%)',
+      marginRight: 'calc(-50vw + 50%)',
+      width: '100vw'
+    }}
+    {...props}
+  >
+    {/* Decorative radial gradients */}
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        background: 'radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.05) 0%, transparent 50%)'
+      }}
+    />
+    {children}
+  </section>
+);
 
-export const AdvancedFeaturesContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 1;
-`;
+export const AdvancedFeaturesContainer = ({ children, ...props }) => (
+  <div className="max-w-[1200px] mx-auto px-8 relative z-[1]" {...props}>{children}</div>
+);
 
-export const AdvancedSectionTitle = styled.h2`
-  font-size: 2.5rem;
-  font-weight: 900;
-  text-align: center;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-`;
+export const AdvancedSectionTitle = ({ children, ...props }) => (
+  <h2
+    className="text-[2.5rem] max-md:text-[2rem] font-black text-center mb-4 bg-clip-text text-transparent"
+    style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%)' }}
+    {...props}
+  >
+    {children}
+  </h2>
+);
 
-export const AdvancedSectionSubtitle = styled.p`
-  font-size: 1.25rem;
-  text-align: center;
-  color: #94a3b8;
-  margin-bottom: 3rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
-  
-  @media (max-width: 768px) {
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
-  }
-`;
+export const AdvancedSectionSubtitle = ({ children, ...props }) => (
+  <p className="text-xl max-md:text-lg text-center text-[#94a3b8] mb-12 max-md:mb-8 max-w-[600px] mx-auto leading-relaxed" {...props}>
+    {children}
+  </p>
+);
 
-export const AdvancedFeaturesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-`;
+export const AdvancedFeaturesGrid = ({ children, ...props }) => (
+  <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-8 max-md:gap-6" {...props}>
+    {children}
+  </div>
+);
 
-export const AdvancedFeatureCard = styled(motion.div)`
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  border: 1px solid #475569;
-  border-radius: 20px;
-  padding: 2rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s ease;
-  cursor: pointer;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-      rgba(59, 130, 246, 0.1) 0%, 
-      rgba(6, 182, 212, 0.05) 50%, 
-      rgba(139, 92, 246, 0.1) 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-  }
-  
-  &:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: #3b82f6;
-    box-shadow: 
-      0 20px 40px rgba(59, 130, 246, 0.2),
-      0 0 80px rgba(6, 182, 212, 0.1);
-    
-    &::before {
-      opacity: 1;
-    }
-  }
-`;
+export const AdvancedFeatureCard = ({ children, ...props }) => (
+  <motion.div
+    className="rounded-[20px] p-8 text-center relative overflow-hidden transition-all duration-400 ease-in-out cursor-pointer border border-[#475569] hover:-translate-y-2 hover:scale-[1.02] hover:border-[#3b82f6] hover:shadow-[0_20px_40px_rgba(59,130,246,0.2),0_0_80px_rgba(6,182,212,0.1)] group"
+    style={{ background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)' }}
+    {...props}
+  >
+    {/* Hover overlay */}
+    <div
+      className="absolute inset-0 opacity-0 transition-opacity duration-400 ease-in-out pointer-events-none group-hover:opacity-100"
+      style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.05) 50%, rgba(139, 92, 246, 0.1) 100%)' }}
+    />
+    {children}
+  </motion.div>
+);
 
-export const AdvancedFeatureIcon = styled.div`
-  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-  font-size: 2rem;
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transform: rotate(45deg);
-    transition: all 0.6s ease;
-    opacity: 0;
-  }
-  
-  ${AdvancedFeatureCard}:hover & {
-    &::before {
-      opacity: 1;
-      transform: rotate(45deg) translate(100%, 100%);
-    }
-  }
-`;
+export const AdvancedFeatureIcon = ({ children, ...props }) => (
+  <div
+    className="w-20 h-20 rounded-[20px] flex items-center justify-center mx-auto mb-6 text-[2rem] relative overflow-hidden group-hover:[&::before]:opacity-100 group-hover:[&::before]:translate-x-full group-hover:[&::before]:translate-y-full"
+    style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)' }}
+    {...props}
+  >
+    {children}
+  </div>
+);
 
-export const AdvancedFeatureTitle = styled.h3`
-  font-size: 1.375rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #f1f5f9;
-  position: relative;
-  z-index: 1;
-`;
+export const AdvancedFeatureTitle = ({ children, ...props }) => (
+  <h3 className="text-[1.375rem] font-bold mb-4 text-[#f1f5f9] relative z-[1]" {...props}>{children}</h3>
+);
 
-export const AdvancedFeatureDescription = styled.p`
-  color: #cbd5e1;
-  line-height: 1.6;
-  font-size: 1rem;
-  position: relative;
-  z-index: 1;
-`;
+export const AdvancedFeatureDescription = ({ children, ...props }) => (
+  <p className="text-[#cbd5e1] leading-relaxed text-base relative z-[1]" {...props}>{children}</p>
+);
 
-export const AdvancedFeatureBadge = styled.div`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 15px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
+export const AdvancedFeatureBadge = ({ children, ...props }) => (
+  <div
+    className="absolute top-4 right-4 text-white py-1 px-3 rounded-[15px] text-xs font-semibold uppercase tracking-wide"
+    style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)' }}
+    {...props}
+  >
+    {children}
+  </div>
+);
 
 // Component for the advanced features section
 export const AdvancedFeaturesComponent = ({ features }) => (
   <AdvancedFeaturesSection>
     <AdvancedFeaturesContainer>
-      <AdvancedSectionTitle>✨ Fonctionnalités avancées que vous maîtriserez</AdvancedSectionTitle>
+      <AdvancedSectionTitle>{"\u2728"} Fonctionnalites avancees que vous maitriserez</AdvancedSectionTitle>
       <AdvancedSectionSubtitle>
-        Développez des compétences de niveau professionnel en implémentant ces fonctionnalités 
-        innovantes qui distinguent votre application sur le marché
+        Developpez des competences de niveau professionnel en implementant ces fonctionnalites
+        innovantes qui distinguent votre application sur le marche
       </AdvancedSectionSubtitle>
       <AdvancedFeaturesGrid>
         {features.map((feature, index) => (
@@ -1087,35 +584,44 @@ AdvancedFeaturesComponent.propTypes = {
 
 // === SCREENSHOT GALLERY COMPONENT ===
 export const ScreenshotGalleryComponent = ({ screenshots }) => (
-  <ScreenshotGallery>
-    <GalleryTitle>📱 Aperçu de l'application</GalleryTitle>
-    <ScreenshotGrid>
+  <div className="my-16">
+    <h3
+      className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent"
+      style={{ backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+    >
+      {"\u{1F4F1}"} Apercu de l&apos;application
+    </h3>
+    <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-8 max-md:gap-6">
       {screenshots.map((screenshot, index) => (
-        <ScreenshotCard
+        <motion.div
           key={index}
-          as={motion.div}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
           viewport={{ once: true }}
+          className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out hover:-translate-y-[5px] hover:shadow-[0_8px_30px_rgba(102,126,234,0.2)]"
         >
-          <ScreenshotImageWrapper>
-            <ScreenshotImage
+          <div
+            className="w-full overflow-hidden relative"
+            style={{ aspectRatio: '9 / 16', background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' }}
+          >
+            <img
+              className="w-full h-full object-cover block"
               src={screenshot.url}
               alt={screenshot.title}
               onError={(e) => {
-                e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="400" viewBox="0 0 200 400"%3E%3Crect width="200" height="400" fill="%23f0f0f0"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="16"%3E' + screenshot.title + '%3C/text%3E%3C/svg%3E';
+                (e.target as HTMLImageElement).src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="400" viewBox="0 0 200 400"%3E%3Crect width="200" height="400" fill="%23f0f0f0"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="16"%3E' + screenshot.title + '%3C/text%3E%3C/svg%3E';
               }}
             />
-          </ScreenshotImageWrapper>
-          <ScreenshotInfo>
-            <ScreenshotTitle>{screenshot.title}</ScreenshotTitle>
-            <ScreenshotDescription>{screenshot.description}</ScreenshotDescription>
-          </ScreenshotInfo>
-        </ScreenshotCard>
+          </div>
+          <div className="p-6">
+            <h4 className="text-lg font-semibold text-[#1e293b] mb-2">{screenshot.title}</h4>
+            <p className="text-sm text-[#64748b] leading-relaxed">{screenshot.description}</p>
+          </div>
+        </motion.div>
       ))}
-    </ScreenshotGrid>
-  </ScreenshotGallery>
+    </div>
+  </div>
 );
 
 ScreenshotGalleryComponent.propTypes = {
@@ -1125,75 +631,3 @@ ScreenshotGalleryComponent.propTypes = {
     description: PropTypes.string.isRequired
   })).isRequired
 };
-
-// Styled components for Screenshot Gallery
-const ScreenshotGallery = styled.div`
-  margin: 4rem 0;
-`;
-
-const GalleryTitle = styled.h3`
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 2rem;
-  text-align: center;
-`;
-
-const ScreenshotGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-`;
-
-const ScreenshotCard = styled.div`
-  background: white;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
-  }
-`;
-
-const ScreenshotImageWrapper = styled.div`
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  overflow: hidden;
-  position: relative;
-`;
-
-const ScreenshotImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-`;
-
-const ScreenshotInfo = styled.div`
-  padding: 1.5rem;
-`;
-
-const ScreenshotTitle = styled.h4`
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 0.5rem;
-`;
-
-const ScreenshotDescription = styled.p`
-  font-size: 0.875rem;
-  color: #64748b;
-  line-height: 1.5;
-`; 

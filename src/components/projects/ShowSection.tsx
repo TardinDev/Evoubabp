@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+'use client'
+
 import PropTypes from 'prop-types';
 import { useSpring, animated } from '@react-spring/web';
 
-const ShowSection = ({ images, direction }) => {
+const ShowSection = ({ images, direction }: { images: string[]; direction: 'left' | 'right' }) => {
   const props = useSpring({
     from: { transform: direction === 'left' ? 'translateX(0%)' : 'translateX(-50%)' },
     to: { transform: direction === 'left' ? 'translateX(-50%)' : 'translateX(0%)' },
@@ -12,13 +13,18 @@ const ShowSection = ({ images, direction }) => {
   });
 
   return (
-    <Wrapper>
-      <Section style={props}>
+    <div className="overflow-hidden w-full py-5">
+      <animated.div className="flex w-fit gap-[30px] py-2.5" style={props}>
         {[...images, ...images].map((img, index) => (
-          <Image key={index} src={`/images/${img}`} alt={`App ${index + 1}`} />
+          <img
+            key={index}
+            src={`/images/${img}`}
+            alt={`App ${index + 1}`}
+            className="w-[100px] h-[100px] rounded-[10px] transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-[10deg]"
+          />
         ))}
-      </Section>
-    </Wrapper>
+      </animated.div>
+    </div>
   );
 };
 
@@ -28,29 +34,3 @@ ShowSection.propTypes = {
 };
 
 export default ShowSection;
-
-
-
-const Wrapper = styled.div`
-  overflow: hidden;
-  width: 100%;
-  padding: 20px 0;
-`;
-
-const Section = styled(animated.div)`
-  display: flex;
-  width: fit-content;
-  gap: 30px;
-  padding: 10px 0;
-`;
-
-const Image = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.1) rotate(10deg);
-  }
-`;

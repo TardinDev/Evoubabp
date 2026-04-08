@@ -1,4 +1,5 @@
-import styled, { keyframes } from "styled-components";
+'use client'
+
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
@@ -99,369 +100,201 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
       whileInView="show"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <Section id={id || "testimonials"}>
-        <Container>
+      <style>{`
+        @keyframes testimonial-progress {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+      `}</style>
+
+      <section
+        id={id || "testimonials"}
+        className="relative py-10 px-8 bg-black overflow-hidden md:py-8 md:px-4 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-px"
+        style={{
+          // @ts-ignore
+          '--tw-before-bg': 'linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent)',
+        }}
+      >
+        {/* Pseudo-element workaround: top border line */}
+        <div
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{
+            background: 'linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent)',
+          }}
+        />
+
+        <div className="max-w-[1000px] mx-auto">
           <motion.div variants={fadeIn("up", "tween", 0.1, 0.8)}>
-            <Header>
-              <Overline>Témoignages</Overline>
-              <Title>
-                Ils m&apos;ont fait <GoldText>confiance</GoldText>
-              </Title>
-              <Description>
+            <div className="text-center mb-6">
+              <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-[#ffd700] mb-4">
+                Témoignages
+              </span>
+              <h2
+                className="font-bold text-white mb-4 tracking-tight"
+                style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}
+              >
+                Ils m&apos;ont fait <span className="text-[#ffd700]">confiance</span>
+              </h2>
+              <p className="text-[1.1rem] text-white/50 max-w-[400px] mx-auto">
                 Des collaborations réussies avec des entreprises ambitieuses
-              </Description>
-            </Header>
+              </p>
+            </div>
           </motion.div>
 
-          <CarouselWrapper>
-            <CarouselTrack
+          {/* CarouselWrapper */}
+          <div className="relative overflow-hidden mb-6">
+            {/* CarouselTrack */}
+            <div
+              className="flex"
               style={{
                 transform: `translateX(-${currentIndex * 100}%)`,
+                transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
               }}
             >
               {testimonials.map((testimonial) => (
-                <Slide key={testimonial.id}>
-                  <TestimonialCard>
-                    <QuoteIcon>
+                <div key={testimonial.id} className="min-w-full px-4">
+                  {/* TestimonialCard */}
+                  <div
+                    className="relative bg-[#0a0a0a] rounded-2xl p-8 max-w-[800px] mx-auto md:p-6"
+                    style={{
+                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                    }}
+                  >
+                    {/* QuoteIcon */}
+                    <div className="absolute top-8 right-8 text-[2.5rem] md:text-[2rem] md:top-6 md:right-6" style={{ color: 'rgba(255, 215, 0, 0.1)' }}>
                       <FaQuoteLeft />
-                    </QuoteIcon>
+                    </div>
 
-                    <Content>
-                      <Quote>{testimonial.content}</Quote>
+                    {/* Content */}
+                    <div className="mb-5">
+                      <p className="text-xl md:text-[1.1rem] font-normal text-white/90 leading-loose mb-6">
+                        {testimonial.content}
+                      </p>
 
-                      <Rating>
+                      {/* Rating */}
+                      <div className="flex gap-1 mb-4 [&_svg]:text-[#ffd700] [&_svg]:text-[0.9rem]">
                         {[...Array(testimonial.rating)].map((_, i) => (
                           <FaStar key={i} />
                         ))}
-                      </Rating>
+                      </div>
 
-                      <ProjectBadge>{testimonial.project}</ProjectBadge>
-                    </Content>
+                      {/* ProjectBadge */}
+                      <span
+                        className="inline-block text-[0.8rem] font-medium text-white/40 px-4 py-2 rounded-full"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.05)',
+                          border: '1px solid rgba(255, 255, 255, 0.08)',
+                        }}
+                      >
+                        {testimonial.project}
+                      </span>
+                    </div>
 
-                    <Author>
-                      <Avatar
+                    {/* Author */}
+                    <div className="flex items-center gap-4">
+                      <img
                         src={testimonial.avatar}
                         alt={testimonial.name}
+                        className="w-14 h-14 md:w-12 md:h-12 rounded-full object-cover border-2 border-[#ffd700]"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&background=ffd700&color=000&size=100&bold=true&font-size=0.4`;
                         }}
                       />
-                      <AuthorInfo>
-                        <AuthorName>{testimonial.name}</AuthorName>
-                        <AuthorRole>
-                          {testimonial.role} <Separator>•</Separator> {testimonial.company}
-                        </AuthorRole>
-                      </AuthorInfo>
-                    </Author>
+                      <div>
+                        <h4 className="text-[1.1rem] font-semibold text-white mb-1">
+                          {testimonial.name}
+                        </h4>
+                        <p className="text-[0.9rem] text-white/50">
+                          {testimonial.role}{' '}
+                          <span className="text-white/30 mx-1">&#8226;</span>{' '}
+                          {testimonial.company}
+                        </p>
+                      </div>
+                    </div>
 
-                    <CardAccent />
-                  </TestimonialCard>
-                </Slide>
+                    {/* CardAccent */}
+                    <div
+                      className="absolute bottom-0 left-8 right-8 h-[2px] opacity-50"
+                      style={{
+                        background: 'linear-gradient(90deg, transparent, #ffd700, transparent)',
+                      }}
+                    />
+                  </div>
+                </div>
               ))}
-            </CarouselTrack>
+            </div>
 
-            <Pagination>
+            {/* Pagination */}
+            <div className="flex justify-center gap-3 mt-6">
               {testimonials.map((_, index) => (
-                <PaginationDot
+                <button
                   key={index}
-                  active={index === currentIndex}
                   onClick={() => goToSlide(index)}
+                  className="h-1 rounded-sm border-none cursor-pointer transition-all duration-300 overflow-hidden relative"
+                  style={{
+                    width: index === currentIndex ? '40px' : '12px',
+                    background: index === currentIndex ? 'transparent' : 'rgba(255, 255, 255, 0.2)',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (index !== currentIndex) {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (index !== currentIndex) {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                    }
+                  }}
                 >
-                  <DotProgress active={index === currentIndex} />
-                </PaginationDot>
+                  <div
+                    className="absolute top-0 left-0 h-full bg-[#ffd700]"
+                    style={{
+                      animation: index === currentIndex ? 'testimonial-progress 5s linear forwards' : 'none',
+                      width: index === currentIndex ? '0%' : '0%',
+                    }}
+                  />
+                </button>
               ))}
-            </Pagination>
-          </CarouselWrapper>
+            </div>
+          </div>
 
-          <StatsRow>
-            <StatBlock>
-              <StatNumber>50+</StatNumber>
-              <StatText>Projets livrés</StatText>
-            </StatBlock>
-            <StatDivider />
-            <StatBlock>
-              <StatNumber>100%</StatNumber>
-              <StatText>Satisfaction</StatText>
-            </StatBlock>
-            <StatDivider />
-            <StatBlock>
-              <StatNumber>5.0</StatNumber>
-              <StatText>Note moyenne</StatText>
-            </StatBlock>
-          </StatsRow>
-        </Container>
-      </Section>
+          {/* StatsRow */}
+          <div
+            className="flex justify-center items-center gap-12 sm:gap-6 py-8"
+            style={{ borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}
+          >
+            <div className="text-center">
+              <div className="text-[2rem] sm:text-2xl font-bold text-[#ffd700] mb-1">
+                50+
+              </div>
+              <div className="text-[0.85rem] text-white/40 font-medium">
+                Projets livrés
+              </div>
+            </div>
+            <div className="w-px h-10" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
+            <div className="text-center">
+              <div className="text-[2rem] sm:text-2xl font-bold text-[#ffd700] mb-1">
+                100%
+              </div>
+              <div className="text-[0.85rem] text-white/40 font-medium">
+                Satisfaction
+              </div>
+            </div>
+            <div className="w-px h-10" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
+            <div className="text-center">
+              <div className="text-[2rem] sm:text-2xl font-bold text-[#ffd700] mb-1">
+                5.0
+              </div>
+              <div className="text-[0.85rem] text-white/40 font-medium">
+                Note moyenne
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </motion.div>
   );
 };
 
 export default TestimonialsSection;
-
-const progressAnimation = keyframes`
-  from { width: 0%; }
-  to { width: 100%; }
-`;
-
-const Section = styled.section`
-  position: relative;
-  padding: 2.5rem 2rem;
-  background: #000000;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
-  }
-
-  @media (max-width: 768px) {
-    padding: 2rem 1rem;
-  }
-`;
-
-const Container = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-`;
-
-const Header = styled.div`
-  text-align: center;
-  margin-bottom: 1.5rem;
-`;
-
-const Overline = styled.span`
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #ffd700;
-  margin-bottom: 1rem;
-`;
-
-const Title = styled.h2`
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
-`;
-
-const GoldText = styled.span`
-  color: #ffd700;
-`;
-
-const Description = styled.p`
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.5);
-  max-width: 400px;
-  margin: 0 auto;
-`;
-
-const CarouselWrapper = styled.div`
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-`;
-
-const CarouselTrack = styled.div`
-  display: flex;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-`;
-
-const Slide = styled.div`
-  min-width: 100%;
-  padding: 0 1rem;
-`;
-
-const TestimonialCard = styled.div`
-  position: relative;
-  background: #0a0a0a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-  }
-`;
-
-const CardAccent = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 2rem;
-  right: 2rem;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #ffd700, transparent);
-  opacity: 0.5;
-`;
-
-const QuoteIcon = styled.div`
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  font-size: 2.5rem;
-  color: rgba(255, 215, 0, 0.1);
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-    top: 1.5rem;
-    right: 1.5rem;
-  }
-`;
-
-const Content = styled.div`
-  margin-bottom: 1.25rem;
-`;
-
-const Quote = styled.p`
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-  }
-`;
-
-const Rating = styled.div`
-  display: flex;
-  gap: 0.25rem;
-  margin-bottom: 1rem;
-
-  svg {
-    color: #ffd700;
-    font-size: 0.9rem;
-  }
-`;
-
-const ProjectBadge = styled.span`
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.5rem 1rem;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-`;
-
-const Author = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
-const Avatar = styled.img`
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ffd700;
-
-  @media (max-width: 768px) {
-    width: 48px;
-    height: 48px;
-  }
-`;
-
-const AuthorInfo = styled.div``;
-
-const AuthorName = styled.h4`
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 0.25rem;
-`;
-
-const AuthorRole = styled.p`
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
-`;
-
-const Separator = styled.span`
-  color: rgba(255, 255, 255, 0.3);
-  margin: 0 0.25rem;
-`;
-
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-`;
-
-const PaginationDot = styled.button<{ active: boolean }>`
-  width: ${props => props.active ? '40px' : '12px'};
-  height: 4px;
-  border-radius: 2px;
-  border: none;
-  background: ${props => props.active ? 'transparent' : 'rgba(255, 255, 255, 0.2)'};
-  cursor: pointer;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  position: relative;
-
-  &:hover {
-    background: ${props => props.active ? 'transparent' : 'rgba(255, 255, 255, 0.3)'};
-  }
-`;
-
-const DotProgress = styled.div<{ active: boolean }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: #ffd700;
-  animation: ${props => props.active ? progressAnimation : 'none'} 5s linear forwards;
-  width: ${props => props.active ? '0%' : '0%'};
-`;
-
-const StatsRow = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
-  padding: 2rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-
-  @media (max-width: 640px) {
-    gap: 1.5rem;
-  }
-`;
-
-const StatBlock = styled.div`
-  text-align: center;
-`;
-
-const StatNumber = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  color: #ffd700;
-  margin-bottom: 0.25rem;
-
-  @media (max-width: 640px) {
-    font-size: 1.5rem;
-  }
-`;
-
-const StatText = styled.div`
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.4);
-  font-weight: 500;
-`;
-
-const StatDivider = styled.div`
-  width: 1px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.1);
-`;

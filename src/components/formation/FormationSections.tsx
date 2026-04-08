@@ -1,5 +1,7 @@
+'use client'
+
 import { FaClock, FaUsers, FaGraduationCap, FaDownload, FaEnvelope } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import PropTypes from "prop-types";
 import {
   HeaderSection,
@@ -47,35 +49,35 @@ export const HeroSection = ({ onStartFormation }) => {
 J'ai une question concernant votre formation React Native Mobile.
 
 Ma question :
-[Écrivez votre question ici]
+[Ecrivez votre question ici]
 
-Merci de votre réponse rapide !
+Merci de votre reponse rapide !
 
 Cordialement`);
-    
+
     window.location.href = `mailto:tardindavy@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
     <HeaderSection>
       <Container>
-        <BackLink as={Link} to="/formations">← Retour aux formations</BackLink>
+        <BackLink as={Link} href="/formations">{"\u2190"} Retour aux formations</BackLink>
         <HeroContent>
           <HeroImage>
-            <AppMockup 
-              src="/imagesFormations/RunSport.png" 
+            <AppMockup
+              src="/imagesFormations/RunSport.png"
               alt="Application RunSport - Formation React Native"
             />
           </HeroImage>
           <HeroText>
-            <Badge>🎯 Formation Gratuite</Badge>
+            <Badge>{"\u{1F3AF}"} Formation Gratuite</Badge>
             <HeroTitle>
-              Développement Mobile avec <GradientText>React-Native</GradientText>
+              Developpement Mobile avec <GradientText>React-Native</GradientText>
             </HeroTitle>
             <HeroDescription>
-              Apprenez à créer 4 applications mobiles complètes : RunSport (E-commerce), SocialConnect 
-              (Réseau social), SkyBooker(Réservation voyage) et SendMoney (Fintech). Une formation 
-              qui vous enseigne React-Native, les APIs, le backend, Git/GitHub et toutes les technologies du développement mobile moderne.
+              Apprenez a creer 4 applications mobiles completes : RunSport (E-commerce), SocialConnect
+              (Reseau social), SkyBooker(Reservation voyage) et SendMoney (Fintech). Une formation
+              qui vous enseigne React-Native, les APIs, le backend, Git/GitHub et toutes les technologies du developpement mobile moderne.
             </HeroDescription>
             <HeroStats>
               <Stat>
@@ -84,31 +86,31 @@ Cordialement`);
               </Stat>
               <Stat>
                 <FaUsers />
-                <span>58 étudiants</span>
+                <span>58 etudiants</span>
               </Stat>
               <Stat>
                 <FaGraduationCap />
-                <span>Débutant</span>
+                <span>Debutant</span>
               </Stat>
             </HeroStats>
-            
+
             <HeroButtonsContainer>
-              <CTAButton 
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }} 
+              <CTAButton
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={onStartFormation}
               >
                 <FaDownload />
                 Commencer Maintenant - Gratuit
               </CTAButton>
-              
-              <ContactButton 
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }} 
+
+              <ContactButton
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={handleContactClick}
               >
                 <FaEnvelope />
-                Une question ? Je réponds immédiatement !
+                Une question ? Je reponds immediatement !
               </ContactButton>
             </HeroButtonsContainer>
           </HeroText>
@@ -122,7 +124,7 @@ Cordialement`);
 export const OverviewSection = ({ concepts, features, techStacks }) => (
   <>
     <Section>
-      <SectionTitle>🎯 Ce que vous allez apprendre</SectionTitle>
+      <SectionTitle>{"\u{1F3AF}"} Ce que vous allez apprendre</SectionTitle>
       <ConceptsGrid>
         {concepts.map((concept, index) => (
           <ConceptCard key={index}>
@@ -137,7 +139,7 @@ export const OverviewSection = ({ concepts, features, techStacks }) => (
     </Section>
 
     <Section>
-      <SectionTitle>🚀 Avantages de cette formation</SectionTitle>
+      <SectionTitle>{"\u{1F680}"} Avantages de cette formation</SectionTitle>
       <FeaturesGrid>
         {features.map((feature, index) => (
           <Feature key={index}>{feature}</Feature>
@@ -145,57 +147,57 @@ export const OverviewSection = ({ concepts, features, techStacks }) => (
       </FeaturesGrid>
     </Section>
 
-    <AdvancedFeaturesComponent 
+    <AdvancedFeaturesComponent
       features={[
         {
-          icon: "🤖",
-          title: "IA pour recommandation personnalisée",
-          description: "Intégrez l'intelligence artificielle pour proposer du contenu personnalisé à vos utilisateurs"
+          icon: "\u{1F916}",
+          title: "IA pour recommandation personnalisee",
+          description: "Integrez l'intelligence artificielle pour proposer du contenu personnalise a vos utilisateurs"
         },
         {
-          icon: "👆",
-          title: "Auth biométrique",
-          description: "Authentification sécurisée par empreinte digitale et reconnaissance faciale"
+          icon: "\u{1F446}",
+          title: "Auth biometrique",
+          description: "Authentification securisee par empreinte digitale et reconnaissance faciale"
         },
         {
-          icon: "💳",
+          icon: "\u{1F4B3}",
           title: "Paiement Stripe + Apple Pay",
-          description: "Intégration complète des systèmes de paiement modernes et sécurisés"
+          description: "Integration complete des systemes de paiement modernes et securises"
         },
         {
-          icon: "🌙",
+          icon: "\u{1F319}",
           title: "Mode sombre automatique",
-          description: "Thème adaptatif basé sur les préférences système de l'utilisateur"
+          description: "Theme adaptatif base sur les preferences systeme de l'utilisateur"
         },
         {
-          icon: "🔔",
-          title: "Notifications push segmentées",
-          description: "Système de notifications ciblées et personnalisées par segments d'utilisateurs"
+          icon: "\u{1F514}",
+          title: "Notifications push segmentees",
+          description: "Systeme de notifications ciblees et personnalisees par segments d'utilisateurs"
         },
         {
-          icon: "💬",
+          icon: "\u{1F4AC}",
           title: "Chat support IA",
           description: "Assistant virtuel intelligent pour le support client 24/7"
         },
         {
-          icon: "✨",
+          icon: "\u2728",
           title: "Animations fluides et feed interactif",
           description: "Interface utilisateur moderne avec animations et interactions fluides"
         },
         {
-          icon: "📍",
-          title: "Chat utilisateur + favoris + géoloc boutique",
-          description: "Système social complet avec géolocalisation et fonctionnalités communautaires"
+          icon: "\u{1F4CD}",
+          title: "Chat utilisateur + favoris + geoloc boutique",
+          description: "Systeme social complet avec geolocalisation et fonctionnalites communautaires"
         }
       ]}
     />
 
     <Section>
-      <SectionTitle>⚡ Technologies modernes pour développer une app</SectionTitle>
+      <SectionTitle>{"\u26A1"} Technologies modernes pour developper une app</SectionTitle>
       <ProjectDescription>
         <p>
-          Maîtrisez les technologies les plus récentes et demandées du marché pour créer 
-          des applications mobiles performantes et évolutives comme les grandes entreprises tech.
+          Maitrisez les technologies les plus recentes et demandees du marche pour creer
+          des applications mobiles performantes et evolutives comme les grandes entreprises tech.
         </p>
       </ProjectDescription>
 
@@ -210,7 +212,7 @@ export const OverviewSection = ({ concepts, features, techStacks }) => (
 // Curriculum Section Component
 export const CurriculumSectionComponent = ({ modules }) => (
   <CurriculumSection>
-    <SectionTitle>📚 Programme de formation</SectionTitle>
+    <SectionTitle>{"\u{1F4DA}"} Programme de formation</SectionTitle>
     <ModuleList>
       {modules.map((module, index) => (
         <ModuleComponent key={index} module={module} />
@@ -229,9 +231,9 @@ export const CTASection = ({ onStartFormation, title, description }) => (
           <p>{description}</p>
         </ProjectDescription>
         <CTAContainer>
-          <CTAButton 
-            whileHover={{ scale: 1.05 }} 
-            whileTap={{ scale: 0.95 }} 
+          <CTAButton
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={onStartFormation}
           >
             <FaDownload />
@@ -288,4 +290,4 @@ CTASection.propTypes = {
   onStartFormation: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired
-}; 
+};

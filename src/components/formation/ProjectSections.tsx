@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { FaPlay, FaCode, FaVideo, FaYoutube, FaTiktok } from "react-icons/fa";
@@ -33,15 +35,15 @@ import {
 const CourseInteractive = ({ courseData }) => {
   const [activeSection, setActiveSection] = useState(courseData.sections[0]?.id || "");
   const [showFinalCode, setShowFinalCode] = useState(false);
-  
+
   const currentSection = courseData.sections.find(section => section.id === activeSection);
-  
+
   return (
     <CourseContainer>
       <CourseInnerWrapper>
         {/* Sidebar des sections */}
         <CourseSidebar>
-          <SidebarTitle>📚 Contenu du cours</SidebarTitle>
+          <SidebarTitle>{"\u{1F4DA}"} Contenu du cours</SidebarTitle>
           <SectionList>
             {courseData.sections.map((section) => (
               <SectionItem
@@ -54,47 +56,47 @@ const CourseInteractive = ({ courseData }) => {
             ))}
           </SectionList>
         </CourseSidebar>
-        
-        {/* Contenu principal avec vidéos */}
+
+        {/* Contenu principal avec videos */}
         <CourseMainContent>
           {currentSection && (
             <>
               <MainContentTitle>{currentSection.title}</MainContentTitle>
-              
+
               <VideoContainer>
-                <FinalCodeButton 
+                <FinalCodeButton
                   active={showFinalCode}
                   onClick={() => setShowFinalCode(!showFinalCode)}
                 >
                   {showFinalCode ? <FaVideo /> : <FaCode />}
-                  {showFinalCode ? 'Retour Vidéo' : 'Code Final'}
+                  {showFinalCode ? 'Retour Video' : 'Code Final'}
                 </FinalCodeButton>
-                
+
                 {!showFinalCode ? (
                   <VideoWrapper>
                     <VideoPlaceholder>
                       <FaPlay />
-                      <p>Vidéo du cours - {currentSection.title}</p>
+                      <p>Video du cours - {currentSection.title}</p>
                       {currentSection.duration && (
-                        <div className="duration">📹 {currentSection.duration}</div>
+                        <div className="duration">{"\u{1F4F9}"} {currentSection.duration}</div>
                       )}
                     </VideoPlaceholder>
                   </VideoWrapper>
                 ) : (
-                  <div style={{ 
+                  <div style={{
                     background: '#0f172a',
                     border: '1px solid #334155',
                     borderRadius: '0.375rem',
                     padding: '1rem',
                     marginBottom: '1rem'
                   }}>
-                    <h5 style={{ 
-                      color: '#06b6d4', 
+                    <h5 style={{
+                      color: '#06b6d4',
                       marginBottom: '1rem',
                       fontSize: '1rem',
                       fontWeight: '600'
                     }}>
-                      🎯 Code final de cette section
+                      {"\u{1F3AF}"} Code final de cette section
                     </h5>
                     <CodeBlock>
                       {currentSection.finalCode || currentSection.code}
@@ -102,10 +104,10 @@ const CourseInteractive = ({ courseData }) => {
                   </div>
                 )}
               </VideoContainer>
-              
+
               <LessonSection>
                 <ContentItem>
-                  <h5>⏱️ Durée estimée</h5>
+                  <h5>{"\u23F1\uFE0F"} Duree estimee</h5>
                   <p>{currentSection.duration || "15-30 minutes selon votre niveau"}</p>
                 </ContentItem>
               </LessonSection>
@@ -162,10 +164,10 @@ export const FreeProjectSection = ({ project, courseData }) => (
     )}
 
     <TechStackComponent
-      title="🛠️ Technologies utilisées"
+      title={"\u{1F6E0}\uFE0F Technologies utilisees"}
       items={project.technologies}
     />
-    
+
     {courseData && (
       <>
         <div style={{
@@ -207,7 +209,7 @@ export const FreeProjectSection = ({ project, courseData }) => (
               target.style.boxShadow = 'none';
             }}
           >
-            📦 Télécharger les assets
+            {"\u{1F4E6}"} Telecharger les assets
           </a>
 
           {project.youtubeChannel && (
@@ -258,10 +260,10 @@ export const PremiumProjectSection = ({ project, onPremiumClick }) => (
     <ProjectDescription>
       <p>{project.description}</p>
     </ProjectDescription>
-    
+
     <LockedContentWrapper>
       <LockedProjectOverlay onPremiumClick={onPremiumClick} />
-      
+
       <BlurredContent>
         {project.isSmallImage ? (
           <ProjectImageSmall>
@@ -273,22 +275,22 @@ export const PremiumProjectSection = ({ project, onPremiumClick }) => (
           </ProjectImage>
         )}
 
-        <TechStackComponent 
-          title="🛠️ Technologies utilisées" 
-          items={project.technologies} 
+        <TechStackComponent
+          title={"\u{1F6E0}\uFE0F Technologies utilisees"}
+          items={project.technologies}
         />
 
         {project.features && (
-          <TechStackComponent 
-            title="✨ Fonctionnalités principales" 
-            items={project.features} 
+          <TechStackComponent
+            title={"\u2728 Fonctionnalites principales"}
+            items={project.features}
           />
         )}
 
         {project.securityFeatures && (
-          <TechStackComponent 
-            title="🔒 Sécurité & Conformité" 
-            items={project.securityFeatures} 
+          <TechStackComponent
+            title={"\u{1F512} Securite & Conformite"}
+            items={project.securityFeatures}
           />
         )}
       </BlurredContent>
@@ -353,4 +355,4 @@ ProjectSectionComponent.propTypes = {
       code: PropTypes.string.isRequired
     })).isRequired
   })
-}; 
+};

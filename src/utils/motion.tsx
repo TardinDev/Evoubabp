@@ -191,7 +191,8 @@ export const headerVariants = {
   };
   
   export const getMenuStyles = (menuOpened: boolean) => {
+    if (typeof document === 'undefined') return;
     if (document.documentElement.clientWidth <= 640) {
-      return { right: !menuOpened && "-100%" };
+      return { right: !menuOpened ? "-100%" : undefined };
     }
   };

@@ -1,240 +1,96 @@
-import styled from 'styled-components';
+'use client'
+
 import { motion } from 'framer-motion';
 import { fadeIn } from '../../utils/motion';
 
 export default function ApplicationsSection() {
   return (
-    <SectionContainer id="applications">
+    <section
+      id="applications"
+      className="py-20 px-8 rounded-2xl my-8 w-full max-w-[100vw] overflow-x-hidden md:py-12 md:px-4 max-[480px]:py-8 max-[480px]:px-3 max-[480px]:rounded-lg max-[480px]:my-4"
+      style={{
+        background: 'linear-gradient(135deg, #f5f7fa, #e4ecf5)',
+        boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)',
+      }}
+    >
       <motion.div
         initial="hidden"
         whileInView="show"
         variants={fadeIn('up', 'spring', 0.2, 1)}
         viewport={{ once: true, amount: 0.2 }}
-        className="content"
+        className="max-w-[1200px] mx-auto text-center"
       >
-        <Title>Applications</Title>
-        <Subtitle>Applications mobiles et web que j&rsquo;ai développées</Subtitle>
+        <h2 className="text-4xl md:text-3xl max-[480px]:text-[1.6rem] font-bold text-[#3a3b3c] mb-4 max-[480px]:mb-3">Applications</h2>
+        <p className="text-[1.2rem] md:text-[1.05rem] max-[480px]:text-[0.95rem] text-[#6c757d] mb-12 md:mb-8 max-[480px]:mb-6 max-[480px]:px-2">
+          Applications mobiles et web que j&rsquo;ai développées
+        </p>
 
         {/* Section Mobile Apps */}
-        <GridContainer>
-          <Card>
-            <ImageContainer>
+        <div className="grid gap-8 md:grid-cols-1 md:gap-6 max-[480px]:gap-4 mb-12 md:mb-8 max-[480px]:mb-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+          <div className="bg-white rounded-2xl p-6 md:p-5 max-[480px]:p-4 max-[480px]:rounded-lg transition-all duration-300 hover:-translate-y-[5px] hover:shadow-lg" style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
+            <div className="mb-4 max-[480px]:mb-3 flex justify-center items-center">
               <img
                 src="/imagesAppsMobile/zopgomobile.png"
                 alt="Zopgo Mobile App"
+                className="w-[60%] max-w-[200px] md:w-[50%] md:max-w-[150px] max-[480px]:w-[45%] max-[480px]:max-w-[120px] max-[480px]:rounded-[0.35rem] h-auto rounded-lg object-contain transition-transform duration-300 hover:scale-105"
+                style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
               />
-            </ImageContainer>
-            <CardTitle>E-commerce Mobile</CardTitle>
-            <CardText>Une application e-commerce complète avec gestion d&rsquo;inventaire en temps réel et traitement sécurisé des paiements.</CardText>
-          </Card>
+            </div>
+            <h3 className="text-2xl md:text-[1.3rem] max-[480px]:text-[1.1rem] font-semibold text-[#2d3748] mb-2 max-[480px]:mb-[0.4rem]">E-commerce Mobile</h3>
+            <p className="text-[#4a5568] text-base md:text-[0.95rem] max-[480px]:text-sm leading-6 md:leading-[1.4] max-[480px]:leading-[1.4]">
+              Une application e-commerce complète avec gestion d&rsquo;inventaire en temps réel et traitement sécurisé des paiements.
+            </p>
+          </div>
 
-          <Card>
-            <ImageContainer>
+          <div className="bg-white rounded-2xl p-6 md:p-5 max-[480px]:p-4 max-[480px]:rounded-lg transition-all duration-300 hover:-translate-y-[5px] hover:shadow-lg" style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
+            <div className="mb-4 max-[480px]:mb-3 flex justify-center items-center">
               <img
                 src="/imagesAppsMobile/instanjobmobile.png"
                 alt="InstanJob Mobile App"
+                className="w-[60%] max-w-[200px] md:w-[50%] md:max-w-[150px] max-[480px]:w-[45%] max-[480px]:max-w-[120px] max-[480px]:rounded-[0.35rem] h-auto rounded-lg object-contain transition-transform duration-300 hover:scale-105"
+                style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
               />
-            </ImageContainer>
-            <CardTitle>Finance Mobile</CardTitle>
-            <CardText>Application de gestion financière personnelle avec suivi des dépenses, outils de budgétisation et surveillance de portefeuille.</CardText>
-          </Card>
-        </GridContainer>
+            </div>
+            <h3 className="text-2xl md:text-[1.3rem] max-[480px]:text-[1.1rem] font-semibold text-[#2d3748] mb-2 max-[480px]:mb-[0.4rem]">Finance Mobile</h3>
+            <p className="text-[#4a5568] text-base md:text-[0.95rem] max-[480px]:text-sm leading-6 md:leading-[1.4] max-[480px]:leading-[1.4]">
+              Application de gestion financière personnelle avec suivi des dépenses, outils de budgétisation et surveillance de portefeuille.
+            </p>
+          </div>
+        </div>
 
         {/* Section Web Apps */}
-        <GridContainer>
-          <Card>
-            <ImageContainer>
+        <div className="grid gap-8 md:grid-cols-1 md:gap-6 max-[480px]:gap-4 mb-12 md:mb-8 max-[480px]:mb-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+          <div className="bg-white rounded-2xl p-6 md:p-5 max-[480px]:p-4 max-[480px]:rounded-lg transition-all duration-300 hover:-translate-y-[5px] hover:shadow-lg" style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
+            <div className="mb-4 max-[480px]:mb-3 flex justify-center items-center">
               <img
                 src="/imagesAppsMobile/zopgoscreen.png"
                 alt="Zopgo Web App"
+                className="w-[60%] max-w-[200px] md:w-[50%] md:max-w-[150px] max-[480px]:w-[45%] max-[480px]:max-w-[120px] max-[480px]:rounded-[0.35rem] h-auto rounded-lg object-contain transition-transform duration-300 hover:scale-105"
+                style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
               />
-            </ImageContainer>
-            <CardTitle>Système de Gestion</CardTitle>
-            <CardText>Plateforme de gestion complète pour les entreprises avec suivi de projet, collaboration d&rsquo;équipe et allocation des ressources.</CardText>
-          </Card>
+            </div>
+            <h3 className="text-2xl md:text-[1.3rem] max-[480px]:text-[1.1rem] font-semibold text-[#2d3748] mb-2 max-[480px]:mb-[0.4rem]">Système de Gestion</h3>
+            <p className="text-[#4a5568] text-base md:text-[0.95rem] max-[480px]:text-sm leading-6 md:leading-[1.4] max-[480px]:leading-[1.4]">
+              Plateforme de gestion complète pour les entreprises avec suivi de projet, collaboration d&rsquo;équipe et allocation des ressources.
+            </p>
+          </div>
 
-          <Card>
-            <ImageContainer>
+          <div className="bg-white rounded-2xl p-6 md:p-5 max-[480px]:p-4 max-[480px]:rounded-lg transition-all duration-300 hover:-translate-y-[5px] hover:shadow-lg" style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
+            <div className="mb-4 max-[480px]:mb-3 flex justify-center items-center">
               <img
                 src="https://via.placeholder.com/400x250?text=Web+App+2"
                 alt="Web App 2"
+                className="w-[60%] max-w-[200px] md:w-[50%] md:max-w-[150px] max-[480px]:w-[45%] max-[480px]:max-w-[120px] max-[480px]:rounded-[0.35rem] h-auto rounded-lg object-contain transition-transform duration-300 hover:scale-105"
+                style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
               />
-            </ImageContainer>
-            <CardTitle>Visualisation de Données</CardTitle>
-            <CardText>Tableau de bord interactif de visualisation de données pour analyser et présenter des ensembles de données complexes avec mises à jour en temps réel.</CardText>
-          </Card>
-        </GridContainer>
+            </div>
+            <h3 className="text-2xl md:text-[1.3rem] max-[480px]:text-[1.1rem] font-semibold text-[#2d3748] mb-2 max-[480px]:mb-[0.4rem]">Visualisation de Données</h3>
+            <p className="text-[#4a5568] text-base md:text-[0.95rem] max-[480px]:text-sm leading-6 md:leading-[1.4] max-[480px]:leading-[1.4]">
+              Tableau de bord interactif de visualisation de données pour analyser et présenter des ensembles de données complexes avec mises à jour en temps réel.
+            </p>
+          </div>
+        </div>
       </motion.div>
-    </SectionContainer>
+    </section>
   );
 }
-
-const SectionContainer = styled.section`
-  padding: 5rem 2rem;
-  background: linear-gradient(135deg, #f5f7fa, #e4ecf5);
-  border-radius: 16px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-  margin: 2rem 0;
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
-
-  .content {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  @media (max-width: 768px) {
-    padding: 3rem 1rem;
-    margin: 1rem 0;
-  }
-
-  @media (max-width: 480px) {
-    padding: 2rem 0.75rem;
-    border-radius: 8px;
-  }
-`;
-
-const Title = styled.h2`
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #3a3b3c;
-  margin-bottom: 1rem;
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.6rem;
-    margin-bottom: 0.75rem;
-  }
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.2rem;
-  color: #6c757d;
-  margin-bottom: 3rem;
-
-  @media (max-width: 768px) {
-    font-size: 1.05rem;
-    margin-bottom: 2rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-    padding: 0 0.5rem;
-  }
-`;
-
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  @media (max-width: 480px) {
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const Card = styled.div`
-  background: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  @media (max-width: 768px) {
-    padding: 1.25rem;
-    border-radius: 0.75rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 1rem;
-    border-radius: 0.5rem;
-  }
-`;
-
-const ImageContainer = styled.div`
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  img {
-    width: 60%;
-    max-width: 200px;
-    height: auto;
-    border-radius: 0.5rem;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    @media (max-width: 768px) {
-      width: 50%;
-      max-width: 150px;
-    }
-
-    @media (max-width: 480px) {
-      width: 45%;
-      max-width: 120px;
-      border-radius: 0.35rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    margin-bottom: 0.75rem;
-  }
-`;
-
-const CardTitle = styled.h3`
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 768px) {
-    font-size: 1.3rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.1rem;
-    margin-bottom: 0.4rem;
-  }
-`;
-
-const CardText = styled.p`
-  color: #4a5568;
-  font-size: 1rem;
-  line-height: 1.5;
-
-  @media (max-width: 768px) {
-    font-size: 0.95rem;
-    line-height: 1.4;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.875rem;
-    line-height: 1.4;
-  }
-`; 

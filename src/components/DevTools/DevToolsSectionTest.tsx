@@ -1,4 +1,5 @@
-import styled from "styled-components";
+'use client'
+
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBug, FaCheckCircle, FaRocket, FaShieldAlt, FaCode, FaUserCheck } from "react-icons/fa";
 import { useState } from "react";
@@ -58,493 +59,235 @@ const DevToolsSectionTest = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <Section>
-      <Container>
-        <Header>
-          <IconWrapper>
-            <FaShieldAlt size={50} />
-          </IconWrapper>
-          <Title>Développement Rigoureux & Qualité Maximale</Title>
-          <Subtitle>
-            Chaque ligne de code est pensée, testée et optimisée pour vous offrir
-            des applications robustes, sécurisées et performantes
-          </Subtitle>
-        </Header>
+    <>
+      <style>{`
+        @keyframes devtest-float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+        }
+      `}</style>
+      <section className="relative overflow-hidden py-24 px-8 max-md:py-16 max-md:px-4 bg-white">
+        {/* ::before pseudo-element */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 50%)'
+          }}
+        />
 
-        <ContentWrapper>
-          {/* Circular Process Selector */}
-          <CircularProcess>
-            <CenterHub>
-              <AnimatePresence mode="wait">
-                <CenterContent
-                  key={activeStep}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ActiveIcon color={devProcessSteps[activeStep].color}>
-                    {(() => {
-                      const Icon = devProcessSteps[activeStep].icon;
-                      return <Icon size={48} />;
-                    })()}
-                  </ActiveIcon>
-                  <ActiveTitle>{devProcessSteps[activeStep].title}</ActiveTitle>
-                </CenterContent>
-              </AnimatePresence>
-            </CenterHub>
-
-            {devProcessSteps.map((step, index) => {
-              const angle = (index * 360) / devProcessSteps.length - 90;
-              const radius = 180;
-              const x = Math.cos((angle * Math.PI) / 180) * radius;
-              const y = Math.sin((angle * Math.PI) / 180) * radius;
-
-              return (
-                <ProcessNode
-                  key={index}
-                  style={{ transform: `translate(${x}px, ${y}px)` }}
-                  active={activeStep === index}
-                  color={step.color}
-                  onClick={() => setActiveStep(index)}
-                  whileHover={{ scale: 1.15 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <step.icon size={24} />
-                  <NodeConnector active={activeStep === index} color={step.color} />
-                </ProcessNode>
-              );
-            })}
-          </CircularProcess>
-
-          {/* Details Panel */}
-          <AnimatePresence mode="wait">
-            <DetailsPanel
-              key={activeStep}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.4 }}
+        <div className="max-w-[1400px] mx-auto relative z-[1]">
+          {/* Header */}
+          <div className="text-center mb-20">
+            <div
+              className="inline-flex items-center justify-center w-[100px] h-[100px] rounded-full text-white mb-8 shadow-[0_20px_40px_rgba(16,185,129,0.25)]"
+              style={{
+                background: 'linear-gradient(135deg, #10b981, #059669)',
+                animation: 'devtest-float 3s ease-in-out infinite',
+              }}
             >
-              <DetailHeader gradient={devProcessSteps[activeStep].gradient}>
-                <DetailTitle>{devProcessSteps[activeStep].title}</DetailTitle>
-              </DetailHeader>
+              <FaShieldAlt size={50} />
+            </div>
+            <h2 className="text-5xl max-md:text-[2rem] font-black text-[#1a202c] mb-6 leading-tight">
+              Développement Rigoureux & Qualité Maximale
+            </h2>
+            <p className="text-[1.25rem] max-md:text-[1.1rem] text-slate-500 max-w-[700px] mx-auto leading-[1.7]">
+              Chaque ligne de code est pensée, testée et optimisée pour vous offrir
+              des applications robustes, sécurisées et performantes
+            </p>
+          </div>
 
-              <DetailContent>
-                <DetailDescription>
-                  {devProcessSteps[activeStep].description}
-                </DetailDescription>
+          {/* Content Wrapper */}
+          <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-16 max-lg:gap-12 items-center mb-20">
+            {/* Circular Process */}
+            <div className="relative w-[450px] h-[450px] max-md:w-[350px] max-md:h-[350px] mx-auto">
+              {/* Center Hub */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-[180px] max-md:w-[140px] max-md:h-[140px] rounded-full border-[3px] border-slate-200 shadow-[0_20px_60px_rgba(0,0,0,0.1)] flex items-center justify-center z-10" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)' }}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeStep}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex flex-col items-center gap-2 p-4"
+                  >
+                    <div className="flex items-center justify-center" style={{ color: devProcessSteps[activeStep].color }}>
+                      {(() => {
+                        const Icon = devProcessSteps[activeStep].icon;
+                        return <Icon size={48} />;
+                      })()}
+                    </div>
+                    <h4 className="text-[0.9rem] max-md:text-[0.75rem] font-bold text-[#1a202c] text-center">
+                      {devProcessSteps[activeStep].title}
+                    </h4>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
 
-                <MetricsList>
-                  {devProcessSteps[activeStep].metrics.map((metric, idx) => (
-                    <MetricItem
-                      key={idx}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                    >
-                      <MetricIcon color={devProcessSteps[activeStep].color}>
-                        <FaCheckCircle size={16} />
-                      </MetricIcon>
-                      <MetricText>{metric}</MetricText>
-                    </MetricItem>
-                  ))}
-                </MetricsList>
+              {/* Process Nodes */}
+              {devProcessSteps.map((step, index) => {
+                const angle = (index * 360) / devProcessSteps.length - 90;
+                const radius = 180;
+                const x = Math.cos((angle * Math.PI) / 180) * radius;
+                const y = Math.sin((angle * Math.PI) / 180) * radius;
 
-                <ProgressIndicator>
-                  {devProcessSteps.map((_, idx) => (
-                    <ProgressDot
-                      key={idx}
-                      active={idx === activeStep}
-                      color={devProcessSteps[idx].color}
-                      onClick={() => setActiveStep(idx)}
+                return (
+                  <motion.div
+                    key={index}
+                    className="absolute top-1/2 left-1/2 w-[70px] h-[70px] max-md:w-[55px] max-md:h-[55px] rounded-full flex items-center justify-center cursor-pointer z-[5] transition-all duration-300"
+                    style={{
+                      transform: `translate(${x}px, ${y}px)`,
+                      background: activeStep === index ? step.color : '#ffffff',
+                      color: activeStep === index ? '#ffffff' : step.color,
+                      border: `3px solid ${step.color}`,
+                      boxShadow: activeStep === index
+                        ? `0 8px 30px ${step.color}50`
+                        : '0 4px 15px rgba(0, 0, 0, 0.1)',
+                    }}
+                    onClick={() => setActiveStep(index)}
+                    whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <step.icon size={24} />
+                    {/* Node Connector */}
+                    <div
+                      className="absolute top-1/2 right-full w-[100px] max-md:w-[75px] h-0.5 transition-all duration-300"
+                      style={{
+                        background: activeStep === index
+                          ? `linear-gradient(to right, ${step.color}, transparent)`
+                          : 'rgba(226, 232, 240, 0.5)',
+                        transformOrigin: 'right center',
+                      }}
                     />
-                  ))}
-                </ProgressIndicator>
-              </DetailContent>
-            </DetailsPanel>
-          </AnimatePresence>
-        </ContentWrapper>
+                  </motion.div>
+                );
+              })}
+            </div>
 
-        <StatsContainer>
-          <StatItem>
-            <StatNumber>100%</StatNumber>
-            <StatLabel>Code Coverage</StatLabel>
-          </StatItem>
-          <StatDivider />
-          <StatItem>
-            <StatNumber>99.9%</StatNumber>
-            <StatLabel>Disponibilité</StatLabel>
-          </StatItem>
-          <StatDivider />
-          <StatItem>
-            <StatNumber>&lt; 2s</StatNumber>
-            <StatLabel>Temps de chargement</StatLabel>
-          </StatItem>
-          <StatDivider />
-          <StatItem>
-            <StatNumber>A+</StatNumber>
-            <StatLabel>Score de sécurité</StatLabel>
-          </StatItem>
-        </StatsContainer>
-      </Container>
-    </Section>
+            {/* Details Panel */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeStep}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.4 }}
+                className="rounded-3xl border-2 border-slate-200 overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
+                style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)' }}
+              >
+                <div className="p-8 text-white" style={{ background: devProcessSteps[activeStep].gradient }}>
+                  <h3 className="text-[2rem] max-md:text-2xl font-extrabold m-0">
+                    {devProcessSteps[activeStep].title}
+                  </h3>
+                </div>
+
+                <div className="p-10">
+                  <p className="text-[1.1rem] text-slate-600 leading-[1.8] mb-8">
+                    {devProcessSteps[activeStep].description}
+                  </p>
+
+                  <div className="flex flex-col gap-4 mb-8">
+                    {devProcessSteps[activeStep].metrics.map((metric, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                        className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200 transition-all duration-300 hover:bg-slate-100 hover:translate-x-2"
+                      >
+                        <div className="flex items-center justify-center shrink-0" style={{ color: devProcessSteps[activeStep].color }}>
+                          <FaCheckCircle size={16} />
+                        </div>
+                        <span className="text-[0.95rem] text-slate-700 font-semibold">{metric}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <div className="flex justify-center gap-3 mt-8 pt-8 border-t-2 border-slate-200">
+                    {devProcessSteps.map((_, idx) => (
+                      <div
+                        key={idx}
+                        className="w-3 h-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-[1.3]"
+                        style={{
+                          background: idx === activeStep ? devProcessSteps[idx].color : '#cbd5e1',
+                          boxShadow: idx === activeStep ? `0 0 12px ${devProcessSteps[idx].color}80` : 'none',
+                        }}
+                        onClick={() => setActiveStep(idx)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Stats Container */}
+          <div className="flex max-md:flex-col justify-around items-center border-2 border-slate-200 rounded-3xl py-12 px-8 max-md:gap-8 max-md:py-8 max-md:px-4 mt-16 shadow-[0_10px_30px_rgba(0,0,0,0.05)]" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)' }}>
+            <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
+              <div
+                className="text-5xl max-md:text-[2.5rem] font-black mb-2 bg-clip-text"
+                style={{
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
+              >
+                100%
+              </div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">Code Coverage</div>
+            </div>
+            <div className="w-0.5 h-20 max-md:hidden" style={{ background: 'linear-gradient(to bottom, transparent, #cbd5e1, transparent)' }} />
+            <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
+              <div
+                className="text-5xl max-md:text-[2.5rem] font-black mb-2 bg-clip-text"
+                style={{
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
+              >
+                99.9%
+              </div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">Disponibilité</div>
+            </div>
+            <div className="w-0.5 h-20 max-md:hidden" style={{ background: 'linear-gradient(to bottom, transparent, #cbd5e1, transparent)' }} />
+            <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
+              <div
+                className="text-5xl max-md:text-[2.5rem] font-black mb-2 bg-clip-text"
+                style={{
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
+              >
+                &lt; 2s
+              </div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">Temps de chargement</div>
+            </div>
+            <div className="w-0.5 h-20 max-md:hidden" style={{ background: 'linear-gradient(to bottom, transparent, #cbd5e1, transparent)' }} />
+            <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
+              <div
+                className="text-5xl max-md:text-[2.5rem] font-black mb-2 bg-clip-text"
+                style={{
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
+              >
+                A+
+              </div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">Score de sécurité</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
 export default DevToolsSectionTest;
-
-const Section = styled.section`
-  padding: 6rem 2rem;
-  background: #ffffff;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-      radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 50%);
-    pointer-events: none;
-  }
-
-  @media (max-width: 768px) {
-    padding: 4rem 1rem;
-  }
-`;
-
-const Container = styled.div`
-  max-width: 1400px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-`;
-
-const Header = styled.div`
-  text-align: center;
-  margin-bottom: 5rem;
-`;
-
-const IconWrapper = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-  margin-bottom: 2rem;
-  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.25);
-  animation: float 3s ease-in-out infinite;
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-  }
-`;
-
-const Title = styled.h2`
-  font-size: 3rem;
-  font-weight: 900;
-  color: #1a202c;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.25rem;
-  color: #64748b;
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.7;
-
-  @media (max-width: 768px) {
-    font-size: 1.1rem;
-  }
-`;
-
-const ContentWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-  margin-bottom: 5rem;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-`;
-
-const CircularProcess = styled.div`
-  position: relative;
-  width: 450px;
-  height: 450px;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    width: 350px;
-    height: 350px;
-  }
-`;
-
-const CenterHub = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 180px;
-  height: 180px;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border-radius: 50%;
-  border: 3px solid #e2e8f0;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-
-  @media (max-width: 768px) {
-    width: 140px;
-    height: 140px;
-  }
-`;
-
-const CenterContent = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
-`;
-
-const ActiveIcon = styled.div<{ color: string }>`
-  color: ${props => props.color};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ActiveTitle = styled.h4`
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #1a202c;
-  text-align: center;
-
-  @media (max-width: 768px) {
-    font-size: 0.75rem;
-  }
-`;
-
-const ProcessNode = styled(motion.div)<{ active: boolean; color: string }>`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: ${props => props.active ? props.color : '#ffffff'};
-  color: ${props => props.active ? '#ffffff' : props.color};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: 3px solid ${props => props.color};
-  box-shadow: ${props => props.active
-    ? `0 8px 30px ${props.color}50`
-    : '0 4px 15px rgba(0, 0, 0, 0.1)'};
-  transition: all 0.3s ease;
-  z-index: 5;
-
-  &:hover {
-    box-shadow: 0 12px 40px ${props => `${props.color}60`};
-  }
-
-  @media (max-width: 768px) {
-    width: 55px;
-    height: 55px;
-  }
-`;
-
-const NodeConnector = styled.div<{ active: boolean; color: string }>`
-  position: absolute;
-  width: 100px;
-  height: 2px;
-  background: ${props => props.active
-    ? `linear-gradient(to right, ${props.color}, transparent)`
-    : 'rgba(226, 232, 240, 0.5)'};
-  top: 50%;
-  right: 100%;
-  transform-origin: right center;
-  transition: all 0.3s ease;
-
-  @media (max-width: 768px) {
-    width: 75px;
-  }
-`;
-
-const DetailsPanel = styled(motion.div)`
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border-radius: 24px;
-  border: 2px solid #e2e8f0;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-`;
-
-const DetailHeader = styled.div<{ gradient: string }>`
-  background: ${props => props.gradient};
-  padding: 2rem;
-  color: white;
-`;
-
-const DetailTitle = styled.h3`
-  font-size: 2rem;
-  font-weight: 800;
-  margin: 0;
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
-`;
-
-const DetailContent = styled.div`
-  padding: 2.5rem;
-`;
-
-const DetailDescription = styled.p`
-  font-size: 1.1rem;
-  color: #475569;
-  line-height: 1.8;
-  margin-bottom: 2rem;
-`;
-
-const MetricsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-`;
-
-const MetricItem = styled(motion.div)`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: #f8fafc;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: #f1f5f9;
-    transform: translateX(8px);
-  }
-`;
-
-const MetricIcon = styled.div<{ color: string }>`
-  color: ${props => props.color};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-`;
-
-const MetricText = styled.span`
-  font-size: 0.95rem;
-  color: #334155;
-  font-weight: 600;
-`;
-
-const ProgressIndicator = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 2px solid #e2e8f0;
-`;
-
-const ProgressDot = styled.div<{ active: boolean; color: string }>`
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: ${props => props.active ? props.color : '#cbd5e1'};
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: ${props => props.active ? `0 0 12px ${props.color}80` : 'none'};
-
-  &:hover {
-    transform: scale(1.3);
-  }
-`;
-
-const StatsContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border: 2px solid #e2e8f0;
-  border-radius: 24px;
-  padding: 3rem 2rem;
-  margin-top: 4rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 2rem;
-    padding: 2rem 1rem;
-  }
-`;
-
-const StatItem = styled.div`
-  text-align: center;
-  padding: 1rem;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-`;
-
-const StatNumber = styled.div`
-  font-size: 3rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 768px) {
-    font-size: 2.5rem;
-  }
-`;
-
-const StatLabel = styled.div`
-  color: #64748b;
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-`;
-
-const StatDivider = styled.div`
-  width: 2px;
-  height: 80px;
-  background: linear-gradient(to bottom, transparent, #cbd5e1, transparent);
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;

@@ -1,32 +1,33 @@
-import styled from "styled-components";
+'use client'
+
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { fadeIn } from "../../utils/motion";
 
 const stats = [
-  { number: 56, label: "Étudiants formés", suffix: "+", icon: "👥" },
-  { number: 96, label: "Taux de satisfaction", suffix: "%", icon: "⭐" },
-  { number: 4, label: "Formations disponibles", suffix: "", icon: "📚" },
-  { number: 850, label: "Heures de contenu", suffix: "h", icon: "⏱️" }
+  { number: 56, label: "Etudiants formes", suffix: "+", icon: "\u{1F465}" },
+  { number: 96, label: "Taux de satisfaction", suffix: "%", icon: "\u2B50" },
+  { number: 4, label: "Formations disponibles", suffix: "", icon: "\u{1F4DA}" },
+  { number: 850, label: "Heures de contenu", suffix: "h", icon: "\u23F1\uFE0F" }
 ];
 
 function Counter({ end, duration = 2000, suffix = "" }) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    let startTime = null;
+    let startTime: number | null = null;
     const animate = (currentTime) => {
       if (startTime === null) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      
+      const progress = Math.min((currentTime - startTime!) / duration, 1);
+
       setCount(Math.floor(progress * end));
-      
+
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
     };
-    
+
     requestAnimationFrame(animate);
   }, [end, duration]);
 
@@ -47,228 +48,79 @@ export default function StatsSection() {
       whileInView="show"
       viewport={{ once: true, amount: 0.25 }}
     >
-      <StatsContainer id="stats-section">
-        <SectionTitle>
-          🌟 <GradientText>Nos Résultats</GradientText> Parlent d&rsquo;Eux-Mêmes
-        </SectionTitle>
-        
-        <StatsGrid>
+      <section
+        id="stats-section"
+        className="py-20 px-8 relative overflow-hidden"
+        style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}
+      >
+        {/* Background pattern overlay */}
+        <div
+          className="absolute inset-0 z-[1]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239CA3AF' fill-opacity='0.05'%3E%3Cpath d='M0 0h20v20H0z'/%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundRepeat: 'repeat'
+          }}
+        />
+
+        <h2 className="relative z-[2] text-center text-5xl md:text-3xl font-black mb-16 text-[#2d3748]">
+          {"\u{1F31F}"} <span
+            className="bg-clip-text text-transparent"
+            style={{ backgroundImage: 'linear-gradient(45deg, #667eea, #764ba2)' }}
+          >Nos Resultats</span> Parlent d&rsquo;Eux-Memes
+        </h2>
+
+        <div className="relative z-[2] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1200px] mx-auto mb-16">
           {stats.map((stat, index) => (
-            <StatCard
+            <motion.div
               key={index}
-              as={motion.div}
-              whileHover={{ 
+              whileHover={{
                 y: -8,
-                scale: 1.05 
+                scale: 1.05
               }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
-                damping: 20 
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 20
               }}
+              className="relative bg-white rounded-[20px] py-10 px-6 text-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-white/30 backdrop-blur-[20px] cursor-pointer overflow-hidden group"
             >
-              <StatIcon>{stat.icon}</StatIcon>
-              <StatNumber>
+              <div className="relative z-[2] text-5xl mb-4 drop-shadow-[0_4px_8px_rgba(0,0,0,0.1)]">
+                {stat.icon}
+              </div>
+              <div className="relative z-[2] text-[3.5rem] font-black text-[#667eea] mb-2 font-mono">
                 <Counter end={stat.number} suffix={stat.suffix} />
-              </StatNumber>
-              <StatLabel>{stat.label}</StatLabel>
-              <StatGlow />
-            </StatCard>
+              </div>
+              <div className="relative z-[2] text-lg text-[#718096] font-semibold">
+                {stat.label}
+              </div>
+              {/* Glow effect on hover */}
+              <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle,rgba(102,126,234,0.1),transparent_70%)] opacity-0 transition-opacity duration-300 ease-in-out z-[1] group-hover:opacity-100" />
+            </motion.div>
           ))}
-        </StatsGrid>
-        
-        <TestimonialSection>
-          <TestimonialQuote>
-            &ldquo;Grâce à Evoubabp Academy, j&rsquo;ai pu transformer ma passion en carrière. 
-            Les formations sont exceptionnelles et le suivi personnalisé fait toute la différence !&rdquo;
-          </TestimonialQuote>
-          <TestimonialAuthor>
-            <AuthorAvatar>👨‍💻</AuthorAvatar>
-            <AuthorInfo>
-              <AuthorName>Alexandre Martin</AuthorName>
-              <AuthorTitle>Développeur Full-Stack chez TechCorp</AuthorTitle>
-            </AuthorInfo>
-          </TestimonialAuthor>
-        </TestimonialSection>
-      </StatsContainer>
+        </div>
+
+        <div className="relative z-[2] max-w-[800px] mx-auto bg-white rounded-[20px] p-12 shadow-[0_20px_60px_rgba(0,0,0,0.1)] border border-white/30 backdrop-blur-[20px]">
+          <blockquote className="text-2xl md:text-xl leading-relaxed text-[#4a5568] mb-8 italic text-center relative">
+            <span className="absolute -top-4 -left-4 text-[4rem] text-[#667eea] opacity-30">&ldquo;</span>
+            Grace a Evoubabp Academy, j&rsquo;ai pu transformer ma passion en carriere.
+            Les formations sont exceptionnelles et le suivi personnalise fait toute la difference !
+            <span className="absolute -bottom-12 -right-4 text-[4rem] text-[#667eea] opacity-30">&rdquo;</span>
+          </blockquote>
+          <div className="flex items-center justify-center gap-4">
+            <div className="text-5xl drop-shadow-[0_4px_8px_rgba(0,0,0,0.1)]">
+              {"\u{1F468}\u200D\u{1F4BB}"}
+            </div>
+            <div className="text-left">
+              <div className="text-xl font-bold text-[#2d3748] mb-1">
+                Alexandre Martin
+              </div>
+              <div className="text-base text-[#718096] font-medium">
+                Developpeur Full-Stack chez TechCorp
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </motion.div>
   );
 }
-
-const StatsContainer = styled.section`
-  padding: 5rem 2rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239CA3AF' fill-opacity='0.05'%3E%3Cpath d='M0 0h20v20H0z'/%3E%3C/g%3E%3C/svg%3E") repeat;
-    z-index: 1;
-  }
-`;
-
-const SectionTitle = styled.h2`
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 900;
-  margin-bottom: 4rem;
-  color: #2d3748;
-  
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-`;
-
-const GradientText = styled.span`
-  background: linear-gradient(45deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
-
-const StatsGrid = styled.div`
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto 4rem;
-`;
-
-const StatCard = styled.div`
-  position: relative;
-  background: white;
-  border-radius: 20px;
-  padding: 2.5rem 1.5rem;
-  text-align: center;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(20px);
-  cursor: pointer;
-  overflow: hidden;
-`;
-
-const StatGlow = styled.div`
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(102, 126, 234, 0.1), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-  
-  ${StatCard}:hover & {
-    opacity: 1;
-  }
-`;
-
-const StatIcon = styled.div`
-  position: relative;
-  z-index: 2;
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-`;
-
-const StatNumber = styled.div`
-  position: relative;
-  z-index: 2;
-  font-size: 3.5rem;
-  font-weight: 900;
-  color: #667eea;
-  margin-bottom: 0.5rem;
-  font-family: 'Courier New', monospace;
-`;
-
-const StatLabel = styled.div`
-  position: relative;
-  z-index: 2;
-  font-size: 1.1rem;
-  color: #718096;
-  font-weight: 600;
-`;
-
-const TestimonialSection = styled.div`
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 20px;
-  padding: 3rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(20px);
-`;
-
-const TestimonialQuote = styled.blockquote`
-  font-size: 1.5rem;
-  line-height: 1.6;
-  color: #4a5568;
-  margin-bottom: 2rem;
-  font-style: italic;
-  text-align: center;
-  position: relative;
-  
-  &::before, &::after {
-    content: '"';
-    font-size: 4rem;
-    color: #667eea;
-    position: absolute;
-    opacity: 0.3;
-  }
-  
-  &::before {
-    top: -1rem;
-    left: -1rem;
-  }
-  
-  &::after {
-    bottom: -3rem;
-    right: -1rem;
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-  }
-`;
-
-const TestimonialAuthor = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-`;
-
-const AuthorAvatar = styled.div`
-  font-size: 3rem;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-`;
-
-const AuthorInfo = styled.div`
-  text-align: left;
-`;
-
-const AuthorName = styled.div`
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #2d3748;
-  margin-bottom: 0.25rem;
-`;
-
-const AuthorTitle = styled.div`
-  font-size: 1rem;
-  color: #718096;
-  font-weight: 500;
-`; 
