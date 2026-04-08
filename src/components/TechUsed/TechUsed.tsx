@@ -155,14 +155,14 @@ const TechUsed = () => {
         });
       });
 
-      // Pinned timeline
+      // Pinned timeline — slow‑motion scroll
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: () => `+=${groups.length * window.innerHeight}`,
+          end: () => `+=${groups.length * window.innerHeight * 1.6}`,
           pin: true,
-          scrub: 0.8,
+          scrub: 2,
           anticipatePin: 1,
         },
       });
@@ -189,7 +189,7 @@ const TechUsed = () => {
             x: i % 2 === 0 ? -120 : 160,
             y: i % 2 === 0 ? -80 : 100,
             scale: 0.85 + (i % 3) * 0.15,
-            duration: 1,
+            duration: 1.8,
             ease: "sine.inOut",
           }
         );
@@ -200,7 +200,7 @@ const TechUsed = () => {
             x: i % 2 === 0 ? 220 : -140,
             y: i % 2 === 0 ? 120 : -100,
             scale: 0.55 + (i % 2) * 0.35,
-            duration: 1,
+            duration: 1.8,
             ease: "sine.inOut",
           },
           "<"
@@ -230,20 +230,20 @@ const TechUsed = () => {
           );
         }
 
-        // Group slides in with 3D
+        // Group slides in with 3D — slow motion
         tl.to(
           group,
           {
             xPercent: 0,
             opacity: 1,
             rotationY: 0,
-            duration: 1.2,
-            ease: "power3.out",
+            duration: 2.2,
+            ease: "power2.out",
           },
           "<0.1"
         );
 
-        // Items cascade in with spring
+        // Items cascade in with spring — slow motion
         tl.to(
           items,
           {
@@ -251,49 +251,49 @@ const TechUsed = () => {
             scale: 1,
             y: 0,
             rotation: 0,
-            stagger: { each: 0.06, from: "start" },
-            duration: 0.5,
-            ease: "back.out(1.7)",
+            stagger: { each: 0.14, from: "start" },
+            duration: 1.2,
+            ease: "back.out(1.4)",
           },
-          "<0.5"
+          "<0.6"
         );
 
-        // Hold
-        tl.to(group, { duration: 0.6 });
+        // Hold — longer pause
+        tl.to(group, { duration: 1.4 });
 
         // ── EXIT ── (except last)
         if (i < groups.length - 1) {
-          // Items scatter with parallax
+          // Items scatter with parallax — slow motion
           tl.to(items, {
             xPercent: (idx: number) => 50 + (idx % 3) * 30,
             y: (idx: number) => (idx % 2 === 0 ? -60 : 60),
             rotation: (idx: number) => (idx % 2 === 0 ? 15 : -15),
             opacity: 0,
-            stagger: 0.03,
-            duration: 0.7,
-            ease: "power3.in",
+            stagger: 0.08,
+            duration: 1.4,
+            ease: "power2.in",
           });
 
           // Step number fades
           if (stepNum) {
             tl.to(
               stepNum,
-              { opacity: 0, scale: 1.3, duration: 0.4, ease: "power2.in" },
+              { opacity: 0, scale: 1.3, duration: 0.8, ease: "power2.in" },
               "<0.1"
             );
           }
 
-          // Group exits with 3D rotation
+          // Group exits with 3D rotation — slow motion
           tl.to(
             group,
             {
               xPercent: 120,
               rotationY: 15,
               opacity: 0,
-              duration: 0.5,
+              duration: 1,
               ease: "power2.in",
             },
-            "<0.15"
+            "<0.2"
           );
         }
       });

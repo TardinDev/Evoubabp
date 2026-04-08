@@ -28,7 +28,7 @@ export default function UnderHeader() {
   }, []);
 
   return (
-    <div className="bg-bg-primary">
+    <div className="bg-bg-primary mt-4 mb-8">
       {/* Section container */}
       <motion.div
         variants={staggerContainer(0.1, 0.2)}
@@ -36,7 +36,7 @@ export default function UnderHeader() {
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
         className="relative bg-bg-primary z-[1]"
-        style={{ padding: 'clamp(16px, 2vw, 30px) clamp(20px, 4vw, 50px)' }}
+        style={{ padding: 'clamp(8px, 1vw, 16px) clamp(20px, 4vw, 50px)' }}
       >
         {/* upElement */}
         <div
@@ -79,7 +79,7 @@ export default function UnderHeader() {
         {/* Person image */}
         <motion.div
           variants={fadeIn("up", "tween", 0.2, 1)}
-          className="absolute bottom-4 left-1/4 -translate-x-1/2 z-[1] max-sm:relative max-sm:left-0 max-sm:translate-x-0 max-sm:flex max-sm:justify-center max-sm:items-center max-sm:mt-8 group"
+          className="absolute top-12 left-1/4 -translate-x-1/2 z-[1] max-sm:relative max-sm:top-0 max-sm:left-0 max-sm:translate-x-0 max-sm:flex max-sm:justify-center max-sm:items-center max-sm:mt-4 group"
         >
           <img
             src={tardinimage}
@@ -103,7 +103,7 @@ export default function UnderHeader() {
         {/* Down element */}
         <div
           className="flex flex-wrap justify-between text-xl max-sm:mt-8 max-sm:gap-6 max-sm:flex-col"
-          style={{ marginTop: 'clamp(3.5rem, 7vw, 10rem)' }}
+          style={{ marginTop: 'clamp(2rem, 4vw, 5rem)' }}
         >
           <motion.div
             variants={fadeIn("right", "tween", 0.2, 1)}
@@ -130,11 +130,10 @@ export default function UnderHeader() {
 
           <motion.div
             variants={fadeIn("left", "tween", 0.2, 1)}
-            className="flex gap-5 items-center max-sm:flex-col max-sm:items-start max-sm:gap-3"
+            className="flex gap-5 items-center ml-auto max-sm:flex-col max-sm:items-start max-sm:ml-0 max-sm:gap-3"
           >
-            <div className="max-sm:text-sm max-sm:leading-relaxed">
-              Découvrez mes projets intégrant l&apos;IA, l&apos;automatisation intelligente
-              et les dernières innovations technologiques sur Vercel et GitHub !
+            <div className="text-lg leading-snug max-w-[520px] font-bold max-sm:text-sm max-sm:leading-relaxed">
+              Découvrez mes projets intégrant l&apos;IA, l&apos;automatisation intelligente et les dernières innovations technologiques sur Vercel et GitHub !
             </div>
 
             <div className="flex flex-col gap-4 max-sm:flex-row max-sm:gap-6">
