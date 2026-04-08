@@ -197,3 +197,43 @@
 .animate-pulse-opacity {
   animation: pulse-opacity 2s infinite;
 }
+
+/* AppShowcase scrollbar */
+.showcase-cards-container::-webkit-scrollbar {
+  height: 6px;
+}
+.showcase-cards-container::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+.showcase-cards-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+.showcase-cards-container::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* AppCard keyframes */
+@keyframes appcard-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes appcard-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* FullStackNodeSection keyframes */
+@keyframes fsnode-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+@keyframes fsnode-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.5); opacity: 1; }
+}
+@keyframes fsnode-typeIn {
+  from { width: 0; }
+  to { width: 100%; }
+}

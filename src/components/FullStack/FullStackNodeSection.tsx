@@ -59,22 +59,6 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
   };
 
   return (
-    <>
-      <style>{`
-        @keyframes fsnode-blink {
-          0%, 50% { opacity: 1; }
-          51%, 100% { opacity: 0; }
-        }
-        @keyframes fsnode-pulse {
-          0%, 100% { transform: scale(1); opacity: 0.5; }
-          50% { transform: scale(1.5); opacity: 1; }
-        }
-        @keyframes fsnode-typeIn {
-          from { width: 0; }
-          to { width: 100%; }
-        }
-      `}</style>
-
       <motion.div
         variants={staggerContainer(0.1, 0.2)}
         initial="hidden"
@@ -305,7 +289,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                           href="https://github.com/TardinDev/University-Management-DashBoard"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="link-certificat inline-flex items-center gap-2 py-3.5 px-6 font-medium text-[0.9rem] text-white no-underline rounded-lg transition-all duration-300 bg-transparent hover:bg-white/5"
+                          className="inline-flex items-center gap-2 py-3.5 px-6 font-medium text-[0.9rem] text-white no-underline rounded-lg transition-all duration-300 bg-transparent hover:bg-white/5"
                           style={{ border: '1px solid rgba(255, 255, 255, 0.2)' }}
                           onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.3)'; }}
                           onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.2)'; }}
@@ -429,7 +413,6 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
           </div>
         </section>
       </motion.div>
-    </>
   );
 };
 

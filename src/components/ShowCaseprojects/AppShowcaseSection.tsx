@@ -24,23 +24,6 @@ const AppShowcaseSection = () => {
 
   return (
     <>
-      <style>{`
-        .showcase-cards-container::-webkit-scrollbar {
-          height: 8px;
-        }
-        .showcase-cards-container::-webkit-scrollbar-track {
-          background: #f3f4f6;
-          border-radius: 4px;
-        }
-        .showcase-cards-container::-webkit-scrollbar-thumb {
-          background: #d1d5db;
-          border-radius: 4px;
-        }
-        .showcase-cards-container::-webkit-scrollbar-thumb:hover {
-          background: #9ca3af;
-        }
-      `}</style>
-
       <motion.div
         variants={staggerContainer(0.1, 0)}
         initial="hidden"
@@ -52,7 +35,7 @@ const AppShowcaseSection = () => {
             <div className="mb-10 last:mb-0">
               <h2 className="text-3xl font-bold mb-4 text-gray-800">Applications Mobiles</h2>
               <p className="text-gray-500 mb-6 text-base">Quelques applications mobiles que j&apos;ai développées.</p>
-              <div className="showcase-cards-container flex flex-nowrap gap-4 sm:gap-6 overflow-x-auto pb-4 max-md:flex-col max-md:flex-wrap max-md:overflow-x-visible max-md:items-center" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db #f3f4f6' }}>
+              <div className="showcase-cards-container flex flex-nowrap gap-3 overflow-x-auto pb-3 md:flex-wrap md:overflow-visible md:gap-6 md:pb-0 md:justify-center" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db #f3f4f6' }}>
                 {applicationsData.mobile.map((app, index) => (
                   <AppCard
                     key={`mobile-${index}`}
@@ -71,7 +54,7 @@ const AppShowcaseSection = () => {
             <div className="mb-10 last:mb-0">
               <h2 className="text-3xl font-bold mb-4 text-gray-800">Applications Web</h2>
               <p className="text-gray-500 mb-6 text-base">Des applications web que j&apos;ai développées pour mes clients.</p>
-              <div className="showcase-cards-container flex flex-nowrap gap-4 sm:gap-6 overflow-x-auto pb-4 max-md:flex-col max-md:flex-wrap max-md:overflow-x-visible max-md:items-center" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db #f3f4f6' }}>
+              <div className="showcase-cards-container flex flex-nowrap gap-3 overflow-x-auto pb-3 md:flex-wrap md:overflow-visible md:gap-6 md:pb-0 md:justify-center" style={{ scrollbarWidth: 'thin', scrollbarColor: '#d1d5db #f3f4f6' }}>
                 {applicationsData.web.map((app, index) => (
                   <AppCard
                     key={`web-${index}`}
