@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { X, ExternalLink } from "lucide-react";
 import { Application } from "../../types/applications";
 
@@ -73,11 +74,15 @@ const AppModal = ({ app, isOpen, onClose }: AppModalProps) => {
             </button>
 
             <div className="flex flex-col">
-              <img
-                src={app.image}
-                alt={`Capture d'écran complète de ${app.title}`}
-                className="w-full max-h-[400px] object-cover rounded-t-2xl"
-              />
+              <div className="relative w-full h-[300px] md:h-[400px]">
+                <Image
+                  src={app.image}
+                  alt={`Capture d'écran complète de ${app.title}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 900px"
+                  className="object-cover rounded-t-2xl"
+                />
+              </div>
 
               <div className="p-8 max-[480px]:p-6">
                 <h2 id="modal-title" className="text-3xl max-[480px]:text-2xl font-bold text-gray-800 mb-2">{app.title}</h2>

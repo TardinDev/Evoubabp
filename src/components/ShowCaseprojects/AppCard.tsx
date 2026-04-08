@@ -1,9 +1,13 @@
 'use client'
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Application } from "../../types/applications";
 import { ExternalLink } from "lucide-react";
+
+const BLUR_DATA_URL =
+  "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjZjBmMGYwIi8+PC9zdmc+";
 
 interface AppCardProps {
   app: Application;
@@ -14,7 +18,6 @@ interface AppCardProps {
 }
 
 const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
   const handleClick = () => {
@@ -32,15 +35,6 @@ const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
     }
   };
 
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
-
-  const handleImageError = () => {
-    console.error(`Failed to load image: ${app.image}`);
-    setImageError(true);
-  };
-
   const isClickable = (type === "web" && app.url) || onCardClick;
 
   return (
@@ -56,51 +50,38 @@ const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
             cursor: isClickable ? "pointer" : "default",
           }}
         >
-          <div className="relative w-full min-h-[120px] md:min-h-[200px]" style={{ backgroundColor: '#f8fafc' }}>
-            {!imageLoaded && !imageError && (
-              <div
-                className="absolute top-0 left-0 w-full h-full min-h-[120px] md:min-h-[200px] flex flex-col items-center justify-center z-[1]"
-                style={{
-                  background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
-                  backgroundSize: '200% 100%',
-                  animation: 'appcard-loading 1.5s infinite',
-                }}
-              >
-                <div
-                  className="w-8 h-8 md:w-10 md:h-10 rounded-full"
-                  style={{
-                    border: '4px solid #f3f3f3',
-                    borderTop: '4px solid #3b82f6',
-                    animation: 'appcard-spin 1s linear infinite',
-                  }}
-                />
-                <p className="text-gray-500 text-xs md:text-sm mt-2">Chargement...</p>
-              </div>
-            )}
-            {imageError && (
-              <div className="absolute top-0 left-0 w-full h-full min-h-[120px] md:min-h-[200px] flex flex-col items-center justify-center z-[1]" style={{ background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)', backgroundSize: '200% 100%' }}>
+          <div
+            className="relative w-full"
+            style={{
+              height: type === "mobile"
+                ? "clamp(8rem, 20vw, 22rem)"
+                : "clamp(9rem, 22vw, 20rem)",
+              backgroundColor: '#f8fafc',
+            }}
+          >
+            {imageError ? (
+              <div className="absolute inset-0 flex flex-col items-center justify-center z-[1]" style={{ background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)', backgroundSize: '200% 100%' }}>
                 <p className="text-red-500 text-xs md:text-sm font-semibold">&#x274C; Image non disponible</p>
                 <p className="text-gray-500 text-[10px] md:text-xs mt-1 break-all px-2 text-center">{app.image}</p>
               </div>
+            ) : (
+              <Image
+                src={app.image}
+                alt={`Capture d'écran de ${app.title} - ${app.description}`}
+                fill
+                sizes="(max-width: 768px) 220px, 380px"
+                loading={index < 3 ? "eager" : "lazy"}
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
+                onError={() => setImageError(true)}
+                className="transition-opacity duration-300"
+                style={{
+                  objectFit: type === "mobile" ? "contain" : "cover",
+                  objectPosition: "center",
+                  backgroundColor: type === "mobile" ? "#f8fafc" : "transparent",
+                }}
+              />
             )}
-            <img
-              src={app.image}
-              alt={`Capture d'écran de ${app.title} - ${app.description}`}
-              onLoad={handleImageLoad}
-              onError={handleImageError}
-              className="relative z-[2] w-full transition-opacity duration-300"
-              style={{
-                display: imageLoaded && !imageError ? "block" : "none",
-                height: type === "mobile"
-                  ? "clamp(8rem, 20vw, 22rem)"
-                  : "clamp(9rem, 22vw, 20rem)",
-                objectFit: type === "mobile" ? "contain" : "cover",
-                objectPosition: "center",
-                backgroundColor: type === "mobile" ? "#f8fafc" : "transparent",
-              }}
-              loading="eager"
-              decoding="async"
-            />
           </div>
 
           <div className="p-3 md:p-5">

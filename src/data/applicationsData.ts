@@ -5,7 +5,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "Sport Challenge",
       description: "une application qui permet de trouver des challenges sportifs autour de chez soi",
-      image: "/imagesAppsMobile/sportchallenge.png",
+      image: "/imagesAppsMobile/sportchallenge.webp",
       technologies: ["React Native", "TypeScript", "Firebase"],
       category: "Sport",
       year: "2024"
@@ -13,7 +13,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "instanjob",
       description: "une Application qui permet de trouver rapidement des missions autour de chez soi",
-      image: "/imagesAppsMobile/instanjobmobile.png",
+      image: "/imagesAppsMobile/instanjobmobile.webp",
       technologies: ["React Native", "Node.js", "MongoDB"],
       category: "Emploi",
       year: "2023"
@@ -21,7 +21,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "ZopGo",
       description: "Faciliter les transport et voyage avec une seule application",
-      image: "/imagesAppsMobile/zopgomobile.png",
+      image: "/imagesAppsMobile/zopgomobile.webp",
       technologies: ["React Native", "Google Maps API"],
       category: "Transport",
       year: "2023"
@@ -29,7 +29,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "Run Sport",
       description: "une application qui permet de trouver des chaussures de sport adaptés à vos besoins",
-      image: "/imagesAppsMobile/RunSport.png",
+      image: "/imagesAppsMobile/RunSport.webp",
       technologies: ["React Native", "E-commerce"],
       category: "E-commerce",
       year: "2024"
@@ -37,7 +37,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "Binome Pay",
       description: "Transférer de l'argent d'un pays à un autre sans passer par les moyens classiques comme les banques ou Western Union, en mettant en relation directe deux personnes avec des besoins croisés.",
-      image: "/imagesAppsMobile/binomePay.png",
+      image: "/imagesAppsMobile/binomePay.webp",
       technologies: ["React Native", "Blockchain", "Web3"],
       category: "Fintech",
       year: "2024"
@@ -47,7 +47,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "Delaala",
       description: "Plateforme web complète offrant des solutions digitales innovantes et des services personnalisés.",
-      image: "/imagesAppsMobile/delaala.png",
+      image: "/imagesAppsMobile/delaala.webp",
       url: "https://delaala.com/",
       technologies: ["React", "TypeScript", "Tailwind CSS", "Zustand", "Zod", "Express", "Supabase", "PostgreSQL"],
       category: "Services",
@@ -56,7 +56,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "ProJuridique",
       description: "Plateforme professionnelle dédiée aux services juridiques, facilitant l'accès au droit et la mise en relation avec des experts juridiques.",
-      image: "/imagesAppsMobile/juridiquePro.png",
+      image: "/imagesAppsMobile/juridiquePro.webp",
       url: "https://projuridique.com/",
       technologies: ["React", "TypeScript", "Tailwind CSS", "GSAP", "Zustand", "Zod", "Express", "Prisma", "PostgreSQL"],
       category: "Juridique",
@@ -65,7 +65,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "Shopping Perroquet",
       description: "Site e-commerce proposant une large sélection de produits avec une expérience d'achat fluide et moderne.",
-      image: "/imagesAppsMobile/e-commerceShoppingPerroquet.png",
+      image: "/imagesAppsMobile/e-commerceShoppingPerroquet.webp",
       url: "https://maquette-ecommerce.vercel.app/",
       technologies: ["React", "TypeScript", "Tailwind CSS", "Zustand", "Zod", "Express", "Supabase", "Prisma", "PostgreSQL"],
       category: "E-commerce",
@@ -74,7 +74,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "Dive-Cvetements",
       description: "site web pour achéter ou louer des vêtements en Laine et rafia pour l'été",
-      image: "/imagesAppsMobile/diveC.png",
+      image: "/imagesAppsMobile/diveC.webp",
       url: "https://div-cvetements.vercel.app/",
       technologies: ["React", "TypeScript", "Styled Components"],
       category: "E-commerce",
@@ -83,7 +83,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "DreamQuest",
       description: "Application innovante qui transforme vos rêves en réalité visuelle. Décrivez votre rêve à l'IA et elle le convertit en image, jeu interactif ou monde 3D immersif.",
-      image: "/imagesAppsMobile/dreamQuest.png",
+      image: "/imagesAppsMobile/dreamQuest.webp",
       url: "",
       technologies: ["React", "TypeScript", "OpenAI", "Three.js"],
       category: "IA & Créativité",
@@ -92,7 +92,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "Mintsa Services",
       description: "un site web pour particulier qui propose des services de consulting et administratif",
-      image: "/imagesAppsMobile/mtzService.png",
+      image: "/imagesAppsMobile/mtzService.webp",
       url: "https://mintsaservices.vercel.app/",
       technologies: ["React", "Next.js", "Tailwind CSS"],
       category: "Services",
@@ -101,7 +101,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "Manioc Gabon",
       description: "Site web dédié à la vente de manioc sous toutes ses formes : tubercules frais, bâtons de manioc, farine, tapioca, et feuilles de manioc. Le site met en avant la qualité locale, la fraîcheur des produits, et une livraison rapide à domicile.",
-      image: "/imagesAppsMobile/maniocgabon.png",
+      image: "/imagesAppsMobile/maniocgabon.webp",
       url: "https://maniocgabon.vercel.app/",
       technologies: ["React", "Vite", "Stripe"],
       category: "E-commerce",
@@ -110,7 +110,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "Germe Invest",
       description: "Cabinet d'investissement offrant des services de conseil financier, de gestion de portefeuille et d'accompagnement des projets d'entrepreneuriat en Afrique.",
-      image: "/imagesAppsMobile/germeinvest.png",
+      image: "/imagesAppsMobile/germeinvest.webp",
       url: "https://germe-invest.com/",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
       category: "Finance & Investissement",
@@ -119,7 +119,7 @@ export const applicationsData: ApplicationsData = {
     {
       title: "KongossaDocs",
       description: "Plateforme de gestion et de partage de documents en ligne, permettant une collaboration efficace et sécurisée entre équipes.",
-      image: "/imagesAppsMobile/kongossaDoc.png",
+      image: "/imagesAppsMobile/kongossaDoc.webp",
       url: "",
       technologies: ["React", "TypeScript", "Firebase", "Material-UI"],
       category: "Productivité",
