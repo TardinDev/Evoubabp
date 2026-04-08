@@ -109,7 +109,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
 
       <section
         id={id || "testimonials"}
-        className="relative py-10 px-8 bg-black overflow-hidden md:py-8 md:px-4 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-px"
+        className="relative py-8 px-4 bg-black overflow-hidden md:py-10 md:px-8 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-px"
         style={{
           // @ts-ignore
           '--tw-before-bg': 'linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent)',

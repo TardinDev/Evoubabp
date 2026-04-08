@@ -102,7 +102,7 @@ export default function UnderHeader() {
 
         {/* Down element */}
         <div
-          className="flex flex-wrap justify-between text-xl max-sm:mt-16 max-sm:gap-8"
+          className="flex flex-wrap justify-between text-xl max-sm:mt-8 max-sm:gap-6 max-sm:flex-col"
           style={{ marginTop: 'clamp(3.5rem, 7vw, 10rem)' }}
         >
           <motion.div
@@ -130,16 +130,16 @@ export default function UnderHeader() {
 
           <motion.div
             variants={fadeIn("left", "tween", 0.2, 1)}
-            className="flex gap-5 items-center"
+            className="flex gap-5 items-center max-sm:flex-col max-sm:items-start max-sm:gap-3"
           >
-            <div>
-              Découvrez mes projets intégrant l&apos;IA, l&apos;automatisation intelligente <br />
+            <div className="max-sm:text-sm max-sm:leading-relaxed">
+              Découvrez mes projets intégrant l&apos;IA, l&apos;automatisation intelligente
               et les dernières innovations technologiques sur Vercel et GitHub !
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 max-sm:flex-row max-sm:gap-6">
               <div className="flex gap-[10px] items-center cursor-pointer">
-                <IoLogoVercel size={48} color="#000" className="mb-4 w-14" />
+                <IoLogoVercel size={48} color="#000" className="mb-4 w-14 max-sm:mb-0 max-sm:w-10" />
                 <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="no-underline text-inherit">
                   <span className="text-purple-800 font-bold">Vercel</span>
                 </a>

@@ -67,7 +67,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
       >
         <section
           id={id}
-          className="relative py-24 px-8 md:py-16 md:px-4 overflow-hidden min-h-screen"
+          className="relative py-16 px-4 md:py-24 md:px-8 overflow-hidden min-h-screen"
           style={{ background: '#0a0a0f' }}
         >
           {/* Noise Overlay */}

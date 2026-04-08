@@ -85,7 +85,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
       >
         <section
           id={id}
-          className="relative py-24 px-8 md:py-16 md:px-4 overflow-hidden min-h-screen"
+          className="relative py-16 px-4 md:py-24 md:px-8 overflow-hidden min-h-screen"
           style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #0f1419 50%, #0a0a0f 100%)' }}
         >
           {/* Background Pattern */}
@@ -319,7 +319,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
             </div>
 
             <motion.div variants={fadeIn('up', 'tween', 0.3, 0.8)}>
-              <div className="grid grid-cols-3 md:grid-cols-1 gap-6 mb-16">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
                 {project.features.map((feature, idx) => (
                   <div
                     key={idx}

@@ -123,7 +123,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
 
       <section
         id={id || "contact"}
-        className="relative py-24 px-8 overflow-hidden md:py-16 md:px-4"
+        className="relative py-16 px-4 overflow-hidden md:py-24 md:px-8"
         style={{
           background: 'linear-gradient(180deg, #4b0082 0%, #380062 50%, #2d004f 100%)',
         }}
@@ -148,7 +148,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
 
         <div className="relative max-w-[1200px] mx-auto z-[2]">
           <motion.div variants={fadeIn("up", "tween", 0.1, 0.8)}>
-            <div className="text-center mb-16 md:mb-12">
+            <div className="text-center mb-8 md:mb-12">
               <span
                 className="inline-block font-mono text-xs tracking-[0.3em] text-[#ffd700] px-4 py-2 rounded mb-6"
                 style={{
@@ -184,7 +184,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-[1fr_1.5fr] gap-12 lg:grid-cols-1 lg:gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_1.5fr] md:gap-12">
             <motion.div variants={fadeIn("right", "spring", 0.2, 0.8)}>
               <div className="flex flex-col gap-6">
                 {/* Email Card */}

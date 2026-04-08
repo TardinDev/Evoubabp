@@ -14,7 +14,7 @@ import { useActiveSectionContext } from "../../contexts/ActiveSectionContext";
 const Menu = ({ menuOpened }) => {
   return (
     <ul
-      className="uppercase text-base list-none gap-6 cursor-pointer flex justify-around items-center sm:static sm:flex-row sm:w-auto sm:max-h-none sm:overflow-visible sm:bg-transparent sm:p-0 sm:rounded-none sm:items-center sm:justify-around max-sm:absolute max-sm:list-none max-sm:gap-8 max-sm:font-medium max-sm:flex-col max-sm:right-0 max-sm:top-12 max-sm:w-1/2 max-sm:w-[85vw] max-sm:max-w-[15rem] max-sm:max-h-[80vh] max-sm:overflow-auto max-sm:bg-white max-sm:p-8 max-sm:flex max-sm:rounded-2xl max-sm:transition-all max-sm:duration-300 max-sm:items-start max-sm:justify-end max-sm:shadow-md"
+      className="uppercase text-base list-none gap-6 cursor-pointer flex justify-around items-center md:static md:flex-row md:w-auto md:max-h-none md:overflow-visible md:bg-transparent md:p-0 md:rounded-none md:items-center md:justify-around max-md:absolute max-md:list-none max-md:gap-6 max-md:font-medium max-md:flex-col max-md:right-0 max-md:top-12 max-md:w-[85vw] max-md:max-w-[15rem] max-md:max-h-[80vh] max-md:overflow-auto max-md:bg-white max-md:p-6 max-md:flex max-md:rounded-2xl max-md:transition-all max-md:duration-300 max-md:items-start max-md:justify-end max-md:shadow-md"
       style={getMenuStyles(menuOpened)}
     >
       <li className="list-none hover:text-accent-blue">
@@ -37,9 +37,9 @@ const Menu = ({ menuOpened }) => {
           Formations
         </Link>
       </li>
-      <li className="normal-case flex gap-[0.1rem] flex-wrap items-center font-bold hover:text-secondary list-none">
+      <li className="normal-case flex gap-[0.1rem] flex-wrap items-center font-bold hover:text-secondary list-none max-md:text-sm">
         <p>tardindavy@gmail.com</p>
-        <IoIosMail size={"52px"} className="text-secondary p-[5px] bg-white rounded-[20px] shadow-[0px_4px_4px_rgba(0,0,0,0.35)]" />
+        <IoIosMail size={"42px"} className="text-secondary p-[5px] bg-white rounded-[20px] shadow-[0px_4px_4px_rgba(0,0,0,0.35)] max-md:w-9 max-md:h-9" />
       </li>
     </ul>
   );
@@ -78,7 +78,7 @@ const Header = () => {
         <Menu menuOpened={menuOpened} />
 
         {/* for menu in small screen */}
-        <div className="hidden md:hidden max-md:block cursor-pointer" onClick={toggleMenu}>
+        <div className="hidden max-md:block cursor-pointer" onClick={toggleMenu}>
           <BiMenuAltRight size={26} color="purple" />
         </div>
       </motion.div>

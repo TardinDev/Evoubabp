@@ -135,7 +135,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
 
       <section
         id={id || "howItWorks"}
-        className="relative px-4 pb-16 pt-0 md:px-8 overflow-hidden"
+        className="relative px-4 pb-12 pt-0 md:px-8 md:pb-16 overflow-hidden"
         style={{
           background: 'linear-gradient(180deg, #4b0082 0%, #380062 50%, #2d004f 100%)',
         }}
