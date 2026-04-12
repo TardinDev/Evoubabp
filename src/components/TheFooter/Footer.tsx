@@ -21,7 +21,7 @@ export default function Footer() {
       />
 
       {/* Footer container */}
-      <div className="max-w-[1200px] mx-auto pt-12 px-8 pb-8 relative z-[1]">
+      <div className="max-w-[1200px] mx-auto pt-12 px-4 sm:px-8 pb-8 relative z-[1]">
         {/* Top section */}
         <div className="grid grid-cols-[1fr_2fr] gap-12 mb-8 max-md:grid-cols-1 max-md:gap-8">
           {/* Brand section */}

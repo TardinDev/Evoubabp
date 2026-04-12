@@ -358,7 +358,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                 }}
               >
                 <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                  <div className="grid grid-cols-2 gap-6 sm:grid-cols-1 sm:gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
                         Nom complet *
@@ -413,7 +413,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-6 sm:grid-cols-1 sm:gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
                         Type de projet

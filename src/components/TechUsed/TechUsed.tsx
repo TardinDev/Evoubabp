@@ -335,7 +335,7 @@ const TechUsed = () => {
       />
 
       {/* Pinned Content */}
-      <div className="flex flex-col justify-center items-center min-h-screen py-10 px-8 relative z-[1]">
+      <div className="flex flex-col justify-center items-center min-h-screen py-10 px-4 sm:px-8 relative z-[1]">
         {/* Title Container */}
         <div ref={titleRef} className="text-center mb-10">
           <h2

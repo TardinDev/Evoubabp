@@ -155,7 +155,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
                 <div key={testimonial.id} className="min-w-full px-4">
                   {/* TestimonialCard */}
                   <div
-                    className="relative bg-[#0a0a0a] rounded-2xl p-8 max-w-[800px] mx-auto md:p-6"
+                    className="relative bg-[#0a0a0a] rounded-2xl p-5 sm:p-6 md:p-8 max-w-[800px] mx-auto"
                     style={{
                       border: '1px solid rgba(255, 255, 255, 0.08)',
                     }}

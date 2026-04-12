@@ -441,7 +441,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
           </div>
 
           {/* RIGHT: Detail panels (stacked absolutely) */}
-          <div className="flex-[1.5] relative w-full min-h-[420px] md:min-h-[400px]">
+          <div className="flex-[1.5] relative w-full min-h-[350px] sm:min-h-[420px] md:min-h-[400px]">
             {services.map((service, i) => (
               <div
                 key={service.key}

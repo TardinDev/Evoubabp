@@ -152,7 +152,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
 
         {/* GlowEffect */}
         <div
-          className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] pointer-events-none"
+          className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%)',
           }}
@@ -160,7 +160,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
 
         <div className="relative max-w-[1400px] mx-auto z-[2]">
           <motion.div variants={fadeIn("up", "tween", 0.1, 0.8)}>
-            <div className="text-center mb-20 pt-16 md:mb-12 md:pt-12">
+            <div className="text-center mb-10 pt-10 sm:mb-20 sm:pt-16 md:mb-12 md:pt-12">
               <span
                 className="inline-block font-mono text-xs tracking-[0.3em] text-[#e0b0ff] px-4 py-2 rounded mb-6"
                 style={{
