@@ -28,6 +28,16 @@ const Menu = ({ menuOpened }) => {
         </a>
       </li>
       <li className="list-none hover:text-accent-blue">
+        <a href="#fullstack-node" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
+          React/NodeJs
+        </a>
+      </li>
+      <li className="list-none hover:text-accent-blue">
+        <a href="#fullstack-spring" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
+          React/Spring-Boot
+        </a>
+      </li>
+      <li className="list-none hover:text-accent-blue">
         <a href="#howItWorks" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
           Methode
         </a>

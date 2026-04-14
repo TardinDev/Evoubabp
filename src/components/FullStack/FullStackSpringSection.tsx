@@ -17,7 +17,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
     description: 'Application web de gestion des déclarations de naissance permettant aux citoyens de déclarer une naissance en ligne et aux agents administratifs de traiter les demandes de manière sécurisée et efficace.',
     image: '/images/declaration-naissance.png',
     liveUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/TardinDev/NaissanceDeclaration',
     features: [
       {
         icon: <FaFileAlt />,
