@@ -15,6 +15,7 @@ import {
   SiPrisma, SiPostman
 } from "react-icons/si";
 import type { IconType } from "react-icons";
+import { useTranslation } from '../../hooks/useTranslation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,81 +33,82 @@ interface Category {
   techs: Tech[];
 }
 
-const categories: Category[] = [
-  {
-    label: "Frontend",
-    icon: FaCode,
-    accentColor: "#667eea",
-    techs: [
-      { name: "React", version: "v19", icon: FaReact, color: "#61DAFB" },
-      { name: "Next.js", version: "v16", icon: SiNextdotjs, color: "#000000" },
-      { name: "Vite", version: "v7", icon: SiVite, color: "#646CFF" },
-      { name: "TypeScript", version: "v5", icon: FaBook, color: "#3178C6" },
-      { name: "Tailwind CSS", version: "v4", icon: SiTailwindcss, color: "#06B6D4" },
-      { name: "Styled Components", version: "v6", icon: SiStyledcomponents, color: "#DB7093" },
-      { name: "React Router", version: "v6", icon: FaRoad, color: "#CA4245" },
-      { name: "Framer Motion", version: "v11", icon: SiFramer, color: "#0055FF" },
-      { name: "Three.js", version: "v0.160", icon: SiThreedotjs, color: "#000000" },
-      { name: "GSAP", version: "v3", icon: SiGreensock, color: "#88CE02" },
-    ],
-  },
-  {
-    label: "Backend",
-    icon: FaServer,
-    accentColor: "#339933",
-    techs: [
-      { name: "Node.js", version: "v22", icon: FaNodeJs, color: "#339933" },
-      { name: "Express", version: "v5", icon: SiExpress, color: "#000000" },
-      { name: "Spring Boot", version: "v4", icon: SiSpringboot, color: "#6DB33F" },
-      { name: "Java", version: "v21", icon: FaJava, color: "#ED8B00" },
-    ],
-  },
-  {
-    label: "Mobile",
-    icon: FaMobile,
-    accentColor: "#764ba2",
-    techs: [
-      { name: "React Native", version: "v0.83", icon: FaReact, color: "#61DAFB" },
-      { name: "Expo", version: "v54", icon: SiExpo, color: "#000020" },
-      { name: "Expo Router", version: "v3", icon: FaCompass, color: "#000020" },
-      { name: "Reanimated", version: "v3", icon: FaMagic, color: "#4A90E2" },
-      { name: "Gesture Handler", version: "v2", icon: FaHandPointer, color: "#7B68EE" },
-      { name: "NativeWind", version: "v4", icon: SiTailwindcss, color: "#06B6D4" },
-    ],
-  },
-  {
-    label: "Base de données",
-    icon: FaDatabase,
-    accentColor: "#4169E1",
-    techs: [
-      { name: "PostgreSQL", version: "v17", icon: SiPostgresql, color: "#4169E1" },
-      { name: "MongoDB", version: "v7", icon: SiMongodb, color: "#47A248" },
-      { name: "Supabase", version: "v2", icon: SiSupabase, color: "#3ECF8E" },
-      { name: "Firebase", version: "v10", icon: SiFirebase, color: "#FFCA28" },
-      { name: "Prisma", version: "v6", icon: SiPrisma, color: "#2D3748" },
-    ],
-  },
-  {
-    label: "Outils & Auth",
-    icon: FaTools,
-    accentColor: "#FF6B6B",
-    techs: [
-      { name: "Zustand", version: "v4", icon: FaLayerGroup, color: "#FF6B6B" },
-      { name: "Tanstack Query", version: "v5", icon: SiReactquery, color: "#FF4154" },
-      { name: "Clerk", version: "v5", icon: FaUserShield, color: "#6C47FF" },
-      { name: "JWT", version: "", icon: FaKey, color: "#000000" },
-      { name: "Git", version: "v2", icon: FaGitAlt, color: "#F05032" },
-      { name: "Postman", version: "v11", icon: SiPostman, color: "#FF6C37" },
-    ],
-  },
-];
-
 const TechUsed = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const orbRef = useRef<HTMLDivElement>(null);
   const orb2Ref = useRef<HTMLDivElement>(null);
   const dotsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const categories: Category[] = [
+    {
+      label: t.techUsed.frontend,
+      icon: FaCode,
+      accentColor: "#667eea",
+      techs: [
+        { name: "React", version: "v19", icon: FaReact, color: "#61DAFB" },
+        { name: "Next.js", version: "v16", icon: SiNextdotjs, color: "#000000" },
+        { name: "Vite", version: "v7", icon: SiVite, color: "#646CFF" },
+        { name: "TypeScript", version: "v5", icon: FaBook, color: "#3178C6" },
+        { name: "Tailwind CSS", version: "v4", icon: SiTailwindcss, color: "#06B6D4" },
+        { name: "Styled Components", version: "v6", icon: SiStyledcomponents, color: "#DB7093" },
+        { name: "React Router", version: "v6", icon: FaRoad, color: "#CA4245" },
+        { name: "Framer Motion", version: "v11", icon: SiFramer, color: "#0055FF" },
+        { name: "Three.js", version: "v0.160", icon: SiThreedotjs, color: "#000000" },
+        { name: "GSAP", version: "v3", icon: SiGreensock, color: "#88CE02" },
+      ],
+    },
+    {
+      label: t.techUsed.backend,
+      icon: FaServer,
+      accentColor: "#339933",
+      techs: [
+        { name: "Node.js", version: "v22", icon: FaNodeJs, color: "#339933" },
+        { name: "Express", version: "v5", icon: SiExpress, color: "#000000" },
+        { name: "Spring Boot", version: "v4", icon: SiSpringboot, color: "#6DB33F" },
+        { name: "Java", version: "v21", icon: FaJava, color: "#ED8B00" },
+      ],
+    },
+    {
+      label: t.techUsed.mobile,
+      icon: FaMobile,
+      accentColor: "#764ba2",
+      techs: [
+        { name: "React Native", version: "v0.83", icon: FaReact, color: "#61DAFB" },
+        { name: "Expo", version: "v54", icon: SiExpo, color: "#000020" },
+        { name: "Expo Router", version: "v3", icon: FaCompass, color: "#000020" },
+        { name: "Reanimated", version: "v3", icon: FaMagic, color: "#4A90E2" },
+        { name: "Gesture Handler", version: "v2", icon: FaHandPointer, color: "#7B68EE" },
+        { name: "NativeWind", version: "v4", icon: SiTailwindcss, color: "#06B6D4" },
+      ],
+    },
+    {
+      label: t.techUsed.database,
+      icon: FaDatabase,
+      accentColor: "#4169E1",
+      techs: [
+        { name: "PostgreSQL", version: "v17", icon: SiPostgresql, color: "#4169E1" },
+        { name: "MongoDB", version: "v7", icon: SiMongodb, color: "#47A248" },
+        { name: "Supabase", version: "v2", icon: SiSupabase, color: "#3ECF8E" },
+        { name: "Firebase", version: "v10", icon: SiFirebase, color: "#FFCA28" },
+        { name: "Prisma", version: "v6", icon: SiPrisma, color: "#2D3748" },
+      ],
+    },
+    {
+      label: t.techUsed.tools,
+      icon: FaTools,
+      accentColor: "#FF6B6B",
+      techs: [
+        { name: "Zustand", version: "v4", icon: FaLayerGroup, color: "#FF6B6B" },
+        { name: "Tanstack Query", version: "v5", icon: SiReactquery, color: "#FF4154" },
+        { name: "Clerk", version: "v5", icon: FaUserShield, color: "#6C47FF" },
+        { name: "JWT", version: "", icon: FaKey, color: "#000000" },
+        { name: "Git", version: "v2", icon: FaGitAlt, color: "#F05032" },
+        { name: "Postman", version: "v11", icon: SiPostman, color: "#FF6C37" },
+      ],
+    },
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -347,11 +349,10 @@ const TechUsed = () => {
               backgroundClip: 'text',
             }}
           >
-            Technologies Utilisées
+            {t.techUsed.title}
           </h2>
           <p className="text-[1.1rem] max-md:text-[0.95rem] text-slate-400 max-w-[550px] mx-auto leading-relaxed">
-            Un stack moderne et performant pour créer des applications
-            exceptionnelles
+            {t.techUsed.subtitle}
           </p>
         </div>
 

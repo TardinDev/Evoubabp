@@ -4,35 +4,38 @@ import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaBrain, FaRobot, FaChartLine, FaLightbulb, FaMicrochip, FaNetworkWired } from 'react-icons/fa';
 import AnimatedBackground from './AnimatedBackground';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface AISectionProps {
   id?: string;
 }
 
 const AISection: React.FC<AISectionProps> = ({ id }) => {
+  const { t } = useTranslation();
+
   const aiFeatures = [
     {
       icon: <FaBrain />,
-      title: 'Intelligence Artificielle',
-      description: 'Intégration de modèles IA avancés pour automatiser et optimiser vos processus métier.',
+      title: t.aiSection.ai,
+      description: t.aiSection.aiDesc,
       gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
     },
     {
       icon: <FaRobot />,
-      title: 'Automatisation Intelligente',
-      description: 'Robots conversationnels et assistants virtuels pour améliorer l\'expérience utilisateur.',
+      title: t.aiSection.automation,
+      description: t.aiSection.automationDesc,
       gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
     },
     {
       icon: <FaChartLine />,
-      title: 'Analyse Prédictive',
-      description: 'Algorithmes de machine learning pour prédire les tendances et optimiser les décisions.',
+      title: t.aiSection.predictive,
+      description: t.aiSection.predictiveDesc,
       gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
     },
     {
       icon: <FaLightbulb />,
-      title: 'Innovation Continue',
-      description: 'Solutions créatives alimentées par l\'IA pour transformer votre vision en réalité.',
+      title: t.aiSection.innovation,
+      description: t.aiSection.innovationDesc,
       gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
     }
   ];
@@ -76,11 +79,10 @@ const AISection: React.FC<AISectionProps> = ({ id }) => {
                 backgroundClip: 'text'
               }}
             >
-              L&apos;IA au Coeur de Nos Solutions
+              {t.aiSection.title}
             </h2>
             <p className="text-[1.2rem] max-md:text-[1.1rem] max-md:px-4 max-[480px]:text-base max-[480px]:px-2 text-[#b8b8d1] leading-relaxed max-w-[600px] mx-auto">
-              Nous intégrons l&apos;intelligence artificielle dans chaque projet pour créer des applications
-              innovantes, intelligentes et tournées vers l&apos;avenir.
+              {t.aiSection.subtitle}
             </p>
           </div>
         </motion.div>
@@ -117,8 +119,7 @@ const AISection: React.FC<AISectionProps> = ({ id }) => {
         <motion.div variants={fadeIn('up', 'tween', 0.6, 1)}>
           <div className="text-center relative z-[2]">
             <p className="text-[1.3rem] italic text-[#e0e0ff] mb-8 p-8 bg-white/5 rounded-[15px] border-l-4 border-l-[#667eea] max-w-[700px] mx-auto">
-              &quot;L&apos;avenir appartient à ceux qui comprennent que l&apos;IA n&apos;est pas juste une technologie,
-              mais un partenaire pour innover.&quot;
+              &quot;{t.aiSection.closingQuote}&quot;
             </p>
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(102, 126, 234, 0.4)' }}
@@ -126,7 +127,7 @@ const AISection: React.FC<AISectionProps> = ({ id }) => {
               className="text-white border-none py-4 px-10 rounded-full text-[1.1rem] font-semibold cursor-pointer transition-all duration-300 shadow-[0_5px_15px_rgba(102,126,234,0.2)]"
               style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
             >
-              Découvrir nos projets IA
+              {t.aiSection.discoverProjects}
             </motion.button>
           </div>
         </motion.div>

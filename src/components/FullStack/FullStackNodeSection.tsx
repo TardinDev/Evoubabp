@@ -4,12 +4,15 @@ import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaReact, FaNodeJs, FaTerminal, FaExternalLinkAlt, FaGithub, FaPlay, FaUniversity, FaUserGraduate, FaCloudUploadAlt, FaCloud } from 'react-icons/fa';
 import { SiPostgresql, SiExpress, SiTypescript } from 'react-icons/si';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface FullStackNodeSectionProps {
   id?: string;
 }
 
 const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
+  const { t } = useTranslation();
+
   const project = {
     title: 'University Management Dashboard',
     year: '2024',
@@ -18,9 +21,9 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
     liveUrl: 'https://university-management-dashboard-kappa.vercel.app/login',
     githubUrl: '#',
     stats: [
-      { value: '3', label: 'Rôles' },
-      { value: 'JWT', label: 'Auth sécurisée' },
-      { value: 'PERN', label: 'Stack' },
+      { value: '3', label: t.fullstackNode.roles },
+      { value: 'JWT', label: t.fullstackNode.secureAuth },
+      { value: 'PERN', label: t.fullstackNode.stack },
     ],
     features: [
       { icon: <FaUserGraduate />, text: 'Multi-role Auth' },
@@ -91,12 +94,12 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                 <h2
                   className="mb-4 font-semibold md:text-[1.1rem] font-[Space_Grotesk,Inter,sans-serif] text-[clamp(2.25rem,3vw,2.75rem)] bg-[linear-gradient(135deg,#F1F1F1,#B0B0B0)] bg-clip-text text-transparent"
                 >
-                  J&apos;apporte une expertise FullStack à vos projets !
+                  {t.fullstackNode.expertise}
                 </h2>
                 <span
                   className="inline-block text-xs mb-6 px-4 py-2 font-[JetBrains_Mono,Fira_Code,monospace] tracking-[0.3em] text-[#61dafb] bg-[rgba(97,218,251,0.1)] border border-[rgba(97,218,251,0.2)]"
                 >
-                  FULLSTACK JAVASCRIPT
+                  {t.fullstackNode.badge}
                 </span>
                 <h2
                   className="mb-6 font-bold flex items-center gap-2 flex-wrap md:justify-center font-[Space_Grotesk,Inter,sans-serif] text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.1]"
@@ -106,8 +109,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                   <span className="text-[#68a063]">Node.js</span>
                 </h2>
                 <p className="text-[1.15rem] max-w-[500px] md:mx-auto text-white/60 leading-[1.7]">
-                  Écosystème JavaScript unifié pour des applications
-                  performantes et temps réel
+                  {t.fullstackNode.subtitle}
                 </p>
               </div>
             </motion.div>
@@ -190,7 +192,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                       />
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white/30">
                         <FaPlay size={40} className="opacity-50" />
-                        <span className="text-[0.9rem] uppercase tracking-[0.15em]">Démo Live</span>
+                        <span className="text-[0.9rem] uppercase tracking-[0.15em]">{t.fullstackNode.demoLive}</span>
                       </div>
                       <span className="absolute top-4 right-4 backdrop-blur-[10px] text-white text-xs px-3 py-1.5 rounded z-[3] bg-black/70 font-[JetBrains_Mono,monospace]">
                         {project.year}
@@ -212,7 +214,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 py-3.5 px-6 font-semibold text-[0.9rem] no-underline rounded-lg transition-all duration-300 hover:-translate-y-0.5 bg-[#61dafb] text-[#0a0a0f] hover:bg-[#7de3ff]"
                         >
-                          <FaExternalLinkAlt /> Voir Live
+                          <FaExternalLinkAlt /> {t.fullstackNode.viewLive}
                         </a>
                         <a
                           href="https://github.com/TardinDev/University-Management-DashBoard"
@@ -220,7 +222,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 py-3.5 px-6 font-medium text-[0.9rem] text-white no-underline rounded-lg transition-all duration-300 bg-transparent hover:bg-white/5 border border-white/20 hover:border-white/30"
                         >
-                          <FaGithub /> Code
+                          <FaGithub /> {t.fullstackNode.code}
                         </a>
                       </div>
                     </div>

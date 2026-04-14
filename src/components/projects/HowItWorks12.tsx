@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
+import { useTranslation } from '../../hooks/useTranslation';
 import {
   HiOutlineLightBulb,
   HiOutlineCode,
@@ -18,98 +19,100 @@ interface HowItWorksProps {
   id?: string;
 }
 
-const processSteps = [
-  {
-    number: "01",
-    title: "Analyse & Design",
-    subtitle: "Comprendre vos besoins",
-    description: "Définition des objectifs, analyse des besoins utilisateurs et création de maquettes UI/UX pour une expérience optimale.",
-    icon: HiOutlineLightBulb,
-    color: "#8b5cf6",
-    deliverables: ["Cahier des charges", "Wireframes", "Maquettes Figma"],
-  },
-  {
-    number: "02",
-    title: "Frontend",
-    subtitle: "Interfaces modernes",
-    description: "Développement d'interfaces utilisateur réactives et performantes avec les technologies les plus récentes.",
-    icon: HiOutlineCode,
-    color: "#61dafb",
-    techs: [
-      { icon: FaReact, name: "React" },
-      { icon: SiTypescript, name: "TypeScript" },
-    ],
-  },
-  {
-    number: "03",
-    title: "Backend",
-    subtitle: "Logique métier robuste",
-    description: "Architecture serveur scalable, APIs RESTful sécurisées et gestion de base de données optimisée.",
-    icon: HiOutlineServer,
-    color: "#6db33f",
-    techs: [
-      { icon: FaNodeJs, name: "Node.js" },
-      { icon: SiSpringboot, name: "Spring Boot" },
-      { icon: FaLock, name: "Clerk" },
-      { icon: SiJsonwebtokens, name: "JWT" },
-      { icon: SiSpringsecurity, name: "Spring Security" },
-    ],
-  },
-  {
-    number: "04",
-    title: "Qualité & CI/CD",
-    subtitle: "Automatisation complète",
-    description: "Pipeline d'intégration continue, tests automatisés et déploiement sécurisé avec monitoring en temps réel.",
-    icon: HiOutlineShieldCheck,
-    color: "#f59e0b",
-    techs: [
-      { icon: SiGithubactions, name: "GitHub Actions" },
-      { icon: FaDocker, name: "Docker" },
-      { icon: SiVitest, name: "Vitest" },
-    ],
-  },
-];
-
-const devPractices = [
-  {
-    icon: SiGithubactions,
-    title: "CI/CD",
-    description: "Build et déploiement automatiques sur chaque commit",
-    color: "#2088FF",
-  },
-  {
-    icon: SiVitest,
-    title: "Tests Automatisés",
-    description: "Tests unitaires et d'intégration avec couverture de code",
-    color: "#6E9F18",
-  },
-  {
-    icon: SiEslint,
-    title: "Linting",
-    description: "Analyse statique du code pour garantir la qualité",
-    color: "#4B32C3",
-  },
-  {
-    icon: SiPrettier,
-    title: "Formatage",
-    description: "Code formaté automatiquement pour une cohérence parfaite",
-    color: "#F7B93E",
-  },
-  {
-    icon: FaGitAlt,
-    title: "Pre-commit Hooks",
-    description: "Vérifications automatiques avant chaque commit",
-    color: "#F05032",
-  },
-  {
-    icon: SiSentry,
-    title: "Monitoring",
-    description: "Suivi des erreurs et performances en production",
-    color: "#362D59",
-  },
-];
-
 const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
+  const { t } = useTranslation();
+
+  const processSteps = [
+    {
+      number: "01",
+      title: t.howItWorks.analysis,
+      subtitle: t.howItWorks.analysisSubtitle,
+      description: t.howItWorks.analysisDesc,
+      icon: HiOutlineLightBulb,
+      color: "#8b5cf6",
+      deliverables: [t.howItWorks.deliverableBrief, t.howItWorks.deliverableWireframes, t.howItWorks.deliverableFigma],
+    },
+    {
+      number: "02",
+      title: t.howItWorks.frontend,
+      subtitle: t.howItWorks.frontendSubtitle,
+      description: t.howItWorks.frontendDesc,
+      icon: HiOutlineCode,
+      color: "#61dafb",
+      techs: [
+        { icon: FaReact, name: "React" },
+        { icon: SiTypescript, name: "TypeScript" },
+      ],
+    },
+    {
+      number: "03",
+      title: t.howItWorks.backend,
+      subtitle: t.howItWorks.backendSubtitle,
+      description: t.howItWorks.backendDesc,
+      icon: HiOutlineServer,
+      color: "#6db33f",
+      techs: [
+        { icon: FaNodeJs, name: "Node.js" },
+        { icon: SiSpringboot, name: "Spring Boot" },
+        { icon: FaLock, name: "Clerk" },
+        { icon: SiJsonwebtokens, name: "JWT" },
+        { icon: SiSpringsecurity, name: "Spring Security" },
+      ],
+    },
+    {
+      number: "04",
+      title: t.howItWorks.quality,
+      subtitle: t.howItWorks.qualitySubtitle,
+      description: t.howItWorks.qualityDesc,
+      icon: HiOutlineShieldCheck,
+      color: "#f59e0b",
+      techs: [
+        { icon: SiGithubactions, name: "GitHub Actions" },
+        { icon: FaDocker, name: "Docker" },
+        { icon: SiVitest, name: "Vitest" },
+      ],
+    },
+  ];
+
+  const devPractices = [
+    {
+      icon: SiGithubactions,
+      title: t.howItWorks.cicd,
+      description: t.howItWorks.cicdDesc,
+      color: "#2088FF",
+    },
+    {
+      icon: SiVitest,
+      title: t.howItWorks.testing,
+      description: t.howItWorks.testingDesc,
+      color: "#6E9F18",
+    },
+    {
+      icon: SiEslint,
+      title: t.howItWorks.linting,
+      description: t.howItWorks.lintingDesc,
+      color: "#4B32C3",
+    },
+    {
+      icon: SiPrettier,
+      title: t.howItWorks.formatting,
+      description: t.howItWorks.formattingDesc,
+      color: "#F7B93E",
+    },
+    {
+      icon: FaGitAlt,
+      title: t.howItWorks.hooks,
+      description: t.howItWorks.hooksDesc,
+      color: "#F05032",
+    },
+    {
+      icon: SiSentry,
+      title: t.howItWorks.monitoring,
+      description: t.howItWorks.monitoringDesc,
+      color: "#362D59",
+    },
+  ];
+
   return (
     <motion.div
       variants={staggerContainer(0.1, 0.2)}
@@ -168,7 +171,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
                   border: '1px solid rgba(255, 255, 255, 0.2)',
                 }}
               >
-                MÉTHODOLOGIE
+                {t.howItWorks.methodology}
               </span>
               <h2
                 className="font-bold text-white leading-tight mb-6"
@@ -177,7 +180,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
                   fontSize: 'clamp(2.5rem, 5vw, 4rem)',
                 }}
               >
-                Processus de
+                {t.howItWorks.processTitle}
                 <span
                   className="bg-clip-text"
                   style={{
@@ -187,12 +190,11 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
                     backgroundClip: 'text',
                   }}
                 >
-                  {' '}Développement
+                  {' '}{t.howItWorks.development}
                 </span>
               </h2>
               <p className="text-[1.15rem] text-white/70 max-w-[600px] mx-auto leading-relaxed">
-                Une approche structurée et itérative pour transformer
-                vos idées en produits digitaux performants
+                {t.howItWorks.processSubtitle}
               </p>
             </div>
           </motion.div>
@@ -340,7 +342,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
                     border: '1px solid rgba(255, 215, 0, 0.2)',
                   }}
                 >
-                  DÉVELOPPEMENT RIGOUREUX
+                  {t.howItWorks.rigorous}
                 </span>
                 <h3
                   className="font-semibold text-white mb-3"
@@ -349,10 +351,10 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
                     fontSize: 'clamp(1.5rem, 3vw, 2rem)',
                   }}
                 >
-                  Outils & Bonnes Pratiques
+                  {t.howItWorks.toolsTitle}
                 </h3>
                 <p className="text-base text-white/60 max-w-[600px] mx-auto leading-relaxed">
-                  Un workflow professionnel pour garantir la qualité, la fiabilité et la maintenabilité du code
+                  {t.howItWorks.toolsDesc}
                 </p>
               </div>
 
@@ -429,10 +431,10 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
                     className="text-[1.25rem] font-semibold text-white mb-1"
                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                   >
-                    Prêt à démarrer votre projet ?
+                    {t.howItWorks.readyToStart}
                   </h4>
                   <p className="text-[0.95rem] text-white/60">
-                    Discutons de vos besoins et trouvons la meilleure solution ensemble
+                    {t.howItWorks.letsDiscuss}
                   </p>
                 </div>
               </div>
@@ -445,7 +447,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
                   fontFamily: "'Space Grotesk', sans-serif",
                 }}
               >
-                Commencer
+                {t.howItWorks.getStarted}
                 <HiArrowRight />
               </a>
             </div>

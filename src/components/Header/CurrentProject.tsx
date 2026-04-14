@@ -14,6 +14,7 @@ import {
 } from "react-icons/si";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
+import { useTranslation } from "../../hooks/useTranslation";
 
 import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
@@ -21,8 +22,9 @@ import progressBar from "../../shared/assets/animations/progressBar.json";
 import ChevronDown from "../../shared/assets/animations/chevronDown.json";
 
 export default function CurrentProject() {
+  const { t } = useTranslation();
   const handleIcon = () => {
-    alert("Naviguez vers le bas pour voir plus de projets !");
+    alert(t.currentProject.scrollDown);
   };
 
   return (
@@ -37,18 +39,15 @@ export default function CurrentProject() {
           variants={fadeIn("right", "tween", 0.2, 1)}
           className="flex-1 flex flex-col justify-center max-w-[600px]"
         >
-          <h1 className="text-white text-xl mb-2">Projet Actuel</h1>
+          <h1 className="text-white text-xl mb-2">{t.currentProject.title}</h1>
           <p className="text-base leading-relaxed text-white mt-2">
-            Actuellement, je travaille sur un projet logiciel visant à faciliter
-            les connexions entre investisseurs et acteurs locaux. L&apos;objectif est de
-            permettre des investissements dans divers secteurs, favorisant ainsi le
-            développement de régions propices au bien-être de la population.
+            {t.currentProject.description}
           </p>
           <div className="flex items-center max-md:mt-4">
             <div className="w-full max-w-[260px] h-[95px] max-md:max-w-[200px]">
               <Lottie animationData={progressBar} loop autoplay />
             </div>
-            <p className="text-2xl text-white">80% Terminé</p>
+            <p className="text-2xl text-white">{t.currentProject.progress}</p>
           </div>
         </motion.div>
 
@@ -56,7 +55,7 @@ export default function CurrentProject() {
           variants={fadeIn("left", "tween", 0.3, 1)}
           className="flex-1 flex flex-col items-center text-center"
         >
-          <h1 className="text-white text-xl mb-4">Technologies Utilisées</h1>
+          <h1 className="text-white text-xl mb-4">{t.currentProject.techUsed}</h1>
           <motion.div
             variants={fadeIn("up", "tween", 0.4, 1)}
             className="flex flex-wrap justify-center gap-4 max-md:gap-2 [&_svg]:transition-transform [&_svg]:duration-300 [&_svg]:ease-in-out [&_svg]:cursor-pointer [&_svg:hover]:scale-[1.2]"
@@ -78,7 +77,7 @@ export default function CurrentProject() {
             className="flex items-center gap-2 mt-2 cursor-pointer"
             onClick={handleIcon}
           >
-            <h5 className="text-white text-base transition-colors duration-300 ease-in-out hover:text-gray-300 max-[480px]:text-base">Voir plus de projets</h5>
+            <h5 className="text-white text-base transition-colors duration-300 ease-in-out hover:text-gray-300 max-[480px]:text-base">{t.currentProject.viewMore}</h5>
             <div className="w-20 h-8">
               <Lottie animationData={ChevronDown} loop autoplay />
             </div>

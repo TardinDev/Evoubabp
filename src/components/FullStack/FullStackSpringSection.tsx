@@ -4,35 +4,38 @@ import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaReact, FaJava, FaShieldAlt, FaExternalLinkAlt, FaGithub, FaFileAlt, FaUserCheck, FaDatabase, FaLock } from 'react-icons/fa';
 import { SiSpringboot, SiPostgresql, SiTypescript } from 'react-icons/si';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface FullStackSpringSectionProps {
   id?: string;
 }
 
 const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) => {
+  const { t } = useTranslation();
+
   const project = {
-    title: 'Déclaration de Naissance',
+    title: `${t.fullstackSpring.birthDeclaration} ${t.fullstackSpring.birthTitle}`,
     subtitle: 'Plateforme administrative officielle',
     year: '2024',
-    description: 'Application web de gestion des déclarations de naissance permettant aux citoyens de déclarer une naissance en ligne et aux agents administratifs de traiter les demandes de manière sécurisée et efficace.',
+    description: t.fullstackSpring.description,
     image: '/images/declaration-naissance.png',
     liveUrl: 'https://declaration-naissance.vercel.app/',
     githubUrl: 'https://github.com/TardinDev/NaissanceDeclaration',
     features: [
       {
         icon: <FaFileAlt />,
-        title: 'Déclaration en ligne',
-        desc: 'Formulaire guidé étape par étape'
+        title: t.fullstackSpring.onlineDeclaration,
+        desc: t.fullstackSpring.onlineDeclarationDesc
       },
       {
         icon: <FaUserCheck />,
-        title: 'Validation agents',
-        desc: 'Interface de traitement sécurisée'
+        title: t.fullstackSpring.agentValidation,
+        desc: t.fullstackSpring.agentValidationDesc
       },
       {
         icon: <FaLock />,
-        title: 'Données protégées',
-        desc: 'Chiffrement et conformité RGPD'
+        title: t.fullstackSpring.protectedData,
+        desc: t.fullstackSpring.protectedDataDesc
       },
     ],
     stack: {
@@ -120,7 +123,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                     border: '1px solid rgba(109, 179, 63, 0.2)',
                   }}
                 >
-                  FULLSTACK JAVA
+                  {t.fullstackSpring.badge}
                 </span>
                 <h2
                   className="font-bold flex items-center justify-center gap-3 flex-wrap mb-4"
@@ -138,7 +141,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                   className="text-[1.15rem] max-w-[500px] mx-auto md:px-4"
                   style={{ color: 'rgba(255, 255, 255, 0.6)', lineHeight: 1.7 }}
                 >
-                  Architecture enterprise robuste pour applications critiques
+                  {t.fullstackSpring.subtitle}
                 </p>
               </div>
             </motion.div>
@@ -160,7 +163,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                       className="text-[0.7rem] font-bold"
                       style={{ fontFamily: "'DM Sans', 'Inter', sans-serif", letterSpacing: '0.15em' }}
                     >
-                      APPLICATION OFFICIELLE
+                      {t.fullstackSpring.officialApp}
                     </span>
                   </div>
 
@@ -172,9 +175,9 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                       lineHeight: 1.2,
                     }}
                   >
-                    Déclaration de
+                    {t.fullstackSpring.birthDeclaration}
                     <span className="block relative" style={{ color: '#6db33f' }}>
-                      Naissance
+                      {t.fullstackSpring.birthTitle}
                       <span
                         className="absolute bottom-[0.1em] left-0 w-full"
                         style={{
@@ -194,9 +197,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                       lineHeight: 1.8,
                     }}
                   >
-                    Solution digitale pour la modernisation des services
-                    d'état civil — Simplifier les démarches administratives
-                    tout en garantissant la sécurité des données sensibles.
+                    {t.fullstackSpring.description}
                   </p>
 
                   <div className="flex flex-wrap gap-3">
@@ -275,7 +276,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                           className="text-[0.9rem]"
                           style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.4)' }}
                         >
-                          Interface de déclaration
+                          {t.fullstackSpring.declarationInterface}
                         </span>
                       </div>
                     </div>
@@ -295,7 +296,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                     }}
                   >
                     <div className="text-base" style={{ color: '#6db33f' }}><FaShieldAlt /></div>
-                    <span className="text-[0.8rem] font-semibold text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>Sécurisé</span>
+                    <span className="text-[0.8rem] font-semibold text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>{t.fullstackSpring.secured}</span>
                   </div>
 
                   {/* Floating Card - bottom-left */}
@@ -371,7 +372,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                     className="flex justify-between items-center mb-8 pb-4"
                     style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}
                   >
-                    <h4 className="text-[1.1rem] font-semibold" style={{ fontFamily: "'DM Sans', sans-serif" }}>Architecture technique</h4>
+                    <h4 className="text-[1.1rem] font-semibold" style={{ fontFamily: "'DM Sans', sans-serif" }}>{t.fullstackSpring.architecture}</h4>
                     <span
                       className="text-[0.8rem] px-3 py-1 rounded"
                       style={{
@@ -395,7 +396,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                           color: 'rgba(255, 255, 255, 0.5)',
                         }}
                       >
-                        Frontend
+                        {t.fullstackSpring.frontendLabel}
                       </div>
                       <div
                         className="flex items-center gap-4 p-4 rounded-lg"
@@ -445,7 +446,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                           color: 'rgba(255, 255, 255, 0.5)',
                         }}
                       >
-                        Backend
+                        {t.fullstackSpring.backendLabel}
                       </div>
                       <div
                         className="flex items-center gap-4 p-4 rounded-lg"
@@ -486,7 +487,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                 >
                   <div>
                     <h4 className="text-2xl font-semibold text-white mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                      Projet réalisé
+                      {t.fullstackSpring.projectCompleted}
                     </h4>
                     <p
                       className="text-[0.95rem] mb-6"
@@ -496,9 +497,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                         lineHeight: 1.7,
                       }}
                     >
-                      Solution développée pour faciliter les démarches
-                      administratives des citoyens et optimiser le travail
-                      des agents d'état civil.
+                      {t.fullstackSpring.projectDesc}
                     </p>
 
                     <div
@@ -510,17 +509,17 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                     >
                       <div className="text-center flex-1">
                         <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#6db33f' }}>100%</div>
-                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>Dématérialisé</div>
+                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackSpring.dematerialized}</div>
                       </div>
                       <div className="w-px h-[30px]" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
                       <div className="text-center flex-1">
                         <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#6db33f' }}>24/7</div>
-                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>Disponible</div>
+                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackSpring.available}</div>
                       </div>
                       <div className="w-px h-[30px]" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
                       <div className="text-center flex-1">
                         <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#6db33f' }}>RGPD</div>
-                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>Conforme</div>
+                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackSpring.compliant}</div>
                       </div>
                     </div>
 
@@ -536,7 +535,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                         onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 20px rgba(109, 179, 63, 0.3)'; }}
                         onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
                       >
-                        <FaExternalLinkAlt /> Voir le projet
+                        <FaExternalLinkAlt /> {t.fullstackSpring.viewProject}
                       </a>
                       <a
                         href={project.githubUrl}
@@ -549,7 +548,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                         onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.3)'; }}
                         onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.2)'; }}
                       >
-                        <FaGithub /> Code source
+                        <FaGithub /> {t.fullstackSpring.sourceCode}
                       </a>
                     </div>
                   </div>

@@ -3,60 +3,62 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBug, FaCheckCircle, FaRocket, FaShieldAlt, FaCode, FaUserCheck } from "react-icons/fa";
 import { useState } from "react";
-
-const devProcessSteps = [
-  {
-    icon: FaCode,
-    title: "Code Propre",
-    description: "Code structuré, documenté et maintenable suivant les meilleures pratiques de développement",
-    color: "#3b82f6",
-    gradient: "linear-gradient(135deg, #3b82f6, #2563eb)",
-    metrics: ["Documentation complète", "Architecture modulaire", "Standards ESLint/Prettier"]
-  },
-  {
-    icon: FaBug,
-    title: "Tests Rigoureux",
-    description: "Tests unitaires, d'intégration et end-to-end pour garantir la qualité du code",
-    color: "#ef4444",
-    gradient: "linear-gradient(135deg, #ef4444, #dc2626)",
-    metrics: ["100% Code Coverage", "Tests automatisés", "CI/CD intégré"]
-  },
-  {
-    icon: FaShieldAlt,
-    title: "Sécurité Avancée",
-    description: "Protection contre les vulnérabilités OWASP, chiffrement des données sensibles",
-    color: "#10b981",
-    gradient: "linear-gradient(135deg, #10b981, #059669)",
-    metrics: ["Chiffrement SSL/TLS", "Protection OWASP", "Audit de sécurité"]
-  },
-  {
-    icon: FaCheckCircle,
-    title: "Validation Continue",
-    description: "Intégration et déploiement continus (CI/CD) pour livrer rapidement et sans erreurs",
-    color: "#8b5cf6",
-    gradient: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
-    metrics: ["Pipeline automatisé", "Déploiement continu", "Rollback instantané"]
-  },
-  {
-    icon: FaUserCheck,
-    title: "UX Optimisée",
-    description: "Interface intuitive et accessible, testée par de vrais utilisateurs",
-    color: "#f59e0b",
-    gradient: "linear-gradient(135deg, #f59e0b, #d97706)",
-    metrics: ["Tests utilisateurs", "Accessibilité WCAG", "Design responsive"]
-  },
-  {
-    icon: FaRocket,
-    title: "Performance Maximale",
-    description: "Optimisation du temps de chargement, lazy loading et mise en cache stratégique",
-    color: "#06b6d4",
-    gradient: "linear-gradient(135deg, #06b6d4, #0891b2)",
-    metrics: ["< 2s chargement", "Lazy loading", "Cache optimisé"]
-  }
-];
+import { useTranslation } from '../../hooks/useTranslation';
 
 const DevToolsSectionTest = () => {
+  const { t } = useTranslation();
   const [activeStep, setActiveStep] = useState(0);
+
+  const devProcessSteps = [
+    {
+      icon: FaCode,
+      title: t.devTools.cleanCode,
+      description: t.devTools.cleanCodeDesc,
+      color: "#3b82f6",
+      gradient: "linear-gradient(135deg, #3b82f6, #2563eb)",
+      metrics: [t.devTools.cleanCodeMetric1, t.devTools.cleanCodeMetric2, t.devTools.cleanCodeMetric3]
+    },
+    {
+      icon: FaBug,
+      title: t.devTools.testing,
+      description: t.devTools.testingDesc,
+      color: "#ef4444",
+      gradient: "linear-gradient(135deg, #ef4444, #dc2626)",
+      metrics: [t.devTools.testingMetric1, t.devTools.testingMetric2, t.devTools.testingMetric3]
+    },
+    {
+      icon: FaShieldAlt,
+      title: t.devTools.security,
+      description: t.devTools.securityDesc,
+      color: "#10b981",
+      gradient: "linear-gradient(135deg, #10b981, #059669)",
+      metrics: [t.devTools.securityMetric1, t.devTools.securityMetric2, t.devTools.securityMetric3]
+    },
+    {
+      icon: FaCheckCircle,
+      title: t.devTools.validation,
+      description: t.devTools.validationDesc,
+      color: "#8b5cf6",
+      gradient: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
+      metrics: [t.devTools.validationMetric1, t.devTools.validationMetric2, t.devTools.validationMetric3]
+    },
+    {
+      icon: FaUserCheck,
+      title: t.devTools.ux,
+      description: t.devTools.uxDesc,
+      color: "#f59e0b",
+      gradient: "linear-gradient(135deg, #f59e0b, #d97706)",
+      metrics: [t.devTools.uxMetric1, t.devTools.uxMetric2, t.devTools.uxMetric3]
+    },
+    {
+      icon: FaRocket,
+      title: t.devTools.performance,
+      description: t.devTools.performanceDesc,
+      color: "#06b6d4",
+      gradient: "linear-gradient(135deg, #06b6d4, #0891b2)",
+      metrics: [t.devTools.performanceMetric1, t.devTools.performanceMetric2, t.devTools.performanceMetric3]
+    }
+  ];
 
   return (
     <>
@@ -89,11 +91,10 @@ const DevToolsSectionTest = () => {
               <FaShieldAlt size={50} />
             </div>
             <h2 className="text-5xl max-md:text-[2rem] font-black text-[#1a202c] mb-6 leading-tight">
-              Développement Rigoureux & Qualité Maximale
+              {t.devTools.title}
             </h2>
             <p className="text-[1.25rem] max-md:text-[1.1rem] text-slate-500 max-w-[700px] mx-auto leading-[1.7]">
-              Chaque ligne de code est pensée, testée et optimisée pour vous offrir
-              des applications robustes, sécurisées et performantes
+              {t.devTools.subtitle}
             </p>
           </div>
 
@@ -236,7 +237,7 @@ const DevToolsSectionTest = () => {
               >
                 100%
               </div>
-              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">Code Coverage</div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">{t.devTools.codeCoverage}</div>
             </div>
             <div className="w-0.5 h-20 max-md:hidden" style={{ background: 'linear-gradient(to bottom, transparent, #cbd5e1, transparent)' }} />
             <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
@@ -251,7 +252,7 @@ const DevToolsSectionTest = () => {
               >
                 99.9%
               </div>
-              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">Disponibilité</div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">{t.devTools.availability}</div>
             </div>
             <div className="w-0.5 h-20 max-md:hidden" style={{ background: 'linear-gradient(to bottom, transparent, #cbd5e1, transparent)' }} />
             <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
@@ -266,7 +267,7 @@ const DevToolsSectionTest = () => {
               >
                 &lt; 2s
               </div>
-              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">Temps de chargement</div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">{t.devTools.loadingTime}</div>
             </div>
             <div className="w-0.5 h-20 max-md:hidden" style={{ background: 'linear-gradient(to bottom, transparent, #cbd5e1, transparent)' }} />
             <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
@@ -281,7 +282,7 @@ const DevToolsSectionTest = () => {
               >
                 A+
               </div>
-              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">Score de sécurité</div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">{t.devTools.securityScore}</div>
             </div>
           </div>
         </div>

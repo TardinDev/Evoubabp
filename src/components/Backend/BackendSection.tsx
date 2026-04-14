@@ -4,57 +4,39 @@ import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaNodeJs, FaServer, FaDatabase, FaCode, FaShieldAlt, FaCog } from 'react-icons/fa';
 import { SiSpringboot, SiSupabase } from 'react-icons/si';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface BackendSectionProps {
   id?: string;
 }
 
 const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
+  const { t } = useTranslation();
+
   const backendTechnologies = [
     {
       icon: <FaNodeJs />,
       title: 'Node.js',
-      description: 'Développement backend JavaScript/TypeScript performant et scalable',
+      description: t.backendSection.nodejs.description,
       gradient: 'linear-gradient(135deg, #68a063 0%, #3c873a 100%)',
-      features: [
-        'API RESTful et GraphQL',
-        'Microservices avec Express/Fastify',
-        'WebSockets et temps réel',
-        'Authentification JWT',
-        'Intégration base de données (MongoDB, PostgreSQL)',
-        'Gestion des files d\'attente (Bull, RabbitMQ)'
-      ],
-      useCases: 'Applications temps réel, APIs performantes, Microservices'
+      features: t.backendSection.nodejs.features,
+      useCases: t.backendSection.nodejs.useCases
     },
     {
       icon: <SiSpringboot />,
       title: 'Spring Boot',
-      description: 'Framework Java enterprise robuste pour applications critiques',
+      description: t.backendSection.springboot.description,
       gradient: 'linear-gradient(135deg, #6db33f 0%, #5a9e32 100%)',
-      features: [
-        'Architecture microservices',
-        'Spring Security pour l\'authentification',
-        'JPA/Hibernate pour ORM',
-        'Spring Cloud pour systèmes distribués',
-        'Tests unitaires et d\'intégration',
-        'Monitoring avec Actuator'
-      ],
-      useCases: 'Applications enterprise, Systèmes bancaires, E-commerce complexe'
+      features: t.backendSection.springboot.features,
+      useCases: t.backendSection.springboot.useCases
     },
     {
       icon: <SiSupabase />,
       title: 'Supabase',
-      description: 'Backend-as-a-Service open source avec base de données PostgreSQL',
+      description: t.backendSection.supabase.description,
       gradient: 'linear-gradient(135deg, #3ecf8e 0%, #2b9e6f 100%)',
-      features: [
-        'Base de données PostgreSQL instantanée',
-        'Authentification intégrée (OAuth, Magic Links)',
-        'API auto-générées (REST, GraphQL)',
-        'Stockage de fichiers',
-        'Functions serverless Edge',
-        'Temps réel avec subscriptions'
-      ],
-      useCases: 'Prototypes rapides, SaaS, Applications mobile-first'
+      features: t.backendSection.supabase.features,
+      useCases: t.backendSection.supabase.useCases
     }
   ];
 
@@ -94,11 +76,10 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
                 backgroundClip: 'text',
               }}
             >
-              Technologies Backend Maîtrisées
+              {t.backendSection.title}
             </h2>
             <p className="text-[1.2rem] md:text-[1.1rem] max-[480px]:text-base text-[#b8b8d1] leading-relaxed max-w-[700px] mx-auto md:px-4 max-[480px]:px-2">
-              Des solutions backend robustes et évolutives adaptées à vos besoins,
-              du prototypage rapide aux systèmes enterprise critiques.
+              {t.backendSection.subtitle}
             </p>
           </div>
         </motion.div>
@@ -131,7 +112,7 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
 
                 <div className="mb-6 flex-grow">
                   <h4 className="text-[1.1rem] font-semibold text-[#e0e0ff] mb-4 flex items-center gap-2">
-                    <FaCode size={16} style={{ color: '#6db33f' }} /> Ce qui est fait :
+                    <FaCode size={16} style={{ color: '#6db33f' }} /> {t.backendSection.whatIsDone}
                   </h4>
                   <ul className="list-none p-0 m-0">
                     {tech.features.map((feature, idx) => (
@@ -145,7 +126,7 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
 
                 <div className="rounded-[10px] p-4 border-l-[3px]" style={{ background: 'rgba(109, 179, 63, 0.1)', borderLeftColor: '#6db33f' }}>
                   <h4 className="text-[0.95rem] font-semibold text-[#3ecf8e] mb-2 flex items-center gap-2">
-                    <FaShieldAlt size={14} /> Cas d'usage :
+                    <FaShieldAlt size={14} /> {t.frontendSection.useCases}
                   </h4>
                   <p className="text-[#d0d0e8] text-[0.9rem] max-[480px]:text-[0.85rem] leading-6 italic">{tech.useCases}</p>
                 </div>
@@ -172,8 +153,7 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
               className="text-[1.3rem] md:text-[1.1rem] max-[480px]:text-base italic text-[#e0e0ff] p-8 md:p-6 max-[480px]:p-4 rounded-[15px] border-l-4 max-w-[800px] mx-auto"
               style={{ background: 'rgba(255, 255, 255, 0.05)', borderLeftColor: '#6db33f' }}
             >
-              Chaque projet est unique. Nous choisissons la technologie backend la plus adaptée
-              à vos contraintes de performance, scalabilité et budget.
+              {t.backendSection.closingMessage}
             </p>
           </div>
         </motion.div>

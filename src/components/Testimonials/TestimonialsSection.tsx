@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
+import { useTranslation } from '../../hooks/useTranslation';
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import { useEffect, useState, useCallback } from "react";
 
@@ -16,70 +17,29 @@ interface Testimonial {
   project: string;
 }
 
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Jean-Pierre Moussavou",
-    role: "CEO",
-    company: "Germe Invest",
-    avatar: "/images/avatars/avatar1.jpg",
-    content: "Davy a transformé notre vision en une plateforme d'investissement moderne et intuitive. Son expertise technique et sa compréhension des besoins métier ont été remarquables.",
-    rating: 5,
-    project: "Plateforme Germe Invest"
-  },
-  {
-    id: 2,
-    name: "Marie-Claire Ndong",
-    role: "Directrice Marketing",
-    company: "Manioc Gabon",
-    avatar: "/images/avatars/avatar2.jpg",
-    content: "Une collaboration exceptionnelle ! Davy a su créer une marketplace e-commerce qui reflète parfaitement notre identité. Les ventes ont augmenté de 150% depuis le lancement.",
-    rating: 5,
-    project: "E-commerce Manioc Gabon"
-  },
-  {
-    id: 3,
-    name: "Thomas Dubois",
-    role: "CTO",
-    company: "Sport Challenge",
-    avatar: "/images/avatars/avatar3.jpg",
-    content: "L'application mobile développée par Davy dépasse nos attentes. L'interface utilisateur est fluide, les performances sont excellentes. Un travail remarquable.",
-    rating: 5,
-    project: "App Mobile Sport Challenge"
-  },
-  {
-    id: 4,
-    name: "Sophie Lemaire",
-    role: "Fondatrice",
-    company: "DreamQuest",
-    avatar: "/images/avatars/avatar4.jpg",
-    content: "Davy a intégré l'IA de manière innovante dans notre projet. La visualisation 3D des rêves avec Three.js est bluffante. Un développeur créatif qui repousse les limites.",
-    rating: 5,
-    project: "DreamQuest - IA & 3D"
-  },
-  {
-    id: 5,
-    name: "Alexandre Martin",
-    role: "Product Manager",
-    company: "Binome Pay",
-    avatar: "/images/avatars/avatar5.jpg",
-    content: "Solution blockchain impeccable. Davy maîtrise parfaitement les technologies Web3 et a su créer une expérience utilisateur fluide pour notre app de paiement P2P.",
-    rating: 5,
-    project: "Binome Pay - Web3"
-  },
-];
-
 interface TestimonialsSectionProps {
   id?: string;
 }
 
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
+  const testimonials: Testimonial[] = t.testimonials.items.map((item: { name: string; role: string; company: string; content: string; project: string }, index: number) => ({
+    id: index + 1,
+    name: item.name,
+    role: item.role,
+    company: item.company,
+    avatar: `/images/avatars/avatar${index + 1}.jpg`,
+    content: item.content,
+    rating: 5,
+    project: item.project,
+  }));
+
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  }, []);
+  }, [testimonials.length]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
@@ -127,16 +87,16 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
           <motion.div variants={fadeIn("up", "tween", 0.1, 0.8)}>
             <div className="text-center mb-6">
               <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-[#ffd700] mb-4">
-                Témoignages
+                {t.testimonials.badge}
               </span>
               <h2
                 className="font-bold text-white mb-4 tracking-tight"
                 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}
               >
-                Ils m&apos;ont fait <span className="text-[#ffd700]">confiance</span>
+                {t.testimonials.title} <span className="text-[#ffd700]">{t.testimonials.titleHighlight}</span>
               </h2>
               <p className="text-[1.1rem] text-white/50 max-w-[400px] mx-auto">
-                Des collaborations réussies avec des entreprises ambitieuses
+                {t.testimonials.subtitle}
               </p>
             </div>
           </motion.div>
@@ -269,7 +229,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
                 50+
               </div>
               <div className="text-[0.85rem] text-white/40 font-medium">
-                Projets livrés
+                {t.testimonials.deliveredProjects}
               </div>
             </div>
             <div className="w-px h-10" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
@@ -278,7 +238,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
                 100%
               </div>
               <div className="text-[0.85rem] text-white/40 font-medium">
-                Satisfaction
+                {t.testimonials.satisfaction}
               </div>
             </div>
             <div className="w-px h-10" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
@@ -287,7 +247,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
                 5.0
               </div>
               <div className="text-[0.85rem] text-white/40 font-medium">
-                Note moyenne
+                {t.testimonials.averageRating}
               </div>
             </div>
           </div>

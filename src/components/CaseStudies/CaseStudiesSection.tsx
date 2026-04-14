@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
+import { useTranslation } from '../../hooks/useTranslation';
 import { FaArrowRight, FaChartLine, FaClock, FaUsers, FaMobile, FaGlobe, FaRobot } from "react-icons/fa";
 import { useState } from "react";
 
@@ -24,69 +25,70 @@ interface CaseStudy {
   year: string;
 }
 
-const caseStudies: CaseStudy[] = [
-  {
-    id: "germe-invest",
-    title: "Plateforme d'investissement Germe Invest",
-    client: "Germe Invest",
-    category: "Application Web",
-    categoryIcon: <FaGlobe />,
-    image: "/imagesAppsWeb/germeinvest.png",
-    challenge: "Germe Invest avait besoin d'une plateforme moderne pour présenter ses services d'investissement et permettre aux clients de suivre leurs portefeuilles. L'ancien site était obsolète et ne reflétait pas le professionnalisme de l'entreprise.",
-    solution: "Développement d'une plateforme responsive avec React et TypeScript, intégrant un dashboard client sécurisé, des graphiques de performance en temps réel et un système de prise de rendez-vous. Architecture optimisée pour la performance et le SEO.",
-    results: [
-      { metric: "Augmentation des leads", value: "+180%", icon: <FaChartLine /> },
-      { metric: "Temps de chargement", value: "-65%", icon: <FaClock /> },
-      { metric: "Nouveaux clients", value: "+45%", icon: <FaUsers /> },
-    ],
-    technologies: ["React", "TypeScript", "Styled Components", "Chart.js", "Node.js"],
-    duration: "3 mois",
-    year: "2024"
-  },
-  {
-    id: "sport-challenge",
-    title: "Application Mobile Sport Challenge",
-    client: "Sport Challenge",
-    category: "Application Mobile",
-    categoryIcon: <FaMobile />,
-    image: "/imagesAppsMobile/sportchallenge.png",
-    challenge: "Créer une application mobile engageante permettant aux utilisateurs de découvrir et participer à des défis sportifs locaux. Le défi principal était de gamifier l'expérience tout en gardant une interface intuitive.",
-    solution: "Application React Native avec Expo, utilisant des animations fluides (Reanimated), géolocalisation pour les défis locaux, système de points et classements, notifications push pour l'engagement utilisateur.",
-    results: [
-      { metric: "Téléchargements", value: "10K+", icon: <FaUsers /> },
-      { metric: "Rétention J7", value: "68%", icon: <FaChartLine /> },
-      { metric: "Note App Store", value: "4.8/5", icon: <FaChartLine /> },
-    ],
-    technologies: ["React Native", "Expo", "Reanimated", "Firebase", "TypeScript"],
-    duration: "4 mois",
-    year: "2024"
-  },
-  {
-    id: "dreamquest",
-    title: "DreamQuest - Visualisation IA des rêves",
-    client: "DreamQuest",
-    category: "IA & 3D",
-    categoryIcon: <FaRobot />,
-    image: "/imagesAppsWeb/dreamquest.png",
-    challenge: "Transformer des descriptions textuelles de rêves en visualisations 3D immersives. Le défi technique était d'intégrer l'IA générative (OpenAI) avec une expérience 3D fluide dans le navigateur.",
-    solution: "Application web combinant React, Three.js pour le rendu 3D, et l'API OpenAI pour l'interprétation et la génération d'images. Implémentation d'un système de sauvegarde des rêves et partage social.",
-    results: [
-      { metric: "Utilisateurs actifs", value: "5K+", icon: <FaUsers /> },
-      { metric: "Rêves générés", value: "25K+", icon: <FaRobot /> },
-      { metric: "Temps moyen session", value: "8 min", icon: <FaClock /> },
-    ],
-    technologies: ["React", "Three.js", "OpenAI API", "GSAP", "Supabase"],
-    duration: "2 mois",
-    year: "2024"
-  },
-];
-
 interface CaseStudiesSectionProps {
   id?: string;
 }
 
 const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ id }) => {
+  const { t } = useTranslation();
   const [expandedStudy, setExpandedStudy] = useState<string | null>(null);
+
+  const caseStudies: CaseStudy[] = [
+    {
+      id: "germe-invest",
+      title: t.caseStudies.germe.title,
+      client: t.caseStudies.germe.client,
+      category: t.caseStudies.germe.category,
+      categoryIcon: <FaGlobe />,
+      image: "/imagesAppsWeb/germeinvest.png",
+      challenge: t.caseStudies.germe.challengeDesc,
+      solution: t.caseStudies.germe.solutionDesc,
+      results: [
+        { metric: t.caseStudies.germe.metric1, value: t.caseStudies.germe.value1, icon: <FaChartLine /> },
+        { metric: t.caseStudies.germe.metric2, value: t.caseStudies.germe.value2, icon: <FaClock /> },
+        { metric: t.caseStudies.germe.metric3, value: t.caseStudies.germe.value3, icon: <FaUsers /> },
+      ],
+      technologies: ["React", "TypeScript", "Styled Components", "Chart.js", "Node.js"],
+      duration: t.caseStudies.germe.duration,
+      year: "2024"
+    },
+    {
+      id: "sport-challenge",
+      title: t.caseStudies.sport.title,
+      client: t.caseStudies.sport.client,
+      category: t.caseStudies.sport.category,
+      categoryIcon: <FaMobile />,
+      image: "/imagesAppsMobile/sportchallenge.png",
+      challenge: t.caseStudies.sport.challengeDesc,
+      solution: t.caseStudies.sport.solutionDesc,
+      results: [
+        { metric: t.caseStudies.sport.metric1, value: t.caseStudies.sport.value1, icon: <FaUsers /> },
+        { metric: t.caseStudies.sport.metric2, value: t.caseStudies.sport.value2, icon: <FaChartLine /> },
+        { metric: t.caseStudies.sport.metric3, value: t.caseStudies.sport.value3, icon: <FaChartLine /> },
+      ],
+      technologies: ["React Native", "Expo", "Reanimated", "Firebase", "TypeScript"],
+      duration: t.caseStudies.sport.duration,
+      year: "2024"
+    },
+    {
+      id: "dreamquest",
+      title: t.caseStudies.dreamquest.title,
+      client: t.caseStudies.dreamquest.client,
+      category: t.caseStudies.dreamquest.category,
+      categoryIcon: <FaRobot />,
+      image: "/imagesAppsWeb/dreamquest.png",
+      challenge: t.caseStudies.dreamquest.challengeDesc,
+      solution: t.caseStudies.dreamquest.solutionDesc,
+      results: [
+        { metric: t.caseStudies.dreamquest.metric1, value: t.caseStudies.dreamquest.value1, icon: <FaUsers /> },
+        { metric: t.caseStudies.dreamquest.metric2, value: t.caseStudies.dreamquest.value2, icon: <FaRobot /> },
+        { metric: t.caseStudies.dreamquest.metric3, value: t.caseStudies.dreamquest.value3, icon: <FaClock /> },
+      ],
+      technologies: ["React", "Three.js", "OpenAI API", "GSAP", "Supabase"],
+      duration: t.caseStudies.dreamquest.duration,
+      year: "2024"
+    },
+  ];
 
   const toggleStudy = (studyId: string) => {
     setExpandedStudy(expandedStudy === studyId ? null : studyId);
@@ -122,7 +124,7 @@ const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ id }) => {
                   border: '1px solid rgba(255, 215, 0, 0.2)',
                 }}
               >
-                PORTFOLIO
+                {t.caseStudies.badge}
               </span>
               <h2
                 className="font-bold text-white mb-4"
@@ -131,7 +133,7 @@ const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ id }) => {
                   fontSize: 'clamp(2rem, 4vw, 3rem)',
                 }}
               >
-                Études de{' '}
+                {t.caseStudies.title}{' '}
                 <span
                   className="bg-clip-text"
                   style={{
@@ -141,11 +143,11 @@ const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ id }) => {
                     backgroundClip: 'text',
                   }}
                 >
-                  cas
+                  {t.caseStudies.titleHighlight}
                 </span>
               </h2>
               <p className="text-[1.125rem] text-white/60 max-w-[500px] mx-auto leading-relaxed">
-                Découvrez en détail comment j&apos;ai aidé mes clients à atteindre leurs objectifs
+                {t.caseStudies.subtitle}
               </p>
             </div>
           </motion.div>
@@ -237,7 +239,7 @@ const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ id }) => {
                           e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)';
                         }}
                       >
-                        Voir les détails{' '}
+                        {t.caseStudies.viewDetails}{' '}
                         <FaArrowRight
                           className="transition-transform duration-300"
                           style={{
@@ -265,7 +267,7 @@ const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ id }) => {
                           className="text-[1.1rem] font-semibold text-[#ffd700] mb-4"
                           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                         >
-                          Le Défi
+                          {t.caseStudies.challenge}
                         </h4>
                         <p className="text-[0.95rem] text-white/70 leading-loose">
                           {study.challenge}
@@ -276,7 +278,7 @@ const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ id }) => {
                           className="text-[1.1rem] font-semibold text-[#ffd700] mb-4"
                           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                         >
-                          La Solution
+                          {t.caseStudies.solution}
                         </h4>
                         <p className="text-[0.95rem] text-white/70 leading-loose">
                           {study.solution}
@@ -290,7 +292,7 @@ const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ id }) => {
                         className="text-[1.1rem] font-semibold text-[#ffd700] mb-4"
                         style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                       >
-                        Résultats
+                        {t.caseStudies.results}
                       </h4>
                       <div className="grid grid-cols-3 sm:grid-cols-1 gap-4">
                         {study.results.map((result, idx) => (
@@ -325,7 +327,7 @@ const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ id }) => {
                         className="text-[1.1rem] font-semibold text-[#ffd700] mb-4"
                         style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                       >
-                        Technologies utilisées
+                        {t.caseStudies.techUsed}
                       </h4>
                       <div className="flex flex-wrap gap-3">
                         {study.technologies.map((tech, idx) => (

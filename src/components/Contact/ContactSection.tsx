@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import { useState } from "react";
+import { useTranslation } from '../../hooks/useTranslation';
 import {
   FaPaperPlane,
   FaEnvelope,
@@ -51,6 +52,7 @@ const inputFocusStyle = {
 };
 
 const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
@@ -156,7 +158,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   border: '1px solid rgba(255, 215, 0, 0.2)',
                 }}
               >
-                CONTACT
+                {t.contact.badge}
               </span>
               <h2
                 className="font-bold text-white mb-4"
@@ -165,7 +167,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   fontSize: 'clamp(2rem, 4vw, 3rem)',
                 }}
               >
-                Discutons de votre{' '}
+                {t.contact.title}{' '}
                 <span
                   className="bg-clip-text"
                   style={{
@@ -175,11 +177,11 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                     backgroundClip: 'text',
                   }}
                 >
-                  projet
+                  {t.contact.titleHighlight}
                 </span>
               </h2>
               <p className="text-[1.125rem] text-white/70 max-w-[500px] mx-auto leading-relaxed">
-                Une idée ? Un projet ? Contactez-moi et transformons votre vision en réalité
+                {t.contact.subtitle}
               </p>
             </div>
           </motion.div>
@@ -213,7 +215,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   </div>
                   <div className="flex-1">
                     <span className="block text-[0.8rem] text-white/50 uppercase tracking-wider mb-1">
-                      Email
+                      {t.contact.email}
                     </span>
                     <a
                       href="mailto:tardindavy@gmail.com"
@@ -250,7 +252,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   </div>
                   <div className="flex-1">
                     <span className="block text-[0.8rem] text-white/50 uppercase tracking-wider mb-1">
-                      WhatsApp
+                      {t.contact.whatsapp}
                     </span>
                     <a
                       href="https://wa.me/33766450771"
@@ -289,13 +291,13 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   </div>
                   <div className="flex-1">
                     <span className="block text-[0.8rem] text-white/50 uppercase tracking-wider mb-1">
-                      Localisation
+                      {t.contact.location}
                     </span>
                     <span className="block text-[1.1rem] text-white">
-                      France, Europe
+                      {t.contact.locationValue}
                     </span>
                     <span className="block text-[0.85rem] text-white/50 mt-1">
-                      Disponible en remote worldwide
+                      {t.contact.remoteAvailable}
                     </span>
                   </div>
                 </div>
@@ -344,7 +346,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                     className="w-2.5 h-2.5 bg-green-500 rounded-full"
                     style={{ animation: 'contact-pulse 2s infinite' }}
                   />
-                  Disponible pour de nouveaux projets
+                  {t.contact.availableForProjects}
                 </div>
               </div>
             </motion.div>
@@ -361,7 +363,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
-                        Nom complet *
+                        {t.contact.fullName}
                       </label>
                       <input
                         type="text"
@@ -370,7 +372,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                         onChange={handleChange}
                         onFocus={handleInputFocus}
                         onBlur={handleInputBlur}
-                        placeholder="Votre nom"
+                        placeholder={t.contact.fullNamePlaceholder}
                         required
                         className={inputClassName}
                         style={inputStyle}
@@ -378,7 +380,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                     </div>
                     <div>
                       <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
-                        Email *
+                        {t.contact.emailLabel}
                       </label>
                       <input
                         type="email"
@@ -387,7 +389,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                         onChange={handleChange}
                         onFocus={handleInputFocus}
                         onBlur={handleInputBlur}
-                        placeholder="votre@email.com"
+                        placeholder={t.contact.emailPlaceholder}
                         required
                         className={inputClassName}
                         style={inputStyle}
@@ -397,7 +399,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
 
                   <div>
                     <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
-                      Sujet *
+                      {t.contact.subject}
                     </label>
                     <input
                       type="text"
@@ -406,7 +408,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                       onChange={handleChange}
                       onFocus={handleInputFocus}
                       onBlur={handleInputBlur}
-                      placeholder="Ex: Développement d'une application mobile"
+                      placeholder={t.contact.subjectPlaceholder}
                       required
                       className={inputClassName}
                       style={inputStyle}
@@ -416,7 +418,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
-                        Type de projet
+                        {t.contact.projectType}
                       </label>
                       <select
                         name="projectType"
@@ -427,18 +429,18 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                         className={`${inputClassName} cursor-pointer [&_option]:bg-[#2d004f] [&_option]:text-white`}
                         style={inputStyle}
                       >
-                        <option value="">Sélectionner...</option>
-                        <option value="mobile">Application Mobile</option>
-                        <option value="web">Application Web</option>
-                        <option value="fullstack">Projet FullStack</option>
-                        <option value="consulting">Consulting</option>
-                        <option value="formation">Formation</option>
-                        <option value="other">Autre</option>
+                        <option value="">{t.contact.selectPlaceholder}</option>
+                        <option value="mobile">{t.contact.mobileApp}</option>
+                        <option value="web">{t.contact.webApp}</option>
+                        <option value="fullstack">{t.contact.fullstackProject}</option>
+                        <option value="consulting">{t.contact.consulting}</option>
+                        <option value="formation">{t.contact.training}</option>
+                        <option value="other">{t.contact.other}</option>
                       </select>
                     </div>
                     <div>
                       <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
-                        Budget estimé
+                        {t.contact.budget}
                       </label>
                       <select
                         name="budget"
@@ -449,19 +451,19 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                         className={`${inputClassName} cursor-pointer [&_option]:bg-[#2d004f] [&_option]:text-white`}
                         style={inputStyle}
                       >
-                        <option value="">Sélectionner...</option>
-                        <option value="<5k">&lt; 5 000 EUR</option>
-                        <option value="5k-10k">5 000 - 10 000 EUR</option>
-                        <option value="10k-25k">10 000 - 25 000 EUR</option>
-                        <option value="25k-50k">25 000 - 50 000 EUR</option>
-                        <option value=">50k">&gt; 50 000 EUR</option>
+                        <option value="">{t.contact.selectPlaceholder}</option>
+                        <option value="<5k">{t.contact.budget5k}</option>
+                        <option value="5k-10k">{t.contact.budget5k10k}</option>
+                        <option value="10k-25k">{t.contact.budget10k25k}</option>
+                        <option value="25k-50k">{t.contact.budget25k50k}</option>
+                        <option value=">50k">{t.contact.budget50k}</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-[0.9rem] font-medium text-white/90 mb-2">
-                      Message *
+                      {t.contact.message}
                     </label>
                     <textarea
                       name="message"
@@ -469,7 +471,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                       onChange={handleChange}
                       onFocus={handleInputFocus as any}
                       onBlur={handleInputBlur as any}
-                      placeholder="Décrivez votre projet, vos objectifs et vos besoins..."
+                      placeholder={t.contact.messagePlaceholder}
                       rows={5}
                       required
                       className={`${inputClassName} resize-y min-h-[120px]`}
@@ -495,12 +497,12 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                             animation: 'contact-spin 0.8s linear infinite',
                           }}
                         />
-                        Envoi en cours...
+                        {t.contact.sending}
                       </>
                     ) : (
                       <>
                         <FaPaperPlane />
-                        Envoyer le message
+                        {t.contact.sendMessage}
                       </>
                     )}
                   </button>
@@ -514,7 +516,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                       }}
                     >
                       <FaCheckCircle />
-                      Message envoyé avec succès ! Je vous répondrai rapidement.
+                      {t.contact.successMessage}
                     </div>
                   )}
 
@@ -527,7 +529,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                       }}
                     >
                       <FaExclamationCircle />
-                      Une erreur est survenue. Veuillez réessayer.
+                      {t.contact.errorMessage}
                     </div>
                   )}
                 </form>

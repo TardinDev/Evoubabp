@@ -4,57 +4,39 @@ import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaReact, FaCode, FaPalette, FaRocket, FaMobileAlt, FaCheckCircle } from 'react-icons/fa';
 import { SiTypescript, SiTailwindcss } from 'react-icons/si';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface FrontendSectionProps {
   id?: string;
 }
 
 const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
+  const { t } = useTranslation();
+
   const frontendTechnologies = [
     {
       icon: <FaReact />,
       title: 'React',
-      description: 'Bibliothèque JavaScript puissante pour construire des interfaces utilisateur modernes et réactives',
+      description: t.frontendSection.react.description,
       gradient: 'linear-gradient(135deg, #61dafb 0%, #0088cc 100%)',
-      features: [
-        'Composants réutilisables et modulaires',
-        'Virtual DOM pour performances optimales',
-        'Hooks pour gestion d\'état simplifiée',
-        'React Router pour navigation fluide',
-        'Context API et Redux pour état global',
-        'Server-Side Rendering (SSR) avec Next.js'
-      ],
-      useCases: 'Applications web complexes, SPA, Applications e-commerce'
+      features: t.frontendSection.react.features,
+      useCases: t.frontendSection.react.useCases
     },
     {
       icon: <SiTypescript />,
       title: 'TypeScript',
-      description: 'Superset de JavaScript offrant le typage statique pour un code plus robuste et maintenable',
+      description: t.frontendSection.typescript.description,
       gradient: 'linear-gradient(135deg, #3178c6 0%, #235a97 100%)',
-      features: [
-        'Détection d\'erreurs à la compilation',
-        'Autocomplétion intelligente (IntelliSense)',
-        'Interfaces et types personnalisés',
-        'Refactoring sécurisé et facilité',
-        'Meilleure documentation du code',
-        'Support des dernières fonctionnalités ES6+'
-      ],
-      useCases: 'Projets de grande envergure, Équipes multiples, Applications critiques'
+      features: t.frontendSection.typescript.features,
+      useCases: t.frontendSection.typescript.useCases
     },
     {
       icon: <SiTailwindcss />,
       title: 'Tailwind CSS',
-      description: 'Framework CSS utility-first permettant un développement rapide et un design cohérent',
+      description: t.frontendSection.tailwind.description,
       gradient: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
-      features: [
-        'Classes utilitaires pour styling rapide',
-        'Design responsive intégré',
-        'Personnalisation complète via config',
-        'Dark mode natif',
-        'Optimisation automatique (PurgeCSS)',
-        'Composants réutilisables avec @apply'
-      ],
-      useCases: 'Prototypage rapide, Design systems, Applications modernes'
+      features: t.frontendSection.tailwind.features,
+      useCases: t.frontendSection.tailwind.useCases
     }
   ];
 
@@ -94,11 +76,10 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
                 backgroundClip: 'text',
               }}
             >
-              Technologies Frontend Modernes
+              {t.frontendSection.title}
             </h2>
             <p className="text-[1.2rem] md:text-[1.1rem] max-[480px]:text-base text-slate-300 leading-relaxed max-w-[700px] mx-auto md:px-4 max-[480px]:px-2">
-              Création d'interfaces utilisateur exceptionnelles et performantes
-              avec les technologies les plus avancées de l'écosystème web.
+              {t.frontendSection.subtitle}
             </p>
           </div>
         </motion.div>
@@ -131,7 +112,7 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
 
                 <div className="mb-6 flex-grow">
                   <h4 className="text-[1.1rem] font-semibold text-sky-100 mb-4 flex items-center gap-2">
-                    <FaCode size={16} style={{ color: '#61dafb' }} /> Fonctionnalités clés :
+                    <FaCode size={16} style={{ color: '#61dafb' }} /> {t.frontendSection.keyFeatures}
                   </h4>
                   <ul className="list-none p-0 m-0">
                     {tech.features.map((feature, idx) => (
@@ -145,7 +126,7 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
 
                 <div className="rounded-[10px] p-4 border-l-[3px]" style={{ background: 'rgba(97, 218, 251, 0.1)', borderLeftColor: '#61dafb' }}>
                   <h4 className="text-[0.95rem] font-semibold text-cyan-500 mb-2 flex items-center gap-2">
-                    <FaCheckCircle size={14} /> Cas d'usage :
+                    <FaCheckCircle size={14} /> {t.frontendSection.useCases}
                   </h4>
                   <p className="text-sky-100 text-[0.9rem] max-[480px]:text-[0.85rem] leading-6 italic">{tech.useCases}</p>
                 </div>
@@ -173,8 +154,7 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
               style={{ background: 'rgba(255, 255, 255, 0.05)', borderLeftColor: '#61dafb' }}
             >
               <FaRocket style={{ display: 'inline', marginRight: '0.5rem' }} />
-              La combinaison React + TypeScript + Tailwind CSS permet de créer des applications
-              web ultra-performantes, maintenables et visuellement exceptionnelles.
+              {t.frontendSection.closingMessage}
             </p>
           </div>
         </motion.div>

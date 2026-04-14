@@ -8,6 +8,7 @@ import { MdPhoneIphone, MdSchool } from 'react-icons/md'
 import { FaBrain } from 'react-icons/fa'
 import dynamic from 'next/dynamic'
 import type { IconType } from 'react-icons'
+import { useTranslation } from '../../hooks/useTranslation'
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
@@ -34,55 +35,52 @@ interface ServiceData {
   gradientTo: string
 }
 
-const services: ServiceData[] = [
-  {
-    key: 'web',
-    title: 'Développement Web/SAAS',
-    description:
-      "Nous créons des applications web et SAAS de toute complexité, sans limites d'intégration ni d'évolutivité, en gérant efficacement et rapidement les entrées, les sorties, les bases de données et de multiples composants externes.",
-    Icon: HiOutlineDesktopComputer,
-    vercelLink: 'voir les projets sur Vercel',
-    color: '#286F6C',
-    animationData: webDevelopmentAnimation,
-    gradientFrom: 'rgba(40, 111, 108, 0.12)',
-    gradientTo: 'rgba(40, 111, 108, 0.04)',
-  },
-  {
-    key: 'saas',
-    title: 'Intelligence Artificielle',
-    description:
-      "Nos solutions IA sont conçues pour automatiser vos processus, analyser vos données et fournir des insights prédictifs pour transformer votre entreprise grâce à l'intelligence artificielle.",
-    Icon: FaBrain,
-    color: '#EEC048',
-    animationData: saasAnimation,
-    gradientFrom: 'rgba(238, 192, 72, 0.12)',
-    gradientTo: 'rgba(238, 192, 72, 0.04)',
-  },
-  {
-    key: 'mobile',
-    title: 'Développement Mobile',
-    description:
-      'Nous créons des applications mobiles haute performance avec React Native, optimisées pour les plateformes Android et iOS.',
-    Icon: MdPhoneIphone,
-    color: '#F26440',
-    animationData: mobileAnimation,
-    gradientFrom: 'rgba(242, 100, 64, 0.12)',
-    gradientTo: 'rgba(242, 100, 64, 0.04)',
-  },
-  {
-    key: 'learning',
-    title: 'Apprentissage React',
-    description:
-      "Notre programme d'apprentissage React propose des projets pratiques et des conseils d'experts pour vous aider à maîtriser les concepts fondamentaux et avancés du développement avec React.",
-    Icon: MdSchool,
-    color: '#4A90E2',
-    animationData: learningAnimation,
-    gradientFrom: 'rgba(74, 144, 226, 0.12)',
-    gradientTo: 'rgba(74, 144, 226, 0.04)',
-  },
-]
-
 const Projects: React.FC<ProjectsProps> = ({ id }) => {
+  const { t } = useTranslation();
+
+  const services: ServiceData[] = [
+    {
+      key: 'web',
+      title: t.services.webSaas,
+      description: t.services.webSaasDesc,
+      Icon: HiOutlineDesktopComputer,
+      vercelLink: t.services.viewVercel,
+      color: '#286F6C',
+      animationData: webDevelopmentAnimation,
+      gradientFrom: 'rgba(40, 111, 108, 0.12)',
+      gradientTo: 'rgba(40, 111, 108, 0.04)',
+    },
+    {
+      key: 'saas',
+      title: t.services.ai,
+      description: t.services.aiDesc,
+      Icon: FaBrain,
+      color: '#EEC048',
+      animationData: saasAnimation,
+      gradientFrom: 'rgba(238, 192, 72, 0.12)',
+      gradientTo: 'rgba(238, 192, 72, 0.04)',
+    },
+    {
+      key: 'mobile',
+      title: t.services.mobile,
+      description: t.services.mobileDesc,
+      Icon: MdPhoneIphone,
+      color: '#F26440',
+      animationData: mobileAnimation,
+      gradientFrom: 'rgba(242, 100, 64, 0.12)',
+      gradientTo: 'rgba(242, 100, 64, 0.04)',
+    },
+    {
+      key: 'learning',
+      title: t.services.learning,
+      description: t.services.learningDesc,
+      Icon: MdSchool,
+      color: '#4A90E2',
+      animationData: learningAnimation,
+      gradientFrom: 'rgba(74, 144, 226, 0.12)',
+      gradientTo: 'rgba(74, 144, 226, 0.04)',
+    },
+  ];
   const sectionRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLDivElement>(null)
   const orb1Ref = useRef<HTMLDivElement>(null)
@@ -412,10 +410,10 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
         {/* Title */}
         <div ref={titleRef} className="text-center mb-10">
           <h2 className="text-xl sm:text-[2.2rem] font-bold text-[#3a3b3c] mb-2">
-            Services Proposés
+            {t.services.title}
           </h2>
           <p className="text-[1.05rem] text-[#6c757d] max-w-[500px] mx-auto">
-            Donner vie à vos idées dans vos délais et votre budget.
+            {t.services.subtitle}
           </p>
         </div>
 

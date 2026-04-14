@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useChatBot } from "../../contexts/ChatBotContext";
+import { useTranslation } from '../../hooks/useTranslation';
 import { FaComments, FaCode, FaEnvelope, FaPhone, FaGlobe } from "react-icons/fa";
 
 export default function Footer() {
   const { openChatBot } = useChatBot();
+  const { t } = useTranslation();
 
   return (
     <footer
@@ -50,8 +52,7 @@ export default function Footer() {
             </div>
             {/* Brand description */}
             <p className="text-[#94a3b8] leading-relaxed max-w-[300px]">
-              Créateur d&apos;applications mobiles et web innovantes.
-              Transformons vos idées en solutions digitales exceptionnelles.
+              {t.footer.brandDescription}
             </p>
             {/* Social links */}
             <div className="flex gap-4">
@@ -89,18 +90,18 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Services column */}
             <div className="flex flex-col gap-4">
-              <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">Services</h3>
-              <a href="#app-showcase" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Applications Mobile</a>
-              <a href="#app-showcase" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Applications Web</a>
-              <a href="#howItWorks" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Développement SaaS</a>
-              <Link href="/formations" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Formations</Link>
-              <Link href="/blog" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Blog</Link>
-              <a href="#howItWorks" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Consulting</a>
+              <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">{t.footer.services}</h3>
+              <a href="#app-showcase" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.mobileApps}</a>
+              <a href="#app-showcase" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.webApps}</a>
+              <a href="#howItWorks" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.saasDev}</a>
+              <Link href="/formations" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.training}</Link>
+              <Link href="/blog" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.blog}</Link>
+              <a href="#howItWorks" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.consulting}</a>
             </div>
 
             {/* Technologies column */}
             <div className="flex flex-col gap-4">
-              <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">Technologies</h3>
+              <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">{t.footer.technologies}</h3>
               <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React Native</a>
               <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React / Next.js</a>
               <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">TypeScript</a>
@@ -110,7 +111,7 @@ export default function Footer() {
 
             {/* Contact column */}
             <div className="flex flex-col gap-4">
-              <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">Contact</h3>
+              <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">{t.footer.contact}</h3>
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2 text-[#94a3b8]">
                   <span className="flex items-center justify-center text-[#94a3b8]"><FaEnvelope size={14} /></span>
@@ -137,7 +138,7 @@ export default function Footer() {
                   }}
                 >
                   <FaComments size={18} />
-                  <span>Discuter avec moi</span>
+                  <span>{t.footer.chatWithMe}</span>
                 </button>
               </div>
             </div>
@@ -153,12 +154,12 @@ export default function Footer() {
         {/* Bottom section */}
         <div className="flex justify-between items-center flex-wrap gap-4 max-md:flex-col max-md:text-center">
           <p className="text-[#64748b] text-sm">
-            &copy; 2026 Evoubabp Industries. Tous droits réservés.
+            {t.footer.copyright}
           </p>
           <div className="flex gap-6 max-sm:flex-wrap max-sm:justify-center">
-            <Link href="/politique-confidentialite" className="text-[#64748b] no-underline text-sm transition-colors duration-300 hover:text-blue-500">Politique de confidentialité</Link>
-            <Link href="/cgu" className="text-[#64748b] no-underline text-sm transition-colors duration-300 hover:text-blue-500">Conditions d&apos;utilisation</Link>
-            <Link href="/mentions-legales" className="text-[#64748b] no-underline text-sm transition-colors duration-300 hover:text-blue-500">Mentions légales</Link>
+            <Link href="/politique-confidentialite" className="text-[#64748b] no-underline text-sm transition-colors duration-300 hover:text-blue-500">{t.footer.privacyPolicy}</Link>
+            <Link href="/cgu" className="text-[#64748b] no-underline text-sm transition-colors duration-300 hover:text-blue-500">{t.footer.termsOfUse}</Link>
+            <Link href="/mentions-legales" className="text-[#64748b] no-underline text-sm transition-colors duration-300 hover:text-blue-500">{t.footer.legalNotices}</Link>
           </div>
         </div>
       </div>

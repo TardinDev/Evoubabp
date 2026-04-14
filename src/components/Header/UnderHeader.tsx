@@ -11,14 +11,16 @@ import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import gitHubAnimation from "../../shared/assets/animations/gitHub.json";
 import { useState, useEffect } from "react";
-
-const carouselWords = [
-  "Tardin",
-  <>Développeur<br />Logiciel</>
-];
+import { useTranslation } from "../../hooks/useTranslation";
 
 export default function UnderHeader() {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const carouselWords = [
+    "Tardin",
+    <>{t.hero.developer}<br />{t.hero.software}</>
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -47,7 +49,7 @@ export default function UnderHeader() {
             variants={fadeIn("right", "tween", 0.2, 1)}
             className="cursor-pointer transition-all duration-500 ease-in-out p-2 rounded-[10px] font-semibold text-black relative z-[2] -ml-6 hover:bg-[#4b0082] hover:text-white hover:scale-110 hover:border hover:border-purple-800 hover:rounded-[10px] hover:px-4 hover:py-2 hover:no-underline hover:z-10 group"
           >
-            Bonjour,<br /> Je suis{" "}
+            {t.hero.greeting}<br /> {t.hero.iAm}{" "}
             <span className="inline-block relative w-[min(280px,70vw)] h-[2.4em] align-top">
               <AnimatePresence mode="wait">
                 <motion.span
@@ -68,11 +70,11 @@ export default function UnderHeader() {
             variants={fadeIn("left", "tween", 0.2, 1)}
             className="relative rounded-[10px] inline-block cursor-pointer px-4 py-2 transition-all duration-500 ease-in-out text-black font-semibold z-[2] hover:bg-[#4b0082] hover:text-white hover:scale-110 hover:border hover:border-purple-800 hover:rounded-[10px] hover:px-4 hover:py-2 hover:no-underline hover:z-10 max-sm:relative max-sm:hidden"
           >
-            <span>Je conçois des solutions intelligentes</span>
+            <span>{t.hero.smartSolutions1}</span>
             <br />
-            <span>alimentées par l&apos;IA pour transformer</span>
+            <span>{t.hero.smartSolutions2}</span>
             <br />
-            <span>l&apos;avenir de votre entreprise.</span>
+            <span>{t.hero.smartSolutions3}</span>
           </motion.span>
         </div>
 
@@ -97,7 +99,7 @@ export default function UnderHeader() {
           href={cv}
           download={cv}
         >
-          Télécharger mon CV
+          {t.hero.downloadCV}
         </motion.a>
 
         {/* Down element */}
@@ -115,8 +117,8 @@ export default function UnderHeader() {
                 4
               </div>
               <div className="relative rounded-[10px] inline-block cursor-pointer px-4 py-2 transition-all duration-500 ease-in-out text-black font-semibold z-[2] hover:bg-[#4b0082] hover:text-white hover:scale-110 hover:border hover:border-purple-800 hover:rounded-[10px] hover:px-4 hover:py-2 hover:no-underline hover:z-10 max-sm:relative max-sm:hidden">
-                <div>Années</div>
-                <div>d&apos;Expérience</div>
+                <div>{t.hero.years}</div>
+                <div>{t.hero.experience}</div>
               </div>
             </div>
             {/* iconsContact */}
@@ -133,7 +135,7 @@ export default function UnderHeader() {
             className="flex gap-5 items-center ml-auto max-sm:flex-col max-sm:items-start max-sm:ml-0 max-sm:gap-3"
           >
             <div className="text-lg leading-snug max-w-[520px] font-bold max-sm:text-sm max-sm:leading-relaxed">
-              Découvrez mes projets intégrant l&apos;IA, l&apos;automatisation intelligente et les dernières innovations technologiques sur Vercel et GitHub !
+              {t.hero.discoverProjects}
             </div>
 
             <div className="flex flex-col gap-4 max-sm:flex-row max-sm:gap-6">

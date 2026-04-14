@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaRobot, FaBug, FaShieldAlt, FaChartLine, FaCheckCircle, FaArrowRight, FaStar, FaCode, FaRocket } from "react-icons/fa";
+import { useTranslation } from '../../hooks/useTranslation';
 
 // Composant icône Claude (étoile orange)
 const ClaudeIcon = ({ size = 24 }: { size?: number }) => (
@@ -10,53 +11,39 @@ const ClaudeIcon = ({ size = 24 }: { size?: number }) => (
 );
 
 const ToolsSection = () => {
+  const { t } = useTranslation();
   const [activeToolIndex, setActiveToolIndex] = useState(0);
 
   const tools = [
     {
-      name: "CodeRabbit",
+      name: t.toolsSection.coderabbit.name,
       icon: FaRobot,
       color: "#FF6B35",
       gradient: "linear-gradient(135deg, #FF6B35, #F7931E)",
-      description: "Assistant IA qui révise automatiquement votre code",
-      tagline: "Révision de code intelligente",
-      features: [
-        "Révision de code automatique par IA",
-        "Suggestions d'amélioration en temps réel",
-        "Détection des bugs et vulnérabilités",
-        "Optimisation des performances"
-      ],
-      stats: { value: "95%", label: "Bugs détectés" }
+      description: t.toolsSection.coderabbit.description,
+      tagline: t.toolsSection.coderabbit.tagline,
+      features: t.toolsSection.coderabbit.features,
+      stats: { value: t.toolsSection.coderabbit.statValue, label: t.toolsSection.coderabbit.statLabel }
     },
     {
-      name: "Claude Code",
+      name: t.toolsSection.claude.name,
       icon: ClaudeIcon,
       color: "#FF6B35",
       gradient: "linear-gradient(135deg, #FF6B35, #F7931E)",
-      description: "Assistant de développement IA par Anthropic",
-      tagline: "Développement assisté par IA",
-      features: [
-        "Génération de code intelligent",
-        "Refactoring et optimisation",
-        "Documentation automatique",
-        "Debugging assisté par IA"
-      ],
-      stats: { value: "10x", label: "Plus productif" }
+      description: t.toolsSection.claude.description,
+      tagline: t.toolsSection.claude.tagline,
+      features: t.toolsSection.claude.features,
+      stats: { value: t.toolsSection.claude.statValue, label: t.toolsSection.claude.statLabel }
     },
     {
-      name: "Sentry",
+      name: t.toolsSection.sentry.name,
       icon: FaBug,
       color: "#362D59",
       gradient: "linear-gradient(135deg, #362D59, #5B4B8A)",
-      description: "Monitoring en temps réel de vos applications",
-      tagline: "Monitoring & Performance",
-      features: [
-        "Tracking des erreurs en production",
-        "Monitoring de performance",
-        "Alertes en temps réel",
-        "Analyse des crashs utilisateurs"
-      ],
-      stats: { value: "99.9%", label: "Disponibilité" }
+      description: t.toolsSection.sentry.description,
+      tagline: t.toolsSection.sentry.tagline,
+      features: t.toolsSection.sentry.features,
+      stats: { value: t.toolsSection.sentry.statValue, label: t.toolsSection.sentry.statLabel }
     }
   ];
 
@@ -89,7 +76,7 @@ const ToolsSection = () => {
               <FaCode size={35} />
             </div>
             <h2 className="text-5xl max-md:text-[2rem] font-black text-[#1a202c] mb-6 leading-tight">
-              Outils de{" "}
+              {t.toolsSection.title1}{" "}
               <span
                 className="bg-clip-text"
                 style={{
@@ -99,9 +86,9 @@ const ToolsSection = () => {
                   backgroundClip: 'text',
                 }}
               >
-                Pointe
+                {t.toolsSection.titleHighlight1}
               </span>{" "}
-              pour un Code{" "}
+              {t.toolsSection.title2}{" "}
               <span
                 className="bg-clip-text"
                 style={{
@@ -111,13 +98,11 @@ const ToolsSection = () => {
                   backgroundClip: 'text',
                 }}
               >
-                Impeccable
+                {t.toolsSection.titleHighlight2}
               </span>
             </h2>
             <p className="text-[1.25rem] max-md:text-[1.1rem] text-slate-500 max-w-[800px] mx-auto leading-[1.7]">
-              Je suis développeur expérimenté mais conscient que le domaine du code évolue.
-              Je m&apos;adapte parfaitement avec les outils modernes pour garantir la qualité,
-              la sécurité et la performance de chaque ligne de code.
+              {t.toolsSection.subtitle}
             </p>
           </div>
 
@@ -245,7 +230,7 @@ const ToolsSection = () => {
                     className="flex items-center gap-3 text-[1.1rem] font-bold no-underline cursor-pointer transition-all duration-300 hover:gap-4 [&_svg]:transition-transform [&_svg]:duration-300 hover:[&_svg]:translate-x-[5px]"
                     style={{ color: activeTool.color }}
                   >
-                    En savoir plus <FaArrowRight />
+                    {t.toolsSection.learnMore} <FaArrowRight />
                   </a>
                 </div>
               </motion.div>
@@ -259,7 +244,7 @@ const ToolsSection = () => {
                 <FaRocket size={48} />
               </div>
               <h3 className="flex-1 text-[1.75rem] max-md:text-2xl font-bold text-[#1a202c] m-0">
-                Prêt à bénéficier d&apos;un code de qualité professionnelle ?
+                {t.toolsSection.ctaTitle}
               </h3>
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(102, 126, 234, 0.4)" }}
@@ -267,7 +252,7 @@ const ToolsSection = () => {
                 className="text-white border-none rounded-full py-5 px-12 max-md:w-full max-md:py-4 max-md:px-8 text-[1.1rem] max-md:text-base font-bold cursor-pointer transition-all duration-300 shadow-[0_10px_30px_rgba(102,126,234,0.3)] whitespace-nowrap"
                 style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
               >
-                Démarrer un projet
+                {t.toolsSection.startProject}
               </motion.button>
             </div>
           </div>

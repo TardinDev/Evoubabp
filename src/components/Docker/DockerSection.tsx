@@ -4,35 +4,38 @@ import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaDocker, FaBoxOpen, FaServer, FaShip, FaLayerGroup, FaCogs } from 'react-icons/fa';
 import AnimatedDockerBackground from './AnimatedDockerBackground';
+import { useTranslation } from '../../hooks/useTranslation';
 
 interface DockerSectionProps {
     id?: string;
 }
 
 const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
+    const { t } = useTranslation();
+
     const dockerFeatures = [
         {
             icon: <FaDocker />,
-            title: 'Containerisation',
-            description: 'Isolation complète des applications pour une sécurité et une stabilité maximales.',
+            title: t.dockerSection.containerization,
+            description: t.dockerSection.containerizationDesc,
             gradient: 'linear-gradient(135deg, #0db7ed 0%, #38bdf8 100%)'
         },
         {
             icon: <FaShip />,
-            title: 'Portabilité Ultime',
-            description: 'Développez une fois, déployez partout. Cohérence parfaite entre dev, test et prod.',
+            title: t.dockerSection.portability,
+            description: t.dockerSection.portabilityDesc,
             gradient: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)'
         },
         {
             icon: <FaLayerGroup />,
-            title: 'Microservices',
-            description: 'Architecture modulaire facilitant la maintenance et l\'évolution de vos systèmes.',
+            title: t.dockerSection.microservices,
+            description: t.dockerSection.microservicesDesc,
             gradient: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)'
         },
         {
             icon: <FaCogs />,
-            title: 'DevOps & CI/CD',
-            description: 'Pipelines automatisés pour des déploiements rapides, fiables et fréquents.',
+            title: t.dockerSection.devops,
+            description: t.dockerSection.devopsDesc,
             gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)'
         }
     ];
@@ -76,11 +79,10 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
                                 backgroundClip: 'text'
                             }}
                         >
-                            Solutions Docker & DevOps
+                            {t.dockerSection.title}
                         </h2>
                         <p className="text-[1.2rem] max-md:text-[1.1rem] max-md:px-4 max-[480px]:text-base max-[480px]:px-2 text-slate-300 leading-relaxed max-w-[600px] mx-auto">
-                            Accélérez votre transformation numérique avec des architectures conteneurisées
-                            modernes, robustes et évolutives.
+                            {t.dockerSection.subtitle}
                         </p>
                     </div>
                 </motion.div>
@@ -118,8 +120,7 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
                 <motion.div variants={fadeIn('up', 'tween', 0.6, 1)}>
                     <div className="text-center relative z-[2]">
                         <p className="text-[1.3rem] italic text-slate-200 mb-8 p-8 rounded-[15px] border-l-4 border-l-[#38bdf8] max-w-[700px] mx-auto" style={{ background: 'rgba(30, 41, 59, 0.4)' }}>
-                            &quot;La conteneurisation n&apos;est pas qu&apos;une technologie, c&apos;est la pierre angulaire
-                            d&apos;une infrastructure agile et résiliente.&quot;
+                            &quot;{t.dockerSection.quote}&quot;
                         </p>
                         <motion.button
                             whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(14, 165, 233, 0.4)' }}
@@ -127,7 +128,7 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
                             className="text-white border-none py-4 px-10 rounded-full text-[1.1rem] font-semibold cursor-pointer transition-all duration-300 shadow-[0_5px_15px_rgba(2,132,199,0.3)]"
                             style={{ background: 'linear-gradient(135deg, #0284c7 0%, #2563eb 100%)' }}
                         >
-                            Moderniser votre infrastructure
+                            {t.dockerSection.modernize}
                         </motion.button>
                     </div>
                 </motion.div>

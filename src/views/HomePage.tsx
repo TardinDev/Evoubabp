@@ -23,6 +23,7 @@ import CaseStudiesSection from "../components/CaseStudies/CaseStudiesSection";
 import ContactSection from "../components/Contact/ContactSection";
 import { ActiveSectionProvider } from "../contexts/ActiveSectionContext";
 import { ChatBotProvider } from "../contexts/ChatBotContext";
+import { LanguageProvider } from "../contexts/LanguageContext";
 import useActiveSection from "../hooks/useActiveSection";
 
 export default function HomePage() {
@@ -52,6 +53,7 @@ export default function HomePage() {
   const { activeSection, activeColor } = useActiveSection(sections);
 
   return (
+    <LanguageProvider>
     <ChatBotProvider>
       <ActiveSectionProvider value={{ activeSection, activeColor }}>
         <div>
@@ -100,5 +102,6 @@ export default function HomePage() {
         </div>
       </ActiveSectionProvider>
     </ChatBotProvider>
+    </LanguageProvider>
   )
 }
