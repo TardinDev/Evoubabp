@@ -16,7 +16,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
     year: '2024',
     description: 'Application web de gestion des déclarations de naissance permettant aux citoyens de déclarer une naissance en ligne et aux agents administratifs de traiter les demandes de manière sécurisée et efficace.',
     image: '/images/declaration-naissance.png',
-    liveUrl: '#',
+    liveUrl: 'https://declaration-naissance.vercel.app/',
     githubUrl: 'https://github.com/TardinDev/NaissanceDeclaration',
     features: [
       {
