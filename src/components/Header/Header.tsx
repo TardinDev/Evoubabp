@@ -2,6 +2,7 @@
 
 import { IoIosMail } from "react-icons/io";
 import { BiMenuAltRight } from "react-icons/bi";
+import { FaWhatsapp } from "react-icons/fa";
 import { motion } from 'framer-motion';
 import { getMenuStyles, headerVariants } from "../../utils/motion";
 import { useState, useCallback } from "react";
@@ -26,16 +27,6 @@ const Menu = ({ menuOpened }: { menuOpened: boolean }) => {
       <li className="list-none hover:text-accent-blue">
         <a href="#app-showcase" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
           {t.header.projects}
-        </a>
-      </li>
-      <li className="list-none hover:text-accent-blue">
-        <a href="#fullstack-node" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
-          {t.header.reactNode}
-        </a>
-      </li>
-      <li className="list-none hover:text-accent-blue">
-        <a href="#fullstack-spring" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
-          {t.header.reactSpring}
         </a>
       </li>
       <li className="list-none hover:text-accent-blue">
@@ -91,19 +82,41 @@ const Header = () => {
             <BiMenuAltRight size={26} color="purple" />
           </div>
         </motion.div>
-      </div>
 
-      {/* Language toggle button below header */}
-      <div className="flex justify-end px-6 py-2 sticky top-[60px] z-[98]">
-        <button
-          onClick={toggleLanguage}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold border-2 border-purple-800 text-purple-800 bg-white/90 backdrop-blur-sm hover:bg-purple-800 hover:text-white transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg"
-          aria-label={language === 'fr' ? 'Switch to English' : 'Passer en Français'}
-        >
-          <span className={language === 'fr' ? 'opacity-100' : 'opacity-40'}>FR</span>
-          <span className="text-purple-400">|</span>
-          <span className={language === 'en' ? 'opacity-100' : 'opacity-40'}>EN</span>
-        </button>
+        {/* Sub-header bar: FullStack links + Language toggle */}
+        <div className="flex justify-end items-center gap-3 pt-1 pb-1">
+          <a
+            href="#fullstack-node"
+            className="px-3 py-1.5 rounded-full text-xs font-bold border-2 border-[#61dafb] text-[#0a0a0f] bg-[#61dafb]/90 backdrop-blur-sm hover:bg-[#61dafb] transition-all duration-300 no-underline shadow-md hover:shadow-lg"
+          >
+            React/NodeJs
+          </a>
+          <a
+            href="#fullstack-spring"
+            className="px-3 py-1.5 rounded-full text-xs font-bold border-2 border-[#6db33f] text-white bg-[#6db33f]/90 backdrop-blur-sm hover:bg-[#6db33f] transition-all duration-300 no-underline shadow-md hover:shadow-lg"
+          >
+            React/Spring-Boot
+          </a>
+          <a
+            href="https://wa.me/33766450771"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border-2 border-[#25D366] text-white bg-[#25D366]/90 backdrop-blur-sm hover:bg-[#25D366] transition-all duration-300 no-underline shadow-md hover:shadow-lg"
+            aria-label="Contact via WhatsApp"
+          >
+            <FaWhatsapp size={16} />
+            WhatsApp
+          </a>
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold border-2 border-purple-800 text-purple-800 bg-white/90 backdrop-blur-sm hover:bg-purple-800 hover:text-white transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg"
+            aria-label={language === 'fr' ? 'Switch to English' : 'Passer en Français'}
+          >
+            <span className={language === 'fr' ? 'opacity-100' : 'opacity-40'}>FR</span>
+            <span className="text-purple-400">|</span>
+            <span className={language === 'en' ? 'opacity-100' : 'opacity-40'}>EN</span>
+          </button>
+        </div>
       </div>
     </>
   );
