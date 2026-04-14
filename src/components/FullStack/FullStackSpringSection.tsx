@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaReact, FaJava, FaShieldAlt, FaExternalLinkAlt, FaGithub, FaFileAlt, FaUserCheck, FaDatabase, FaLock } from 'react-icons/fa';
-import { SiSpringboot, SiPostgresql, SiTypescript } from 'react-icons/si';
+import { SiSpringboot, SiMysql, SiTypescript } from 'react-icons/si';
 import { useTranslation } from '../../hooks/useTranslation';
 
 interface FullStackSpringSectionProps {
@@ -40,7 +40,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
     ],
     stack: {
       frontend: ['React 19', 'TypeScript', 'Material-UI', 'React Query'],
-      backend: ['Java 21', 'Spring Boot 4', 'Spring Security', 'PostgreSQL']
+      backend: ['Java 21', 'Spring Boot 4', 'Spring Security', 'MySQL']
     }
   };
 
@@ -205,7 +205,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                       const labels = [
                         { icon: <FaReact />, text: 'React' },
                         { icon: <SiSpringboot />, text: 'Spring Boot' },
-                        { icon: <SiPostgresql />, text: 'PostgreSQL' },
+                        { icon: <SiMysql />, text: 'MySQL' },
                       ];
                       return (
                         <span
