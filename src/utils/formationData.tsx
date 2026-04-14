@@ -3,6 +3,13 @@ import { FaGraduationCap, FaBookOpen, FaLaptopCode, FaMobile, FaBrain, FaRobot }
 // Données des formations
 export const formations = [
   {
+    icon: FaRobot,
+    title: "Coder avec l'IA - Claude Code",
+    text: "Apprenez à coder 10x plus vite avec Claude Code, l'outil IA d'Anthropic. Au programme : les commandes et skills essentiels, le fichier CLAUDE.md pour personnaliser votre assistant, et les standards web 2026 (Next.js 15, React 19, Tailwind v4). Formation courte, dense et 100% pratique.",
+    navigateUrl: "/formations/claude-code",
+    featured: true
+  },
+  {
     icon: FaGraduationCap,
     title: "Développement Web Moderne",
     text: "Apprenez à créer des applications web complètes de A à Z. Au programme : React pour l'interface, TypeScript pour un code robuste, Tailwind CSS pour le design, Supabase pour la base de données et Node.js pour l'API. Vous construirez un vrai projet (e-commerce ou assistant IA) étape par étape.",
@@ -19,12 +26,6 @@ export const formations = [
     title: "Machine Learning & IA",
     text: "Comprenez le Machine Learning sans prérequis mathématiques complexes. Découvrez les 3 types d'apprentissage, les algorithmes essentiels (régression, KNN, arbres de décision, réseaux de neurones) et pratiquez avec des exemples interactifs. Idéal pour débuter en IA.",
     navigateUrl: "/formations/machine-learning"
-  },
-  {
-    icon: FaRobot,
-    title: "Coder avec l'IA - Claude Code",
-    text: "Apprenez à coder 10x plus vite avec Claude Code, l'outil IA d'Anthropic. Au programme : les commandes et skills essentiels, le fichier CLAUDE.md pour personnaliser votre assistant, et les standards web 2026 (Next.js 15, React 19, Tailwind v4). Formation courte, dense et 100% pratique.",
-    navigateUrl: "/formations/claude-code"
   },
   {
     icon: FaBookOpen,

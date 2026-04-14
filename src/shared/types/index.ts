@@ -7,6 +7,7 @@ export interface FormationCardProps {
   countdown?: string;
   index: number;
   navigateUrl?: string;
+  featured?: boolean;
 }
 
 export interface ProjectData {
