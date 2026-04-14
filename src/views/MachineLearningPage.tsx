@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FaBrain, FaChartLine, FaRobot, FaLightbulb } from "react-icons/fa";
+import { ContactCTA } from "../components/formation";
 
 export default function MachineLearningPage() {
   const [activeExample, setActiveExample] = useState<string | null>(null);
@@ -402,26 +403,8 @@ export default function MachineLearningPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section
-        className="py-16 px-8 text-center text-white"
-        style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
-      >
-        <div className="max-w-[800px] mx-auto">
-          <h2 className="text-[2.5rem] md:text-[1.8rem] mb-4">
-            {"\u{1F680}"} Pret a Apprendre le Machine Learning?
-          </h2>
-          <p className="text-xl mb-8 opacity-90">
-            Rejoignez notre formation complete et devenez expert en ML en quelques mois!
-          </p>
-          <a
-            href="/formations"
-            className="inline-block py-4 px-10 text-lg font-semibold text-[#667eea] bg-white rounded-lg no-underline transition-transform duration-300 hover:scale-105"
-          >
-            Decouvrir nos formations
-          </a>
-        </div>
-      </section>
+      {/* CTA contact personnalisé */}
+      <ContactCTA />
     </div>
   );
 }

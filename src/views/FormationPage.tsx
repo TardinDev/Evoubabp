@@ -8,7 +8,8 @@ import {
   FormationCard,
   StatsSection,
   FormationFooter,
-  FAQSection
+  FAQSection,
+  ContactCTA
 } from "../components/formation";
 
 // Import des donnees et hooks
@@ -67,7 +68,10 @@ export default function FormationPage() {
       {/* 4. Section FAQ */}
       <FAQSection />
 
-      {/* 5. Footer avec contact et informations */}
+      {/* 5. CTA contact personnalisé */}
+      <ContactCTA />
+
+      {/* 6. Footer avec contact et informations */}
       <FormationFooter />
     </div>
   );

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaReact, FaNodeJs, FaCheck } from "react-icons/fa";
 import { SiTypescript, SiTailwindcss, SiSupabase } from "react-icons/si";
 import Link from "next/link";
+import { ContactCTA } from "../components/formation";
 
 export default function WebDevPage() {
   const [selectedProject, setSelectedProject] = useState<'ecommerce' | 'ai' | null>(null);
@@ -194,6 +195,16 @@ export default function WebDevPage() {
               {"\u{1F3AF}"} Objectif : Afficher une liste de produits avec un panier fonctionnel
             </div>
 
+            <div className="bg-[#f0fff4] border-l-4 border-[#38a169] p-4 mb-6 rounded-r-lg">
+              <h4 className="font-bold text-[#276749] mb-2">Ce que vous allez apprendre :</h4>
+              <ul className="text-[#2f855a] text-sm space-y-1 list-disc pl-5 m-0">
+                <li>Creer des composants React reutilisables</li>
+                <li>Gerer l&apos;etat local avec le hook useState</li>
+                <li>Passer des donnees entre composants via les props</li>
+                <li>Gerer les evenements utilisateur (clic, formulaire)</li>
+              </ul>
+            </div>
+
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
               <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748] last:border-b-0">{"\u{1F4DD}"} Tache 1 : Creer le composant ProductList</div>
               <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748] last:border-b-0">{"\u{1F4DD}"} Tache 2 : Gerer l&apos;etat avec useState</div>
@@ -241,6 +252,15 @@ function App() {
 
 export default App;`}</pre>
 
+            <div className="bg-[#fffbeb] border-l-4 border-[#d69e2e] p-4 mb-8 rounded-r-lg">
+              <h4 className="font-bold text-[#975a16] mb-1">Astuce</h4>
+              <p className="text-[#744210] text-sm m-0">
+                Commencez toujours par decouper votre interface en petits composants independants.
+                Ici, vous pourriez creer un composant {"<ProductCard />"} pour chaque produit au lieu de tout mettre dans App.
+                Cela rend votre code plus lisible et reutilisable.
+              </p>
+            </div>
+
             <button
               onClick={() => setCurrentStep(2)}
               className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]"
@@ -259,6 +279,16 @@ export default App;`}</pre>
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 1 : React - Interface de Chat</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
               {"\u{1F3AF}"} Objectif : Creer une interface de chat fonctionnelle
+            </div>
+
+            <div className="bg-[#f0fff4] border-l-4 border-[#38a169] p-4 mb-6 rounded-r-lg">
+              <h4 className="font-bold text-[#276749] mb-2">Ce que vous allez apprendre :</h4>
+              <ul className="text-[#2f855a] text-sm space-y-1 list-disc pl-5 m-0">
+                <li>Gerer une liste de messages avec useState</li>
+                <li>Capturer les saisies utilisateur avec des inputs controles</li>
+                <li>Simuler des reponses asynchrones avec setTimeout</li>
+                <li>Structurer une interface de chat (messages, input, bouton)</li>
+              </ul>
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
@@ -951,6 +981,9 @@ CREATE TABLE messages (
           </div>
         </section>
       )}
+
+      {/* CTA contact personnalisé */}
+      <ContactCTA />
 
       {/* Ressources */}
       <section className="py-16 px-8 bg-[#f7fafc]">

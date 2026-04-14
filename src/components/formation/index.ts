@@ -2,4 +2,5 @@ export { default as FormationHeader } from './FormationHeader';
 export { default as FormationCard } from './FormationCard';
 export { default as StatsSection } from './StatsSection';
 export { default as FormationFooter } from './FormationFooter';
-export { default as FAQSection } from './FAQSection'; 
+export { default as FAQSection } from './FAQSection';
+export { default as ContactCTA } from './ContactCTA';
