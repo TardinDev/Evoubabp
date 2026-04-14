@@ -72,7 +72,7 @@ const Header = () => {
           style={{ boxShadow: headerShadow }}
         >
           <div className="font-bold text-purple-800" style={{ fontSize: 'clamp(1.3rem, 3.5vw + 0.9rem, 2.6rem)' }}>
-            <a href="Home" className="text-[#4b0082] no-underline">Evoubap</a>
+            <a href="/" className="text-[#4b0082] no-underline">Evoubap</a>
           </div>
 
           <Menu menuOpened={menuOpened} />
