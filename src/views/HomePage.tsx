@@ -8,6 +8,7 @@ import Projects from "../components/projects/Projects";
 import AppShowcaseSection from "../components/ShowCaseprojects/AppShowcaseSection";
 import FullStackNodeSection from "../components/FullStack/FullStackNodeSection";
 import FullStackSpringSection from "../components/FullStack/FullStackSpringSection";
+import FullStackFlyTaxiSection from "../components/FullStack/FullStackFlyTaxiSection";
 // import DevToolsSection from "../components/DevTools/DevToolsSection";
 import DevToolsSectionTest from "../components/DevTools/DevToolsSectionTest";
 import AISection from "../components/AI/AISection";
@@ -40,6 +41,7 @@ export default function HomePage() {
     { id: 'case-studies', color: '#E8EAF6' }, // Indigo clair
     { id: 'fullstack-node', color: '#E8F5E9' }, // Vert clair (Node.js)
     { id: 'fullstack-spring', color: '#F3E5F5' }, // Violet clair (Spring)
+    { id: 'fullstack-flytaxi', color: '#FFE8DF' }, // Orange clair (Fly & Taxi)
     { id: 'dev-tools', color: '#E3F2FD' }, // Bleu clair
     { id: 'tools-section', color: '#FCE4EC' }, // Rose clair
     { id: 'frontend-tech', color: '#E1F5FE' }, // Bleu cyan clair (React/TypeScript/Tailwind)
@@ -81,6 +83,9 @@ export default function HomePage() {
           </div>
           <div id="fullstack-spring">
             <FullStackSpringSection />
+          </div>
+          <div id="fullstack-flytaxi">
+            <FullStackFlyTaxiSection />
           </div>
           <div id="dev-tools">
             <DevToolsSectionTest />
