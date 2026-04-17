@@ -45,6 +45,24 @@ export const applicationsData: ApplicationsData = {
   ],
   web: [
     {
+      title: "Fly & Taxi Booking System IA",
+      description: "Plateforme de réservation de vols et de taxis enrichie par l'IA, offrant des recommandations intelligentes et une expérience utilisateur fluide.",
+      image: "/imagesAppsMobile/flytaxi.png",
+      url: "https://flyandtaxibookingsystemeia.vercel.app/",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Java", "Spring Boot", "PostgreSQL", "Docker"],
+      category: "Réservation & IA",
+      year: "2025"
+    },
+    {
+      title: "Déclaration de Naissance",
+      description: "Application web de dématérialisation des déclarations de naissance, permettant aux citoyens de soumettre leurs démarches administratives en ligne de manière sécurisée.",
+      image: "/imagesAppsMobile/declarationNaissance.png",
+      url: "https://declaration-naissance.vercel.app/",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Java", "Spring Boot", "MySQL", "Docker"],
+      category: "Administration",
+      year: "2025"
+    },
+    {
       title: "Delaala",
       description: "Plateforme web complète offrant des solutions digitales innovantes et des services personnalisés.",
       image: "/imagesAppsMobile/delaala.webp",
