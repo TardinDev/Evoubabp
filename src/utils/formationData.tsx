@@ -5,7 +5,7 @@ export const formations = [
   {
     icon: FaRobot,
     title: "Coder avec l'IA - Claude Code",
-    text: "Apprenez à coder 10x plus vite avec Claude Code, l'outil IA d'Anthropic. Au programme : les commandes et skills essentiels, le fichier CLAUDE.md pour personnaliser votre assistant, et les standards web 2026 (Next.js 15, React 19, Tailwind v4). Formation courte, dense et 100% pratique.",
+    text: "Apprenez à coder 10x plus vite avec Claude Code, l'outil IA d'Anthropic. Au programme : les commandes et skills essentiels, le fichier CLAUDE.md pour personnaliser votre assistant, et les standards web 2026 (Next.js 16, React 19, Tailwind v4). Formation courte, dense et 100% pratique.",
     navigateUrl: "/formations/claude-code",
     featured: true
   },

@@ -49,7 +49,7 @@ const etapes = [
     title: "Coder aux standards web 2026",
     why: "Les technologies \u00e9voluent chaque ann\u00e9e. Un d\u00e9veloppeur qui code comme en 2024 livre du code obsol\u00e8te. Cette \u00e9tape vous met \u00e0 jour.",
     points: [
-      "Next.js 15 App Router & Server Components/Actions",
+      "Next.js 16 App Router & Server Components/Actions",
       "React 19 : use(), useActionState, Suspense",
       "TypeScript strict mode (z\u00e9ro any, null safety)",
       "Tailwind CSS v4 : config CSS-first avec @theme",
