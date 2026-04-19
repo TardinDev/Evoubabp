@@ -16,7 +16,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
   const project = {
     title: `${t.fullstackSpring.birthDeclaration} ${t.fullstackSpring.birthTitle}`,
     subtitle: 'Plateforme administrative officielle',
-    year: '2024',
+    year: '2026',
     description: t.fullstackSpring.description,
     image: '/images/declaration-naissance.png',
     liveUrl: 'https://declaration-naissance.vercel.app/',
@@ -44,8 +44,8 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
       },
     ],
     stack: {
-      frontend: ['React 19', 'TypeScript', 'Material-UI', 'React Query'],
-      backend: ['Java 21', 'Spring Boot 4', 'Spring Security', 'MySQL', 'Docker']
+      frontend: ['React 19', 'TypeScript', 'Vite 5', 'shadcn/ui', 'Tailwind CSS', 'Zustand'],
+      backend: ['Java 17', 'Spring Boot 3.2', 'Spring Security', 'MySQL 8', 'Docker']
     }
   };
 

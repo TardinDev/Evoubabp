@@ -17,11 +17,11 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
 
   const project = {
     title: `${t.fullstackFlyTaxi.titlePart1} ${t.fullstackFlyTaxi.titlePart2}`,
-    year: '2025',
+    year: '2026',
     description: t.fullstackFlyTaxi.description,
     image: '/imagesAppsMobile/flytaxi.png',
     liveUrl: 'https://flyandtaxibookingsystemeia.vercel.app/',
-    githubUrl: 'https://github.com/TardinDev',
+    githubUrl: 'https://github.com/TardinDev/Aeroport_Booking_Systeme',
     features: [
       {
         icon: <FaBolt />,
@@ -45,8 +45,8 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
       },
     ],
     stack: {
-      frontend: ['React 19', 'TypeScript', 'Tailwind CSS', 'React Query'],
-      backend: ['Java 21', 'Spring Boot 4', 'Spring Security', 'PostgreSQL', 'Docker']
+      frontend: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Query'],
+      backend: ['Java 21', 'Spring Boot 3.2', 'Spring Security 6', 'PostgreSQL 16', 'Flyway', 'Docker']
     }
   };
 
