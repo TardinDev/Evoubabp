@@ -12,78 +12,153 @@ import {
   SiDocker,
   SiPrisma
 } from "react-icons/si";
+import { HiArrowRight } from "react-icons/hi";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import { useTranslation } from "../../hooks/useTranslation";
+import type { IconType } from "react-icons";
 
-import dynamic from "next/dynamic";
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
-import progressBar from "../../shared/assets/animations/progressBar.json";
-import ChevronDown from "../../shared/assets/animations/chevronDown.json";
+interface TechItem {
+  Icon: IconType;
+  name: string;
+  color: string;
+}
+
+const TECHS: TechItem[] = [
+  { Icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
+  { Icon: FaReact, name: "React", color: "#61DAFB" },
+  { Icon: SiNextdotjs, name: "Next.js", color: "#FFFFFF" },
+  { Icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
+  { Icon: SiReactquery, name: "React Query", color: "#FF4154" },
+  { Icon: SiNodedotjs, name: "Node.js", color: "#3C873A" },
+  { Icon: SiVite, name: "Vite", color: "#646CFF" },
+  { Icon: SiPrisma, name: "Prisma", color: "#A5B4FC" },
+  { Icon: SiPostgresql, name: "PostgreSQL", color: "#60A5FA" },
+  { Icon: SiDocker, name: "Docker", color: "#2496ED" },
+];
+
+const PROGRESS = 80;
 
 export default function CurrentProject() {
   const { t } = useTranslation();
-  const handleIcon = () => {
-    alert(t.currentProject.scrollDown);
+
+  const handleViewMore = () => {
+    const target = document.getElementById('app-showcase');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (
-    <motion.div
-      variants={staggerContainer(0.1, 0.2)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: false, amount: 0.25 }}
-    >
-      <div className="bg-[#4b0082] px-[5vw] py-4 flex flex-wrap justify-between gap-8 md:flex-row md:items-start max-md:flex-col max-md:items-center max-md:p-8 [&_h1]:text-white [&_h1]:text-xl max-[480px]:[&_h1]:text-xl [&_h1]:mb-2 [&_p]:text-base max-[480px]:[&_p]:text-sm [&_p]:leading-relaxed [&_p]:text-white [&_p]:mt-2">
-        <motion.div
-          variants={fadeIn("right", "tween", 0.2, 1)}
-          className="flex-1 flex flex-col justify-center max-w-[600px]"
-        >
-          <h1 className="text-white text-xl mb-2">{t.currentProject.title}</h1>
-          <p className="text-base leading-relaxed text-white mt-2">
-            {t.currentProject.description}
-          </p>
-          <div className="flex items-center max-md:mt-4">
-            <div className="w-full max-w-[260px] h-[95px] max-md:max-w-[200px]">
-              <Lottie animationData={progressBar} loop autoplay />
-            </div>
-            <p className="text-2xl text-white">{t.currentProject.progress}</p>
-          </div>
-        </motion.div>
+    <section className="relative overflow-hidden bg-[#4b0082]">
 
-        <motion.div
-          variants={fadeIn("left", "tween", 0.3, 1)}
-          className="flex-1 flex flex-col items-center text-center"
-        >
-          <h1 className="text-white text-xl mb-4">{t.currentProject.techUsed}</h1>
+      <motion.div
+        variants={staggerContainer(0.1, 0.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.25 }}
+        className="relative z-[1] w-full px-3 sm:px-4 py-4"
+      >
+        <div className="grid md:grid-cols-2 gap-3 md:gap-4">
+          {/* LEFT — Project details */}
           <motion.div
-            variants={fadeIn("up", "tween", 0.4, 1)}
-            className="flex flex-wrap justify-center gap-4 max-md:gap-2 [&_svg]:transition-transform [&_svg]:duration-300 [&_svg]:ease-in-out [&_svg]:cursor-pointer [&_svg:hover]:scale-[1.2]"
+            variants={fadeIn("right", "tween", 0.2, 0.8)}
+            className="rounded-xl p-4 sm:p-5 flex flex-col gap-3 backdrop-blur-sm"
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+            }}
           >
-            <SiTypescript size={48} color="#3178C6" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
-            <FaReact size={48} color="#61DAFB" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
-            <SiNextdotjs size={48} color="#000000" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
-            <SiTailwindcss size={48} color="#06B6D4" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
-            <SiReactquery size={48} color="#FF4154" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
-            <SiNodedotjs size={48} color="#3C873A" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
-            <SiVite size={42} color="#646CFF" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
-            <SiPrisma size={48} color="#2D3748" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
-            <SiPostgresql size={48} color="#316192" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
-            <SiDocker size={48} color="#2496ED" className="transition-transform duration-300 ease-in-out cursor-pointer hover:scale-[1.2] max-[480px]:w-10 max-[480px]:h-10" />
+            {/* Status badge */}
+            <div className="flex items-center gap-2 self-start px-3 py-1 rounded-full border border-emerald-400/30 bg-emerald-500/10">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              </span>
+              <span className="text-xs font-semibold tracking-wide text-emerald-300 uppercase">
+                {t.currentProject.statusInProgress}
+              </span>
+            </div>
+
+            <h2 className="text-white font-bold text-lg sm:text-xl leading-tight">
+              {t.currentProject.title}
+            </h2>
+
+            <p className="text-white/80 text-[0.85rem] sm:text-[0.9rem] leading-relaxed">
+              {t.currentProject.description}
+            </p>
+
+            {/* Progress bar */}
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[10px] sm:text-xs font-medium text-white/60 uppercase tracking-wider">
+                  {t.currentProject.progressLabel}
+                </span>
+                <span className="text-xs sm:text-sm font-bold text-white">
+                  {t.currentProject.progress}
+                </span>
+              </div>
+              <div className="h-1.5 w-full rounded-full overflow-hidden bg-white/10">
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${PROGRESS}%` }}
+                  viewport={{ once: false, amount: 0.4 }}
+                  transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
+                  className="h-full rounded-full bg-emerald-400"
+                />
+              </div>
+            </div>
           </motion.div>
 
+          {/* RIGHT — Tech stack + CTA */}
           <motion.div
-            variants={fadeIn("up", "tween", 0.5, 1)}
-            className="flex items-center gap-2 mt-2 cursor-pointer"
-            onClick={handleIcon}
+            variants={fadeIn("left", "tween", 0.3, 0.8)}
+            className="rounded-xl p-4 sm:p-5 flex flex-col gap-3 backdrop-blur-sm"
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+            }}
           >
-            <h5 className="text-white text-base transition-colors duration-300 ease-in-out hover:text-gray-300 max-[480px]:text-base">{t.currentProject.viewMore}</h5>
-            <div className="w-20 h-8">
-              <Lottie animationData={ChevronDown} loop autoplay />
-            </div>
+            <h2 className="text-white font-bold text-lg sm:text-xl">
+              {t.currentProject.techUsed}
+            </h2>
+
+            <motion.div
+              variants={fadeIn("up", "tween", 0.4, 0.8)}
+              className="grid grid-cols-5 gap-1.5 sm:gap-2"
+            >
+              {TECHS.map(({ Icon, name, color }) => (
+                <div
+                  key={name}
+                  title={name}
+                  className="group flex flex-col items-center justify-center gap-1 py-2 rounded-lg border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 cursor-pointer"
+                >
+                  <Icon
+                    className="w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 group-hover:scale-110"
+                    style={{ color }}
+                  />
+                  <span
+                    className="text-[8px] sm:text-[9px] font-medium text-white/60 group-hover:text-white transition-colors duration-300 text-center px-1 leading-tight"
+                  >
+                    {name}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+
+            <motion.button
+              variants={fadeIn("up", "tween", 0.5, 0.8)}
+              onClick={handleViewMore}
+              className="group inline-flex items-center justify-center gap-2 self-start px-4 py-2 rounded-full font-semibold text-xs sm:text-sm text-white bg-[#7C3AED] hover:bg-[#6d28d9] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(124,58,237,0.4)] hover:-translate-y-0.5 cursor-pointer"
+            >
+              <span>{t.currentProject.viewMore}</span>
+              <HiArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </motion.button>
           </motion.div>
-        </motion.div>
-      </div>
-    </motion.div>
+        </div>
+      </motion.div>
+    </section>
   );
 }

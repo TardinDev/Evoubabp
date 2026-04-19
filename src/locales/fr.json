@@ -22,11 +22,13 @@
   },
   "currentProject": {
     "title": "Projet Actuel",
-    "description": "Actuellement, je travaille sur un projet logiciel visant à faciliter les connexions entre investisseurs et acteurs locaux. L'objectif est de permettre des investissements dans divers secteurs, favorisant ainsi le développement de régions propices au bien-être de la population.",
+    "description": "Je développe une plateforme qui connecte investisseurs et porteurs de projets locaux. L'idée : fluidifier l'accès au capital dans des secteurs variés — agriculture, tech, infrastructures — pour accélérer le développement des territoires et avoir un impact concret sur le quotidien des populations.",
     "progress": "80% Terminé",
     "techUsed": "Technologies Utilisées",
     "viewMore": "Voir plus de projets",
-    "scrollDown": "Naviguez vers le bas pour voir plus de projets !"
+    "scrollDown": "Naviguez vers le bas pour voir plus de projets !",
+    "statusInProgress": "En cours",
+    "progressLabel": "Avancement"
   },
   "services": {
     "title": "Services Proposés",

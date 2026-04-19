@@ -22,11 +22,13 @@
   },
   "currentProject": {
     "title": "Current Project",
-    "description": "Currently, I am working on a software project aimed at facilitating connections between investors and local stakeholders. The goal is to enable investments in various sectors, thereby fostering the development of regions conducive to the well-being of the population.",
+    "description": "I'm building a platform that connects investors with local project leaders. The idea: unlock capital flow across diverse sectors — agriculture, tech, infrastructure — to accelerate regional development and make a tangible difference for local communities.",
     "progress": "80% Completed",
     "techUsed": "Technologies Used",
     "viewMore": "View more projects",
-    "scrollDown": "Scroll down to see more projects!"
+    "scrollDown": "Scroll down to see more projects!",
+    "statusInProgress": "In progress",
+    "progressLabel": "Progress"
   },
   "services": {
     "title": "Services Offered",
