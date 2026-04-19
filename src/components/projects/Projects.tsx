@@ -110,9 +110,8 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
       // ============================
       details.forEach((detail, i) => {
         gsap.set(detail, {
-          opacity: i === 0 ? 1 : 0,
+          autoAlpha: i === 0 ? 1 : 0,
           yPercent: i === 0 ? 0 : 20,
-          visibility: i === 0 ? 'visible' : 'hidden',
         })
       })
 
@@ -259,20 +258,17 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
 
         // Detail panel: old exits
         tl.to(details[fromIdx], {
-          opacity: 0,
+          autoAlpha: 0,
           yPercent: -20,
           duration: 0.6,
           ease: 'power2.in',
-          onComplete: () => {
-            gsap.set(details[fromIdx], { visibility: 'hidden' })
-          },
         }, label)
 
         // Detail panel: new enters
         tl.fromTo(details[toIdx],
-          { opacity: 0, yPercent: 20, visibility: 'visible' },
+          { autoAlpha: 0, yPercent: 20 },
           {
-            opacity: 1,
+            autoAlpha: 1,
             yPercent: 0,
             duration: 0.6,
             ease: 'power2.out',
