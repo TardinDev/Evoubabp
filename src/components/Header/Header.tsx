@@ -6,7 +6,6 @@ import { FaWhatsapp } from "react-icons/fa";
 import { motion } from 'framer-motion';
 import { getMenuStyles, headerVariants } from "../../utils/motion";
 import { useState, useCallback } from "react";
-import useHeaderShadow from "../../hooks/useHeaderShadow";
 import Link from "next/link";
 import { useActiveSectionContext } from "../../contexts/ActiveSectionContext";
 import { useTranslation } from "../../hooks/useTranslation";
@@ -49,7 +48,6 @@ const Menu = ({ menuOpened }: { menuOpened: boolean }) => {
 
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
-  const headerShadow = useHeaderShadow();
   const { activeColor } = useActiveSectionContext();
   const { language, toggleLanguage } = useTranslation();
 
@@ -60,7 +58,7 @@ const Header = () => {
   return (
     <>
       <div
-        className="py-3 px-3 sm:px-4 md:px-6 z-[99] opacity-100 sticky top-0 transition-all duration-300 ease-in-out"
+        className="py-0 px-3 sm:px-4 md:px-6 z-[99] opacity-100 sticky top-0 transition-all duration-300 ease-in-out"
         style={{ backgroundColor: activeColor, transition: 'background-color 500ms ease, all 300ms ease' }}
       >
         <motion.div
@@ -69,10 +67,17 @@ const Header = () => {
           variants={headerVariants}
           viewport={{ once: false, amount: 0.25 }}
           className="bg-transparent p-0 flex justify-between font-medium flex-wrap relative"
-          style={{ boxShadow: headerShadow }}
         >
-          <div className="font-bold text-purple-800" style={{ fontSize: 'clamp(1.3rem, 3.5vw + 0.9rem, 2.6rem)' }}>
-            <a href="/" className="text-[#4b0082] no-underline">Evoubap</a>
+          <div className="flex items-center mt-2 sm:mt-3 md:mt-4">
+            <a href="/" aria-label="Evoubap — accueil" className="inline-flex items-center no-underline">
+              <img
+                src="/evoubap-logos/evoubap-logo-gradient.svg"
+                alt="Evoubap — Transformation Digitale"
+                width={480}
+                height={208}
+                className="h-28 sm:h-32 md:h-36 lg:h-40 w-auto -my-9 sm:-my-10 md:-my-11 lg:-my-12"
+              />
+            </a>
           </div>
 
           <Menu menuOpened={menuOpened} />
@@ -84,7 +89,7 @@ const Header = () => {
         </motion.div>
 
         {/* Sub-header bar: FullStack links + Language toggle */}
-        <div className="flex justify-end items-center flex-wrap gap-1.5 sm:gap-2 md:gap-3 pt-1 pb-1">
+        <div className="flex justify-end items-center flex-wrap gap-1.5 sm:gap-2 md:gap-3 pt-0 pb-0.5">
           <a
             href="#fullstack-node"
             className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#61dafb] text-[#0a0a0f] bg-[#61dafb]/90 backdrop-blur-sm hover:bg-[#61dafb] transition-all duration-300 no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"

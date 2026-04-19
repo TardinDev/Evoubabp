@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" fill="none">
+  <defs>
+    <linearGradient id="geoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#0891B2"/>
+    </linearGradient>
+    <linearGradient id="geoGradLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Butterfly icon - geometric triangular style -->
+  <g transform="translate(40, 40)">
+    <!-- Left upper wing (large triangle) -->
+    <polygon points="90,90 10,30 20,100" fill="url(#geoGrad)"/>
+    <!-- Left lower wing (small triangle) -->
+    <polygon points="90,90 25,160 55,155" fill="url(#geoGradLight)"/>
+    <!-- Right upper wing (large triangle) -->
+    <polygon points="90,90 170,30 160,100" fill="url(#geoGrad)"/>
+    <!-- Right lower wing (small triangle) -->
+    <polygon points="90,90 155,160 125,155" fill="url(#geoGradLight)"/>
+
+    <!-- Inner accent triangles -->
+    <polygon points="90,90 30,55 40,95" fill="#FFFFFF" opacity="0.25"/>
+    <polygon points="90,90 150,55 140,95" fill="#FFFFFF" opacity="0.25"/>
+
+    <!-- Body -->
+    <rect x="87" y="50" width="6" height="115" rx="3" fill="#0F172A"/>
+    <!-- Head -->
+    <circle cx="90" cy="48" r="5" fill="#0F172A"/>
+    <!-- Antennae -->
+    <path d="M 90,45 Q 80,30 73,22" stroke="#0F172A" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M 90,45 Q 100,30 107,22" stroke="#0F172A" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <circle cx="73" cy="22" r="2.5" fill="#06B6D4"/>
+    <circle cx="107" cy="22" r="2.5" fill="#06B6D4"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(240, 130)">
+    <text x="0" y="0" font-family="'Helvetica Neue', Arial, sans-serif" font-size="60" font-weight="800" fill="#0F172A" letter-spacing="-2.5">evou<tspan fill="#06B6D4">bap</tspan></text>
+    <text x="2" y="30" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" fill="#64748B" letter-spacing="5">INNOVATION · CRÉATIVITÉ · ENVOL</text>
+  </g>
+</svg>

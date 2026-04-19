@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useChatBot } from "../../contexts/ChatBotContext";
 import { useTranslation } from '../../hooks/useTranslation';
-import { FaComments, FaCode, FaEnvelope, FaPhone, FaGlobe } from "react-icons/fa";
+import { FaComments, FaEnvelope, FaPhone, FaGlobe } from "react-icons/fa";
 
 export default function Footer() {
   const { openChatBot } = useChatBot();
@@ -30,18 +30,17 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             {/* Brand logo */}
             <div className="flex items-center gap-3">
-              {/* Logo icon */}
-              <div
-                className="w-10 h-10 rounded-[10px] flex items-center justify-center text-white"
-                style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}
-              >
-                <FaCode size={20} />
-              </div>
-              {/* Brand name */}
+              <img
+                src="/evoubap-logos/evoubap-icon.svg"
+                alt="Evoubap"
+                width={48}
+                height={48}
+                className="w-12 h-12 rounded-[10px]"
+              />
               <h2
                 className="text-2xl font-bold bg-clip-text"
                 style={{
-                  background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+                  background: 'linear-gradient(135deg, #7C3AED, #EC4899)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text'

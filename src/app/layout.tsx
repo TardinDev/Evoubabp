@@ -44,9 +44,11 @@ export const metadata: Metadata = {
     images: ['/evoubapfavicon.jpeg'],
   },
   icons: {
-    icon: '/evoubapfavicon.jpeg',
-    shortcut: '/evoubapfavicon.jpeg',
-    apple: '/evoubapfavicon.jpeg',
+    icon: [
+      { url: '/evoubap-logos/evoubap-icon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/evoubap-logos/evoubap-icon.svg',
+    apple: '/evoubap-logos/evoubap-icon.svg',
   },
   other: {
     'ai-content-declaration':
