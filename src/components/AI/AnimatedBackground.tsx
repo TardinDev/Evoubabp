@@ -1,10 +1,10 @@
 'use client'
 
-import { useMemo } from 'react';
-
 interface FloatingElementProps {
   delay: number;
   size: number;
+  top: string;
+  left: string;
 }
 
 interface NodeProps {
@@ -17,13 +17,7 @@ interface ConnectionProps {
   to: { top: string; left: string };
 }
 
-const FloatingElement: React.FC<FloatingElementProps> = ({ delay, size }) => {
-  // Use useMemo to stabilize random positions between renders (avoids hydration mismatch)
-  const position = useMemo(() => ({
-    top: `${Math.random() * 80 + 10}%`,
-    left: `${Math.random() * 80 + 10}%`,
-  }), []);
-
+const FloatingElement: React.FC<FloatingElementProps> = ({ delay, size, top, left }) => {
   return (
     <div
       className="absolute rounded-full blur-[1px]"
@@ -33,8 +27,8 @@ const FloatingElement: React.FC<FloatingElementProps> = ({ delay, size }) => {
         background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(247, 147, 251, 0.3))',
         animation: `ai-float ${6 + delay}s ease-in-out infinite`,
         animationDelay: `${delay}s`,
-        top: position.top,
-        left: position.left,
+        top,
+        left,
       }}
     />
   );
@@ -115,12 +109,12 @@ const AnimatedBackground: React.FC = () => {
         }
       `}</style>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <FloatingElement delay={0} size={8} />
-        <FloatingElement delay={2} size={12} />
-        <FloatingElement delay={4} size={6} />
-        <FloatingElement delay={1} size={10} />
-        <FloatingElement delay={3} size={15} />
-        <FloatingElement delay={5} size={9} />
+        <FloatingElement delay={0} size={8} top="18%" left="12%" />
+        <FloatingElement delay={2} size={12} top="62%" left="78%" />
+        <FloatingElement delay={4} size={6} top="34%" left="52%" />
+        <FloatingElement delay={1} size={10} top="78%" left="22%" />
+        <FloatingElement delay={3} size={15} top="46%" left="88%" />
+        <FloatingElement delay={5} size={9} top="14%" left="70%" />
 
         <div className="absolute inset-0">
           <Node top="20%" left="10%" />
