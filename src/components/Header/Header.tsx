@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { getMenuStyles, headerVariants } from "../../utils/motion";
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import EvoubapLogo from "./EvoubapLogo";
 import { useActiveSectionContext } from "../../contexts/ActiveSectionContext";
 import { useTranslation } from "../../hooks/useTranslation";
 
@@ -70,11 +71,7 @@ const Header = () => {
         >
           <div className="flex items-center mt-2 sm:mt-3 md:mt-4">
             <a href="/" aria-label="Evoubap — accueil" className="inline-flex items-center no-underline">
-              <img
-                src="/evoubap-logos/evoubap-logo-gradient.svg"
-                alt="Evoubap — Transformation Digitale"
-                width={480}
-                height={208}
+              <EvoubapLogo
                 className="h-28 sm:h-32 md:h-36 lg:h-40 w-auto -my-9 sm:-my-10 md:-my-11 lg:-my-12"
               />
             </a>

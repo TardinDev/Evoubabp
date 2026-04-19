@@ -215,6 +215,25 @@
 }
 
 
+/* Evoubap butterfly logo — wing flap */
+@keyframes evoubap-wing-flap {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.55); }
+}
+
+.evoubap-wings {
+  transform-origin: center center;
+  transform-box: fill-box;
+}
+
+.evoubap-wings.is-flapping {
+  animation: evoubap-wing-flap 0.55s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evoubap-wings.is-flapping { animation: none; }
+}
+
 /* FullStackNodeSection keyframes */
 @keyframes fsnode-blink {
   0%, 50% { opacity: 1; }
