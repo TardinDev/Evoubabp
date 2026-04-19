@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
-import { FaReact, FaJava, FaShieldAlt, FaExternalLinkAlt, FaGithub, FaFileAlt, FaDatabase, FaBolt, FaLayerGroup } from 'react-icons/fa';
+import { FaReact, FaJava, FaShieldAlt, FaExternalLinkAlt, FaGithub, FaFileAlt, FaDatabase, FaBolt, FaLayerGroup, FaCheckCircle, FaExclamationTriangle, FaFilePdf, FaBookOpen, FaCogs, FaVial, FaExchangeAlt } from 'react-icons/fa';
 import { SiSpringboot, SiMysql, SiTypescript, SiDocker } from 'react-icons/si';
 import { useTranslation } from '../../hooks/useTranslation';
 
@@ -361,6 +361,125 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                     </p>
                   </div>
                 ))}
+              </div>
+            </motion.div>
+
+            <motion.div variants={fadeIn('up', 'tween', 0.35, 0.8)}>
+              <div
+                className="rounded-2xl p-8 md:p-10 mb-16"
+                style={{
+                  background: 'rgba(109, 179, 63, 0.05)',
+                  border: '1px solid rgba(109, 179, 63, 0.15)',
+                }}
+              >
+                <div className="flex items-center justify-between mb-2 flex-wrap gap-3">
+                  <h4
+                    className="font-semibold text-white"
+                    style={{
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontSize: 'clamp(1.3rem, 2.5vw, 1.75rem)',
+                    }}
+                  >
+                    {t.fullstackSpring.craftTitle}
+                  </h4>
+                  <span
+                    className="inline-flex items-center gap-2 text-[0.7rem] px-3 py-1.5 rounded"
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      letterSpacing: '0.1em',
+                      color: '#6db33f',
+                      background: 'rgba(109, 179, 63, 0.12)',
+                      border: '1px solid rgba(109, 179, 63, 0.25)',
+                    }}
+                  >
+                    <FaJava /> JAVA 17 · SPRING BOOT 3.2
+                  </span>
+                </div>
+                <p
+                  className="text-[0.95rem] mb-8 max-w-[720px]"
+                  style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    color: 'rgba(255, 255, 255, 0.6)',
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {t.fullstackSpring.craftSubtitle}
+                </p>
+
+                <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                  {[
+                    { icon: <FaLayerGroup />, title: t.fullstackSpring.craftLayers, desc: t.fullstackSpring.craftLayersDesc, tag: 'Architecture' },
+                    { icon: <FaDatabase />, title: t.fullstackSpring.craftJpa, desc: t.fullstackSpring.craftJpaDesc, tag: 'Persistence' },
+                    { icon: <FaShieldAlt />, title: t.fullstackSpring.craftSecurity, desc: t.fullstackSpring.craftSecurityDesc, tag: 'Security' },
+                    { icon: <FaCheckCircle />, title: t.fullstackSpring.craftValidation, desc: t.fullstackSpring.craftValidationDesc, tag: 'DTO' },
+                    { icon: <FaExclamationTriangle />, title: t.fullstackSpring.craftErrors, desc: t.fullstackSpring.craftErrorsDesc, tag: 'Errors' },
+                    { icon: <FaExchangeAlt />, title: t.fullstackSpring.craftMapstruct, desc: t.fullstackSpring.craftMapstructDesc, tag: 'Mapping' },
+                    { icon: <FaFilePdf />, title: t.fullstackSpring.craftPdf, desc: t.fullstackSpring.craftPdfDesc, tag: 'PDF' },
+                    { icon: <FaBookOpen />, title: t.fullstackSpring.craftSwagger, desc: t.fullstackSpring.craftSwaggerDesc, tag: 'Docs' },
+                    { icon: <FaCogs />, title: t.fullstackSpring.craftProfiles, desc: t.fullstackSpring.craftProfilesDesc, tag: 'Config' },
+                    { icon: <FaVial />, title: t.fullstackSpring.craftTests, desc: t.fullstackSpring.craftTestsDesc, tag: 'Tests' },
+                  ].map((brick, idx) => (
+                    <div
+                      key={idx}
+                      className="p-5 rounded-xl transition-all duration-300 hover:-translate-y-0.5"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        border: '1px solid rgba(255, 255, 255, 0.06)',
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(109, 179, 63, 0.3)';
+                        (e.currentTarget as HTMLElement).style.background = 'rgba(109, 179, 63, 0.05)';
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.06)';
+                        (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.03)';
+                      }}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div
+                          className="w-10 h-10 flex items-center justify-center rounded-lg flex-shrink-0 text-[1.05rem]"
+                          style={{
+                            background: 'linear-gradient(135deg, rgba(109, 179, 63, 0.2), rgba(109, 179, 63, 0.05))',
+                            border: '1px solid rgba(109, 179, 63, 0.2)',
+                            color: '#6db33f',
+                          }}
+                        >
+                          {brick.icon}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">
+                            <h5
+                              className="text-[0.95rem] font-semibold text-white"
+                              style={{ fontFamily: "'DM Sans', sans-serif" }}
+                            >
+                              {brick.title}
+                            </h5>
+                            <span
+                              className="text-[0.6rem] px-2 py-0.5 rounded"
+                              style={{
+                                fontFamily: "'JetBrains Mono', monospace",
+                                letterSpacing: '0.08em',
+                                color: 'rgba(109, 179, 63, 0.9)',
+                                background: 'rgba(109, 179, 63, 0.1)',
+                              }}
+                            >
+                              {brick.tag}
+                            </span>
+                          </div>
+                          <p
+                            className="text-[0.83rem] leading-[1.55]"
+                            style={{
+                              fontFamily: "'DM Sans', sans-serif",
+                              color: 'rgba(255, 255, 255, 0.55)',
+                            }}
+                          >
+                            {brick.desc}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
 
