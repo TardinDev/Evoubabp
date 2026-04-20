@@ -5,6 +5,7 @@ import Header from "../components/Header/Header";
 import UnderHeader from "../components/Header/UnderHeader";
 import CurrentProject from "../components/Header/CurrentProject";
 import Projects from "../components/projects/Projects";
+import LazyMount from "../components/LazyMount";
 import { ActiveSectionProvider } from "../contexts/ActiveSectionContext";
 import { ChatBotProvider } from "../contexts/ChatBotContext";
 import { LanguageProvider } from "../contexts/LanguageContext";
@@ -28,27 +29,26 @@ const TestimonialsSection = dynamic(() => import("../components/Testimonials/Tes
 const ContactSection = dynamic(() => import("../components/Contact/ContactSection"), { ssr: false });
 
 export default function HomePage() {
-  // Définir les sections avec leurs couleurs
   const sections = [
-    { id: 'header-section', color: '#F8F7F1' }, // Couleur par défaut
-    { id: 'under-header', color: '#FFF5E1' }, // Beige clair
-    { id: 'current-project', color: '#E8F4F8' }, // Bleu très clair
-    { id: 'projects', color: '#F0E6FF' }, // Violet clair
-    { id: 'howItWorks', color: '#E8F5E9' }, // Vert très clair
-    { id: 'app-showcase', color: '#FFF3E0' }, // Orange clair
-    { id: 'tech-used', color: '#0f0c29' }, // Dark (Technologies)
-    { id: 'testimonials', color: '#F8FAFC' }, // Gris très clair
-    { id: 'fullstack-node', color: '#E8F5E9' }, // Vert clair (Node.js)
-    { id: 'fullstack-spring', color: '#F3E5F5' }, // Violet clair (Spring)
-    { id: 'fullstack-flytaxi', color: '#FFE8DF' }, // Orange clair (Fly & Taxi)
-    { id: 'dev-tools', color: '#E3F2FD' }, // Bleu clair
-    { id: 'tools-section', color: '#FCE4EC' }, // Rose clair
-    { id: 'frontend-tech', color: '#E1F5FE' }, // Bleu cyan clair (React/TypeScript/Tailwind)
-    { id: 'backend-tech', color: '#E8F5E9' }, // Vert clair (Node.js/Spring)
-    { id: 'ai-innovation', color: '#EDE7F6' }, // Violet clair (IA)
-    { id: 'docker-devops', color: '#E3F2FD' }, // Bleu clair (Docker)
-    { id: 'contact', color: '#F3E5F5' }, // Violet clair (Contact)
-    { id: 'footer', color: '#ECEFF1' }, // Gris clair
+    { id: 'header-section', color: '#F8F7F1' },
+    { id: 'under-header', color: '#FFF5E1' },
+    { id: 'current-project', color: '#E8F4F8' },
+    { id: 'projects', color: '#F0E6FF' },
+    { id: 'howItWorks', color: '#E8F5E9' },
+    { id: 'app-showcase', color: '#FFF3E0' },
+    { id: 'tech-used', color: '#0f0c29' },
+    { id: 'testimonials', color: '#F8FAFC' },
+    { id: 'fullstack-node', color: '#E8F5E9' },
+    { id: 'fullstack-spring', color: '#F3E5F5' },
+    { id: 'fullstack-flytaxi', color: '#FFE8DF' },
+    { id: 'dev-tools', color: '#E3F2FD' },
+    { id: 'tools-section', color: '#FCE4EC' },
+    { id: 'frontend-tech', color: '#E1F5FE' },
+    { id: 'backend-tech', color: '#E8F5E9' },
+    { id: 'ai-innovation', color: '#EDE7F6' },
+    { id: 'docker-devops', color: '#E3F2FD' },
+    { id: 'contact', color: '#F3E5F5' },
+    { id: 'footer', color: '#ECEFF1' },
   ];
 
   const { activeSection, activeColor } = useActiveSection(sections);
@@ -66,43 +66,43 @@ export default function HomePage() {
             <CurrentProject />
           </section>
           <Projects id="projects" />
-          <ChatBot />
-          <HowItWorks id="howItWorks" />
-          <section id="app-showcase" aria-label="Vitrine d'applications">
+          <LazyMount minHeight={400}><ChatBot /></LazyMount>
+          <LazyMount minHeight={600}><HowItWorks id="howItWorks" /></LazyMount>
+          <LazyMount as="section" id="app-showcase" ariaLabel="Vitrine d'applications" minHeight={600}>
             <AppShowcaseSection />
-          </section>
-          <section id="tech-used" aria-label="Technologies utilisées">
+          </LazyMount>
+          <LazyMount as="section" id="tech-used" ariaLabel="Technologies utilisées" minHeight={500}>
             <TechUsed />
-          </section>
-          <section id="testimonials" aria-label="Témoignages">
+          </LazyMount>
+          <LazyMount as="section" id="testimonials" ariaLabel="Témoignages" minHeight={500}>
             <TestimonialsSection />
-          </section>
-          <section id="fullstack-node" aria-label="Projet Node.js">
+          </LazyMount>
+          <LazyMount as="section" id="fullstack-node" ariaLabel="Projet Node.js" minHeight={700}>
             <FullStackNodeSection />
-          </section>
-          <section id="fullstack-spring" aria-label="Projet Spring Boot">
+          </LazyMount>
+          <LazyMount as="section" id="fullstack-spring" ariaLabel="Projet Spring Boot" minHeight={700}>
             <FullStackSpringSection />
-          </section>
-          <section id="fullstack-flytaxi" aria-label="Projet Fly & Taxi">
+          </LazyMount>
+          <LazyMount as="section" id="fullstack-flytaxi" ariaLabel="Projet Fly & Taxi" minHeight={700}>
             <FullStackFlyTaxiSection />
-          </section>
-          <section id="dev-tools" aria-label="Outils de développement">
+          </LazyMount>
+          <LazyMount as="section" id="dev-tools" ariaLabel="Outils de développement" minHeight={500}>
             <DevToolsSectionTest />
-          </section>
-          <section id="tools-section" aria-label="Outils">
+          </LazyMount>
+          <LazyMount as="section" id="tools-section" ariaLabel="Outils" minHeight={500}>
             <ToolsSection />
-          </section>
-          <FrontendSection id="frontend-tech" />
-          <BackendSection id="backend-tech" />
-          <AISection id="ai-innovation" />
-          <DockerSection id="docker-devops" />
-          <section id="contact" aria-label="Contact">
+          </LazyMount>
+          <LazyMount minHeight={500}><FrontendSection id="frontend-tech" /></LazyMount>
+          <LazyMount minHeight={500}><BackendSection id="backend-tech" /></LazyMount>
+          <LazyMount minHeight={500}><AISection id="ai-innovation" /></LazyMount>
+          <LazyMount minHeight={500}><DockerSection id="docker-devops" /></LazyMount>
+          <LazyMount as="section" id="contact" ariaLabel="Contact" minHeight={500}>
             <ContactSection />
-          </section>
+          </LazyMount>
         </main>
-        <div id="footer">
+        <LazyMount id="footer" minHeight={400}>
           <Footer />
-        </div>
+        </LazyMount>
       </ActiveSectionProvider>
     </ChatBotProvider>
     </LanguageProvider>
