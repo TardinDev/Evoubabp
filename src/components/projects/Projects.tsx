@@ -114,6 +114,23 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
   useEffect(() => {
     ScrollTrigger.config({ ignoreMobileResize: true })
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const isNarrowViewport = window.matchMedia('(max-width: 768px)').matches
+
+    // On mobile or reduced-motion, skip the heavy pinned timeline entirely
+    // to cut Total Blocking Time. Details panels remain statically visible.
+    if (isNarrowViewport || prefersReducedMotion) {
+      const details = detailRefs.current.filter(Boolean) as HTMLElement[]
+      const lottieContainers = lottieContainerRefs.current.filter(Boolean) as HTMLElement[]
+      details.forEach((detail) => {
+        gsap.set(detail, { autoAlpha: 1, yPercent: 0, position: 'relative' })
+      })
+      lottieContainers.forEach((container) => {
+        gsap.set(container, { scale: 1, opacity: 1 })
+      })
+      return
+    }
+
     const ctx = gsap.context(() => {
       const cards = cardRefs.current.filter(Boolean) as HTMLElement[]
       const details = detailRefs.current.filter(Boolean) as HTMLElement[]
@@ -121,8 +138,6 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
       const bgLayers = bgLayerRefs.current.filter(Boolean) as HTMLElement[]
       const lottieContainers = lottieContainerRefs.current.filter(Boolean) as HTMLElement[]
       const numServices = services.length
-
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
       // ============================
       // INITIAL STATES

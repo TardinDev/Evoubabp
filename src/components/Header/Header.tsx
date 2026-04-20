@@ -84,7 +84,7 @@ const Header = () => {
           initial="hidden"
           whileInView="show"
           variants={headerVariants}
-          viewport={{ once: false, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.25 }}
           className="bg-transparent p-0 flex justify-between font-medium flex-wrap relative"
         >
           <div className="flex items-center mt-2 sm:mt-3 md:mt-4">

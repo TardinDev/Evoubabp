@@ -11,11 +11,19 @@ interface Testimonial {
   name: string;
   role: string;
   company: string;
-  avatar: string;
+  initials: string;
   content: string;
   rating: number;
   project: string;
 }
+
+const getInitials = (name: string) =>
+  name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? '')
+    .join('');
 
 interface TestimonialsSectionProps {
   id?: string;
@@ -31,7 +39,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
     name: item.name,
     role: item.role,
     company: item.company,
-    avatar: `/images/avatars/avatar${index + 1}.jpg`,
+    initials: getInitials(item.name),
     content: item.content,
     rating: 5,
     project: item.project,
@@ -152,15 +160,12 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
 
                     {/* Author */}
                     <div className="flex items-center gap-4">
-                      <img
-                        src={testimonial.avatar}
-                        alt={testimonial.name}
-                        className="w-14 h-14 md:w-12 md:h-12 rounded-full object-cover border-2 border-[#ffd700]"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&background=ffd700&color=000&size=100&bold=true&font-size=0.4`;
-                        }}
-                      />
+                      <div
+                        aria-hidden
+                        className="w-14 h-14 md:w-12 md:h-12 rounded-full border-2 border-[#ffd700] bg-[#ffd700] text-black font-bold flex items-center justify-center shrink-0 text-base"
+                      >
+                        {testimonial.initials}
+                      </div>
                       <div>
                         <h4 className="text-[1.1rem] font-semibold text-white mb-1">
                           {testimonial.name}

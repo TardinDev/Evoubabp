@@ -56,7 +56,7 @@ export default function CurrentProject() {
         variants={staggerContainer(0.1, 0.2)}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: false, amount: 0.25 }}
+        viewport={{ once: true, amount: 0.25 }}
         className="relative z-[1] w-full px-3 sm:px-4 py-4"
       >
         <div className="grid md:grid-cols-2 gap-3 md:gap-4">
@@ -103,7 +103,7 @@ export default function CurrentProject() {
                 <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: `${PROGRESS}%` }}
-                  viewport={{ once: false, amount: 0.4 }}
+                  viewport={{ once: true, amount: 0.4 }}
                   transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
                   className="h-full rounded-full bg-emerald-400"
                 />

@@ -37,7 +37,7 @@ export default function UnderHeader() {
         variants={staggerContainer(0.1, 0.2)}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: false, amount: 0.25 }}
+        viewport={{ once: true, amount: 0.25 }}
         className="relative bg-bg-primary z-[1]"
         style={{ padding: 'clamp(8px, 1vw, 16px) clamp(20px, 4vw, 50px)' }}
       >

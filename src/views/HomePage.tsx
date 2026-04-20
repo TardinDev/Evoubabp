@@ -10,22 +10,22 @@ import { ChatBotProvider } from "../contexts/ChatBotContext";
 import { LanguageProvider } from "../contexts/LanguageContext";
 import useActiveSection from "../hooks/useActiveSection";
 
-const HowItWorks = dynamic(() => import("../components/projects/HowItWorks12"));
-const AppShowcaseSection = dynamic(() => import("../components/ShowCaseprojects/AppShowcaseSection"));
-const FullStackNodeSection = dynamic(() => import("../components/FullStack/FullStackNodeSection"));
-const FullStackSpringSection = dynamic(() => import("../components/FullStack/FullStackSpringSection"));
-const FullStackFlyTaxiSection = dynamic(() => import("../components/FullStack/FullStackFlyTaxiSection"));
-const DevToolsSectionTest = dynamic(() => import("../components/DevTools/DevToolsSectionTest"));
-const AISection = dynamic(() => import("../components/AI/AISection"));
-const DockerSection = dynamic(() => import("../components/Docker/DockerSection"));
-const FrontendSection = dynamic(() => import("../components/Frontend/FrontendSection"));
-const BackendSection = dynamic(() => import("../components/Backend/BackendSection"));
-const TechUsed = dynamic(() => import("../components/TechUsed/TechUsed"));
-const ToolsSection = dynamic(() => import("../components/Tools/ToolsSection"));
-const Footer = dynamic(() => import("../components/TheFooter/Footer"));
+const HowItWorks = dynamic(() => import("../components/projects/HowItWorks12"), { ssr: false });
+const AppShowcaseSection = dynamic(() => import("../components/ShowCaseprojects/AppShowcaseSection"), { ssr: false });
+const FullStackNodeSection = dynamic(() => import("../components/FullStack/FullStackNodeSection"), { ssr: false });
+const FullStackSpringSection = dynamic(() => import("../components/FullStack/FullStackSpringSection"), { ssr: false });
+const FullStackFlyTaxiSection = dynamic(() => import("../components/FullStack/FullStackFlyTaxiSection"), { ssr: false });
+const DevToolsSectionTest = dynamic(() => import("../components/DevTools/DevToolsSectionTest"), { ssr: false });
+const AISection = dynamic(() => import("../components/AI/AISection"), { ssr: false });
+const DockerSection = dynamic(() => import("../components/Docker/DockerSection"), { ssr: false });
+const FrontendSection = dynamic(() => import("../components/Frontend/FrontendSection"), { ssr: false });
+const BackendSection = dynamic(() => import("../components/Backend/BackendSection"), { ssr: false });
+const TechUsed = dynamic(() => import("../components/TechUsed/TechUsed"), { ssr: false });
+const ToolsSection = dynamic(() => import("../components/Tools/ToolsSection"), { ssr: false });
+const Footer = dynamic(() => import("../components/TheFooter/Footer"), { ssr: false });
 const ChatBot = dynamic(() => import("../components/ChatBot/ChatBot"), { ssr: false });
-const TestimonialsSection = dynamic(() => import("../components/Testimonials/TestimonialsSection"));
-const ContactSection = dynamic(() => import("../components/Contact/ContactSection"));
+const TestimonialsSection = dynamic(() => import("../components/Testimonials/TestimonialsSection"), { ssr: false });
+const ContactSection = dynamic(() => import("../components/Contact/ContactSection"), { ssr: false });
 
 export default function HomePage() {
   // Définir les sections avec leurs couleurs

@@ -11,13 +11,12 @@ const BLUR_DATA_URL =
 
 interface AppCardProps {
   app: Application;
-  index: number;
   type: "mobile" | "web";
   variants: any;
   onCardClick?: (app: Application) => void;
 }
 
-const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
+const AppCard = ({ app, type, variants, onCardClick }: AppCardProps) => {
   const [imageError, setImageError] = useState(false);
 
   const handleClick = () => {
@@ -69,7 +68,7 @@ const AppCard = ({ app, index, type, variants, onCardClick }: AppCardProps) => {
                 alt={`Capture d'écran de ${app.title} - ${app.description}`}
                 fill
                 sizes="(max-width: 768px) 220px, 380px"
-                loading={index < 3 ? "eager" : "lazy"}
+                loading="lazy"
                 placeholder="blur"
                 blurDataURL={BLUR_DATA_URL}
                 onError={() => setImageError(true)}

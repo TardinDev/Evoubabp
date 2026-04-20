@@ -42,7 +42,6 @@ const AppShowcaseSection = () => {
                   <AppCard
                     key={`mobile-${index}`}
                     app={app}
-                    index={index}
                     type="mobile"
                     variants={fadeIn("right", "spring", index * 0.08, 0.6)}
                     onCardClick={handleCardClick}
@@ -61,7 +60,6 @@ const AppShowcaseSection = () => {
                   <AppCard
                     key={`web-${index}`}
                     app={app}
-                    index={index}
                     type="web"
                     variants={fadeIn("left", "spring", index * 0.08, 0.6)}
                   />
