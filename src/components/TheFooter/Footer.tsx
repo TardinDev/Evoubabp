@@ -50,7 +50,7 @@ export default function Footer() {
               </h2>
             </div>
             {/* Brand description */}
-            <p className="text-[#94a3b8] leading-relaxed max-w-[300px]">
+            <p className="text-[#cbd5e1] leading-relaxed max-w-[300px]">
               {t.footer.brandDescription}
             </p>
             {/* Social links */}
@@ -60,7 +60,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-300 backdrop-blur-[10px] border border-white/10 bg-white/10 hover:-translate-y-0.5 [&_svg]:fill-[#94a3b8] [&_svg]:transition-[fill] [&_svg]:duration-300 hover:[&_svg]:fill-white"
+                className="w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-300 backdrop-blur-[10px] border border-white/10 bg-white/10 hover:-translate-y-0.5 [&_svg]:fill-[#cbd5e1] [&_svg]:transition-[fill] [&_svg]:duration-300 hover:[&_svg]:fill-white"
                 style={{ ['--tw-bg-opacity' as string]: undefined }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = 'linear-gradient(135deg, #3b82f6, #8b5cf6)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; }}
@@ -74,7 +74,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-300 backdrop-blur-[10px] border border-white/10 bg-white/10 hover:-translate-y-0.5 [&_svg]:fill-[#94a3b8] [&_svg]:transition-[fill] [&_svg]:duration-300 hover:[&_svg]:fill-white"
+                className="w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-300 backdrop-blur-[10px] border border-white/10 bg-white/10 hover:-translate-y-0.5 [&_svg]:fill-[#cbd5e1] [&_svg]:transition-[fill] [&_svg]:duration-300 hover:[&_svg]:fill-white"
                 onMouseEnter={(e) => { e.currentTarget.style.background = 'linear-gradient(135deg, #3b82f6, #8b5cf6)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; }}
               >
@@ -90,42 +90,42 @@ export default function Footer() {
             {/* Services column */}
             <div className="flex flex-col gap-4">
               <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">{t.footer.services}</h3>
-              <a href="#app-showcase" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.mobileApps}</a>
-              <a href="#app-showcase" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.webApps}</a>
-              <a href="#howItWorks" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.saasDev}</a>
-              <Link href="/formations" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.training}</Link>
-              <Link href="/blog" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.blog}</Link>
-              <a href="#howItWorks" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.consulting}</a>
+              <a href="#app-showcase" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.mobileApps}</a>
+              <a href="#app-showcase" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.webApps}</a>
+              <a href="#howItWorks" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.saasDev}</a>
+              <Link href="/formations" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.training}</Link>
+              <Link href="/blog" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.blog}</Link>
+              <a href="#howItWorks" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.consulting}</a>
             </div>
 
             {/* Technologies column */}
             <div className="flex flex-col gap-4">
               <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">{t.footer.technologies}</h3>
-              <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React Native</a>
-              <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React / Next.js</a>
-              <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">TypeScript</a>
-              <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Node.js</a>
-              <a href="#tech-used" className="text-[#94a3b8] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Expo</a>
+              <a href="#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React Native</a>
+              <a href="#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React / Next.js</a>
+              <a href="#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">TypeScript</a>
+              <a href="#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Node.js</a>
+              <a href="#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Expo</a>
             </div>
 
             {/* Contact column */}
             <div className="flex flex-col gap-4">
               <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">{t.footer.contact}</h3>
               <div className="flex flex-col gap-3">
-                <div className="flex items-center gap-2 text-[#94a3b8]">
-                  <span className="flex items-center justify-center text-[#94a3b8]"><FaEnvelope size={14} /></span>
-                  <a href="mailto:tardindavy@gmail.com" className="text-[#94a3b8] no-underline transition-colors duration-300 hover:text-blue-500">
+                <div className="flex items-center gap-2 text-[#cbd5e1]">
+                  <span className="flex items-center justify-center text-[#cbd5e1]"><FaEnvelope size={14} /></span>
+                  <a href="mailto:tardindavy@gmail.com" className="text-[#cbd5e1] no-underline transition-colors duration-300 hover:text-blue-500">
                     tardindavy@gmail.com
                   </a>
                 </div>
-                <div className="flex items-center gap-2 text-[#94a3b8]">
-                  <span className="flex items-center justify-center text-[#94a3b8]"><FaPhone size={14} /></span>
-                  <a href="https://wa.me/33766450771" target="_blank" rel="noopener noreferrer" className="text-[#94a3b8] no-underline transition-colors duration-300 hover:text-blue-500">
+                <div className="flex items-center gap-2 text-[#cbd5e1]">
+                  <span className="flex items-center justify-center text-[#cbd5e1]"><FaPhone size={14} /></span>
+                  <a href="https://wa.me/33766450771" target="_blank" rel="noopener noreferrer" className="text-[#cbd5e1] no-underline transition-colors duration-300 hover:text-blue-500">
                     +33 7 66 45 07 71 (WhatsApp)
                   </a>
                 </div>
-                <div className="flex items-center gap-2 text-[#94a3b8]">
-                  <span className="flex items-center justify-center text-[#94a3b8]"><FaGlobe size={14} /></span>
+                <div className="flex items-center gap-2 text-[#cbd5e1]">
+                  <span className="flex items-center justify-center text-[#cbd5e1]"><FaGlobe size={14} /></span>
                   <span>France, Europe</span>
                 </div>
                 <button

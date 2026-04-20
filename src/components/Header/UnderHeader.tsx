@@ -127,11 +127,11 @@ export default function UnderHeader() {
               </div>
             </div>
             {/* iconsContact */}
-            <div className="flex gap-4 mt-2 cursor-pointer [&>svg]:transition-transform [&>svg]:duration-300 [&>svg]:ease-in-out hover:[&>svg]:scale-[1.2]">
-              <FaFacebook color="blue" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
-              <FaTiktok color="#000" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
-              <IoLogoWhatsapp color="green" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
-              <FaYoutube color="red" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+            <div className="flex gap-4 mt-2 [&>svg]:transition-transform [&>svg]:duration-300 [&>svg]:ease-in-out hover:[&>svg]:scale-[1.2]">
+              <FaFacebook role="img" aria-label="Facebook" color="blue" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <FaTiktok role="img" aria-label="TikTok" color="#000" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <IoLogoWhatsapp role="img" aria-label="WhatsApp" color="green" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
+              <FaYoutube role="img" aria-label="YouTube" color="red" className="w-9 h-9 sm:w-[44px] sm:h-[44px] transition-transform duration-300 ease-in-out hover:scale-[1.2]" />
             </div>
           </motion.div>
 
@@ -144,25 +144,33 @@ export default function UnderHeader() {
             </div>
 
             <div className="flex flex-col gap-4 max-sm:flex-row max-sm:gap-6">
-              <div className="flex gap-[10px] items-center cursor-pointer">
-                <IoLogoVercel size={48} color="#000" className="mb-4 w-14 max-sm:mb-0 max-sm:w-10" />
-                <a href="https://vercel.com/tardindevs-projects" target="_blank" rel="noopener noreferrer" className="no-underline text-inherit">
-                  <span className="text-purple-800 font-bold">Vercel</span>
-                </a>
-              </div>
+              <a
+                href="https://vercel.com/tardindevs-projects"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Voir mes projets sur Vercel"
+                className="flex gap-[10px] items-center no-underline text-inherit"
+              >
+                <IoLogoVercel aria-hidden size={48} color="#000" className="mb-4 w-14 max-sm:mb-0 max-sm:w-10" />
+                <span className="text-purple-800 font-bold">Vercel</span>
+              </a>
 
-              <div className="flex gap-[10px] items-center cursor-pointer">
-                <div style={{ height: "2rem", width: "3rem" }}>
+              <a
+                href="https://github.com/TardinDev"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Voir mon profil GitHub"
+                className="flex gap-[10px] items-center no-underline text-inherit"
+              >
+                <div aria-hidden style={{ height: "2rem", width: "3rem" }}>
                   <Lottie
                     animationData={gitHubAnimation}
                     loop
                     autoplay
                   />
                 </div>
-                <a href="https://github.com/TardinDev" target="_blank" rel="noopener noreferrer" className="no-underline text-inherit">
-                  <span className="text-purple-800 font-bold">GitHub</span>
-                </a>
-              </div>
+                <span className="text-purple-800 font-bold">GitHub</span>
+              </a>
             </div>
 
           </motion.div>

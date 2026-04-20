@@ -414,10 +414,12 @@ const ChatBot = () => {
                 </div>
               </div>
               <button
+                type="button"
+                aria-label="Fermer le chat"
                 className="bg-white/20 border-none rounded-[10px] w-9 h-9 flex items-center justify-center cursor-pointer text-white transition-all duration-300 hover:bg-white/30 hover:rotate-90"
                 onClick={handleClose}
               >
-                <FaTimes size={20} />
+                <FaTimes aria-hidden size={20} />
               </button>
             </div>
 
@@ -666,12 +668,14 @@ const ChatBot = () => {
                   className="flex-1 py-3.5 px-5 border border-white/15 rounded-[25px] text-sm font-[inherit] bg-white/5 text-white placeholder:text-white/40 focus:outline-none focus:border-violet-500 focus:bg-violet-500/10"
                 />
                 <button
+                  type="button"
+                  aria-label="Envoyer le message"
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim()}
                   className="text-white border-none w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:enabled:scale-110 hover:enabled:shadow-[0_8px_25px_rgba(139,92,246,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)' }}
                 >
-                  <FaPaperPlane size={18} />
+                  <FaPaperPlane aria-hidden size={18} />
                 </button>
               </div>
             )}
@@ -681,6 +685,8 @@ const ChatBot = () => {
 
       {hasReachedApps && (
         <motion.button
+          type="button"
+          aria-label="Ouvrir le chat de support"
           className="fixed bottom-[30px] right-[30px] w-[65px] h-[65px] rounded-full text-white border-none flex items-center justify-center cursor-pointer shadow-[0_8px_30px_rgba(75,0,130,0.5)] z-[999] max-md:w-[60px] max-md:h-[60px] max-md:bottom-5 max-md:right-5"
           style={{
             background: 'linear-gradient(135deg, #4b0082 0%, #8b5cf6 100%)',
@@ -692,7 +698,7 @@ const ChatBot = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <FaComments size={28} />
+          <FaComments aria-hidden size={28} />
           {!hasInteracted && (
             <motion.div
               className="absolute -top-1.5 -right-1.5 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-[3px] border-[#1a1a2e]"

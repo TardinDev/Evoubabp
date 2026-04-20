@@ -57,52 +57,51 @@ export default function HomePage() {
     <LanguageProvider>
     <ChatBotProvider>
       <ActiveSectionProvider value={{ activeSection, activeColor }}>
-        <div>
-          <Header />
-          <div id="header-section">
+        <Header />
+        <main id="main-content">
+          <section id="header-section" aria-label="Présentation">
             <UnderHeader />
-          </div>
-          <div id="current-project">
+          </section>
+          <section id="current-project" aria-label="Projet en cours">
             <CurrentProject />
-          </div>
+          </section>
           <Projects id="projects" />
           <ChatBot />
           <HowItWorks id="howItWorks" />
-          <div id="app-showcase">
+          <section id="app-showcase" aria-label="Vitrine d'applications">
             <AppShowcaseSection />
-          </div>
-          <div id="tech-used">
+          </section>
+          <section id="tech-used" aria-label="Technologies utilisées">
             <TechUsed />
-          </div>
-          <div id="testimonials">
+          </section>
+          <section id="testimonials" aria-label="Témoignages">
             <TestimonialsSection />
-          </div>
-          <div id="fullstack-node">
+          </section>
+          <section id="fullstack-node" aria-label="Projet Node.js">
             <FullStackNodeSection />
-          </div>
-          <div id="fullstack-spring">
+          </section>
+          <section id="fullstack-spring" aria-label="Projet Spring Boot">
             <FullStackSpringSection />
-          </div>
-          <div id="fullstack-flytaxi">
+          </section>
+          <section id="fullstack-flytaxi" aria-label="Projet Fly & Taxi">
             <FullStackFlyTaxiSection />
-          </div>
-          <div id="dev-tools">
+          </section>
+          <section id="dev-tools" aria-label="Outils de développement">
             <DevToolsSectionTest />
-          </div>
-          <div id="tools-section">
+          </section>
+          <section id="tools-section" aria-label="Outils">
             <ToolsSection />
-          </div>
+          </section>
           <FrontendSection id="frontend-tech" />
           <BackendSection id="backend-tech" />
           <AISection id="ai-innovation" />
           <DockerSection id="docker-devops" />
-          <div id="contact">
+          <section id="contact" aria-label="Contact">
             <ContactSection />
-          </div>
-          <div id="footer">
-            <Footer />
-          </div>
-
+          </section>
+        </main>
+        <div id="footer">
+          <Footer />
         </div>
       </ActiveSectionProvider>
     </ChatBotProvider>

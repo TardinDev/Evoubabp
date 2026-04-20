@@ -161,9 +161,10 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
 
       dots.forEach((dot, i) => {
         gsap.set(dot, {
-          scale: i === 0 ? 1.4 : 1,
-          width: i === 0 ? 28 : 10,
+          scaleX: i === 0 ? 2.8 : 1,
+          scaleY: i === 0 ? 1.4 : 1,
           backgroundColor: i === 0 ? services[0].color : '#cbd5e1',
+          transformOrigin: 'center center',
         })
       })
 
@@ -347,14 +348,14 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
 
         // Progress dots
         tl.to(dots[fromIdx], {
-          scale: 1,
-          width: 10,
+          scaleX: 1,
+          scaleY: 1,
           backgroundColor: '#cbd5e1',
           duration: 0.3,
         }, label)
         tl.to(dots[toIdx], {
-          scale: 1.4,
-          width: 28,
+          scaleX: 2.8,
+          scaleY: 1.4,
           backgroundColor: services[toIdx].color,
           duration: 0.3,
         }, label)
@@ -427,7 +428,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
           <h2 className="text-xl sm:text-[2.2rem] font-bold text-[#3a3b3c] mb-2">
             {t.services.title}
           </h2>
-          <p className="text-[1.05rem] text-[#6c757d] max-w-[500px] mx-auto">
+          <p className="text-[1.05rem] text-[#525a63] max-w-[500px] mx-auto">
             {t.services.subtitle}
           </p>
         </div>
@@ -468,7 +469,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                 <h3 className="text-[1.3rem] text-[#3a3b3c] mb-4 font-semibold">
                   {service.title}
                 </h3>
-                <p className="text-base text-[#6c757d] mb-4 leading-relaxed">
+                <p className="text-base text-[#525a63] mb-4 leading-relaxed">
                   {service.description}{' '}
                   {service.vercelLink && (
                     <a
@@ -511,7 +512,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
               key={service.key}
               ref={(el) => { dotRefs.current[i] = el }}
               className="w-[10px] h-[10px] rounded-full bg-gray-300"
-              style={{ willChange: 'transform, width, background-color' }}
+              style={{ willChange: 'transform, background-color' }}
             />
           ))}
         </div>
