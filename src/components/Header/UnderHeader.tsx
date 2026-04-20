@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { fadeIn, staggerContainer } from "../../utils/motion";
 import { FaFacebook, FaTiktok, FaYoutube } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -83,11 +84,15 @@ export default function UnderHeader() {
           variants={fadeIn("up", "tween", 0.2, 1)}
           className="absolute top-12 left-1/4 -translate-x-1/2 z-[1] max-sm:relative max-sm:top-0 max-sm:left-0 max-sm:translate-x-0 max-sm:flex max-sm:justify-center max-sm:items-center max-sm:mt-4 group"
         >
-          <img
+          <Image
             src={tardinimage}
             alt="Tardin"
+            width={280}
+            height={280}
+            priority
+            sizes="(max-width: 640px) 130px, (max-width: 1024px) 26vw, 280px"
             className="h-auto object-contain border-[3px] border-purple-800 rounded-full mb-[5px] opacity-90 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:scale-105"
-            style={{ width: 'clamp(130px, 26vw, 280px)' }}
+            style={{ width: 'clamp(130px, 26vw, 280px)', height: 'auto' }}
           />
         </motion.div>
 

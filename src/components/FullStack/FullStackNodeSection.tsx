@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaReact, FaNodeJs, FaTerminal, FaExternalLinkAlt, FaGithub, FaPlay, FaUniversity, FaUserGraduate, FaCloudUploadAlt, FaCloud } from 'react-icons/fa';
 import { SiPostgresql, SiExpress, SiTypescript } from 'react-icons/si';
@@ -181,10 +182,13 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                     className="rounded-[20px] overflow-hidden transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 bg-[#12121a] border border-white/[0.06]"
                   >
                     <div className="relative overflow-hidden aspect-video bg-[linear-gradient(135deg,#1a1a2e,#0f0f1a)]">
-                      <img
+                      <Image
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover relative z-[2]"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        loading="lazy"
+                        className="object-cover relative z-[2]"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.style.opacity = '0';

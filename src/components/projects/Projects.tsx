@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { HiOutlineDesktopComputer } from 'react-icons/hi'
@@ -12,10 +12,12 @@ import { useTranslation } from '../../hooks/useTranslation'
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
-import webDevelopmentAnimation from '../../shared/assets/animations/webDevelopment.json'
-import saasAnimation from '../../shared/assets/animations/saas.json'
-import mobileAnimation from '../../shared/assets/animations/mobile.json'
-import learningAnimation from '../../shared/assets/animations/learning.json'
+const ANIMATION_FILES: Record<string, string> = {
+  web: '/lotties/webDevelopment.json',
+  saas: '/lotties/saas.json',
+  mobile: '/lotties/mobile.json',
+  learning: '/lotties/learning.json',
+}
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -30,13 +32,13 @@ interface ServiceData {
   Icon: IconType
   vercelLink?: string
   color: string
-  animationData: object
   gradientFrom: string
   gradientTo: string
 }
 
 const Projects: React.FC<ProjectsProps> = ({ id }) => {
   const { t } = useTranslation();
+  const [animations, setAnimations] = useState<Record<string, unknown>>({})
 
   const services: ServiceData[] = [
     {
@@ -46,7 +48,6 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
       Icon: HiOutlineDesktopComputer,
       vercelLink: t.services.viewVercel,
       color: '#286F6C',
-      animationData: webDevelopmentAnimation,
       gradientFrom: 'rgba(40, 111, 108, 0.12)',
       gradientTo: 'rgba(40, 111, 108, 0.04)',
     },
@@ -56,7 +57,6 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
       description: t.services.aiDesc,
       Icon: FaBrain,
       color: '#EEC048',
-      animationData: saasAnimation,
       gradientFrom: 'rgba(238, 192, 72, 0.12)',
       gradientTo: 'rgba(238, 192, 72, 0.04)',
     },
@@ -66,7 +66,6 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
       description: t.services.mobileDesc,
       Icon: MdPhoneIphone,
       color: '#F26440',
-      animationData: mobileAnimation,
       gradientFrom: 'rgba(242, 100, 64, 0.12)',
       gradientTo: 'rgba(242, 100, 64, 0.04)',
     },
@@ -76,11 +75,31 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
       description: t.services.learningDesc,
       Icon: MdSchool,
       color: '#4A90E2',
-      animationData: learningAnimation,
       gradientFrom: 'rgba(74, 144, 226, 0.12)',
       gradientTo: 'rgba(74, 144, 226, 0.04)',
     },
   ];
+
+  useEffect(() => {
+    let cancelled = false
+    const loadAnimations = async () => {
+      const entries = await Promise.all(
+        Object.entries(ANIMATION_FILES).map(async ([key, url]) => {
+          try {
+            const res = await fetch(url)
+            if (!res.ok) return [key, null] as const
+            return [key, await res.json()] as const
+          } catch {
+            return [key, null] as const
+          }
+        })
+      )
+      if (cancelled) return
+      setAnimations(Object.fromEntries(entries.filter(([, v]) => v)))
+    }
+    loadAnimations()
+    return () => { cancelled = true }
+  }, [])
   const sectionRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLDivElement>(null)
   const orb1Ref = useRef<HTMLDivElement>(null)
@@ -469,12 +488,16 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                   className="flex-1 flex items-center justify-center"
                   style={{ willChange: 'transform, opacity' }}
                 >
-                  <Lottie
-                    animationData={service.animationData}
-                    loop
-                    autoplay
-                    style={{ width: '100%', maxHeight: '260px' }}
-                  />
+                  {animations[service.key] ? (
+                    <Lottie
+                      animationData={animations[service.key]}
+                      loop
+                      autoplay
+                      style={{ width: '100%', maxHeight: '260px' }}
+                    />
+                  ) : (
+                    <div className="w-full" style={{ height: 260 }} aria-hidden />
+                  )}
                 </div>
               </div>
             ))}

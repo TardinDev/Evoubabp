@@ -1,31 +1,31 @@
 'use client'
 
-import CurrentProject from "../components/Header/CurrentProject";
+import dynamic from "next/dynamic";
 import Header from "../components/Header/Header";
 import UnderHeader from "../components/Header/UnderHeader";
-import HowItWorks from "../components/projects/HowItWorks12";
+import CurrentProject from "../components/Header/CurrentProject";
 import Projects from "../components/projects/Projects";
-import AppShowcaseSection from "../components/ShowCaseprojects/AppShowcaseSection";
-import FullStackNodeSection from "../components/FullStack/FullStackNodeSection";
-import FullStackSpringSection from "../components/FullStack/FullStackSpringSection";
-import FullStackFlyTaxiSection from "../components/FullStack/FullStackFlyTaxiSection";
-// import DevToolsSection from "../components/DevTools/DevToolsSection";
-import DevToolsSectionTest from "../components/DevTools/DevToolsSectionTest";
-import AISection from "../components/AI/AISection";
-import DockerSection from "../components/Docker/DockerSection";
-import FrontendSection from "../components/Frontend/FrontendSection";
-import BackendSection from "../components/Backend/BackendSection";
-import TechUsed from "../components/TechUsed/TechUsed";
-import ToolsSection from "../components/Tools/ToolsSection";
-import Footer from "../components/TheFooter/Footer";
-import ChatBot from "../components/ChatBot/ChatBot";
-import TestimonialsSection from "../components/Testimonials/TestimonialsSection";
-import CaseStudiesSection from "../components/CaseStudies/CaseStudiesSection";
-import ContactSection from "../components/Contact/ContactSection";
 import { ActiveSectionProvider } from "../contexts/ActiveSectionContext";
 import { ChatBotProvider } from "../contexts/ChatBotContext";
 import { LanguageProvider } from "../contexts/LanguageContext";
 import useActiveSection from "../hooks/useActiveSection";
+
+const HowItWorks = dynamic(() => import("../components/projects/HowItWorks12"));
+const AppShowcaseSection = dynamic(() => import("../components/ShowCaseprojects/AppShowcaseSection"));
+const FullStackNodeSection = dynamic(() => import("../components/FullStack/FullStackNodeSection"));
+const FullStackSpringSection = dynamic(() => import("../components/FullStack/FullStackSpringSection"));
+const FullStackFlyTaxiSection = dynamic(() => import("../components/FullStack/FullStackFlyTaxiSection"));
+const DevToolsSectionTest = dynamic(() => import("../components/DevTools/DevToolsSectionTest"));
+const AISection = dynamic(() => import("../components/AI/AISection"));
+const DockerSection = dynamic(() => import("../components/Docker/DockerSection"));
+const FrontendSection = dynamic(() => import("../components/Frontend/FrontendSection"));
+const BackendSection = dynamic(() => import("../components/Backend/BackendSection"));
+const TechUsed = dynamic(() => import("../components/TechUsed/TechUsed"));
+const ToolsSection = dynamic(() => import("../components/Tools/ToolsSection"));
+const Footer = dynamic(() => import("../components/TheFooter/Footer"));
+const ChatBot = dynamic(() => import("../components/ChatBot/ChatBot"), { ssr: false });
+const TestimonialsSection = dynamic(() => import("../components/Testimonials/TestimonialsSection"));
+const ContactSection = dynamic(() => import("../components/Contact/ContactSection"));
 
 export default function HomePage() {
   // Définir les sections avec leurs couleurs
@@ -38,7 +38,6 @@ export default function HomePage() {
     { id: 'app-showcase', color: '#FFF3E0' }, // Orange clair
     { id: 'tech-used', color: '#0f0c29' }, // Dark (Technologies)
     { id: 'testimonials', color: '#F8FAFC' }, // Gris très clair
-    { id: 'case-studies', color: '#E8EAF6' }, // Indigo clair
     { id: 'fullstack-node', color: '#E8F5E9' }, // Vert clair (Node.js)
     { id: 'fullstack-spring', color: '#F3E5F5' }, // Violet clair (Spring)
     { id: 'fullstack-flytaxi', color: '#FFE8DF' }, // Orange clair (Fly & Taxi)

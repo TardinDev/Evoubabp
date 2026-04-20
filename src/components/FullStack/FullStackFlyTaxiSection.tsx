@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaReact, FaShieldAlt, FaExternalLinkAlt, FaGithub, FaPlane, FaRobot, FaBolt, FaLayerGroup } from 'react-icons/fa';
 import { SiSpringboot, SiPostgresql, SiDocker } from 'react-icons/si';
@@ -253,10 +254,13 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
                       className="relative"
                       style={{ aspectRatio: '16/10', background: 'linear-gradient(135deg, #1a1a2e, #0f0f1a)' }}
                     >
-                      <img
+                      <Image
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover relative z-[2]"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        loading="lazy"
+                        className="object-cover relative z-[2]"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.style.opacity = '0';
