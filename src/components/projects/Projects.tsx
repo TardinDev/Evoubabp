@@ -131,12 +131,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
       return
     }
 
-    let ctx: gsap.Context | null = null
-    let idleHandle: number | null = null
-    let timeoutHandle: ReturnType<typeof setTimeout> | null = null
-
-    const initAnimations = () => {
-      ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       const cards = cardRefs.current.filter(Boolean) as HTMLElement[]
       const details = detailRefs.current.filter(Boolean) as HTMLElement[]
       const dots = dotRefs.current.filter(Boolean) as HTMLElement[]
@@ -383,22 +378,9 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
         // Hold pause
         tl.to({}, { duration: 0.4 })
       }
-      }, sectionRef)
-    }
+    }, sectionRef)
 
-    if (typeof window !== 'undefined' && typeof window.requestIdleCallback === 'function') {
-      idleHandle = window.requestIdleCallback(initAnimations, { timeout: 2000 })
-    } else {
-      timeoutHandle = setTimeout(initAnimations, 1)
-    }
-
-    return () => {
-      if (idleHandle !== null && typeof window !== 'undefined' && typeof window.cancelIdleCallback === 'function') {
-        window.cancelIdleCallback(idleHandle)
-      }
-      if (timeoutHandle !== null) clearTimeout(timeoutHandle)
-      ctx?.revert()
-    }
+    return () => ctx.revert()
   }, [])
 
   return (

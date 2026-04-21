@@ -141,7 +141,8 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        {/* GA/GTM scripts are loaded via lazyOnload, so only keep dns-prefetch (no preconnect, which PageSpeed flags as unused). */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <script
