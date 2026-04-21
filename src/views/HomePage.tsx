@@ -4,13 +4,13 @@ import dynamic from "next/dynamic";
 import Header from "../components/Header/Header";
 import UnderHeader from "../components/Header/UnderHeader";
 import CurrentProject from "../components/Header/CurrentProject";
-import Projects from "../components/projects/Projects";
 import LazyMount from "../components/LazyMount";
 import { ActiveSectionProvider } from "../contexts/ActiveSectionContext";
 import { ChatBotProvider } from "../contexts/ChatBotContext";
 import { LanguageProvider } from "../contexts/LanguageContext";
 import useActiveSection from "../hooks/useActiveSection";
 
+const Projects = dynamic(() => import("../components/projects/Projects"), { ssr: false });
 const HowItWorks = dynamic(() => import("../components/projects/HowItWorks12"), { ssr: false });
 const AppShowcaseSection = dynamic(() => import("../components/ShowCaseprojects/AppShowcaseSection"), { ssr: false });
 const FullStackNodeSection = dynamic(() => import("../components/FullStack/FullStackNodeSection"), { ssr: false });
@@ -65,7 +65,9 @@ export default function HomePage() {
           <section id="current-project" aria-label="Projet en cours">
             <CurrentProject />
           </section>
-          <Projects id="projects" />
+          <LazyMount minHeight={600} rootMargin="400px 0px">
+            <Projects id="projects" />
+          </LazyMount>
           <LazyMount minHeight={400}><ChatBot /></LazyMount>
           <LazyMount minHeight={600}><HowItWorks id="howItWorks" /></LazyMount>
           <LazyMount as="section" id="app-showcase" ariaLabel="Vitrine d'applications" minHeight={600}>

@@ -13,9 +13,8 @@ import {
   SiPrisma
 } from "react-icons/si";
 import { HiArrowRight } from "react-icons/hi";
-import { motion } from "framer-motion";
-import { fadeIn, staggerContainer } from "../../utils/motion";
 import { useTranslation } from "../../hooks/useTranslation";
+import type { CSSProperties } from "react";
 import type { IconType } from "react-icons";
 
 interface TechItem {
@@ -52,18 +51,13 @@ export default function CurrentProject() {
   return (
     <section className="relative overflow-hidden bg-[#4b0082]">
 
-      <motion.div
-        variants={staggerContainer(0.1, 0.2)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
+      <div
         className="relative z-[1] w-full px-3 sm:px-4 py-4"
       >
         <div className="grid md:grid-cols-2 gap-3 md:gap-4">
           {/* LEFT — Project details */}
-          <motion.div
-            variants={fadeIn("right", "tween", 0.2, 0.8)}
-            className="rounded-xl p-4 sm:p-5 flex flex-col gap-3 backdrop-blur-sm"
+          <div
+            className="cp-fade-right rounded-xl p-4 sm:p-5 flex flex-col gap-3 backdrop-blur-sm"
             style={{
               background: 'rgba(255,255,255,0.04)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -100,21 +94,17 @@ export default function CurrentProject() {
                 </span>
               </div>
               <div className="h-1.5 w-full rounded-full overflow-hidden bg-white/10">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${PROGRESS}%` }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 1.2, ease: 'easeOut', delay: 0.3 }}
-                  className="h-full rounded-full bg-emerald-400"
+                <div
+                  className="cp-progress-bar h-full rounded-full bg-emerald-400"
+                  style={{ ['--progress-target' as string]: `${PROGRESS}%` } as CSSProperties}
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* RIGHT — Tech stack + CTA */}
-          <motion.div
-            variants={fadeIn("left", "tween", 0.3, 0.8)}
-            className="rounded-xl p-4 sm:p-5 flex flex-col gap-3 backdrop-blur-sm"
+          <div
+            className="cp-fade-left rounded-xl p-4 sm:p-5 flex flex-col gap-3 backdrop-blur-sm"
             style={{
               background: 'rgba(255,255,255,0.04)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -125,9 +115,8 @@ export default function CurrentProject() {
               {t.currentProject.techUsed}
             </h2>
 
-            <motion.div
-              variants={fadeIn("up", "tween", 0.4, 0.8)}
-              className="grid grid-cols-5 gap-1.5 sm:gap-2"
+            <div
+              className="cp-fade-up grid grid-cols-5 gap-1.5 sm:gap-2"
             >
               {TECHS.map(({ Icon, name, color }) => (
                 <div
@@ -146,19 +135,18 @@ export default function CurrentProject() {
                   </span>
                 </div>
               ))}
-            </motion.div>
+            </div>
 
-            <motion.button
-              variants={fadeIn("up", "tween", 0.5, 0.8)}
+            <button
               onClick={handleViewMore}
-              className="group inline-flex items-center justify-center gap-2 self-start px-4 py-2 rounded-full font-semibold text-xs sm:text-sm text-white bg-[#7C3AED] hover:bg-[#6d28d9] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(124,58,237,0.4)] hover:-translate-y-0.5 cursor-pointer"
+              className="cp-fade-up-late group inline-flex items-center justify-center gap-2 self-start px-4 py-2 rounded-full font-semibold text-xs sm:text-sm text-white bg-[#7C3AED] hover:bg-[#6d28d9] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(124,58,237,0.4)] hover:-translate-y-0.5 cursor-pointer"
             >
               <span>{t.currentProject.viewMore}</span>
               <HiArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </motion.button>
-          </motion.div>
+            </button>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

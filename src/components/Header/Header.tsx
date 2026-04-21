@@ -3,31 +3,12 @@
 import { IoIosMail } from "react-icons/io";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaWhatsapp } from "react-icons/fa";
-import { motion } from 'framer-motion';
-import { getMenuStyles, headerVariants } from "../../utils/motion";
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import EvoubapLogo from "./EvoubapLogo";
 import { useActiveSectionContext } from "../../contexts/ActiveSectionContext";
 import { useTranslation } from "../../hooks/useTranslation";
-
-const subHeaderContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.09, delayChildren: 0.15 },
-  },
-};
-
-const subHeaderItem = {
-  hidden: { opacity: 0, y: -12, scale: 0.85 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { type: 'spring', stiffness: 420, damping: 22 },
-  },
-};
+import { getMenuStyles } from "../../utils/motion";
 
 const Menu = ({ menuOpened }: { menuOpened: boolean }) => {
   const { t } = useTranslation();
@@ -80,12 +61,8 @@ const Header = () => {
         className="py-0 px-3 sm:px-4 md:px-6 z-[99] opacity-100 sticky top-0 transition-all duration-300 ease-in-out"
         style={{ backgroundColor: activeColor, transition: 'background-color 500ms ease, all 300ms ease' }}
       >
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          variants={headerVariants}
-          viewport={{ once: true, amount: 0.25 }}
-          className="bg-transparent p-0 flex justify-between font-medium flex-wrap relative"
+        <div
+          className="hdr-slide-down bg-transparent p-0 flex justify-between font-medium flex-wrap relative"
         >
           <div className="flex items-center mt-2 sm:mt-3 md:mt-4">
             <a href="/" aria-label="Evoubap — accueil" className="inline-flex items-center no-underline">
@@ -101,61 +78,50 @@ const Header = () => {
           <div className="hidden max-md:block cursor-pointer" onClick={toggleMenu}>
             <BiMenuAltRight size={26} color="purple" />
           </div>
-        </motion.div>
+        </div>
 
         {/* Sub-header bar: FullStack links + Language toggle */}
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={subHeaderContainer}
+        <div
           className="flex justify-end items-center flex-wrap gap-1.5 sm:gap-2 md:gap-3 pt-0 pb-0.5"
         >
-          <motion.a
-            variants={subHeaderItem}
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+          <a
             href="#fullstack-node"
-            className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#61dafb] text-[#0a0a0f] bg-[#61dafb]/90 backdrop-blur-sm hover:bg-[#61dafb] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
+            className="hdr-subitem hdr-subitem-hover px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#61dafb] text-[#0a0a0f] bg-[#61dafb]/90 backdrop-blur-sm hover:bg-[#61dafb] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
+            style={{ animationDelay: '0.15s' }}
           >
             <span className="sm:hidden">Node</span>
             <span className="hidden sm:inline">React/NodeJs</span>
-          </motion.a>
-          <motion.a
-            variants={subHeaderItem}
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+          </a>
+          <a
             href="#fullstack-spring"
-            className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#6db33f] text-white bg-[#6db33f]/90 backdrop-blur-sm hover:bg-[#6db33f] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
+            className="hdr-subitem hdr-subitem-hover px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#6db33f] text-white bg-[#6db33f]/90 backdrop-blur-sm hover:bg-[#6db33f] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
+            style={{ animationDelay: '0.24s' }}
           >
             <span className="sm:hidden">Spring</span>
             <span className="hidden sm:inline">React/Spring-Boot</span>
-          </motion.a>
-          <motion.a
-            variants={subHeaderItem}
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+          </a>
+          <a
             href="https://wa.me/33766450771"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#25D366] text-white bg-[#25D366]/90 backdrop-blur-sm hover:bg-[#25D366] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
+            className="hdr-subitem hdr-subitem-hover flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#25D366] text-white bg-[#25D366]/90 backdrop-blur-sm hover:bg-[#25D366] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
             aria-label="Contact via WhatsApp"
+            style={{ animationDelay: '0.33s' }}
           >
             <FaWhatsapp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span className="hidden sm:inline">WhatsApp</span>
-          </motion.a>
-          <motion.button
-            variants={subHeaderItem}
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.95 }}
+          </a>
+          <button
             onClick={toggleLanguage}
-            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1 sm:py-2 rounded-full text-[11px] sm:text-sm font-bold border-2 border-purple-800 text-purple-800 bg-white/90 backdrop-blur-sm hover:bg-purple-800 hover:text-white transition-colors duration-300 cursor-pointer shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
+            className="hdr-subitem hdr-subitem-hover flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1 sm:py-2 rounded-full text-[11px] sm:text-sm font-bold border-2 border-purple-800 text-purple-800 bg-white/90 backdrop-blur-sm hover:bg-purple-800 hover:text-white transition-colors duration-300 cursor-pointer shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
             aria-label={language === 'fr' ? 'Switch to English' : 'Passer en Français'}
+            style={{ animationDelay: '0.42s' }}
           >
             <span className={language === 'fr' ? 'opacity-100' : 'opacity-40'}>FR</span>
             <span className="text-purple-400">|</span>
             <span className={language === 'en' ? 'opacity-100' : 'opacity-40'}>EN</span>
-          </motion.button>
-        </motion.div>
+          </button>
+        </div>
       </div>
     </>
   );
