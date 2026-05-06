@@ -7,7 +7,7 @@ import { FaFacebook, FaTiktok, FaYoutube } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { IoLogoVercel } from "react-icons/io5";
 const tardinimage = '/images/tardin.png'
-const cv = '/documents/tardinDev.pdf'
+const cv = '/documents/CV_Davy_Tardin_O_Emvo2026.pdf'
 import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import gitHubAnimation from "../../shared/assets/animations/gitHub.json";
