@@ -149,7 +149,7 @@ const Header = () => {
             href="#payments"
             onClick={(e) => smoothScrollTo(e, 'payments')}
             aria-label={t.header.paymentsChipLong}
-            className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#635bff] text-white bg-[#635bff]/90 backdrop-blur-sm hover:bg-[#635bff] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
+            className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#0a0a0a] text-white bg-[#0a0a0a] hover:bg-[#4b0082] hover:border-[#4b0082] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap transition-colors"
           >
             <span className="sm:hidden">{t.header.paymentsChipShort}</span>
             <span className="hidden sm:inline">{t.header.paymentsChipLong}</span>

@@ -7,7 +7,7 @@
     "method": "Methode",
     "training": "Formations",
     "paymentsChipShort": "Paiements",
-    "paymentsChipLong": "Paiements intégrés"
+    "paymentsChipLong": "Paiements intégration"
   },
   "hero": {
     "greeting": "Bonjour,",
@@ -291,6 +291,8 @@
     "trustWebhooksDesc": "Signature vérifiée + idempotence pour ne jamais débiter deux fois.",
     "trustAuditTitle": "Audit & logs",
     "trustAuditDesc": "Traçabilité complète des paiements, remboursements et disputes.",
+    "useCasesLabel": "Cas d'usage",
+    "complianceLabel": "Conformité & sécurité",
     "ctaTitle": "Quel moyen de paiement pour votre projet ?",
     "ctaSubtitle": "Marché, devise, récurrence, conformité — on choisit ensemble la stack qui colle à votre cas.",
     "ctaButton": "Discuter de mon intégration",
@@ -452,6 +454,11 @@
       "description": "Framework CSS utility-first permettant un développement rapide et un design cohérent",
       "features": ["Classes utilitaires pour styling rapide", "Design responsive intégré", "Personnalisation complète via config", "Dark mode natif", "Optimisation automatique (PurgeCSS)", "Composants réutilisables avec @apply"],
       "useCases": "Prototypage rapide, Design systems, Applications modernes"
+    },
+    "nextjs": {
+      "description": "Framework React full-stack pour des applications web ultra-performantes, SEO-friendly et prêtes pour la production",
+      "features": ["Server-Side Rendering (SSR) et Static Generation", "App Router avec React Server Components", "Optimisation automatique des images et fonts", "API Routes et Server Actions intégrées", "Streaming, Suspense et caching avancé", "Déploiement edge sur Vercel en une commande"],
+      "useCases": "Sites SEO-critiques, e-commerce, SaaS, portails marketing"
     }
   },
   "backendSection": {

@@ -291,6 +291,8 @@
     "trustWebhooksDesc": "Verified signatures + idempotency keys — never charge a customer twice.",
     "trustAuditTitle": "Audit & logs",
     "trustAuditDesc": "Full traceability of payments, refunds and disputes.",
+    "useCasesLabel": "Use cases",
+    "complianceLabel": "Compliance & security",
     "ctaTitle": "Which payment method fits your project?",
     "ctaSubtitle": "Market, currency, recurrence, compliance — let's pick the stack that matches your case.",
     "ctaButton": "Discuss my integration",
@@ -452,6 +454,11 @@
       "description": "Utility-first CSS framework enabling rapid development and consistent design",
       "features": ["Utility classes for rapid styling", "Built-in responsive design", "Full customization via config", "Native dark mode", "Automatic optimization (PurgeCSS)", "Reusable components with @apply"],
       "useCases": "Rapid prototyping, Design systems, Modern applications"
+    },
+    "nextjs": {
+      "description": "Full-stack React framework for blazing-fast, SEO-friendly, production-ready web applications",
+      "features": ["Server-Side Rendering (SSR) and Static Generation", "App Router with React Server Components", "Automatic image and font optimization", "Built-in API Routes and Server Actions", "Streaming, Suspense and advanced caching", "Edge deployment on Vercel in one command"],
+      "useCases": "SEO-critical sites, e-commerce, SaaS, marketing portals"
     }
   },
   "backendSection": {

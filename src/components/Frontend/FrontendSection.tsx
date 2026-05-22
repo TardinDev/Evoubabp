@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../utils/motion';
 import { FaReact, FaCode, FaPalette, FaRocket, FaMobileAlt, FaCheckCircle } from 'react-icons/fa';
-import { SiTypescript, SiTailwindcss } from 'react-icons/si';
+import { SiTypescript, SiTailwindcss, SiNextdotjs } from 'react-icons/si';
 import { useTranslation } from '../../hooks/useTranslation';
 
 interface FrontendSectionProps {
@@ -37,6 +37,14 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
       gradient: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
       features: t.frontendSection.tailwind.features,
       useCases: t.frontendSection.tailwind.useCases
+    },
+    {
+      icon: <SiNextdotjs />,
+      title: 'Next.js',
+      description: t.frontendSection.nextjs.description,
+      gradient: 'linear-gradient(135deg, #000000 0%, #404040 100%)',
+      features: t.frontendSection.nextjs.features,
+      useCases: t.frontendSection.nextjs.useCases
     }
   ];
 
@@ -66,6 +74,7 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
               <FaReact size={40} style={{ color: '#61dafb', filter: 'drop-shadow(0 0 10px rgba(97, 218, 251, 0.4))' }} />
               <SiTypescript size={40} style={{ color: '#3178c6', filter: 'drop-shadow(0 0 10px rgba(49, 120, 198, 0.4))' }} />
               <SiTailwindcss size={40} style={{ color: '#06b6d4', filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.4))' }} />
+              <SiNextdotjs size={40} style={{ color: '#ffffff', filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.4))' }} />
             </div>
             <h2
               className="text-5xl md:text-[2.2rem] max-[480px]:text-[1.8rem] font-extrabold mb-4 bg-clip-text"

@@ -2,7 +2,15 @@
 
 import { motion } from 'framer-motion'
 import { fadeIn, staggerContainer } from '../../utils/motion'
-import { FaStripe, FaPaypal, FaApplePay, FaGooglePay, FaUniversity, FaMobileAlt, FaBitcoin, FaShieldAlt, FaCheckCircle, FaFileSignature, FaClipboardList } from 'react-icons/fa'
+import {
+  FaStripe,
+  FaPaypal,
+  FaApplePay,
+  FaGooglePay,
+  FaUniversity,
+  FaMobileAlt,
+  FaBitcoin,
+} from 'react-icons/fa'
 import { useTranslation } from '../../hooks/useTranslation'
 import type { ReactNode } from 'react'
 
@@ -10,186 +18,244 @@ interface PaymentsSectionProps {
   id?: string
 }
 
-interface ProviderKey {
-  key: 'stripe' | 'paypal' | 'wallets' | 'sepa' | 'mobileMoney' | 'crypto'
-  icon: ReactNode
-  accent: string
+type ProviderKey =
+  | 'stripe'
+  | 'paypal'
+  | 'wallets'
+  | 'sepa'
+  | 'mobileMoney'
+  | 'crypto'
+
+interface ProviderEntry {
+  key: ProviderKey
+  logo: ReactNode
+  brand: string
 }
 
-const providers: ProviderKey[] = [
-  { key: 'stripe',      icon: <FaStripe className="text-3xl" />,       accent: '#635bff' },
-  { key: 'paypal',      icon: <FaPaypal className="text-3xl" />,       accent: '#003087' },
-  { key: 'wallets',     icon: (
-    <span className="inline-flex items-center gap-1">
-      <FaApplePay className="text-3xl" />
-      <FaGooglePay className="text-3xl" />
-    </span>
-  ), accent: '#0a0a0f' },
-  { key: 'sepa',        icon: <FaUniversity className="text-3xl" />,   accent: '#1d4ed8' },
-  { key: 'mobileMoney', icon: <FaMobileAlt className="text-3xl" />,    accent: '#f59e0b' },
-  { key: 'crypto',      icon: <FaBitcoin className="text-3xl" />,      accent: '#f7931a' },
+const ACCENT = '#4b0082'
+const INK = '#0a0a0a'
+const PAPER = '#F8F7F1'
+
+const providers: ProviderEntry[] = [
+  { key: 'stripe',      brand: '#635BFF', logo: <FaStripe className="text-[2.6rem]" /> },
+  { key: 'paypal',      brand: '#003087', logo: <FaPaypal className="text-3xl" /> },
+  {
+    key: 'wallets',
+    brand: '#1A1A1A',
+    logo: (
+      <span className="inline-flex items-center gap-2">
+        <FaApplePay className="text-3xl" />
+        <FaGooglePay className="text-3xl" />
+      </span>
+    ),
+  },
+  { key: 'sepa',        brand: '#003399', logo: <FaUniversity className="text-2xl" /> },
+  { key: 'mobileMoney', brand: '#FF7900', logo: <FaMobileAlt className="text-2xl" /> },
+  { key: 'crypto',      brand: '#F7931A', logo: <FaBitcoin className="text-2xl" /> },
 ]
 
 const PaymentsSection: React.FC<PaymentsSectionProps> = ({ id }) => {
   const { t } = useTranslation()
 
   const trustItems = [
-    { icon: <FaShieldAlt />,      title: t.payments.trustPciTitle,      desc: t.payments.trustPciDesc },
-    { icon: <FaCheckCircle />,    title: t.payments.trustScaTitle,      desc: t.payments.trustScaDesc },
-    { icon: <FaFileSignature />,  title: t.payments.trustWebhooksTitle, desc: t.payments.trustWebhooksDesc },
-    { icon: <FaClipboardList />,  title: t.payments.trustAuditTitle,    desc: t.payments.trustAuditDesc },
+    { label: t.payments.trustPciTitle, desc: t.payments.trustPciDesc },
+    { label: t.payments.trustScaTitle, desc: t.payments.trustScaDesc },
+    {
+      label: t.payments.trustWebhooksTitle,
+      desc: t.payments.trustWebhooksDesc,
+    },
+    { label: t.payments.trustAuditTitle, desc: t.payments.trustAuditDesc },
   ]
 
   return (
     <motion.div
-      variants={staggerContainer(0.1, 0.2)}
+      variants={staggerContainer(0.08, 0.15)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.1 }}
     >
       <section
         id={id}
-        className="relative py-16 px-4 md:py-24 md:px-8 overflow-hidden bg-gradient-to-b from-[#f8f7ff] via-white to-[#f0f0ff]"
+        className="relative overflow-hidden py-20 md:py-28"
+        style={{ backgroundColor: PAPER, color: INK }}
       >
-        {/* Decorative gradient blob */}
-        <div
-          aria-hidden="true"
-          className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #635bff 0%, transparent 70%)' }}
-        />
-        <div
-          aria-hidden="true"
-          className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #f59e0b 0%, transparent 70%)' }}
-        />
-
-        {/* Header */}
-        <motion.div
-          variants={fadeIn('up', 'tween', 0.1, 1)}
-          className="relative max-w-5xl mx-auto text-center mb-12 md:mb-16"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest border-2 border-[#635bff] text-[#635bff] bg-white/80 backdrop-blur-sm mb-6">
-            {t.payments.badge}
-          </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-[#0a0a0f] leading-tight mb-4">
-            {t.payments.title}{' '}
-            <span className="bg-gradient-to-r from-[#635bff] to-[#f59e0b] bg-clip-text text-transparent">
-              {t.payments.titleHighlight}
+        <div className="relative max-w-6xl mx-auto px-6 md:px-10">
+          {/* En-tête de section */}
+          <motion.header
+            variants={fadeIn('up', 'tween', 0.05, 0.8)}
+            className="text-center mb-14 md:mb-20"
+          >
+            <span
+              className="inline-block font-mono text-xs tracking-[0.3em] uppercase mb-6 px-4 py-2 rounded"
+              style={{
+                color: ACCENT,
+                backgroundColor: 'rgba(75, 0, 130, 0.08)',
+              }}
+            >
+              {t.payments.badge}
             </span>
-          </h2>
-          <p className="text-base md:text-lg text-[#0a0a0f]/70 max-w-3xl mx-auto leading-relaxed">
-            {t.payments.subtitle}
-          </p>
-        </motion.div>
 
-        {/* Providers grid */}
-        <div className="relative max-w-7xl mx-auto grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {providers.map(({ key, icon, accent }, idx) => {
-            const p = t.payments.providers[key]
-            return (
-              <motion.article
-                key={key}
-                variants={fadeIn('up', 'tween', 0.1 + idx * 0.05, 0.8)}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="group relative bg-white rounded-2xl border border-[#0a0a0f]/8 shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden"
-              >
-                {/* Top accent bar */}
-                <div className="h-1.5 w-full" style={{ background: accent }} />
+            <h2
+              className="font-extrabold mb-5 leading-[1.1] tracking-tight"
+              style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}
+            >
+              {t.payments.title}{' '}
+              <span style={{ color: ACCENT }}>
+                {t.payments.titleHighlight}
+              </span>
+            </h2>
 
-                <div className="p-6 md:p-7">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div
-                      className="w-14 h-14 rounded-xl flex items-center justify-center text-white shadow-md"
-                      style={{ background: accent }}
-                    >
-                      {icon}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-[#0a0a0f] leading-tight">
-                        {p.name}
-                      </h3>
-                      <p className="text-sm text-[#0a0a0f]/60 font-medium">
-                        {p.tagline}
-                      </p>
-                    </div>
+            <p className="text-base md:text-lg leading-relaxed text-black/65 max-w-2xl mx-auto">
+              {t.payments.subtitle}
+            </p>
+          </motion.header>
+
+          {/* Grille des providers */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-black/15">
+            {providers.map(({ key, logo, brand }, idx) => {
+              const p = t.payments.providers[key]
+              return (
+                <motion.article
+                  key={key}
+                  variants={fadeIn('up', 'tween', 0.05 + idx * 0.04, 0.6)}
+                  className="group relative border-r border-b border-black/15 p-7 md:p-9 transition-colors duration-300 hover:bg-white"
+                >
+                  {/* Logo couleur de marque */}
+                  <div
+                    className="mb-7 transition-transform duration-300 group-hover:scale-[1.04] origin-left"
+                    style={{ color: brand }}
+                  >
+                    {logo}
                   </div>
 
-                  <p className="text-sm text-[#0a0a0f]/75 leading-relaxed mb-5">
+                  <h3 className="font-bold text-xl md:text-2xl leading-tight mb-1.5">
+                    {p.name}
+                  </h3>
+
+                  <p
+                    className="font-mono text-[10px] uppercase tracking-[0.18em] mb-5"
+                    style={{ color: brand }}
+                  >
+                    {p.tagline}
+                  </p>
+
+                  <p className="text-[0.95rem] leading-relaxed text-black/70 mb-6">
                     {p.description}
                   </p>
 
-                  <ul className="space-y-2 mb-5">
+                  <ul className="space-y-2 mb-7">
                     {p.features.map((f) => (
                       <li
                         key={f}
-                        className="flex items-start gap-2 text-sm text-[#0a0a0f]/80"
+                        className="flex gap-3 text-sm text-black/80"
                       >
-                        <FaCheckCircle
-                          className="mt-0.5 shrink-0"
-                          style={{ color: accent }}
+                        <span
                           aria-hidden="true"
+                          className="shrink-0 select-none mt-2 inline-block w-1 h-1 rounded-full"
+                          style={{ backgroundColor: brand }}
                         />
                         <span>{f}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <div className="pt-4 border-t border-[#0a0a0f]/8">
-                    <p className="text-xs uppercase tracking-wider font-bold text-[#0a0a0f]/50 mb-1">
-                      Use cases
+                  <div className="pt-5 border-t border-black/10">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-black/45 mb-1.5">
+                      {t.payments.useCasesLabel}
                     </p>
-                    <p className="text-sm text-[#0a0a0f]/75">{p.useCases}</p>
+                    <p className="text-sm text-black/70 leading-snug">
+                      {p.useCases}
+                    </p>
                   </div>
-                </div>
-              </motion.article>
-            )
-          })}
-        </div>
 
-        {/* Trust band */}
-        <motion.div
-          variants={fadeIn('up', 'tween', 0.3, 1)}
-          className="relative max-w-7xl mx-auto mt-16 md:mt-20"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {trustItems.map((item) => (
-              <div
-                key={item.title}
-                className="flex flex-col items-start gap-2 p-5 rounded-xl bg-white/90 border border-[#635bff]/15 shadow-sm hover:shadow-md transition-shadow"
+                  {/* Filet d'accent au hover — couleur de marque */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute bottom-0 left-0 h-px w-0 transition-[width] duration-500 ease-out group-hover:w-full"
+                    style={{ backgroundColor: brand }}
+                  />
+                </motion.article>
+              )
+            })}
+          </div>
+
+          {/* Bande de confiance */}
+          <motion.div
+            variants={fadeIn('up', 'tween', 0.2, 0.8)}
+            className="mt-20 md:mt-28"
+          >
+            <div className="text-center mb-10">
+              <span
+                className="inline-block font-mono text-xs tracking-[0.3em] uppercase px-4 py-2 rounded"
+                style={{
+                  color: ACCENT,
+                  backgroundColor: 'rgba(75, 0, 130, 0.08)',
+                }}
               >
-                <div className="w-10 h-10 rounded-lg bg-[#635bff]/10 text-[#635bff] flex items-center justify-center text-lg">
-                  {item.icon}
+                {t.payments.complianceLabel}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {trustItems.map((item) => (
+                <div
+                  key={item.label}
+                  className="bg-white border border-black/10 p-6 hover:border-black/25 transition-colors duration-300"
+                >
+                  <p
+                    className="font-mono text-[10px] uppercase tracking-[0.22em] mb-3"
+                    style={{ color: ACCENT }}
+                  >
+                    {item.label}
+                  </p>
+                  <p className="text-sm leading-relaxed text-black/75">
+                    {item.desc}
+                  </p>
                 </div>
-                <h4 className="text-sm md:text-base font-bold text-[#0a0a0f]">
-                  {item.title}
-                </h4>
-                <p className="text-xs md:text-sm text-[#0a0a0f]/65 leading-snug">
-                  {item.desc}
+              ))}
+            </div>
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            variants={fadeIn('up', 'tween', 0.3, 0.8)}
+            className="mt-20 md:mt-28 border-t border-black/15 pt-12 md:pt-14"
+          >
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+              <div className="max-w-xl">
+                <h3
+                  className="font-extrabold mb-3 leading-tight tracking-tight"
+                  style={{ fontSize: 'clamp(1.5rem, 2.8vw, 2.1rem)' }}
+                >
+                  {t.payments.ctaTitle}
+                </h3>
+                <p className="text-base text-black/65 leading-relaxed">
+                  {t.payments.ctaSubtitle}
                 </p>
               </div>
-            ))}
-          </div>
-        </motion.div>
 
-        {/* CTA */}
-        <motion.div
-          variants={fadeIn('up', 'tween', 0.4, 1)}
-          className="relative max-w-4xl mx-auto mt-14 md:mt-20 text-center"
-        >
-          <h3 className="text-2xl md:text-3xl font-extrabold text-[#0a0a0f] mb-3">
-            {t.payments.ctaTitle}
-          </h3>
-          <p className="text-base text-[#0a0a0f]/70 mb-6 max-w-2xl mx-auto">
-            {t.payments.ctaSubtitle}
-          </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-to-r from-[#635bff] to-[#4b0082] text-white font-bold text-base no-underline shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300"
-          >
-            {t.payments.ctaButton}
-            <span aria-hidden="true">→</span>
-          </a>
-        </motion.div>
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-3 self-start md:self-auto px-8 py-4 text-[#F8F7F1] text-sm font-semibold tracking-wide no-underline whitespace-nowrap transition-colors duration-300"
+                style={{ backgroundColor: INK }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = ACCENT)
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = INK)
+                }
+              >
+                <span>{t.payments.ctaButton}</span>
+                <span
+                  aria-hidden="true"
+                  className="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
+                >
+                  →
+                </span>
+              </a>
+            </div>
+          </motion.div>
+        </div>
       </section>
     </motion.div>
   )
