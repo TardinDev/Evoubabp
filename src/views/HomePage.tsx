@@ -27,6 +27,7 @@ const Footer = dynamic(() => import("../components/TheFooter/Footer"), { ssr: fa
 const ChatBot = dynamic(() => import("../components/ChatBot/ChatBot"), { ssr: false });
 const TestimonialsSection = dynamic(() => import("../components/Testimonials/TestimonialsSection"), { ssr: false });
 const ContactSection = dynamic(() => import("../components/Contact/ContactSection"), { ssr: false });
+const PaymentsSection = dynamic(() => import("../components/Payments/PaymentsSection"), { ssr: false });
 
 export default function HomePage() {
   const sections = [
@@ -47,6 +48,7 @@ export default function HomePage() {
     { id: 'backend-tech', color: '#E8F5E9' },
     { id: 'ai-innovation', color: '#EDE7F6' },
     { id: 'docker-devops', color: '#E3F2FD' },
+    { id: 'payments', color: '#F0EFFF' },
     { id: 'contact', color: '#F3E5F5' },
     { id: 'footer', color: '#ECEFF1' },
   ];
@@ -96,6 +98,9 @@ export default function HomePage() {
           <LazyMount minHeight={500}><BackendSection id="backend-tech" /></LazyMount>
           <LazyMount minHeight={500}><AISection id="ai-innovation" /></LazyMount>
           <LazyMount minHeight={500}><DockerSection id="docker-devops" /></LazyMount>
+          <LazyMount as="section" id="payments" ariaLabel="Moyens de paiement intégrés" minHeight={700}>
+            <PaymentsSection />
+          </LazyMount>
           <LazyMount as="section" id="contact" ariaLabel="Contact" minHeight={500}>
             <ContactSection />
           </LazyMount>

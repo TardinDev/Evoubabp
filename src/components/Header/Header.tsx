@@ -68,10 +68,22 @@ const Menu = ({ menuOpened }: { menuOpened: boolean }) => {
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const { activeColor } = useActiveSectionContext();
-  const { language, toggleLanguage } = useTranslation();
+  const { language, toggleLanguage, t } = useTranslation();
 
   const toggleMenu = useCallback(() => {
     setMenuOpened(prev => !prev);
+  }, []);
+
+  const smoothScrollTo = useCallback((e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      block: 'start',
+    });
+    history.replaceState(null, '', `#${id}`);
   }, []);
 
   return (
@@ -129,6 +141,18 @@ const Header = () => {
           >
             <span className="sm:hidden">Spring</span>
             <span className="hidden sm:inline">React/Spring-Boot</span>
+          </motion.a>
+          <motion.a
+            variants={subHeaderItem}
+            whileHover={{ scale: 1.08, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            href="#payments"
+            onClick={(e) => smoothScrollTo(e, 'payments')}
+            aria-label={t.header.paymentsChipLong}
+            className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#635bff] text-white bg-[#635bff]/90 backdrop-blur-sm hover:bg-[#635bff] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
+          >
+            <span className="sm:hidden">{t.header.paymentsChipShort}</span>
+            <span className="hidden sm:inline">{t.header.paymentsChipLong}</span>
           </motion.a>
           <motion.a
             variants={subHeaderItem}

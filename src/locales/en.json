@@ -5,7 +5,9 @@
     "reactNode": "React/NodeJs",
     "reactSpring": "React/Spring-Boot",
     "method": "Method",
-    "training": "Training"
+    "training": "Training",
+    "paymentsChipShort": "Payments",
+    "paymentsChipLong": "Payments built-in"
   },
   "hero": {
     "greeting": "Hello,",
@@ -275,6 +277,104 @@
         "project": "Binome Pay - Web3"
       }
     ]
+  },
+  "payments": {
+    "badge": "PAYMENTS · INTEGRATIONS",
+    "title": "Every",
+    "titleHighlight": "payment method",
+    "subtitle": "Cards, wallets, transfers, mobile money, crypto: I plug in the right rails for your market — secure, compliant and ready to scale.",
+    "trustPciTitle": "PCI-DSS",
+    "trustPciDesc": "No raw card data ever touches your server. Provider-side tokenization.",
+    "trustScaTitle": "3D Secure / SCA",
+    "trustScaDesc": "Strong customer authentication compliant with PSD2 (3DS2).",
+    "trustWebhooksTitle": "Signed webhooks",
+    "trustWebhooksDesc": "Verified signatures + idempotency keys — never charge a customer twice.",
+    "trustAuditTitle": "Audit & logs",
+    "trustAuditDesc": "Full traceability of payments, refunds and disputes.",
+    "ctaTitle": "Which payment method fits your project?",
+    "ctaSubtitle": "Market, currency, recurrence, compliance — let's pick the stack that matches your case.",
+    "ctaButton": "Discuss my integration",
+    "providers": {
+      "stripe": {
+        "name": "Stripe",
+        "tagline": "Cards, subscriptions, Checkout",
+        "description": "Full Stripe integration: hosted Checkout, custom Payment Intents, recurring subscriptions, invoices and customer portal.",
+        "features": [
+          "Stripe Checkout & Elements",
+          "Subscriptions & free trials",
+          "Stripe Connect (marketplaces)",
+          "Webhooks + idempotency keys",
+          "Refunds & dispute handling",
+          "Multi-currency (135+)"
+        ],
+        "useCases": "SaaS, e-commerce, marketplaces, freelancers"
+      },
+      "paypal": {
+        "name": "PayPal",
+        "tagline": "International payments",
+        "description": "PayPal Smart Buttons, pay-in-installments and merchant invoicing. Ideal for consumer-facing global commerce.",
+        "features": [
+          "Smart Payment Buttons",
+          "Pay in 4 / Pay Later",
+          "Immediate or deferred capture",
+          "PayPal IPN webhooks",
+          "Sandbox for end-to-end tests"
+        ],
+        "useCases": "B2C e-commerce, global platforms"
+      },
+      "wallets": {
+        "name": "Apple Pay / Google Pay",
+        "tagline": "Mobile wallets",
+        "description": "One-tap payments from iOS and Android, via Stripe or Adyen. Higher mobile conversion, zero friction.",
+        "features": [
+          "Apple Pay JS & in-app",
+          "Google Pay API web & Android",
+          "Verified domain + Apple cert",
+          "Automatic card fallback",
+          "Token PAN (never raw cards)"
+        ],
+        "useCases": "Mobile apps, mobile-first checkout"
+      },
+      "sepa": {
+        "name": "SEPA / Bank transfer",
+        "tagline": "EU direct debit & transfers",
+        "description": "SEPA Direct Debit for B2B subscriptions and instant transfers. Ideal for high-ticket EU commerce.",
+        "features": [
+          "Online SEPA mandates",
+          "SCT Instant transfers",
+          "Drastically lower fees than cards",
+          "Pre-debit notifications",
+          "Automatic reconciliation"
+        ],
+        "useCases": "B2B, recurring invoices, long-term contracts"
+      },
+      "mobileMoney": {
+        "name": "Mobile Money",
+        "tagline": "MTN, Orange, Wave, Airtel",
+        "description": "Integration of mobile money carriers for West and Central Africa via aggregators (Paydunya, CinetPay, FedaPay, Flutterwave).",
+        "features": [
+          "MTN MoMo, Orange Money, Wave",
+          "Airtel Money, Moov Money",
+          "Collect & Disburse",
+          "Confirmation webhooks",
+          "Multi-country / multi-carrier"
+        ],
+        "useCases": "African markets, local fintech, diaspora"
+      },
+      "crypto": {
+        "name": "Crypto / Web3",
+        "tagline": "USDC, ETH, on-chain",
+        "description": "On-chain crypto payments or via gateway (Coinbase Commerce, MoonPay) and wallet signatures for Web3 apps.",
+        "features": [
+          "Coinbase Commerce / NOWPayments",
+          "WalletConnect & MetaMask",
+          "Stablecoins (USDC, USDT)",
+          "Block-level confirmation",
+          "Auto fiat conversion"
+        ],
+        "useCases": "Web3, DApps, P2P payments, NFT"
+      }
+    }
   },
   "contact": {
     "badge": "CONTACT",
