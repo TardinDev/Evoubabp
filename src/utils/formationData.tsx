@@ -1,7 +1,14 @@
-import { FaGraduationCap, FaBookOpen, FaLaptopCode, FaMobile, FaBrain, FaRobot } from "react-icons/fa";
+import { FaGraduationCap, FaBookOpen, FaLaptopCode, FaMobile, FaBrain, FaRobot, FaMicrophone } from "react-icons/fa";
 
 // Données des formations
 export const formations = [
+  {
+    icon: FaMicrophone,
+    title: "Avoir son propre Jarvis sur son PC ou son Mac",
+    text: "Installez et configurez votre assistant IA personnel. Il vous répond à la voix, ouvre vos applications, range vos fichiers, cherche sur le web et résume vos documents. Il tourne en local : vos données restent sur votre machine.",
+    navigateUrl: "/formations/jarvis",
+    featured: true
+  },
   {
     icon: FaRobot,
     title: "Coder avec l'IA - Claude Code",

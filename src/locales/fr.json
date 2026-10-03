@@ -32,6 +32,13 @@
     "statusInProgress": "En cours",
     "progressLabel": "Avancement"
   },
+  "jarvisPromo": {
+    "badge": "Nouvelle formation",
+    "title": "Créez votre propre Jarvis",
+    "text": "Un assistant vocal qui agit sur votre PC ou votre Mac, en local.",
+    "cta": "Voir le programme",
+    "close": "Fermer la publicité"
+  },
   "services": {
     "title": "Services Proposés",
     "subtitle": "Donner vie à vos idées dans vos délais et votre budget.",

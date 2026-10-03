@@ -32,6 +32,13 @@
     "statusInProgress": "In progress",
     "progressLabel": "Progress"
   },
+  "jarvisPromo": {
+    "badge": "New course",
+    "title": "Build your own Jarvis",
+    "text": "A voice assistant that acts on your PC or Mac, running locally.",
+    "cta": "See the programme",
+    "close": "Close the ad"
+  },
   "services": {
     "title": "Services Offered",
     "subtitle": "Bringing your ideas to life within your timeline and budget.",

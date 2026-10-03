@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Header from "../components/Header/Header";
 import UnderHeader from "../components/Header/UnderHeader";
 import CurrentProject from "../components/Header/CurrentProject";
+import JarvisPromo from "../components/JarvisPromo/JarvisPromo";
 import Projects from "../components/projects/Projects";
 import LazyMount from "../components/LazyMount";
 import { ActiveSectionProvider } from "../contexts/ActiveSectionContext";
@@ -105,6 +106,7 @@ export default function HomePage() {
             <ContactSection />
           </LazyMount>
         </main>
+        <JarvisPromo />
         <LazyMount id="footer" minHeight={400}>
           <Footer />
         </LazyMount>
