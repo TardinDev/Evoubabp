@@ -7,43 +7,50 @@ export const formations = [
     title: "Avoir son propre Jarvis sur son PC ou son Mac",
     text: "Installez et configurez votre assistant IA personnel. Il vous répond à la voix, ouvre vos applications, range vos fichiers, cherche sur le web et résume vos documents. Il tourne en local : vos données restent sur votre machine.",
     navigateUrl: "/formations/jarvis",
-    featured: true
+    featured: true,
+    price: "Sur devis"
   },
   {
     icon: FaRobot,
     title: "Coder avec l'IA - Claude Code",
     text: "Apprenez à coder 10x plus vite avec Claude Code, l'outil IA d'Anthropic. Au programme : les commandes et skills essentiels, le fichier CLAUDE.md pour personnaliser votre assistant, et les standards web 2026 (Next.js 16, React 19, Tailwind v4). Formation courte, dense et 100% pratique.",
     navigateUrl: "/formations/claude-code",
-    featured: true
+    featured: true,
+    price: "Payante"
   },
   {
     icon: FaGraduationCap,
     title: "Développement Web Moderne",
     text: "Apprenez à créer des applications web complètes de A à Z. Au programme : React pour l'interface, TypeScript pour un code robuste, Tailwind CSS pour le design, Supabase pour la base de données et Node.js pour l'API. Vous construirez un vrai projet (e-commerce ou assistant IA) étape par étape.",
-    navigateUrl: "/formations/web-dev"
+    navigateUrl: "/formations/web-dev",
+    price: "Gratuit"
   },
   {
     icon: FaMobile,
     title: "Développement Mobile Cross-Platform",
     text: "Créez des applications iOS et Android avec un seul code grâce à React Native et Expo. 5 projets concrets inclus : clone TikTok, e-commerce, réseau social, réservation de vols et fintech. Plus de 10h de contenu avec le code source complet fourni.",
-    navigateUrl: "/formations/mobile"
+    navigateUrl: "/formations/mobile",
+    price: "Gratuit"
   },
   {
     icon: FaBrain,
     title: "Machine Learning & IA",
     text: "Comprenez le Machine Learning sans prérequis mathématiques complexes. Découvrez les 3 types d'apprentissage, les algorithmes essentiels (régression, KNN, arbres de décision, réseaux de neurones) et pratiquez avec des exemples interactifs. Idéal pour débuter en IA.",
-    navigateUrl: "/formations/machine-learning"
+    navigateUrl: "/formations/machine-learning",
+    price: "Gratuit"
   },
   {
     icon: FaBookOpen,
     title: "Tech Business & Entrepreneuriat",
-    text: "Lancez votre projet tech avec les bonnes bases : étude de marché, business model, stratégie de lancement, levée de fonds et gestion d'équipe technique. Formation pensée pour les développeurs qui veulent entreprendre."
+    text: "Lancez votre projet tech avec les bonnes bases : étude de marché, business model, stratégie de lancement, levée de fonds et gestion d'équipe technique. Formation pensée pour les développeurs qui veulent entreprendre.",
+    price: "Gratuit"
   },
   {
     icon: FaLaptopCode,
     title: "Live Coding & Mentoring",
     text: "Sessions de coding en direct chaque vendredi à 21h. Posez vos questions, résolvez des problèmes réels et progressez avec un accompagnement personnalisé. Idéal en complément de n'importe quelle formation.",
-    hasCountdown: true
+    hasCountdown: true,
+    price: "Gratuit"
   }
 ];
 

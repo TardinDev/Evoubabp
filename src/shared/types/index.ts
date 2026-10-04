@@ -5,9 +5,11 @@ export interface FormationCardProps {
   title: string;
   text: string;
   countdown?: string;
-  index: number;
+  index?: number;
   navigateUrl?: string;
   featured?: boolean;
+  price?: string;
+  className?: string;
 }
 
 export interface ProjectData {
