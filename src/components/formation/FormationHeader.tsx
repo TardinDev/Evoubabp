@@ -44,7 +44,7 @@ export default function FormationHeader() {
 
       {/* Hero */}
       <div className="max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-24">
-        <span className="block font-mono text-xs tracking-[0.3em] uppercase mb-6 text-white/70">
+        <span className="block text-xs mb-6 text-white/70">
           Formations tech
         </span>
 

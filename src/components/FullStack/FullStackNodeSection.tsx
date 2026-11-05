@@ -48,7 +48,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
   const terminalLines = [
     { type: 'comment', text: '// PERN Stack - University Management System' },
     { type: 'command', text: '$ npm run dev' },
-    { type: 'output', text: '> PostgreSQL connected ✓' },
+    { type: 'output', text: '> PostgreSQL connected ' },
     { type: 'output', text: '> Express server on port 5000' },
     { type: 'success', text: '> Multi-role auth ready' },
   ];
@@ -85,7 +85,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
           <div
             className="absolute inset-0 pointer-events-none bg-[length:60px_60px]"
             style={{
-              backgroundImage: 'linear-gradient(rgba(97, 218, 251, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(97, 218, 251, 0.03) 1px, transparent 1px)',
+              backgroundColor: 'rgba(97, 218, 251, 0.03)',
             }}
           />
 
@@ -93,7 +93,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
             <motion.div variants={fadeIn('up', 'tween', 0.1, 0.8)}>
               <div className="mb-16 md:mb-12 md:text-center">
                 <h2
-                  className="mb-4 font-semibold md:text-[1.1rem] font-[Space_Grotesk,Inter,sans-serif] text-[clamp(2.25rem,3vw,2.75rem)] bg-[linear-gradient(135deg,#F1F1F1,#B0B0B0)] bg-clip-text text-transparent"
+                  className="mb-4 font-semibold md:text-[1.1rem] font-[Space_Grotesk,Inter,sans-serif] text-[clamp(2.25rem,3vw,2.75rem)] bg-[#F1F1F1]"
                 >
                   {t.fullstackNode.expertise}
                 </h2>
@@ -161,12 +161,12 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                     {project.stats.map((stat, idx) => (
                       <div
                         key={idx}
-                        className="text-center py-6 px-4 rounded-xl bg-[linear-gradient(135deg,rgba(97,218,251,0.08),rgba(104,160,99,0.05))] border border-white/[0.06]"
+                        className="text-center py-6 px-4 rounded-xl bg-[rgba(97,218,251,0.08)] border border-white/[0.06]"
                       >
                         <div className="text-2xl font-bold text-white mb-1 font-[Space_Grotesk,sans-serif]">
                           {stat.value}
                         </div>
-                        <div className="text-xs uppercase text-white/50 tracking-[0.1em]">
+                        <div className="text-xs text-white/50">
                           {stat.label}
                         </div>
                       </div>
@@ -181,7 +181,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                   <div
                     className="rounded-[20px] overflow-hidden transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2 bg-[#12121a] border border-white/[0.06]"
                   >
-                    <div className="relative overflow-hidden aspect-video bg-[linear-gradient(135deg,#1a1a2e,#0f0f1a)]">
+                    <div className="relative overflow-hidden aspect-video bg-[#1a1a2e]">
                       <Image
                         src={project.image}
                         alt={project.title}
@@ -196,7 +196,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                       />
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-white/30">
                         <FaPlay size={40} className="opacity-50" />
-                        <span className="text-[0.9rem] uppercase tracking-[0.15em]">{t.fullstackNode.demoLive}</span>
+                        <span className="text-[0.9rem]">{t.fullstackNode.demoLive}</span>
                       </div>
                       <span className="absolute top-4 right-4 backdrop-blur-[10px] text-white text-xs px-3 py-1.5 rounded z-[3] bg-black/70 font-[JetBrains_Mono,monospace]">
                         {project.year}
@@ -242,7 +242,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                 {/* Frontend Stack */}
                 <div className="flex-1 max-w-[300px]">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-xl text-2xl bg-[linear-gradient(135deg,rgba(97,218,251,0.2),rgba(97,218,251,0.05))] text-[#61dafb]">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-xl text-2xl bg-[rgba(97,218,251,0.2)] text-[#61dafb]">
                       <FaReact />
                     </div>
                     <h4 className="text-xl font-semibold text-white font-[Space_Grotesk,sans-serif]">Frontend</h4>
@@ -263,7 +263,7 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                 {/* Divider */}
                 <div className="flex flex-col md:flex-row items-center justify-center gap-2 px-4 md:py-4 md:px-0">
                   <div
-                    className="w-0.5 h-10 md:w-10 md:h-0.5 bg-[linear-gradient(to_bottom,transparent,rgba(255,255,255,0.2),transparent)]"
+                    className="w-0.5 h-10 md:w-10 md:h-0.5 bg-[rgba(255,255,255,0.2)]"
                   />
                   <div
                     className="relative flex items-center justify-center w-[50px] h-[50px] rounded-full text-[0.7rem] bg-[#0a0a0f] border-2 border-[rgba(97,218,251,0.3)] font-[JetBrains_Mono,monospace] text-[#61dafb] tracking-[0.05em]"
@@ -275,14 +275,14 @@ const FullStackNodeSection: React.FC<FullStackNodeSectionProps> = ({ id }) => {
                     API
                   </div>
                   <div
-                    className="w-0.5 h-10 md:w-10 md:h-0.5 bg-[linear-gradient(to_bottom,transparent,rgba(255,255,255,0.2),transparent)]"
+                    className="w-0.5 h-10 md:w-10 md:h-0.5 bg-[rgba(255,255,255,0.2)]"
                   />
                 </div>
 
                 {/* Backend Stack */}
                 <div className="flex-1 max-w-[300px]">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-xl text-2xl bg-[linear-gradient(135deg,rgba(104,160,99,0.2),rgba(104,160,99,0.05))] text-[#68a063]">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-xl text-2xl bg-[rgba(104,160,99,0.2)] text-[#68a063]">
                       <FaNodeJs />
                     </div>
                     <h4 className="text-xl font-semibold text-white font-[Space_Grotesk,sans-serif]">Backend</h4>

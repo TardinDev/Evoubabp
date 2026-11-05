@@ -45,7 +45,7 @@ const TechUsed = () => {
     {
       label: t.techUsed.frontend,
       icon: FaCode,
-      accentColor: "#667eea",
+      accentColor: "#4b0082",
       techs: [
         { name: "React", version: "v19", icon: FaReact, color: "#61DAFB" },
         { name: "Next.js", version: "v16", icon: SiNextdotjs, color: "#000000" },
@@ -73,7 +73,7 @@ const TechUsed = () => {
     {
       label: t.techUsed.mobile,
       icon: FaMobile,
-      accentColor: "#764ba2",
+      accentColor: "#4b0082",
       techs: [
         { name: "React Native", version: "v0.83", icon: FaReact, color: "#61DAFB" },
         { name: "Expo", version: "v54", icon: SiExpo, color: "#000020" },
@@ -308,31 +308,21 @@ const TechUsed = () => {
     <section
       ref={sectionRef}
       className="relative overflow-hidden min-h-screen"
-      style={{ background: 'linear-gradient(160deg, #0f0c29 0%, #1a1a3e 40%, #24243e 100%)' }}
+      style={{ background: '#0f0c29' }}
     >
       {/* Ambient glow orbs */}
-      <div
-        ref={orbRef}
-        className="absolute w-[550px] h-[550px] max-md:w-[300px] max-md:h-[300px] rounded-full blur-[130px] max-md:blur-[80px] opacity-20 pointer-events-none z-0"
-        style={{ top: "25%", left: "5%", willChange: 'transform, background-color' }}
-      />
-      <div
-        ref={orb2Ref}
-        className="absolute w-[550px] h-[550px] max-md:w-[300px] max-md:h-[300px] rounded-full blur-[130px] max-md:blur-[80px] opacity-20 pointer-events-none z-0"
-        style={{ top: "55%", right: "5%", willChange: 'transform, background-color' }}
-      />
 
       {/* Floating decorative shapes */}
       <div
-        className="float-shape absolute w-[18px] h-[18px] border-2 border-[rgba(102,126,234,0.15)] rounded pointer-events-none z-0"
+        className="float-shape absolute w-[18px] h-[18px] border-2 border-[rgba(75,0,130,0.15)] rounded pointer-events-none z-0"
         style={{ top: "12%", left: "6%", willChange: 'transform' }}
       />
       <div
-        className="float-shape absolute w-[14px] h-[14px] border-2 border-[rgba(102,126,234,0.15)] rounded-full pointer-events-none z-0"
+        className="float-shape absolute w-[14px] h-[14px] border-2 border-[rgba(75,0,130,0.15)] rounded-full pointer-events-none z-0"
         style={{ top: "65%", right: "9%", willChange: 'transform' }}
       />
       <div
-        className="float-shape absolute w-[18px] h-[18px] border-2 border-[rgba(102,126,234,0.15)] rounded pointer-events-none z-0"
+        className="float-shape absolute w-[18px] h-[18px] border-2 border-[rgba(75,0,130,0.15)] rounded pointer-events-none z-0"
         style={{ bottom: "18%", left: "48%", willChange: 'transform' }}
       />
 
@@ -341,12 +331,9 @@ const TechUsed = () => {
         {/* Title Container */}
         <div ref={titleRef} className="text-center mb-10">
           <h2
-            className="text-[2.5rem] max-md:text-[1.8rem] font-bold mb-3 bg-clip-text"
+            className="text-[2.5rem] max-md:text-[1.8rem] font-bold mb-3"
             style={{
-              background: 'linear-gradient(135deg, #667eea 0%, #a78bfa 50%, #764ba2 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: '#FFFFFF',
             }}
           >
             {t.techUsed.title}
@@ -377,7 +364,7 @@ const TechUsed = () => {
                   className="text-[1.2rem] max-md:text-[0.9rem] font-normal"
                   style={{ WebkitTextStrokeWidth: '1px' }}
                 >
-                  {" "}/ {String(categories.length).padStart(2, "0")}
+                  / {String(categories.length).padStart(2, "0")}
                 </span>
               </div>
 
@@ -404,7 +391,7 @@ const TechUsed = () => {
                 <div
                   className="flex-1 h-px"
                   style={{
-                    background: `linear-gradient(90deg, ${category.accentColor}40 0%, transparent 100%)`,
+                    background: `none`,
                   }}
                 />
               </div>
@@ -444,7 +431,7 @@ const TechUsed = () => {
                       {tech.version && (
                         <span
                           className="text-[0.7rem] font-semibold text-white py-[0.15rem] px-2 rounded-xl tracking-[0.3px]"
-                          style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+                          style={{ background: '#4b0082' }}
                         >
                           {tech.version}
                         </span>

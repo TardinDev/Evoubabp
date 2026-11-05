@@ -140,15 +140,14 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
         id={id || "howItWorks"}
         className="relative px-4 pb-12 pt-0 md:px-8 md:pb-16 overflow-hidden"
         style={{
-          background: 'linear-gradient(180deg, #4b0082 0%, #380062 50%, #2d004f 100%)',
+          background: '#4b0082',
         }}
       >
         {/* GridOverlay */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage:
-              'linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
+            backgroundColor: 'rgba(255, 255, 255, 0.03)',
             backgroundSize: '60px 60px',
           }}
         />
@@ -157,7 +156,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
         <div
           className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%)',
+            background: 'transparent',
           }}
         />
 
@@ -165,7 +164,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
           <motion.div variants={fadeIn("up", "tween", 0.1, 0.8)}>
             <div className="text-center mb-10 pt-10 sm:mb-20 sm:pt-16 md:mb-12 md:pt-12">
               <span
-                className="inline-block font-mono text-xs tracking-[0.3em] text-[#e0b0ff] px-4 py-2 rounded mb-6"
+                className="inline-block text-xs text-[#e0b0ff] px-4 py-2 rounded mb-6"
                 style={{
                   background: 'rgba(255, 255, 255, 0.1)',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -182,15 +181,12 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
               >
                 {t.howItWorks.processTitle}
                 <span
-                  className="bg-clip-text"
+                  className=""
                   style={{
-                    background: 'linear-gradient(135deg, #e0b0ff 0%, #ff9ecd 50%, #ffd700 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
+                    color: '#FFFFFF',
                   }}
                 >
-                  {' '}{t.howItWorks.development}
+                  {t.howItWorks.development}
                 </span>
               </h2>
               <p className="text-[1.15rem] text-white/70 max-w-[600px] mx-auto leading-relaxed">
@@ -205,7 +201,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
             <div
               className="absolute top-[80px] left-[10%] right-[10%] h-[2px] opacity-30 hidden xl:block"
               style={{
-                background: 'linear-gradient(90deg, #8b5cf6, #61dafb, #6db33f, #f59e0b)',
+                background: '#8b5cf6',
               }}
             />
 
@@ -336,7 +332,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
             >
               <div className="text-center mb-12 md:mb-8">
                 <span
-                  className="inline-block font-mono text-[0.7rem] tracking-[0.25em] text-[#ffd700] px-3 py-1.5 rounded mb-4"
+                  className="inline-block text-xs text-[#ffd700] px-3 py-1.5 rounded mb-4"
                   style={{
                     background: 'rgba(255, 215, 0, 0.1)',
                     border: '1px solid rgba(255, 215, 0, 0.2)',
@@ -420,7 +416,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
                 <div
                   className="w-[60px] h-[60px] flex items-center justify-center rounded-2xl text-[#ffd700] text-2xl"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(224, 176, 255, 0.2))',
+                    background: 'rgba(255, 215, 0, 0.2)',
                     animation: 'hiw-pulse 2s ease-in-out infinite',
                   }}
                 >
@@ -442,7 +438,7 @@ const HowItWorks: React.FC<HowItWorksProps> = ({ id }) => {
                 href="#contact"
                 className="hiw-cta-button inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-base no-underline whitespace-nowrap transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_10px_30px_rgba(255,215,0,0.4)]"
                 style={{
-                  background: 'linear-gradient(135deg, #ffd700, #ffb700)',
+                  background: '#ffd700',
                   color: '#2d004f',
                   fontFamily: "'Space Grotesk', sans-serif",
                 }}

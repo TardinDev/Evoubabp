@@ -80,28 +80,28 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
         className="relative py-8 px-4 bg-black overflow-hidden md:py-10 md:px-8 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-px"
         style={{
           // @ts-ignore
-          '--tw-before-bg': 'linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent)',
+          '--tw-before-bg': 'rgba(255, 215, 0, 0.3)',
         }}
       >
         {/* Pseudo-element workaround: top border line */}
         <div
           className="absolute top-0 left-0 right-0 h-px"
           style={{
-            background: 'linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent)',
+            background: 'rgba(255, 215, 0, 0.3)',
           }}
         />
 
         <div className="max-w-[1000px] mx-auto">
           <motion.div variants={fadeIn("up", "tween", 0.1, 0.8)}>
             <div className="text-center mb-6">
-              <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-[#ffd700] mb-4">
+              <span className="inline-block text-xs font-semibold text-[#ffd700] mb-4">
                 {t.testimonials.badge}
               </span>
               <h2
                 className="font-bold text-white mb-4 tracking-tight"
                 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}
               >
-                {t.testimonials.title} <span className="text-[#ffd700]">{t.testimonials.titleHighlight}</span>
+                {`${t.testimonials.title.trim()} ${t.testimonials.titleHighlight}`}
               </h2>
               <p className="text-[1.1rem] text-white/50 max-w-[400px] mx-auto">
                 {t.testimonials.subtitle}
@@ -171,8 +171,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
                           {testimonial.name}
                         </h4>
                         <p className="text-[0.9rem] text-white/50">
-                          {testimonial.role}{' '}
-                          <span className="text-white/30 mx-1">&#8226;</span>{' '}
+                          {testimonial.role}
+                          <span className="text-white/30 mx-1">&#8226;</span>
                           {testimonial.company}
                         </p>
                       </div>
@@ -182,7 +182,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ id }) => {
                     <div
                       className="absolute bottom-0 left-8 right-8 h-[2px] opacity-50"
                       style={{
-                        background: 'linear-gradient(90deg, transparent, #ffd700, transparent)',
+                        background: '#ffd700',
                       }}
                     />
                   </div>

@@ -14,12 +14,12 @@ export default function FormationCard({ icon: Icon, title, text, countdown, navi
         <Icon aria-hidden="true" className="text-3xl shrink-0" style={{ color: ACCENT }} />
         <div className="flex flex-wrap justify-end gap-2">
           {featured && (
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] px-2.5 py-1 text-white bg-[#4b0082]">
+            <span className="text-xs px-2.5 py-1 text-white bg-[#4b0082]">
               Nouveau
             </span>
           )}
           {price && (
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] px-2.5 py-1 border border-black/15 text-black/65">
+            <span className="text-xs px-2.5 py-1 border border-black/15 text-black/65">
               {price}
             </span>
           )}
@@ -36,10 +36,10 @@ export default function FormationCard({ icon: Icon, title, text, countdown, navi
 
       {countdown && (
         <div className="mb-6 pt-5 border-t border-black/10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-black/50 mb-1.5">
+          <p className="text-xs text-black/50 mb-1.5">
             Prochaine session dans
           </p>
-          <p className="font-mono text-xl font-bold m-0" style={{ color: ACCENT }}>
+          <p className="text-xl font-bold m-0" style={{ color: ACCENT }}>
             {countdown.replace('d ', ' j ')}
           </p>
         </div>

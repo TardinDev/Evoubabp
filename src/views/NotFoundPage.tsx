@@ -6,7 +6,7 @@ export default function NotFoundPage() {
   return (
     <div
       className="min-h-screen flex items-center justify-center p-5"
-      style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+      style={{ background: '#4b0082' }}
     >
       <div className="text-center text-white">
         <h1 className="text-[5rem] sm:text-[8rem] font-extrabold m-0 leading-none opacity-90">
@@ -20,7 +20,7 @@ export default function NotFoundPage() {
         </p>
         <Link
           href="/"
-          className="inline-block py-3.5 px-8 bg-white text-[#667eea] no-underline rounded-lg font-semibold text-base transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)]"
+          className="inline-block py-3.5 px-8 bg-white text-[#4b0082] no-underline rounded-lg font-semibold text-base transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)]"
         >
           Retour à l'accueil
         </Link>

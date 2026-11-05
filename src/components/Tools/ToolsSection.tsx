@@ -19,7 +19,7 @@ const ToolsSection = () => {
       name: t.toolsSection.coderabbit.name,
       icon: FaRobot,
       color: "#FF6B35",
-      gradient: "linear-gradient(135deg, #FF6B35, #F7931E)",
+      gradient: "#FF6B35",
       description: t.toolsSection.coderabbit.description,
       tagline: t.toolsSection.coderabbit.tagline,
       features: t.toolsSection.coderabbit.features,
@@ -29,7 +29,7 @@ const ToolsSection = () => {
       name: t.toolsSection.claude.name,
       icon: ClaudeIcon,
       color: "#FF6B35",
-      gradient: "linear-gradient(135deg, #FF6B35, #F7931E)",
+      gradient: "#FF6B35",
       description: t.toolsSection.claude.description,
       tagline: t.toolsSection.claude.tagline,
       features: t.toolsSection.claude.features,
@@ -39,7 +39,7 @@ const ToolsSection = () => {
       name: t.toolsSection.sentry.name,
       icon: FaBug,
       color: "#362D59",
-      gradient: "linear-gradient(135deg, #362D59, #5B4B8A)",
+      gradient: "#362D59",
       description: t.toolsSection.sentry.description,
       tagline: t.toolsSection.sentry.tagline,
       features: t.toolsSection.sentry.features,
@@ -63,39 +63,33 @@ const ToolsSection = () => {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.06) 0%, transparent 50%)'
+              'transparent'
           }}
         />
 
         <div className="max-w-[1400px] mx-auto relative z-[1]">
           {/* Header */}
           <div className="text-center mb-16">
-            <div className="flex justify-center gap-6 mb-8 [&_svg]:text-[#667eea] [&_svg]:drop-shadow-[0_4px_8px_rgba(102,126,234,0.3)]">
+            <div className="flex justify-center gap-6 mb-8 [&_svg]:text-[#4b0082]">
               <FaShieldAlt size={35} />
               <FaChartLine size={35} />
               <FaCode size={35} />
             </div>
             <h2 className="text-5xl max-md:text-[2rem] font-black text-[#1a202c] mb-6 leading-tight">
-              {t.toolsSection.title1}{" "}
+              {t.toolsSection.title1}
               <span
-                className="bg-clip-text"
+                className=""
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
+                  color: '#4b0082',
                 }}
               >
                 {t.toolsSection.titleHighlight1}
-              </span>{" "}
-              {t.toolsSection.title2}{" "}
+              </span>
+              {t.toolsSection.title2}
               <span
-                className="bg-clip-text"
+                className=""
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
+                  color: '#4b0082',
                 }}
               >
                 {t.toolsSection.titleHighlight2}
@@ -115,7 +109,7 @@ const ToolsSection = () => {
                   key={index}
                   className="flex-1 flex flex-col max-md:flex-row items-center max-md:items-center text-center max-md:text-left cursor-pointer relative transition-all duration-300 py-6 px-4 rounded-[15px] max-md:gap-4"
                   style={{
-                    background: activeToolIndex === index ? 'linear-gradient(135deg, #f8fafc, #f1f5f9)' : 'transparent',
+                    background: activeToolIndex === index ? '#f8fafc' : 'transparent',
                   }}
                   onClick={() => setActiveToolIndex(index)}
                   whileHover={{ scale: 1.05 }}
@@ -148,7 +142,7 @@ const ToolsSection = () => {
                   </div>
                   {/* Timeline Connector */}
                   {index < tools.length - 1 && (
-                    <div className="absolute top-10 -right-1/2 w-full h-[3px] max-md:hidden -z-[1]" style={{ background: 'linear-gradient(90deg, #e2e8f0, #cbd5e1)' }} />
+                    <div className="absolute top-10 -right-1/2 w-full h-[3px] max-md:hidden -z-[1]" style={{ background: '#e2e8f0' }} />
                   )}
                 </motion.div>
               ))}
@@ -163,7 +157,7 @@ const ToolsSection = () => {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
                 className="border-2 border-slate-200 rounded-[20px] p-10 max-md:p-6"
-                style={{ background: 'linear-gradient(135deg, #fafbfc, #f8fafc)' }}
+                style={{ background: '#fafbfc' }}
               >
                 {/* Detail Header */}
                 <div className="flex max-md:flex-col items-center gap-8 max-md:gap-4 mb-8 pb-8 max-md:text-center border-b-2 border-slate-200">
@@ -212,17 +206,14 @@ const ToolsSection = () => {
                     }}
                   >
                     <div
-                      className="text-[2.5rem] font-black mb-2 bg-clip-text"
+                      className="text-[2.5rem] font-black mb-2"
                       style={{
-                        background: 'linear-gradient(135deg, #667eea, #764ba2)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
+                        color: '#4b0082',
                       }}
                     >
                       {activeTool.stats.value}
                     </div>
-                    <div className="text-slate-500 text-[0.9rem] font-semibold uppercase tracking-[1px]">
+                    <div className="text-slate-500 text-[0.9rem] font-semibold">
                       {activeTool.stats.label}
                     </div>
                   </div>
@@ -240,17 +231,17 @@ const ToolsSection = () => {
           {/* Bottom CTA */}
           <div className="bg-white border-2 border-slate-200 rounded-3xl p-12 max-md:p-8 shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
             <div className="flex max-md:flex-col items-center justify-between gap-8 max-md:text-center">
-              <div className="text-[#667eea]" style={{ animation: 'tools-bounce 2s ease-in-out infinite' }}>
+              <div className="text-[#4b0082]" style={{ animation: 'tools-bounce 2s ease-in-out infinite' }}>
                 <FaRocket size={48} />
               </div>
               <h3 className="flex-1 text-[1.75rem] max-md:text-2xl font-bold text-[#1a202c] m-0">
                 {t.toolsSection.ctaTitle}
               </h3>
               <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(102, 126, 234, 0.4)" }}
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(75,0,130, 0.4)" }}
                 whileTap={{ scale: 0.95 }}
-                className="text-white border-none rounded-full py-5 px-12 max-md:w-full max-md:py-4 max-md:px-8 text-[1.1rem] max-md:text-base font-bold cursor-pointer transition-all duration-300 shadow-[0_10px_30px_rgba(102,126,234,0.3)] whitespace-nowrap"
-                style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+                className="text-white border-none rounded-full py-5 px-12 max-md:w-full max-md:py-4 max-md:px-8 text-[1.1rem] max-md:text-base font-bold cursor-pointer transition-all duration-300 shadow-[0_10px_30px_rgba(75,0,130,0.3)] whitespace-nowrap"
+                style={{ background: '#4b0082' }}
               >
                 {t.toolsSection.startProject}
               </motion.button>

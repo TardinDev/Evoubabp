@@ -18,25 +18,25 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
             icon: <FaDocker />,
             title: t.dockerSection.containerization,
             description: t.dockerSection.containerizationDesc,
-            gradient: 'linear-gradient(135deg, #0db7ed 0%, #38bdf8 100%)'
+            gradient: '#0db7ed'
         },
         {
             icon: <FaShip />,
             title: t.dockerSection.portability,
             description: t.dockerSection.portabilityDesc,
-            gradient: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)'
+            gradient: '#3b82f6'
         },
         {
             icon: <FaLayerGroup />,
             title: t.dockerSection.microservices,
             description: t.dockerSection.microservicesDesc,
-            gradient: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)'
+            gradient: '#6366f1'
         },
         {
             icon: <FaCogs />,
             title: t.dockerSection.devops,
             description: t.dockerSection.devopsDesc,
-            gradient: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)'
+            gradient: '#8b5cf6'
         }
     ];
 
@@ -50,14 +50,14 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
             <section
                 id={id}
                 className="relative overflow-hidden w-full max-w-[100vw] py-24 px-8 max-md:py-16 max-md:px-4 max-[480px]:py-12 max-[480px]:px-2"
-                style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #172554 100%)' }}
+                style={{ background: '#0f172a' }}
             >
                 {/* ::before pseudo-element replacement */}
                 <div
                     className="absolute inset-0 pointer-events-none"
                     style={{
                         background:
-                            'radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.1) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 40%)'
+                            'transparent'
                     }}
                 />
 
@@ -71,12 +71,9 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
                             <FaBoxOpen size={40} />
                         </div>
                         <h2
-                            className="text-5xl max-md:text-[2.2rem] max-[480px]:text-[1.8rem] font-extrabold mb-4 bg-clip-text"
+                            className="text-5xl max-md:text-[2.2rem] max-[480px]:text-[1.8rem] font-extrabold mb-4"
                             style={{
-                                background: 'linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text'
+                                color: '#FFFFFF',
                             }}
                         >
                             {t.dockerSection.title}
@@ -110,7 +107,7 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
                                 {/* CardGlow */}
                                 <div
                                     className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                                    style={{ background: 'radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%)' }}
+                                    style={{ background: 'transparent' }}
                                 />
                             </div>
                         </motion.div>
@@ -126,7 +123,7 @@ const DockerSection: React.FC<DockerSectionProps> = ({ id }) => {
                             whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(14, 165, 233, 0.4)' }}
                             whileTap={{ scale: 0.95 }}
                             className="text-white border-none py-4 px-10 rounded-full text-[1.1rem] font-semibold cursor-pointer transition-all duration-300 shadow-[0_5px_15px_rgba(2,132,199,0.3)]"
-                            style={{ background: 'linear-gradient(135deg, #0284c7 0%, #2563eb 100%)' }}
+                            style={{ background: '#0284c7' }}
                         >
                             {t.dockerSection.modernize}
                         </motion.button>

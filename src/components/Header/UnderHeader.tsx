@@ -50,7 +50,7 @@ export default function UnderHeader() {
             variants={fadeIn("right", "tween", 0.2, 1)}
             className="cursor-pointer transition-all duration-500 ease-in-out p-2 rounded-[10px] font-semibold text-black relative z-[2] -ml-6 hover:bg-[#4b0082] hover:text-white hover:scale-110 hover:border hover:border-purple-800 hover:rounded-[10px] hover:px-4 hover:py-2 hover:no-underline hover:z-10 group"
           >
-            {t.hero.greeting}<br /> {t.hero.iAm}{" "}
+            {t.hero.greeting}<br /> {t.hero.iAm}
             <span className="inline-block relative w-[min(280px,70vw)] h-[2.4em] align-top">
               <AnimatePresence mode="wait">
                 <motion.span

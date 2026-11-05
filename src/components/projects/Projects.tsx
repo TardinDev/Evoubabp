@@ -165,8 +165,8 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
           borderLeftColor: i === 0 ? services[i].color : 'transparent',
           boxShadow: i === 0 ? `0 4px 24px ${services[i].color}25` : 'none',
           background: i === 0
-            ? 'linear-gradient(135deg, #d4e4fa, #e8effa)'
-            : 'linear-gradient(135deg, #e4ecf5, #f5f7fa)',
+            ? '#d4e4fa'
+            : '#e4ecf5',
         })
       })
 
@@ -275,7 +275,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
           opacity: 0.45,
           borderLeftColor: 'transparent',
           boxShadow: 'none',
-          background: 'linear-gradient(135deg, #e4ecf5, #f5f7fa)',
+          background: '#e4ecf5',
           duration: 1,
           ease: 'power2.inOut',
         }, label)
@@ -286,7 +286,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
           opacity: 1,
           borderLeftColor: services[toIdx].color,
           boxShadow: `0 4px 24px ${services[toIdx].color}25`,
-          background: 'linear-gradient(135deg, #d4e4fa, #e8effa)',
+          background: '#d4e4fa',
           duration: 1,
           ease: 'power2.inOut',
         }, label)
@@ -398,7 +398,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
             ref={(el) => { bgLayerRefs.current[i] = el }}
             className="absolute inset-0"
             style={{
-              background: `linear-gradient(135deg, ${service.gradientFrom}, #f5f7fa 50%, ${service.gradientTo})`,
+              background: `#f5f7fa`,
               willChange: 'opacity',
             }}
           />
@@ -406,21 +406,6 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
       </div>
 
       {/* Ambient glow orbs */}
-      <div
-        ref={orb1Ref}
-        className="absolute w-[450px] h-[450px] max-md:w-[250px] max-md:h-[250px] rounded-full blur-[120px] max-md:blur-[70px] opacity-15 pointer-events-none z-0"
-        style={{ top: '15%', left: '5%', willChange: 'transform, background-color' }}
-      />
-      <div
-        ref={orb2Ref}
-        className="absolute w-[400px] h-[400px] max-md:w-[220px] max-md:h-[220px] rounded-full blur-[110px] max-md:blur-[65px] opacity-15 pointer-events-none z-0"
-        style={{ top: '55%', right: '5%', willChange: 'transform, background-color' }}
-      />
-      <div
-        ref={orb3Ref}
-        className="absolute w-[300px] h-[300px] max-md:w-[180px] max-md:h-[180px] rounded-full blur-[100px] max-md:blur-[60px] opacity-10 pointer-events-none z-0"
-        style={{ bottom: '10%', left: '40%', willChange: 'transform, background-color' }}
-      />
 
       {/* Floating decorative shapes */}
       <div
@@ -485,7 +470,7 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                   {service.title}
                 </h3>
                 <p className="text-base text-[#525a63] mb-4 leading-relaxed">
-                  {service.description}{' '}
+                  {service.description}
                   {service.vercelLink && (
                     <a
                       href="https://vercel.com/tardindevs-projects"

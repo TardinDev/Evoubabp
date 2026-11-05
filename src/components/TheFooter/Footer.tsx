@@ -12,13 +12,13 @@ export default function Footer() {
   return (
     <footer
       className="relative overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)' }}
+      style={{ background: '#0f172a' }}
     >
       {/* Pseudo-element overlay via a div */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%)'
+          background: 'transparent'
         }}
       />
 
@@ -38,12 +38,9 @@ export default function Footer() {
                 className="w-12 h-12 rounded-[10px]"
               />
               <h2
-                className="text-2xl font-bold bg-clip-text"
+                className="text-2xl font-bold"
                 style={{
-                  background: 'linear-gradient(135deg, #7C3AED, #EC4899)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
+                  color: '#FFFFFF',
                 }}
               >
                 Evoubap
@@ -62,7 +59,7 @@ export default function Footer() {
                 aria-label="LinkedIn"
                 className="w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-300 backdrop-blur-[10px] border border-white/10 bg-white/10 hover:-translate-y-0.5 [&_svg]:fill-[#cbd5e1] [&_svg]:transition-[fill] [&_svg]:duration-300 hover:[&_svg]:fill-white"
                 style={{ ['--tw-bg-opacity' as string]: undefined }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = 'linear-gradient(135deg, #3b82f6, #8b5cf6)'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = '#3b82f6'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24">
@@ -75,7 +72,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 aria-label="GitHub"
                 className="w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-300 backdrop-blur-[10px] border border-white/10 bg-white/10 hover:-translate-y-0.5 [&_svg]:fill-[#cbd5e1] [&_svg]:transition-[fill] [&_svg]:duration-300 hover:[&_svg]:fill-white"
-                onMouseEnter={(e) => { e.currentTarget.style.background = 'linear-gradient(135deg, #3b82f6, #8b5cf6)'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = '#3b82f6'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'; }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24">
@@ -130,10 +127,10 @@ export default function Footer() {
                 </div>
                 <button
                   onClick={openChatBot}
-                  className="flex items-center gap-2.5 border-none text-white py-3 px-5 rounded-[25px] cursor-pointer transition-all duration-300 text-[0.9rem] font-semibold mt-4 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(102,126,234,0.4)] active:translate-y-0"
+                  className="flex items-center gap-2.5 border-none text-white py-3 px-5 rounded-[25px] cursor-pointer transition-all duration-300 text-[0.9rem] font-semibold mt-4 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(75,0,130,0.4)] active:translate-y-0"
                   style={{
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                    boxShadow: '0 4px 15px rgba(102, 126, 234, 0.3)'
+                    background: '#4b0082',
+                    boxShadow: '0 4px 15px rgba(75,0,130, 0.3)'
                   }}
                 >
                   <FaComments size={18} />
@@ -147,7 +144,7 @@ export default function Footer() {
         {/* Divider */}
         <div
           className="h-px my-8"
-          style={{ background: 'linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent)' }}
+          style={{ background: 'rgba(148, 163, 184, 0.3)' }}
         />
 
         {/* Bottom section */}

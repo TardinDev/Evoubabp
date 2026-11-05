@@ -96,7 +96,7 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
         <section
           id={id}
           className="relative py-16 px-4 md:py-24 md:px-8 overflow-hidden min-h-screen"
-          style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #0f1419 50%, #0a0a0f 100%)' }}
+          style={{ background: '#0a0a0f' }}
         >
           {/* Background Pattern */}
           <div
@@ -111,7 +111,7 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
           <div
             className="absolute top-0 left-0 right-0 h-1"
             style={{
-              background: `linear-gradient(90deg, #0a0a0f, ${ACCENT}, #0a0a0f)`,
+              background: `#0a0a0f`,
               backgroundSize: '200% 100%',
               animation: 'flytaxi-shimmer 3s linear infinite',
             }}
@@ -177,7 +177,7 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
                         className="absolute bottom-[0.1em] left-0 w-full"
                         style={{
                           height: '0.15em',
-                          background: `linear-gradient(90deg, ${ACCENT}, transparent)`,
+                          background: `none`,
                           opacity: 0.6,
                         }}
                       />
@@ -252,7 +252,7 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
                     </div>
                     <div
                       className="relative"
-                      style={{ aspectRatio: '16/10', background: 'linear-gradient(135deg, #1a1a2e, #0f0f1a)' }}
+                      style={{ aspectRatio: '16/10', background: '#1a1a2e' }}
                     >
                       <Image
                         src={project.image}
@@ -339,7 +339,7 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
                     <div
                       className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl text-xl"
                       style={{
-                        background: 'linear-gradient(135deg, rgba(242, 100, 64, 0.2), rgba(242, 100, 64, 0.05))',
+                        background: 'rgba(242, 100, 64, 0.2)',
                         border: '1px solid rgba(242, 100, 64, 0.25)',
                         color: ACCENT,
                       }}
@@ -387,7 +387,7 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
                     {/* Frontend Layer */}
                     <div>
                       <div
-                        className="text-[0.7rem] uppercase mb-2"
+                        className="text-xs mb-2"
                         style={{
                           fontFamily: "'DM Sans', sans-serif",
                           letterSpacing: '0.1em',
@@ -424,20 +424,20 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
 
                     {/* Connector */}
                     <div className="flex items-center gap-3 px-4">
-                      <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, transparent, rgba(242, 100, 64, 0.5), transparent)` }} />
+                      <div className="flex-1 h-px" style={{ background: `rgba(242, 100, 64, 0.5)` }} />
                       <span
                         className="text-[0.65rem] whitespace-nowrap"
                         style={{ fontFamily: "'JetBrains Mono', monospace", color: ACCENT }}
                       >
                         HTTPS / JWT / IA
                       </span>
-                      <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, transparent, rgba(242, 100, 64, 0.5), transparent)` }} />
+                      <div className="flex-1 h-px" style={{ background: `rgba(242, 100, 64, 0.5)` }} />
                     </div>
 
                     {/* Backend Layer */}
                     <div>
                       <div
-                        className="text-[0.7rem] uppercase mb-2"
+                        className="text-xs mb-2"
                         style={{
                           fontFamily: "'DM Sans', sans-serif",
                           letterSpacing: '0.1em',
@@ -507,17 +507,17 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
                     >
                       <div className="text-center flex-1">
                         <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: ACCENT }}>IA</div>
-                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackFlyTaxi.statAiLabel}</div>
+                        <div className="text-xs" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackFlyTaxi.statAiLabel}</div>
                       </div>
                       <div className="w-px h-[30px]" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
                       <div className="text-center flex-1">
                         <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: ACCENT }}>PCI-DSS</div>
-                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackFlyTaxi.statPaymentLabel}</div>
+                        <div className="text-xs" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackFlyTaxi.statPaymentLabel}</div>
                       </div>
                       <div className="w-px h-[30px]" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
                       <div className="text-center flex-1">
                         <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: ACCENT }}>Docker</div>
-                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackFlyTaxi.statDockerLabel}</div>
+                        <div className="text-xs" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackFlyTaxi.statDockerLabel}</div>
                       </div>
                     </div>
 
@@ -527,7 +527,7 @@ const FullStackFlyTaxiSection: React.FC<FullStackFlyTaxiSectionProps> = ({ id })
                         target="_blank"
                         className="inline-flex items-center justify-center gap-2 flex-1 py-3.5 px-6 text-white font-semibold text-[0.9rem] no-underline rounded-lg transition-all duration-300 hover:-translate-y-0.5"
                         style={{
-                          background: `linear-gradient(135deg, ${ACCENT}, #d94d2a)`,
+                          background: `#d94d2a`,
                           fontFamily: "'DM Sans', sans-serif",
                         }}
                         onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 20px rgba(242, 100, 64, 0.35)'; }}

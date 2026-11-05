@@ -15,7 +15,7 @@ const DevToolsSectionTest = () => {
       title: t.devTools.cleanCode,
       description: t.devTools.cleanCodeDesc,
       color: "#3b82f6",
-      gradient: "linear-gradient(135deg, #3b82f6, #2563eb)",
+      gradient: "#3b82f6",
       metrics: [t.devTools.cleanCodeMetric1, t.devTools.cleanCodeMetric2, t.devTools.cleanCodeMetric3]
     },
     {
@@ -23,7 +23,7 @@ const DevToolsSectionTest = () => {
       title: t.devTools.testing,
       description: t.devTools.testingDesc,
       color: "#ef4444",
-      gradient: "linear-gradient(135deg, #ef4444, #dc2626)",
+      gradient: "#ef4444",
       metrics: [t.devTools.testingMetric1, t.devTools.testingMetric2, t.devTools.testingMetric3]
     },
     {
@@ -31,7 +31,7 @@ const DevToolsSectionTest = () => {
       title: t.devTools.security,
       description: t.devTools.securityDesc,
       color: "#10b981",
-      gradient: "linear-gradient(135deg, #10b981, #059669)",
+      gradient: "#10b981",
       metrics: [t.devTools.securityMetric1, t.devTools.securityMetric2, t.devTools.securityMetric3]
     },
     {
@@ -39,7 +39,7 @@ const DevToolsSectionTest = () => {
       title: t.devTools.validation,
       description: t.devTools.validationDesc,
       color: "#8b5cf6",
-      gradient: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
+      gradient: "#8b5cf6",
       metrics: [t.devTools.validationMetric1, t.devTools.validationMetric2, t.devTools.validationMetric3]
     },
     {
@@ -47,7 +47,7 @@ const DevToolsSectionTest = () => {
       title: t.devTools.ux,
       description: t.devTools.uxDesc,
       color: "#f59e0b",
-      gradient: "linear-gradient(135deg, #f59e0b, #d97706)",
+      gradient: "#f59e0b",
       metrics: [t.devTools.uxMetric1, t.devTools.uxMetric2, t.devTools.uxMetric3]
     },
     {
@@ -55,7 +55,7 @@ const DevToolsSectionTest = () => {
       title: t.devTools.performance,
       description: t.devTools.performanceDesc,
       color: "#06b6d4",
-      gradient: "linear-gradient(135deg, #06b6d4, #0891b2)",
+      gradient: "#06b6d4",
       metrics: [t.devTools.performanceMetric1, t.devTools.performanceMetric2, t.devTools.performanceMetric3]
     }
   ];
@@ -74,7 +74,7 @@ const DevToolsSectionTest = () => {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 50%)'
+              'transparent'
           }}
         />
 
@@ -84,7 +84,7 @@ const DevToolsSectionTest = () => {
             <div
               className="inline-flex items-center justify-center w-[100px] h-[100px] rounded-full text-white mb-8 shadow-[0_20px_40px_rgba(16,185,129,0.25)]"
               style={{
-                background: 'linear-gradient(135deg, #10b981, #059669)',
+                background: '#10b981',
                 animation: 'devtest-float 3s ease-in-out infinite',
               }}
             >
@@ -103,7 +103,7 @@ const DevToolsSectionTest = () => {
             {/* Circular Process */}
             <div className="relative w-[min(450px,90vw)] h-[min(450px,90vw)] max-md:w-[min(350px,90vw)] max-md:h-[min(350px,90vw)] mx-auto">
               {/* Center Hub */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-[180px] max-md:w-[140px] max-md:h-[140px] rounded-full border-[3px] border-slate-200 shadow-[0_20px_60px_rgba(0,0,0,0.1)] flex items-center justify-center z-10" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)' }}>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-[180px] max-md:w-[140px] max-md:h-[140px] rounded-full border-[3px] border-slate-200 shadow-[0_20px_60px_rgba(0,0,0,0.1)] flex items-center justify-center z-10" style={{ background: '#ffffff' }}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeStep}
@@ -156,7 +156,7 @@ const DevToolsSectionTest = () => {
                       className="absolute top-1/2 right-full w-[100px] max-md:w-[75px] h-0.5 transition-all duration-300"
                       style={{
                         background: activeStep === index
-                          ? `linear-gradient(to right, ${step.color}, transparent)`
+                          ? `none`
                           : 'rgba(226, 232, 240, 0.5)',
                         transformOrigin: 'right center',
                       }}
@@ -175,7 +175,7 @@ const DevToolsSectionTest = () => {
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.4 }}
                 className="rounded-3xl border-2 border-slate-200 overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
-                style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)' }}
+                style={{ background: '#ffffff' }}
               >
                 <div className="p-8 text-white" style={{ background: devProcessSteps[activeStep].gradient }}>
                   <h3 className="text-[2rem] max-md:text-2xl font-extrabold m-0">
@@ -224,65 +224,53 @@ const DevToolsSectionTest = () => {
           </div>
 
           {/* Stats Container */}
-          <div className="flex max-md:flex-col justify-around items-center border-2 border-slate-200 rounded-3xl py-12 px-8 max-md:gap-8 max-md:py-8 max-md:px-4 mt-16 shadow-[0_10px_30px_rgba(0,0,0,0.05)]" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)' }}>
+          <div className="flex max-md:flex-col justify-around items-center border-2 border-slate-200 rounded-3xl py-12 px-8 max-md:gap-8 max-md:py-8 max-md:px-4 mt-16 shadow-[0_10px_30px_rgba(0,0,0,0.05)]" style={{ background: '#f8fafc' }}>
             <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
               <div
-                className="text-5xl max-md:text-[2.5rem] font-black mb-2 bg-clip-text"
+                className="text-5xl max-md:text-[2.5rem] font-black mb-2"
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
+                  color: '#4b0082',
                 }}
               >
                 100%
               </div>
-              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">{t.devTools.codeCoverage}</div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold">{t.devTools.codeCoverage}</div>
             </div>
-            <div className="w-0.5 h-20 max-md:hidden" style={{ background: 'linear-gradient(to bottom, transparent, #cbd5e1, transparent)' }} />
+            <div className="w-0.5 h-20 max-md:hidden" style={{ background: '#cbd5e1' }} />
             <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
               <div
-                className="text-5xl max-md:text-[2.5rem] font-black mb-2 bg-clip-text"
+                className="text-5xl max-md:text-[2.5rem] font-black mb-2"
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
+                  color: '#4b0082',
                 }}
               >
                 99.9%
               </div>
-              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">{t.devTools.availability}</div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold">{t.devTools.availability}</div>
             </div>
-            <div className="w-0.5 h-20 max-md:hidden" style={{ background: 'linear-gradient(to bottom, transparent, #cbd5e1, transparent)' }} />
+            <div className="w-0.5 h-20 max-md:hidden" style={{ background: '#cbd5e1' }} />
             <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
               <div
-                className="text-5xl max-md:text-[2.5rem] font-black mb-2 bg-clip-text"
+                className="text-5xl max-md:text-[2.5rem] font-black mb-2"
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
+                  color: '#4b0082',
                 }}
               >
                 &lt; 2s
               </div>
-              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">{t.devTools.loadingTime}</div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold">{t.devTools.loadingTime}</div>
             </div>
-            <div className="w-0.5 h-20 max-md:hidden" style={{ background: 'linear-gradient(to bottom, transparent, #cbd5e1, transparent)' }} />
+            <div className="w-0.5 h-20 max-md:hidden" style={{ background: '#cbd5e1' }} />
             <div className="text-center p-4 transition-transform duration-300 hover:scale-105">
               <div
-                className="text-5xl max-md:text-[2.5rem] font-black mb-2 bg-clip-text"
+                className="text-5xl max-md:text-[2.5rem] font-black mb-2"
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
+                  color: '#4b0082',
                 }}
               >
                 A+
               </div>
-              <div className="text-slate-500 text-[0.95rem] font-semibold uppercase tracking-[1.5px]">{t.devTools.securityScore}</div>
+              <div className="text-slate-500 text-[0.95rem] font-semibold">{t.devTools.securityScore}</div>
             </div>
           </div>
         </div>

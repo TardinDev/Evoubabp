@@ -43,7 +43,7 @@ const CourseInteractive = ({ courseData }) => {
       <CourseInnerWrapper>
         {/* Sidebar des sections */}
         <CourseSidebar>
-          <SidebarTitle>{"\u{1F4DA}"} Contenu du cours</SidebarTitle>
+          <SidebarTitle>Contenu du cours</SidebarTitle>
           <SectionList>
             {courseData.sections.map((section) => (
               <SectionItem
@@ -78,7 +78,7 @@ const CourseInteractive = ({ courseData }) => {
                       <FaPlay />
                       <p>Video du cours - {currentSection.title}</p>
                       {currentSection.duration && (
-                        <div className="duration">{"\u{1F4F9}"} {currentSection.duration}</div>
+                        <div className="duration">{currentSection.duration}</div>
                       )}
                     </VideoPlaceholder>
                   </VideoWrapper>
@@ -91,12 +91,12 @@ const CourseInteractive = ({ courseData }) => {
                     marginBottom: '1rem'
                   }}>
                     <h5 style={{
-                      color: '#06b6d4',
+                      color: '#FFFFFF',
                       marginBottom: '1rem',
                       fontSize: '1rem',
                       fontWeight: '600'
                     }}>
-                      {"\u{1F3AF}"} Code final de cette section
+                      Code final de cette section
                     </h5>
                     <CodeBlock>
                       {currentSection.finalCode || currentSection.code}
@@ -107,7 +107,7 @@ const CourseInteractive = ({ courseData }) => {
 
               <LessonSection>
                 <ContentItem>
-                  <h5>{"\u23F1\uFE0F"} Duree estimee</h5>
+                  <h5>{"\u23F1"} Duree estimee</h5>
                   <p>{currentSection.duration || "15-30 minutes selon votre niveau"}</p>
                 </ContentItem>
               </LessonSection>
@@ -142,10 +142,7 @@ export const FreeProjectSection = ({ project, courseData }) => (
         }}>
           <FaTiktok style={{
             fontSize: '2rem',
-            background: 'linear-gradient(180deg, #00f2ea 0%, #ff0050 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
+            color: '#FFFFFF',
           }} />
         </span>
       )}
@@ -164,7 +161,7 @@ export const FreeProjectSection = ({ project, courseData }) => (
     )}
 
     <TechStackComponent
-      title={"\u{1F6E0}\uFE0F Technologies utilisees"}
+      title={"Technologies utilisees"}
       items={project.technologies}
     />
 
@@ -184,7 +181,7 @@ export const FreeProjectSection = ({ project, courseData }) => (
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              background: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)',
+              background: '#3b82f6',
               color: 'white',
               padding: '0.75rem 1.5rem',
               borderRadius: '0.375rem',
@@ -209,7 +206,7 @@ export const FreeProjectSection = ({ project, courseData }) => (
               target.style.boxShadow = 'none';
             }}
           >
-            {"\u{1F4E6}"} Telecharger les assets
+            Telecharger les assets
           </a>
 
           {project.youtubeChannel && (
@@ -218,7 +215,7 @@ export const FreeProjectSection = ({ project, courseData }) => (
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                background: 'linear-gradient(135deg, #FF0000 0%, #CC0000 100%)',
+                background: '#FF0000',
                 color: 'white',
                 padding: '0.75rem 1.5rem',
                 borderRadius: '0.375rem',
@@ -276,20 +273,20 @@ export const PremiumProjectSection = ({ project, onPremiumClick }) => (
         )}
 
         <TechStackComponent
-          title={"\u{1F6E0}\uFE0F Technologies utilisees"}
+          title={"Technologies utilisees"}
           items={project.technologies}
         />
 
         {project.features && (
           <TechStackComponent
-            title={"\u2728 Fonctionnalites principales"}
+            title={"Fonctionnalites principales"}
             items={project.features}
           />
         )}
 
         {project.securityFeatures && (
           <TechStackComponent
-            title={"\u{1F512} Securite & Conformite"}
+            title={"Securite & Conformite"}
             items={project.securityFeatures}
           />
         )}

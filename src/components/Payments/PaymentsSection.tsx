@@ -86,7 +86,7 @@ const PaymentsSection: React.FC<PaymentsSectionProps> = ({ id }) => {
             className="text-center mb-14 md:mb-20"
           >
             <span
-              className="inline-block font-mono text-xs tracking-[0.3em] uppercase mb-6 px-4 py-2 rounded"
+              className="inline-block text-xs mb-6 px-4 py-2 rounded"
               style={{
                 color: ACCENT,
                 backgroundColor: 'rgba(75, 0, 130, 0.08)',
@@ -99,10 +99,7 @@ const PaymentsSection: React.FC<PaymentsSectionProps> = ({ id }) => {
               className="font-extrabold mb-5 leading-[1.1] tracking-tight"
               style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}
             >
-              {t.payments.title}{' '}
-              <span style={{ color: ACCENT }}>
-                {t.payments.titleHighlight}
-              </span>
+              {`${t.payments.title.trim()} ${t.payments.titleHighlight}`}
             </h2>
 
             <p className="text-base md:text-lg leading-relaxed text-black/65 max-w-2xl mx-auto">
@@ -133,7 +130,7 @@ const PaymentsSection: React.FC<PaymentsSectionProps> = ({ id }) => {
                   </h3>
 
                   <p
-                    className="font-mono text-[10px] uppercase tracking-[0.18em] mb-5"
+                    className="text-xs mb-5"
                     style={{ color: brand }}
                   >
                     {p.tagline}
@@ -160,7 +157,7 @@ const PaymentsSection: React.FC<PaymentsSectionProps> = ({ id }) => {
                   </ul>
 
                   <div className="pt-5 border-t border-black/10">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-black/45 mb-1.5">
+                    <p className="text-xs text-black/45 mb-1.5">
                       {t.payments.useCasesLabel}
                     </p>
                     <p className="text-sm text-black/70 leading-snug">
@@ -186,7 +183,7 @@ const PaymentsSection: React.FC<PaymentsSectionProps> = ({ id }) => {
           >
             <div className="text-center mb-10">
               <span
-                className="inline-block font-mono text-xs tracking-[0.3em] uppercase px-4 py-2 rounded"
+                className="inline-block text-xs px-4 py-2 rounded"
                 style={{
                   color: ACCENT,
                   backgroundColor: 'rgba(75, 0, 130, 0.08)',
@@ -203,7 +200,7 @@ const PaymentsSection: React.FC<PaymentsSectionProps> = ({ id }) => {
                   className="bg-white border border-black/10 p-6 hover:border-black/25 transition-colors duration-300"
                 >
                   <p
-                    className="font-mono text-[10px] uppercase tracking-[0.22em] mb-3"
+                    className="text-xs mb-3"
                     style={{ color: ACCENT }}
                   >
                     {item.label}

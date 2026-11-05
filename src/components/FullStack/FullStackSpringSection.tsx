@@ -95,7 +95,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
         <section
           id={id}
           className="relative py-16 px-4 md:py-24 md:px-8 overflow-hidden min-h-screen"
-          style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #0f1419 50%, #0a0a0f 100%)' }}
+          style={{ background: '#0a0a0f' }}
         >
           {/* Background Pattern */}
           <div
@@ -110,7 +110,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
           <div
             className="absolute top-0 left-0 right-0 h-1"
             style={{
-              background: 'linear-gradient(90deg, #0a0a0f, #6db33f, #0a0a0f)',
+              background: '#0a0a0f',
               backgroundSize: '200% 100%',
               animation: 'fsspring-shimmer 3s linear infinite',
             }}
@@ -188,7 +188,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                         className="absolute bottom-[0.1em] left-0 w-full"
                         style={{
                           height: '0.15em',
-                          background: 'linear-gradient(90deg, #6db33f, transparent)',
+                          background: '#6db33f',
                           opacity: 0.6,
                         }}
                       />
@@ -263,7 +263,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                     </div>
                     <div
                       className="relative"
-                      style={{ aspectRatio: '16/10', background: 'linear-gradient(135deg, #1a1a2e, #0f0f1a)' }}
+                      style={{ aspectRatio: '16/10', background: '#1a1a2e' }}
                     >
                       <Image
                         src={project.image}
@@ -350,7 +350,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                     <div
                       className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-xl text-xl"
                       style={{
-                        background: 'linear-gradient(135deg, rgba(109, 179, 63, 0.2), rgba(109, 179, 63, 0.05))',
+                        background: 'rgba(109, 179, 63, 0.2)',
                         border: '1px solid rgba(109, 179, 63, 0.2)',
                         color: '#6db33f',
                       }}
@@ -443,7 +443,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                         <div
                           className="w-10 h-10 flex items-center justify-center rounded-lg flex-shrink-0 text-[1.05rem]"
                           style={{
-                            background: 'linear-gradient(135deg, rgba(109, 179, 63, 0.2), rgba(109, 179, 63, 0.05))',
+                            background: 'rgba(109, 179, 63, 0.2)',
                             border: '1px solid rgba(109, 179, 63, 0.2)',
                             color: '#6db33f',
                           }}
@@ -517,7 +517,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                     {/* Frontend Layer */}
                     <div>
                       <div
-                        className="text-[0.7rem] uppercase mb-2"
+                        className="text-xs mb-2"
                         style={{
                           fontFamily: "'DM Sans', sans-serif",
                           letterSpacing: '0.1em',
@@ -554,20 +554,20 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
 
                     {/* Connector */}
                     <div className="flex items-center gap-3 px-4">
-                      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(109, 179, 63, 0.5), transparent)' }} />
+                      <div className="flex-1 h-px" style={{ background: 'rgba(109, 179, 63, 0.5)' }} />
                       <span
                         className="text-[0.65rem] whitespace-nowrap"
                         style={{ fontFamily: "'JetBrains Mono', monospace", color: '#6db33f' }}
                       >
                         HTTPS / JWT
                       </span>
-                      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(109, 179, 63, 0.5), transparent)' }} />
+                      <div className="flex-1 h-px" style={{ background: 'rgba(109, 179, 63, 0.5)' }} />
                     </div>
 
                     {/* Backend Layer */}
                     <div>
                       <div
-                        className="text-[0.7rem] uppercase mb-2"
+                        className="text-xs mb-2"
                         style={{
                           fontFamily: "'DM Sans', sans-serif",
                           letterSpacing: '0.1em',
@@ -637,17 +637,17 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                     >
                       <div className="text-center flex-1">
                         <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#6db33f' }}>100%</div>
-                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackSpring.dematerialized}</div>
+                        <div className="text-xs" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackSpring.dematerialized}</div>
                       </div>
                       <div className="w-px h-[30px]" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
                       <div className="text-center flex-1">
                         <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#6db33f' }}>24/7</div>
-                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackSpring.available}</div>
+                        <div className="text-xs" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackSpring.available}</div>
                       </div>
                       <div className="w-px h-[30px]" style={{ background: 'rgba(255, 255, 255, 0.1)' }} />
                       <div className="text-center flex-1">
                         <div className="text-xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif", color: '#6db33f' }}>RGPD</div>
-                        <div className="text-[0.7rem] uppercase" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackSpring.compliant}</div>
+                        <div className="text-xs" style={{ fontFamily: "'DM Sans', sans-serif", color: 'rgba(255, 255, 255, 0.5)', letterSpacing: '0.05em' }}>{t.fullstackSpring.compliant}</div>
                       </div>
                     </div>
 
@@ -657,7 +657,7 @@ const FullStackSpringSection: React.FC<FullStackSpringSectionProps> = ({ id }) =
                         target="_blank"
                         className="inline-flex items-center justify-center gap-2 flex-1 py-3.5 px-6 text-white font-semibold text-[0.9rem] no-underline rounded-lg transition-all duration-300 hover:-translate-y-0.5"
                         style={{
-                          background: 'linear-gradient(135deg, #6db33f, #5a9e32)',
+                          background: '#6db33f',
                           fontFamily: "'DM Sans', sans-serif",
                         }}
                         onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 20px rgba(109, 179, 63, 0.3)'; }}

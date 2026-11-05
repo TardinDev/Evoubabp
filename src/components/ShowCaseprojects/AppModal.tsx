@@ -93,7 +93,7 @@ const AppModal = ({ app, isOpen, onClose }: AppModalProps) => {
 
                 {app.technologies && app.technologies.length > 0 && (
                   <div className="mb-6">
-                    <h3 className="text-base font-semibold text-gray-700 mb-3 uppercase tracking-wide">Technologies utilisées</h3>
+                    <h3 className="text-base font-semibold text-gray-700 mb-3">Technologies utilisées</h3>
                     <div className="flex flex-wrap gap-3">
                       {app.technologies.map((tech, idx) => (
                         <span
@@ -112,7 +112,7 @@ const AppModal = ({ app, isOpen, onClose }: AppModalProps) => {
 
                 {app.category && (
                   <div className="mb-6">
-                    <h3 className="text-base font-semibold text-gray-700 mb-3 uppercase tracking-wide">Catégorie</h3>
+                    <h3 className="text-base font-semibold text-gray-700 mb-3">Catégorie</h3>
                     <span
                       className="inline-block px-4 py-2 rounded-lg text-sm font-medium"
                       style={{ backgroundColor: '#f3e8ff', color: '#6b21a8' }}

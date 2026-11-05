@@ -51,7 +51,7 @@ const GridLine: React.FC<GridLineProps> = ({ top, delay }) => {
       className="absolute left-0 w-full h-px"
       style={{
         top,
-        background: 'linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), transparent)',
+        background: 'rgba(56, 189, 248, 0.3)',
         animation: 'docker-flow 8s linear infinite',
         animationDelay: `${delay}s`,
       }}
@@ -65,7 +65,7 @@ const VerticalGridLine: React.FC<VerticalGridLineProps> = ({ left, delay }) => {
       className="absolute top-0 h-full w-px"
       style={{
         left,
-        background: 'linear-gradient(180deg, transparent, rgba(56, 189, 248, 0.3), transparent)',
+        background: 'rgba(56, 189, 248, 0.3)',
         animation: 'docker-flowVertical 8s linear infinite',
         animationDelay: `${delay}s`,
       }}

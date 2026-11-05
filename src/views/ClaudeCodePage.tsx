@@ -42,7 +42,7 @@ const etapes = [
       "Hooks syst\u00e8me et MCP Servers pour automatiser",
     ],
     projet: "On construit les premi\u00e8res pages et composants du projet en utilisant les commandes apprises. Claude g\u00e9n\u00e8re, vous validez et comprenez.",
-    color: "#667eea",
+    color: "#4b0082",
   },
   {
     num: "04",
@@ -56,7 +56,7 @@ const etapes = [
       "Performance : Core Web Vitals (LCP, INP, CLS)",
     ],
     projet: "On int\u00e8gre le backend, l'authentification et le styling du projet fil rouge en appliquant chaque standard appris.",
-    color: "#764ba2",
+    color: "#4b0082",
   },
   {
     num: "05",
@@ -93,7 +93,7 @@ export default function ClaudeCodePage() {
       {/* Header */}
       <header
         className="text-white py-16 px-8"
-        style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' }}
+        style={{ background: '#1a1a2e' }}
       >
         <div className="max-w-[1000px] mx-auto">
           <Link href="/formations" className="text-white no-underline inline-block mb-6 py-2 px-4 border-2 border-white/40 rounded-lg transition-all duration-300 hover:bg-white hover:text-[#1a1a2e]">
@@ -132,17 +132,17 @@ export default function ClaudeCodePage() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div className="text-center p-6 bg-[#f7fafc] rounded-xl">
-              <div className="text-4xl mb-3">{"\u{1F6E0}\uFE0F"}</div>
+              <div className="text-4xl mb-3"></div>
               <h3 className="font-bold text-[#2d3748] mb-1">Installation</h3>
               <p className="text-[#718096] text-sm m-0">&Eacute;tapes 1-2</p>
             </div>
             <div className="text-center p-6 bg-[#f7fafc] rounded-xl">
-              <div className="text-4xl mb-3">{"\u{1F680}"}</div>
+              <div className="text-4xl mb-3"></div>
               <h3 className="font-bold text-[#2d3748] mb-1">Construction</h3>
               <p className="text-[#718096] text-sm m-0">&Eacute;tapes 3-5</p>
             </div>
             <div className="text-center p-6 bg-[#f7fafc] rounded-xl">
-              <div className="text-4xl mb-3">{"\u{1F30D}"}</div>
+              <div className="text-4xl mb-3"></div>
               <h3 className="font-bold text-[#2d3748] mb-1">D&eacute;ploiement</h3>
               <p className="text-[#718096] text-sm m-0">&Eacute;tape 6</p>
             </div>
@@ -186,7 +186,7 @@ export default function ClaudeCodePage() {
                         <div className="flex items-center gap-3 flex-wrap">
                           <h3 className="text-lg font-bold text-[#2d3748] m-0">{etape.title}</h3>
                           {i === 4 && (
-                            <span className="px-2.5 py-0.5 bg-[#e53e3e]/10 text-[#e53e3e] text-xs font-bold rounded-full uppercase">Nouveau 2026</span>
+                            <span className="px-2.5 py-0.5 bg-[#e53e3e]/10 text-[#e53e3e] text-xs font-bold rounded-full">Nouveau 2026</span>
                           )}
                         </div>
                       </div>
@@ -233,7 +233,7 @@ export default function ClaudeCodePage() {
       {/* Bandeau incitation */}
       <section
         className="py-10 px-8 text-center"
-        style={{ background: 'linear-gradient(135deg, #d4a574, #f0c27f)' }}
+        style={{ background: '#d4a574' }}
       >
         <p className="text-[#1a1a2e] text-lg font-bold max-w-[600px] mx-auto m-0">
           Formation dispens&eacute;e personnellement par Davy Tardin.
@@ -245,7 +245,7 @@ export default function ClaudeCodePage() {
       <section className="py-20 px-8 bg-white">
         <div
           className="max-w-[900px] mx-auto rounded-3xl p-10 md:p-14 text-white relative overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' }}
+          style={{ background: '#1a1a2e' }}
         >
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/5 rounded-full" />
           <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-white/5 rounded-full" />

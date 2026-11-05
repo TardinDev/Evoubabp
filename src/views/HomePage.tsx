@@ -38,7 +38,7 @@ export default function HomePage() {
     { id: 'projects', color: '#F0E6FF' },
     { id: 'howItWorks', color: '#E8F5E9' },
     { id: 'app-showcase', color: '#FFF3E0' },
-    { id: 'tech-used', color: '#0f0c29' },
+    { id: 'tech-used', color: '#F5F5F7' },
     { id: 'testimonials', color: '#F8FAFC' },
     { id: 'fullstack-node', color: '#E8F5E9' },
     { id: 'fullstack-spring', color: '#F3E5F5' },

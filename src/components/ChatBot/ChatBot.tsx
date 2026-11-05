@@ -401,7 +401,7 @@ const ChatBot = () => {
             {/* Chat Header */}
             <div
               className="text-white py-5 px-6 flex justify-between items-center"
-              style={{ background: 'linear-gradient(135deg, #4b0082 0%, #8b5cf6 100%)' }}
+              style={{ background: '#4b0082' }}
             >
               <div className="flex items-center gap-4">
                 <div className="relative w-[45px] h-[45px] bg-white/20 rounded-xl flex items-center justify-center">
@@ -426,7 +426,7 @@ const ChatBot = () => {
             {/* Messages Container */}
             <div
               className="flex-1 overflow-y-auto p-6 flex flex-col gap-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-violet-500/30 [&::-webkit-scrollbar-thumb]:rounded-sm"
-              style={{ background: 'linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%)' }}
+              style={{ background: '#0f0f1a' }}
             >
               {messages.map((message) => (
                 <div
@@ -441,7 +441,7 @@ const ChatBot = () => {
                     }`}
                     style={
                       message.sender === 'user'
-                        ? { background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)' }
+                        ? { background: '#8b5cf6' }
                         : { background: 'rgba(255, 255, 255, 0.08)' }
                     }
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -494,7 +494,7 @@ const ChatBot = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  <div className="text-xs text-white/50 mb-3 uppercase tracking-wider">
+                  <div className="text-xs text-white/50 mb-3">
                     Questions suggérées :
                   </div>
                   <div className="grid grid-cols-2 gap-2">
@@ -523,7 +523,7 @@ const ChatBot = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
-                  <div className="text-xs text-white/50 mb-2 uppercase tracking-wider">
+                  <div className="text-xs text-white/50 mb-2">
                     Actions rapides :
                   </div>
                   <motion.button
@@ -644,7 +644,7 @@ const ChatBot = () => {
                       <button
                         type="submit"
                         className="flex-[2] text-white border-none py-3.5 rounded-[10px] font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(139,92,246,0.4)]"
-                        style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)' }}
+                        style={{ background: '#8b5cf6' }}
                       >
                         Envoyer <FaPaperPlane size={14} />
                       </button>
@@ -673,7 +673,7 @@ const ChatBot = () => {
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim()}
                   className="text-white border-none w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:enabled:scale-110 hover:enabled:shadow-[0_8px_25px_rgba(139,92,246,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)' }}
+                  style={{ background: '#8b5cf6' }}
                 >
                   <FaPaperPlane aria-hidden size={18} />
                 </button>
@@ -689,7 +689,7 @@ const ChatBot = () => {
           aria-label="Ouvrir le chat de support"
           className="fixed bottom-[30px] right-[30px] w-[65px] h-[65px] rounded-full text-white border-none flex items-center justify-center cursor-pointer shadow-[0_8px_30px_rgba(75,0,130,0.5)] z-[999] max-md:w-[60px] max-md:h-[60px] max-md:bottom-5 max-md:right-5"
           style={{
-            background: 'linear-gradient(135deg, #4b0082 0%, #8b5cf6 100%)',
+            background: '#4b0082',
             display: isOpen ? 'none' : 'flex',
           }}
           onClick={handleOpen}

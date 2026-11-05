@@ -76,7 +76,7 @@ export default function CurrentProject() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
               </span>
-              <span className="text-xs font-semibold tracking-wide text-emerald-300 uppercase">
+              <span className="text-xs font-semibold text-emerald-300">
                 {t.currentProject.statusInProgress}
               </span>
             </div>
@@ -92,7 +92,7 @@ export default function CurrentProject() {
             {/* Progress bar */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[10px] sm:text-xs font-medium text-white/60 uppercase tracking-wider">
+                <span className="text-xs sm:text-xs font-medium text-white/60">
                   {t.currentProject.progressLabel}
                 </span>
                 <span className="text-xs sm:text-sm font-bold text-white">

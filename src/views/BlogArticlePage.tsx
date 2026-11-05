@@ -111,7 +111,7 @@ export default function BlogArticlePage({ slug }: { slug: string }) {
 
       <section
         className="px-8 pt-12 pb-16 text-white"
-        style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+        style={{ background: '#4b0082' }}
       >
         <div className="max-w-[800px] mx-auto">
           <Link
@@ -144,7 +144,7 @@ export default function BlogArticlePage({ slug }: { slug: string }) {
       <div className="max-w-[1100px] -mt-8 mx-auto px-8 pb-16 grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-8 items-start">
         {headings.length > 0 && (
           <aside className="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)] static lg:sticky lg:top-8 border border-black/[0.04]">
-            <h3 className="text-[0.85rem] font-bold uppercase tracking-[0.5px] text-[#667eea] mb-4">
+            <h3 className="text-[0.85rem] font-bold text-[#4b0082] mb-4">
               Table des mati&egrave;res
             </h3>
             <ul className="list-none p-0 m-0 flex flex-col gap-2">
@@ -152,7 +152,7 @@ export default function BlogArticlePage({ slug }: { slug: string }) {
                 <li key={id} className={level === 3 ? 'pl-4' : ''}>
                   <a
                     href={`#${id}`}
-                    className="text-gray-500 no-underline text-[0.85rem] leading-snug transition-colors duration-200 hover:text-[#667eea]"
+                    className="text-gray-500 no-underline text-[0.85rem] leading-snug transition-colors duration-200 hover:text-[#4b0082]"
                   >
                     {text}
                   </a>
@@ -171,13 +171,13 @@ export default function BlogArticlePage({ slug }: { slug: string }) {
       <div className="max-w-[800px] mx-auto px-8 pb-16 flex justify-between">
         <Link
           href="/blog"
-          className="text-[#667eea] no-underline font-semibold transition-colors duration-300 hover:text-[#764ba2]"
+          className="text-[#4b0082] no-underline font-semibold transition-colors duration-300 hover:text-[#4b0082]"
         >
           &larr; Tous les articles
         </Link>
         <Link
           href="/"
-          className="text-[#667eea] no-underline font-semibold transition-colors duration-300 hover:text-[#764ba2]"
+          className="text-[#4b0082] no-underline font-semibold transition-colors duration-300 hover:text-[#4b0082]"
         >
           Accueil
         </Link>

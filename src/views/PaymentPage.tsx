@@ -126,22 +126,7 @@ export default function PaymentPage() {
   return (
     <div
       className="min-h-screen text-white py-8"
-      style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' }}
-    >
-      <div className="max-w-[1200px] mx-auto px-4">
-        <Link
-          href="/formations/mobile"
-          className="inline-flex items-center gap-2 text-slate-500 no-underline mb-8 transition-colors duration-300 hover:text-blue-500"
-        >
-          <FaArrowLeft />
-          Retour à la formation
-        </Link>
-
-        <div className="text-center mb-12 [&>svg]:text-5xl [&>svg]:text-blue-500 [&>svg]:mb-4">
-          <FaLock />
-          <h1
-            className="text-[2.5rem] font-bold mb-4 bg-clip-text text-transparent"
-            style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+      style={{ background: '#0f172a' }} > <div className="max-w-[1200px] mx-auto px-4"> <Link href="/formations/mobile" className="inline-flex items-center gap-2 text-slate-500 no-underline mb-8 transition-colors duration-300 hover:text-blue-500" > <FaArrowLeft /> Retour à la formation </Link> <div className="text-center mb-12 [&>svg]:text-5xl [&>svg]:text-blue-500 [&>svg]:mb-4"> <FaLock /> <h1 className="text-[2.5rem] font-bold mb-4" style={{ color: '#FFFFFF' }}
           >
             Choisissez votre formation React Native
           </h1>
@@ -165,7 +150,7 @@ export default function PaymentPage() {
                 }`}
                 style={
                   selectedPlan === plan.id
-                    ? { background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }
+                    ? { background: '#3b82f6' }
                     : undefined
                 }
                 onClick={() => setSelectedPlan(plan.id)}
@@ -193,7 +178,7 @@ export default function PaymentPage() {
                 {plan.id === "mastering" && (
                   <div
                     className="absolute -top-2.5 right-4 text-white px-3 py-1 rounded-lg text-xs font-bold"
-                    style={{ background: 'linear-gradient(135deg, #f59e0b, #ef4444)' }}
+                    style={{ background: '#f59e0b' }}
                   >
                     Plus populaire
                   </div>
@@ -241,7 +226,7 @@ export default function PaymentPage() {
 
             <motion.button
               className="w-full border-none rounded-xl p-4 text-white font-bold text-lg cursor-pointer flex items-center justify-center gap-2 mb-4 transition-all duration-300 hover:scale-105"
-              style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}
+              style={{ background: '#3b82f6' }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handlePaymentClick}
@@ -251,7 +236,7 @@ export default function PaymentPage() {
             </motion.button>
 
             <div className="text-center text-xs text-slate-400">
-              🔒 Paiement sécurisé SSL 256 bits - Remboursement garanti 30 jours
+              Paiement sécurisé SSL 256 bits - Remboursement garanti 30 jours
             </div>
           </div>
         </div>
@@ -266,13 +251,13 @@ export default function PaymentPage() {
           >
             <motion.div
               className="rounded-2xl p-8 max-w-[500px] w-full border border-slate-600 shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
-              style={{ background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)' }}
+              style={{ background: '#1e293b' }}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-white m-0">🚀 Formation bientôt disponible !</h2>
+                <h2 className="text-2xl font-bold text-white m-0">Formation bientôt disponible !</h2>
                 <button
                   className="bg-transparent border-none text-slate-400 text-xl cursor-pointer p-2 rounded-lg transition-all duration-300 hover:bg-slate-600 hover:text-white"
                   onClick={() => setShowNotificationModal(false)}
@@ -300,7 +285,7 @@ export default function PaymentPage() {
                     <motion.button
                       type="submit"
                       className="border-none rounded-lg p-4 text-white font-bold text-base cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
-                      style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}
+                      style={{ background: '#10b981' }}
                       disabled={isSubmitting || !email}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -319,7 +304,7 @@ export default function PaymentPage() {
               ) : (
                 <div
                   className="flex items-center gap-4 rounded-xl p-6 text-white font-semibold [&>svg]:text-2xl [&>svg]:text-white"
-                  style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}
+                  style={{ background: '#10b981' }}
                 >
                   <FaCheck />
                   <span>Parfait ! Vous serez averti(e) dès que la formation sera disponible.</span>

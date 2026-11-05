@@ -127,15 +127,14 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
         id={id || "contact"}
         className="relative py-16 px-4 overflow-hidden md:py-24 md:px-8"
         style={{
-          background: 'linear-gradient(180deg, #4b0082 0%, #380062 50%, #2d004f 100%)',
+          background: '#4b0082',
         }}
       >
         {/* BackgroundPattern */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage:
-              'linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
+            backgroundColor: 'rgba(255, 255, 255, 0.02)',
             backgroundSize: '40px 40px',
           }}
         />
@@ -144,7 +143,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
         <div
           className="absolute top-[30%] right-[10%] w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 60%)',
+            background: 'transparent',
           }}
         />
 
@@ -152,7 +151,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
           <motion.div variants={fadeIn("up", "tween", 0.1, 0.8)}>
             <div className="text-center mb-8 md:mb-12">
               <span
-                className="inline-block font-mono text-xs tracking-[0.3em] text-[#ffd700] px-4 py-2 rounded mb-6"
+                className="inline-block text-xs text-[#ffd700] px-4 py-2 rounded mb-6"
                 style={{
                   background: 'rgba(255, 215, 0, 0.1)',
                   border: '1px solid rgba(255, 215, 0, 0.2)',
@@ -167,18 +166,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   fontSize: 'clamp(2rem, 4vw, 3rem)',
                 }}
               >
-                {t.contact.title}{' '}
-                <span
-                  className="bg-clip-text"
-                  style={{
-                    background: 'linear-gradient(135deg, #ffd700 0%, #ff9500 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  {t.contact.titleHighlight}
-                </span>
+                {`${t.contact.title.trim()} ${t.contact.titleHighlight}`}
               </h2>
               <p className="text-[1.125rem] text-white/70 max-w-[500px] mx-auto leading-relaxed">
                 {t.contact.subtitle}
@@ -208,13 +196,13 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   <div
                     className="w-12 h-12 flex items-center justify-center rounded-xl text-[#ffd700] text-xl"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 149, 0, 0.1))',
+                      background: 'rgba(255, 215, 0, 0.2)',
                     }}
                   >
                     <FaEnvelope />
                   </div>
                   <div className="flex-1">
-                    <span className="block text-[0.8rem] text-white/50 uppercase tracking-wider mb-1">
+                    <span className="block text-[0.8rem] text-white/50 mb-1">
                       {t.contact.email}
                     </span>
                     <a
@@ -245,13 +233,13 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   <div
                     className="w-12 h-12 flex items-center justify-center rounded-xl text-[#ffd700] text-xl"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 149, 0, 0.1))',
+                      background: 'rgba(255, 215, 0, 0.2)',
                     }}
                   >
                     <FaWhatsapp />
                   </div>
                   <div className="flex-1">
-                    <span className="block text-[0.8rem] text-white/50 uppercase tracking-wider mb-1">
+                    <span className="block text-[0.8rem] text-white/50 mb-1">
                       {t.contact.whatsapp}
                     </span>
                     <a
@@ -284,13 +272,13 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                   <div
                     className="w-12 h-12 flex items-center justify-center rounded-xl text-[#ffd700] text-xl"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 149, 0, 0.1))',
+                      background: 'rgba(255, 215, 0, 0.2)',
                     }}
                   >
                     <FaMapMarkerAlt />
                   </div>
                   <div className="flex-1">
-                    <span className="block text-[0.8rem] text-white/50 uppercase tracking-wider mb-1">
+                    <span className="block text-[0.8rem] text-white/50 mb-1">
                       {t.contact.location}
                     </span>
                     <span className="block text-[1.1rem] text-white">
@@ -484,7 +472,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id }) => {
                     disabled={isSubmitting}
                     className="inline-flex items-center justify-center gap-3 px-8 py-5 border-none rounded-xl text-[#2d004f] text-[1.1rem] font-semibold cursor-pointer transition-all duration-300 hover:translate-y-[-2px] hover:shadow-[0_10px_30px_rgba(255,215,0,0.4)] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
                     style={{
-                      background: 'linear-gradient(135deg, #ffd700, #ff9500)',
+                      background: '#ffd700',
                     }}
                   >
                     {isSubmitting ? (

@@ -18,7 +18,7 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
       icon: <FaNodeJs />,
       title: 'Node.js',
       description: t.backendSection.nodejs.description,
-      gradient: 'linear-gradient(135deg, #68a063 0%, #3c873a 100%)',
+      gradient: '#68a063',
       features: t.backendSection.nodejs.features,
       useCases: t.backendSection.nodejs.useCases
     },
@@ -26,7 +26,7 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
       icon: <SiSpringboot />,
       title: 'Spring Boot',
       description: t.backendSection.springboot.description,
-      gradient: 'linear-gradient(135deg, #6db33f 0%, #5a9e32 100%)',
+      gradient: '#6db33f',
       features: t.backendSection.springboot.features,
       useCases: t.backendSection.springboot.useCases
     },
@@ -34,7 +34,7 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
       icon: <SiSupabase />,
       title: 'Supabase',
       description: t.backendSection.supabase.description,
-      gradient: 'linear-gradient(135deg, #3ecf8e 0%, #2b9e6f 100%)',
+      gradient: '#3ecf8e',
       features: t.backendSection.supabase.features,
       useCases: t.backendSection.supabase.useCases
     }
@@ -50,13 +50,13 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
       <section
         id={id}
         className="relative overflow-hidden w-full max-w-[100vw] py-24 px-8 md:py-16 md:px-4 max-[480px]:py-12 max-[480px]:px-2"
-        style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #0f0f23 50%, #16213e 100%)' }}
+        style={{ background: '#1a1a2e' }}
       >
         {/* Background radial gradients */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(circle at 30% 30%, rgba(104, 160, 99, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(109, 179, 63, 0.1) 0%, transparent 50%)',
+            background: 'transparent',
           }}
         />
 
@@ -68,12 +68,9 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
               <FaCog size={40} style={{ color: '#6db33f', filter: 'drop-shadow(0 0 10px rgba(109, 179, 63, 0.3))' }} />
             </div>
             <h2
-              className="text-5xl md:text-[2.2rem] max-[480px]:text-[1.8rem] font-extrabold mb-4 bg-clip-text"
+              className="text-5xl md:text-[2.2rem] max-[480px]:text-[1.8rem] font-extrabold mb-4"
               style={{
-                background: 'linear-gradient(135deg, #68a063 0%, #6db33f 50%, #3ecf8e 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                color: '#FFFFFF',
               }}
             >
               {t.backendSection.title}
@@ -139,7 +136,7 @@ const BackendSection: React.FC<BackendSectionProps> = ({ id }) => {
                     left: '-50%',
                     width: '200%',
                     height: '200%',
-                    background: 'radial-gradient(circle, rgba(109, 179, 63, 0.1) 0%, transparent 70%)',
+                    background: 'transparent',
                   }}
                 />
               </div>

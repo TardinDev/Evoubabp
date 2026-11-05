@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   other: {
     'ai-content-declaration':
       'Ce site est le portfolio professionnel de Davy Tardin, développeur full-stack. Il propose des formations en développement web et mobile.',
-    'theme-color': '#667eea',
+    'theme-color': '#4b0082',
   },
 }
 

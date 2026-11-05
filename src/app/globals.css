@@ -96,7 +96,7 @@
     color: #1a1a2e;
     margin: 2.5rem 0 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid #4b0082;
   }
 
   .blog-article-content h3 {
@@ -128,7 +128,7 @@
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
     font-size: 0.9em;
-    color: #764ba2;
+    color: #4b0082;
   }
 
   .blog-article-content pre {
@@ -160,7 +160,7 @@
   }
 
   .blog-article-content tr:first-child {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: #4b0082;
   }
 
   .blog-article-content tr:first-child td {

@@ -56,7 +56,7 @@ export default function JarvisPromo() {
             style={{ color: INK }}
           >
             <span
-              className="block font-mono text-[10px] uppercase tracking-[0.22em] mb-2"
+              className="block text-xs mb-2"
               style={{ color: ACCENT }}
             >
               {p.badge}

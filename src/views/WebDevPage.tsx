@@ -33,7 +33,7 @@ export default function WebDevPage() {
       {/* Header */}
       <header
         className="text-white py-12 px-8"
-        style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+        style={{ background: '#4b0082' }}
       >
         <div className="max-w-[1200px] mx-auto">
           <Link href="/formations" className="text-white no-underline inline-block mb-4 opacity-90 hover:opacity-100">
@@ -57,7 +57,7 @@ export default function WebDevPage() {
       {!selectedProject && (
         <section className="py-16 px-8 bg-white">
           <div className="max-w-[1000px] mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-[#2d3748]">{"\u{1F3AF}"} Choisissez votre Projet</h2>
+            <h2 className="text-3xl font-bold mb-8 text-[#2d3748]">Choisissez votre Projet</h2>
             <p className="text-lg text-[#4a5568] mb-8 leading-relaxed">
               Selectionnez le projet que vous souhaitez construire. Les deux projets utilisent les memes technologies
               mais avec des cas d&apos;usage differents.
@@ -66,9 +66,9 @@ export default function WebDevPage() {
             <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-8 mt-8">
               <div
                 onClick={() => { setSelectedProject('ecommerce'); setCurrentStep(1); }}
-                className="bg-white rounded-2xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-[5px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:border-[#667eea]"
+                className="bg-white rounded-2xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-[5px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:border-[#4b0082]"
               >
-                <div className="text-5xl mb-4 text-center">{"\u{1F6D2}"}</div>
+                <div className="text-5xl mb-4 text-center"></div>
                 <h3 className="text-2xl font-bold text-[#2d3748] mb-4 text-center">Shop App - E-commerce</h3>
                 <p className="text-[#4a5568] mb-6 text-center leading-relaxed">
                   Application e-commerce complete avec panier, paiements et admin
@@ -81,7 +81,7 @@ export default function WebDevPage() {
                 </div>
                 <div
                   className="text-white p-4 rounded-lg text-center font-semibold transition-all duration-300 hover:opacity-90"
-                  style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+                  style={{ background: '#4b0082' }}
                 >
                   Choisir ce projet {"\u2192"}
                 </div>
@@ -89,9 +89,9 @@ export default function WebDevPage() {
 
               <div
                 onClick={() => { setSelectedProject('ai'); setCurrentStep(1); }}
-                className="bg-white rounded-2xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-[5px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:border-[#667eea]"
+                className="bg-white rounded-2xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.08)] cursor-pointer transition-all duration-300 ease-in-out border-2 border-transparent hover:-translate-y-[5px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:border-[#4b0082]"
               >
-                <div className="text-5xl mb-4 text-center">{"\u{1F916}"}</div>
+                <div className="text-5xl mb-4 text-center"></div>
                 <h3 className="text-2xl font-bold text-[#2d3748] mb-4 text-center">AI Assistant - ChatGPT Clone</h3>
                 <p className="text-[#4a5568] mb-6 text-center leading-relaxed">
                   Assistant IA avec chat en temps reel et historique
@@ -104,7 +104,7 @@ export default function WebDevPage() {
                 </div>
                 <div
                   className="text-white p-4 rounded-lg text-center font-semibold transition-all duration-300 hover:opacity-90"
-                  style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+                  style={{ background: '#4b0082' }}
                 >
                   Choisir ce projet {"\u2192"}
                 </div>
@@ -125,7 +125,7 @@ export default function WebDevPage() {
               {"\u2190"} Changer de projet
             </button>
             <h2 className="text-3xl font-bold mb-8 text-[#2d3748]">
-              {selectedProject === 'ecommerce' ? '\u{1F6D2} Projet : Shop App' : '\u{1F916} Projet : AI Assistant'}
+              {selectedProject === 'ecommerce' ? 'Projet : Shop App' : 'Projet : AI Assistant'}
             </h2>
             <p className="text-lg text-[#4a5568] mb-8 leading-relaxed">
               {selectedProject === 'ecommerce'
@@ -136,23 +136,23 @@ export default function WebDevPage() {
 
             {selectedProject === 'ecommerce' && (
               <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Liste de produits</div>
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Panier d&apos;achat</div>
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Authentification</div>
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Paiements</div>
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Admin dashboard</div>
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} API REST</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Liste de produits</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Panier d&apos;achat</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Authentification</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Paiements</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Admin dashboard</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">API REST</div>
               </div>
             )}
 
             {selectedProject === 'ai' && (
               <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Interface de chat</div>
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Integration OpenAI</div>
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Streaming temps reel</div>
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Historique des conversations</div>
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Export en Markdown</div>
-                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">{"\u2705"} Mode vocal (optionnel)</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Interface de chat</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Integration OpenAI</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Streaming temps reel</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Historique des conversations</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Export en Markdown</div>
+                <div className="bg-[#f7fafc] p-4 rounded-lg font-medium text-[#2d3748]">Mode vocal (optionnel)</div>
               </div>
             )}
           </div>
@@ -162,7 +162,7 @@ export default function WebDevPage() {
       {/* Timeline des etapes */}
       <section className="py-16 px-8 bg-[#f7fafc]">
         <div className="max-w-[1000px] mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-[#2d3748]">{"\u{1F4DA}"} Parcours d&apos;Apprentissage</h2>
+          <h2 className="text-3xl font-bold mb-8 text-[#2d3748]">Parcours d&apos;Apprentissage</h2>
           <div className="flex justify-between gap-4 flex-wrap max-md:flex-col">
             {steps.map((step) => (
               <div
@@ -171,7 +171,7 @@ export default function WebDevPage() {
                 className={`flex-1 flex flex-col items-center gap-2 cursor-pointer p-4 rounded-xl transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] ${
                   currentStep === step.id ? 'text-white' : 'bg-[#f7fafc] text-[#2d3748]'
                 }`}
-                style={currentStep === step.id ? { background: 'linear-gradient(135deg, #667eea, #764ba2)' } : {}}
+                style={currentStep === step.id ? { background: '#4b0082' } : {}}
               >
                 <div
                   className="w-[50px] h-[50px] rounded-full flex items-center justify-center text-2xl text-white"
@@ -192,7 +192,7 @@ export default function WebDevPage() {
           <div className="max-w-[1000px] mx-auto">
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 1 : React - Creer l&apos;Interface</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
-              {"\u{1F3AF}"} Objectif : Afficher une liste de produits avec un panier fonctionnel
+              Objectif : Afficher une liste de produits avec un panier fonctionnel
             </div>
 
             <div className="bg-[#f0fff4] border-l-4 border-[#38a169] p-4 mb-6 rounded-r-lg">
@@ -206,9 +206,9 @@ export default function WebDevPage() {
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748] last:border-b-0">{"\u{1F4DD}"} Tache 1 : Creer le composant ProductList</div>
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748] last:border-b-0">{"\u{1F4DD}"} Tache 2 : Gerer l&apos;etat avec useState</div>
-              <div className="py-3 font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 3 : Ajouter au panier</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748] last:border-b-0">Tache 1 : Creer le composant ProductList</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748] last:border-b-0">Tache 2 : Gerer l&apos;etat avec useState</div>
+              <div className="py-3 font-medium text-[#2d3748]">Tache 3 : Ajouter au panier</div>
             </div>
 
             <pre className="bg-[#1a202c] text-[#e2e8f0] p-6 rounded-lg overflow-x-auto text-sm leading-relaxed my-8">{`// src/App.tsx
@@ -264,7 +264,7 @@ export default App;`}</pre>
             <button
               onClick={() => setCurrentStep(2)}
               className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]"
-              style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+              style={{ background: '#4b0082' }}
             >
               Etape suivante : TypeScript {"\u2192"}
             </button>
@@ -278,7 +278,7 @@ export default App;`}</pre>
           <div className="max-w-[1000px] mx-auto">
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 1 : React - Interface de Chat</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
-              {"\u{1F3AF}"} Objectif : Creer une interface de chat fonctionnelle
+              Objectif : Creer une interface de chat fonctionnelle
             </div>
 
             <div className="bg-[#f0fff4] border-l-4 border-[#38a169] p-4 mb-6 rounded-r-lg">
@@ -292,9 +292,9 @@ export default App;`}</pre>
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748] last:border-b-0">{"\u{1F4DD}"} Tache 1 : Creer le composant Chat</div>
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748] last:border-b-0">{"\u{1F4DD}"} Tache 2 : Gerer les messages avec useState</div>
-              <div className="py-3 font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 3 : Afficher la conversation</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748] last:border-b-0">Tache 1 : Creer le composant Chat</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748] last:border-b-0">Tache 2 : Gerer les messages avec useState</div>
+              <div className="py-3 font-medium text-[#2d3748]">Tache 3 : Afficher la conversation</div>
             </div>
 
             <pre className="bg-[#1a202c] text-[#e2e8f0] p-6 rounded-lg overflow-x-auto text-sm leading-relaxed my-8">{`// src/App.tsx
@@ -357,7 +357,7 @@ export default App;`}</pre>
             <button
               onClick={() => setCurrentStep(2)}
               className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]"
-              style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+              style={{ background: '#4b0082' }}
             >
               Etape suivante : TypeScript {"\u2192"}
             </button>
@@ -371,13 +371,13 @@ export default App;`}</pre>
           <div className="max-w-[1000px] mx-auto">
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 2 : TypeScript - Ajouter le Typage</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
-              {"\u{1F3AF}"} Objectif : Securiser le code avec des types
+              Objectif : Securiser le code avec des types
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 1 : Creer l&apos;interface Product</div>
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 2 : Typer les props et l&apos;etat</div>
-              <div className="py-3 font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 3 : Utiliser les generiques</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 1 : Creer l&apos;interface Product</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 2 : Typer les props et l&apos;etat</div>
+              <div className="py-3 font-medium text-[#2d3748]">Tache 3 : Utiliser les generiques</div>
             </div>
 
             <pre className="bg-[#1a202c] text-[#e2e8f0] p-6 rounded-lg overflow-x-auto text-sm leading-relaxed my-8">{`// src/types.ts
@@ -434,7 +434,7 @@ function App() {
 
             <div className="flex gap-4 mt-8">
               <button onClick={() => setCurrentStep(1)} className="bg-[#e2e8f0] text-[#2d3748] py-4 px-8 border-none rounded-lg font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px] hover:bg-[#cbd5e0]">{"\u2190"} React</button>
-              <button onClick={() => setCurrentStep(3)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}>Tailwind {"\u2192"}</button>
+              <button onClick={() => setCurrentStep(3)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: '#4b0082' }}>Tailwind {"\u2192"}</button>
             </div>
           </div>
         </section>
@@ -446,13 +446,13 @@ function App() {
           <div className="max-w-[1000px] mx-auto">
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 2 : TypeScript - Types pour l&apos;IA</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
-              {"\u{1F3AF}"} Objectif : Creer des types pour les messages et conversations
+              Objectif : Creer des types pour les messages et conversations
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 1 : Definir l&apos;interface Message</div>
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 2 : Creer le type Conversation</div>
-              <div className="py-3 font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 3 : Typer les reponses de l&apos;API</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 1 : Definir l&apos;interface Message</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 2 : Creer le type Conversation</div>
+              <div className="py-3 font-medium text-[#2d3748]">Tache 3 : Typer les reponses de l&apos;API</div>
             </div>
 
             <pre className="bg-[#1a202c] text-[#e2e8f0] p-6 rounded-lg overflow-x-auto text-sm leading-relaxed my-8">{`// src/types.ts
@@ -528,7 +528,7 @@ export default App;`}</pre>
 
             <div className="flex gap-4 mt-8">
               <button onClick={() => setCurrentStep(1)} className="bg-[#e2e8f0] text-[#2d3748] py-4 px-8 border-none rounded-lg font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px] hover:bg-[#cbd5e0]">{"\u2190"} React</button>
-              <button onClick={() => setCurrentStep(3)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}>Tailwind {"\u2192"}</button>
+              <button onClick={() => setCurrentStep(3)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: '#4b0082' }}>Tailwind {"\u2192"}</button>
             </div>
           </div>
         </section>
@@ -540,13 +540,13 @@ export default App;`}</pre>
           <div className="max-w-[1000px] mx-auto">
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 3 : Tailwind - Styliser l&apos;Application</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
-              {"\u{1F3AF}"} Objectif : Creer une UI professionnelle et responsive
+              Objectif : Creer une UI professionnelle et responsive
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 1 : Installer Tailwind CSS</div>
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 2 : Creer une grille de produits</div>
-              <div className="py-3 font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 3 : Ajouter animations et hover effects</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 1 : Installer Tailwind CSS</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 2 : Creer une grille de produits</div>
+              <div className="py-3 font-medium text-[#2d3748]">Tache 3 : Ajouter animations et hover effects</div>
             </div>
 
             <pre className="bg-[#1a202c] text-[#e2e8f0] p-6 rounded-lg overflow-x-auto text-sm leading-relaxed my-8">{`// Installation
@@ -596,7 +596,7 @@ function App() {
 
             <div className="flex gap-4 mt-8">
               <button onClick={() => setCurrentStep(2)} className="bg-[#e2e8f0] text-[#2d3748] py-4 px-8 border-none rounded-lg font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px] hover:bg-[#cbd5e0]">{"\u2190"} TypeScript</button>
-              <button onClick={() => setCurrentStep(4)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}>Supabase {"\u2192"}</button>
+              <button onClick={() => setCurrentStep(4)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: '#4b0082' }}>Supabase {"\u2192"}</button>
             </div>
           </div>
         </section>
@@ -608,13 +608,13 @@ function App() {
           <div className="max-w-[1000px] mx-auto">
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 3 : Tailwind - Interface Chat Moderne</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
-              {"\u{1F3AF}"} Objectif : Creer une interface type ChatGPT
+              Objectif : Creer une interface type ChatGPT
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 1 : Installer Tailwind CSS</div>
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 2 : Design des bulles de chat</div>
-              <div className="py-3 font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 3 : Animations et dark mode</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 1 : Installer Tailwind CSS</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 2 : Design des bulles de chat</div>
+              <div className="py-3 font-medium text-[#2d3748]">Tache 3 : Animations et dark mode</div>
             </div>
 
             <pre className="bg-[#1a202c] text-[#e2e8f0] p-6 rounded-lg overflow-x-auto text-sm leading-relaxed my-8">{`// Installation
@@ -703,7 +703,7 @@ function App() {
 
             <div className="flex gap-4 mt-8">
               <button onClick={() => setCurrentStep(2)} className="bg-[#e2e8f0] text-[#2d3748] py-4 px-8 border-none rounded-lg font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px] hover:bg-[#cbd5e0]">{"\u2190"} TypeScript</button>
-              <button onClick={() => setCurrentStep(4)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}>OpenAI API {"\u2192"}</button>
+              <button onClick={() => setCurrentStep(4)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: '#4b0082' }}>OpenAI API {"\u2192"}</button>
             </div>
           </div>
         </section>
@@ -715,13 +715,13 @@ function App() {
           <div className="max-w-[1000px] mx-auto">
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 4 : Supabase - Base de Donnees et Auth</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
-              {"\u{1F3AF}"} Objectif : Connecter une vraie base de donnees
+              Objectif : Connecter une vraie base de donnees
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 1 : Creer un projet Supabase</div>
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 2 : Ajouter l&apos;authentification</div>
-              <div className="py-3 font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 3 : Stocker les produits en BDD</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 1 : Creer un projet Supabase</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 2 : Ajouter l&apos;authentification</div>
+              <div className="py-3 font-medium text-[#2d3748]">Tache 3 : Stocker les produits en BDD</div>
             </div>
 
             <pre className="bg-[#1a202c] text-[#e2e8f0] p-6 rounded-lg overflow-x-auto text-sm leading-relaxed my-8">{`// Installation
@@ -775,7 +775,7 @@ function App() {
 
             <div className="flex gap-4 mt-8">
               <button onClick={() => setCurrentStep(3)} className="bg-[#e2e8f0] text-[#2d3748] py-4 px-8 border-none rounded-lg font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px] hover:bg-[#cbd5e0]">{"\u2190"} Tailwind</button>
-              <button onClick={() => setCurrentStep(5)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}>Node.js {"\u2192"}</button>
+              <button onClick={() => setCurrentStep(5)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: '#4b0082' }}>Node.js {"\u2192"}</button>
             </div>
           </div>
         </section>
@@ -787,13 +787,13 @@ function App() {
           <div className="max-w-[1000px] mx-auto">
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 4 : OpenAI API - Integration GPT</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
-              {"\u{1F3AF}"} Objectif : Connecter l&apos;API OpenAI pour les reponses IA
+              Objectif : Connecter l&apos;API OpenAI pour les reponses IA
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 1 : Creer une cle API OpenAI</div>
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 2 : Configurer le serveur Node.js</div>
-              <div className="py-3 font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 3 : Implementer le streaming</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 1 : Creer une cle API OpenAI</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 2 : Configurer le serveur Node.js</div>
+              <div className="py-3 font-medium text-[#2d3748]">Tache 3 : Implementer le streaming</div>
             </div>
 
             <pre className="bg-[#1a202c] text-[#e2e8f0] p-6 rounded-lg overflow-x-auto text-sm leading-relaxed my-8">{`// Installation
@@ -847,7 +847,7 @@ app.listen(3001, () => {
 
             <div className="flex gap-4 mt-8">
               <button onClick={() => setCurrentStep(3)} className="bg-[#e2e8f0] text-[#2d3748] py-4 px-8 border-none rounded-lg font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px] hover:bg-[#cbd5e0]">{"\u2190"} Tailwind</button>
-              <button onClick={() => setCurrentStep(5)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}>Supabase {"\u2192"}</button>
+              <button onClick={() => setCurrentStep(5)} className="border-none py-4 px-8 rounded-lg text-white font-semibold cursor-pointer transition-transform duration-300 hover:-translate-y-[2px]" style={{ background: '#4b0082' }}>Supabase {"\u2192"}</button>
             </div>
           </div>
         </section>
@@ -859,13 +859,13 @@ app.listen(3001, () => {
           <div className="max-w-[1000px] mx-auto">
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 5 : Node.js - API Personnalisee</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
-              {"\u{1F3AF}"} Objectif : Creer une API pour les paiements
+              Objectif : Creer une API pour les paiements
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 1 : Creer un serveur Express</div>
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 2 : Route pour les paiements Stripe</div>
-              <div className="py-3 font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 3 : Webhooks pour les confirmations</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 1 : Creer un serveur Express</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 2 : Route pour les paiements Stripe</div>
+              <div className="py-3 font-medium text-[#2d3748]">Tache 3 : Webhooks pour les confirmations</div>
             </div>
 
             <pre className="bg-[#1a202c] text-[#e2e8f0] p-6 rounded-lg overflow-x-auto text-sm leading-relaxed my-8">{`// server/index.js
@@ -903,10 +903,10 @@ app.listen(3001, () => {
 
             <div
               className="text-white p-8 rounded-xl my-8 text-center"
-              style={{ background: 'linear-gradient(135deg, #48bb78, #38a169)' }}
+              style={{ background: '#48bb78' }}
             >
               <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>
-                {"\u{1F389}"} Felicitations!
+                Felicitations!
               </h3>
               <p>
                 Vous avez construit une application e-commerce complete avec React, TypeScript,
@@ -925,13 +925,13 @@ app.listen(3001, () => {
           <div className="max-w-[1000px] mx-auto">
             <h3 className="text-[1.75rem] font-bold text-[#2d3748] mb-4">Etape 5 : Supabase - Historique des Conversations</h3>
             <div className="bg-[#ebf8ff] border-l-4 border-[#3182ce] p-4 mb-8 font-medium text-[#2c5282]">
-              {"\u{1F3AF}"} Objectif : Sauvegarder l&apos;historique avec Supabase
+              Objectif : Sauvegarder l&apos;historique avec Supabase
             </div>
 
             <div className="bg-[#f7fafc] p-6 rounded-lg mb-8">
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 1 : Creer les tables dans Supabase</div>
-              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 2 : Sauvegarder les conversations</div>
-              <div className="py-3 font-medium text-[#2d3748]">{"\u{1F4DD}"} Tache 3 : Charger l&apos;historique</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 1 : Creer les tables dans Supabase</div>
+              <div className="py-3 border-b border-[#e2e8f0] font-medium text-[#2d3748]">Tache 2 : Sauvegarder les conversations</div>
+              <div className="py-3 font-medium text-[#2d3748]">Tache 3 : Charger l&apos;historique</div>
             </div>
 
             <pre className="bg-[#1a202c] text-[#e2e8f0] p-6 rounded-lg overflow-x-auto text-sm leading-relaxed my-8">{`// Installation
@@ -966,10 +966,10 @@ CREATE TABLE messages (
 
             <div
               className="text-white p-8 rounded-xl my-8 text-center"
-              style={{ background: 'linear-gradient(135deg, #48bb78, #38a169)' }}
+              style={{ background: '#48bb78' }}
             >
               <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>
-                {"\u{1F389}"} Felicitations!
+                Felicitations!
               </h3>
               <p>
                 Vous avez construit un assistant IA complet avec React, TypeScript,
@@ -988,12 +988,12 @@ CREATE TABLE messages (
       {/* Ressources */}
       <section className="py-16 px-8 bg-[#f7fafc]">
         <div className="max-w-[1000px] mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-[#2d3748]">{"\u{1F4DA}"} Ressources</h2>
+          <h2 className="text-3xl font-bold mb-8 text-[#2d3748]">Ressources</h2>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
-            <a href="https://react.dev" target="_blank" className="bg-white p-4 rounded-lg no-underline text-[#667eea] font-semibold text-center transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]">React Docs</a>
-            <a href="https://www.typescriptlang.org/docs/" target="_blank" className="bg-white p-4 rounded-lg no-underline text-[#667eea] font-semibold text-center transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]">TypeScript Docs</a>
-            <a href="https://tailwindcss.com/docs" target="_blank" className="bg-white p-4 rounded-lg no-underline text-[#667eea] font-semibold text-center transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]">Tailwind Docs</a>
-            <a href="https://supabase.com/docs" target="_blank" className="bg-white p-4 rounded-lg no-underline text-[#667eea] font-semibold text-center transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]">Supabase Docs</a>
+            <a href="https://react.dev" target="_blank" className="bg-white p-4 rounded-lg no-underline text-[#4b0082] font-semibold text-center transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]">React Docs</a>
+            <a href="https://www.typescriptlang.org/docs/" target="_blank" className="bg-white p-4 rounded-lg no-underline text-[#4b0082] font-semibold text-center transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]">TypeScript Docs</a>
+            <a href="https://tailwindcss.com/docs" target="_blank" className="bg-white p-4 rounded-lg no-underline text-[#4b0082] font-semibold text-center transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]">Tailwind Docs</a>
+            <a href="https://supabase.com/docs" target="_blank" className="bg-white p-4 rounded-lg no-underline text-[#4b0082] font-semibold text-center transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.1)] hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15)]">Supabase Docs</a>
           </div>
         </div>
       </section>

@@ -70,7 +70,7 @@ Cordialement`);
             />
           </HeroImage>
           <HeroText>
-            <Badge>{"\u{1F3AF}"} Formation Gratuite</Badge>
+            <Badge>Formation Gratuite</Badge>
             <HeroTitle>
               Developpement Mobile avec <GradientText>React-Native</GradientText>
             </HeroTitle>
@@ -124,7 +124,7 @@ Cordialement`);
 export const OverviewSection = ({ concepts, features, techStacks }) => (
   <>
     <Section>
-      <SectionTitle>{"\u{1F3AF}"} Ce que vous allez apprendre</SectionTitle>
+      <SectionTitle>Ce que vous allez apprendre</SectionTitle>
       <ConceptsGrid>
         {concepts.map((concept, index) => (
           <ConceptCard key={index}>
@@ -139,7 +139,7 @@ export const OverviewSection = ({ concepts, features, techStacks }) => (
     </Section>
 
     <Section>
-      <SectionTitle>{"\u{1F680}"} Avantages de cette formation</SectionTitle>
+      <SectionTitle>Avantages de cette formation</SectionTitle>
       <FeaturesGrid>
         {features.map((feature, index) => (
           <Feature key={index}>{feature}</Feature>
@@ -150,42 +150,42 @@ export const OverviewSection = ({ concepts, features, techStacks }) => (
     <AdvancedFeaturesComponent
       features={[
         {
-          icon: "\u{1F916}",
+          icon: "",
           title: "IA pour recommandation personnalisee",
           description: "Integrez l'intelligence artificielle pour proposer du contenu personnalise a vos utilisateurs"
         },
         {
-          icon: "\u{1F446}",
+          icon: "",
           title: "Auth biometrique",
           description: "Authentification securisee par empreinte digitale et reconnaissance faciale"
         },
         {
-          icon: "\u{1F4B3}",
+          icon: "",
           title: "Paiement Stripe + Apple Pay",
           description: "Integration complete des systemes de paiement modernes et securises"
         },
         {
-          icon: "\u{1F319}",
+          icon: "",
           title: "Mode sombre automatique",
           description: "Theme adaptatif base sur les preferences systeme de l'utilisateur"
         },
         {
-          icon: "\u{1F514}",
+          icon: "",
           title: "Notifications push segmentees",
           description: "Systeme de notifications ciblees et personnalisees par segments d'utilisateurs"
         },
         {
-          icon: "\u{1F4AC}",
+          icon: "",
           title: "Chat support IA",
           description: "Assistant virtuel intelligent pour le support client 24/7"
         },
         {
-          icon: "\u2728",
+          icon: "",
           title: "Animations fluides et feed interactif",
           description: "Interface utilisateur moderne avec animations et interactions fluides"
         },
         {
-          icon: "\u{1F4CD}",
+          icon: "",
           title: "Chat utilisateur + favoris + geoloc boutique",
           description: "Systeme social complet avec geolocalisation et fonctionnalites communautaires"
         }
@@ -193,7 +193,7 @@ export const OverviewSection = ({ concepts, features, techStacks }) => (
     />
 
     <Section>
-      <SectionTitle>{"\u26A1"} Technologies modernes pour developper une app</SectionTitle>
+      <SectionTitle>Technologies modernes pour developper une app</SectionTitle>
       <ProjectDescription>
         <p>
           Maitrisez les technologies les plus recentes et demandees du marche pour creer
@@ -212,7 +212,7 @@ export const OverviewSection = ({ concepts, features, techStacks }) => (
 // Curriculum Section Component
 export const CurriculumSectionComponent = ({ modules }) => (
   <CurriculumSection>
-    <SectionTitle>{"\u{1F4DA}"} Programme de formation</SectionTitle>
+    <SectionTitle>Programme de formation</SectionTitle>
     <ModuleList>
       {modules.map((module, index) => (
         <ModuleComponent key={index} module={module} />

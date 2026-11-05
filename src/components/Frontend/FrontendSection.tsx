@@ -18,7 +18,7 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
       icon: <FaReact />,
       title: 'React',
       description: t.frontendSection.react.description,
-      gradient: 'linear-gradient(135deg, #61dafb 0%, #0088cc 100%)',
+      gradient: '#61dafb',
       features: t.frontendSection.react.features,
       useCases: t.frontendSection.react.useCases
     },
@@ -26,7 +26,7 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
       icon: <SiTypescript />,
       title: 'TypeScript',
       description: t.frontendSection.typescript.description,
-      gradient: 'linear-gradient(135deg, #3178c6 0%, #235a97 100%)',
+      gradient: '#3178c6',
       features: t.frontendSection.typescript.features,
       useCases: t.frontendSection.typescript.useCases
     },
@@ -34,7 +34,7 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
       icon: <SiTailwindcss />,
       title: 'Tailwind CSS',
       description: t.frontendSection.tailwind.description,
-      gradient: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
+      gradient: '#06b6d4',
       features: t.frontendSection.tailwind.features,
       useCases: t.frontendSection.tailwind.useCases
     },
@@ -42,7 +42,7 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
       icon: <SiNextdotjs />,
       title: 'Next.js',
       description: t.frontendSection.nextjs.description,
-      gradient: 'linear-gradient(135deg, #000000 0%, #404040 100%)',
+      gradient: '#000000',
       features: t.frontendSection.nextjs.features,
       useCases: t.frontendSection.nextjs.useCases
     }
@@ -58,13 +58,13 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
       <section
         id={id}
         className="relative overflow-hidden w-full max-w-[100vw] py-24 px-8 md:py-16 md:px-4 max-[480px]:py-12 max-[480px]:px-2"
-        style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)' }}
+        style={{ background: '#0f172a' }}
       >
         {/* Background radial gradients */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(circle at 20% 20%, rgba(97, 218, 251, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(49, 120, 198, 0.1) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 60%)',
+            background: 'transparent',
           }}
         />
 
@@ -77,12 +77,9 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
               <SiNextdotjs size={40} style={{ color: '#ffffff', filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.4))' }} />
             </div>
             <h2
-              className="text-5xl md:text-[2.2rem] max-[480px]:text-[1.8rem] font-extrabold mb-4 bg-clip-text"
+              className="text-5xl md:text-[2.2rem] max-[480px]:text-[1.8rem] font-extrabold mb-4"
               style={{
-                background: 'linear-gradient(135deg, #61dafb 0%, #3178c6 50%, #06b6d4 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                color: '#FFFFFF',
               }}
             >
               {t.frontendSection.title}
@@ -148,7 +145,7 @@ const FrontendSection: React.FC<FrontendSectionProps> = ({ id }) => {
                     left: '-50%',
                     width: '200%',
                     height: '200%',
-                    background: 'radial-gradient(circle, rgba(97, 218, 251, 0.1) 0%, transparent 70%)',
+                    background: 'transparent',
                   }}
                 />
               </div>

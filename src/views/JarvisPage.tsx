@@ -110,7 +110,7 @@ export default function JarvisPage() {
             {"←"} Retour aux formations
           </Link>
 
-          <span className="block font-mono text-xs tracking-[0.3em] uppercase mb-6 text-white/70">
+          <span className="block text-xs mb-6 text-white/70">
             Nouvelle formation
           </span>
 
@@ -188,7 +188,7 @@ export default function JarvisPage() {
             {etapes.map((etape, i) => (
               <li key={etape.title} className="border-b border-black/15 py-6 grid sm:grid-cols-[7rem_1fr] gap-2 sm:gap-6">
                 <span
-                  className="font-mono text-[11px] uppercase tracking-[0.18em] pt-1"
+                  className="text-[13px] pt-1"
                   style={{ color: ACCENT }}
                 >
                   Étape {i + 1}
@@ -212,7 +212,7 @@ export default function JarvisPage() {
           ].map(({ label, items }) => (
             <div key={label} className="bg-white border border-black/10 p-7 md:p-9">
               <h2
-                className="font-mono text-[11px] uppercase tracking-[0.22em] mb-5"
+                className="text-[13px] mb-5"
                 style={{ color: ACCENT }}
               >
                 {label}

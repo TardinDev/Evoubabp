@@ -11,7 +11,7 @@ export const TechStackComponent = ({ title, items }) => (
     <h3 className="text-xl font-semibold mb-4 text-[#2d3748]">{title}</h3>
     <div className="flex flex-wrap gap-3">
       {items.map((item, index) => (
-        <span key={index} className="bg-[#667eea] text-white py-2 px-4 rounded-[20px] text-sm font-medium">
+        <span key={index} className="bg-[#4b0082] text-white py-2 px-4 rounded-[20px] text-sm font-medium">
           {item}
         </span>
       ))}
@@ -24,7 +24,7 @@ export const ModuleComponent = ({ module }) => (
     <div className="flex items-center gap-4 mb-4 max-md:flex-col max-md:items-start max-md:gap-2">
       <div
         className="w-10 h-10 rounded-[10px] flex items-center justify-center font-bold text-white shrink-0"
-        style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+        style={{ background: '#4b0082' }}
       >
         {module.number}
       </div>
@@ -89,7 +89,7 @@ export const Container = ({ children, ...props }) => (
 export const HeaderSection = ({ children, ...props }) => (
   <section
     className="text-white py-8 pb-16"
-    style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+    style={{ background: '#4b0082' }}
     {...props}
   >
     {children}
@@ -145,8 +145,8 @@ export const HeroTitle = ({ children, ...props }) => (
 
 export const GradientText = ({ children, ...props }) => (
   <span
-    className="bg-clip-text text-transparent"
-    style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)' }}
+    className=""
+    style={{ backgroundColor: '#3b82f6' }}
     {...props}
   >
     {children}
@@ -168,7 +168,7 @@ export const Stat = ({ children, ...props }) => (
 export const CTAButton = ({ children, ...props }) => (
   <motion.button
     className="border-none rounded-full text-white text-lg font-semibold py-4 px-8 flex items-center gap-2 cursor-pointer transition-all duration-300 ease-in-out hover:-translate-y-[2px] hover:shadow-[0_10px_25px_rgba(59,130,246,0.4)]"
-    style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)' }}
+    style={{ background: '#3b82f6' }}
     {...props}
   >
     {children}
@@ -184,7 +184,7 @@ export const HeroButtonsContainer = ({ children, ...props }) => (
 export const ContactButton = ({ children, ...props }) => (
   <motion.button
     className="border-2 border-white/20 rounded-full text-white text-lg max-md:text-[0.95rem] font-semibold py-4 px-8 flex items-center gap-2 cursor-pointer transition-all duration-300 ease-in-out hover:-translate-y-[2px] hover:shadow-[0_10px_25px_rgba(16,185,129,0.4)]"
-    style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}
+    style={{ background: '#10b981' }}
     {...props}
   >
     {children}
@@ -206,7 +206,7 @@ export const Tab = ({ children, active, ...props }: { children: React.ReactNode;
   <button
     className={`rounded-md py-3 px-6 max-md:py-2 max-md:px-4 max-md:text-sm font-medium cursor-pointer transition-all duration-300 ease-in-out whitespace-nowrap border ${
       active
-        ? 'bg-[#667eea] text-white border-[#667eea]'
+        ? 'bg-[#4b0082] text-white border-[#4b0082]'
         : 'bg-transparent text-[#64748b] border-[#e2e8f0] hover:bg-[#f8fafc]'
     }`}
     {...props}
@@ -242,7 +242,7 @@ export const ConceptCard = ({ children, ...props }) => (
 export const ConceptIcon = ({ children, ...props }) => (
   <div
     className="w-[50px] h-[50px] rounded-xl flex items-center justify-center mx-auto mb-5 text-white text-xl"
-    style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+    style={{ background: '#4b0082' }}
     {...props}
   >
     {children}
@@ -378,14 +378,14 @@ export const VideoContainer = ({ children, ...props }) => (
 export const VideoWrapper = ({ children, ...props }) => (
   <div
     className="relative w-full h-[250px] max-md:h-[200px] rounded-md border border-[#334155] flex items-center justify-center mb-4 overflow-hidden"
-    style={{ background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}
+    style={{ background: '#1e293b' }}
     {...props}
   >
     {/* Decorative radial gradients */}
     <div
       className="absolute inset-0"
       style={{
-        backgroundImage: 'radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)'
+        backgroundImage: 'transparent'
       }}
     />
     {children}
@@ -430,7 +430,7 @@ export const CTASectionFullWidth = ({ children, ...props }) => (
   <section
     className="py-16 text-center text-white relative [&>h2]:text-white [&>h2]:mb-4 [&_p]:text-white/90 [&_p]:opacity-100"
     style={{
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: '#4b0082',
       marginLeft: 'calc(-50vw + 50%)',
       marginRight: 'calc(-50vw + 50%)',
       width: '100vw'
@@ -455,7 +455,7 @@ export const AdvancedFeaturesSection = ({ children, ...props }) => (
   <section
     className="py-16 relative overflow-hidden"
     style={{
-      background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)',
+      background: '#0f172a',
       marginLeft: 'calc(-50vw + 50%)',
       marginRight: 'calc(-50vw + 50%)',
       width: '100vw'
@@ -466,7 +466,7 @@ export const AdvancedFeaturesSection = ({ children, ...props }) => (
     <div
       className="absolute inset-0 pointer-events-none"
       style={{
-        background: 'radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.05) 0%, transparent 50%)'
+        background: 'transparent'
       }}
     />
     {children}
@@ -479,8 +479,8 @@ export const AdvancedFeaturesContainer = ({ children, ...props }) => (
 
 export const AdvancedSectionTitle = ({ children, ...props }) => (
   <h2
-    className="text-[2.5rem] max-md:text-[2rem] font-black text-center mb-4 bg-clip-text text-transparent"
-    style={{ backgroundImage: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%)' }}
+    className="text-[2.5rem] max-md:text-[2rem] font-black text-center mb-4"
+    style={{ backgroundColor: '#3b82f6' }}
     {...props}
   >
     {children}
@@ -502,13 +502,13 @@ export const AdvancedFeaturesGrid = ({ children, ...props }) => (
 export const AdvancedFeatureCard = ({ children, ...props }) => (
   <motion.div
     className="rounded-[20px] p-8 text-center relative overflow-hidden transition-all duration-400 ease-in-out cursor-pointer border border-[#475569] hover:-translate-y-2 hover:scale-[1.02] hover:border-[#3b82f6] hover:shadow-[0_20px_40px_rgba(59,130,246,0.2),0_0_80px_rgba(6,182,212,0.1)] group"
-    style={{ background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)' }}
+    style={{ background: '#1e293b' }}
     {...props}
   >
     {/* Hover overlay */}
     <div
       className="absolute inset-0 opacity-0 transition-opacity duration-400 ease-in-out pointer-events-none group-hover:opacity-100"
-      style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.05) 50%, rgba(139, 92, 246, 0.1) 100%)' }}
+      style={{ background: 'rgba(59, 130, 246, 0.1)' }}
     />
     {children}
   </motion.div>
@@ -517,7 +517,7 @@ export const AdvancedFeatureCard = ({ children, ...props }) => (
 export const AdvancedFeatureIcon = ({ children, ...props }) => (
   <div
     className="w-20 h-20 rounded-[20px] flex items-center justify-center mx-auto mb-6 text-[2rem] relative overflow-hidden group-hover:[&::before]:opacity-100 group-hover:[&::before]:translate-x-full group-hover:[&::before]:translate-y-full"
-    style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)' }}
+    style={{ background: '#3b82f6' }}
     {...props}
   >
     {children}
@@ -534,8 +534,8 @@ export const AdvancedFeatureDescription = ({ children, ...props }) => (
 
 export const AdvancedFeatureBadge = ({ children, ...props }) => (
   <div
-    className="absolute top-4 right-4 text-white py-1 px-3 rounded-[15px] text-xs font-semibold uppercase tracking-wide"
-    style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)' }}
+    className="absolute top-4 right-4 text-white py-1 px-3 rounded-[15px] text-xs font-semibold"
+    style={{ background: '#8b5cf6' }}
     {...props}
   >
     {children}
@@ -546,7 +546,7 @@ export const AdvancedFeatureBadge = ({ children, ...props }) => (
 export const AdvancedFeaturesComponent = ({ features }) => (
   <AdvancedFeaturesSection>
     <AdvancedFeaturesContainer>
-      <AdvancedSectionTitle>{"\u2728"} Fonctionnalites avancees que vous maitriserez</AdvancedSectionTitle>
+      <AdvancedSectionTitle>Fonctionnalites avancees que vous maitriserez</AdvancedSectionTitle>
       <AdvancedSectionSubtitle>
         Developpez des competences de niveau professionnel en implementant ces fonctionnalites
         innovantes qui distinguent votre application sur le marche
@@ -586,10 +586,10 @@ AdvancedFeaturesComponent.propTypes = {
 export const ScreenshotGalleryComponent = ({ screenshots }) => (
   <div className="my-16">
     <h3
-      className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent"
-      style={{ backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+      className="text-3xl font-bold mb-8 text-center"
+      style={{ backgroundColor: '#4b0082' }}
     >
-      {"\u{1F4F1}"} Apercu de l&apos;application
+      Apercu de l&apos;application
     </h3>
     <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-8 max-md:gap-6">
       {screenshots.map((screenshot, index) => (
@@ -599,11 +599,11 @@ export const ScreenshotGalleryComponent = ({ screenshots }) => (
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
           viewport={{ once: true }}
-          className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out hover:-translate-y-[5px] hover:shadow-[0_8px_30px_rgba(102,126,234,0.2)]"
+          className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out hover:-translate-y-[5px] hover:shadow-[0_8px_30px_rgba(75,0,130,0.2)]"
         >
           <div
             className="w-full overflow-hidden relative"
-            style={{ aspectRatio: '9 / 16', background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' }}
+            style={{ aspectRatio: '9 / 16', background: '#f5f7fa' }}
           >
             <img
               className="w-full h-full object-cover block"

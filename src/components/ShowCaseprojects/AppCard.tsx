@@ -58,7 +58,7 @@ const AppCard = ({ app, type, variants, onCardClick }: AppCardProps) => {
             }}
           >
             {imageError ? (
-              <div className="absolute inset-0 flex flex-col items-center justify-center z-[1]" style={{ background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)', backgroundSize: '200% 100%' }}>
+              <div className="absolute inset-0 flex flex-col items-center justify-center z-[1]" style={{ background: '#f0f0f0', backgroundSize: '200% 100%' }}>
                 <p className="text-red-500 text-xs md:text-sm font-semibold">&#x274C; Image non disponible</p>
                 <p className="text-gray-500 text-[10px] md:text-xs mt-1 break-all px-2 text-center">{app.image}</p>
               </div>

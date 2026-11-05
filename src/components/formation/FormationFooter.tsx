@@ -3,7 +3,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const focusRing = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 const linkClass = `py-1.5 text-white/75 hover:text-white no-underline transition-colors duration-300 ${focusRing}`;
-const headingClass = "font-mono text-[11px] uppercase tracking-[0.22em] text-white/50 mb-4";
+const headingClass = "text-[13px] text-white/50 mb-4";
 
 export default function FormationFooter() {
   return (

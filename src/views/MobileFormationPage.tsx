@@ -48,7 +48,7 @@ export default function MobileFormationPage() {
             />
             <CTASection
               onStartFormation={handleStartFormation}
-              title={"\u{1F680} Pret a commencer ?"}
+              title={"Pret a commencer ?"}
               description="Rejoignez cette formation gratuite et developpez 4 applications mobiles completes. Commencez des maintenant avec le projet RunSport et progressez a votre rythme !"
             />
           </TabContent>
@@ -64,7 +64,7 @@ export default function MobileFormationPage() {
             <CurriculumSectionComponent modules={modules} />
             <CTASection
               onStartFormation={handleStartFormation}
-              title={"\u{1F680} Pret a commencer ?"}
+              title={"Pret a commencer ?"}
               description="Vous avez maintenant une vue d'ensemble du programme complet. Lancez-vous dans le developpement de votre premiere app mobile avec React Native !"
             />
           </TabContent>

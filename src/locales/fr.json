@@ -101,7 +101,7 @@
   },
   "fullstackNode": {
     "expertise": "J'apporte une expertise FullStack à vos projets !",
-    "badge": "FULLSTACK JAVASCRIPT",
+    "badge": "Fullstack JavaScript",
     "subtitle": "Écosystème JavaScript unifié pour des applications performantes et temps réel",
     "demoLive": "Démo Live",
     "viewLive": "Voir Live",
@@ -111,7 +111,7 @@
     "stack": "Stack"
   },
   "fullstackSpring": {
-    "badge": "FULLSTACK JAVA · DOCKERIZED",
+    "badge": "Fullstack Java avec Docker",
     "subtitle": "Architecture fullstack Java : sécurité d'entreprise, déploiement Docker, 24/7.",
     "officialApp": "APPLICATION OFFICIELLE",
     "birthDeclaration": "Déclaration de",
@@ -161,7 +161,7 @@
     "craftTestsDesc": "Tests unitaires avec Mockito, tests d'intégration sur une vraie base MySQL via Testcontainers."
   },
   "fullstackFlyTaxi": {
-    "badge": "SAAS · IA · DOCKERIZED",
+    "badge": "SaaS et IA avec Docker",
     "subtitle": "Réservation vols + taxis unifiée par l'IA. Architecture Java, PostgreSQL, Docker.",
     "officialApp": "PLATEFORME SAAS",
     "titlePart1": "Fly &",
@@ -189,7 +189,7 @@
     "secured": "Sécurisé"
   },
   "caseStudies": {
-    "badge": "PORTFOLIO",
+    "badge": "Portfolio",
     "title": "Études de",
     "titleHighlight": "cas",
     "subtitle": "Découvrez en détail comment j'ai aidé mes clients à atteindre leurs objectifs",
@@ -288,7 +288,7 @@
     ]
   },
   "payments": {
-    "badge": "PAIEMENTS · INTÉGRATIONS",
+    "badge": "Paiements et intégrations",
     "title": "Tous les moyens de",
     "titleHighlight": "paiement",
     "subtitle": "Cartes, wallets, virements, mobile money, crypto : j'intègre la bonne solution pour votre marché — sécurisée, conforme et prête à scaler.",
@@ -388,7 +388,7 @@
     }
   },
   "contact": {
-    "badge": "CONTACT",
+    "badge": "Contact",
     "title": "Discutons de votre",
     "titleHighlight": "projet",
     "subtitle": "Une idée ? Un projet ? Contactez-moi et transformons votre vision en réalité",

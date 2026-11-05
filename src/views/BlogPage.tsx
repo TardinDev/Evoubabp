@@ -9,7 +9,7 @@ export default function BlogPage() {
     <div className="min-h-screen bg-[#f8f9fa]">
       <section
         className="px-8 pt-12 pb-16 text-center text-white"
-        style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+        style={{ background: '#4b0082' }}
       >
         <Link
           href="/"
@@ -33,11 +33,11 @@ export default function BlogPage() {
             <Link
               key={article.slug}
               href={`/blog/${article.slug}`}
-              className="group bg-white rounded-2xl p-8 no-underline text-inherit shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 ease-in-out flex flex-col border border-black/[0.04] hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(102,126,234,0.15)] hover:border-[rgba(102,126,234,0.2)]"
+              className="group bg-white rounded-2xl p-8 no-underline text-inherit shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 ease-in-out flex flex-col border border-black/[0.04] hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(75,0,130,0.15)] hover:border-[rgba(75,0,130,0.2)]"
             >
               <span
-                className="inline-block text-white text-xs font-semibold py-1 px-3 rounded-full w-fit mb-4 uppercase tracking-[0.5px]"
-                style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}
+                className="inline-block text-white text-xs font-semibold py-1 px-3 rounded-full w-fit mb-4"
+                style={{ background: '#4b0082' }}
               >
                 Article
               </span>
@@ -61,7 +61,7 @@ export default function BlogPage() {
                   {article.readingTime}
                 </span>
               </div>
-              <span className="text-[#667eea] font-semibold text-[0.9rem] transition-colors duration-300 group-hover:text-[#764ba2]">
+              <span className="text-[#4b0082] font-semibold text-[0.9rem] transition-colors duration-300 group-hover:text-[#4b0082]">
                 Lire l&apos;article &rarr;
               </span>
             </Link>

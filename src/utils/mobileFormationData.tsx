@@ -24,12 +24,12 @@ export const concepts = [
 ];
 
 export const features = [
-  "✅ 4 projets complets inclus",
-  "✅ Code source disponible",
-  "✅ Vidéos tutoriels HD",
-  "✅ Support communauté",
-  "✅ Certificat de réussite",
-  "✅ Mise à jour gratuite"
+  "4 projets complets inclus",
+  "Code source disponible",
+  "Vidéos tutoriels HD",
+  "Support communauté",
+  "Certificat de réussite",
+  "Mise à jour gratuite"
 ];
 
 export const formations = {
@@ -41,12 +41,12 @@ export const formations = {
     description: "Maîtrisez les fondamentaux du développement mobile avec React Native",
     projects: ["runSport", "socialConnect"],
     features: [
-      "✅ 2 projets complets inclus",
-      "✅ Code source disponible",
-      "✅ Vidéos tutoriels HD",
-      "✅ Support communauté",
-      "✅ Certificat de réussite",
-      "✅ Mise à jour gratuite"
+      "2 projets complets inclus",
+      "Code source disponible",
+      "Vidéos tutoriels HD",
+      "Support communauté",
+      "Certificat de réussite",
+      "Mise à jour gratuite"
     ],
     badge: "POPULAIRE",
     color: "#3B82F6"
@@ -59,14 +59,14 @@ export const formations = {
     description: "Devenez un expert React Native avec 4 projets complets",
     projects: ["runSport", "socialConnect", "skyBooker", "sendMoney"],
     features: [
-      "✅ 4 projets complets inclus",
-      "✅ Code source disponible",
-      "✅ Vidéos tutoriels HD",
-      "✅ Support communauté",
-      "✅ Certificat de réussite",
-      "✅ Mise à jour gratuite",
-      "✅ Accès aux projets avancés",
-      "✅ Mentoring personnalisé"
+      "4 projets complets inclus",
+      "Code source disponible",
+      "Vidéos tutoriels HD",
+      "Support communauté",
+      "Certificat de réussite",
+      "Mise à jour gratuite",
+      "Accès aux projets avancés",
+      "Mentoring personnalisé"
     ],
     badge: "RECOMMANDÉ",
     color: "#10B981"
@@ -75,7 +75,7 @@ export const formations = {
 
 export const techStacks = {
   frontend: {
-    title: "🎨 Frontend & UI",
+    title: "Frontend & UI",
     items: [
       "React Native",
       "Expo SDK 54",
@@ -85,7 +85,7 @@ export const techStacks = {
     ]
   },
   backend: {
-    title: "⚙️ Backend & APIs",
+    title: "Backend & APIs",
     items: [
       "Supabase",
       "Clerk Auth",
@@ -95,7 +95,7 @@ export const techStacks = {
     ]
   },
   stateStorage: {
-    title: "📊 State & Storage",
+    title: "State & Storage",
     items: [
       "TanStack Query",
       "Zustand",
@@ -106,7 +106,7 @@ export const techStacks = {
     ]
   },
   tools: {
-    title: "🛠️ Tools & Deployment",
+    title: "Tools & Deployment",
     items: [
       "Git/GitHub",
       "Sentry",
@@ -401,7 +401,7 @@ const MOCK_VIDEOS = [
     id: '1',
     videoUrl: 'https://example.com/video1.mp4',
     username: '@user1',
-    description: 'Ma première vidéo TikTok ! 🎵',
+    description: 'Ma première vidéo TikTok ! ',
     likes: 1234,
     comments: 56,
     shares: 12
@@ -1126,7 +1126,7 @@ const MOCK_PROFILE = {
   id: '1',
   username: '@username',
   name: 'John Doe',
-  bio: 'Créateur de contenu 🎥\nPassionné de tech 💻',
+  bio: 'Créateur de contenu \nPassionné de tech ',
   followers: 125000,
   following: 432,
   likes: 1500000,
@@ -1492,21 +1492,21 @@ export default function RootLayout() {
         <Stack.Screen 
           name="index" 
           options={{ 
-            title: '🏃‍♂️ RunSport',
+            title: 'RunSport',
             headerShown: true 
           }} 
         />
         <Stack.Screen 
           name="products" 
           options={{ 
-            title: '👟 Nos Produits',
+            title: 'Nos Produits',
             headerBackTitle: 'Retour'
           }} 
         />
         <Stack.Screen 
           name="cart" 
           options={{ 
-            title: '🛒 Mon Panier',
+            title: 'Mon Panier',
             presentation: 'modal'
           }} 
         />
@@ -1841,7 +1841,7 @@ export const projects = {
   },
   runSport: {
     id: "project",
-    title: "🏃‍♂️ Projet RunSport",
+    title: "Projet RunSport",
     description: "RunSport est une application mobile de vente de chaussures de sport adaptées, que vous développerez étape par étape. Cette app moderne inclut toutes les fonctionnalités essentielles d'une application E-commerce.",
     image: "/imagesFormations/RunSport.png",
     alt: "Écrans de l'application RunSport",
@@ -1862,7 +1862,7 @@ export const projects = {
   },
   socialConnect: {
     id: "social",
-    title: "📱 Projet SocialConnect",
+    title: "Projet SocialConnect",
     description: "SocialConnect est une application de réseau social moderne et complète que vous développerez de A à Z. Cette app inclut toutes les fonctionnalités essentielles d'un réseau social : feed, stories, messages privés, système de followers et interactions en temps réel.",
     image: "/imagesFormations/socialMedia.png",
     alt: "Écrans de l'application SocialConnect",
@@ -1893,7 +1893,7 @@ export const projects = {
   },
   skyBooker: {
     id: "travel",
-    title: "✈️ Projet SkyBooker",
+    title: "Projet SkyBooker",
     description: "SkyBooker est une application complète de réservation de billets d'avion que vous développerez étape par étape. Cette app moderne inclut la recherche de vols, comparaison de prix, paiement sécurisé, gestion des réservations et notifications de voyage.",
     image: "/imagesFormations/skyReservation.png",
     alt: "Écrans de l'application SkyBooker",
@@ -1924,7 +1924,7 @@ export const projects = {
   },
   sendMoney: {
     id: "sendmoney",
-    title: "💸 Projet SendMoney",
+    title: "Projet SendMoney",
     description: "SendMoney est une application fintech complète de transfert d'argent et de paiements mobiles que vous développerez de A à Z. Cette app moderne inclut portefeuille digital, transferts sécurisés, paiements marchands et gestion financière personnelle avec sécurité bancaire.",
     image: "/imagesFormations/sendMoney.png",
     alt: "Écrans de l'application SendMoney",

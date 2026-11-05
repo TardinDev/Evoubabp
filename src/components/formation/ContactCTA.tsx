@@ -15,7 +15,7 @@ export default function ContactCTA() {
     <section className="py-20 px-8">
       <div
         className="max-w-[1000px] mx-auto rounded-3xl p-12 md:p-16 text-white relative overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+        style={{ background: '#4b0082' }}
       >
         {/* Decorative circles */}
         <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full" />

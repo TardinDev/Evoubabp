@@ -12,7 +12,7 @@ export default function PolitiqueConfidentialitePage() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%)',
+            'transparent',
         }}
       />
 
@@ -33,7 +33,7 @@ export default function PolitiqueConfidentialitePage() {
 
           {/* PageTitle */}
           <h1
-            className="font-bold bg-gradient-to-br from-blue-500 to-violet-500 bg-clip-text text-transparent mb-2"
+            className="font-bold mb-2 text-blue-500"
             style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}
           >
             Politique de Confidentialité
@@ -47,7 +47,7 @@ export default function PolitiqueConfidentialitePage() {
           {/* IntroSection */}
           <div
             className="border border-blue-500/20 rounded-2xl px-8 py-6 mb-8"
-            style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1))' }}
+            style={{ background: 'rgba(59, 130, 246, 0.1)' }}
           >
             <p className="text-slate-200 leading-[1.8] m-0">
               Chez Evoubabp Industries, nous accordons une grande importance à la protection de vos
@@ -61,7 +61,7 @@ export default function PolitiqueConfidentialitePage() {
           <section className="mb-8 p-8 bg-white/[0.03] rounded-2xl border border-white/[0.06]">
             <div
               className="inline-flex items-center justify-center w-10 h-10 rounded-[10px] text-blue-500 mb-4"
-              style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2))' }}
+              style={{ background: 'rgba(59, 130, 246, 0.2)' }}
             >
               <FaUserShield />
             </div>
@@ -168,7 +168,7 @@ export default function PolitiqueConfidentialitePage() {
           <section className="mb-8 p-8 bg-white/[0.03] rounded-2xl border border-white/[0.06]">
             <div
               className="inline-flex items-center justify-center w-10 h-10 rounded-[10px] text-blue-500 mb-4"
-              style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2))' }}
+              style={{ background: 'rgba(59, 130, 246, 0.2)' }}
             >
               <FaCookieBite />
             </div>
@@ -207,7 +207,7 @@ export default function PolitiqueConfidentialitePage() {
           <section className="mb-8 p-8 bg-white/[0.03] rounded-2xl border border-white/[0.06]">
             <div
               className="inline-flex items-center justify-center w-10 h-10 rounded-[10px] text-blue-500 mb-4"
-              style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2))' }}
+              style={{ background: 'rgba(59, 130, 246, 0.2)' }}
             >
               <FaShieldAlt />
             </div>
@@ -308,7 +308,7 @@ export default function PolitiqueConfidentialitePage() {
           <section className="mb-8 p-8 bg-white/[0.03] rounded-2xl border border-white/[0.06]">
             <div
               className="inline-flex items-center justify-center w-10 h-10 rounded-[10px] text-blue-500 mb-4"
-              style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2))' }}
+              style={{ background: 'rgba(59, 130, 246, 0.2)' }}
             >
               <FaEnvelope />
             </div>
@@ -323,7 +323,7 @@ export default function PolitiqueConfidentialitePage() {
                 <a
                   href="mailto:tardindavy@gmail.com"
                   className="inline-flex items-center gap-2 py-3 px-6 text-white no-underline rounded-lg font-medium transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(59,130,246,0.3)]"
-                  style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}
+                  style={{ background: '#3b82f6' }}
                 >
                   <FaEnvelope /> tardindavy@gmail.com
                 </a>

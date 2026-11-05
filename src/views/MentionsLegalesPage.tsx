@@ -12,7 +12,7 @@ export default function MentionsLegalesPage() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%)',
+            'transparent',
         }}
       />
 
@@ -33,7 +33,7 @@ export default function MentionsLegalesPage() {
 
           {/* PageTitle */}
           <h1
-            className="font-bold bg-gradient-to-br from-blue-500 to-violet-500 bg-clip-text text-transparent mb-2"
+            className="font-bold mb-2 text-blue-500"
             style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}
           >
             Mentions Légales
@@ -48,7 +48,7 @@ export default function MentionsLegalesPage() {
           <section className="mb-10 p-8 bg-white/[0.03] rounded-2xl border border-white/[0.06]">
             <div
               className="inline-flex items-center justify-center w-10 h-10 rounded-[10px] text-blue-500 mb-4"
-              style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2))' }}
+              style={{ background: 'rgba(59, 130, 246, 0.2)' }}
             >
               <FaBuilding />
             </div>
@@ -72,7 +72,7 @@ export default function MentionsLegalesPage() {
           <section className="mb-10 p-8 bg-white/[0.03] rounded-2xl border border-white/[0.06]">
             <div
               className="inline-flex items-center justify-center w-10 h-10 rounded-[10px] text-blue-500 mb-4"
-              style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2))' }}
+              style={{ background: 'rgba(59, 130, 246, 0.2)' }}
             >
               <FaServer />
             </div>
@@ -170,7 +170,7 @@ export default function MentionsLegalesPage() {
           <section className="mb-10 p-8 bg-white/[0.03] rounded-2xl border border-white/[0.06]">
             <div
               className="inline-flex items-center justify-center w-10 h-10 rounded-[10px] text-blue-500 mb-4"
-              style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2))' }}
+              style={{ background: 'rgba(59, 130, 246, 0.2)' }}
             >
               <FaEnvelope />
             </div>
@@ -186,7 +186,7 @@ export default function MentionsLegalesPage() {
                 <a
                   href="mailto:tardindavy@gmail.com"
                   className="inline-flex items-center gap-2 py-3 px-6 text-white no-underline rounded-lg font-medium transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(59,130,246,0.3)]"
-                  style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}
+                  style={{ background: '#3b82f6' }}
                 >
                   <FaEnvelope /> tardindavy@gmail.com
                 </a>
@@ -195,7 +195,7 @@ export default function MentionsLegalesPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 py-3 px-6 text-white no-underline rounded-lg font-medium transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(59,130,246,0.3)]"
-                  style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}
+                  style={{ background: '#3b82f6' }}
                 >
                   <FaPhone /> +33 7 66 45 07 71
                 </a>

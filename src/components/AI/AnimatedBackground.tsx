@@ -17,27 +17,13 @@ interface ConnectionProps {
   to: { top: string; left: string };
 }
 
-const FloatingElement: React.FC<FloatingElementProps> = ({ delay, size, top, left }) => {
-  return (
-    <div
-      className="absolute rounded-full blur-[1px]"
-      style={{
-        width: `${size}px`,
-        height: `${size}px`,
-        background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(247, 147, 251, 0.3))',
-        animation: `ai-float ${6 + delay}s ease-in-out infinite`,
-        animationDelay: `${delay}s`,
-        top,
-        left,
-      }}
-    />
-  );
-};
+// Particules décoratives retirées (esthétique « IA » générique)
+const FloatingElement: React.FC<FloatingElementProps> = () => null;
 
 const Node: React.FC<NodeProps> = ({ top, left }) => {
   return (
     <div
-      className="absolute w-1 h-1 bg-[#667eea] rounded-full shadow-[0_0_10px_rgba(102,126,234,0.5)]"
+      className="absolute w-1 h-1 bg-[#4b0082] rounded-full shadow-[0_0_10px_rgba(75,0,130,0.5)]"
       style={{
         top,
         left,
@@ -62,7 +48,7 @@ const Connection: React.FC<ConnectionProps> = ({ from, to }) => {
     <div
       className="absolute h-px"
       style={{
-        background: 'linear-gradient(90deg, rgba(102, 126, 234, 0.3), rgba(247, 147, 251, 0.3))',
+        background: 'rgba(75,0,130, 0.3)',
         transformOrigin: 'left center',
         animation: 'ai-connectionPulse 4s ease-in-out infinite',
         top: from.top,
