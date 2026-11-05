@@ -190,9 +190,3 @@ export const headerVariants = {
     show: { opacity: 1 },
   };
   
-  export const getMenuStyles = (menuOpened: boolean) => {
-    if (typeof document === 'undefined') return;
-    if (document.documentElement.clientWidth <= 768) {
-      return { right: !menuOpened ? "-100%" : undefined };
-    }
-  };

@@ -1,410 +1,839 @@
 'use client'
 
+import Link from "next/link";
 import { useState } from "react";
-import { FaBrain, FaChartLine, FaRobot, FaLightbulb } from "react-icons/fa";
-import { ContactCTA } from "../components/formation";
+import { FaWhatsapp } from "react-icons/fa";
+import { IoIosMail } from "react-icons/io";
+import {
+  AP, body, body2, btnPrimary, btnSecondary, card, container, containerWide,
+  h1, h2, h3, lead, link, section, small, focusRing,
+} from "../components/MachineLearning/appleStyle";
 
-export default function MachineLearningPage() {
-  const [activeExample, setActiveExample] = useState<string | null>(null);
+/* ------------------------------------------------------------------ */
+/* Contenu                                                             */
+/* ------------------------------------------------------------------ */
+
+const sommaire = [
+  { href: "#principe", label: "Le principe" },
+  { href: "#familles", label: "Supervisé ou non" },
+  { href: "#vocabulaire", label: "Le vocabulaire" },
+  { href: "#atelier", label: "Votre atelier" },
+  { href: "#projet-1", label: "Projet 1" },
+  { href: "#projet-2", label: "Projet 2" },
+  { href: "#projet-3", label: "Projet 3" },
+  { href: "#faq", label: "Questions" },
+];
+
+// L'analogie de l'enfant : chaque geste correspond à une brique du machine learning
+const analogie = [
+  {
+    geste: "Vous montrez des photos à un enfant en lui disant : « ça, c'est un chat », « ça, c'est un chien ».",
+    terme: "Le dataset",
+    sens: "Les exemples, avec la bonne réponse pour chacun.",
+  },
+  {
+    geste: "L'enfant regarde une nouvelle photo et tente sa chance : « chien ! ».",
+    terme: "Le modèle",
+    sens: "Ce qui fabrique une réponse à partir d'une entrée.",
+  },
+  {
+    geste: "Vous lui dites s'il a eu juste, ou à quel point il s'est trompé.",
+    terme: "La fonction coût",
+    sens: "Un score qui mesure l'erreur. Plus il est bas, mieux c'est.",
+  },
+  {
+    geste: "La fois suivante, il fait un peu plus attention aux oreilles et au museau.",
+    terme: "L'algorithme d'optimisation",
+    sens: "La méthode qui corrige le modèle un petit peu après chaque erreur.",
+  },
+  {
+    geste: "Un jour, vous lui montrez un animal qu'il n'a jamais vu. Il répond juste : il a appris.",
+    terme: "L'évaluation",
+    sens: "On vérifie le modèle sur des exemples qu'il n'a jamais vus.",
+  },
+];
+
+const familles = [
+  {
+    title: "Apprentissage supervisé",
+    definition: "On donne à la machine des exemples accompagnés de la bonne réponse. Elle apprend à retrouver cette réponse seule, sur des exemples qu'elle n'a jamais vus.",
+    analogie: "Comme un élève qui s'entraîne avec des exercices corrigés.",
+    projets: "Projets 1 et 2",
+    href: "#projet-1",
+  },
+  {
+    title: "Apprentissage non supervisé",
+    definition: "On donne des exemples sans aucune réponse. La machine cherche seule ce qui se ressemble et fait apparaître des groupes que personne ne lui a décrits.",
+    analogie: "Comme trier une pile de photos de vacances sans consigne : on finit par faire des tas « plage », « montagne », « repas ».",
+    projets: "Projet 3",
+    href: "#projet-3",
+  },
+];
+
+const vocabulaire = [
+  { terme: "Donnée", definition: "Un exemple : une photo, une ligne de relevé bancaire, une recette." },
+  { terme: "Caractéristique", definition: "Ce que le modèle regarde dans la donnée : les pixels d'une photo, les lettres d'un libellé, les ingrédients d'une recette." },
+  { terme: "Étiquette", definition: "La bonne réponse attachée à un exemple : « chat », « courses ». En non supervisé, il n'y en a pas." },
+  { terme: "Entraînement", definition: "Le moment où le modèle regarde les exemples et ajuste ses réglages pour se tromper de moins en moins." },
+  { terme: "Jeu de test", definition: "Des exemples cachés pendant l'entraînement, pour vérifier que le modèle a compris et pas seulement mémorisé." },
+  { terme: "Surapprentissage", definition: "Le modèle connaît ses exemples par cœur mais se trompe sur les nouveaux. Comme un élève qui apprend les corrigés sans comprendre." },
+  { terme: "Précision", definition: "La part de bonnes réponses. 97 bonnes réponses sur 100 photos, c'est 97 % de précision." },
+  { terme: "Groupe (cluster)", definition: "Un ensemble d'exemples que la machine juge semblables, sans qu'on lui ait dit pourquoi." },
+];
+
+const atelier = [
+  { title: "Ouvrir Google Colab", text: "Allez sur colab.research.google.com et connectez-vous avec un compte Google. C'est gratuit et rien ne s'installe sur votre ordinateur." },
+  { title: "Créer un notebook", text: "Cliquez sur « Nouveau notebook ». Un notebook est une page où l'on colle du code par petits blocs, appelés cellules." },
+  { title: "Coller et lancer un bloc", text: "Copiez un bloc de cette page, collez-le dans une cellule, puis appuyez sur Maj + Entrée. Le résultat s'affiche juste en dessous." },
+  { title: "Avancer dans l'ordre", text: "Lancez les blocs dans l'ordre, sans en sauter. Si une erreur apparaît, relancez le bloc précédent puis celui-ci." },
+];
+
+interface Etape {
+  title: string;
+  explication: string;
+  code?: string;
+}
+
+interface Projet {
+  id: string;
+  numero: number;
+  title: string;
+  situation: string;
+  famille: string;
+  duree: string;
+  donnees: string;
+  apprend: string[];
+  sansCode?: { title: string; intro: string; etapes: string[] };
+  etapes: Etape[];
+  resultat: string;
+  pieges: string[];
+  plusLoin: string[];
+}
+
+const projets: Projet[] = [
+  {
+    id: "projet-1",
+    numero: 1,
+    title: "Chat ou chien ?",
+    situation:
+      "Vous prenez une photo de votre animal et l'application répond « chat » ou « chien ». C'est le même principe que le tri automatique des photos de votre téléphone par sujet.",
+    famille: "Apprentissage supervisé",
+    duree: "Environ 1 heure",
+    donnees: "23 000 photos de chats et de chiens, déjà étiquetées",
+    apprend: [
+      "Charger et préparer des images",
+      "Réutiliser un modèle qui sait déjà « voir »",
+      "Lire la précision pendant l'entraînement",
+      "Tester le modèle avec vos propres photos",
+    ],
+    sansCode: {
+      title: "Commencez sans écrire une ligne de code.",
+      intro: "Pour voir le principe en 10 minutes, faites d'abord la version sans code avec Teachable Machine, un outil gratuit de Google.",
+      etapes: [
+        "Allez sur teachablemachine.withgoogle.com et choisissez « Projet d'image ».",
+        "Renommez la classe 1 en « Chat » et importez une trentaine de photos de chats.",
+        "Renommez la classe 2 en « Chien » et importez une trentaine de photos de chiens.",
+        "Cliquez sur « Entraîner le modèle » et attendez une minute.",
+        "Montrez une nouvelle photo, ou votre webcam : la barre indique si c'est un chat ou un chien.",
+      ],
+    },
+    etapes: [
+      {
+        title: "Activer la carte graphique",
+        explication:
+          "Dans Colab, ouvrez le menu Exécution, puis « Modifier le type d'exécution », et choisissez un GPU (T4). Le GPU est une carte graphique : elle fait des milliers de calculs en même temps, ce qui rend l'entraînement sur des images bien plus rapide.",
+      },
+      {
+        title: "Charger les photos",
+        explication:
+          "On télécharge le jeu de photos. 80 % servent à apprendre, les 20 % restants sont mis de côté pour l'examen final. Chaque photo est accompagnée de son étiquette : 0 pour chat, 1 pour chien. Le premier téléchargement prend quelques minutes.",
+        code: `import tensorflow as tf
+import tensorflow_datasets as tfds
+
+# 80 % des photos pour apprendre, 20 % pour l'examen
+(train, test), info = tfds.load(
+    "cats_vs_dogs",
+    split=["train[:80%]", "train[80%:]"],
+    as_supervised=True,   # chaque photo arrive avec son étiquette
+    with_info=True,
+)
+print(info.features["label"].names)   # ['cat', 'dog']`,
+      },
+      {
+        title: "Mettre toutes les photos au même format",
+        explication:
+          "Les photos ont toutes des tailles différentes, mais le modèle a besoin d'images identiques. On les redimensionne en 160 × 160 pixels, puis on les regroupe par paquets de 32 pour aller plus vite.",
+        code: `TAILLE = (160, 160)
+
+def preparer(image, etiquette):
+    image = tf.image.resize(image, TAILLE)
+    return image, etiquette
+
+train = train.map(preparer).batch(32).prefetch(1)
+test = test.map(preparer).batch(32)`,
+      },
+      {
+        title: "Réutiliser un modèle qui sait déjà voir",
+        explication:
+          "Partir de zéro demanderait des millions de photos. On reprend MobileNetV2, un modèle déjà entraîné par Google à reconnaître des formes, des textures et des contours. On le « gèle » pour ne pas l'abîmer, et on ajoute à la fin une seule décision : chat ou chien. C'est comme embaucher quelqu'un qui sait déjà dessiner et lui apprendre seulement à reconnaître deux animaux.",
+        code: `base = tf.keras.applications.MobileNetV2(
+    input_shape=TAILLE + (3,),
+    include_top=False,
+    weights="imagenet",
+)
+base.trainable = False   # on garde ce qu'il sait déjà
+
+modele = tf.keras.Sequential([
+    tf.keras.layers.Rescaling(1 / 127.5, offset=-1),   # pixels ramenés entre -1 et 1
+    base,
+    tf.keras.layers.GlobalAveragePooling2D(),
+    tf.keras.layers.Dense(1, activation="sigmoid"),    # 0 = chat, 1 = chien
+])`,
+      },
+      {
+        title: "Entraîner le modèle",
+        explication:
+          "On choisit la fonction coût (« binary_crossentropy » : elle mesure l'erreur quand il y a deux réponses possibles) et l'algorithme d'optimisation (« adam », une version améliorée de la descente de gradient). Une époque correspond à un passage complet sur toutes les photos. Regardez la ligne « val_accuracy » : c'est la précision sur les photos de l'examen.",
+        code: `modele.compile(
+    optimizer="adam",
+    loss="binary_crossentropy",
+    metrics=["accuracy"],
+)
+modele.fit(train, validation_data=test, epochs=3)`,
+      },
+      {
+        title: "Tester avec votre propre photo",
+        explication:
+          "Lancez ce bloc : un bouton apparaît pour envoyer une photo depuis votre ordinateur. Le modèle donne un nombre entre 0 et 1. Près de 0, c'est un chat. Près de 1, c'est un chien.",
+        code: `from google.colab import files
+
+envoi = files.upload()
+nom = list(envoi)[0]
+
+image = tf.keras.utils.load_img(nom, target_size=TAILLE)
+x = tf.expand_dims(tf.keras.utils.img_to_array(image), 0)
+score = float(modele.predict(x)[0][0])
+
+if score > 0.5:
+    print(f"Chien, sûr à {score:.0%}")
+else:
+    print(f"Chat, sûr à {1 - score:.0%}")`,
+      },
+    ],
+    resultat: "Après 3 époques, le modèle reconnaît environ 97 photos sur 100 qu'il n'avait jamais vues.",
+    pieges: [
+      "Message « out of memory » ou entraînement très lent : vérifiez que le GPU est bien activé (étape 1).",
+      "Une photo de lapin sera quand même classée chat ou chien : le modèle ne connaît que ces deux réponses.",
+      "Si Colab se déconnecte, relancez tous les blocs depuis le début : la mémoire est effacée.",
+    ],
+    plusLoin: [
+      "Ajouter une troisième classe (par exemple « lapin ») avec vos propres photos.",
+      "Dégeler les dernières couches de MobileNetV2 pour gagner encore un peu de précision.",
+    ],
+  },
+  {
+    id: "projet-2",
+    numero: 2,
+    title: "Où passe mon argent ?",
+    situation:
+      "Votre relevé bancaire est une longue liste de libellés obscurs : « CB LIDL 2304 PARIS », « PRLV SEPA FREE MOBILE ». Vous allez apprendre à une machine à les ranger toute seule en courses, transport, abonnements, restaurants, loisirs et santé, puis à répondre à la vraie question : combien ai-je dépensé dans chaque catégorie ce mois-ci ?",
+    famille: "Apprentissage supervisé",
+    duree: "Environ 45 minutes",
+    donnees: "Une soixantaine de lignes de relevé déjà rangées, que vous remplacerez ensuite par les vôtres",
+    apprend: [
+      "Fabriquer vous-même un petit jeu de données étiqueté",
+      "Transformer un texte court en nombres",
+      "Vérifier le modèle sur le mois suivant",
+      "Utiliser le modèle sur votre propre relevé",
+    ],
+    etapes: [
+      {
+        title: "Écrire les exemples",
+        explication:
+          "Pour apprendre, la machine a besoin d'exemples déjà rangés. Voici une soixantaine de lignes de relevé typiques, chacune avec sa catégorie. C'est votre dataset : vous venez de faire le travail d'étiquetage que font les banques à grande échelle.",
+        code: `import pandas as pd
+
+exemples = [
+    ("CB CARREFOUR CITY 12/03", "Courses"), ("CB LIDL 0423 LYON", "Courses"),
+    ("CB MONOPRIX PARIS 15", "Courses"), ("CB AUCHAN SUPERMARCHE", "Courses"),
+    ("CB INTERMARCHE 05/04", "Courses"), ("CB FRANPRIX 2231", "Courses"),
+    ("CB BOULANGERIE PAUL", "Courses"), ("CB PICARD SURGELES", "Courses"),
+    ("CB LECLERC DRIVE", "Courses"), ("CB BIOCOOP NATION", "Courses"),
+    ("CB SNCF INTERNET", "Transport"), ("PRLV SEPA NAVIGO ANNUEL", "Transport"),
+    ("CB UBER TRIP 0412", "Transport"), ("CB TOTALENERGIES STATION", "Transport"),
+    ("CB RATP TICKETS", "Transport"), ("CB BOLT RIDE", "Transport"),
+    ("CB ESSO A6 AUTOROUTE", "Transport"), ("CB BLABLACAR", "Transport"),
+    ("CB VINCI AUTOROUTES PEAGE", "Transport"), ("CB LIME SCOOTER", "Transport"),
+    ("PRLV SEPA FREE MOBILE", "Abonnements"), ("PRLV NETFLIX.COM", "Abonnements"),
+    ("PRLV SPOTIFY P1234", "Abonnements"), ("PRLV SEPA ORANGE INTERNET", "Abonnements"),
+    ("PRLV EDF CLIENTS PARTICULIERS", "Abonnements"), ("PRLV SEPA BASIC FIT", "Abonnements"),
+    ("PRLV DISNEY PLUS", "Abonnements"), ("PRLV SFR BOX", "Abonnements"),
+    ("PRLV AMAZON PRIME", "Abonnements"), ("PRLV ENGIE GAZ", "Abonnements"),
+    ("CB UBER EATS", "Restaurants"), ("CB DELIVEROO", "Restaurants"),
+    ("CB MCDONALDS 0587", "Restaurants"), ("CB STARBUCKS GARE", "Restaurants"),
+    ("CB RESTAURANT LE PETIT ZINC", "Restaurants"), ("CB BURGER KING", "Restaurants"),
+    ("CB SUSHI SHOP", "Restaurants"), ("CB BRASSERIE DU COIN", "Restaurants"),
+    ("CB KFC 1123", "Restaurants"), ("CB PIZZA HUT", "Restaurants"),
+    ("CB FNAC.COM", "Loisirs"), ("CB CINEMA PATHE", "Loisirs"),
+    ("CB DECATHLON 0098", "Loisirs"), ("CB STEAM GAMES", "Loisirs"),
+    ("CB UGC CINE CITE", "Loisirs"), ("CB CULTURA", "Loisirs"),
+    ("CB TICKETMASTER CONCERT", "Loisirs"), ("CB PLAYSTATION STORE", "Loisirs"),
+    ("CB MUSEE DU LOUVRE", "Loisirs"), ("CB BOWLING CITY", "Loisirs"),
+    ("CB PHARMACIE CENTRALE", "Santé"), ("CB PHARMACIE DE LA GARE", "Santé"),
+    ("CB DOCTOLIB DR MARTIN", "Santé"), ("CB OPTICIEN KRYS", "Santé"),
+    ("PRLV MUTUELLE HARMONIE", "Santé"), ("CB LABORATOIRE ANALYSES", "Santé"),
+    ("CB DENTISTE CABINET", "Santé"), ("CB PHARMACIE DU MARCHE", "Santé"),
+]
+depenses = pd.DataFrame(exemples, columns=["libelle", "categorie"])
+print(depenses.categorie.value_counts())`,
+      },
+      {
+        title: "Transformer les libellés en nombres",
+        explication:
+          "Un modèle ne lit pas, il calcule. On découpe donc chaque libellé en petits morceaux de 2 à 4 lettres : « LIDL » devient « LI », « ID », « DL », « LID », « IDL »… Grâce à ça, « CB LIDL 2304 » et « CB LIDL 0423 » se ressemblent beaucoup pour la machine, même si les chiffres changent. Le modèle (une régression logistique) apprend ensuite quels morceaux annoncent quelle catégorie.",
+        code: `from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+
+modele = make_pipeline(
+    TfidfVectorizer(analyzer="char_wb", ngram_range=(2, 4)),   # morceaux de 2 à 4 lettres
+    LogisticRegression(max_iter=1000),
+)`,
+      },
+      {
+        title: "Entraîner le modèle",
+        explication:
+          "Une ligne suffit. Le modèle regarde les soixante exemples et ajuste ses réglages pour que ses réponses collent le mieux possible aux catégories que vous avez données.",
+        code: `modele.fit(depenses.libelle, depenses.categorie)`,
+      },
+      {
+        title: "Vérifier sur le mois suivant",
+        explication:
+          "Le vrai test : un relevé que le modèle n'a jamais vu, avec des enseignes nouvelles (Bouygues, Gaumont, Total Access…). On connaît la bonne catégorie de chaque ligne, on compare avec ce que répond le modèle.",
+        code: `mois_suivant = pd.DataFrame({
+    "libelle": ["CB LIDL 2304 PARIS", "CB UBER EATS 0911", "PRLV SEPA BOUYGUES TELECOM",
+                "CB SNCF CONNECT", "CB CARREFOUR MARKET", "CB PHARMACIE LAFAYETTE",
+                "CB CINEMA GAUMONT", "CB TOTAL ACCESS", "CB FRANPRIX 0045", "CB DELIVEROO PARIS"],
+    "montant": [42.30, 18.90, 15.99, 64.00, 87.15, 12.40, 11.50, 55.20, 23.80, 24.60],
+    "vraie_categorie": ["Courses", "Restaurants", "Abonnements", "Transport", "Courses",
+                        "Santé", "Loisirs", "Transport", "Courses", "Restaurants"],
+})
+mois_suivant["categorie"] = modele.predict(mois_suivant.libelle)
+
+bonnes = (mois_suivant.categorie == mois_suivant.vraie_categorie).sum()
+print(bonnes, "bonnes réponses sur", len(mois_suivant))
+print(mois_suivant[["libelle", "categorie"]])`,
+      },
+      {
+        title: "Faire le bilan du mois",
+        explication:
+          "C'est la question qui vous intéresse vraiment : le total par catégorie, du plus gros poste au plus petit.",
+        code: `bilan = mois_suivant.groupby("categorie").montant.sum().sort_values(ascending=False)
+print(bilan)`,
+      },
+      {
+        title: "Utiliser votre propre relevé",
+        explication:
+          "Dans votre espace bancaire, exportez vos opérations au format CSV, puis glissez le fichier dans le panneau Fichiers de Colab (icône de dossier à gauche). Les noms de colonnes changent d'une banque à l'autre : ouvrez le fichier, repérez celle du libellé et celle du montant, et adaptez les deux noms ci-dessous.",
+        code: `releve = pd.read_csv("releve.csv", sep=";", decimal=",")
+print(releve.columns)   # repérez les colonnes du libellé et du montant
+
+releve["categorie"] = modele.predict(releve["Libellé"])
+print(releve.groupby("categorie")["Montant"].sum())`,
+      },
+    ],
+    resultat: "Sur le relevé du mois suivant, le modèle range correctement les 10 dépenses, y compris les enseignes qu'il n'avait jamais vues.",
+    pieges: [
+      "Un commerçant au nom inattendu (« CB SARL MARTIN ») sera mal rangé : ajoutez-le à vos exemples avec la bonne catégorie, puis relancez l'entraînement.",
+      "Erreur « KeyError » à la dernière étape : le nom de colonne ne correspond pas à celui de votre banque. Copiez-le exactement depuis l'affichage de releve.columns.",
+      "Votre relevé reste dans votre session Colab. Évitez de partager le notebook une fois vos données chargées.",
+    ],
+    plusLoin: [
+      "Ajouter vos propres catégories (« Enfants », « Animaux »…) en écrivant une dizaine d'exemples pour chacune.",
+      "Afficher le bilan sous forme de graphique avec bilan.plot.barh().",
+    ],
+  },
+  {
+    id: "projet-3",
+    numero: 3,
+    title: "Que cuisiner ce soir ?",
+    situation:
+      "Il est 19h, le frigo est à moitié vide et personne n'a d'idée. Vous allez donner à la machine une liste de recettes du quotidien, sans lui dire de quel type elles sont. Elle va d'abord les regrouper seule en familles, puis trouver la recette la plus proche de ce qu'il vous reste, avec la liste des ingrédients qui manquent.",
+    famille: "Apprentissage non supervisé",
+    duree: "Environ 45 minutes",
+    donnees: "24 recettes de tous les jours décrites par leurs ingrédients, sans aucune étiquette",
+    apprend: [
+      "Décrire une recette avec des 0 et des 1",
+      "Laisser la machine trouver seule des groupes (k-means)",
+      "Mesurer la ressemblance entre deux recettes",
+      "Recommander à partir de ce que vous avez",
+    ],
+    etapes: [
+      {
+        title: "Écrire les recettes",
+        explication:
+          "Chaque recette est une simple liste d'ingrédients. Remarquez qu'on ne dit nulle part « dessert » ou « plat de pâtes » : il n'y a pas d'étiquette. C'est ce qui rend ce projet non supervisé.",
+        code: `recettes = {
+    "Pâtes carbonara": ["pâtes", "lardons", "oeufs", "parmesan", "poivre"],
+    "Pâtes au pesto": ["pâtes", "basilic", "parmesan", "huile d'olive", "ail"],
+    "Pâtes à la tomate": ["pâtes", "tomates", "ail", "huile d'olive", "basilic"],
+    "Lasagnes": ["pâtes", "boeuf haché", "tomates", "fromage râpé", "oignon"],
+    "Spaghetti bolognaise": ["pâtes", "boeuf haché", "tomates", "oignon", "carotte"],
+    "Omelette aux champignons": ["oeufs", "champignons", "beurre", "persil"],
+    "Quiche lorraine": ["oeufs", "lardons", "crème", "pâte brisée", "fromage râpé"],
+    "Oeufs cocotte": ["oeufs", "crème", "beurre", "ciboulette"],
+    "Tortilla": ["oeufs", "pommes de terre", "oignon", "huile d'olive"],
+    "Croque-monsieur": ["pain de mie", "jambon", "fromage râpé", "beurre"],
+    "Salade niçoise": ["salade", "tomates", "thon", "oeufs", "olives"],
+    "Salade grecque": ["concombre", "tomates", "feta", "olives", "oignon"],
+    "Taboulé": ["semoule", "tomates", "concombre", "menthe", "citron"],
+    "Salade de riz": ["riz", "thon", "tomates", "maïs", "olives"],
+    "Crêpes": ["farine", "oeufs", "lait", "sucre", "beurre"],
+    "Gâteau au yaourt": ["farine", "oeufs", "yaourt", "sucre", "huile"],
+    "Pancakes": ["farine", "oeufs", "lait", "sucre", "levure"],
+    "Pain perdu": ["pain", "oeufs", "lait", "sucre", "beurre"],
+    "Riz cantonais": ["riz", "oeufs", "jambon", "petits pois", "sauce soja"],
+    "Poulet curry riz": ["poulet", "riz", "curry", "lait de coco", "oignon"],
+    "Poulet rôti pommes de terre": ["poulet", "pommes de terre", "ail", "thym", "beurre"],
+    "Gratin dauphinois": ["pommes de terre", "crème", "lait", "ail", "fromage râpé"],
+    "Hachis parmentier": ["pommes de terre", "boeuf haché", "lait", "beurre", "oignon"],
+    "Soupe de légumes": ["carotte", "poireau", "pommes de terre", "oignon", "bouillon"],
+}
+noms = list(recettes)`,
+      },
+      {
+        title: "Transformer les recettes en nombres",
+        explication:
+          "On fait la liste de tous les ingrédients rencontrés, puis on décrit chaque recette par une ligne de 0 et de 1 : 1 si l'ingrédient est dans la recette, 0 sinon. Les 24 recettes deviennent un tableau de 24 lignes et 47 colonnes.",
+        code: `from sklearn.preprocessing import MultiLabelBinarizer
+
+encodeur = MultiLabelBinarizer()
+X = encodeur.fit_transform(recettes.values())
+print(X.shape)   # (24, 47) : 24 recettes, 47 ingrédients différents`,
+      },
+      {
+        title: "Laisser la machine faire des familles",
+        explication:
+          "L'algorithme k-means reçoit une seule consigne : « fais 6 groupes ». Il place les recettes qui partagent beaucoup d'ingrédients dans le même groupe, sans savoir ce qu'est un dessert ou une salade. Regardez le résultat : il retrouve tout seul les salades, les desserts, les plats de pâtes…",
+        code: `from sklearn.cluster import KMeans
+
+groupes = KMeans(n_clusters=6, n_init=20, random_state=0).fit_predict(X)
+
+for g in range(6):
+    print("Famille", g + 1, ":", [n for n, x in zip(noms, groupes) if x == g])`,
+      },
+      {
+        title: "Dire ce qu'il reste dans le frigo",
+        explication:
+          "Écrivez vos ingrédients, avec la même orthographe que dans les recettes. Le modèle mesure la ressemblance entre votre frigo et chaque recette (la part d'ingrédients en commun), puis garde les trois plus proches.",
+        code: `from sklearn.neighbors import NearestNeighbors
+
+voisins = NearestNeighbors(n_neighbors=3, metric="jaccard").fit(X.astype(bool))
+
+frigo = ["oeufs", "lait", "farine", "beurre"]
+distances, indices = voisins.kneighbors(encodeur.transform([frigo]).astype(bool))`,
+      },
+      {
+        title: "Lire les suggestions",
+        explication:
+          "Pour chaque recette proposée, on affiche la ressemblance et ce qu'il faudrait acheter. Avec des œufs, du lait, de la farine et du beurre, la machine propose des crêpes : il ne manque que le sucre.",
+        code: `for d, i in zip(distances[0], indices[0]):
+    recette = noms[i]
+    manque = sorted(set(recettes[recette]) - set(frigo))
+    print(f"{recette} : {1 - d:.0%} de ressemblance, il manque {', '.join(manque) or 'rien'}")`,
+      },
+    ],
+    resultat: "Six familles cohérentes trouvées sans aucune étiquette, et des crêpes proposées à 80 % de ressemblance pour un frigo contenant œufs, lait, farine et beurre.",
+    pieges: [
+      "Un ingrédient mal orthographié (« oeuf » au lieu de « oeufs ») est ignoré, avec un avertissement : recopiez exactement les noms des recettes.",
+      "Avec un autre nombre de groupes, les familles changent. Essayez 4 puis 8 : il n'y a pas de bonne réponse unique, c'est le propre du non supervisé.",
+    ],
+    plusLoin: [
+      "Ajouter vos propres recettes de famille et relancer le regroupement.",
+      "Donner plus de poids aux ingrédients rares (TF-IDF) pour que le sel ou l'huile comptent moins.",
+    ],
+  },
+];
+
+const faq = [
+  {
+    q: "Je suis mauvais en maths, je peux suivre ?",
+    r: "Oui. Les trois projets utilisent des bibliothèques qui font les calculs à votre place. Vous avez besoin de comprendre l'idée (le modèle se trompe, on mesure l'erreur, on corrige), pas de savoir dériver une fonction.",
+  },
+  {
+    q: "Je n'ai jamais écrit de code.",
+    r: "Chaque bloc est prêt à copier et chaque étape explique ce qu'il fait. Commencez par la version sans code du projet 1, puis passez à Colab.",
+  },
+  {
+    q: "Faut-il un ordinateur puissant ?",
+    r: "Non. Google Colab fait tourner le code sur ses serveurs, gratuitement. Un navigateur et une connexion internet suffisent.",
+  },
+  {
+    q: "Dans quel ordre faire les projets ?",
+    r: "Dans l'ordre de la page. Le projet 1 montre le principe avec des images, le 2 vous fait construire vos propres données, le 3 vous montre une machine qui trouve des groupes sans qu'on lui donne les réponses.",
+  },
+  {
+    q: "Et si je bloque ?",
+    r: "Venez au live coding du vendredi à 21h avec votre notebook, ou écrivez-moi : on regarde ensemble.",
+  },
+];
+
+const ressources = [
+  { title: "Les bibliothèques utilisées", items: ["pandas, pour lire et ranger des tableaux", "scikit-learn, pour les modèles classiques", "TensorFlow et Keras, pour les réseaux de neurones", "Google Colab, pour exécuter le tout en ligne"] },
+  { title: "Pour continuer seul", items: ["Machine Learning Specialization, Andrew Ng (Coursera)", "Google Machine Learning Crash Course", "Kaggle Learn, cours courts et gratuits", "fast.ai, Practical Deep Learning"] },
+];
+
+/* ------------------------------------------------------------------ */
+/* Composants                                                          */
+/* ------------------------------------------------------------------ */
+
+function BlocCode({ code }: { code: string }) {
+  const [copie, setCopie] = useState(false);
+
+  const copier = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopie(true);
+      setTimeout(() => setCopie(false), 2000);
+    } catch {
+      setCopie(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header Section */}
-      <header
-        className="text-white py-16 px-8 text-center"
-        style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+    <div className="relative mt-5 rounded-[14px] overflow-hidden" style={{ backgroundColor: AP.dark }}>
+      <button
+        type="button"
+        onClick={copier}
+        className="absolute top-3 right-3 rounded-full px-3.5 py-1.5 text-[13px] text-white/85 bg-white/10 hover:bg-white/20 border-0 cursor-pointer transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+        aria-label={copie ? "Code copié" : "Copier le code"}
       >
-        <div className="max-w-[1200px] mx-auto">
-          <a
-            href="/formations"
-            className="text-white no-underline inline-block mb-8 py-2 px-4 border-2 border-white rounded-lg transition-all duration-300 hover:bg-white hover:text-[#667eea]"
-          >
-            {"\u2190"} Retour aux formations
-          </a>
-          <h1 className="text-5xl md:text-3xl mb-4 flex items-center justify-center gap-4">
-            <FaBrain /> Apprentissage Automatique (Machine Learning)
-          </h1>
-          <p className="text-xl opacity-90">
-            Decouvrez les fondamentaux du Machine Learning de maniere simple et intuitive
+        {copie ? "Copié" : "Copier"}
+      </button>
+      <pre
+        className="overflow-x-auto p-5 pr-24 md:p-6 md:pr-24 text-[13px] leading-[1.7] m-0"
+        style={{ color: '#F5F5F7', fontFamily: AP.mono }}
+      >
+        <code>{code}</code>
+      </pre>
+    </div>
+  );
+}
+
+function Liste({ items }: { items: string[] }) {
+  return (
+    <ul className="m-0 p-0 list-none space-y-3">
+      {items.map((item) => (
+        <li key={item} className="text-[17px] leading-[1.5] pl-4 border-l-2" style={{ borderColor: AP.accent }}>
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function EnTete({ titre, texte }: { titre: string; texte?: string }) {
+  return (
+    <div className="text-center max-w-[720px] mx-auto mb-14">
+      <h2 className={h2}>{titre}</h2>
+      {texte && <p className={`${lead} mt-4`}>{texte}</p>}
+    </div>
+  );
+}
+
+function ProjetBloc({ projet, gris }: { projet: Projet; gris: boolean }) {
+  const fond = gris ? AP.gray : AP.white;
+  const carte = gris ? AP.white : AP.gray;
+
+  return (
+    <section id={projet.id} className={`${section} scroll-mt-12`} style={{ backgroundColor: fond }}>
+      <div className={containerWide}>
+        <div className="text-center max-w-[760px] mx-auto mb-14">
+          <p className="text-[17px] font-semibold m-0 mb-3" style={{ color: AP.accent }}>
+            Projet {projet.numero}
           </p>
+          <h2 className={h1}>{projet.title}</h2>
+          <p className={`${lead} mt-6`}>{projet.situation}</p>
+        </div>
+
+        {/* Fiche */}
+        <div className="grid md:grid-cols-2 gap-6 mb-16">
+          <dl className="rounded-[18px] p-8 m-0 grid gap-6" style={{ backgroundColor: carte }}>
+            {[
+              { dt: "Famille", dd: projet.famille },
+              { dt: "Durée", dd: projet.duree },
+              { dt: "Les données", dd: projet.donnees },
+            ].map(({ dt, dd }) => (
+              <div key={dt}>
+                <dt className={small}>{dt}</dt>
+                <dd className="m-0 mt-1 text-[19px] font-semibold leading-snug">{dd}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="rounded-[18px] p-8" style={{ backgroundColor: carte }}>
+            <h3 className={`${small} font-normal mb-5`}>Ce que vous apprenez</h3>
+            <Liste items={projet.apprend} />
+          </div>
+        </div>
+
+        {/* Sans code */}
+        {projet.sansCode && (
+          <div className="rounded-[18px] p-8 md:p-12 mb-16" style={{ backgroundColor: carte }}>
+            <h3 className={h3}>{projet.sansCode.title}</h3>
+            <p className={`${body2} mt-3 mb-7 max-w-[640px]`}>{projet.sansCode.intro}</p>
+            <ol className="m-0 p-0 list-none space-y-4">
+              {projet.sansCode.etapes.map((e, i) => (
+                <li key={e} className="flex gap-4 text-[17px] leading-[1.5]">
+                  <span className="shrink-0 font-semibold tabular-nums w-5" style={{ color: AP.accent }}>{i + 1}</span>
+                  <span>{e}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
+
+        {/* Étapes */}
+        <h3 className={`${h3} mb-2`}>
+          {projet.sansCode ? "La version avec Python, étape par étape." : "Étape par étape."}
+        </h3>
+        <p className={`${body2} mb-8`}>Un bloc de code par étape, à lancer dans l&apos;ordre dans Google Colab.</p>
+
+        <ol className="list-none m-0 p-0 space-y-4">
+          {projet.etapes.map((etape, i) => (
+            <li key={etape.title} className="rounded-[18px] p-6 md:p-9 grid md:grid-cols-[8rem_1fr] gap-3 md:gap-8" style={{ backgroundColor: carte }}>
+              <span className="text-[17px] font-semibold" style={{ color: AP.accent }}>
+                Étape {i + 1}
+              </span>
+              <div className="min-w-0">
+                <h4 className="text-[21px] font-semibold leading-tight m-0 mb-2">{etape.title}</h4>
+                <p className={`${body} max-w-[720px]`} style={{ color: '#424245' }}>{etape.explication}</p>
+                {etape.code && <BlocCode code={etape.code} />}
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        {/* Résultat, pièges, suite */}
+        <div className="mt-16 grid lg:grid-cols-3 gap-6">
+          <div className="rounded-[18px] p-8 text-white" style={{ backgroundColor: AP.dark }}>
+            <h3 className="text-[21px] font-semibold m-0 mb-3">Le résultat attendu</h3>
+            <p className="text-[17px] leading-[1.5] m-0 text-white/80">{projet.resultat}</p>
+          </div>
+          <div className="rounded-[18px] p-8" style={{ backgroundColor: carte }}>
+            <h3 className="text-[21px] font-semibold m-0 mb-5">Si ça coince</h3>
+            <Liste items={projet.pieges} />
+          </div>
+          <div className="rounded-[18px] p-8" style={{ backgroundColor: carte }}>
+            <h3 className="text-[21px] font-semibold m-0 mb-5">Pour aller plus loin</h3>
+            <Liste items={projet.plusLoin} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Page                                                                */
+/* ------------------------------------------------------------------ */
+
+export default function MachineLearningPage() {
+  return (
+    <div className="min-h-screen bg-white" style={{ fontFamily: AP.font, color: AP.text }}>
+      {/* Barre du haut */}
+      <div className="border-b border-black/10 bg-white/90 backdrop-blur sticky top-0 z-20">
+        <div className={`${containerWide} flex items-center justify-between gap-6 h-12`}>
+          <Link href="/formations" className={`text-[14px] ${link}`}>
+            Toutes les formations
+          </Link>
+          <nav aria-label="Sommaire de la formation" className="hidden md:block">
+            <ul className="flex gap-6 m-0 p-0 list-none text-[13px]">
+              {sommaire.map(({ href, label }) => (
+                <li key={href}>
+                  <a href={href} className={`no-underline text-[#1D1D1F]/80 hover:text-[#1D1D1F] ${focusRing}`}>
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      {/* Hero */}
+      <header className={`${section} text-center`}>
+        <div className={container}>
+          <p className="text-[19px] font-semibold m-0 mb-4" style={{ color: AP.accent }}>Formation Machine Learning</p>
+          <h1 className={h1}>Créez vos trois premières IA. Même en partant de zéro.</h1>
+          <p className={`${lead} mt-6 max-w-[680px] mx-auto`}>
+            Pas de maths compliquées, rien à installer. Une IA qui reconnaît les chats et les chiens,
+            une qui range vos dépenses, une qui vous dit quoi cuisiner avec ce qu&apos;il reste dans le frigo.
+          </p>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <a href="#projet-1" className={btnPrimary}>Commencer le projet 1</a>
+            <Link href="/machine-learning" className={btnSecondary}>Voir la démo interactive</Link>
+          </div>
+          <dl className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-[760px] mx-auto m-0">
+            {[
+              { dt: "Niveau", dd: "Débutant complet" },
+              { dt: "Outil", dd: "Un navigateur" },
+              { dt: "Projets", dd: "3 projets guidés" },
+              { dt: "Prix", dd: "Gratuit" },
+            ].map(({ dt, dd }) => (
+              <div key={dt}>
+                <dt className={small}>{dt}</dt>
+                <dd className="m-0 mt-1 text-[19px] font-semibold">{dd}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </header>
 
-      {/* Introduction Section */}
-      <section className="py-16 px-8 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="text-[2.5rem] md:text-[1.8rem] text-center mb-12 text-[#2d3748]">
-            {"\u{1F914}"} Qu&apos;est-ce que le Machine Learning?
-          </h2>
-          <div className="bg-white p-8 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.1)]">
-            <p className="text-xl leading-[1.8] text-[#4a5568] mb-8">
-              Le Machine Learning (apprentissage automatique) est une branche de l&apos;intelligence artificielle
-              qui permet aux ordinateurs d&apos;<strong>apprendre a partir de donnees</strong> sans etre explicitement programmes.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-6 rounded-lg bg-[#f7fafc]">
-                <h3 className="text-xl mb-4 text-[#2d3748]">{"\u274C"} Programmation Traditionnelle</h3>
-                <p className="text-[#4a5568] leading-relaxed [&>code]:bg-[#e2e8f0] [&>code]:py-0.5 [&>code]:px-2 [&>code]:rounded [&>code]:text-sm">
-                  Vous ecrivez toutes les regles:<br/>
-                  <code>Si temperature {'>'} 30{"\u00B0"}C alors &quot;Il fait chaud&quot;</code>
-                </p>
-              </div>
-              <div className="p-6 rounded-lg bg-[#f7fafc]">
-                <h3 className="text-xl mb-4 text-[#2d3748]">{"\u2705"} Machine Learning</h3>
-                <p className="text-[#4a5568] leading-relaxed [&>code]:bg-[#e2e8f0] [&>code]:py-0.5 [&>code]:px-2 [&>code]:rounded [&>code]:text-sm">
-                  L&apos;ordinateur apprend les regles:<br/>
-                  <code>Analyser 1000 exemples de temperatures {"\u2192"} Deduire les regles</code>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Types de ML Section */}
-      <section className="py-16 px-8 bg-[#f7fafc]">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="text-[2.5rem] md:text-[1.8rem] text-center mb-12 text-[#2d3748]">
-            {"\u{1F4DA}"} Les 3 Types Principaux de Machine Learning
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.1)] transition-transform duration-300 hover:-translate-y-[5px]">
-              <div className="text-5xl text-[#667eea] mb-4"><FaChartLine /></div>
-              <h3 className="text-2xl text-[#2d3748] mb-4">1. Apprentissage Supervise</h3>
-              <p className="text-[#4a5568] mb-6 leading-relaxed">
-                L&apos;algorithme apprend a partir de <strong>donnees etiquetees</strong> (exemples avec reponses).
-              </p>
-              <div className="bg-[#edf2f7] p-6 rounded-lg mb-6">
-                <h4 className="text-[#667eea] mb-2">{"\u{1F4A1}"} Exemple concret:</h4>
-                <p className="text-[#2d3748] leading-relaxed text-[0.95rem]">
-                  <strong>Detecter des spams</strong><br/>
-                  {"\u2022"} Donnees: 10,000 emails marques &quot;spam&quot; ou &quot;non-spam&quot;<br/>
-                  {"\u2022"} L&apos;algorithme apprend les caracteristiques des spams<br/>
-                  {"\u2022"} Il peut ensuite classifier de nouveaux emails
-                </p>
-              </div>
-              <div className="bg-[#f7fafc] p-4 rounded-lg text-sm text-[#4a5568] leading-[1.8]">
-                <h5 className="text-[#2d3748] mb-2">{"\u{1F4CC}"} Utilisations:</h5>
-                {"\u2022"} Reconnaissance d&apos;images<br/>
-                {"\u2022"} Previsions de prix<br/>
-                {"\u2022"} Diagnostic medical
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.1)] transition-transform duration-300 hover:-translate-y-[5px]">
-              <div className="text-5xl text-[#667eea] mb-4"><FaRobot /></div>
-              <h3 className="text-2xl text-[#2d3748] mb-4">2. Apprentissage Non Supervise</h3>
-              <p className="text-[#4a5568] mb-6 leading-relaxed">
-                L&apos;algorithme decouvre des <strong>patterns caches</strong> dans des donnees non etiquetees.
-              </p>
-              <div className="bg-[#edf2f7] p-6 rounded-lg mb-6">
-                <h4 className="text-[#667eea] mb-2">{"\u{1F4A1}"} Exemple concret:</h4>
-                <p className="text-[#2d3748] leading-relaxed text-[0.95rem]">
-                  <strong>Segmentation de clients</strong><br/>
-                  {"\u2022"} Donnees: Historique d&apos;achats de 50,000 clients<br/>
-                  {"\u2022"} L&apos;algorithme groupe les clients similaires<br/>
-                  {"\u2022"} Decouvre 5 types de clients differents
-                </p>
-              </div>
-              <div className="bg-[#f7fafc] p-4 rounded-lg text-sm text-[#4a5568] leading-[1.8]">
-                <h5 className="text-[#2d3748] mb-2">{"\u{1F4CC}"} Utilisations:</h5>
-                {"\u2022"} Recommandations (Netflix, Amazon)<br/>
-                {"\u2022"} Detection d&apos;anomalies<br/>
-                {"\u2022"} Compression de donnees
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.1)] transition-transform duration-300 hover:-translate-y-[5px]">
-              <div className="text-5xl text-[#667eea] mb-4"><FaLightbulb /></div>
-              <h3 className="text-2xl text-[#2d3748] mb-4">3. Apprentissage par Renforcement</h3>
-              <p className="text-[#4a5568] mb-6 leading-relaxed">
-                L&apos;algorithme apprend par <strong>essais-erreurs</strong> avec un systeme de recompenses.
-              </p>
-              <div className="bg-[#edf2f7] p-6 rounded-lg mb-6">
-                <h4 className="text-[#667eea] mb-2">{"\u{1F4A1}"} Exemple concret:</h4>
-                <p className="text-[#2d3748] leading-relaxed text-[0.95rem]">
-                  <strong>Jeu d&apos;echecs</strong><br/>
-                  {"\u2022"} L&apos;IA joue des milliers de parties<br/>
-                  {"\u2022"} Recompense: +1 si victoire, -1 si defaite<br/>
-                  {"\u2022"} Elle ameliore sa strategie a chaque partie
-                </p>
-              </div>
-              <div className="bg-[#f7fafc] p-4 rounded-lg text-sm text-[#4a5568] leading-[1.8]">
-                <h5 className="text-[#2d3748] mb-2">{"\u{1F4CC}"} Utilisations:</h5>
-                {"\u2022"} Voitures autonomes<br/>
-                {"\u2022"} Jeux video (AlphaGo)<br/>
-                {"\u2022"} Robotique
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Example Section */}
-      <section className="py-16 px-8 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="text-[2.5rem] md:text-[1.8rem] text-center mb-12 text-[#2d3748]">
-            {"\u{1F3AE}"} Exemple Interactif: Classification de Fruits
-          </h2>
-          <p className="text-center text-xl text-[#4a5568] mb-12">
-            Voyons comment un algorithme de Machine Learning apprend a classifier des fruits!
+      {/* Le principe */}
+      <section id="principe" className={`${section} scroll-mt-12`} style={{ backgroundColor: AP.gray }}>
+        <div className={containerWide}>
+          <EnTete
+            titre="Le principe, avec un enfant et des photos."
+            texte="En programmation classique, on écrit les règles. En machine learning, on donne des exemples et la machine trouve les règles toute seule. C'est ce que vous faites quand vous apprenez à un enfant à reconnaître un chat."
+          />
+          <ol className="list-none m-0 p-0 space-y-4">
+            {analogie.map((a, i) => (
+              <li key={a.terme} className={`${card} p-7 md:p-9 grid md:grid-cols-12 gap-x-8 gap-y-3 items-start`}>
+                <span aria-hidden="true" className="md:col-span-1 font-semibold text-[34px] leading-none tabular-nums" style={{ color: AP.accent }}>
+                  {i + 1}
+                </span>
+                <p className={`md:col-span-6 ${body}`}>{a.geste}</p>
+                <div className="md:col-span-5">
+                  <h3 className="text-[21px] font-semibold leading-tight m-0 mb-1">{a.terme}</h3>
+                  <p className={body2}>{a.sens}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <p className={`${body2} mt-10 text-center`}>
+            Envie de voir la machine corriger ses erreurs en direct ?{" "}
+            <Link href="/machine-learning" className={link}>Essayez la démo de la descente de gradient</Link>.
           </p>
-
-          <div className="flex flex-col gap-4 mb-8">
-            {/* Step 1 */}
-            <div
-              onClick={() => setActiveExample('step1')}
-              className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:border-[#667eea] ${
-                activeExample === 'step1'
-                  ? 'bg-[#667eea] text-white border-[#667eea]'
-                  : 'bg-white text-[#2d3748] border-[#e2e8f0]'
-              }`}
-            >
-              <span className="inline-block w-10 h-10 rounded-full text-center leading-10 font-bold mr-4" style={{ background: 'currentColor', filter: 'invert(1)' }}>1</span>
-              <span className="text-xl font-semibold">Collecter les donnees</span>
-              {activeExample === 'step1' && (
-                <div className="mt-6 pt-6 border-t border-white/30">
-                  <p className="mb-4 leading-relaxed">
-                    On mesure le <strong>poids</strong> et la <strong>couleur</strong> de 100 fruits:
-                  </p>
-                  <table className="w-full border-collapse bg-white/10 rounded-lg overflow-hidden">
-                    <thead>
-                      <tr>
-                        <th className="p-3 text-left font-semibold bg-white/10 border-b border-white/20">Poids (g)</th>
-                        <th className="p-3 text-left font-semibold bg-white/10 border-b border-white/20">Couleur (0-255)</th>
-                        <th className="p-3 text-left font-semibold bg-white/10 border-b border-white/20">Fruit</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr><td className="p-3 border-b border-white/20">150</td><td className="p-3 border-b border-white/20">200 (rouge)</td><td className="p-3 border-b border-white/20">{"\u{1F34E}"} Pomme</td></tr>
-                      <tr><td className="p-3 border-b border-white/20">120</td><td className="p-3 border-b border-white/20">50 (orange)</td><td className="p-3 border-b border-white/20">{"\u{1F34A}"} Orange</td></tr>
-                      <tr><td className="p-3 border-b border-white/20">180</td><td className="p-3 border-b border-white/20">80 (jaune)</td><td className="p-3 border-b border-white/20">{"\u{1F34C}"} Banane</td></tr>
-                      <tr><td className="p-3">145</td><td className="p-3">195 (rouge)</td><td className="p-3">{"\u{1F34E}"} Pomme</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </div>
-
-            {/* Step 2 */}
-            <div
-              onClick={() => setActiveExample('step2')}
-              className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:border-[#667eea] ${
-                activeExample === 'step2'
-                  ? 'bg-[#667eea] text-white border-[#667eea]'
-                  : 'bg-white text-[#2d3748] border-[#e2e8f0]'
-              }`}
-            >
-              <span className="inline-block w-10 h-10 rounded-full text-center leading-10 font-bold mr-4" style={{ background: 'currentColor', filter: 'invert(1)' }}>2</span>
-              <span className="text-xl font-semibold">Entrainer le modele</span>
-              {activeExample === 'step2' && (
-                <div className="mt-6 pt-6 border-t border-white/30">
-                  <p className="mb-4 leading-relaxed">
-                    L&apos;algorithme analyse les donnees et decouvre les patterns:
-                  </p>
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center gap-4 bg-white/10 p-4 rounded-lg">
-                      <span className="text-3xl">{"\u{1F34E}"}</span>
-                      <p className="flex-1 m-0"><strong>Pommes:</strong> Poids {"\u2248"} 140-160g, Couleur rouge (190-210)</p>
-                    </div>
-                    <div className="flex items-center gap-4 bg-white/10 p-4 rounded-lg">
-                      <span className="text-3xl">{"\u{1F34A}"}</span>
-                      <p className="flex-1 m-0"><strong>Oranges:</strong> Poids {"\u2248"} 110-130g, Couleur orange (40-60)</p>
-                    </div>
-                    <div className="flex items-center gap-4 bg-white/10 p-4 rounded-lg">
-                      <span className="text-3xl">{"\u{1F34C}"}</span>
-                      <p className="flex-1 m-0"><strong>Bananes:</strong> Poids {"\u2248"} 170-190g, Couleur jaune (70-90)</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Step 3 */}
-            <div
-              onClick={() => setActiveExample('step3')}
-              className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:border-[#667eea] ${
-                activeExample === 'step3'
-                  ? 'bg-[#667eea] text-white border-[#667eea]'
-                  : 'bg-white text-[#2d3748] border-[#e2e8f0]'
-              }`}
-            >
-              <span className="inline-block w-10 h-10 rounded-full text-center leading-10 font-bold mr-4" style={{ background: 'currentColor', filter: 'invert(1)' }}>3</span>
-              <span className="text-xl font-semibold">Predire de nouveaux fruits</span>
-              {activeExample === 'step3' && (
-                <div className="mt-6 pt-6 border-t border-white/30">
-                  <p className="mb-4 leading-relaxed">
-                    On donne un nouveau fruit au modele:
-                  </p>
-                  <div className="flex flex-col items-center gap-4 p-8 bg-white/10 rounded-lg mb-4">
-                    <div className="p-4 bg-white/15 rounded-lg w-full text-center">
-                      <strong>Nouveau fruit:</strong> Poids = 155g, Couleur = 205 (rouge)
-                    </div>
-                    <div className="text-3xl font-bold">{"\u2193"}</div>
-                    <div className="p-4 bg-white/15 rounded-lg w-full text-center text-xl">
-                      <strong>Prediction:</strong> {"\u{1F34E}"} C&apos;est une Pomme! (95% de confiance)
-                    </div>
-                  </div>
-                  <p className="leading-relaxed">
-                    Le modele compare les caracteristiques aux patterns appris et fait une prediction!
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <button
-            onClick={() => {
-              if (activeExample === null) setActiveExample('step1');
-              else if (activeExample === 'step1') setActiveExample('step2');
-              else if (activeExample === 'step2') setActiveExample('step3');
-              else setActiveExample('step1');
-            }}
-            className="block mx-auto py-4 px-8 text-lg font-semibold text-white border-none rounded-lg cursor-pointer transition-transform duration-300 hover:scale-105"
-            style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
-          >
-            {activeExample === null ? '\u25B6\uFE0F Commencer l\'exemple' :
-             activeExample === 'step3' ? '\u{1F504} Recommencer' : '\u27A1\uFE0F Etape suivante'}
-          </button>
         </div>
       </section>
 
-      {/* Concepts Cles Section */}
-      <section className="py-16 px-8 bg-[#f7fafc]">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="text-[2.5rem] md:text-[1.8rem] text-center mb-12 text-[#2d3748]">
-            {"\u{1F511}"} Concepts Cles a Retenir
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
-            {[
-              { title: "\u{1F4CA} Dataset (Jeu de donnees)", text: "Ensemble de donnees utilisees pour entrainer le modele. Plus il y a de donnees de qualite, meilleur sera le modele.", example: "Ex: 10,000 photos de chats et chiens pour entrainer un classificateur" },
-              { title: "\u{1F3AF} Features (Caracteristiques)", text: "Les attributs mesurables des donnees que le modele utilise pour apprendre.", example: "Ex: Pour une maison \u2192 superficie, nombre de chambres, localisation" },
-              { title: "\u{1F3CB}\uFE0F Training (Entrainement)", text: "Processus ou le modele apprend des patterns a partir des donnees d'entrainement.", example: "Ex: Montrer 80% des donnees au modele pour qu'il apprenne" },
-              { title: "\u2705 Testing (Test)", text: "Evaluation du modele sur de nouvelles donnees qu'il n'a jamais vues.", example: "Ex: Utiliser 20% des donnees pour verifier la precision" },
-              { title: "\u26A0\uFE0F Overfitting (Surapprentissage)", text: "Quand le modele memorise les donnees d'entrainement au lieu d'apprendre les vrais patterns.", example: "Ex: Un etudiant qui memorise sans comprendre \u2192 echoue aux nouveaux problemes" },
-              { title: "\u{1F4C8} Accuracy (Precision)", text: "Pourcentage de predictions correctes sur l'ensemble des predictions.", example: "Ex: 95/100 predictions correctes = 95% de precision" }
-            ].map((concept, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl border-l-4 border-[#667eea] shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-                <h3 className="text-[#2d3748] mb-3 text-xl">{concept.title}</h3>
-                <p className="text-[#4a5568] leading-relaxed mb-3">{concept.text}</p>
-                <div className="bg-[#edf2f7] p-3 rounded-md text-sm text-[#667eea] italic">
-                  {concept.example}
-                </div>
-              </div>
+      {/* Supervisé / non supervisé */}
+      <section id="familles" className={`${section} bg-white scroll-mt-12`}>
+        <div className={containerWide}>
+          <EnTete titre="Deux façons d'apprendre." texte="Les trois projets couvrent les deux grandes familles du machine learning." />
+          <div className="grid md:grid-cols-2 gap-6">
+            {familles.map((f) => (
+              <article key={f.title} className="rounded-[18px] p-8 md:p-10 flex flex-col" style={{ backgroundColor: AP.gray }}>
+                <h3 className={h3}>{f.title}</h3>
+                <p className={`${body} mt-4`}>{f.definition}</p>
+                <p className={`${body2} mt-4 mb-8`}>{f.analogie}</p>
+                <a href={f.href} className={`mt-auto text-[17px] ${link}`}>{f.projets}</a>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Algorithmes Populaires Section */}
-      <section className="py-16 px-8 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="text-[2.5rem] md:text-[1.8rem] text-center mb-12 text-[#2d3748]">
-            {"\u{1F6E0}\uFE0F"} Algorithmes ML Populaires pour Debutants
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-8">
-            {[
-              { name: "Regression Lineaire", desc: "Predit une valeur numerique basee sur une relation lineaire.", example: "Predire le prix d'une maison selon sa superficie", formula: "y = mx + b\n(Prix = coefficient \u00D7 superficie + constante)" },
-              { name: "K-Nearest Neighbors (KNN)", desc: "Classifie selon les K voisins les plus proches dans les donnees.", example: "Si 8/10 voisins proches sont des spams \u2192 C'est un spam", formula: "\"Dis-moi qui sont tes voisins, je te dirai qui tu es\"" },
-              { name: "Decision Trees (Arbres de decision)", desc: "Prend des decisions via une serie de questions oui/non.", example: `Poids > 150g? \u2192 Oui \u2192 Couleur rouge? \u2192 Oui \u2192 Pomme!`, formula: "Comme un organigramme de decisions" },
-              { name: "Neural Networks (Reseaux de neurones)", desc: "Inspire du cerveau humain, compose de neurones artificiels connectes.", example: "Reconnaissance faciale, traduction automatique", formula: "Base du Deep Learning et de l'IA moderne" }
-            ].map((algo, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.1)] text-center">
-                <h3 className="text-[#667eea] text-xl mb-4">{algo.name}</h3>
-                <p className="text-[#4a5568] mb-4 leading-relaxed">{algo.desc}</p>
-                <div className="bg-[#f7fafc] p-4 rounded-lg mb-4 text-sm text-[#2d3748]">
-                  <strong>Exemple:</strong> {algo.example}
-                </div>
-                <div className="bg-[#edf2f7] p-3 rounded-md font-mono text-sm text-[#667eea] whitespace-pre-line">
-                  {algo.formula}
-                </div>
+      {/* Vocabulaire */}
+      <section id="vocabulaire" className={`${section} scroll-mt-12`} style={{ backgroundColor: AP.gray }}>
+        <div className={container}>
+          <EnTete titre="Huit mots suffisent." texte="Revenez ici si l'un d'eux vous échappe pendant les projets." />
+          <dl className={`${card} m-0 px-7 md:px-10`}>
+            {vocabulaire.map(({ terme, definition }, i) => (
+              <div key={terme} className={`py-6 grid sm:grid-cols-[11rem_1fr] gap-1 sm:gap-8 ${i > 0 ? 'border-t border-black/10' : ''}`}>
+                <dt className="text-[17px] font-semibold">{terme}</dt>
+                <dd className={`m-0 ${body2}`}>{definition}</dd>
               </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      {/* Atelier */}
+      <section id="atelier" className={`${section} bg-white scroll-mt-12`}>
+        <div className={containerWide}>
+          <EnTete
+            titre="Votre atelier : Google Colab."
+            texte="Les trois projets se font dans Google Colab, un outil gratuit qui exécute du Python dans votre navigateur. Préparez-le une fois, en quatre gestes."
+          />
+          <ol className="list-none m-0 p-0 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {atelier.map((a, i) => (
+              <li key={a.title} className="rounded-[18px] p-7" style={{ backgroundColor: AP.gray }}>
+                <span className="block font-semibold text-[28px] mb-4 tabular-nums" style={{ color: AP.accent }}>{i + 1}</span>
+                <h3 className="text-[19px] font-semibold leading-tight m-0 mb-2">{a.title}</h3>
+                <p className={`${body2} text-[15px]`}>{a.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Projets */}
+      {projets.map((projet, i) => (
+        <ProjetBloc key={projet.id} projet={projet} gris={i % 2 === 0} />
+      ))}
+
+      {/* FAQ */}
+      <section id="faq" className={`${section} scroll-mt-12`} style={{ backgroundColor: AP.gray }}>
+        <div className={container}>
+          <EnTete titre="Les questions qu'on se pose au début." />
+          <div className={`${card} px-7 md:px-10`}>
+            {faq.map(({ q, r }, i) => (
+              <details key={q} className={`group ${i > 0 ? 'border-t border-black/10' : ''}`}>
+                <summary className={`flex justify-between items-center gap-6 py-6 cursor-pointer list-none text-[19px] font-semibold [&::-webkit-details-marker]:hidden ${focusRing}`}>
+                  <span>{q}</span>
+                  <span aria-hidden="true" className="text-[24px] font-light leading-none transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none" style={{ color: AP.text2 }}>
+                    +
+                  </span>
+                </summary>
+                <p className={`${body2} pb-6 max-w-[640px]`}>{r}</p>
+              </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Workflow ML Section */}
-      <section className="py-16 px-8 bg-[#f7fafc]">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="text-[2.5rem] md:text-[1.8rem] text-center mb-12 text-[#2d3748]">
-            {"\u{1F504}"} Le Workflow d&apos;un Projet ML
-          </h2>
-
-          <div className="max-w-[600px] mx-auto">
-            {[
-              { num: "1\uFE0F\u20E3", title: "Definir le probleme", text: "Quelle question voulez-vous resoudre?" },
-              { num: "2\uFE0F\u20E3", title: "Collecter les donnees", text: "Rassembler des donnees pertinentes et de qualite" },
-              { num: "3\uFE0F\u20E3", title: "Nettoyer les donnees", text: "Supprimer erreurs, doublons, valeurs manquantes" },
-              { num: "4\uFE0F\u20E3", title: "Choisir un algorithme", text: "Selectionner le bon outil pour le probleme" },
-              { num: "5\uFE0F\u20E3", title: "Entrainer le modele", text: "Laisser l'algorithme apprendre des donnees" },
-              { num: "6\uFE0F\u20E3", title: "Evaluer la performance", text: "Tester sur de nouvelles donnees" },
-              { num: "7\uFE0F\u20E3", title: "Deployer en production", text: "Utiliser le modele pour de vraies predictions" }
-            ].map((step, index, arr) => (
-              <div key={index}>
-                <div className="flex items-center gap-6 bg-white p-6 rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-                  <div className="text-3xl">{step.num}</div>
-                  <div className="flex-1">
-                    <h3 className="text-[#2d3748] mb-2">{step.title}</h3>
-                    <p className="text-[#4a5568] text-[0.95rem]">{step.text}</p>
-                  </div>
-                </div>
-                {index < arr.length - 1 && (
-                  <div className="text-center text-3xl text-[#667eea] my-2">{"\u2193"}</div>
-                )}
-              </div>
-            ))}
-          </div>
+      {/* Ressources */}
+      <section className={`${section} bg-white`}>
+        <div className={`${containerWide} grid md:grid-cols-2 gap-6`}>
+          {ressources.map(({ title, items }) => (
+            <div key={title} className="rounded-[18px] p-8 md:p-10" style={{ backgroundColor: AP.gray }}>
+              <h2 className={`${h3} mb-6`}>{title}</h2>
+              <Liste items={items} />
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Resources Section */}
-      <section className="py-16 px-8 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <h2 className="text-[2.5rem] md:text-[1.8rem] text-center mb-12 text-[#2d3748]">
-            {"\u{1F4DA}"} Pour Aller Plus Loin
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.1)]">
-              <h3 className="text-[#667eea] mb-4 text-xl">{"\u{1F40D}"} Python & Libraries</h3>
-              <div className="text-[#4a5568] leading-[1.8]">
-                {"\u2022"} <strong>NumPy:</strong> Calculs mathematiques<br/>
-                {"\u2022"} <strong>Pandas:</strong> Manipulation de donnees<br/>
-                {"\u2022"} <strong>Scikit-learn:</strong> Algorithmes ML<br/>
-                {"\u2022"} <strong>TensorFlow/PyTorch:</strong> Deep Learning
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.1)]">
-              <h3 className="text-[#667eea] mb-4 text-xl">{"\u{1F4D6}"} Cours Recommandes</h3>
-              <div className="text-[#4a5568] leading-[1.8]">
-                {"\u2022"} Machine Learning by Andrew Ng (Coursera)<br/>
-                {"\u2022"} Fast.ai - Practical Deep Learning<br/>
-                {"\u2022"} Google&apos;s ML Crash Course<br/>
-                {"\u2022"} Kaggle Learn
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.1)]">
-              <h3 className="text-[#667eea] mb-4 text-xl">{"\u{1F4BB}"} Projets Pratiques</h3>
-              <div className="text-[#4a5568] leading-[1.8]">
-                {"\u2022"} Prediction de prix immobiliers<br/>
-                {"\u2022"} Classification d&apos;images (chats vs chiens)<br/>
-                {"\u2022"} Systeme de recommandation de films<br/>
-                {"\u2022"} Detection de fraude bancaire
-              </div>
+      {/* Contact */}
+      <section className="pb-20 md:pb-28 bg-white">
+        <div className={containerWide}>
+          <div className="rounded-[18px] p-10 md:p-16 text-center" style={{ backgroundColor: AP.dark, color: '#F5F5F7' }}>
+            <h2 className="font-semibold tracking-[-0.02em] leading-[1.1] text-[32px] md:text-[44px] m-0">Bloqué sur un projet ?</h2>
+            <p className="text-[19px] leading-[1.45] text-white/70 mt-4 mb-10 max-w-[560px] mx-auto">
+              Envoyez-moi votre notebook ou le message d&apos;erreur : on trouve la solution ensemble. Réponse sous 24h.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <a
+                href="https://wa.me/33766450771?text=Bonjour%20Davy%2C%20j'ai%20une%20question%20sur%20la%20formation%20Machine%20Learning."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3 text-[17px] no-underline text-white bg-[#25D366] hover:bg-[#1da851] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                <FaWhatsapp aria-hidden="true" size={18} />
+                Me contacter sur WhatsApp
+              </a>
+              <a
+                href="mailto:tardindavy@gmail.com?subject=Formation%20Machine%20Learning%20-%20Question"
+                className="inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3 text-[17px] no-underline text-white border border-white/40 hover:bg-white hover:text-[#1D1D1F] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                <IoIosMail aria-hidden="true" size={20} />
+                Envoyer un email
+              </a>
             </div>
           </div>
         </div>
       </section>
-
-      {/* CTA contact personnalisé */}
-      <ContactCTA />
     </div>
   );
 }

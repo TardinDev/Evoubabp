@@ -90,22 +90,22 @@ export default function Footer() {
             {/* Services column */}
             <div className="flex flex-col gap-4">
               <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">{t.footer.services}</h3>
-              <a href="#app-showcase" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.mobileApps}</a>
-              <a href="#app-showcase" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.webApps}</a>
-              <a href="#howItWorks" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.saasDev}</a>
+              <a href="/#app-showcase" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.mobileApps}</a>
+              <a href="/#app-showcase" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.webApps}</a>
+              <a href="/#howItWorks" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.saasDev}</a>
               <Link href="/formations" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.training}</Link>
               <Link href="/blog" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.blog}</Link>
-              <a href="#howItWorks" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.consulting}</a>
+              <a href="/#howItWorks" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">{t.footer.consulting}</a>
             </div>
 
             {/* Technologies column */}
             <div className="flex flex-col gap-4">
               <h3 className="text-lg font-semibold text-[#e2e8f0] mb-2">{t.footer.technologies}</h3>
-              <a href="#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React Native</a>
-              <a href="#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React / Next.js</a>
-              <a href="#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">TypeScript</a>
-              <a href="#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Node.js</a>
-              <a href="#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Expo</a>
+              <a href="/#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React Native</a>
+              <a href="/#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">React / Next.js</a>
+              <a href="/#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">TypeScript</a>
+              <a href="/#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Node.js</a>
+              <a href="/#tech-used" className="text-[#cbd5e1] no-underline transition-all duration-300 py-1 rounded hover:text-blue-500 hover:pl-2">Expo</a>
             </div>
 
             {/* Contact column */}

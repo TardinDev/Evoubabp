@@ -4,12 +4,15 @@ import { IoIosMail } from "react-icons/io";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaWhatsapp } from "react-icons/fa";
 import { motion } from 'framer-motion';
-import { getMenuStyles, headerVariants } from "../../utils/motion";
+import { headerVariants } from "../../utils/motion";
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import EvoubapLogo from "./EvoubapLogo";
 import { useActiveSectionContext } from "../../contexts/ActiveSectionContext";
 import { useTranslation } from "../../hooks/useTranslation";
+
+const MotionLink = motion(Link);
 
 const subHeaderContainer = {
   hidden: { opacity: 0 },
@@ -34,8 +37,7 @@ const Menu = ({ menuOpened }: { menuOpened: boolean }) => {
 
   return (
     <ul
-      className="uppercase text-base list-none gap-6 cursor-pointer flex justify-around items-center md:static md:flex-row md:w-auto md:max-h-none md:overflow-visible md:bg-transparent md:p-0 md:rounded-none md:items-center md:justify-around max-md:absolute max-md:list-none max-md:gap-6 max-md:font-medium max-md:flex-col max-md:right-0 max-md:top-12 max-md:w-[85vw] max-md:max-w-[15rem] max-md:max-h-[80vh] max-md:overflow-auto max-md:bg-white max-md:p-6 max-md:flex max-md:rounded-2xl max-md:transition-all max-md:duration-300 max-md:items-start max-md:justify-end max-md:shadow-md"
-      style={getMenuStyles(menuOpened)}
+      className={`uppercase text-base list-none gap-6 cursor-pointer flex justify-around items-center md:static md:flex-row md:w-auto md:max-h-none md:overflow-visible md:bg-transparent md:p-0 md:rounded-none md:items-center md:justify-around max-md:absolute max-md:list-none max-md:gap-6 max-md:font-medium max-md:flex-col ${menuOpened ? "max-md:right-0" : "max-md:-right-full"} max-md:top-12 max-md:w-[85vw] max-md:max-w-[15rem] max-md:max-h-[80vh] max-md:overflow-auto max-md:bg-white max-md:p-6 max-md:flex max-md:rounded-2xl max-md:transition-all max-md:duration-300 max-md:items-start max-md:justify-end max-md:shadow-md`}
     >
       <li className="list-none hover:text-accent-blue">
         <Link href="/" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
@@ -43,12 +45,12 @@ const Menu = ({ menuOpened }: { menuOpened: boolean }) => {
         </Link>
       </li>
       <li className="list-none hover:text-accent-blue">
-        <a href="#app-showcase" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
+        <a href="/#app-showcase" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
           {t.header.projects}
         </a>
       </li>
       <li className="list-none hover:text-accent-blue">
-        <a href="#howItWorks" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
+        <a href="/#howItWorks" className="no-underline text-black visited:text-black active:text-black hover:text-black focus:text-black">
           {t.header.method}
         </a>
       </li>
@@ -69,6 +71,7 @@ const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const { activeColor } = useActiveSectionContext();
   const { language, toggleLanguage, t } = useTranslation();
+  const pathname = usePathname();
 
   const toggleMenu = useCallback(() => {
     setMenuOpened(prev => !prev);
@@ -94,9 +97,8 @@ const Header = () => {
       >
         <motion.div
           initial="hidden"
-          whileInView="show"
+          animate="show"
           variants={headerVariants}
-          viewport={{ once: true, amount: 0.25 }}
           className="bg-transparent p-0 flex justify-between font-medium flex-wrap relative"
         >
           <div className="flex items-center mt-2 sm:mt-3 md:mt-4">
@@ -120,13 +122,25 @@ const Header = () => {
           initial="hidden"
           animate="show"
           variants={subHeaderContainer}
-          className="flex justify-end items-center flex-wrap gap-1.5 sm:gap-2 md:gap-3 pt-0 pb-0.5"
+          className="relative z-10 flex justify-end items-center flex-wrap gap-1.5 sm:gap-2 md:gap-3 pt-0 pb-0.5"
         >
+          <MotionLink
+            variants={subHeaderItem}
+            whileHover={{ scale: 1.08, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            href="/machine-learning"
+            aria-label={t.header.mlChipLong}
+            aria-current={pathname === '/machine-learning' ? 'page' : undefined}
+            className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#4b0082] text-white bg-[#4b0082] hover:bg-[#0a0a0a] hover:border-[#0a0a0a] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap transition-colors"
+          >
+            <span className="sm:hidden">{t.header.mlChipShort}</span>
+            <span className="hidden sm:inline">{t.header.mlChipLong}</span>
+          </MotionLink>
           <motion.a
             variants={subHeaderItem}
             whileHover={{ scale: 1.08, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            href="#fullstack-node"
+            href="/#fullstack-node"
             className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#61dafb] text-[#0a0a0f] bg-[#61dafb]/90 backdrop-blur-sm hover:bg-[#61dafb] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
           >
             <span className="sm:hidden">Node</span>
@@ -136,7 +150,7 @@ const Header = () => {
             variants={subHeaderItem}
             whileHover={{ scale: 1.08, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            href="#fullstack-spring"
+            href="/#fullstack-spring"
             className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#6db33f] text-white bg-[#6db33f]/90 backdrop-blur-sm hover:bg-[#6db33f] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap"
           >
             <span className="sm:hidden">Spring</span>
@@ -146,7 +160,7 @@ const Header = () => {
             variants={subHeaderItem}
             whileHover={{ scale: 1.08, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            href="#payments"
+            href="/#payments"
             onClick={(e) => smoothScrollTo(e, 'payments')}
             aria-label={t.header.paymentsChipLong}
             className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border-2 border-[#0a0a0a] text-white bg-[#0a0a0a] hover:bg-[#4b0082] hover:border-[#4b0082] no-underline shadow-sm sm:shadow-md hover:shadow-lg whitespace-nowrap transition-colors"

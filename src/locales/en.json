@@ -7,7 +7,9 @@
     "method": "Method",
     "training": "Training",
     "paymentsChipShort": "Payments",
-    "paymentsChipLong": "Payments built-in"
+    "paymentsChipLong": "Payments built-in",
+    "mlChipShort": "ML",
+    "mlChipLong": "Machine Learning"
   },
   "hero": {
     "greeting": "Hello,",
@@ -597,5 +599,131 @@
     "mobile": "Mobile",
     "database": "Database",
     "tools": "Tools & Auth"
+  },
+  "machineLearning": {
+    "heroTitle": "How a machine learns.",
+    "heroSubtitle": "No magic, no complicated maths. Examples, an error you measure, and a machine that corrects itself a little each time.",
+    "ctaFormation": "Take the course",
+    "ctaProjects": "See the 3 projects",
+    "typesTitle": "Two ways to learn.",
+    "typesSubtitle": "Almost all everyday machine learning falls into one of these two families.",
+    "types": [
+      {
+        "title": "Supervised learning",
+        "definition": "The machine is given examples together with the right answer. It learns to find that answer on its own, on examples it has never seen.",
+        "analogy": "Like a student practising with corrected exercises.",
+        "examples": [
+          "Telling a cat from a dog in a photo",
+          "Putting a bank expense in the right category",
+          "Predicting how long a trip will take"
+        ],
+        "inCourse": "Projects 1 and 2 of the course"
+      },
+      {
+        "title": "Unsupervised learning",
+        "definition": "The machine is given examples with no answers at all. It looks for what is similar and brings out groups nobody described to it.",
+        "analogy": "Like sorting a pile of holiday photos with no instructions: you end up with \"beach\", \"mountain\" and \"meals\" piles.",
+        "examples": [
+          "Grouping recipes that look alike",
+          "Finding customer profiles",
+          "Spotting a purchase that doesn't look like you"
+        ],
+        "inCourse": "Project 3 of the course"
+      }
+    ],
+    "stepsTitle": "The five building blocks.",
+    "stepsSubtitle": "Once you understand them, you can read any AI project, from photo sorting to a large language model.",
+    "steps": [
+      {
+        "title": "Dataset",
+        "tagline": "The examples the model learns from",
+        "description": "A table of examples: inputs x (floor area, neighbourhood, number of rooms) and the expected answer y (the price). It is split so the model can be measured honestly.",
+        "points": [
+          "Cleaning and missing values",
+          "Feature scaling",
+          "Train / validation / test split"
+        ]
+      },
+      {
+        "title": "Model",
+        "tagline": "A function with parameters",
+        "description": "The model computes a prediction ŷ from x. Linear regression has two parameters, a neural network has millions: the principle stays the same.",
+        "points": [
+          "Linear and logistic regression",
+          "Decision trees, random forests",
+          "Neural networks"
+        ]
+      },
+      {
+        "title": "Cost function",
+        "tagline": "One number to measure the error",
+        "description": "It sums up the gap between predictions and true answers. Learning means finding the parameters that make this number as small as possible.",
+        "points": [
+          "Mean squared error for regression",
+          "Cross-entropy for classification",
+          "L1 / L2 regularisation against overfitting"
+        ]
+      },
+      {
+        "title": "Optimisation algorithm",
+        "tagline": "Gradient descent",
+        "description": "Compute the slope of the cost function, then move the parameters in the direction that lowers it. Repeat until the error stops decreasing.",
+        "points": [
+          "Learning rate α",
+          "Stochastic and mini-batch gradient",
+          "Adam, RMSProp, momentum"
+        ]
+      },
+      {
+        "title": "Evaluation",
+        "tagline": "Testing on unseen data",
+        "description": "A model that memorises its training set is useless. It is judged on the test set, with the metric that matches the real problem.",
+        "points": [
+          "Overfitting and underfitting",
+          "Cross-validation",
+          "Precision, recall, F1, confusion matrix"
+        ]
+      }
+    ],
+    "demoTitle": "Try gradient descent.",
+    "demoIntro": "The dot is a parameter w. At each step it follows the slope of the cost function J(w) towards the minimum. Change the learning rate to see its effect.",
+    "learningRate": "Learning rate α",
+    "stepOnce": "Take one step",
+    "stepTen": "Take 10 steps",
+    "reset": "Start over",
+    "iteration": "Iteration",
+    "cost": "Cost J(w)",
+    "hintSmall": "With a small α, descent is safe but slow.",
+    "hintLarge": "Above α = 1, each step overshoots the minimum: the error grows instead of shrinking.",
+    "diverged": "The model is diverging. Lower α, then click Start over.",
+    "converged": "Minimum reached: the error no longer decreases.",
+    "chartLabel": "Cost function J(w) curve and gradient descent path",
+    "codeTitle": "The same loop in Python.",
+    "projectsTitle": "Learn by building the projects.",
+    "projectsSubtitle": "Theory fades, a working project stays. Three everyday cases, guided step by step in your browser.",
+    "projectCta": "Start the project",
+    "projects": [
+      {
+        "title": "Cat or dog?",
+        "situation": "An AI that looks at a photo and recognises the animal.",
+        "kind": "Supervised learning",
+        "duration": "1 h"
+      },
+      {
+        "title": "Where does my money go?",
+        "situation": "Your bank expenses sorted automatically into groceries, transport, subscriptions…",
+        "kind": "Supervised learning",
+        "duration": "45 min"
+      },
+      {
+        "title": "What should I cook tonight?",
+        "situation": "List what's left in the fridge, the machine finds the closest recipe.",
+        "kind": "Unsupervised learning",
+        "duration": "45 min"
+      }
+    ],
+    "ctaTitle": "Ready to build your first AI?",
+    "ctaSubtitle": "Free, no prerequisites, nothing to install.",
+    "ctaButton": "Start the course"
   }
 }

@@ -35,7 +35,7 @@ export const formations = [
   {
     icon: FaBrain,
     title: "Machine Learning & IA",
-    text: "Comprenez le Machine Learning sans prérequis mathématiques complexes. Découvrez les 3 types d'apprentissage, les algorithmes essentiels (régression, KNN, arbres de décision, réseaux de neurones) et pratiquez avec des exemples interactifs. Idéal pour débuter en IA.",
+    text: "Le machine learning expliqué à partir de zéro, sans maths compliquées et sans rien installer. Trois projets guidés pas à pas : une IA qui reconnaît un chat d'un chien, une qui range vos dépenses bancaires par catégorie et une qui vous dit quoi cuisiner avec ce qu'il reste dans le frigo.",
     navigateUrl: "/formations/machine-learning",
     price: "Gratuit"
   },

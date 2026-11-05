@@ -7,7 +7,9 @@
     "method": "Methode",
     "training": "Formations",
     "paymentsChipShort": "Paiements",
-    "paymentsChipLong": "Paiements intégration"
+    "paymentsChipLong": "Paiements intégration",
+    "mlChipShort": "ML",
+    "mlChipLong": "Machine Learning"
   },
   "hero": {
     "greeting": "Bonjour,",
@@ -597,5 +599,131 @@
     "mobile": "Mobile",
     "database": "Base de données",
     "tools": "Outils & Auth"
+  },
+  "machineLearning": {
+    "heroTitle": "Comment une machine apprend.",
+    "heroSubtitle": "Pas de magie, pas de maths compliquées. Des exemples, une erreur que l'on mesure, et une machine qui se corrige un peu à chaque fois.",
+    "ctaFormation": "Suivre la formation",
+    "ctaProjects": "Voir les 3 projets",
+    "typesTitle": "Deux façons d'apprendre.",
+    "typesSubtitle": "Presque tout le machine learning du quotidien entre dans l'une de ces deux familles.",
+    "types": [
+      {
+        "title": "Apprentissage supervisé",
+        "definition": "On donne à la machine des exemples accompagnés de la bonne réponse. Elle apprend à retrouver cette réponse seule, sur des exemples qu'elle n'a jamais vus.",
+        "analogy": "Comme un élève qui s'entraîne avec des exercices corrigés.",
+        "examples": [
+          "Reconnaître un chat d'un chien sur une photo",
+          "Ranger une dépense bancaire dans la bonne catégorie",
+          "Prévoir la durée d'un trajet"
+        ],
+        "inCourse": "Projets 1 et 2 de la formation"
+      },
+      {
+        "title": "Apprentissage non supervisé",
+        "definition": "On donne des exemples sans aucune réponse. La machine cherche seule ce qui se ressemble et fait apparaître des groupes que personne ne lui a décrits.",
+        "analogy": "Comme trier une pile de photos de vacances sans consigne : on finit par faire des tas « plage », « montagne », « repas ».",
+        "examples": [
+          "Regrouper des recettes qui se ressemblent",
+          "Repérer des profils de clients",
+          "Détecter un achat qui ne vous ressemble pas"
+        ],
+        "inCourse": "Projet 3 de la formation"
+      }
+    ],
+    "stepsTitle": "Les cinq briques.",
+    "stepsSubtitle": "Une fois comprises, vous savez lire n'importe quel projet d'IA, du tri de photos au grand modèle de langage.",
+    "steps": [
+      {
+        "title": "Dataset",
+        "tagline": "Les exemples dont le modèle apprend",
+        "description": "Un tableau d'exemples : des entrées x (surface, quartier, nombre de pièces) et la réponse attendue y (le prix). On le découpe pour pouvoir mesurer le modèle honnêtement.",
+        "points": [
+          "Nettoyage et valeurs manquantes",
+          "Normalisation des variables",
+          "Découpage entraînement / validation / test"
+        ]
+      },
+      {
+        "title": "Modèle",
+        "tagline": "Une fonction avec des paramètres",
+        "description": "Le modèle calcule une prédiction ŷ à partir de x. Une régression linéaire a deux paramètres, un réseau de neurones en a des millions : le principe ne change pas.",
+        "points": [
+          "Régression linéaire et logistique",
+          "Arbres de décision, forêts aléatoires",
+          "Réseaux de neurones"
+        ]
+      },
+      {
+        "title": "Fonction coût",
+        "tagline": "Un seul nombre pour mesurer l'erreur",
+        "description": "Elle résume l'écart entre les prédictions et les vraies réponses. Apprendre, c'est trouver les paramètres qui rendent ce nombre le plus petit possible.",
+        "points": [
+          "Erreur quadratique moyenne pour la régression",
+          "Entropie croisée pour la classification",
+          "Régularisation L1 / L2 contre le surapprentissage"
+        ]
+      },
+      {
+        "title": "Algorithme d'optimisation",
+        "tagline": "La descente de gradient",
+        "description": "On calcule la pente de la fonction coût, puis on déplace les paramètres dans le sens qui la fait baisser. On répète jusqu'à ce que l'erreur ne diminue plus.",
+        "points": [
+          "Taux d'apprentissage α",
+          "Gradient stochastique et mini-batch",
+          "Adam, RMSProp, momentum"
+        ]
+      },
+      {
+        "title": "Évaluation",
+        "tagline": "Tester sur des données jamais vues",
+        "description": "Un modèle qui récite son jeu d'entraînement ne sert à rien. On le juge sur le jeu de test, avec la métrique qui correspond au problème réel.",
+        "points": [
+          "Surapprentissage et sous-apprentissage",
+          "Validation croisée",
+          "Précision, rappel, F1, matrice de confusion"
+        ]
+      }
+    ],
+    "demoTitle": "Essayez la descente de gradient.",
+    "demoIntro": "Le point représente un paramètre w. À chaque pas, il suit la pente de la fonction coût J(w) vers le minimum. Changez le taux d'apprentissage pour voir son effet.",
+    "learningRate": "Taux d'apprentissage α",
+    "stepOnce": "Faire un pas",
+    "stepTen": "Faire 10 pas",
+    "reset": "Recommencer",
+    "iteration": "Itération",
+    "cost": "Coût J(w)",
+    "hintSmall": "Avec un α petit, la descente est sûre mais lente.",
+    "hintLarge": "Au-delà de α = 1, chaque pas dépasse le minimum : l'erreur grandit au lieu de baisser.",
+    "diverged": "Le modèle diverge. Réduisez α puis cliquez sur Recommencer.",
+    "converged": "Minimum atteint : l'erreur ne baisse plus.",
+    "chartLabel": "Courbe de la fonction coût J(w) et trajet de la descente de gradient",
+    "codeTitle": "La même boucle en Python.",
+    "projectsTitle": "Apprendre en réalisant les projets.",
+    "projectsSubtitle": "La théorie s'oublie, un projet qui marche reste. Trois cas tirés de la vie de tous les jours, guidés pas à pas dans votre navigateur.",
+    "projectCta": "Commencer le projet",
+    "projects": [
+      {
+        "title": "Chat ou chien ?",
+        "situation": "Une IA qui regarde une photo et reconnaît l'animal.",
+        "kind": "Apprentissage supervisé",
+        "duration": "1 h"
+      },
+      {
+        "title": "Où passe mon argent ?",
+        "situation": "Vos dépenses bancaires rangées toutes seules en courses, transport, abonnements…",
+        "kind": "Apprentissage supervisé",
+        "duration": "45 min"
+      },
+      {
+        "title": "Que cuisiner ce soir ?",
+        "situation": "Vous listez ce qu'il reste dans le frigo, la machine trouve la recette la plus proche.",
+        "kind": "Apprentissage non supervisé",
+        "duration": "45 min"
+      }
+    ],
+    "ctaTitle": "Prêt à créer votre première IA ?",
+    "ctaSubtitle": "Gratuit, sans prérequis, rien à installer.",
+    "ctaButton": "Commencer la formation"
   }
 }
