@@ -21,6 +21,7 @@ const sommaire = [
   { href: "#projet-1", label: "Projet 1" },
   { href: "#projet-2", label: "Projet 2" },
   { href: "#projet-3", label: "Projet 3" },
+  { href: "#deploiement", label: "Mettre en ligne" },
   { href: "#faq", label: "Questions" },
 ];
 
@@ -455,6 +456,95 @@ distances, indices = voisins.kneighbors(encodeur.transform([frigo]).astype(bool)
   },
 ];
 
+// Déploiement : mettre le modèle du projet 2 en ligne, sans rien installer
+const deploiement = {
+  etapes: [
+    {
+      title: "Enregistrer le modèle dans un fichier",
+      explication:
+        "Le modèle entraîné n'existe que dans la mémoire de Colab : il disparaît quand la page se ferme. On l'enregistre donc dans un fichier, comme on enregistre un document. Lancez ce bloc à la fin du projet 2 : le fichier se télécharge sur votre ordinateur. La dernière ligne affiche la version de scikit-learn : notez-la, elle servira à l'étape 5.",
+      code: `import joblib
+import sklearn
+from google.colab import files
+
+joblib.dump(modele, "modele_depenses.joblib")
+files.download("modele_depenses.joblib")
+
+print("Version de scikit-learn :", sklearn.__version__)`,
+    },
+    {
+      title: "Lui donner une vraie interface",
+      explication:
+        "Personne n'a envie de lire du code pour utiliser votre IA. Gradio fabrique une petite page web à partir d'une simple fonction : une case où taper le libellé, et la réponse du modèle avec son niveau de certitude pour chaque catégorie. Lancez le bloc : la page s'affiche directement dans Colab.",
+      code: `!pip install -q gradio
+import gradio as gr
+
+def ranger(libelle):
+    probas = modele.predict_proba([libelle])[0]
+    return {categorie: float(p) for categorie, p in zip(modele.classes_, probas)}
+
+demo = gr.Interface(
+    fn=ranger,
+    inputs=gr.Textbox(label="Libellé de la ligne de relevé"),
+    outputs=gr.Label(num_top_classes=3, label="Catégorie"),
+    title="Où passe mon argent ?",
+    examples=["CB LIDL 2304 PARIS", "PRLV NETFLIX.COM", "CB PHARMACIE DU CENTRE"],
+)
+demo.launch(share=True)`,
+    },
+    {
+      title: "Partager un premier lien",
+      explication:
+        "Grâce à share=True, Gradio affiche aussi un lien public qui se termine par gradio.live. Envoyez-le à un ami : il peut tester votre IA depuis son téléphone. Ce lien est temporaire : il s'arrête dès que vous fermez Colab. Pour un lien permanent, passez à l'étape suivante.",
+    },
+    {
+      title: "Écrire le fichier app.py",
+      explication:
+        "Pour que l'IA reste en ligne tout le temps, on la confie à Hugging Face Spaces, un hébergeur gratuit fait pour ça. Il a besoin de trois fichiers. Le premier, vous l'avez déjà : modele_depenses.joblib. Le deuxième s'appelle app.py : c'est l'interface de l'étape 2, qui charge cette fois le modèle depuis le fichier. Copiez ce bloc, vous le collerez à l'étape 6.",
+      code: `import gradio as gr
+import joblib
+
+modele = joblib.load("modele_depenses.joblib")
+
+def ranger(libelle):
+    probas = modele.predict_proba([libelle])[0]
+    return {categorie: float(p) for categorie, p in zip(modele.classes_, probas)}
+
+gr.Interface(
+    fn=ranger,
+    inputs=gr.Textbox(label="Libellé de la ligne de relevé"),
+    outputs=gr.Label(num_top_classes=3, label="Catégorie"),
+    title="Où passe mon argent ?",
+    examples=["CB LIDL 2304 PARIS", "PRLV NETFLIX.COM", "CB PHARMACIE DU CENTRE"],
+).launch()`,
+    },
+    {
+      title: "Écrire le fichier requirements.txt",
+      explication:
+        "Le troisième fichier dit à Hugging Face quels outils installer. Remplacez 1.6.1 par la version notée à l'étape 1 : si elle est différente, le modèle refusera de se charger.",
+      code: `scikit-learn==1.6.1
+joblib`,
+    },
+    {
+      title: "Mettre en ligne sur Hugging Face Spaces",
+      explication:
+        "Tout se fait dans le navigateur. Créez un compte gratuit sur huggingface.co, puis cliquez sur «\u00a0New Space\u00a0». Donnez-lui un nom, choisissez Gradio comme SDK et le matériel gratuit «\u00a0CPU basic\u00a0». Dans l'onglet «\u00a0Files\u00a0», cliquez sur «\u00a0Add file\u00a0» puis «\u00a0Create a new file\u00a0» pour créer app.py et requirements.txt en collant les blocs des étapes 4 et 5, puis «\u00a0Upload files\u00a0» pour déposer modele_depenses.joblib. Le site se construit en une à deux minutes. Votre IA a maintenant une adresse permanente, du type huggingface.co/spaces/votre-nom/ou-passe-mon-argent.",
+    },
+  ],
+  resultat:
+    "Une page web publique où n'importe qui tape une ligne de relevé et voit la catégorie proposée, avec le niveau de certitude du modèle. Sans serveur à louer, sans carte bancaire.",
+  pieges: [
+    "Le Space affiche «\u00a0Runtime error\u00a0» : ouvrez l'onglet «\u00a0Logs\u00a0», la dernière ligne rouge dit ce qui manque. Le plus souvent, c'est une version de scikit-learn différente de celle de Colab dans requirements.txt.",
+    "Le fichier doit s'appeler exactement app.py et être à la racine du Space, pas dans un dossier.",
+    "Après deux jours sans visite, un Space gratuit se met en veille. Il se réveille tout seul au visiteur suivant, en une trentaine de secondes.",
+    "Un Space public est visible de tous. N'y mettez jamais votre vrai relevé bancaire : entraînez le modèle avec des exemples, ou passez le Space en privé.",
+  ],
+  autresProjets: [
+    "Projet 1, chat ou chien : enregistrez le modèle avec modele.save(\"chat_chien.keras\"), utilisez gr.Image(type=\"pil\") comme entrée dans app.py et écrivez tensorflow dans requirements.txt.",
+    "Projet 3, le frigo : enregistrez l'encodeur, les voisins et les recettes avec joblib, puis proposez les ingrédients sous forme de cases à cocher avec gr.CheckboxGroup. Plus de faute d'orthographe possible.",
+  ],
+};
+
 const faq = [
   {
     q: "Je suis mauvais en maths, je peux suivre ?",
@@ -479,7 +569,7 @@ const faq = [
 ];
 
 const ressources = [
-  { title: "Les bibliothèques utilisées", items: ["pandas, pour lire et ranger des tableaux", "scikit-learn, pour les modèles classiques", "TensorFlow et Keras, pour les réseaux de neurones", "Google Colab, pour exécuter le tout en ligne"] },
+  { title: "Les bibliothèques utilisées", items: ["pandas, pour lire et ranger des tableaux", "scikit-learn, pour les modèles classiques", "TensorFlow et Keras, pour les réseaux de neurones", "Google Colab, pour exécuter le tout en ligne", "Gradio, pour donner une interface au modèle", "Hugging Face Spaces, pour le mettre en ligne gratuitement"] },
   { title: "Pour continuer seul", items: ["Machine Learning Specialization, Andrew Ng (Coursera)", "Google Machine Learning Crash Course", "Kaggle Learn, cours courts et gratuits", "fast.ai, Practical Deep Learning"] },
 ];
 
@@ -634,6 +724,85 @@ function ProjetBloc({ projet, gris }: { projet: Projet; gris: boolean }) {
 }
 
 /* ------------------------------------------------------------------ */
+function DeploiementBloc() {
+  const carte = AP.gray;
+
+  return (
+    <section id="deploiement" className={`${section} bg-white scroll-mt-12`}>
+      <div className={containerWide}>
+        <div className="text-center max-w-[760px] mx-auto mb-14">
+          <p className="text-[17px] font-semibold m-0 mb-3" style={{ color: AP.accent }}>
+            Dernière étape
+          </p>
+          <h2 className={h1}>Mettez votre IA en ligne.</h2>
+          <p className={`${lead} mt-6`}>
+            Pour l&apos;instant, votre IA ne vit que dans votre notebook. La déployer, c&apos;est lui donner une
+            adresse sur internet pour que n&apos;importe qui puisse s&apos;en servir. Toujours gratuit, toujours
+            depuis le navigateur.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6 mb-16">
+          <div className="rounded-[18px] p-8" style={{ backgroundColor: carte }}>
+            <h3 className="text-[21px] font-semibold m-0 mb-3">L&apos;idée, avec un restaurant.</h3>
+            <p className={body2}>
+              Le notebook, c&apos;est votre cuisine : vous y préparez et goûtez la recette. Déployer, c&apos;est ouvrir
+              la salle du restaurant. Les clients ne voient pas la cuisine, seulement le menu et l&apos;assiette :
+              une page simple où ils posent leur question et reçoivent la réponse du modèle.
+            </p>
+          </div>
+          <dl className="rounded-[18px] p-8 m-0 grid gap-6" style={{ backgroundColor: carte }}>
+            {[
+              { dt: "Exemple suivi", dd: "Le projet 2, « Où passe mon argent ? »" },
+              { dt: "Outils", dd: "Gradio pour l'interface, Hugging Face Spaces pour l'hébergement" },
+              { dt: "Durée", dd: "Environ 30 minutes" },
+            ].map(({ dt, dd }) => (
+              <div key={dt}>
+                <dt className={small}>{dt}</dt>
+                <dd className="m-0 mt-1 text-[19px] font-semibold leading-snug">{dd}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <h3 className={`${h3} mb-2`}>Étape par étape.</h3>
+        <p className={`${body2} mb-8`}>Les trois premières étapes se font dans le notebook du projet 2, les trois suivantes sur le site de Hugging Face.</p>
+
+        <ol className="list-none m-0 p-0 space-y-4">
+          {deploiement.etapes.map((etape, i) => (
+            <li key={etape.title} className="rounded-[18px] p-6 md:p-9 grid md:grid-cols-[8rem_1fr] gap-3 md:gap-8" style={{ backgroundColor: carte }}>
+              <span className="text-[17px] font-semibold" style={{ color: AP.accent }}>
+                Étape {i + 1}
+              </span>
+              <div className="min-w-0">
+                <h4 className="text-[21px] font-semibold leading-tight m-0 mb-2">{etape.title}</h4>
+                <p className={`${body} max-w-[720px]`} style={{ color: '#424245' }}>{etape.explication}</p>
+                {"code" in etape && etape.code && <BlocCode code={etape.code} />}
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-16 grid lg:grid-cols-3 gap-6">
+          <div className="rounded-[18px] p-8 text-white" style={{ backgroundColor: AP.dark }}>
+            <h3 className="text-[21px] font-semibold m-0 mb-3">Le résultat attendu</h3>
+            <p className="text-[17px] leading-[1.5] m-0 text-white/80">{deploiement.resultat}</p>
+          </div>
+          <div className="rounded-[18px] p-8" style={{ backgroundColor: carte }}>
+            <h3 className="text-[21px] font-semibold m-0 mb-5">Si ça coince</h3>
+            <Liste items={deploiement.pieges} />
+          </div>
+          <div className="rounded-[18px] p-8" style={{ backgroundColor: carte }}>
+            <h3 className="text-[21px] font-semibold m-0 mb-5">Pour les projets 1 et 3</h3>
+            <Liste items={deploiement.autresProjets} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* Page                                                                */
 /* ------------------------------------------------------------------ */
 
@@ -668,6 +837,7 @@ export default function MachineLearningPage() {
           <p className={`${lead} mt-6 max-w-[680px] mx-auto`}>
             Pas de maths compliquées, rien à installer. Une IA qui reconnaît les chats et les chiens,
             une qui range vos dépenses, une qui vous dit quoi cuisiner avec ce qu&apos;il reste dans le frigo.
+            Puis vous les mettez en ligne, avec une vraie adresse à partager.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <a href="#projet-1" className={btnPrimary}>Commencer le projet 1</a>
@@ -772,6 +942,9 @@ export default function MachineLearningPage() {
       {projets.map((projet, i) => (
         <ProjetBloc key={projet.id} projet={projet} gris={i % 2 === 0} />
       ))}
+
+      {/* Déploiement */}
+      <DeploiementBloc />
 
       {/* FAQ */}
       <section id="faq" className={`${section} scroll-mt-12`} style={{ backgroundColor: AP.gray }}>

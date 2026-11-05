@@ -35,7 +35,7 @@ export const formations = [
   {
     icon: FaBrain,
     title: "Machine Learning & IA",
-    text: "Le machine learning expliqué à partir de zéro, sans maths compliquées et sans rien installer. Trois projets guidés pas à pas : une IA qui reconnaît un chat d'un chien, une qui range vos dépenses bancaires par catégorie et une qui vous dit quoi cuisiner avec ce qu'il reste dans le frigo.",
+    text: "Le machine learning expliqué à partir de zéro, sans maths compliquées et sans rien installer. Trois projets guidés pas à pas : une IA qui reconnaît un chat d'un chien, une qui range vos dépenses bancaires par catégorie et une qui vous dit quoi cuisiner avec ce qu'il reste dans le frigo. Puis vous les mettez en ligne gratuitement, avec une vraie adresse à partager.",
     navigateUrl: "/formations/machine-learning",
     price: "Gratuit"
   },
