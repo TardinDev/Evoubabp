@@ -8,29 +8,34 @@ import { useTranslation } from '../../hooks/useTranslation'
 
 const ACCENT = '#4b0082'
 const INK = '#0a0a0a'
-const STORAGE_KEY = 'evoubap-jarvis-promo-closed'
-const APPEAR_DELAY_MS = 2500
 
-export default function JarvisPromo() {
-  const { t } = useTranslation()
-  const p = t.jarvisPromo
+type PromoTexts = { badge: string; title: string; text: string; cta: string; close: string }
+
+type PromoCardProps = {
+  href: string
+  texts: PromoTexts
+  storageKey: string
+  delayMs: number
+}
+
+function PromoCard({ href, texts: p, storageKey, delayMs }: PromoCardProps) {
   const reduceMotion = useReducedMotion()
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     try {
-      if (sessionStorage.getItem(STORAGE_KEY)) return
+      if (sessionStorage.getItem(storageKey)) return
     } catch {
       // stockage indisponible : on affiche quand même la pub
     }
-    const timer = setTimeout(() => setVisible(true), APPEAR_DELAY_MS)
+    const timer = setTimeout(() => setVisible(true), delayMs)
     return () => clearTimeout(timer)
-  }, [])
+  }, [storageKey, delayMs])
 
   const handleClose = () => {
     setVisible(false)
     try {
-      sessionStorage.setItem(STORAGE_KEY, '1')
+      sessionStorage.setItem(storageKey, '1')
     } catch {
       // rien à faire
     }
@@ -47,30 +52,22 @@ export default function JarvisPromo() {
           animate={{ x: 0, opacity: 1 }}
           exit={hidden}
           transition={{ type: 'tween', duration: 0.6, ease: 'easeOut' }}
-          className="fixed bottom-[30px] left-4 sm:left-[30px] z-[900] w-[min(20rem,calc(100vw-8rem))] bg-white border border-black/15 border-l-4 shadow-[0_12px_40px_rgba(0,0,0,0.18)]"
+          className="pointer-events-auto relative w-full bg-white border border-black/15 border-l-4 shadow-[0_12px_40px_rgba(0,0,0,0.18)]"
           style={{ color: INK, borderLeftColor: ACCENT }}
         >
           <Link
-            href="/formations/jarvis"
+            href={href}
             className="group block p-4 pr-10 no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4b0082]"
             style={{ color: INK }}
           >
-            <span
-              className="block text-xs mb-2"
-              style={{ color: ACCENT }}
-            >
+            <span className="block text-xs mb-2" style={{ color: ACCENT }}>
               {p.badge}
             </span>
             <span className="block font-extrabold text-lg leading-tight tracking-tight mb-1.5">
               {p.title}
             </span>
-            <span className="block text-sm leading-snug text-black/65 mb-3">
-              {p.text}
-            </span>
-            <span
-              className="inline-flex items-center gap-2 text-sm font-semibold"
-              style={{ color: ACCENT }}
-            >
+            <span className="block text-sm leading-snug text-black/65 mb-3">{p.text}</span>
+            <span className="inline-flex items-center gap-2 text-sm font-semibold" style={{ color: ACCENT }}>
               {p.cta}
               <HiArrowRight
                 aria-hidden="true"
@@ -90,5 +87,28 @@ export default function JarvisPromo() {
         </motion.aside>
       )}
     </AnimatePresence>
+  )
+}
+
+// Cartes de pub flottantes de l'accueil (formation Machine Learning + formation Jarvis),
+// empilées en bas à gauche pour ne jamais se chevaucher.
+export default function JarvisPromo() {
+  const { t } = useTranslation()
+
+  return (
+    <div className="pointer-events-none fixed bottom-[30px] left-4 sm:left-[30px] z-[900] flex flex-col gap-3 w-[min(20rem,calc(100vw-8rem))]">
+      <PromoCard
+        href="/formations/machine-learning"
+        texts={t.mlPromo}
+        storageKey="evoubap-ml-promo-closed"
+        delayMs={2500}
+      />
+      <PromoCard
+        href="/formations/jarvis"
+        texts={t.jarvisPromo}
+        storageKey="evoubap-jarvis-promo-closed"
+        delayMs={3300}
+      />
+    </div>
   )
 }

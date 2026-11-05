@@ -34,6 +34,13 @@
     "statusInProgress": "In progress",
     "progressLabel": "Progress"
   },
+  "mlPromo": {
+    "badge": "Machine Learning course",
+    "title": "Learn to build AI",
+    "text": "No need to buy a €2,000 MacBook with 24 GB of RAM: everything runs in your browser with Google Colab, a free tool from Google.",
+    "cta": "See the 3 projects",
+    "close": "Close the ad"
+  },
   "jarvisPromo": {
     "badge": "New course",
     "title": "Build your own Jarvis",

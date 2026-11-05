@@ -34,6 +34,13 @@
     "statusInProgress": "En cours",
     "progressLabel": "Avancement"
   },
+  "mlPromo": {
+    "badge": "Formation Machine Learning",
+    "title": "Apprenez à créer des IA",
+    "text": "Pas besoin d'acheter un MacBook à 2 000 € avec 24 Go de RAM : tout se fait dans votre navigateur avec Google Colab, un outil gratuit de Google.",
+    "cta": "Voir les 3 projets",
+    "close": "Fermer la publicité"
+  },
   "jarvisPromo": {
     "badge": "Nouvelle formation",
     "title": "Créez votre propre Jarvis",
